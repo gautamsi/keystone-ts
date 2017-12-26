@@ -129,7 +129,7 @@ export const options = function (options) {
  * Example:
  *     keystone.get('test') // returns the 'test' value
  */
-export const get = export const set;
+export const get = set;
 
 /**
  * Gets an expanded path option, expanded to include moduleRoot if it is relative
