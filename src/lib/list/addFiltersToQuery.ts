@@ -27,4 +27,4 @@ function addFiltersToQuery (filters) {
 	return query;
 }
 
-module.exports = addFiltersToQuery;
+export = addFiltersToQuery;

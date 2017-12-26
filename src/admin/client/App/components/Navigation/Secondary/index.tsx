@@ -84,7 +84,7 @@ var SecondaryNavigation = React.createClass({
 	},
 });
 
-module.exports = connect((state) => {
+export = connect((state) => {
 	return {
 		currentList: state.lists.currentList,
 	};

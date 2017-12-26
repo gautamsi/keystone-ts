@@ -4,7 +4,7 @@ var path = require('path');
 var TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
 var MarkdownFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'MarkdownFieldTestObject'));
 
-module.exports = function MarkdownModelTestConfig (config) {
+export = function MarkdownModelTestConfig (config) {
 	return {
 		name: new TextFieldTestObject(objectAssign({}, config, {fieldName: 'name'})),
 		fieldA: new MarkdownFieldTestObject(objectAssign({}, config, {fieldName: 'fieldA'})),

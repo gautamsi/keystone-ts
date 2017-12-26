@@ -23,4 +23,4 @@ function addPresenceToQuery (presence, currentPathQuery) {
 	return newQuery || currentPathQuery;
 }
 
-module.exports = addPresenceToQuery;
+export = addPresenceToQuery;

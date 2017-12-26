@@ -17,4 +17,4 @@ function getDocumentName (doc, escape) {
 	return (escape) ? utils.encodeHTMLEntities(name) : name;
 }
 
-module.exports = getDocumentName;
+export = getDocumentName;

@@ -112,4 +112,4 @@ ListManagement.propTypes = {
 	selectAllItemsLoading: PropTypes.bool,
 };
 
-module.exports = ListManagement;
+export = ListManagement;

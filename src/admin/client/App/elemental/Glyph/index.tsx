@@ -57,4 +57,4 @@ Glyph.defaultProps = {
 	size: 'small',
 };
 
-module.exports = Glyph;
+export = Glyph;

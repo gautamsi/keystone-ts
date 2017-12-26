@@ -2,7 +2,7 @@ var _ = require('lodash');
 var async = require('async');
 var listToArray = require('list-to-array');
 
-module.exports = function (req, res) {
+export = function (req, res) {
 	var keystone = req.keystone;
 	var query = req.list.model.findById(req.params.id);
 

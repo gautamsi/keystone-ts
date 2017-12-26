@@ -75,7 +75,7 @@ function borderLeftRadius (radius) {
 
 // Return
 
-module.exports = {
+export = {
 	borderTopRadius,
 	borderRightRadius,
 	borderBottomRadius,

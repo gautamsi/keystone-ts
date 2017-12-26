@@ -31,4 +31,4 @@ Markdown.add({
 Markdown.defaultColumns = 'name, fieldA, fieldB';
 Markdown.register();
 
-module.exports = Markdown;
+export = Markdown;

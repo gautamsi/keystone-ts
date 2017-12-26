@@ -1,6 +1,6 @@
 var session = require('../../../lib/session');
 
-module.exports = function SignoutRoute (req, res) {
+export = function SignoutRoute (req, res) {
 	var keystone = req.keystone;
 	session.signout(req, res, function () {
 		// After logging out, the user will be redirected to /signin?signedout

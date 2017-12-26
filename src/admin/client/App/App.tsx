@@ -89,4 +89,4 @@ const App = (props) => {
 	);
 };
 
-module.exports = App;
+export = App;

@@ -8,4 +8,4 @@ HiddenRelationship.add({
 });
 
 HiddenRelationship.register();
-module.exports = HiddenRelationship;
+export = HiddenRelationship;

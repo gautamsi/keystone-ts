@@ -28,4 +28,4 @@ DateArray.add({
 DateArray.defaultColumns = 'name, fieldA, fieldB';
 DateArray.register();
 
-module.exports = DateArray;
+export = DateArray;

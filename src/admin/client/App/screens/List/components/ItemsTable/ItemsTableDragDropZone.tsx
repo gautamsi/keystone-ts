@@ -63,4 +63,4 @@ var ItemsTableDragDropZone = React.createClass({
 	},
 });
 
-module.exports = ItemsTableDragDropZone;
+export = ItemsTableDragDropZone;

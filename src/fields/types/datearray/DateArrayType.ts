@@ -205,4 +205,4 @@ datearray.prototype.updateItem = function (item, data, callback) {
 };
 
 /* Export Field Type */
-module.exports = datearray;
+export = datearray;

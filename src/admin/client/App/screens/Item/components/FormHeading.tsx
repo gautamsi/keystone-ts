@@ -1,7 +1,7 @@
 import React from 'react';
 import evalDependsOn from '../../../../../../fields/utils/evalDependsOn';
 
-module.exports = React.createClass({
+export = React.createClass({
 	displayName: 'FormHeading',
 	propTypes: {
 		options: React.PropTypes.object,

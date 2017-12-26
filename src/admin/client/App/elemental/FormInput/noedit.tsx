@@ -91,4 +91,4 @@ const classes = {
 	},
 };
 
-module.exports = FormInputNoedit;
+export = FormInputNoedit;

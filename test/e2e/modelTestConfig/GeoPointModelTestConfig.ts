@@ -4,7 +4,7 @@ var path = require('path');
 var TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
 var GeoPointFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'GeoPointFieldTestObject'));
 
-module.exports = function GeoPointModelTestConfig (config) {
+export = function GeoPointModelTestConfig (config) {
 	return {
 		name: new TextFieldTestObject(objectAssign({}, config, {fieldName: 'name'})),
 		fieldA: new GeoPointFieldTestObject(objectAssign({}, config, {fieldName: 'fieldA'})),

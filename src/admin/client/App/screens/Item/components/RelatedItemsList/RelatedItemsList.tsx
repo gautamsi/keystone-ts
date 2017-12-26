@@ -137,4 +137,4 @@ const RelatedItemsList = React.createClass({
 	},
 });
 
-module.exports = RelatedItemsList;
+export = RelatedItemsList;

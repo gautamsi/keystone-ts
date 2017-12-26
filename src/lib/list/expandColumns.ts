@@ -95,4 +95,4 @@ function expandColumns (cols) {
 	return expanded;
 }
 
-module.exports = expandColumns;
+export = expandColumns;

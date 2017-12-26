@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-module.exports = function removeModel(modelName) {
+export = function removeModel(modelName) {
 	delete mongoose.models[modelName];
 	delete mongoose.modelSchemas[modelName];
 };

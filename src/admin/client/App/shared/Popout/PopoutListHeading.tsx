@@ -22,4 +22,4 @@ var PopoutListHeading = React.createClass({
 	},
 });
 
-module.exports = PopoutListHeading;
+export = PopoutListHeading;

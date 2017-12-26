@@ -8,4 +8,4 @@ InlineRelationship.add({
 });
 
 InlineRelationship.register();
-module.exports = InlineRelationship;
+export = InlineRelationship;

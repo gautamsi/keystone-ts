@@ -11,7 +11,7 @@
 
 var http = require('http');
 
-module.exports = function (keystone, app, callback) {
+export = function (keystone, app, callback) {
 
 	var host = keystone.get('host');
 	var port = keystone.get('port');

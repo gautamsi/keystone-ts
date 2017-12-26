@@ -125,4 +125,4 @@ var PrimaryNavigation = React.createClass({
 	},
 });
 
-module.exports = PrimaryNavigation;
+export = PrimaryNavigation;

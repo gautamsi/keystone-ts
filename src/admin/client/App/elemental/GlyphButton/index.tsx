@@ -68,4 +68,4 @@ const classes = {
 	},
 };
 
-module.exports = GlyphButton;
+export = GlyphButton;

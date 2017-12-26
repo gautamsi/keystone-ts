@@ -14,4 +14,4 @@ function underscoreMethod (path, fn) {
 	return this;
 }
 
-module.exports = underscoreMethod;
+export = underscoreMethod;

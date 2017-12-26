@@ -20,4 +20,4 @@ const classes = {
 	},
 };
 
-module.exports = ScreenReaderOnly;
+export = ScreenReaderOnly;

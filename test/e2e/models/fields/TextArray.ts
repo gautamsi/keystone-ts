@@ -28,4 +28,4 @@ TextArray.add({
 TextArray.defaultColumns = 'name, fieldA, fieldB';
 TextArray.register();
 
-module.exports = TextArray;
+export = TextArray;

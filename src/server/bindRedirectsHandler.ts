@@ -1,4 +1,4 @@
-module.exports = function bindErrorHandlers (keystone, app) {
+export = function bindErrorHandlers (keystone, app) {
 	if (Object.keys(keystone._redirects).length) {
 		app.use(function (req, res, next) {
 			if (keystone._redirects[req.path]) {

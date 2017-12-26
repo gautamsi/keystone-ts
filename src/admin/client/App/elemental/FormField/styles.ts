@@ -4,7 +4,7 @@
 
 import theme from '../../../theme';
 
-module.exports = {
+export = {
 	'FormField': {
 		marginBottom: '1em',
 		position: 'relative',

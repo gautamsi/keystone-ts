@@ -184,7 +184,7 @@ var ItemView = React.createClass({
 	},
 });
 
-module.exports = connect((state) => ({
+export = connect((state) => ({
 	data: state.item.data,
 	loading: state.item.loading,
 	ready: state.item.ready,

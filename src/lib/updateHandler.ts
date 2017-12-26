@@ -126,4 +126,4 @@ UpdateHandler.prototype.process = function (data, options, callback) {
 
 };
 
-module.exports = UpdateHandler;
+export = UpdateHandler;

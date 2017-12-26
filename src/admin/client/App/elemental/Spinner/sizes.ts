@@ -1,1 +1,1 @@
-module.exports = ['small', 'medium', 'large'];
+export = ['small', 'medium', 'large'];

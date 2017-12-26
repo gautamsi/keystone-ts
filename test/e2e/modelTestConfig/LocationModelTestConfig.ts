@@ -4,7 +4,7 @@ var path = require('path');
 var TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
 var LocationFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'LocationFieldTestObject'));
 
-module.exports = function LocationModelTestConfig (config) {
+export = function LocationModelTestConfig (config) {
 	return {
 		name: new TextFieldTestObject(objectAssign({}, config, {fieldName: 'name'})),
 		fieldA: new LocationFieldTestObject(objectAssign({}, config, {fieldName: 'fieldA'})),

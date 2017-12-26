@@ -25,4 +25,4 @@ DependsOn.add({
 
 DependsOn.register();
 
-module.exports = DependsOn;
+export = DependsOn;

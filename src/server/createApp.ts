@@ -5,7 +5,7 @@ var morgan = require('morgan');
 
 var language = require('../lib/middleware/language');
 
-module.exports = function createApp (keystone, express) {
+export = function createApp (keystone, express) {
 
 	if (!keystone.app) {
 		if (!express) {

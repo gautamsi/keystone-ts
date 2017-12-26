@@ -214,7 +214,7 @@ Field.prototype.getPreSaveWatcher = function () {
 	};
 
 };
-module.exports = Field;
+export = Field;
 
 /** Getter properties for the Field prototype */
 definePrototypeGetters(Field, {

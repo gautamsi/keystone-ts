@@ -8,4 +8,4 @@ function map (field, path) {
 	return this.mappings[field];
 }
 
-module.exports = map;
+export = map;

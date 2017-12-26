@@ -151,4 +151,4 @@ var Checkbox = React.createClass({
 	},
 });
 
-module.exports = Checkbox;
+export = Checkbox;

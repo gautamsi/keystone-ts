@@ -31,4 +31,4 @@ Code.add({
 Code.defaultColumns = 'name, fieldA, fieldB';
 Code.register();
 
-module.exports = Code;
+export = Code;

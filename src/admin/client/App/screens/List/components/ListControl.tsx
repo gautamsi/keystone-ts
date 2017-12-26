@@ -46,4 +46,4 @@ var ListControl = React.createClass({
 	},
 });
 
-module.exports = ListControl;
+export = ListControl;

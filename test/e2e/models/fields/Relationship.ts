@@ -32,4 +32,4 @@ Relationship.add({
 Relationship.defaultColumns = 'name, fieldA, fieldB';
 Relationship.register();
 
-module.exports = Relationship;
+export = Relationship;

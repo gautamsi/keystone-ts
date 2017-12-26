@@ -39,4 +39,4 @@ const classes = {
 	},
 };
 
-module.exports = ListHeaderTitle;
+export = ListHeaderTitle;

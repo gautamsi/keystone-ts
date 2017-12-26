@@ -97,4 +97,4 @@ function start (events) {
 	return this;
 }
 
-module.exports = start;
+export = start;

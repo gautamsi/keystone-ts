@@ -28,4 +28,4 @@ CloudinaryImage.add({
 CloudinaryImage.defaultColumns = 'name, fieldA, fieldB';
 CloudinaryImage.register();
 
-module.exports = CloudinaryImage;
+export = CloudinaryImage;

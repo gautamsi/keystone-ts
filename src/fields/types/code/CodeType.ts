@@ -30,4 +30,4 @@ code.prototype.validateRequiredInput = TextType.prototype.validateRequiredInput;
 code.prototype.addFilterToQuery = TextType.prototype.addFilterToQuery;
 
 /* Export Field Type */
-module.exports = code;
+export = code;

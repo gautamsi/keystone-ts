@@ -31,4 +31,4 @@ Num.add({
 Num.defaultColumns = 'name, fieldA, fieldB';
 Num.register();
 
-module.exports = Num;
+export = Num;

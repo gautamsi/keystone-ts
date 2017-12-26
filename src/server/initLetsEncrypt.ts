@@ -8,7 +8,7 @@
 
 var letsencrypt = require('letsencrypt-express');
 
-module.exports = function (keystone, app) {
+export = function (keystone, app) {
 
 	var options = keystone.get('letsencrypt');
 	var ssl = keystone.get('ssl');

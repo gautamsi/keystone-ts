@@ -61,4 +61,4 @@ const classes = {
 	},
 };
 
-module.exports = DrilldownItem;
+export = DrilldownItem;

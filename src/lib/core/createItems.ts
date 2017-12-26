@@ -336,4 +336,4 @@ function createItems (data, ops, callback) {
 	});
 }
 
-module.exports = createItems;
+export = createItems;

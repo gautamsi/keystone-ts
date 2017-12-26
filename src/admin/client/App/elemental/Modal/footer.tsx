@@ -45,4 +45,4 @@ const classes = {
 	},
 };
 
-module.exports = ModalFooter;
+export = ModalFooter;

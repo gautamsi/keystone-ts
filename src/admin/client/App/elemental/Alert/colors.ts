@@ -1,6 +1,6 @@
 import theme from '../../../theme';
 
-module.exports = {
+export = {
 	danger: theme.alert.color.danger,
 	error: theme.alert.color.danger,
 	info: theme.alert.color.info,

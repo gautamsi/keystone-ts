@@ -1,6 +1,6 @@
 import Field from '../Field';
 
-module.exports = Field.create({
+export = Field.create({
 	displayName: 'KeyField',
 	statics: {
 		type: 'Key',

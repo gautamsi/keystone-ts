@@ -20,4 +20,4 @@ function getExpressApp() {
 	return app;
 }
 
-module.exports = getExpressApp;
+export = getExpressApp;

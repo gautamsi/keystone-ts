@@ -1,6 +1,6 @@
 import theme from '../../../theme';
 
-module.exports = {
+export = {
 	danger: theme.glyph.color.danger,
 	inherit: theme.glyph.color.inherit,
 	inverted: theme.glyph.color.inverted,

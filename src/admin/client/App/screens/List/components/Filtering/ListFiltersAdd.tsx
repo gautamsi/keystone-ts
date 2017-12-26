@@ -178,4 +178,4 @@ var ListFiltersAdd = React.createClass({
 	},
 });
 
-module.exports = ListFiltersAdd;
+export = ListFiltersAdd;

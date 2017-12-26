@@ -63,4 +63,4 @@ const classes = {
 	},
 };
 
-module.exports = GlyphField;
+export = GlyphField;

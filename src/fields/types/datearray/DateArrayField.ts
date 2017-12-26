@@ -7,7 +7,7 @@ import moment from 'moment';
 const DEFAULT_INPUT_FORMAT = 'YYYY-MM-DD';
 const DEFAULT_FORMAT_STRING = 'Do MMM YYYY';
 
-module.exports = Field.create({
+export = Field.create({
 
 	displayName: 'DateArrayField',
 	statics: {

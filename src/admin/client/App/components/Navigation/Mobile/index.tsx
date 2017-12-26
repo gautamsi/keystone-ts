@@ -151,4 +151,4 @@ const MobileNavigation = React.createClass({
 	},
 });
 
-module.exports = MobileNavigation;
+export = MobileNavigation;

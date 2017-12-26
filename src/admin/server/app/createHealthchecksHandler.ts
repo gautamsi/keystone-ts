@@ -17,4 +17,4 @@ function createHealthchecksHandler (keystone) {
 	return healthcheck.createRoute(healthcheckConfig);
 }
 
-module.exports = createHealthchecksHandler;
+export = createHealthchecksHandler;

@@ -37,4 +37,4 @@ textarea.prototype.format = function (item) {
 };
 
 /* Export Field Type */
-module.exports = textarea;
+export = textarea;

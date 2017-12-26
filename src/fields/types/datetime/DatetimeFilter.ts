@@ -1,1 +1,1 @@
-module.exports = require('../date/DateFilter');
+export = require('../date/DateFilter');

@@ -1,4 +1,4 @@
-module.exports = {
+export = {
 	Field: require('../TextarrayField'),
 	Filter: require('../TextarrayFilter'),
 	section: 'Text',

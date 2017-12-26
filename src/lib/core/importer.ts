@@ -52,4 +52,4 @@ function dispatchImporter (rel__dirname) {
 	return importer;
 }
 
-module.exports = dispatchImporter;
+export = dispatchImporter;

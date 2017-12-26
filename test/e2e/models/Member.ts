@@ -8,4 +8,4 @@ var Member = new keystone.List('Member', {
 
 Member.register();
 
-module.exports = Member;
+export = Member;

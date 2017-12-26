@@ -19,4 +19,4 @@ function processFilters (q) {
 	return filters;
 }
 
-module.exports = processFilters;
+export = processFilters;

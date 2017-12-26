@@ -1,6 +1,6 @@
 var async = require('async');
 
-module.exports = function (req, res) {
+export = function (req, res) {
 	var keystone = req.keystone;
 	var counts = {};
 	async.each(keystone.lists, function (list, next) {

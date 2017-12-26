@@ -43,4 +43,4 @@ Bool.add({
 Bool.defaultColumns = 'name, fieldA, fieldB';
 Bool.register();
 
-module.exports = Bool;
+export = Bool;

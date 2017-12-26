@@ -1,4 +1,4 @@
-module.exports = {
+export = {
 	Field: require('../NameField'),
 	Filter: require('../NameFilter'),
 	section: 'Text',

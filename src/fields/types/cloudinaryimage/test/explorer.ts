@@ -1,4 +1,4 @@
-module.exports = {
+export = {
 	Field: require('../CloudinaryImageField'),
 	Filter: require('../CloudinaryImageFilter'),
 	section: 'Miscellaneous',

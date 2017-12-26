@@ -49,4 +49,4 @@ LoginForm.propTypes = {
 };
 
 
-module.exports = LoginForm;
+export = LoginForm;

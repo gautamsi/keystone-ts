@@ -27,4 +27,4 @@ const MobileListItem = React.createClass({
 	},
 });
 
-module.exports = MobileListItem;
+export = MobileListItem;

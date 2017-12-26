@@ -33,4 +33,4 @@ var ItemsTableDragDrop = React.createClass({
 	},
 });
 
-module.exports = DragDropContext(HTML5Backend)(ItemsTableDragDrop);
+export = DragDropContext(HTML5Backend)(ItemsTableDragDrop);

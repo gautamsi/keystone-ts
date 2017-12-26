@@ -56,4 +56,4 @@ var FlashMessages = React.createClass({
 	},
 });
 
-module.exports = FlashMessages;
+export = FlashMessages;

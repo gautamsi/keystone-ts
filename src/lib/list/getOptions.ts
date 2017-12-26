@@ -62,4 +62,4 @@ function getOptions () {
 	return ops;
 }
 
-module.exports = getOptions;
+export = getOptions;

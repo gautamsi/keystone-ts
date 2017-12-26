@@ -29,4 +29,4 @@ Location.add({
 Location.defaultColumns = 'name, fieldA, fieldB';
 Location.register();
 
-module.exports = Location;
+export = Location;

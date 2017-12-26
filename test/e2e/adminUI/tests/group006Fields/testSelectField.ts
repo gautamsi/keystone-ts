@@ -1,7 +1,7 @@
 var fieldTests = require('./commonFieldTestUtils.js');
 var ModelTestConfig = require('../../../modelTestConfig/SelectModelTestConfig');
 
-module.exports = {
+export = {
 	'@disabled': true,
 	before: function (browser) {
 		fieldTests.before(browser);

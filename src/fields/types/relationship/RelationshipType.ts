@@ -269,4 +269,4 @@ definePrototypeGetters(relationship, {
 });
 
 /* Export Field Type */
-module.exports = relationship;
+export = relationship;

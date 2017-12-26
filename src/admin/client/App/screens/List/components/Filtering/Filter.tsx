@@ -90,4 +90,4 @@ Filter.propTypes = {
 	}).isRequired,
 };
 
-module.exports = Filter;
+export = Filter;

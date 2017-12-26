@@ -217,4 +217,4 @@ function updateItem (item, data, options, callback) {
 	});
 }
 
-module.exports = updateItem;
+export = updateItem;

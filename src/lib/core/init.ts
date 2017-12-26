@@ -7,4 +7,4 @@ function init (options) {
 	return this;
 }
 
-module.exports = init;
+export = init;

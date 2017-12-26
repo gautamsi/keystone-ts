@@ -27,4 +27,4 @@ html.prototype.validateRequiredInput = TextType.prototype.validateRequiredInput;
 html.prototype.addFilterToQuery = TextType.prototype.addFilterToQuery;
 
 /* Export Field Type */
-module.exports = html;
+export = html;

@@ -101,4 +101,4 @@ function dropProps (connect, monitor) {
 	};
 };
 
-module.exports = DropTarget('item', dropTarget, dropProps)(ItemsTableDragDropZoneTarget);
+export = DropTarget('item', dropTarget, dropProps)(ItemsTableDragDropZoneTarget);

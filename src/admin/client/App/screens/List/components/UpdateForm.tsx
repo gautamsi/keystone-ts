@@ -136,4 +136,4 @@ var UpdateForm = React.createClass({
 	},
 });
 
-module.exports = UpdateForm;
+export = UpdateForm;

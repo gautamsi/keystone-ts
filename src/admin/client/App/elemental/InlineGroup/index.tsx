@@ -77,4 +77,4 @@ const classes = {
 	},
 };
 
-module.exports = InlineGroup;
+export = InlineGroup;

@@ -29,4 +29,4 @@ Color.add({
 Color.defaultColumns = 'name, fieldA, fieldB';
 Color.register();
 
-module.exports = Color;
+export = Color;

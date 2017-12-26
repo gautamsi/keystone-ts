@@ -4,7 +4,7 @@ var path = require('path');
 var TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
 var KeyFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'KeyFieldTestObject'));
 
-module.exports = function KeyModelTestConfig (config) {
+export = function KeyModelTestConfig (config) {
 	return {
 		name: new TextFieldTestObject(objectAssign({}, config, {fieldName: 'name'})),
 		fieldA: new KeyFieldTestObject(objectAssign({}, config, {fieldName: 'fieldA'})),

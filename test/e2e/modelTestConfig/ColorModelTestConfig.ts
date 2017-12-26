@@ -4,7 +4,7 @@ var path = require('path');
 var TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
 var ColorFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'ColorFieldTestObject'));
 
-module.exports = function ColorModelTestConfig (config) {
+export = function ColorModelTestConfig (config) {
 	return {
 		name: new TextFieldTestObject(objectAssign({}, config, {fieldName: 'name'})),
 		fieldA: new ColorFieldTestObject(objectAssign({}, config, {fieldName: 'fieldA'})),

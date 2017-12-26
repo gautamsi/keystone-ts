@@ -1,6 +1,6 @@
 import theme from '../../../theme';
 
-module.exports = {
+export = {
 	small: theme.glyph.size.small,
 	medium: theme.glyph.size.medium,
 	large: theme.glyph.size.large,

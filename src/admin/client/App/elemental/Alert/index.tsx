@@ -44,4 +44,4 @@ Alert.defaultProps = {
 	component: 'div',
 };
 
-module.exports = Alert;
+export = Alert;

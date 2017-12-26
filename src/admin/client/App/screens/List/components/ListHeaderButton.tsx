@@ -34,4 +34,4 @@ const classes = {
 	},
 };
 
-module.exports = ListHeaderButton;
+export = ListHeaderButton;

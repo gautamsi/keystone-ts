@@ -31,4 +31,4 @@ const SecondaryNavItem = React.createClass({
 	},
 });
 
-module.exports = SecondaryNavItem;
+export = SecondaryNavItem;

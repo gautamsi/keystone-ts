@@ -14,4 +14,4 @@ DateFieldMap.add({
 DateFieldMap.register();
 DateFieldMap.defaultColumns = 'datefield';
 
-module.exports = DateFieldMap;
+export = DateFieldMap;

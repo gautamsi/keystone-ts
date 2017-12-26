@@ -9,4 +9,4 @@ ManyRelationship.add({
 });
 
 ManyRelationship.register();
-module.exports = ManyRelationship;
+export = ManyRelationship;

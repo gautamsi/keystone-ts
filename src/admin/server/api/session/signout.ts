@@ -18,4 +18,4 @@ function signout (req, res) {
 	});
 }
 
-module.exports = signout;
+export = signout;

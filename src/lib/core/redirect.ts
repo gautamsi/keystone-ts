@@ -24,4 +24,4 @@ function redirect () {
 	return this;
 }
 
-module.exports = redirect;
+export = redirect;

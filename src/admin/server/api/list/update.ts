@@ -4,7 +4,7 @@ TODO: Needs Review and Spec
 
 var async = require('async');
 
-module.exports = function (req, res) {
+export = function (req, res) {
 	var keystone = req.keystone;
 	if (!keystone.security.csrf.validate(req)) {
 		return res.apiError(403, 'invalid csrf');

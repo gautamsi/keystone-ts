@@ -31,4 +31,4 @@ const classes = {
 	},
 };
 
-module.exports = Kbd;
+export = Kbd;

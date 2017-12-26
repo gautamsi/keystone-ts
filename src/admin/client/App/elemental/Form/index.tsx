@@ -49,4 +49,4 @@ Form.defaultProps = {
 	layout: 'basic',
 };
 
-module.exports = Form;
+export = Form;

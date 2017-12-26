@@ -62,4 +62,4 @@ const classes = {
 	},
 };
 
-module.exports = LoadingButton;
+export = LoadingButton;

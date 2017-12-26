@@ -1,6 +1,6 @@
 import theme from '../../../theme';
 
-module.exports = {
+export = {
 	small: theme.container.size.small,
 	medium: theme.container.size.medium,
 	large: theme.container.size.large,

@@ -1,4 +1,4 @@
-module.exports = {
+export = {
 	Field: require('../ColorField'),
 	Filter: require('../ColorFilter'),
 	readme: require('fs').readFileSync('./fields/types/color/Readme.md', 'utf8'),

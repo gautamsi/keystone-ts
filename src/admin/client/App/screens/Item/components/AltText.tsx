@@ -77,4 +77,4 @@ AltText.defaultProps = {
 	modifier: '<alt>',
 };
 
-module.exports = AltText;
+export = AltText;

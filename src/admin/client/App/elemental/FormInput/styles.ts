@@ -4,7 +4,7 @@
 
 import theme from '../../../theme';
 
-module.exports = {
+export = {
 	'FormInput': {
 		'appearance': 'none',
 		'backgroundColor': theme.input.background.default,

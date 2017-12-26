@@ -33,4 +33,4 @@ FormNote.defaultProps = {
 	component: 'div',
 };
 
-module.exports = FormNote;
+export = FormNote;

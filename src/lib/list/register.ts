@@ -85,4 +85,4 @@ function register () {
 	return this;
 }
 
-module.exports = register;
+export = register;

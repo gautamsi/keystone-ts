@@ -2,7 +2,7 @@ var fieldTests = require('./commonFieldTestUtils.js');
 var ModelTestConfig = require('../../../modelTestConfig/RelationshipModelTestConfig');
 var UserModelTestConfig = require('../../../modelTestConfig/UserModelTestConfig');
 
-module.exports = {
+export = {
 	before: function (browser) {
 		fieldTests.before(browser);
 		browser.adminUIInitialFormScreen.setDefaultModelTestConfig(ModelTestConfig);

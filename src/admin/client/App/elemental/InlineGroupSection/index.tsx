@@ -47,4 +47,4 @@ InlineGroupSection.propTypes = {
 	position: PropTypes.oneOf(['first', 'last', 'middle', 'only']),
 };
 
-module.exports = InlineGroupSection;
+export = InlineGroupSection;

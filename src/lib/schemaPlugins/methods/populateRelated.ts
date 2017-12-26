@@ -1,6 +1,6 @@
 var _ = require('lodash');
 
-module.exports = function populateRelated (rel, callback) {
+export = function populateRelated (rel, callback) {
 
 	var item = this;
 

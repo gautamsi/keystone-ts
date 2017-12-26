@@ -85,4 +85,4 @@ const classes = {
 	},
 };
 
-module.exports = Footer;
+export = Footer;

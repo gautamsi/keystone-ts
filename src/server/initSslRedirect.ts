@@ -1,4 +1,4 @@
-module.exports = function (keystone, app) {
+export = function (keystone, app) {
 	var portString;
 	function sslRedirect (req, res, next) {
 		if (req.secure) {

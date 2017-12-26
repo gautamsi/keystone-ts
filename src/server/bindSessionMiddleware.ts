@@ -1,4 +1,4 @@
-module.exports = function bindSessionMiddleware (keystone, app) {
+export = function bindSessionMiddleware (keystone, app) {
 
 	app.use(keystone.get('session options').cookieParser);
 

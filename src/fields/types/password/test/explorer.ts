@@ -1,4 +1,4 @@
-module.exports = {
+export = {
 	Field: require('../PasswordField'),
 	Filter: require('../PasswordFilter'),
 	section: 'Miscellaneous',

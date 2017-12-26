@@ -1,4 +1,4 @@
-module.exports = {
+export = {
 	Alert: require('./Alert'),
 	BlankState: require('./BlankState'),
 	Button: require('./Button'),

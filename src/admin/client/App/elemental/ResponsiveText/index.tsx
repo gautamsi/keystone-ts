@@ -82,4 +82,4 @@ ResponsiveText.defaultProps = {
 	component: 'span',
 };
 
-module.exports = ResponsiveText;
+export = ResponsiveText;

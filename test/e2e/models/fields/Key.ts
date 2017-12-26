@@ -29,4 +29,4 @@ Key.add({
 Key.defaultColumns = 'name, fieldA, fieldB';
 Key.register();
 
-module.exports = Key;
+export = Key;

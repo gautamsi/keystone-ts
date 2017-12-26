@@ -29,4 +29,4 @@ Money.add({
 Money.defaultColumns = 'name, fieldA, fieldB';
 Money.register();
 
-module.exports = Money;
+export = Money;

@@ -1,4 +1,4 @@
-module.exports = {
+export = {
 	Field: require('../NumberarrayField'),
 	Filter: require('../NumberarrayFilter'),
 	section: 'Number',

@@ -181,4 +181,4 @@ select.prototype.format = function (item) {
 };
 
 /* Export Field Type */
-module.exports = select;
+export = select;

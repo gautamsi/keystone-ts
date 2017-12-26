@@ -214,4 +214,4 @@ Page.prototype.clean = function (data) {
  * Export class
  */
 
-module.exports = Page;
+export = Page;

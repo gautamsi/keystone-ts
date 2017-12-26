@@ -23,4 +23,4 @@ AlertView.propTypes = {
 	signedOut: React.PropTypes.bool,
 };
 
-module.exports = AlertView;
+export = AlertView;

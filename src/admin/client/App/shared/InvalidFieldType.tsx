@@ -17,4 +17,4 @@ InvalidFieldType.propTypes = {
 	type: React.PropTypes.string,
 };
 
-module.exports = InvalidFieldType;
+export = InvalidFieldType;

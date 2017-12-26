@@ -1,7 +1,7 @@
 var fieldTests = require('./commonFieldTestUtils.js');
 var ModelTestConfig = require('../../../modelTestConfig/PasswordModelTestConfig');
 
-module.exports = {
+export = {
 	// '@disabled': true,  // TODO: enable after https://github.com/keystonejs/keystone/issues/3428 is fixed
 	before: function (browser) {
 		fieldTests.before(browser);

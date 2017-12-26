@@ -17,4 +17,4 @@ OtherList.add({
 OtherList.defaultColumns = 'name';
 OtherList.register();
 
-module.exports = OtherList;
+export = OtherList;

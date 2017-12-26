@@ -114,4 +114,4 @@ function prepareWidths (prefix, obj) {
 	return classes;
 };
 
-module.exports = GridCol;
+export = GridCol;

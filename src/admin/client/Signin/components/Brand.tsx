@@ -34,4 +34,4 @@ const Brand = function (props) {
 	);
 };
 
-module.exports = Brand;
+export = Brand;

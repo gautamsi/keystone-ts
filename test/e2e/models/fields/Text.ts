@@ -29,4 +29,4 @@ Text.add({
 Text.defaultColumns = 'name, fieldA, fieldB';
 Text.register();
 
-module.exports = Text;
+export = Text;

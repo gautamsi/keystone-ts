@@ -26,4 +26,4 @@ function selectColumns (q, cols) {
 	}
 }
 
-module.exports = selectColumns;
+export = selectColumns;

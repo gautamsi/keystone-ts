@@ -53,4 +53,4 @@ const FlashMessage = React.createClass({
 	},
 });
 
-module.exports = FlashMessage;
+export = FlashMessage;

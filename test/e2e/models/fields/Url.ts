@@ -29,4 +29,4 @@ Url.add({
 Url.defaultColumns = 'name, fieldA, fieldB';
 Url.register();
 
-module.exports = Url;
+export = Url;

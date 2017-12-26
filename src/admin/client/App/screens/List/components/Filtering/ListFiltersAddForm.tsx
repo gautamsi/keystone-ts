@@ -69,4 +69,4 @@ var ListFiltersAddForm = React.createClass({
 	},
 });
 
-module.exports = ListFiltersAddForm;
+export = ListFiltersAddForm;

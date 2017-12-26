@@ -56,4 +56,4 @@ const classes = {
 	},
 };
 
-module.exports = GridRow;
+export = GridRow;

@@ -78,4 +78,4 @@ FormInput.contextTypes = {
 	formFieldId: PropTypes.string,
 };
 
-module.exports = FormInput;
+export = FormInput;

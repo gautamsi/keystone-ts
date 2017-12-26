@@ -31,4 +31,4 @@ Email.add({
 Email.defaultColumns = 'name, fieldA, fieldB';
 Email.register();
 
-module.exports = Email;
+export = Email;

@@ -29,4 +29,4 @@ Center.defaultProps = {
 	height: 'auto',
 };
 
-module.exports = Center;
+export = Center;

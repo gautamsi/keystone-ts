@@ -31,7 +31,7 @@ const linkStyles = {
 	':focus': { color: 'inherit' },
 };
 
-module.exports = {
+export = {
 	alert: {
 		borderColor: 'transparent',
 		borderRadius: theme.alert.borderRadius,

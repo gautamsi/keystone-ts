@@ -55,4 +55,4 @@ const PopoutFooter = React.createClass({
 	},
 });
 
-module.exports = PopoutFooter;
+export = PopoutFooter;

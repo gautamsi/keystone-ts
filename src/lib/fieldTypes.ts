@@ -32,4 +32,4 @@ var fields = {
 	get Url () { return require('../fields/types/url/UrlType'); },
 };
 
-module.exports = fields;
+export = fields;

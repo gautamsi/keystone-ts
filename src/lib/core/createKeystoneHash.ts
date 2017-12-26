@@ -12,4 +12,4 @@ function createKeystoneHash () {
 	return hash.digest('hex').slice(0, 6);
 }
 
-module.exports = createKeystoneHash;
+export = createKeystoneHash;

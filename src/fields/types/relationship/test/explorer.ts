@@ -1,4 +1,4 @@
-module.exports = {
+export = {
 	Field: require('../RelationshipField'),
 	Filter: require('../RelationshipFilter'),
 	readme: require('fs').readFileSync('./fields/types/relationship/Readme.md', 'utf8'),

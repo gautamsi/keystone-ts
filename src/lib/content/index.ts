@@ -239,7 +239,7 @@ Content.prototype.editable = function (user, options) {
  * @api public
  */
 
-module.exports = new Content();
+export = new Content();
 
 // Expose Classes
 exports.Page = require('./page');

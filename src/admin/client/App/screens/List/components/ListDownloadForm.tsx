@@ -190,4 +190,4 @@ var ListDownloadForm = React.createClass({
 	},
 });
 
-module.exports = ListDownloadForm;
+export = ListDownloadForm;

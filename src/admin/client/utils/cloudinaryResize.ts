@@ -15,4 +15,4 @@ function cloudinaryResize (publicId, options = {}) {
 	});
 };
 
-module.exports = cloudinaryResize;
+export = cloudinaryResize;

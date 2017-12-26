@@ -424,4 +424,4 @@ const styles = {
 	},
 };
 
-module.exports = EditForm;
+export = EditForm;

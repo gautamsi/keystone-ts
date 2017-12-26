@@ -105,7 +105,7 @@ const classes = {
 	},
 };
 
-module.exports = EditFormHeaderSearch;
+export = EditFormHeaderSearch;
 
 
 // Search

@@ -28,4 +28,4 @@ NumberArray.add({
 NumberArray.defaultColumns = 'name, fieldA, fieldB';
 NumberArray.register();
 
-module.exports = NumberArray;
+export = NumberArray;

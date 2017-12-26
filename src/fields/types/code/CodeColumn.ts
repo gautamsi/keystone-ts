@@ -1,1 +1,1 @@
-module.exports = require('../text/TextColumn');
+export = require('../text/TextColumn');

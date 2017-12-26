@@ -38,4 +38,4 @@ function signin (req, res) {
 	});
 }
 
-module.exports = signin;
+export = signin;

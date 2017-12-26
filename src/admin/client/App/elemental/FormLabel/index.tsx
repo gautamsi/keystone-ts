@@ -63,4 +63,4 @@ FormLabel.contextTypes = {
 	]),
 };
 
-module.exports = FormLabel;
+export = FormLabel;

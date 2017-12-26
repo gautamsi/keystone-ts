@@ -29,4 +29,4 @@ Date.add({
 Date.defaultColumns = 'name, fieldA, fieldB';
 Date.register();
 
-module.exports = Date;
+export = Date;

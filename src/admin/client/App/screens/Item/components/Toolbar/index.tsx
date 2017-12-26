@@ -7,4 +7,4 @@ Toolbar.propTypes = {
 	children: PropTypes.node.isRequired,
 };
 
-module.exports = Toolbar;
+export = Toolbar;

@@ -75,4 +75,4 @@ const classes = {
 	},
 };
 
-module.exports = ModalHeader;
+export = ModalHeader;

@@ -336,4 +336,4 @@ theme.spinner = {
 	},
 };
 
-module.exports = theme;
+export = theme;

@@ -89,4 +89,4 @@ function paginate (options, callback) {
 	}
 }
 
-module.exports = paginate;
+export = paginate;

@@ -34,4 +34,4 @@ UserInfo.propTypes = {
 	userName: PropTypes.string.isRequired,
 };
 
-module.exports = UserInfo;
+export = UserInfo;

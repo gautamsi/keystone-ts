@@ -33,4 +33,4 @@ Container.defaultProps = {
 	width: 'large',
 };
 
-module.exports = Container;
+export = Container;

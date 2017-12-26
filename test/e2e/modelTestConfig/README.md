@@ -12,7 +12,7 @@ var path = require('path');
     var TextFieldTestObject = require('../fieldTestObjects/textField');
     var BooleanFieldTestObject = require('../fieldTestObjects/booleanField');
 
-    module.exports = function ModelTestConfig (config) {
+    export = function ModelTestConfig (config) {
         return {
             name: new TextFieldTestObject(objectAssign({}, config, {fieldName: 'name'})),
             fieldA: new BooleanFieldTestObject(objectAssign({}, config, {fieldName: 'fieldA'})),

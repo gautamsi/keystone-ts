@@ -14,4 +14,4 @@ function getOrphanedLists () {
 	}.bind(this));
 }
 
-module.exports = getOrphanedLists;
+export = getOrphanedLists;

@@ -4,7 +4,7 @@ var path = require('path');
 var TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
 var NumberArrayFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'NumberArrayFieldTestObject'));
 
-module.exports = function NumberArrayModelTestConfig (config) {
+export = function NumberArrayModelTestConfig (config) {
 	return {
 		name: new TextFieldTestObject(objectAssign({}, config, {fieldName: 'name'})),
 		fieldA: new NumberArrayFieldTestObject(objectAssign({}, config, {fieldName: 'fieldA'})),

@@ -1,1 +1,1 @@
-module.exports = require('../date/DateColumn');
+export = require('../date/DateColumn');

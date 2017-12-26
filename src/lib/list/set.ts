@@ -13,4 +13,4 @@ function set (key, value) {
 	return value;
 }
 
-module.exports = set;
+export = set;

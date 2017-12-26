@@ -8,4 +8,4 @@ function createRouter () {
 	return express.Router();
 }
 
-module.exports = createRouter;
+export = createRouter;

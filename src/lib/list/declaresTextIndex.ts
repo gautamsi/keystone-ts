@@ -18,4 +18,4 @@ function declaresTextIndex () {
 	return false;
 }
 
-module.exports = declaresTextIndex;
+export = declaresTextIndex;

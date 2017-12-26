@@ -40,4 +40,4 @@ var ListTile = React.createClass({
 	},
 });
 
-module.exports = ListTile;
+export = ListTile;

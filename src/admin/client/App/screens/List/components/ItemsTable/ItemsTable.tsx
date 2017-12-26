@@ -128,4 +128,4 @@ const ItemsTable = React.createClass({
 	},
 });
 
-module.exports = exports = ItemsTable;
+export = exports = ItemsTable;

@@ -1,4 +1,4 @@
-module.exports = {
+export = {
 	Field: require('../TextField'),
 	Filter: require('../TextFilter'),
 	readme: require('fs').readFileSync('./fields/types/text/Readme.md', 'utf8'),

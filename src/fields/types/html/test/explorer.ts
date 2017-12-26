@@ -1,4 +1,4 @@
-module.exports = {
+export = {
 	Field: require('../HtmlField'),
 	Filter: require('../HtmlFilter'),
 	readme: require('fs').readFileSync('./fields/types/html/Readme.md', 'utf8'),

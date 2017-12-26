@@ -6,7 +6,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-module.exports = React.createClass({
+export = React.createClass({
 	displayName: 'Portal',
 	portalElement: null, // eslint-disable-line react/sort-comp
 	componentDidMount () {

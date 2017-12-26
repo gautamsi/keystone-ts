@@ -12,4 +12,4 @@ function expandPaths (paths) {
 	}, this);
 }
 
-module.exports = expandPaths;
+export = expandPaths;

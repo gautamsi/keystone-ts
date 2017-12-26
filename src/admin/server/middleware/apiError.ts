@@ -12,7 +12,7 @@ var assign = require('object-assign');
 		apiError(err) => 500 { err }
 */
 
-module.exports = function (req, res, next) {
+export = function (req, res, next) {
 	res.apiError = function apiError (statusCode, error, detail) {
 		// process arguments
 		if (typeof statusCode !== 'number' && detail === undefined) {

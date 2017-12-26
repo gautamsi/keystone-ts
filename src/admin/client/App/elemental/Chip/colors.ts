@@ -20,7 +20,7 @@ const invertedColors = {};
 	};
 });
 
-module.exports = {
+export = {
 	default: {
 		background: theme.color.gray10,
 		backgroundActive: theme.color.gray20,

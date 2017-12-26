@@ -108,4 +108,4 @@ Pagination.propTypes = {
 	total: PropTypes.number.isRequired,
 };
 
-module.exports = Pagination;
+export = Pagination;

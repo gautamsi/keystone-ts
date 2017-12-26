@@ -38,4 +38,4 @@ File.add({
 File.defaultColumns = 'name, fieldA, fieldB';
 File.register();
 
-module.exports = File;
+export = File;

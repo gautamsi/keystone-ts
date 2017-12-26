@@ -119,4 +119,4 @@ function getCSVData (item, options) {
 	return rtn;
 }
 
-module.exports = getCSVData;
+export = getCSVData;

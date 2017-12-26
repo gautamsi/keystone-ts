@@ -29,4 +29,4 @@ Textarea.add({
 Textarea.defaultColumns = 'name, fieldA, fieldB';
 Textarea.register();
 
-module.exports = Textarea;
+export = Textarea;

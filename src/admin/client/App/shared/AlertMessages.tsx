@@ -94,4 +94,4 @@ var AlertMessages = React.createClass({
 	},
 });
 
-module.exports = AlertMessages;
+export = AlertMessages;

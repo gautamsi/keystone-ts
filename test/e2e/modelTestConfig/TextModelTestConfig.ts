@@ -3,7 +3,7 @@ var fieldTestObjectsPath = require('keystone-nightwatch-e2e').fieldTestObjectsPa
 var path = require('path');
 var TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
 
-module.exports = function TextModelTestConfig (config) {
+export = function TextModelTestConfig (config) {
 	return {
 		name: new TextFieldTestObject(objectAssign({}, config, {fieldName: 'name'})),
 		fieldA: new TextFieldTestObject(objectAssign({}, config, {fieldName: 'fieldA'})),

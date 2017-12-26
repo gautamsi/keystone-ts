@@ -17,4 +17,4 @@ SourceRelationship.add({
 SourceRelationship.register();
 SourceRelationship.defaultColumns = 'name, fieldA';
 
-module.exports = SourceRelationship;
+export = SourceRelationship;

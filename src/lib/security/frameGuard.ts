@@ -11,7 +11,7 @@
  * @api public
  */
 
-module.exports = function (keystone) {
+export = function (keystone) {
 	return function frameGuard (req, res, next) {
 		var options = keystone.get('frame guard');
 		if (options) {

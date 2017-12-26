@@ -4,7 +4,7 @@ var path = require('path');
 var TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
 var DateFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'DateFieldTestObject'));
 
-module.exports = function DateModelTestConfig (config) {
+export = function DateModelTestConfig (config) {
 	return {
 		name: new TextFieldTestObject(objectAssign({}, config, {fieldName: 'name'})),
 		fieldA: new DateFieldTestObject(objectAssign({}, config, {fieldName: 'fieldA'})),

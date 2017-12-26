@@ -25,4 +25,4 @@ var PopoutBody = React.createClass({
 	},
 });
 
-module.exports = PopoutBody;
+export = PopoutBody;

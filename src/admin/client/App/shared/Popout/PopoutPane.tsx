@@ -31,4 +31,4 @@ var PopoutPane = React.createClass({
 	},
 });
 
-module.exports = PopoutPane;
+export = PopoutPane;

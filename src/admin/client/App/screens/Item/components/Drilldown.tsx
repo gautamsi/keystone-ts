@@ -38,4 +38,4 @@ const classes = {
 	},
 };
 
-module.exports = Drilldown;
+export = Drilldown;

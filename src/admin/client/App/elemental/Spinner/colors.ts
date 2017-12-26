@@ -1,1 +1,1 @@
-module.exports = ['danger', 'default', 'inverted', 'primary', 'success', 'warning'];
+export = ['danger', 'default', 'inverted', 'primary', 'success', 'warning'];

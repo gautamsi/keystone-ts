@@ -1,4 +1,4 @@
-module.exports = function initTrustProxy (keystone, app) {
+export = function initTrustProxy (keystone, app) {
 	// Process 'X-Forwarded-For' request header
 	if (keystone.get('trust proxy') === true) {
 		app.enable('trust proxy');

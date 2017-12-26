@@ -54,4 +54,4 @@ PrimaryNavItem.propTypes = {
 	to: PropTypes.string,
 };
 
-module.exports = PrimaryNavItem;
+export = PrimaryNavItem;

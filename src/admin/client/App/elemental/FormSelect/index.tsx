@@ -55,4 +55,4 @@ FormSelect.propTypes = {
 	]),
 };
 
-module.exports = FormSelect;
+export = FormSelect;

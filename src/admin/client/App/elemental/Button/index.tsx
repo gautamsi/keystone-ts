@@ -85,4 +85,4 @@ Button.defaultProps = {
 	variant: 'fill',
 };
 
-module.exports = Button;
+export = Button;

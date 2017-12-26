@@ -79,4 +79,4 @@ function add () {
 	return this;
 }
 
-module.exports = add;
+export = add;

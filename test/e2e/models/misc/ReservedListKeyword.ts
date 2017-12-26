@@ -27,4 +27,4 @@ ReservedListKeyword.add({
 
 ReservedListKeyword.register();
 
-module.exports = ReservedListKeyword;
+export = ReservedListKeyword;

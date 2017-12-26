@@ -26,4 +26,4 @@ function isReserved (path) {
 	return reservedPaths.indexOf(path) >= 0;
 }
 
-module.exports = isReserved;
+export = isReserved;

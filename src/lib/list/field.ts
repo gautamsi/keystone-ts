@@ -51,4 +51,4 @@ function field (path, options) {
 	return field;
 }
 
-module.exports = field;
+export = field;

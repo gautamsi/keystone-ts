@@ -29,4 +29,4 @@ Password.add({
 Password.defaultColumns = 'name, fieldA, fieldB';
 Password.register();
 
-module.exports = Password;
+export = Password;

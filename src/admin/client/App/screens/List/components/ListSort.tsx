@@ -135,4 +135,4 @@ var ListSort = React.createClass({
 	},
 });
 
-module.exports = ListSort;
+export = ListSort;

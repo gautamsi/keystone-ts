@@ -519,4 +519,4 @@ location.prototype.milesFrom = function (item, point) {
 };
 
 /* Export Field Type */
-module.exports = location;
+export = location;

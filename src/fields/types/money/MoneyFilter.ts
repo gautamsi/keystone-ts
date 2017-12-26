@@ -1,1 +1,1 @@
-module.exports = require('../number/NumberFilter');
+export = require('../number/NumberFilter');

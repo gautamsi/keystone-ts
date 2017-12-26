@@ -27,7 +27,7 @@ Object.keys(colors).forEach(color => {
 	};
 });
 
-module.exports = {
+export = {
 	chip: {
 		display: 'inline-block',
 		fontSize: theme.font.size.small,

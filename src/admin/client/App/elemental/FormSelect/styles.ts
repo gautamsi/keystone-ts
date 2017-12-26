@@ -7,7 +7,7 @@
 import theme from '../../../theme';
 import { darken, lighten } from '../../../utils/color';
 
-module.exports = {
+export = {
 	container: {
 		position: 'relative',
 	},

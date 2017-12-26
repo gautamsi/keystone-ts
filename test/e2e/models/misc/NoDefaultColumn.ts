@@ -17,4 +17,4 @@ NoDefaultColumn.add({
 
 NoDefaultColumn.register();
 
-module.exports = NoDefaultColumn;
+export = NoDefaultColumn;

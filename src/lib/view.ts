@@ -36,7 +36,7 @@ function View (req, res) {
 
 }
 
-module.exports = View;
+export = View;
 
 
 /**

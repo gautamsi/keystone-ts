@@ -31,4 +31,4 @@ RelatedItemsListDragDrop.propTypes = {
 	relationship: PropTypes.object.isRequired,
 };
 
-module.exports = DragDropContext(HTML5Backend)(RelatedItemsListDragDrop);
+export = DragDropContext(HTML5Backend)(RelatedItemsListDragDrop);

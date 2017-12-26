@@ -173,4 +173,4 @@ Storage.Adapters.FS = require('./adapters/fs');
 assign(Storage, nameFunctions);
 
 
-module.exports = Storage;
+export = Storage;

@@ -26,4 +26,4 @@ SelectFieldOnInitial.add({
 SelectFieldOnInitial.defaultColumns = 'name, type';
 SelectFieldOnInitial.register();
 
-module.exports = SelectFieldOnInitial;
+export = SelectFieldOnInitial;

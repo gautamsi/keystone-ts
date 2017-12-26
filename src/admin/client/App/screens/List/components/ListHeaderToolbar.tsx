@@ -193,4 +193,4 @@ const classes = {
 	},
 };
 
-module.exports = ListHeaderToolbar;
+export = ListHeaderToolbar;

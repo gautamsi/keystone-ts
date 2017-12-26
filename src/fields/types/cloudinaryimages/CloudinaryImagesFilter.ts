@@ -1,1 +1,1 @@
-module.exports = require('../cloudinaryimage/CloudinaryImageFilter');
+export = require('../cloudinaryimage/CloudinaryImageFilter');

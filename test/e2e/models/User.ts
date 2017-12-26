@@ -42,4 +42,4 @@ User.schema.virtual('canAccessKeystone').get(function () {
 User.defaultColumns = 'name, email, isAdmin, isMember';
 User.register();
 
-module.exports = User;
+export = User;

@@ -29,4 +29,4 @@ Datetime.add({
 Datetime.defaultColumns = 'name, fieldA, fieldB';
 Datetime.register();
 
-module.exports = Datetime;
+export = Datetime;

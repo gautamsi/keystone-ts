@@ -74,7 +74,7 @@ const ItemsRow = React.createClass({
 	},
 });
 
-module.exports = exports = ItemsRow;
+export = exports = ItemsRow;
 
 // Expose Sortable
 
@@ -157,4 +157,4 @@ function dropProps (connect) {
 	};
 };
 
-exports.Sortable = DragSource('item', dragItem, dragProps)(DropTarget('item', dropItem, dropProps)(ItemsRow));
+export const Sortable = DragSource('item', dragItem, dragProps)(DropTarget('item', dropItem, dropProps)(ItemsRow));

@@ -9,7 +9,7 @@ var Types = require('../fieldTypes');
  * as well as the user who created/updated it.
  */
 
-module.exports = function track () {
+export = function track () {
 
 	var list = this;
 	var options = list.get('track');

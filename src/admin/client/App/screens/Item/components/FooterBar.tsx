@@ -102,4 +102,4 @@ var FooterBar = React.createClass({
 	},
 });
 
-module.exports = FooterBar;
+export = FooterBar;

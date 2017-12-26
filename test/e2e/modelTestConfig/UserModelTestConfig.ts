@@ -7,7 +7,7 @@ var PasswordFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'Passwo
 var TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
 var BooleanFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'BooleanFieldTestObject'));
 
-module.exports = function UserModelTestConfig (config) {
+export = function UserModelTestConfig (config) {
 	return {
 		name: new NameFieldTestObject(objectAssign({}, config, {fieldName: 'name'})),
 		email: new EmailFieldTestObject(objectAssign({}, config, {fieldName: 'email'})),

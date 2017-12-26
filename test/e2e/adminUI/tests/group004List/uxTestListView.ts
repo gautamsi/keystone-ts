@@ -1,6 +1,6 @@
 var ModelTestConfig = require('../../../modelTestConfig/NameModelTestConfig');
 
-module.exports = {
+export = {
 	before: function (browser) {
 		browser.adminUIApp = browser.page.adminUIApp();
 		browser.adminUISigninScreen = browser.page.adminUISignin();

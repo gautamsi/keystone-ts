@@ -35,4 +35,4 @@ Select.add({
 Select.defaultColumns = 'name, fieldA, fieldB';
 Select.register();
 
-module.exports = Select;
+export = Select;

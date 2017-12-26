@@ -19,4 +19,4 @@ TargetRelationship.relationship({
 TargetRelationship.register();
 TargetRelationship.defaultColumns = 'name';
 
-module.exports = TargetRelationship;
+export = TargetRelationship;

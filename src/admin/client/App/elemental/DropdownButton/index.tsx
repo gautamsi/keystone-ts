@@ -38,4 +38,4 @@ const classes = {
 	},
 };
 
-module.exports = DropdownButton;
+export = DropdownButton;

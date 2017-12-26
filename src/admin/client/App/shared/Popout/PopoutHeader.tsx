@@ -54,4 +54,4 @@ const PopoutHeader = React.createClass({
 	},
 });
 
-module.exports = PopoutHeader;
+export = PopoutHeader;

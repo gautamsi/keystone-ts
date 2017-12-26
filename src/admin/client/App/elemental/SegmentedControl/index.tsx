@@ -72,4 +72,4 @@ SegmentedControl.defaultProps = {
 	color: 'default',
 };
 
-module.exports = SegmentedControl;
+export = SegmentedControl;

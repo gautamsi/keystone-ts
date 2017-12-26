@@ -12,4 +12,4 @@ InvalidDefaultColumn.add({
 InvalidDefaultColumn.defaultColumns = 'bar';
 InvalidDefaultColumn.register();
 
-module.exports = InvalidDefaultColumn;
+export = InvalidDefaultColumn;

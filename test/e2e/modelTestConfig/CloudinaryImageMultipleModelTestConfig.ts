@@ -4,7 +4,7 @@ var path = require('path');
 var CloudinaryImageMultipleFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'CloudinaryImageMultipleFieldTestObject'));
 var TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
 
-module.exports = function CloudinaryImageMultipleModelTestConfig (config) {
+export = function CloudinaryImageMultipleModelTestConfig (config) {
 	return {
 		name: new TextFieldTestObject(objectAssign({}, config, {fieldName: 'name'})),
 		fieldA: new CloudinaryImageMultipleFieldTestObject(objectAssign({}, config, {fieldName: 'fieldA'})),

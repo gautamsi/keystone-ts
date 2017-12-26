@@ -24,7 +24,7 @@ Object.keys(colors).forEach(color => {
 	};
 });
 
-module.exports = {
+export = {
 	control: {
 		borderWidth: 1,
 		borderStyle: 'solid',

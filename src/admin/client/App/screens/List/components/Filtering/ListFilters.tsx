@@ -49,4 +49,4 @@ ListFilters.propTypes = {
 	filters: PropTypes.array.isRequired,
 };
 
-module.exports = ListFilters;
+export = ListFilters;

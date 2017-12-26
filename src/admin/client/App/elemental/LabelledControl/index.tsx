@@ -29,4 +29,4 @@ LabelledControl.propTypes = {
 	type: PropTypes.oneOf(['checkbox', 'radio']).isRequired,
 };
 
-module.exports = LabelledControl;
+export = LabelledControl;

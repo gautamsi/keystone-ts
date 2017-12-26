@@ -52,4 +52,4 @@ money.prototype.format = function (item, format) {
 };
 
 /* Export Field Type */
-module.exports = money;
+export = money;

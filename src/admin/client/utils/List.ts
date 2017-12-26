@@ -348,4 +348,4 @@ List.prototype.reorderItems = function (item, oldSortOrder, newSortOrder, pageOp
 };
 
 
-module.exports = List;
+export = List;

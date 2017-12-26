@@ -54,4 +54,4 @@ const MobileSectionItem = React.createClass({
 	},
 });
 
-module.exports = MobileSectionItem;
+export = MobileSectionItem;

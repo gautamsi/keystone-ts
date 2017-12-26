@@ -4,7 +4,7 @@
  */
 var keystone = require('../../../index.js');
 
-module.exports = function(done) {
+export = function(done) {
 	var Member = keystone.list('User');
 	Member.model.findOneAndUpdate({isMember: true}, {$set: {isAdmin: false}}, {new: true}).exec(function (err, member) {
 		if (!err && member) {

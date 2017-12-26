@@ -1,4 +1,4 @@
-module.exports = {
+export = {
 	Field: require('../DatetimeField'),
 	Filter: require('../DatetimeFilter'),
 	readme: require('fs').readFileSync('./fields/types/datetime/Readme.md', 'utf8'),

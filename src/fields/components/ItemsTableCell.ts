@@ -7,4 +7,4 @@ function ItemsTableCell ({ className, ...props }) {
 	return <td {...props} />;
 };
 
-module.exports = ItemsTableCell;
+export = ItemsTableCell;

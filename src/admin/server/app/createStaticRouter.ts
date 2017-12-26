@@ -32,7 +32,7 @@ function buildFieldTypesStream (fieldTypes) {
 	return str(src);
 }
 
-module.exports = function createStaticRouter (keystone) {
+export = function createStaticRouter (keystone) {
 	var keystoneHash = keystone.createKeystoneHash();
 	var writeToDisk = keystone.get('cache admin bundles');
 	var router = express.Router();

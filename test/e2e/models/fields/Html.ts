@@ -29,4 +29,4 @@ Html.add({
 Html.defaultColumns = 'name, fieldA, fieldB';
 Html.register();
 
-module.exports = Html;
+export = Html;

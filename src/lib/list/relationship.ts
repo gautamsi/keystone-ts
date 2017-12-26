@@ -37,4 +37,4 @@ function relationship (def) {
 	return this;
 }
 
-module.exports = relationship;
+export = relationship;

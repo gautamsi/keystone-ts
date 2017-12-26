@@ -54,4 +54,4 @@ Chip.defaultProps = {
 	color: 'default',
 };
 
-module.exports = Chip;
+export = Chip;

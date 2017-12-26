@@ -5,7 +5,7 @@ var debug = require('debug')('keystone:core:initExpressSession');
 var Promise = require('es6-promise').Promise;
 var safeRequire = require('../safeRequire');
 
-module.exports = function initExpressSession (mongoose) {
+export = function initExpressSession (mongoose) {
 
 	if (this.expressSession) return this;
 

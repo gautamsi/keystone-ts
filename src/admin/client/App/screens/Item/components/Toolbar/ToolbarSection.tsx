@@ -15,4 +15,4 @@ ToolbarSection.propTypes = {
 	right: PropTypes.bool,
 };
 
-module.exports = ToolbarSection;
+export = ToolbarSection;

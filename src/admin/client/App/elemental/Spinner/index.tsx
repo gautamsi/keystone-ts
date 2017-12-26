@@ -31,4 +31,4 @@ Spinner.defaultProps = {
 	color: 'default',
 };
 
-module.exports = Spinner;
+export = Spinner;
