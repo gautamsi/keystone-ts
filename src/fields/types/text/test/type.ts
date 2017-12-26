@@ -1,6 +1,6 @@
 var demand = require('must');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		text: String,
 		nested: {
@@ -17,7 +17,7 @@ exports.initList = function (List) {
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
 			var testItem = new List.model();

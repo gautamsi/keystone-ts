@@ -21,5 +21,5 @@ function definePrototypeGetters (Constructor, getterObj) {
 	});
 }
 
-export = definePrototypeGetters;
+export default definePrototypeGetters;
 module.definePrototypeGetter = definePrototypeGetter;

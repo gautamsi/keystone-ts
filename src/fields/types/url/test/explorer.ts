@@ -1,4 +1,4 @@
-export = {
+export default {
 	Field: require('../UrlField'),
 	Filter: require('../UrlFilter'),
 	readme: require('fs').readFileSync('./fields/types/url/Readme.md', 'utf8'),

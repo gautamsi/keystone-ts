@@ -1,7 +1,7 @@
 var demand = require('must');
 var RelationshipType = require('../RelationshipType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	// We can use relationships that refer to the same List to test
 	List.add({
 		single: { type: RelationshipType, ref: List.key },
@@ -9,7 +9,7 @@ exports.initList = function (List) {
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 
 	var relatedItem = new List.model();
 	before(function (done) {

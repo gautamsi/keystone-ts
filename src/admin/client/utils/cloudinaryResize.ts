@@ -5,7 +5,7 @@ const CLOUD_NAME = window.Keystone.cloudinary.cloud_name;
 	Take a cloudinary public id + options object
 	and return a url
 */
-function cloudinaryResize (publicId, options = {}) {
+export function cloudinaryResize (publicId, options = {}) {
 	if (!publicId || !CLOUD_NAME) return false;
 
 	return url(publicId, {
@@ -14,5 +14,3 @@ function cloudinaryResize (publicId, options = {}) {
 		...options,
 	});
 };
-
-export = cloudinaryResize;

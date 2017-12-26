@@ -19,7 +19,7 @@ try {
 var tls = require('tls');
 var fs = require('fs');
 
-export = function (keystone, app, created, callback) {
+export default function (keystone, app, created, callback) {
 
 	var ssl = keystone.get('ssl');
 	var host = keystone.get('ssl host') || keystone.get('host');

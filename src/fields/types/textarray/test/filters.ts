@@ -1,13 +1,13 @@
 var demand = require('must');
 var TextArrayType = require('../TextArrayType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		textarr: TextArrayType,
 	});
 };
 
-exports.getTestItems = function () {
+export const getTestItems = function () {
 	return [
 		{},
 		{ textarr: [] },
@@ -22,7 +22,7 @@ exports.getTestItems = function () {
 	];
 };
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 	describe('no presence specified', function () {
 		it('should filter a string', function (done) {
 			filter({

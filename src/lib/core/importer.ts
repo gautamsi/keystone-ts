@@ -52,4 +52,4 @@ function dispatchImporter (rel__dirname) {
 	return importer;
 }
 
-export = dispatchImporter;
+export default dispatchImporter;

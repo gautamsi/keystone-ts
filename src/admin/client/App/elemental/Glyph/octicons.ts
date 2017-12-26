@@ -1,6 +1,6 @@
 /* eslint quote-props: ["error", "as-needed"] */
 
-export = {
+export default {
 	alert: 'octicon octicon-alert',
 	'arrow-down': 'octicon octicon-arrow-down',
 	'arrow-left': 'octicon octicon-arrow-left',

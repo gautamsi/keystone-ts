@@ -1,1 +1,1 @@
-export = require('../date/DateFilter');
+export default require('../date/DateFilter');

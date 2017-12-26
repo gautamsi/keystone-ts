@@ -1,13 +1,13 @@
 var demand = require('must');
 var moment = require('moment');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		date: Date,
 	});
 };
 
-exports.getTestItems = function () {
+export const getTestItems = function () {
 	return [
 		{},
 		{ date: '2015-01-01' },
@@ -17,7 +17,7 @@ exports.getTestItems = function () {
 	];
 };
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 	it('should find a specific date', function (done) {
 		filter({
 			date: {

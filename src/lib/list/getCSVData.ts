@@ -119,4 +119,4 @@ function getCSVData (item, options) {
 	return rtn;
 }
 
-export = getCSVData;
+export default getCSVData;

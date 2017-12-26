@@ -1,4 +1,4 @@
-export = function (keystone, app) {
+export default function (keystone, app) {
 	var portString;
 	function sslRedirect (req, res, next) {
 		if (req.secure) {

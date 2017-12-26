@@ -1,6 +1,6 @@
 var _ = require('lodash');
 
-export = function transform (doc, ret) {
+export default function transform (doc, ret) {
 	if (doc._populatedRelationships) {
 		_.forEach(doc._populatedRelationships, function (on, key) {
 			if (!on) return;

@@ -103,4 +103,4 @@ function ensureTextIndex (callback) {
 	});
 }
 
-export = ensureTextIndex;
+export default ensureTextIndex;

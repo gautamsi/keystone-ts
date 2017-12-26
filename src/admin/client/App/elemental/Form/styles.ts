@@ -2,6 +2,6 @@
 // Form
 // ==============================
 
-export = {
+export default {
 	Form: {},
 };

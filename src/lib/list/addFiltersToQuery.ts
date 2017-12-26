@@ -27,4 +27,4 @@ function addFiltersToQuery (filters) {
 	return query;
 }
 
-export = addFiltersToQuery;
+export default addFiltersToQuery;

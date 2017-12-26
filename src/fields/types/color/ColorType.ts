@@ -22,4 +22,4 @@ color.prototype.validateRequiredInput = TextType.prototype.validateRequiredInput
 color.prototype.addFilterToQuery = TextType.prototype.addFilterToQuery;
 
 /* Export Field Type */
-export = color;
+export default color;

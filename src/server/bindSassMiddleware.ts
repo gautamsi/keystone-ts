@@ -1,4 +1,4 @@
-export = function bindSassMiddleware (keystone, app) {
+export default function bindSassMiddleware (keystone, app) {
 	// the sass option can be a single path, or array of paths
 	// when set, we configure the node-sass middleware
 

@@ -8,46 +8,46 @@ var utils = require('keystone-utils');
 // should NEVER be set in production environments!!
 var DISABLE_CSRF = process.env.DISABLE_CSRF === 'true';
 
-exports.TOKEN_KEY = '_csrf';
-exports.LOCAL_KEY = 'csrf_token_key';
-exports.LOCAL_VALUE = 'csrf_token_value';
-exports.SECRET_KEY = exports.TOKEN_KEY + '_secret';
-exports.SECRET_LENGTH = 10;
-exports.CSRF_HEADER_KEY = 'x-csrf-token';
-exports.XSRF_HEADER_KEY = 'x-xsrf-token';
-exports.XSRF_COOKIE_KEY = 'XSRF-TOKEN';
+export const TOKEN_KEY = '_csrf';
+export const LOCAL_KEY = 'csrf_token_key';
+export const LOCAL_VALUE = 'csrf_token_value';
+export const SECRET_KEY = export const TOKEN_KEY + '_secret';
+export const SECRET_LENGTH = 10;
+export const CSRF_HEADER_KEY = 'x-csrf-token';
+export const XSRF_HEADER_KEY = 'x-xsrf-token';
+export const XSRF_COOKIE_KEY = 'XSRF-TOKEN';
 
 function tokenize (salt, secret) {
 	return salt + crypto.createHash('sha1').update(salt + secret).digest('hex');
 }
 
-exports.createSecret = function () {
-	return crypto.pseudoRandomBytes(exports.SECRET_LENGTH).toString('base64');
+export const createSecret = function () {
+	return crypto.pseudoRandomBytes(export const SECRET_LENGTH).toString('base64');
 };
 
-exports.getSecret = function (req) {
-	return req.session[exports.SECRET_KEY] || (req.session[exports.SECRET_KEY] = exports.createSecret());
+export const getSecret = function (req) {
+	return req.session[export const SECRET_KEY] || (req.session[export const SECRET_KEY] = export const createSecret());
 };
 
-exports.createToken = function (req) {
-	return tokenize(utils.randomString(exports.SECRET_LENGTH), exports.getSecret(req));
+export const createToken = function (req) {
+	return tokenize(utils.randomString(export const SECRET_LENGTH), export const getSecret(req));
 };
 
-exports.getToken = function (req, res) {
-	res.locals[exports.LOCAL_VALUE] = res.locals[exports.LOCAL_VALUE] || exports.createToken(req);
-	res.cookie(exports.XSRF_COOKIE_KEY, res.locals[exports.LOCAL_VALUE]);
-	return res.locals[exports.LOCAL_VALUE];
+export const getToken = function (req, res) {
+	res.locals[export const LOCAL_VALUE] = res.locals[export const LOCAL_VALUE] || export const createToken(req);
+	res.cookie(export const XSRF_COOKIE_KEY, res.locals[export const LOCAL_VALUE]);
+	return res.locals[export const LOCAL_VALUE];
 };
 
-exports.requestToken = function (req) {
-	if (req.body && req.body[exports.TOKEN_KEY]) {
-		return req.body[exports.TOKEN_KEY];
-	} else if (req.query && req.query[exports.TOKEN_KEY]) {
-		return req.query[exports.TOKEN_KEY];
-	} else if (req.headers && req.headers[exports.XSRF_HEADER_KEY]) {
-		return req.headers[exports.XSRF_HEADER_KEY];
-	} else if (req.headers && req.headers[exports.CSRF_HEADER_KEY]) {
-		return req.headers[exports.CSRF_HEADER_KEY];
+export const requestToken = function (req) {
+	if (req.body && req.body[export const TOKEN_KEY]) {
+		return req.body[export const TOKEN_KEY];
+	} else if (req.query && req.query[export const TOKEN_KEY]) {
+		return req.query[export const TOKEN_KEY];
+	} else if (req.headers && req.headers[export const XSRF_HEADER_KEY]) {
+		return req.headers[export const XSRF_HEADER_KEY];
+	} else if (req.headers && req.headers[export const CSRF_HEADER_KEY]) {
+		return req.headers[export const CSRF_HEADER_KEY];
 	}
 	// JM: If you think we should be checking the req.cookie here you don't understand CSRF.
 	// On pages loaded from this app (on the same origin) JS will have access to the cookie and should add the CSRF value as one of the headers above.
@@ -58,11 +58,11 @@ exports.requestToken = function (req) {
 	return '';
 };
 
-exports.validate = function (req, token) {
+export const validate = function (req, token) {
 	// Allow environment variable to disable check
 	if (DISABLE_CSRF) return true;
 	if (arguments.length === 1) {
-		token = exports.requestToken(req);
+		token = export const requestToken(req);
 	}
 	if (typeof token !== 'string') {
 		return false;
@@ -70,16 +70,16 @@ exports.validate = function (req, token) {
 	return scmp(
 		token,
 		tokenize(
-			token.slice(0, exports.SECRET_LENGTH),
-			req.session[exports.SECRET_KEY]
+			token.slice(0, export const SECRET_LENGTH),
+			req.session[export const SECRET_KEY]
 		)
 	);
 };
 
-exports.middleware = {
+export const middleware = {
 	init: function (req, res, next) {
-		res.locals[exports.LOCAL_KEY] = exports.LOCAL_VALUE;
-		exports.getToken(req, res);
+		res.locals[export const LOCAL_KEY] = export const LOCAL_VALUE;
+		export const getToken(req, res);
 		next();
 	},
 	validate: function (req, res, next) {
@@ -90,7 +90,7 @@ exports.middleware = {
 			return next();
 		}
 		// Validate token
-		if (exports.validate(req)) {
+		if (export const validate(req)) {
 			next();
 		} else {
 			res.statusCode = 403;

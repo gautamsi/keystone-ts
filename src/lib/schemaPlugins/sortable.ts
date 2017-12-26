@@ -1,4 +1,4 @@
-export = function sortable () {
+export function sortable () {
 
 	var list = this;
 

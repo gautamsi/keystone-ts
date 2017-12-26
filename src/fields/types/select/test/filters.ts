@@ -1,7 +1,7 @@
 var demand = require('must');
 var SelectType = require('../SelectType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		textSelect: { type: SelectType, options: 'one, two, three' },
 		numericSelect: { type: SelectType, numeric: true, options: [
@@ -12,7 +12,7 @@ exports.initList = function (List) {
 	});
 };
 
-exports.getTestItems = function () {
+export const getTestItems = function () {
 	return [
 		{},
 		{ textSelect: '', numericSelect: 0 },
@@ -22,7 +22,7 @@ exports.getTestItems = function () {
 	];
 };
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 
 	describe('text values', function () {
 

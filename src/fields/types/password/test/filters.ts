@@ -1,13 +1,13 @@
 var demand = require('must');
 var PasswordType = require('../PasswordType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		password: PasswordType,
 	});
 };
 
-exports.getTestItems = function () {
+export const getTestItems = function () {
 	return [
 		{},
 		{ password: '' },
@@ -18,7 +18,7 @@ exports.getTestItems = function () {
 	];
 };
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 	it('should filter for existance', function (done) {
 		filter({
 			password: {

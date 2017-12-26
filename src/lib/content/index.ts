@@ -239,8 +239,8 @@ Content.prototype.editable = function (user, options) {
  * @api public
  */
 
-export = new Content();
+export default new Content();
 
 // Expose Classes
-exports.Page = require('./page');
-exports.Types = require('./types');
+export const Page = require('./page');
+export const Types = require('./types');

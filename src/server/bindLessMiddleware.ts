@@ -1,4 +1,4 @@
-export = function bindLessMiddleware (keystone, app) {
+export default function bindLessMiddleware (keystone, app) {
 	// the less option can be a single path, or array of paths
 	// when set, we configure the less middleware
 	var lessPaths = keystone.get('less');

@@ -147,4 +147,4 @@ geopoint.prototype.updateItem = function (item, data, callback) {
 };
 
 /* Export Field Type */
-export = geopoint;
+export default geopoint;

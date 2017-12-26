@@ -3,7 +3,7 @@
  */
 
 // breakpoints
-exports.breakpoint = {
+export const breakpoint = {
 	xs: 480,
 	sm: 768,
 	md: 992,
@@ -11,7 +11,7 @@ exports.breakpoint = {
 };
 
 // border radii
-exports.borderRadius = {
+export const borderRadius = {
 	xs: 2,
 	sm: 4,
 	md: 8,
@@ -20,7 +20,7 @@ exports.borderRadius = {
 };
 
 // color
-exports.color = {
+export const color = {
 	appDanger: '#d64242',
 	appInfo: '#56cdfc',
 	appPrimary: '#1385e5',
@@ -29,7 +29,7 @@ exports.color = {
 };
 
 // spacing
-exports.spacing = {
+export const spacing = {
 	xs: 5,
 	sm: 10,
 	md: 20,
@@ -39,5 +39,5 @@ exports.spacing = {
 
 // table constants
 
-exports.TABLE_CONTROL_COLUMN_WIDTH = 26;  // icon + padding
-exports.NETWORK_ERROR_RETRY_DELAY = 500; // in ms
+export const TABLE_CONTROL_COLUMN_WIDTH = 26;  // icon + padding
+export const NETWORK_ERROR_RETRY_DELAY = 500; // in ms

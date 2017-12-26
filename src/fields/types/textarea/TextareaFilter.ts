@@ -1,1 +1,1 @@
-export = require('../text/TextFilter');
+export default require('../text/TextFilter');

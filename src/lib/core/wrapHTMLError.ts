@@ -11,4 +11,4 @@ function wrapHTMLError (title, err) {
 	+ '<div class="error-message">' + (err || '') + '</div></div></body></html>';
 }
 
-export = wrapHTMLError;
+export default wrapHTMLError;

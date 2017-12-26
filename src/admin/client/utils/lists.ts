@@ -3,16 +3,16 @@
  * wrapped with the List helper (./List.js)
  */
 
-import List from './List';
+import List from "./List";
 
-exports.listsByKey = {};
-exports.listsByPath = {};
+export let listsByKey = {};
+export let listsByPath = {};
 
 for (const key in Keystone.lists) {
-	// Guard for-ins
-	if ({}.hasOwnProperty.call(Keystone.lists, key)) {
-		var list = new List(Keystone.lists[key]);
-		exports.listsByKey[key] = list;
-		exports.listsByPath[list.path] = list;
-	}
+    // Guard for-ins
+    if ({}.hasOwnProperty.call(Keystone.lists, key)) {
+        const list = new List(Keystone.lists[key]);
+        listsByKey[key] = list;
+        listsByPath[list.path] = list;
+    }
 }

@@ -1,3 +1,4 @@
+declare var require;
 var compression = require('compression');
 var favicon = require('serve-favicon');
 var methodOverride = require('method-override');
@@ -5,7 +6,7 @@ var morgan = require('morgan');
 
 var language = require('../lib/middleware/language');
 
-export = function createApp (keystone, express) {
+export default function createApp (keystone, express) {
 
 	if (!keystone.app) {
 		if (!express) {

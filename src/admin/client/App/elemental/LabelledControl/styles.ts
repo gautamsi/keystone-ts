@@ -6,7 +6,7 @@
 
 import theme from '../../../theme';
 
-export = {
+export default {
 	wrapper: {
 		display: 'block',
 		height: theme.input.height,

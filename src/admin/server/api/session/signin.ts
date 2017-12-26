@@ -38,4 +38,4 @@ function signin (req, res) {
 	});
 }
 
-export = signin;
+export default signin;

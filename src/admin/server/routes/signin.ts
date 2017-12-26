@@ -3,7 +3,7 @@ var path = require('path');
 
 var templatePath = path.resolve(__dirname, '../templates/signin.html');
 
-export = function SigninRoute (req, res) {
+export default function SigninRoute (req, res) {
 	var keystone = req.keystone;
 	var UserList = keystone.list(keystone.get('user model'));
 	var locals = {

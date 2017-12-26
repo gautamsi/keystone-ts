@@ -1,4 +1,4 @@
-export = {
+export default {
 	Field: require('../KeyField'),
 	Filter: require('../KeyFilter'),
 	section: 'Text',

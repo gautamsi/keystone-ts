@@ -134,4 +134,4 @@ number.prototype.updateItem = function (item, data, callback) {
 };
 
 /* Export Field Type */
-export = number;
+export default number;

@@ -1,7 +1,7 @@
 var demand = require('must');
 var TextArrayType = require('../TextArrayType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		textarr: TextArrayType,
 		nested: {
@@ -11,7 +11,7 @@ exports.initList = function (List) {
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	it('should default to an empty array', function () {
 		var testItem = new List.model();
 		demand(testItem.get('textarr')).eql([]);

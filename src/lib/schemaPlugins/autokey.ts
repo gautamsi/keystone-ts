@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var utils = require('keystone-utils');
 
-export = function autokey () {
+export default function autokey () {
 
 	var autokey = this.autokey = _.clone(this.get('autokey'));
 	var def = {};

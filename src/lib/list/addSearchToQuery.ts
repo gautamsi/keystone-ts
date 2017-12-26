@@ -77,4 +77,4 @@ function addSearchToQuery (searchString) {
 	return query;
 }
 
-export = addSearchToQuery;
+export default addSearchToQuery;

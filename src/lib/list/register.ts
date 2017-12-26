@@ -85,4 +85,4 @@ function register () {
 	return this;
 }
 
-export = register;
+export default register;

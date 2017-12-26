@@ -9,4 +9,4 @@ function automap (field) {
 	return this;
 }
 
-export = automap;
+export default automap;

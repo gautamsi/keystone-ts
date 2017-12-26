@@ -79,4 +79,4 @@ function add () {
 	return this;
 }
 
-export = add;
+export default add;

@@ -1,7 +1,7 @@
 var demand = require('must');
 var SelectType = require('../SelectType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		select: { type: SelectType, options: 'one, two, three' },
 		nested: {
@@ -23,7 +23,7 @@ exports.initList = function (List) {
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	describe('invalid options', function () {
 		it('should throw when no options are passed', function (done) {
 			try {

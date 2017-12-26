@@ -30,7 +30,7 @@ const keyframes = compose.keyframes('pulse', {
 	'40%': { opacity: 1 },
 });
 
-export = {
+export default {
 	base: {
 		display: 'inline-block',
 		lineHeight: 1,

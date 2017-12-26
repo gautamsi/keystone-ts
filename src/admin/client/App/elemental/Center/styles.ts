@@ -2,7 +2,7 @@
 // Center
 // ==============================
 
-export = {
+export default {
 	center: {
 		display: 'flex',
 		alignItems: 'center',

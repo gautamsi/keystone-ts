@@ -8,7 +8,7 @@
 var _ = require('lodash');
 var utils = require('keystone-utils');
 
-export = function initNav (sections) {
+export default function initNav (sections) {
 	var keystone = this;
 
 	var nav = {

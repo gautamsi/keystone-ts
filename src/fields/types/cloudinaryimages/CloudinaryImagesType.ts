@@ -363,4 +363,4 @@ cloudinaryimages.prototype.updateItem = function (item, data, files, callback) {
 	});
 };
 
-export = cloudinaryimages;
+export default cloudinaryimages;

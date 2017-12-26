@@ -2,7 +2,7 @@ var async = require('async');
 var demand = require('must');
 var RelationshipType = require('../RelationshipType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		single: { type: RelationshipType, ref: List.key },
 	});
@@ -10,7 +10,7 @@ exports.initList = function (List) {
 
 var items;
 
-exports.getTestItems = function (List, callback) {
+export const getTestItems = function (List, callback) {
 	async.mapValues({
 		jed: new List.model({ name: 'Jed' }),
 		max: new List.model({ name: 'Max' }),
@@ -29,7 +29,7 @@ exports.getTestItems = function (List, callback) {
 	});
 };
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 
 	describe('match', function () {
 

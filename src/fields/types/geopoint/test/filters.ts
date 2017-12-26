@@ -1,7 +1,7 @@
 var demand = require('must');
 var GeoPointType = require('../GeoPointType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		gp: GeoPointType,
 	});
@@ -16,7 +16,7 @@ const COORDINATES = {
 	vienna: [16.3738189, 48.2081743],
 };
 
-exports.getTestItems = function () {
+export const getTestItems = function () {
 	return [
 		{},
 		{ gp: COORDINATES.canberra }, // Canberra
@@ -27,7 +27,7 @@ exports.getTestItems = function () {
 	];
 };
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 	it('should find points in a 500km radius max by default (max 500km around sydney center)', function (done) {
 		filter({
 			gp: {

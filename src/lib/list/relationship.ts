@@ -37,4 +37,4 @@ function relationship (def) {
 	return this;
 }
 
-export = relationship;
+export default relationship;

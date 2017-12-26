@@ -15,7 +15,7 @@
 // a reference to the keystone instance, so it can be
 // passed as middeware to the express app.
 
-export = function (keystone) {
+export default function (keystone) {
 	return function cors (req, res, next) {
 
 		var origin = keystone.get('cors allow origin');

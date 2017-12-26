@@ -248,4 +248,4 @@ embedly.prototype.updateItem = function (item, data, callback) {
 };
 
 /* Export Field Type */
-export = embedly;
+export default embedly;

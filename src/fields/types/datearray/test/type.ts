@@ -2,7 +2,7 @@ var demand = require('must');
 var DateArrayType = require('../DateArrayType');
 var moment = require('moment');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		datearr: { type: DateArrayType },
 		nested: {
@@ -11,7 +11,7 @@ exports.initList = function (List) {
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	describe('invalid options', function () {
 		it('should throw when format is not a string', function (done) {
 			try {

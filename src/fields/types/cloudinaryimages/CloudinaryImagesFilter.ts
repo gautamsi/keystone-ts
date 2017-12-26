@@ -1,1 +1,1 @@
-export = require('../cloudinaryimage/CloudinaryImageFilter');
+export default require('../cloudinaryimage/CloudinaryImageFilter');

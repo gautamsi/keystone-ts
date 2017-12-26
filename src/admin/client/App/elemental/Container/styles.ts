@@ -30,7 +30,7 @@ const clearfixStyles = {
 	display: 'table', // 2
 };
 
-export = {
+export default {
 	container: {
 		marginLeft: 'auto',
 		marginRight: 'auto',

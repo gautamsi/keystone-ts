@@ -1,8 +1,8 @@
-var bodyParser = require('body-parser');
-var express = require('express');
-var multer = require('multer');
+import * as bodyParser from 'body-parser';
+import * as express from 'express';
+import * as multer from 'multer';
 
-export = function createDynamicRouter (keystone) {
+export default function createDynamicRouter (keystone) {
 	// ensure keystone nav has been initialised
 	// TODO: move this elsewhere (on demand generation, or client-side?)
 	if (!keystone.nav) {

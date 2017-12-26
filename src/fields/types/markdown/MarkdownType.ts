@@ -155,4 +155,4 @@ markdown.prototype.updateItem = function (item, data, callback) {
 };
 
 /* Export Field Type */
-export = markdown;
+export default markdown;

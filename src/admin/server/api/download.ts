@@ -12,7 +12,7 @@ var escapeValueForExcel = require('../security/escapeValueForExcel');
 
 var FN_ARGS = /^function\s*[^\(]*\(\s*([^\)]*)\)/m;
 
-export = function (req, res) {
+export default function (req, res) {
 
 	var baby = require('babyparse');
 	var keystone = req.keystone;

@@ -2,7 +2,7 @@ var demand = require('must');
 var ColorType = require('../ColorType');
 var TextType = require('../../text/TextType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		color: { type: ColorType },
 		nested: {
@@ -11,15 +11,15 @@ exports.initList = function (List) {
 	});
 };
 
-exports.createData = function (List) { // eslint-disable-line no-unused-vars
+export const createData = function (List) { // eslint-disable-line no-unused-vars
 
 };
 
-exports.testFilters = function (List) { // eslint-disable-line no-unused-vars
+export const testFilters = function (List) { // eslint-disable-line no-unused-vars
 
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
 			var testItem = new List.model();

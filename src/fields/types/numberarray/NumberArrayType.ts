@@ -233,4 +233,4 @@ numberarray.prototype.updateItem = function (item, data, callback) {
 };
 
 /* Export Field Type */
-export = numberarray;
+export default numberarray;

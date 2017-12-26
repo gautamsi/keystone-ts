@@ -2,7 +2,7 @@ var demand = require('must');
 var NumberType = require('../NumberType');
 
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		number: { type: NumberType },
 		nested: {
@@ -11,7 +11,7 @@ exports.initList = function (List) {
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	describe('invalid options', function () {
 		it('should throw when no options are passed', function (done) {
 			try {

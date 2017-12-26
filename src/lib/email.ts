@@ -97,4 +97,4 @@ var Email = function (options) {
 	return email;
 };
 
-export = Email;
+export default Email;

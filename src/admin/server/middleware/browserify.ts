@@ -26,7 +26,7 @@ function logError (file, err) {
 	console.log(ts() + chalk.red('error building ' + chalk.underline(file) + ':') + '\n' + err.message);
 }
 
-export = function (opts) {
+export default function (opts) {
 	var stream = opts.stream;
 	var expose = opts.expose;
 	var file = opts.file;

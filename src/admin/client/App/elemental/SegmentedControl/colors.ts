@@ -1,6 +1,6 @@
 import theme from '../../../theme';
 
-export = {
+export default {
 	danger: theme.color.danger,
 	default: theme.color.gray80,
 	error: theme.color.danger,

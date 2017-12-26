@@ -593,4 +593,4 @@ cloudinaryimage.prototype.getRequestHandler = function (item, req, paths, callba
 };
 
 /* Export Field Type */
-export = cloudinaryimage;
+export default cloudinaryimage;

@@ -1,7 +1,7 @@
 var demand = require('must');
 var PasswordType = require('../PasswordType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		password: PasswordType,
 		minChar: {
@@ -51,7 +51,7 @@ exports.initList = function (List) {
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update password if specified', function (done) {
 			var testItem = new List.model();

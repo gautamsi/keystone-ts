@@ -1,7 +1,7 @@
 var demand = require('must');
 var NameType = require('../NameType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		name: NameType,
 	});
@@ -57,9 +57,9 @@ function getTestItems () {
 	];
 };
 
-exports.getTestItems = getTestItems;
+export const getTestItems = getTestItems;
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 	it('should find the first name', function (done) {
 		filter({
 			name: {

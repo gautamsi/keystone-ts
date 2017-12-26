@@ -445,4 +445,4 @@ s3file.prototype.getRequestHandler = function (item, req, paths, callback) {
 /*!
  * Export class
  */
-export = s3file;
+export default s3file;

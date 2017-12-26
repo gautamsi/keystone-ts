@@ -3,7 +3,7 @@ var TextType = require('../../text/TextType');
 var DateType = require('../../date/DateType');
 var DatetimeType = require('../DatetimeType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		datetime: DatetimeType,
 		customFormat: {
@@ -16,7 +16,7 @@ exports.initList = function (List) {
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	describe('invalid options', function () {
 		it('should throw when format is not a string', function (done) {
 			try {

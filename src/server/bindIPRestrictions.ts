@@ -1,6 +1,6 @@
 var debug = require('debug')('keystone:server:bindIpRestrictions');
 
-export = function bindIPRestrictions (keystone, app) {
+export default function bindIPRestrictions (keystone, app) {
 	// Check for IP range restrictions
 	if (keystone.get('allowed ip ranges')) {
 		if (!app.get('trust proxy')) {

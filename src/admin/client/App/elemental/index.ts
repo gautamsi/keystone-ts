@@ -1,4 +1,4 @@
-export = {
+export default {
 	Alert: require('./Alert'),
 	BlankState: require('./BlankState'),
 	Button: require('./Button'),

@@ -7,4 +7,4 @@ function ItemsTableCell ({ className, ...props }) {
 	return <td {...props} />;
 };
 
-export = ItemsTableCell;
+export default ItemsTableCell;

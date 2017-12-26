@@ -7,7 +7,7 @@
 
 import theme from '../../../theme';
 
-export = {
+export default {
 	// pull active elements up
 	active: {
 		position: 'relative',

@@ -75,7 +75,7 @@ function borderLeftRadius (radius) {
 
 // Return
 
-export = {
+export default {
 	borderTopRadius,
 	borderRightRadius,
 	borderBottomRadius,

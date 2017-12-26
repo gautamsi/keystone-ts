@@ -1,13 +1,13 @@
 var demand = require('must');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		text1: String,
 		text2: String,
 	});
 };
 
-exports.getTestItems = function () {
+export const getTestItems = function () {
 	return [
 		{},
 		{ text1: '' },
@@ -20,7 +20,7 @@ exports.getTestItems = function () {
 	];
 };
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 
 	describe('match', function () {
 

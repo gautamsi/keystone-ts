@@ -350,4 +350,4 @@ localfile.prototype.getRequestHandler = function (item, req, paths, callback) {
 };
 
 /* Export Field Type */
-export = localfile;
+export default localfile;

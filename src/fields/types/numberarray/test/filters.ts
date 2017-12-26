@@ -1,13 +1,13 @@
 var demand = require('must');
 var NumberArrayType = require('../NumberArrayType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		numarr: NumberArrayType,
 	});
 };
 
-exports.getTestItems = function () {
+export const getTestItems = function () {
 	return [
 		{},
 		{ numarr: [] },
@@ -23,7 +23,7 @@ exports.getTestItems = function () {
 	];
 };
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 	describe('no presence specified', function () {
 		it('should filter for a number', function (done) {
 			filter({

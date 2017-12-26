@@ -1,6 +1,6 @@
-var express = require('express');
+import * as express from 'express';
 
-export = function bindStaticMiddleware (keystone, app) {
+export default function bindStaticMiddleware (keystone, app) {
 	// the static option can be a single path, or array of paths
 	// when set, we configure the express static middleware
 

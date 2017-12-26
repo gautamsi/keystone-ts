@@ -1,13 +1,13 @@
 var demand = require('must');
 var NameType = require('../NameType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		name: NameType,
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update the full name', function (done) {
 			var testItem = new List.model();

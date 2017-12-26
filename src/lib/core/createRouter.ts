@@ -1,4 +1,4 @@
-var express = require('express');
+import * as express from 'express';
 
 /*
 	This is a shorthand method for keystone instances to create a new express
@@ -8,4 +8,4 @@ function createRouter () {
 	return express.Router();
 }
 
-export = createRouter;
+export default createRouter;

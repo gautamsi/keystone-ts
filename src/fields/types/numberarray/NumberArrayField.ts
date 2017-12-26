@@ -1,7 +1,7 @@
 import ArrayFieldMixin from '../../mixins/ArrayField';
 import Field from '../Field';
 
-export = Field.create({
+export default Field.create({
 
 	displayName: 'NumberArrayField',
 	statics: {

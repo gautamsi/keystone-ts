@@ -51,4 +51,4 @@ function field (path, options) {
 	return field;
 }
 
-export = field;
+export default field;

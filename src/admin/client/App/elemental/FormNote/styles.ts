@@ -4,7 +4,7 @@
 
 import theme from '../../../theme';
 
-export = {
+export default {
 	note: {
 		color: theme.form.note.color,
 		fontSize: theme.form.note.fontSize,

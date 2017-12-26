@@ -1,6 +1,6 @@
 import theme from '../../../theme';
 
-export = {
+export default {
 	danger: theme.glyph.color.danger,
 	inherit: theme.glyph.color.inherit,
 	inverted: theme.glyph.color.inverted,

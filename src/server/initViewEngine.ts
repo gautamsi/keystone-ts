@@ -1,4 +1,4 @@
-export = function initViewEngine (keystone, app) {
+export default function initViewEngine (keystone, app) {
 	// Allow usage of custom view engines
 	if (keystone.get('custom engine')) {
 		app.engine(keystone.get('view engine'), keystone.get('custom engine'));

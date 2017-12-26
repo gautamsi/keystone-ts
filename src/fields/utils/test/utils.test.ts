@@ -2,7 +2,7 @@ var demand = require('must');
 var addPresenceToQuery = require('../addPresenceToQuery');
 var evalDependsOn = require('../evalDependsOn');
 
-exports.testUtils = function () {
+export const testUtils = function () {
 	describe('addPresenceToQuery', function () {
 		it('should add $elemMatch if the presence is some', function () {
 			var someFilter = { somepath: 'somefilter' };

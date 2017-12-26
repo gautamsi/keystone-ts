@@ -1,4 +1,4 @@
-export = function (req, res, next) {
+export default function (req, res, next) {
 	res.logError = function logError (endpoint, description, err) {
 		if (arguments.length === 2 && typeof description !== 'string') {
 			err = description;

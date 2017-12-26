@@ -133,7 +133,7 @@ function blend (color1, color2, percent) {
 		+ (Math.round((B2 - B1) * decimalFraction) + B1)).toString(16).slice(1);
 }
 
-export = {
+export default {
 	blend,
 	darken,
 	fade,

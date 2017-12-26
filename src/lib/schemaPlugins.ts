@@ -1,13 +1,13 @@
-exports.sortable = require('./schemaPlugins/sortable');
-exports.autokey = require('./schemaPlugins/autokey');
-exports.track = require('./schemaPlugins/track');
-exports.history = require('./schemaPlugins/history');
+export { sortable} from './schemaPlugins/sortable';
+export const autokey = require('./schemaPlugins/autokey');
+export const track = require('./schemaPlugins/track');
+export const history = require('./schemaPlugins/history');
 
-exports.methods = {
+export const methods = {
 	getRelated: require('./schemaPlugins/methods/getRelated'),
 	populateRelated: require('./schemaPlugins/methods/populateRelated'),
 };
 
-exports.options = {
+export const options = {
 	transform: require('./schemaPlugins/options/transform'),
 };

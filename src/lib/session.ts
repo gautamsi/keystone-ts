@@ -63,14 +63,14 @@ function signinWithUser (user, req, res, onSuccess) {
 	});
 }
 
-exports.signinWithUser = signinWithUser;
+export const signinWithUser = signinWithUser;
 
 var postHookedSigninWithUser = function (user, req, res, onSuccess, onFail) {
 	keystone.callHook(user, 'post:signin', req, function (err) {
 		if (err) {
 			return onFail(err);
 		}
-		exports.signinWithUser(user, req, res, onSuccess, onFail);
+		export const signinWithUser(user, req, res, onSuccess, onFail);
 	});
 };
 
@@ -125,7 +125,7 @@ var doSignin = function (lookup, req, res, onSuccess, onFail) {
 	}
 };
 
-exports.signin = function (lookup, req, res, onSuccess, onFail) {
+export const signin = function (lookup, req, res, onSuccess, onFail) {
 	keystone.callHook({}, 'pre:signin', req, function (err) {
 		if (err) {
 			return onFail(err);
@@ -142,7 +142,7 @@ exports.signin = function (lookup, req, res, onSuccess, onFail) {
  * @param {function()} next callback
  */
 
-exports.signout = function (req, res, next) {
+export const signout = function (req, res, next) {
 	keystone.callHook(req.user, 'pre:signout', function (err) {
 		if (err) {
 			console.log("An error occurred in signout 'pre' middleware", err);
@@ -180,14 +180,14 @@ exports.signout = function (req, res, next) {
  * @param {function()} next callback
  */
 
-exports.persist = function (req, res, next) {
+export const persist = function (req, res, next) {
 	var User = keystone.list(keystone.get('user model'));
 	if (!req.session) {
 		console.error('\nKeystoneJS Runtime Error:\n\napp must have session middleware installed. Try adding "express-session" to your express instance.\n');
 		process.exit(1);
 	}
 	if (keystone.get('cookie signin') && !req.session.userId && req.signedCookies['keystone.uid'] && req.signedCookies['keystone.uid'].indexOf(':') > 0) {
-		exports.signin(req.signedCookies['keystone.uid'], req, res, function () {
+		export const signin(req.signedCookies['keystone.uid'], req, res, function () {
 			next();
 		}, function (err) {
 			var cookieOpts = _.defaults({}, keystone.get('cookie signin options'), {
@@ -230,7 +230,7 @@ exports.persist = function (req, res, next) {
  * @param {function()} next callback
  */
 
-exports.keystoneAuth = function (req, res, next) {
+export const keystoneAuth = function (req, res, next) {
 	if (!req.user || !req.user.canAccessKeystone) {
 		if (req.headers.accept === 'application/json') {
 			return req.user

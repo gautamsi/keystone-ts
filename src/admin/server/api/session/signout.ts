@@ -18,4 +18,4 @@ function signout (req, res) {
 	});
 }
 
-export = signout;
+export default signout;

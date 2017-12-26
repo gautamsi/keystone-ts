@@ -1,2 +1,2 @@
-exports.Text = require('./text');
-exports.Html = require('./html');
+export const Text = require('./text');
+export const Html = require('./html');

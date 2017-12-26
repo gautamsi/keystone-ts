@@ -1,6 +1,6 @@
 var assign = require('object-assign');
 
-export = function initViewLocals (keystone, app) {
+export default function initViewLocals (keystone, app) {
 	// Apply locals
 	if (typeof keystone.get('locals') === 'object') {
 		assign(app.locals, keystone.get('locals'));

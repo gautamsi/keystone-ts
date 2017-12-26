@@ -1,12 +1,12 @@
 var demand = require('must');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		bool: Boolean,
 	});
 };
 
-exports.getTestItems = function () {
+export const getTestItems = function () {
 	return [
 		{ bool: undefined },
 		{ bool: true },
@@ -14,7 +14,7 @@ exports.getTestItems = function () {
 	];
 };
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 	it('should filter true values', function (done) {
 		filter({
 			bool: {

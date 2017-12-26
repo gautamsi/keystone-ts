@@ -11,7 +11,7 @@
 
 var fs = require('fs');
 
-export = function (keystone, app, callback) {
+export default function (keystone, app, callback) {
 
 	var unixSocket = keystone.get('unix socket');
 	var message = keystone.get('name') + ' is ready on ' + unixSocket;

@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var utils = require('keystone-utils');
 
-export = function (keystone) {
+export default function (keystone) {
 
 	function List (key, options) {
 		if (!(this instanceof List)) return new List(key, options);

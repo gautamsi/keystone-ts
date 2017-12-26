@@ -1,14 +1,14 @@
 var demand = require('must');
 var MarkdownType = require('../MarkdownType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		markdown: MarkdownType,
 		markdown2: MarkdownType,
 	});
 };
 
-exports.getTestItems = function () {
+export const getTestItems = function () {
 	return [
 		{},
 		{ markdown: '' },
@@ -21,7 +21,7 @@ exports.getTestItems = function () {
 	];
 };
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 
 	describe('match', function () {
 

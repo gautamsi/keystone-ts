@@ -2,7 +2,7 @@ var keystone = require('../../../');
 var _ = require('lodash');
 var async = require('async');
 
-export = function getRelated (paths, callback, nocollapse) {
+export default function getRelated (paths, callback, nocollapse) {
 
 	var item = this;
 	var list = this.list;

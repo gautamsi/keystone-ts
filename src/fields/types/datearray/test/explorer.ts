@@ -1,4 +1,4 @@
-export = {
+export default {
 	Field: require('../DatearrayField'),
 	Filter: require('../DatearrayFilter'),
 	section: 'Date',

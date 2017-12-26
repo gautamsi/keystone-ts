@@ -1,1 +1,1 @@
-export = require('../number/NumberColumn');
+export default require('../number/NumberColumn');

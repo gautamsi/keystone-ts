@@ -1,2 +1,2 @@
-exports.createDynamicRouter = require('./app/createDynamicRouter');
-exports.createStaticRouter = require('./app/createStaticRouter');
+export const createDynamicRouter = require('./app/createDynamicRouter');
+export const createStaticRouter = require('./app/createStaticRouter');

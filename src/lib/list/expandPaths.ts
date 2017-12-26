@@ -12,4 +12,4 @@ function expandPaths (paths) {
 	}, this);
 }
 
-export = expandPaths;
+export default expandPaths;

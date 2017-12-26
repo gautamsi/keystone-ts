@@ -1,6 +1,6 @@
 var demand = require('must');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		bool: { type: Boolean, note: 'This is a boolean field' },
 		indented: { type: Boolean, indent: true },
@@ -17,7 +17,7 @@ exports.initList = function (List) {
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should be true when passed the boolean true', function (done) {
 			var testItem = new List.model();

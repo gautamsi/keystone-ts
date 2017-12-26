@@ -70,4 +70,4 @@ text.prototype.crop = function (item, length, append, preserveWords) {
 };
 
 /* Export Field Type */
-export = text;
+export default text;

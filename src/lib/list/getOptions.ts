@@ -62,4 +62,4 @@ function getOptions () {
 	return ops;
 }
 
-export = getOptions;
+export default getOptions;

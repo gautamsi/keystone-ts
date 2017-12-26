@@ -1,1 +1,1 @@
-export = require('../../components/columns/ArrayColumn');
+export default require('../../components/columns/ArrayColumn');

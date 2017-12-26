@@ -1,6 +1,6 @@
 var async = require('async');
 
-export = function (req, res) {
+export default function (req, res) {
 	var keystone = req.keystone;
 	if (!keystone.security.csrf.validate(req)) {
 		console.log('Refusing to delete ' + req.list.key + ' items; CSRF failure');

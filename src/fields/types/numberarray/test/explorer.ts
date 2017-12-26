@@ -1,4 +1,4 @@
-export = {
+export default {
 	Field: require('../NumberarrayField'),
 	Filter: require('../NumberarrayFilter'),
 	section: 'Number',

@@ -55,4 +55,4 @@ ItemsTableValue.defaultProps = {
 	truncate: true,
 };
 
-export = ItemsTableValue;
+export default ItemsTableValue;

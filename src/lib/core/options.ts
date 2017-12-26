@@ -18,7 +18,7 @@ function isAbsolutePath (value) {
  * Example:
  *     keystone.set('user model', 'User') // sets the 'user model' option to `User`
  */
-exports.set = function (key, value) {
+export const set = function (key, value) {
 
 	if (arguments.length === 1) {
 		return this._options[key];
@@ -106,7 +106,7 @@ exports.set = function (key, value) {
  * Example:
  *     keystone.options({test: value}) // sets the 'test' option to `value`
  */
-exports.options = function (options) {
+export const options = function (options) {
 	if (!arguments.length) {
 		return this._options;
 	}
@@ -129,7 +129,7 @@ exports.options = function (options) {
  * Example:
  *     keystone.get('test') // returns the 'test' value
  */
-exports.get = exports.set;
+export const get = export const set;
 
 /**
  * Gets an expanded path option, expanded to include moduleRoot if it is relative
@@ -137,14 +137,14 @@ exports.get = exports.set;
  * Example:
  *     keystone.get('pathOption', 'defaultValue')
  */
-exports.getPath = function (key, defaultValue) {
+export const getPath = function (key, defaultValue) {
 	return this.expandPath(this.get(key) || defaultValue);
 };
 
 /**
  * Expands a path to include moduleRoot if it is relative
  */
-exports.expandPath = function (pathValue) {
+export const expandPath = function (pathValue) {
 	pathValue = (typeof pathValue === 'string' && pathValue.substr(0, 1) !== path.sep && pathValue.substr(1, 2) !== ':\\')
 		? path.join(this.get('module root'), pathValue)
 		: pathValue;

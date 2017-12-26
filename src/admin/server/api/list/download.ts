@@ -5,7 +5,7 @@ TODO: Needs Review and Spec
 var moment = require('moment');
 var assign = require('object-assign');
 
-export = function (req, res, next) {
+export default function (req, res, next) {
 	var baby = require('babyparse');
 	var keystone = req.keystone;
 

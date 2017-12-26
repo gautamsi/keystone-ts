@@ -1,1 +1,1 @@
-export = ['small', 'medium', 'large'];
+export default ['small', 'medium', 'large'];

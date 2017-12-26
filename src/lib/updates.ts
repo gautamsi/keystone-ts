@@ -19,7 +19,7 @@ var UpdateModel = new mongoose.Schema({
 mongoose.model('App_Update', UpdateModel);
 
 // Apply method - loads the available updates and applies any that haven't been, in order
-exports.apply = function (callback) {
+export const apply = function (callback) {
 
 	var Update = mongoose.model('App_Update');
 	var updateCount = 0;

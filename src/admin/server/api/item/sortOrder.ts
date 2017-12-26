@@ -4,7 +4,7 @@ TODO: Needs Review and Spec
 
 var getList = require('../list/get');
 
-export = function (req, res) {
+export default function (req, res) {
 	var keystone = req.keystone;
 	if (!keystone.security.csrf.validate(req)) {
 		console.log('Refusing to reorder ' + req.list.key + ' ' + req.params.id + '; CSRF failure');

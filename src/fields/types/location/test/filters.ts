@@ -1,13 +1,13 @@
 var demand = require('must');
 var LocationType = require('../LocationType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		loc: LocationType,
 	});
 };
 
-exports.getTestItems = function () {
+export const getTestItems = function () {
 	return [
 		{},
 		{ loc: {
@@ -45,7 +45,7 @@ exports.getTestItems = function () {
 	];
 };
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 	it('should filter by state', function (done) {
 		filter({
 			loc: {

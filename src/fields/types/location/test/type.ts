@@ -1,14 +1,14 @@
 var demand = require('must');
 var LocationType = require('../LocationType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		locationBasic: { type: LocationType },
 		locationCustomRequired: { type: LocationType, required: ['state', 'country'] },
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		describe('flat paths', function () {
 			it('should update the number', function (done) {

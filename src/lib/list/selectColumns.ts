@@ -26,4 +26,4 @@ function selectColumns (q, cols) {
 	}
 }
 
-export = selectColumns;
+export default selectColumns;

@@ -366,4 +366,4 @@ localfiles.prototype.getRequestHandler = function (item, req, paths, callback) {
 
 
 /* Export Field Type */
-export = localfiles;
+export default localfiles;

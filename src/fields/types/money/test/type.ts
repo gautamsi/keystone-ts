@@ -2,7 +2,7 @@ var demand = require('must');
 var MoneyType = require('../MoneyType');
 var NumberType = require('../../number/NumberType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		money: { type: MoneyType },
 		nested: {
@@ -12,7 +12,7 @@ exports.initList = function (List) {
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	describe('invalid options', function () {
 		it('should throw when format is not a string', function (done) {
 			try {

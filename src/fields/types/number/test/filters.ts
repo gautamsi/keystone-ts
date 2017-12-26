@@ -1,12 +1,12 @@
 var demand = require('must');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		num1: Number,
 	});
 };
 
-exports.getTestItems = function () {
+export const getTestItems = function () {
 	return [
 		{},
 		{ num1: -1 },
@@ -17,7 +17,7 @@ exports.getTestItems = function () {
 	];
 };
 
-exports.testFilters = function (List, filter) {
+export const testFilters = function (List, filter) {
 
 	describe('equals', function () {
 

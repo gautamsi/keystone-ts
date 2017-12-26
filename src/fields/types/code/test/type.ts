@@ -2,7 +2,7 @@ var demand = require('must');
 var CodeType = require('../CodeType');
 var TextType = require('../../text/TextType');
 
-exports.initList = function (List) {
+export const initList = function (List) {
 	List.add({
 		code: { type: CodeType },
 		nested: {
@@ -26,7 +26,7 @@ exports.initList = function (List) {
 	});
 };
 
-exports.testFieldType = function (List) {
+export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
 			var testItem = new List.model();

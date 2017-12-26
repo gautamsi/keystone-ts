@@ -1,4 +1,4 @@
-export = function bindStylusMiddleware (keystone, app) {
+export default function bindStylusMiddleware (keystone, app) {
 	// the stylus option can be a single path, or array of paths
 	// when set, we configure the stylus middleware
 	var stylusPaths = keystone.get('stylus');
