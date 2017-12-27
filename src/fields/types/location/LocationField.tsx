@@ -10,7 +10,7 @@ import {
 	FormNote,
 	Grid,
 	LabelledControl,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 
 /**
  * TODO:

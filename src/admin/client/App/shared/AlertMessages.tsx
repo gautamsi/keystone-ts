@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert } from '../elemental';
+import { Alert } from 'elemental';
 
 import { upcase } from '../../utils/string';
 

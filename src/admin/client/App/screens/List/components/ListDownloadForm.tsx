@@ -3,7 +3,7 @@ import assign from 'object-assign';
 import Popout from '../../../shared/Popout';
 import PopoutList from '../../../shared/Popout/PopoutList';
 import ListHeaderButton from './ListHeaderButton';
-import { LabelledControl, Form, FormField, SegmentedControl } from '../../../elemental';
+import { LabelledControl, Form, FormField, SegmentedControl } from 'elemental';
 
 import { downloadItems } from '../actions';
 const FORMAT_OPTIONS = [

@@ -1,7 +1,7 @@
 import Field from '../Field';
 import React from 'react';
 import tinymce from 'tinymce';
-import { FormInput } from '../../../admin/client/App/elemental';
+import { FormInput } from 'elemental';
 import evalDependsOn from '../../utils/evalDependsOn';
 
 /**

@@ -9,7 +9,7 @@ import vkey from 'vkey';
 import AlertMessages from './AlertMessages';
 import { Fields } from 'FieldTypes';
 import InvalidFieldType from './InvalidFieldType';
-import { Button, Form, Modal } from '../elemental';
+import { Button, Form, Modal } from 'elemental';
 
 const CreateForm = React.createClass({
 	displayName: 'CreateForm',

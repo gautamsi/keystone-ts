@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container } from '../../../elemental';
+import { Container } from 'elemental';
 
 import {
 	setActiveList,

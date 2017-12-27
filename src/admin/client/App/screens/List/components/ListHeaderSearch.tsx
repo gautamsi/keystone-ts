@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import theme from '../../../../theme';
 import { darken } from '../../../../utils/color';
 
-import { FormInput, Glyph } from '../../../elemental';
+import { FormInput, Glyph } from 'elemental';
 
 function ListHeaderSearch ({
 	focusInput,

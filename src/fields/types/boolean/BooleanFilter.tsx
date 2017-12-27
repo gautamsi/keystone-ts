@@ -1,5 +1,5 @@
 import React from 'react';
-import { SegmentedControl } from '../../../admin/client/App/elemental';
+import { SegmentedControl } from 'elemental';
 
 const VALUE_OPTIONS = [
 	{ label: 'Is Checked', value: true },

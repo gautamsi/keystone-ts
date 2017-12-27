@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormField, FormLabel } from '../../admin/client/App/elemental';
+import { FormField, FormLabel } from 'elemental';
 import theme from '../../admin/client/theme';
 
 function NestedFormField ({ children, className, label, ...props }) {

@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import * as evalDependsOn from '../utils/evalDependsOn.js';
 import React from 'react';
 import { findDOMNode } from 'react-dom';
-import { FormField, FormInput, FormNote } from '../../admin/client/App/elemental';
+import { FormField, FormInput, FormNote } from 'elemental';
 import blacklist from 'blacklist';
 import CollapsedFieldLabel from '../components/CollapsedFieldLabel';
 

@@ -3,7 +3,7 @@
  */
 
 import React, { PropTypes } from 'react';
-import { Button, Form, FormField, FormInput } from '../../App/elemental';
+import { Button, Form, FormField, FormInput } from 'elemental';
 
 const LoginForm = ({
 	email,

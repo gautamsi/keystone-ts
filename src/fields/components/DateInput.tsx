@@ -3,7 +3,7 @@ import DayPicker from 'react-day-picker';
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import Popout from '../../admin/client/App/shared/Popout';
-import { FormInput } from '../../admin/client/App/elemental';
+import { FormInput } from 'elemental';
 
 let lastId = 0;
 

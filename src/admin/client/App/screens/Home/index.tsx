@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Container, Spinner } from '../../elemental';
+import { Container, Spinner } from 'elemental';
 import { connect } from 'react-redux';
 
 import Lists from './components/Lists';

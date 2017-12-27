@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Center, Container, Spinner } from '../../elemental';
+import { Center, Container, Spinner } from 'elemental';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 

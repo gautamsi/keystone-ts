@@ -7,7 +7,7 @@ import {
 	FormInput,
 	InlineGroup as Group,
 	InlineGroupSection as Section,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 
 /*
 TODO: Implement yearRange Prop, or deprecate for max / min values (better)

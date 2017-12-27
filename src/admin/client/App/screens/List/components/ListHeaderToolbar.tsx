@@ -4,7 +4,7 @@ import {
 	InlineGroup as Group,
 	InlineGroupSection as Section,
 	ResponsiveText,
-} from '../../../elemental';
+} from 'elemental';
 import theme from '../../../../theme';
 
 import ListColumnsForm from './ListColumnsForm';

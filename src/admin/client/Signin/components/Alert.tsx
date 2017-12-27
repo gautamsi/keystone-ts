@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Alert } from '../../App/elemental';
+import { Alert } from 'elemental';
 
 const AlertView = function (props) {
 	if (props.isInvalid) {

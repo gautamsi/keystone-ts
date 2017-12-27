@@ -1,6 +1,6 @@
 import React from 'react';
 import Field from '../Field';
-import { GlyphButton, FormInput } from '../../../admin/client/App/elemental';
+import { GlyphButton, FormInput } from 'elemental';
 
 export = Field.create({
 	displayName: 'URLField',

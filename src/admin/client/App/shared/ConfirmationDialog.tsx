@@ -3,7 +3,7 @@
  */
 
 import React, { PropTypes } from 'react';
-import { Button, Modal } from '../elemental';
+import { Button, Modal } from 'elemental';
 
 function ConfirmationDialog ({
 	cancelLabel,

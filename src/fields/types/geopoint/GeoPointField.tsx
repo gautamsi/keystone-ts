@@ -3,7 +3,7 @@ import React from 'react';
 import {
 	FormInput,
 	Grid,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 
 export = Field.create({
 

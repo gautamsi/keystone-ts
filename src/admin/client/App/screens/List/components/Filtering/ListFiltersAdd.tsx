@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import ListFiltersAddForm from './ListFiltersAddForm';
 import Popout from '../../../../shared/Popout';
 import PopoutList from '../../../../shared/Popout/PopoutList';
-import { FormInput } from '../../../../elemental';
+import { FormInput } from 'elemental';
 import ListHeaderButton from '../ListHeaderButton';
 
 import { setFilter } from '../../actions';

@@ -1,6 +1,6 @@
 import { css } from 'glamor';
 import React, { PropTypes } from 'react';
-import { Spinner } from '../../admin/client/App/elemental';
+import { Spinner } from 'elemental';
 import theme from '../../admin/client/theme';
 
 // FIXME static octicon classes leaning on Elemental to avoid duplicate

@@ -1,6 +1,6 @@
 import Domify from 'react-domify';
 import React from 'react';
-import { Form } from '../../../admin/client/App/elemental';
+import { Form } from 'elemental';
 
 import Col from './Col';
 import Row from './Row';

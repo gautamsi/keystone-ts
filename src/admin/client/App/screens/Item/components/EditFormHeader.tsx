@@ -8,7 +8,7 @@ import EditFormHeaderSearch from './EditFormHeaderSearch';
 import { Link } from 'react-router';
 
 import Drilldown from './Drilldown';
-import { GlyphButton, ResponsiveText } from '../../../elemental';
+import { GlyphButton, ResponsiveText } from 'elemental';
 
 export const EditFormHeader = React.createClass({
 	displayName: 'EditFormHeader',

@@ -1,6 +1,6 @@
 import { css } from 'glamor';
 import React, { PropTypes } from 'react';
-import { DropdownButton, Glyph } from '../../../elemental';
+import { DropdownButton, Glyph } from 'elemental';
 
 function ListHeaderButton ({ className, label, glyph, ...props }) {
 	return (

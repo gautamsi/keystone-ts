@@ -5,7 +5,7 @@ import {
 	FormField,
 	FormNote,
 	SegmentedControl,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 import PopoutList from '../../../admin/client/App/shared/Popout/PopoutList';
 import Kbd from '../../../admin/client/App/shared/Kbd';
 import bindFunctions from '../../utils/bindFunctions';

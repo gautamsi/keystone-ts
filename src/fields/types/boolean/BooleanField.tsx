@@ -1,7 +1,7 @@
 import React from 'react';
 import Field from '../Field';
 import Checkbox from '../../components/Checkbox';
-import { FormField } from '../../../admin/client/App/elemental';
+import { FormField } from 'elemental';
 
 const NOOP = () => {};
 

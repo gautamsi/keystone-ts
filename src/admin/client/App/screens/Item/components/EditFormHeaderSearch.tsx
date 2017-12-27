@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 import { css } from 'glamor';
-import { FormInput, Glyph, GlyphButton } from '../../../elemental';
+import { FormInput, Glyph, GlyphButton } from 'elemental';
 import theme from '../../../../theme';
 
 class EditFormHeaderSearch extends Component {

@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Container } from '../../../elemental';
+import { Container } from 'elemental';
 import PrimaryNavItem from './NavItem';
 
 let PrimaryNavigation = React.createClass({

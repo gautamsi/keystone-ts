@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import {
 	FormInput,
 	Grid,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 
 const NAME_SHAPE = {
 	first: PropTypes.string,

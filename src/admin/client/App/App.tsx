@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Container } from './elemental';
+import { Container } from 'elemental';
 import { Link } from 'react-router';
 import { css } from 'glamor';
 

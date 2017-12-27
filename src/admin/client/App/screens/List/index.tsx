@@ -16,7 +16,7 @@ import {
 	GlyphButton,
 	Pagination,
 	Spinner,
-} from '../../elemental';
+} from 'elemental';
 
 import ListFilters from './components/Filtering/ListFilters';
 import ListHeaderTitle from './components/ListHeaderTitle';

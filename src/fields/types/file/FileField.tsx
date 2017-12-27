@@ -11,7 +11,7 @@ import {
 	FormField,
 	FormInput,
 	FormNote,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 import FileChangeMessage from '../../components/FileChangeMessage';
 import HiddenFileInput from '../../components/HiddenFileInput';
 

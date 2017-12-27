@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import demand from 'must';
 import ConfirmationDialog from '../ConfirmationDialog';
-import { Modal, Button } from '../../elemental';
+import { Modal, Button } from 'elemental';
 
 describe('<ConfirmationDialog />', () => {
 	it('should render a Modal with a body and a footer', () => {

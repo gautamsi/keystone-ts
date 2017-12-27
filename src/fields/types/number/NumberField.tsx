@@ -1,6 +1,6 @@
 import React from 'react';
 import Field from '../Field';
-import { FormInput } from '../../../admin/client/App/elemental';
+import { FormInput } from 'elemental';
 
 export = Field.create({
 	displayName: 'NumberField',

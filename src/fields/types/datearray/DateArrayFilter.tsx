@@ -6,7 +6,7 @@ import {
 	FormInput,
 	FormSelect,
 	Grid,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 
 const PRESENCE_OPTIONS = [
 	{ label: 'At least one element', value: 'some' },

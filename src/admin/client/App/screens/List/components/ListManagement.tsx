@@ -5,7 +5,7 @@ import {
 	InlineGroup as Group,
 	InlineGroupSection as Section,
 	Spinner,
-} from '../../../elemental';
+} from 'elemental';
 
 function ListManagement ({
 	checkedItemCount,

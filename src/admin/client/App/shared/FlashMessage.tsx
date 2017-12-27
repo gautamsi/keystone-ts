@@ -3,7 +3,7 @@
  */
 
 import React, { PropTypes } from 'react';
-import { Alert } from '../elemental';
+import { Alert } from 'elemental';
 
 const FlashMessage = React.createClass({
 	propTypes: {

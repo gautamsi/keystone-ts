@@ -8,7 +8,7 @@ import {
 	FormSelect,
 	Grid,
 	SegmentedControl,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 
 const INVERTED_OPTIONS = [
 	{ label: 'Matches', value: false },

@@ -5,7 +5,7 @@ import {
 	FormField,
 	FormInput,
 	FormSelect,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 
 const MODE_OPTIONS = [
 	{ label: 'Contains', value: 'contains' },

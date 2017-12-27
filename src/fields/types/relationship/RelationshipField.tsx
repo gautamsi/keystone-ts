@@ -9,7 +9,7 @@ import {
 	FormInput,
 	InlineGroup as Group,
 	InlineGroupSection as Section,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 import _ from 'lodash';
 
 function compareValues (current, next) {

@@ -1,7 +1,7 @@
 import Field from '../Field';
 import React from 'react';
 import Select from 'react-select';
-import { FormInput } from '../../../admin/client/App/elemental';
+import { FormInput } from 'elemental';
 
 /**
  * TODO:

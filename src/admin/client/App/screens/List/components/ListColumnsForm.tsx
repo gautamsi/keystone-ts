@@ -3,7 +3,7 @@ import assign from 'object-assign';
 
 import Popout from '../../../shared/Popout';
 import PopoutList from '../../../shared/Popout/PopoutList';
-import { FormInput } from '../../../elemental';
+import { FormInput } from 'elemental';
 import ListHeaderButton from './ListHeaderButton';
 
 import { setActiveColumns } from '../actions';

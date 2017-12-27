@@ -7,7 +7,7 @@ import {
 	FormInput,
 	InlineGroup as Group,
 	InlineGroupSection as Section,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 import transparentSwatch from './transparent-swatch';
 import theme from '../../../admin/client/theme';
 

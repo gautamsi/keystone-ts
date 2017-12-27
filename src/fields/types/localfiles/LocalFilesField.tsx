@@ -7,7 +7,7 @@ import _ from 'lodash';
 import bytes from 'bytes';
 import Field from '../Field';
 import React from 'react';
-import { Button, FormField, FormInput, FormNote } from '../../../admin/client/App/elemental';
+import { Button, FormField, FormInput, FormNote } from 'elemental';
 
 const ICON_EXTS = [
 	'aac', 'ai', 'aiff', 'avi', 'bmp', 'c', 'cpp', 'css', 'dat', 'dmg', 'doc', 'dotx', 'dwg', 'dxf', 'eps', 'exe', 'flv', 'gif', 'h',

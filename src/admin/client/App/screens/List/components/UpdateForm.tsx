@@ -5,7 +5,7 @@ import assign from 'object-assign';
 import { Fields } from 'FieldTypes';
 import InvalidFieldType from '../../../shared/InvalidFieldType';
 import { plural } from '../../../../utils/string';
-import { BlankState, Button, Form, Modal } from '../../../elemental';
+import { BlankState, Button, Form, Modal } from 'elemental';
 
 let UpdateForm = React.createClass({
 	displayName: 'UpdateForm',

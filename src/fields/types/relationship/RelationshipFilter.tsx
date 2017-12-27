@@ -8,7 +8,7 @@ import {
 	FormField,
 	FormInput,
 	SegmentedControl,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 
 import PopoutList from '../../../admin/client/App/shared/Popout/PopoutList';
 

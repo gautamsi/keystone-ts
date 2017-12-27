@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Button } from '../../../admin/client/App/elemental';
+import { Button } from 'elemental';
 import ImageThumbnail from '../../components/ImageThumbnail';
 
 function CloudinaryImagesThumbnail ({

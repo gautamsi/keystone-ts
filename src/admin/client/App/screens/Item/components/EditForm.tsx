@@ -7,13 +7,13 @@ import {
 	FormInput,
 	Grid,
 	ResponsiveText,
-} from '../../../elemental';
+} from 'elemental';
 
 import { Fields } from 'FieldTypes';
 import { fade } from '../../../../utils/color';
 import theme from '../../../../theme';
 
-import { Button, LoadingButton } from '../../../elemental';
+import { Button, LoadingButton } from 'elemental';
 import AlertMessages from '../../../shared/AlertMessages';
 import ConfirmationDialog from '../../../shared/ConfirmationDialog';
 

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Chip } from '../../../../elemental';
+import { Chip } from 'elemental';
 import Filter from './Filter';
 
 import { clearAllFilters } from '../../actions';

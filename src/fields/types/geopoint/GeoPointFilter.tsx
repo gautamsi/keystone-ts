@@ -5,7 +5,7 @@ import {
 	FormInput,
 	Grid,
 	SegmentedControl,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 
 const DISTANCE_OPTIONS = [
 	{ label: 'Max distance (km)', value: 'max' },

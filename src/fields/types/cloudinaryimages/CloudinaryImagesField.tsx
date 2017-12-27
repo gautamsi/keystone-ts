@@ -9,7 +9,7 @@ import _ from 'lodash';
 import async from 'async';
 import React, { cloneElement } from 'react';
 import Field from '../Field';
-import { Button, FormField, FormNote } from '../../../admin/client/App/elemental';
+import { Button, FormField, FormNote } from 'elemental';
 import Lightbox from 'react-images';
 import cloudinaryResize from '../../../admin/client/utils/cloudinaryResize';
 import Thumbnail from './CloudinaryImagesThumbnail';

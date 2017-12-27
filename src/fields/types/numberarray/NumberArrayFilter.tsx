@@ -6,7 +6,7 @@ import {
 	FormInput,
 	FormSelect,
 	Grid,
-} from '../../../admin/client/App/elemental';
+} from 'elemental';
 
 const MODE_OPTIONS = [
 	{ label: 'Exactly', value: 'equals' },
