@@ -9,12 +9,15 @@
         "baseUrl": ".",
         "skipLibCheck": true,
         "jsx": "react",
+        "lib": [
+            "es2015"
+        ],
         "paths": {
             "*": [
                 "node_modules/*",
                 "src/types/*"
             ]
-        }, 
+        },
     },
     "include": [
         "src/**/*"
