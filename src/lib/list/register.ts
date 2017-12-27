@@ -1,8 +1,8 @@
-var assign = require('object-assign');
-var schemaPlugins = require('../schemaPlugins');
-var UpdateHandler = require('../updateHandler');
-var utils = require('keystone-utils');
-var debug = require('debug')('keystone:core:list:register');
+const assign = require('object-assign');
+const schemaPlugins = require('../schemaPlugins');
+const UpdateHandler = require('../updateHandler');
+const utils = require('keystone-utils');
+const debug = require('debug')('keystone:core:list:register');
 
 
 /**
@@ -11,8 +11,8 @@ var debug = require('debug')('keystone:core:list:register');
  * Also adds default fields and virtuals to the schema for the list
  */
 function register () {
-	var keystone = this.keystone;
-	var list = this;
+	const keystone = this.keystone;
+	const list = this;
 	/* Handle deprecated options */
 	if (this.schema.methods.toCSV) {
 		console.warn(this.key + ' Warning: List.schema.methods.toCSV support has been removed from KeystoneJS.\nPlease use getCSVData instead (see the 0.3 -> 4.0 Upgrade Guide)\n');
@@ -60,7 +60,7 @@ function register () {
 		// If the list is configured to use a text index for search and the list
 		// doesn't explicitly define one, create (or update) one of our own
 		this.ensureTextIndex(function () {
-			debug('this.ensureTextIndex() done for \'' + list.key + '\'');
+			debug("this.ensureTextIndex() done for '" + list.key + "'");
 		});
 	}
 	/* Register the list and its field types on the Keystone instance */
@@ -70,17 +70,17 @@ function register () {
 	/* Add listeners for model events */
 	// see http://mongoosejs.com/docs/api.html#model_Model
 	this.model.on('index', function (err) {
-		if (err) console.error('Mongoose model \'index\' event fired on \'' + list.key + '\' with error:\n', err.message, err.stack);
+		if (err) console.error("Mongoose model 'index' event fired on '" + list.key + "' with error:\n", err.message, err.stack);
 	});
 	this.model.on('index-single-start', function (index) {
-		debug('Mongoose model \'index-single-start\' event fired on \'' + list.key + '\' for index:\n', index);
+		debug("Mongoose model 'index-single-start' event fired on '" + list.key + "' for index:\n", index);
 	});
 	this.model.on('index-single-done', function (err, index) {
-		if (err) console.error('Mongoose model \'index-single-done\' event fired on \'' + list.key + '\' for index:\n', index, '\nWith error:\n', err.message, err.stack);
-		else debug('Mongoose model \'index-single-done\' event fired on \'' + list.key + '\' for index:\n', index);
+		if (err) console.error("Mongoose model 'index-single-done' event fired on '" + list.key + "' for index:\n", index, '\nWith error:\n', err.message, err.stack);
+		else debug("Mongoose model 'index-single-done' event fired on '" + list.key + "' for index:\n", index);
 	});
 	this.model.on('error', function (err) {
-		if (err) console.error('Mongoose model \'error\' event fired on \'' + list.key + '\' with error:\n', err.message, err.stack);
+		if (err) console.error("Mongoose model 'error' event fired on '" + list.key + "' with error:\n", err.message, err.stack);
 	});
 	return this;
 }

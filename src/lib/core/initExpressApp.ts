@@ -9,4 +9,4 @@ export default function initExpressApp (customApp) {
 		this.app = require('../../server/createApp')(this);
 	}
 	return this;
-};
+}

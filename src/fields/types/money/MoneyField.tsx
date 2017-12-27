@@ -14,7 +14,7 @@ export = Field.create({
 	},
 
 	valueChanged (event) {
-		var newValue = event.target.value.replace(/[^\d\s\,\.\$€£¥]/g, '');
+		let newValue = event.target.value.replace(/[^\d\s\,\.\$€£¥]/g, '');
 		if (newValue === this.props.value) return;
 
 		this.props.onChange({

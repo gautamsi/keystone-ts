@@ -37,9 +37,9 @@ const ItemsRow = React.createClass({
 			'ItemList__row--failure': this.props.rowAlert.fail === itemId,
 		});
 		// item fields
-		var cells = this.props.columns.map((col, i) => {
-			var ColumnType = Columns[col.type] || Columns.__unrecognised__;
-			var linkTo = !i ? `${Keystone.adminPath}/${this.props.list.path}/${itemId}` : undefined;
+		let cells = this.props.columns.map((col, i) => {
+			let ColumnType = Columns[col.type] || Columns.__unrecognised__;
+			let linkTo = !i ? `${Keystone.adminPath}/${this.props.list.path}/${itemId}` : undefined;
 			return <ColumnType key={col.path} list={this.props.list} col={col} data={item} linkTo={linkTo} />;
 		});
 
@@ -57,7 +57,7 @@ const ItemsRow = React.createClass({
 			));
 		}
 
-		var addRow = (<tr key={'i' + item.id} onClick={this.props.manageMode ? (e) => this.props.checkTableItem(item, e) : null} className={rowClassname}>{cells}</tr>);
+		let addRow = (<tr key={'i' + item.id} onClick={this.props.manageMode ? (e) => this.props.checkTableItem(item, e) : null} className={rowClassname}>{cells}</tr>);
 
 		if (this.props.list.sortable) {
 			return (
@@ -155,6 +155,6 @@ function dropProps (connect) {
 	return {
 		connectDropTarget: connect.dropTarget(),
 	};
-};
+}
 
 export const Sortable = DragSource('item', dragItem, dragProps)(DropTarget('item', dropItem, dropProps)(ItemsRow));

@@ -37,7 +37,7 @@ function InlineGroupSection ({
 			{children}
 		</div>
 	);
-};
+}
 
 InlineGroupSection.propTypes = {
 	active: PropTypes.bool, // buttons only

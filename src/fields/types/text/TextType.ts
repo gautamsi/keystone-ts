@@ -1,6 +1,6 @@
-var FieldType = require('../Type');
-var util = require('util');
-var utils = require('keystone-utils');
+const FieldType = require('../Type');
+const util = require('util');
+const utils = require('keystone-utils');
 
 /**
  * Text FieldType Constructor
@@ -18,10 +18,10 @@ text.properName = 'Text';
 util.inherits(text, FieldType);
 
 text.prototype.validateInput = function (data, callback) {
-	var max = this.options.max;
-	var min = this.options.min;
-	var value = this.getValueFromData(data);
-	var result = value === undefined || value === null || typeof value === 'string';
+	const max = this.options.max;
+	const min = this.options.min;
+	const value = this.getValueFromData(data);
+	let result = value === undefined || value === null || typeof value === 'string';
 	if (max && typeof value === 'string') {
 		result = value.length < max;
 	}
@@ -32,8 +32,8 @@ text.prototype.validateInput = function (data, callback) {
 };
 
 text.prototype.validateRequiredInput = function (item, data, callback) {
-	var value = this.getValueFromData(data);
-	var result = !!value;
+	const value = this.getValueFromData(data);
+	let result = !!value;
 	if (value === undefined && item.get(this.path)) {
 		result = true;
 	}
@@ -44,12 +44,12 @@ text.prototype.validateRequiredInput = function (item, data, callback) {
  * Add filters to a query
  */
 text.prototype.addFilterToQuery = function (filter) {
-	var query = {};
+	const query = {};
 	if (filter.mode === 'exactly' && !filter.value) {
 		query[this.path] = filter.inverted ? { $nin: ['', null] } : { $in: ['', null] };
 		return query;
 	}
-	var value = utils.escapeRegExp(filter.value);
+	let value = utils.escapeRegExp(filter.value);
 	if (filter.mode === 'beginsWith') {
 		value = '^' + value;
 	} else if (filter.mode === 'endsWith') {

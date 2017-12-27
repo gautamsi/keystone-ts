@@ -28,7 +28,7 @@ describe('<List /> query param sagas', function () {
 						pathname,
 						query,
 					}));
-					let next = generator.next();
+					const next = generator.next();
 					demand(next.value).eql(expectedResult);
 				});
 			});
@@ -47,7 +47,7 @@ describe('<List /> query param sagas', function () {
 					const pathname = '/somePath';
 					const generator = urlUpdate(query, cache, pathname);
 					const expectedResult = put(push({ pathname, query }));
-					let next = generator.next();
+					const next = generator.next();
 					demand(next.value).eql(expectedResult);
 				});
 			});

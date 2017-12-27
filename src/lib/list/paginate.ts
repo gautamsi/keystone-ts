@@ -14,22 +14,22 @@
  * @param {Function} callback (optional)
  */
 function paginate (options, callback) {
-	var list = this;
-	var model = this.model;
+	const list = this;
+	const model = this.model;
 
 	options = options || {};
 
-	var query = model.find(options.filters, options.optionalExpression);
-	var countQuery = model.find(options.filters);
+	const query = model.find(options.filters, options.optionalExpression);
+	const countQuery = model.find(options.filters);
 
 	query._original_exec = query.exec;
 	query._original_sort = query.sort;
 	query._original_select = query.select;
 
-	var currentPage = Number(options.page) || 1;
-	var resultsPerPage = Number(options.perPage) || 50;
-	var maxPages = Number(options.maxPages) || 10;
-	var skip = (currentPage - 1) * resultsPerPage;
+	const currentPage = Number(options.page) || 1;
+	const resultsPerPage = Number(options.perPage) || 50;
+	const maxPages = Number(options.maxPages) || 10;
+	const skip = (currentPage - 1) * resultsPerPage;
 
 	list.pagination = { maxPages: maxPages };
 
@@ -63,8 +63,8 @@ function paginate (options, callback) {
 
 			query._original_exec(function (err, results) {
 				if (err) return callback(err);
-				var totalPages = Math.ceil(count / resultsPerPage);
-				var rtn = {
+				const totalPages = Math.ceil(count / resultsPerPage);
+				const rtn = {
 					total: count,
 					results: results,
 					currentPage: currentPage,

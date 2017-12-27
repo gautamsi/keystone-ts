@@ -32,7 +32,7 @@ function ImageThumbnail ({ children, className, component, mask, ...props }) {
 	props.children = [].concat(children, [maskUI]);
 
 	return React.createElement(component, props);
-};
+}
 
 ImageThumbnail.propTypes = {
 	component: PropTypes.oneOfType([

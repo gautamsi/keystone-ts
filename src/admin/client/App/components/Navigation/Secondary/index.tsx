@@ -11,7 +11,7 @@ import {
 } from '../../../screens/List/actions/active';
 import SecondaryNavItem from './NavItem';
 
-var SecondaryNavigation = React.createClass({
+let SecondaryNavigation = React.createClass({
 	displayName: 'SecondaryNavigation',
 	propTypes: {
 		currentListKey: React.PropTypes.string,

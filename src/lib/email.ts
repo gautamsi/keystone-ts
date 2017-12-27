@@ -1,6 +1,6 @@
-var keystone = require('../index');
-var utils = require('keystone-utils');
-var safeRequire = require('./safeRequire');
+const keystone = require('../index');
+const utils = require('keystone-utils');
+const safeRequire = require('./safeRequire');
 
 /**
  * Email Class
@@ -21,7 +21,7 @@ var safeRequire = require('./safeRequire');
  * @api public
  */
 
-var Email = function (options) {
+const Email = function (options) {
 	if (typeof options === 'string') {
 		options = { templateName: options };
 	}
@@ -36,12 +36,12 @@ var Email = function (options) {
 	 * will be deprecated with the 0.5 release!
 	 */
 	// keystome.set('email transport', 'sometransport') -> options.transport
-	var emailTransport = keystone.get('email transport');
+	const emailTransport = keystone.get('email transport');
 	if (!options.transport && emailTransport) {
 		options.transport = emailTransport;
 	}
 	// mandrill used to be the default; provide it if the api key is set
-	var mandrillApiKey = keystone.get('mandrill api key');
+	const mandrillApiKey = keystone.get('mandrill api key');
 	if (!options.transport && mandrillApiKey) {
 		options.transport = 'mandrill';
 		options.apiKey = mandrillApiKey;
@@ -52,8 +52,8 @@ var Email = function (options) {
 	}
 	// keystone.set('view engine', 'something') -> engine
 	if (!options.engine) {
-		var customEngine = keystone.get('custom engine');
-		var viewEngine = keystone.get('view engine');
+		const customEngine = keystone.get('custom engine');
+		const viewEngine = keystone.get('view engine');
 		if (typeof customEngine === 'function') {
 			// when customEngine is a function, viewEngine is probably the extension
 			options.engine = customEngine;
@@ -64,23 +64,23 @@ var Email = function (options) {
 		}
 	}
 	// keystone.set('emails', 'rootpath') -> root
-	var rootPath = keystone.get('emails');
+	const rootPath = keystone.get('emails');
 	if (rootPath && !options.root) {
 		options.root = rootPath;
 	}
 
 	// Try to use the keystone-email package and throw if it hasn't been installed
-	var KeystoneEmail = safeRequire('keystone-email', 'email');
+	const KeystoneEmail = safeRequire('keystone-email', 'email');
 
 	// Create the new email instance with the template name and options
-	var templateName = options.templateName;
+	const templateName = options.templateName;
 	delete options.templateName;
-	var email = new KeystoneEmail(templateName, options);
+	const email = new KeystoneEmail(templateName, options);
 
 	// Make email.send backwards compatible with old argument signature
-	var send = email.send;
+	const send = email.send;
 	email.send = function () {
-		var args = [arguments[0]];
+		const args = [arguments[0]];
 		if (typeof arguments[1] === 'function') {
 			// map .send(options, callback) => .send(locals, options, callback)
 			// TOOD: Deprecate this call signature

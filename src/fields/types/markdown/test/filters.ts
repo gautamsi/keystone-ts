@@ -1,5 +1,5 @@
-var demand = require('must');
-var MarkdownType = require('../MarkdownType');
+const demand = require('must');
+const MarkdownType = require('../MarkdownType');
 
 export const initList = function (List) {
 	List.add({
@@ -32,7 +32,7 @@ export const testFilters = function (List, filter) {
 					value: 'abc',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql(['abc']);
 				done();
 			});
@@ -46,7 +46,7 @@ export const testFilters = function (List, filter) {
 					value: 'abc',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql([
 					undefined,
 					'',
@@ -67,7 +67,7 @@ export const testFilters = function (List, filter) {
 					value: '',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql([undefined, '']);
 				done();
 			});
@@ -81,7 +81,7 @@ export const testFilters = function (List, filter) {
 					value: '',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql([
 					' ',
 					'abc',
@@ -101,7 +101,7 @@ export const testFilters = function (List, filter) {
 					value: ' ',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql([' ']);
 				done();
 			});
@@ -114,7 +114,7 @@ export const testFilters = function (List, filter) {
 					value: 'a/b\c@d',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql(['a/b\c@d']);
 				done();
 			});
@@ -127,7 +127,7 @@ export const testFilters = function (List, filter) {
 					value: 'abcd',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql(['ABCD', 'abcd']);
 				done();
 			});
@@ -141,7 +141,7 @@ export const testFilters = function (List, filter) {
 					value: 'abcd',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql(['abcd']);
 				done();
 			});
@@ -158,7 +158,7 @@ export const testFilters = function (List, filter) {
 					value: '123',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql(['abcd']);
 				done();
 			});
@@ -174,7 +174,7 @@ export const testFilters = function (List, filter) {
 					value: 'abc',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql([
 					'abc',
 					'ABCD',
@@ -192,7 +192,7 @@ export const testFilters = function (List, filter) {
 					value: 'abc',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql([
 					undefined,
 					'',
@@ -214,7 +214,7 @@ export const testFilters = function (List, filter) {
 					value: 'cd',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql([
 					'ABCD',
 					'abcd',
@@ -232,7 +232,7 @@ export const testFilters = function (List, filter) {
 					value: 'cd',
 				},
 			}, 'markdown', function (results) {
-				var normalized = normalizeResults(results);
+				const normalized = normalizeResults(results);
 				demand(normalized).eql([
 					undefined,
 					'',
@@ -253,8 +253,8 @@ export const testFilters = function (List, filter) {
  * @return {array}         The normalized results
  */
 function normalizeResults (results) {
-	var normalized = [];
-	for (var i = 0; i < results.length; i++) {
+	const normalized = [];
+	for (let i = 0; i < results.length; i++) {
 		normalized.push(results[i].md);
 	}
 	return normalized;

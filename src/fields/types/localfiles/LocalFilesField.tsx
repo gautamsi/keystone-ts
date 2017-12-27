@@ -16,7 +16,7 @@ const ICON_EXTS = [
 	'wav', 'xls', 'xlsx', 'xml', 'yml', 'zip',
 ];
 
-var LocalFilesFieldItem = React.createClass({
+let LocalFilesFieldItem = React.createClass({
 	propTypes: {
 		deleted: React.PropTypes.bool,
 		filename: React.PropTypes.string,
@@ -28,8 +28,8 @@ var LocalFilesFieldItem = React.createClass({
 	renderActionButton () {
 		if (!this.props.shouldRenderActionButton || this.props.isQueued) return null;
 
-		var buttonLabel = this.props.deleted ? 'Undo' : 'Remove';
-		var buttonType = this.props.deleted ? 'link' : 'link-cancel';
+		let buttonLabel = this.props.deleted ? 'Undo' : 'Remove';
+		let buttonType = this.props.deleted ? 'link' : 'link-cancel';
 
 		return <Button key="action-button" type={buttonType} onClick={this.props.toggleDelete}>{buttonLabel}</Button>;
 	},
@@ -63,13 +63,13 @@ var LocalFilesFieldItem = React.createClass({
 
 });
 
-var tempId = 0;
+let tempId = 0;
 
 export = Field.create({
 
 	getInitialState () {
-		var items = [];
-		var self = this;
+		let items = [];
+		let self = this;
 
 		_.forEach(this.props.value, function (item) {
 			self.pushItem(item, items);
@@ -79,10 +79,10 @@ export = Field.create({
 	},
 
 	removeItem (id) {
-		var thumbs = [];
-		var self = this;
+		let thumbs = [];
+		let self = this;
 		_.forEach(this.state.items, function (thumb) {
-			var newProps = Object.assign({}, thumb.props);
+			let newProps = Object.assign({}, thumb.props);
 			if (thumb.props._id === id) {
 				newProps.deleted = !thumb.props.deleted;
 			}
@@ -119,9 +119,9 @@ export = Field.create({
 	},
 
 	uploadFile (event) {
-		var self = this;
+		let self = this;
 
-		var files = event.target.files;
+		let files = event.target.files;
 		_.forEach(files, function (f) {
 			self.pushItem({ isQueued: true, filename: f.name });
 			self.forceUpdate();
@@ -139,7 +139,7 @@ export = Field.create({
 	renderToolbar () {
 		if (!this.shouldRenderField()) return null;
 
-		var clearFilesButton;
+		let clearFilesButton;
 		if (this.hasFiles()) {
 			clearFilesButton = <Button type="link-cancel" className="ml-5" onClick={this.clearFiles}>Clear Uploads</Button>;
 		}
@@ -178,8 +178,8 @@ export = Field.create({
 	},
 
 	renderFieldAction () {
-		var value = '';
-		var remove = [];
+		let value = '';
+		let remove = [];
 		_.forEach(this.state.items, function (thumb) {
 			if (thumb && thumb.props.deleted) remove.push(thumb.props._id);
 		});

@@ -1,16 +1,16 @@
-var async = require('async');
-var listToArray = require('list-to-array');
+const async = require('async');
+const listToArray = require('list-to-array');
 
-var evalDependsOn = require('../../fields/utils/evalDependsOn.js');
+const evalDependsOn = require('../../fields/utils/evalDependsOn.js');
 
-var MONGO_INDEX_CONSTRAINT_ERROR_REGEXP = /E11000 duplicate key error index\: [^\$]+\$(\w+) dup key\: \{ \: "([^"]+)" \}/;
+const MONGO_INDEX_CONSTRAINT_ERROR_REGEXP = /E11000 duplicate key error index\: [^\$]+\$(\w+) dup key\: \{ \: "([^"]+)" \}/;
 
 // Adds a validation message to the errors object in the common format
 function addValidationError (options, errors, field, type, detail) {
 	if (detail instanceof Error) {
 		detail = detail.name !== 'Error' ? detail.name + ': ' + detail.message : detail.message;
 	}
-	var error = '';
+	let error = '';
 	if (typeof detail === 'string') {
 		error = detail;
 	} else {
@@ -29,7 +29,7 @@ function addValidationError (options, errors, field, type, detail) {
 		fieldLabel: field.label,
 		fieldType: field.type,
 	};
-};
+}
 
 // Adds a field update error message to the errors object in the common format
 function addFieldUpdateError (errors, field, detail) {
@@ -56,10 +56,10 @@ function updateItem (item, data, options, callback) {
 
 	// update fields with noedit: true set if fields have been explicitly
 	// provided, or if the ignoreNoEdit option is true
-	var ignoreNoEdit = !!(options.fields || options.ignoreNoEdit);
+	const ignoreNoEdit = !!(options.fields || options.ignoreNoEdit);
 
 	// fields defaults to all the fields in the list
-	var fields = options.fields || this.fieldsArray;
+	let fields = options.fields || this.fieldsArray;
 	// fields can be a list or array of field paths or Field instances
 	fields = listToArray(fields).map(function (field) {
 		// TODO: Check that field is an instance of Field
@@ -85,8 +85,8 @@ function updateItem (item, data, options, callback) {
 	//
 	// this option supports the backwards compatible { path: true } format, or a
 	// list or array of field paths to validate
-	var requiredFields = options.required;
-	var requiredFieldPaths = {};
+	let requiredFields = options.required;
+	let requiredFieldPaths = {};
 	if (typeof requiredFields === 'string') {
 		requiredFields = listToArray(requiredFields);
 	}
@@ -101,7 +101,7 @@ function updateItem (item, data, options, callback) {
 	/* Field Validation */
 	// TODO: If a field is required but not specified in the provided fields array
 	// we should explicitly include it in the set of fields to validate
-	var validationErrors = {};
+	const validationErrors = {};
 	function doFieldValidation (field, done) {
 		// Note; we don't pass back validation errors to the callback, because we don't
 		// want to break the async loop before all the fields have been validated.
@@ -111,8 +111,7 @@ function updateItem (item, data, options, callback) {
 				done();
 			} else {
 				if ((field.required || requiredFieldPaths[field.path])
-					&& (!field.dependsOn || evalDependsOn(field.dependsOn, data)))
-				{
+					&& (!field.dependsOn || evalDependsOn(field.dependsOn, data))) {
 					field.validateRequiredInput(item, data, function (valid, detail) {
 						if (!valid) {
 							addValidationError(options, validationErrors, field, 'required', detail);
@@ -127,9 +126,9 @@ function updateItem (item, data, options, callback) {
 	}
 
 	/* Field Updates */
-	var updateErrors = {};
+	const updateErrors = {};
 	function doFieldUpdate (field, done) {
-		var callback = function (err) {
+		const callback = function (err) {
 			// Note; we don't pass back errors to the callback, because we don't want
 			// to break the async loop before all the fields have been updated.
 			if (err) {
@@ -138,7 +137,7 @@ function updateItem (item, data, options, callback) {
 			done();
 		};
 		// all fields have (item, data) as the first two arguments
-		var updateArgs = [item, data];
+		const updateArgs = [item, data];
 		// some fields support an optional third argument: files
 		if (field.updateItem.length > 3) {
 			updateArgs.push(options.files);
@@ -192,9 +191,9 @@ function updateItem (item, data, options, callback) {
 				// Try to make mongoose index constraint errors more friendly
 				// This is brittle, but should return a more human-readable error message
 				if (err.code === 11000) {
-					var indexConstraintError = MONGO_INDEX_CONSTRAINT_ERROR_REGEXP.exec(err.errmsg);
+					const indexConstraintError = MONGO_INDEX_CONSTRAINT_ERROR_REGEXP.exec(err.errmsg);
 					if (indexConstraintError) {
-						var probableFieldPath = indexConstraintError[1];
+						let probableFieldPath = indexConstraintError[1];
 						probableFieldPath = probableFieldPath.substr(0, probableFieldPath.lastIndexOf('_'));
 						return callback({
 							error: 'database error',

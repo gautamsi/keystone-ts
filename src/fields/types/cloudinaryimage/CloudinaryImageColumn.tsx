@@ -3,14 +3,14 @@ import CloudinaryImageSummary from '../../components/columns/CloudinaryImageSumm
 import ItemsTableCell from '../../components/ItemsTableCell';
 import ItemsTableValue from '../../components/ItemsTableValue';
 
-var CloudinaryImageColumn = React.createClass({
+let CloudinaryImageColumn = React.createClass({
 	displayName: 'CloudinaryImageColumn',
 	propTypes: {
 		col: React.PropTypes.object,
 		data: React.PropTypes.object,
 	},
 	renderValue: function () {
-		var value = this.props.data.fields[this.props.col.path];
+		let value = this.props.data.fields[this.props.col.path];
 		if (!value || !Object.keys(value).length) return;
 
 		return (

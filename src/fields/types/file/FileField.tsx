@@ -89,7 +89,7 @@ export = Field.create({
 		});
 	},
 	handleRemove (e) {
-		var state = {};
+		let state = {};
 
 		if (this.state.userSelectedFile) {
 			state = buildInitialState(this.props);
@@ -159,7 +159,7 @@ export = Field.create({
 				</Button>
 			);
 		} else {
-			var clearText;
+			let clearText;
 			if (this.state.userSelectedFile) {
 				clearText = 'Cancel Upload';
 			} else {

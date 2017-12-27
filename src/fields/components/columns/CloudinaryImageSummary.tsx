@@ -32,7 +32,7 @@ const textStyle = {
 	verticalAlign: 'middle',
 };
 
-var CloudinaryImageSummary = React.createClass({
+let CloudinaryImageSummary = React.createClass({
 	displayName: 'CloudinaryImageSummary',
 	propTypes: {
 		image: React.PropTypes.object.isRequired,

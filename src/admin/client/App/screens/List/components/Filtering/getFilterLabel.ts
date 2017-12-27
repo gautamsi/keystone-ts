@@ -81,8 +81,8 @@ function getFilterLabel (field, value) {
 		// RELATIONSHIP
 		// TODO populate relationship, currently rendering an ID
 		case 'relationship': {
-			let joiner = value.inverted ? 'is NOT' : 'is';
-			let formattedValue = (value.value.length > 1)
+			const joiner = value.inverted ? 'is NOT' : 'is';
+			const formattedValue = (value.value.length > 1)
 				? value.value.join(', or ')
 				: value.value[0];
 
@@ -91,8 +91,8 @@ function getFilterLabel (field, value) {
 
 		// SELECT
 		case 'select': {
-			let joiner = value.inverted ? 'is NOT' : 'is';
-			let formattedValue = (value.value.length > 1)
+			const joiner = value.inverted ? 'is NOT' : 'is';
+			const formattedValue = (value.value.length > 1)
 				? value.value.join(', or ')
 				: value.value[0];
 
@@ -146,7 +146,7 @@ function getFilterLabel (field, value) {
 			return `${label} "${value.value}"`;
 		}
 	}
-};
+}
 
 function resolveNumberFormat (value, conjunction = 'is') {
 	let mode = '';

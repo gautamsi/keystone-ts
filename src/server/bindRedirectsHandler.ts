@@ -8,4 +8,4 @@ export default function bindErrorHandlers (keystone, app) {
 			}
 		});
 	}
-};
+}

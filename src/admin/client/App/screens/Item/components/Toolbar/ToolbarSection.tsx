@@ -8,7 +8,7 @@ function ToolbarSection ({ className, left, right, ...props }) {
 	}, className);
 
 	return <div {...props} />;
-};
+}
 
 ToolbarSection.propTypes = {
 	left: PropTypes.bool,

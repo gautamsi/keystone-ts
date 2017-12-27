@@ -15,6 +15,6 @@ function CollapsedFieldLabel ({ style, ...props }) {
 	return (
 		<Button variant="link" style={__style__} {...props} />
 	);
-};
+}
 
 export = CollapsedFieldLabel;

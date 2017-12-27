@@ -1,7 +1,7 @@
-var assign = require('object-assign');
-var FieldType = require('../Type');
-var TextType = require('../text/TextType');
-var util = require('util');
+const assign = require('object-assign');
+const FieldType = require('../Type');
+const TextType = require('../text/TextType');
+const util = require('util');
 
 
 /**

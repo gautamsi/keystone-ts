@@ -81,7 +81,7 @@ export const Base = {
 		return <FormInput noedit>{this.props.value}</FormInput>;
 	},
 	renderUI () {
-		var wrapperClassName = classnames(
+		let wrapperClassName = classnames(
 			'field-type-' + this.props.type,
 			this.props.className,
 			{ 'field-monospace': this.props.monospace }
@@ -129,7 +129,7 @@ module.exports.create = function (spec) {
 
 	spec = validateSpec(spec);
 
-	var field = {
+	let field = {
 		spec: spec,
 		displayName: spec.displayName,
 		mixins: [Mixins.Collapse],
@@ -153,7 +153,7 @@ module.exports.create = function (spec) {
 		Object.assign(field.statics, spec.statics);
 	}
 
-	var excludeBaseMethods = {};
+	let excludeBaseMethods = {};
 	if (spec.mixins) {
 		spec.mixins.forEach(function (mixin) {
 			Object.keys(mixin).forEach(function (name) {

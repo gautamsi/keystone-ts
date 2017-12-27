@@ -3,7 +3,7 @@
  * If no options are provides, returns the field at the specified path.
  */
 function field (path, options) {
-	var Field = this.keystone.Field;
+	const Field = this.keystone.Field;
 	if (arguments.length === 1) {
 		return this.fields[path];
 	}
@@ -42,7 +42,7 @@ function field (path, options) {
 		this.fieldTypes.wysiwyg = true;
 	}
 
-	var field = new options.type(this, path, options);
+	const field = new options.type(this, path, options);
 	this.fields[path] = field;
 	this.fieldsArray.push(field);
 	if (field.type === 'relationship') {

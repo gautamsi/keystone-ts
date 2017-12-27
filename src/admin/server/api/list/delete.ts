@@ -1,7 +1,7 @@
-var async = require('async');
+const async = require('async');
 
 export default function (req, res) {
-	var keystone = req.keystone;
+	const keystone = req.keystone;
 	if (!keystone.security.csrf.validate(req)) {
 		console.log('Refusing to delete ' + req.list.key + ' items; CSRF failure');
 		return res.apiError(403, 'invalid csrf');
@@ -10,7 +10,7 @@ export default function (req, res) {
 		console.log('Refusing to delete ' + req.list.key + ' items; List.nodelete is true');
 		return res.apiError(400, 'nodelete');
 	}
-	var ids = req.body.ids || req.body.id || req.params.id;
+	let ids = req.body.ids || req.body.id || req.params.id;
 	if (typeof ids === 'string') {
 		ids = ids.split(',');
 	}
@@ -19,9 +19,9 @@ export default function (req, res) {
 	}
 
 	if (req.user) {
-		var checkResourceId = (keystone.get('user model') === req.list.key);
+		const checkResourceId = (keystone.get('user model') === req.list.key);
 
-		var userId = String(req.user.id);
+		const userId = String(req.user.id);
 		// check if user can delete this resources based on resources ids and userId
 		if (checkResourceId && ids.some(function (id) {
 			return id === userId;
@@ -30,8 +30,8 @@ export default function (req, res) {
 			return res.apiError(403, 'not allowed', 'You can not delete yourself');
 		}
 	}
-	var deletedCount = 0;
-	var deletedIds = [];
+	let deletedCount = 0;
+	const deletedIds = [];
 	req.list.model.find().where('_id').in(ids).exec(function (err, results) {
 		if (err) {
 			console.log('Error deleting ' + req.list.key + ' items:', err);
@@ -52,4 +52,4 @@ export default function (req, res) {
 			});
 		});
 	});
-};
+}

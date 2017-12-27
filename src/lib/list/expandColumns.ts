@@ -1,4 +1,4 @@
-var utils = require('keystone-utils');
+const utils = require('keystone-utils');
 
 /**
  * Expands a comma-separated string or array of columns into valid column objects.
@@ -22,15 +22,15 @@ function expandColumns (cols) {
 	if (!Array.isArray(cols)) {
 		throw new Error('List.expandColumns: cols must be an array.');
 	}
-	var list = this;
-	var expanded = [];
-	var nameCol = false;
-	var getCol = function (def) {
+	const list = this;
+	const expanded = [];
+	let nameCol = false;
+	const getCol = function (def) {
 		if (def.path === '__name__') {
 			def.path = list.namePath;
 		}
-		var field = list.fields[def.path];
-		var col = null;
+		const field = list.fields[def.path];
+		let col = null;
 		if (field) {
 			col = {
 				field: field,
@@ -69,10 +69,10 @@ function expandColumns (cols) {
 		}
 		return col;
 	};
-	for (var i = 0; i < cols.length; i++) {
-		var def = {};
+	for (let i = 0; i < cols.length; i++) {
+		const def = {};
 		if (typeof cols[i] === 'string') {
-			var parts = cols[i].trim().split('|');
+			let parts = cols[i].trim().split('|');
 			def.width = parts[1] || false;
 			parts = parts[0].split(':');
 			def.path = parts[0];
@@ -81,7 +81,7 @@ function expandColumns (cols) {
 		if (!utils.isObject(def) || !def.path) {
 			throw new Error('List.expandColumns: column definition must contain a path.');
 		}
-		var col = getCol(def);
+		const col = getCol(def);
 		if (col) {
 			expanded.push(col);
 		}

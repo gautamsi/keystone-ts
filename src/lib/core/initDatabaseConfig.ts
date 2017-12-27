@@ -1,10 +1,10 @@
-var utils = require('keystone-utils');
+const utils = require('keystone-utils');
 
 export default function initDatabaseConfig () {
 	if (!this.get('mongo')) {
-		var dbName = this.get('db name')
+		const dbName = this.get('db name')
 			|| utils.slug(this.get('name'));
-		var dbUrl = process.env.MONGO_URI
+		const dbUrl = process.env.MONGO_URI
 			|| process.env.MONGODB_URI
 			|| process.env.MONGO_URL
 			|| process.env.MONGODB_URL
@@ -15,4 +15,4 @@ export default function initDatabaseConfig () {
 		this.set('mongo', dbUrl);
 	}
 	return this;
-};
+}

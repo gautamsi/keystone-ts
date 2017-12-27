@@ -66,7 +66,7 @@ function active (state = initialState, action) {
 				filters: action.filters,
 			});
 		case CLEAR_FILTER:
-			let newFilters = _.filter(state.filters, (filter) => {
+			const newFilters = _.filter(state.filters, (filter) => {
 				return filter.field.path !== action.path;
 			});
 			return assign({}, state, {

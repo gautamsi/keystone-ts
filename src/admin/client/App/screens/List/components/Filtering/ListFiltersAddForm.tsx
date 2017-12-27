@@ -4,7 +4,7 @@ import Popout from '../../../../shared/Popout';
 
 import { Filters } from 'FieldTypes';
 
-var ListFiltersAddForm = React.createClass({
+let ListFiltersAddForm = React.createClass({
 	propTypes: {
 		field: React.PropTypes.object.isRequired,
 		maxHeight: React.PropTypes.number,
@@ -52,7 +52,7 @@ var ListFiltersAddForm = React.createClass({
 		);
 	},
 	render () {
-		var FilterComponent = this.state.filterComponent;
+		let FilterComponent = this.state.filterComponent;
 		return (
 			<form onSubmit={this.handleFormSubmit}>
 				<Popout.Body ref="body" scrollable style={{ height: this.state.bodyHeight }}>

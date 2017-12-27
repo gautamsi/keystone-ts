@@ -19,4 +19,4 @@ export default function bindSessionMiddleware (keystone, app) {
 		app.use(keystone.get('session'));
 	}
 
-};
+}

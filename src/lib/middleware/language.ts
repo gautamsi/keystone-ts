@@ -1,8 +1,8 @@
-var requestLanguage = require('express-request-language');
-var assign = require('object-assign');
+const requestLanguage = require('express-request-language');
+const assign = require('object-assign');
 
 export default function (keystone) {
-	var languageOptions = assign({
+	const languageOptions = assign({
 		'supported languages': ['en-US'],
 		'language cookie': 'language',
 		'language cookie options': {},
@@ -17,4 +17,4 @@ export default function (keystone) {
 		},
 		queryName: languageOptions['language query name'],
 	});
-};
+}

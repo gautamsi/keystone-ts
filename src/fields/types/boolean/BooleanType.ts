@@ -1,6 +1,6 @@
-var FieldType = require('../Type');
-var utils = require('keystone-utils');
-var util = require('util');
+const FieldType = require('../Type');
+const utils = require('keystone-utils');
+const util = require('util');
 
 /**
  * Boolean FieldType Constructor
@@ -22,8 +22,8 @@ boolean.prototype.defaults = {
 };
 
 boolean.prototype.validateInput = function (data, callback) {
-	var value = this.getValueFromData(data);
-	var result = true;
+	const value = this.getValueFromData(data);
+	let result = true;
 	if (value !== undefined
 		&& value !== null
 		&& typeof value !== 'string'
@@ -35,8 +35,8 @@ boolean.prototype.validateInput = function (data, callback) {
 };
 
 boolean.prototype.validateRequiredInput = function (item, data, callback) {
-	var value = this.getValueFromData(data);
-	var result = (value && value !== 'false') || item.get(this.path) ? true : false;
+	const value = this.getValueFromData(data);
+	const result = (value && value !== 'false') || item.get(this.path) ? true : false;
 	utils.defer(callback, result);
 };
 
@@ -44,7 +44,7 @@ boolean.prototype.validateRequiredInput = function (item, data, callback) {
  * Add filters to a query
  */
 boolean.prototype.addFilterToQuery = function (filter) {
-	var query = {};
+	const query = {};
 	if (!filter.value || filter.value === 'false') {
 		query[this.path] = { $ne: true };
 	} else {
@@ -73,7 +73,7 @@ boolean.prototype.inputIsValid = function (data, required) {
  * Treats a falsy value or the string "false" as false, everything else as true.
  */
 boolean.prototype.updateItem = function (item, data, callback) {
-	var value = this.getValueFromData(data);
+	const value = this.getValueFromData(data);
 	if (typeof value === 'undefined') {
 		return process.nextTick(callback);
 	}

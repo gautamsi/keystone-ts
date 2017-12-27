@@ -1,6 +1,6 @@
 export function sortable () {
 
-	var list = this;
+	const list = this;
 
 	this.add({
 		sortOrder: { type: Number, index: true, hidden: true },
@@ -12,9 +12,9 @@ export function sortable () {
 			return next();
 		}
 
-		var item = this;
+		const item = this;
 
-		var addLast = function (done) {
+		const addLast = function (done) {
 			list.model.findOne().sort('-sortOrder').exec(function (err, max) { // eslint-disable-line no-unused-vars, handle-callback-err
 				item.sortOrder = (max && max.sortOrder) ? max.sortOrder + 1 : 1;
 				done();
@@ -45,9 +45,9 @@ export function sortable () {
 		prevOrder = parseFloat(prevOrder);
 		newOrder = parseFloat(newOrder);
 
-		var whichWay = (newOrder > prevOrder) ? -1 : 1;
-		var gte = (newOrder > prevOrder) ? prevOrder + 1 : newOrder;
-		var lte = (newOrder > prevOrder) ? newOrder : prevOrder - 1;
+		const whichWay = (newOrder > prevOrder) ? -1 : 1;
+		const gte = (newOrder > prevOrder) ? prevOrder + 1 : newOrder;
+		const lte = (newOrder > prevOrder) ? newOrder : prevOrder - 1;
 		return list.model
 			.where('sortOrder')
 			.gte(gte)
@@ -61,4 +61,4 @@ export function sortable () {
 			});
 	};
 
-};
+}

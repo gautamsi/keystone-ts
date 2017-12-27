@@ -191,7 +191,7 @@ class SelectFilter extends Component {
 			</div>
 		);
 	}
-};
+}
 
 
 SelectFilter.propTypes = {

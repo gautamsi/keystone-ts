@@ -13,7 +13,7 @@ function Center ({
 	props.style = { height, ...style };
 
 	return <Component {...props} />;
-};
+}
 Center.propTypes = {
 	component: PropTypes.oneOfType([
 		PropTypes.func,

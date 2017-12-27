@@ -1,5 +1,5 @@
-var demand = require('must');
-var PasswordType = require('../PasswordType');
+const demand = require('must');
+const PasswordType = require('../PasswordType');
 
 export const initList = function (List) {
 	List.add({

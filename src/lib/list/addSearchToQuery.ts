@@ -1,16 +1,16 @@
-var assign = require('object-assign');
-var utils = require('keystone-utils');
-var debug = require('debug')('keystone:core:list:addSearchToQuery');
+const assign = require('object-assign');
+const utils = require('keystone-utils');
+const debug = require('debug')('keystone:core:list:addSearchToQuery');
 
 function trim (i) { return i.trim(); }
 function truthy (i) { return i; }
 
 function getNameFilter (field, searchString) {
-	var searchWords = searchString.split(' ').map(trim).filter(truthy).map(utils.escapeRegExp);
-	var nameSearchRegExp = new RegExp(searchWords.join('|'), 'i');
-	var first = {};
+	const searchWords = searchString.split(' ').map(trim).filter(truthy).map(utils.escapeRegExp);
+	const nameSearchRegExp = new RegExp(searchWords.join('|'), 'i');
+	const first = {};
 	first[field.paths.first] = nameSearchRegExp;
-	var last = {};
+	const last = {};
 	last[field.paths.last] = nameSearchRegExp;
 	return {
 		$or: [first, last],
@@ -18,15 +18,15 @@ function getNameFilter (field, searchString) {
 }
 
 function getStringFilter (path, searchRegExp) {
-	var filter = {};
+	const filter = {};
 	filter[path] = searchRegExp;
 	return filter;
 }
 
 function addSearchToQuery (searchString) {
 	searchString = String(searchString || '').trim();
-	var query = {};
-	var searchFilters = [];
+	const query = {};
+	let searchFilters = [];
 	if (!searchString) return query;
 
 	if (this.options.searchUsesTextIndex) {
@@ -38,14 +38,14 @@ function addSearchToQuery (searchString) {
 		});
 
 		if (this.autokey) {
-			var strictAutokeyFilter = {};
-			var autokeyRegExp = new RegExp('^' + utils.escapeRegExp(searchString));
+			const strictAutokeyFilter = {};
+			const autokeyRegExp = new RegExp('^' + utils.escapeRegExp(searchString));
 			strictAutokeyFilter[this.autokey.path] = autokeyRegExp;
 			searchFilters.push(strictAutokeyFilter);
 		}
 	} else {
 		debug('Using regular expression search for value: "' + searchString + '"');
-		var searchRegExp = new RegExp(utils.escapeRegExp(searchString), 'i');
+		const searchRegExp = new RegExp(utils.escapeRegExp(searchString), 'i');
 		searchFilters = this.searchFields.map(function (i) {
 			if (i.field && i.field.type === 'name') {
 				return getNameFilter(i.field, searchString);
@@ -55,7 +55,7 @@ function addSearchToQuery (searchString) {
 		}, this);
 
 		if (this.autokey) {
-			var autokeyFilter = {};
+			const autokeyFilter = {};
 			autokeyFilter[this.autokey.path] = searchRegExp;
 			searchFilters.push(autokeyFilter);
 		}

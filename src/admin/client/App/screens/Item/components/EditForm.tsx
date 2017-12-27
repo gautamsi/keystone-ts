@@ -40,13 +40,13 @@ function getNameFromData (data) {
 function smoothScrollTop () {
 	if (document.body.scrollTop || document.documentElement.scrollTop) {
 		window.scrollBy(0, -50);
-		var timeOut = setTimeout(smoothScrollTop, 20);
+		let timeOut = setTimeout(smoothScrollTop, 20);
 	}	else {
 		clearTimeout(timeOut);
 	}
 }
 
-var EditForm = React.createClass({
+let EditForm = React.createClass({
 	displayName: 'EditForm',
 	propTypes: {
 		data: React.PropTypes.object,
@@ -157,8 +157,8 @@ var EditForm = React.createClass({
 		});
 	},
 	renderKeyOrId () {
-		var className = 'EditForm__key-or-id';
-		var list = this.props.list;
+		let className = 'EditForm__key-or-id';
+		let list = this.props.list;
 
 		if (list.nameField && list.autokey && this.props.data[list.autokey.path]) {
 			return (
@@ -196,15 +196,15 @@ var EditForm = React.createClass({
 		}
 	},
 	renderNameField () {
-		var nameField = this.props.list.nameField;
-		var nameFieldIsFormHeader = this.props.list.nameFieldIsFormHeader;
-		var wrapNameField = field => (
+		let nameField = this.props.list.nameField;
+		let nameFieldIsFormHeader = this.props.list.nameFieldIsFormHeader;
+		let wrapNameField = field => (
 			<div className="EditForm__name-field">
 				{field}
 			</div>
 		);
 		if (nameFieldIsFormHeader) {
-			var nameFieldProps = this.getFieldProps(nameField);
+			let nameFieldProps = this.getFieldProps(nameField);
 			nameFieldProps.label = null;
 			nameFieldProps.size = 'full';
 			nameFieldProps.autoFocus = true;
@@ -223,7 +223,7 @@ var EditForm = React.createClass({
 		}
 	},
 	renderFormElements () {
-		var headings = 0;
+		let headings = 0;
 
 		return this.props.list.uiElements.map((el, index) => {
 			// Don't render the name field if it is the header since it'll be rendered in BIG above
@@ -242,8 +242,8 @@ var EditForm = React.createClass({
 			}
 
 			if (el.type === 'field') {
-				var field = this.props.list.fields[el.field];
-				var props = this.getFieldProps(field);
+				let field = this.props.list.fields[el.field];
+				let props = this.getFieldProps(field);
 				if (typeof Fields[field.type] !== 'function') {
 					return React.createElement(InvalidFieldType, { type: field.type, path: field.path, key: field.path });
 				}
@@ -308,8 +308,8 @@ var EditForm = React.createClass({
 
 		if (!this.props.list.tracking) return null;
 
-		var elements = [];
-		var data = {};
+		let elements = [];
+		let data = {};
 
 		if (this.props.list.tracking.createdAt) {
 			data.createdAt = this.props.data.fields[this.props.list.tracking.createdAt];

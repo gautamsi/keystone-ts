@@ -8,7 +8,7 @@ const moreIndicatorStyle = {
 	fontSize: '.8rem',
 };
 
-var CloudinaryImagesColumn = React.createClass({
+let CloudinaryImagesColumn = React.createClass({
 	displayName: 'CloudinaryImagesColumn',
 	propTypes: {
 		col: React.PropTypes.object,

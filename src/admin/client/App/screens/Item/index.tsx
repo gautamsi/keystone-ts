@@ -27,7 +27,7 @@ import {
 	selectList,
 } from '../List/actions';
 
-var ItemView = React.createClass({
+let ItemView = React.createClass({
 	displayName: 'ItemView',
 	contextTypes: {
 		router: React.PropTypes.object.isRequired,

@@ -2,10 +2,10 @@
  * Gets the data from an Item ready to be serialised for client-side use, as
  * used by the React components and the Admin API
  */
-var listToArray = require('list-to-array');
+const listToArray = require('list-to-array');
 
 function getData (item, fields, expandRelationshipFields) {
-	var data = {
+	const data = {
 		id: item.id,
 		name: this.getDocumentName(item),
 	};
@@ -27,7 +27,7 @@ function getData (item, fields, expandRelationshipFields) {
 		}
 		data.fields = {};
 		fields.forEach(function (path) {
-			var field = this.fields[path];
+			const field = this.fields[path];
 			if (field) {
 				if (field.type === 'relationship' && expandRelationshipFields) {
 					data.fields[path] = field.getExpandedData(item);

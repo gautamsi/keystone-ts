@@ -3,10 +3,10 @@
  * getting information about those lists, etc.
  */
 
-const listToArray = require("list-to-array");
-const qs = require("qs");
-const xhr = require("xhr");
-const assign = require("object-assign");
+const listToArray = require('list-to-array');
+const qs = require('qs');
+const xhr = require('xhr');
+const assign = require('object-assign');
 // Filters for truthy elements in an array
 const truthy = (i) => i;
 
@@ -19,11 +19,11 @@ const truthy = (i) => i;
  */
 function getColumns(list) {
     return list.uiElements.map((col) => {
-        if (col.type === "heading") {
-            return { type: "heading", content: col.content };
+        if (col.type === 'heading') {
+            return { type: 'heading', content: col.content };
         } else {
-            let field = list.fields[col.field];
-            return field ? { type: "field", field: field, title: field.label, path: field.path } : null;
+            const field = list.fields[col.field];
+            return field ? { type: 'field', field: field, title: field.label, path: field.path } : null;
         }
     }).filter(truthy);
 }
@@ -36,7 +36,7 @@ function getColumns(list) {
  * @return {Object}            The corrected filters, keyed by path
  */
 function getFilters(filterArray) {
-    let filters = {};
+    const filters = {};
     filterArray.forEach((filter) => {
         filters[filter.field.path] = filter.value;
     });
@@ -53,8 +53,8 @@ function getFilters(filterArray) {
 function getSortString(sort) {
     return sort.paths.map(i => {
         // If we want to sort inverted, we prefix a "-" before the sort path
-        return i.invert ? "-" + i.path : i.path;
-    }).filter(truthy).join(",");
+        return i.invert ? '-' + i.path : i.path;
+    }).filter(truthy).join(',');
 }
 
 /**
@@ -64,12 +64,12 @@ function buildQueryString(options) {
     const query = {};
     if (options.search) query.search = options.search;
     if (options.filters.length) query.filters = JSON.stringify(getFilters(options.filters));
-    if (options.columns) query.fields = options.columns.map(i => i.path).join(",");
+    if (options.columns) query.fields = options.columns.map(i => i.path).join(',');
     if (options.page && options.page.size) query.limit = options.page.size;
     if (options.page && options.page.index > 1) query.skip = (options.page.index - 1) * options.page.size;
     if (options.sort) query.sort = getSortString(options.sort);
     query.expandRelationshipFields = true;
-    return "?" + qs.stringify(query);
+    return '?' + qs.stringify(query);
 }
 
 /**
@@ -82,7 +82,7 @@ const List = function (options) {
     assign(this, options);
     this.columns = getColumns(this);
     this.expandedDefaultColumns = this.expandColumns(this.defaultColumns);
-    this.defaultColumnPaths = this.expandedDefaultColumns.map(i => i.path).join(",");
+    this.defaultColumnPaths = this.expandedDefaultColumns.map(i => i.path).join(',');
 };
 
 /**
@@ -94,8 +94,8 @@ const List = function (options) {
 List.prototype.createItem = function (formData, callback) {
     xhr({
         url: `${Keystone.adminPath}/api/${this.path}/create`,
-        responseType: "json",
-        method: "POST",
+        responseType: 'json',
+        method: 'POST',
         headers: assign({}, Keystone.csrf.header),
         body: formData,
     }, (err, resp, data) => {
@@ -122,8 +122,8 @@ List.prototype.createItem = function (formData, callback) {
 List.prototype.updateItem = function (id, formData, callback) {
     xhr({
         url: `${Keystone.adminPath}/api/${this.path}/${id}`,
-        responseType: "json",
-        method: "POST",
+        responseType: 'json',
+        method: 'POST',
         headers: assign({}, Keystone.csrf.header),
         body: formData,
     }, (err, resp, data) => {
@@ -139,10 +139,10 @@ List.prototype.updateItem = function (id, formData, callback) {
 List.prototype.expandColumns = function (input) {
     let nameIncluded = false;
     const cols = listToArray(input).map(i => {
-        const split = i.split("|");
+        const split = i.split('|');
         let path = split[0];
         const width = split[1];
-        if (path === "__name__") {
+        if (path === '__name__') {
             path = this.namePath;
         }
         const field = this.fields[path];
@@ -170,9 +170,9 @@ List.prototype.expandColumns = function (input) {
     }).filter(truthy);
     if (!nameIncluded) {
         cols.unshift({
-            type: "id",
-            label: "ID",
-            path: "id",
+            type: 'id',
+            label: 'ID',
+            path: 'id',
         });
     }
     return cols;
@@ -184,23 +184,23 @@ List.prototype.expandSort = function (input) {
         isDefaultSort: false,
     };
     sort.input = sort.rawInput;
-    if (sort.input === "__default__") {
+    if (sort.input === '__default__') {
         sort.isDefaultSort = true;
-        sort.input = this.sortable ? "sortOrder" : this.namePath;
+        sort.input = this.sortable ? 'sortOrder' : this.namePath;
     }
     sort.paths = listToArray(sort.input).map(path => {
         let invert = false;
-        if (path.charAt(0) === "-") {
+        if (path.charAt(0) === '-') {
             invert = true;
             path = path.substr(1);
         }
-        else if (path.charAt(0) === "+") {
+        else if (path.charAt(0) === '+') {
             path = path.substr(1);
         }
         const field = this.fields[path];
         if (!field) {
             // TODO: Support arbitary document paths
-            console.warn("Invalid Sort specified:", path);
+            console.warn('Invalid Sort specified:', path);
             return;
         }
         return {
@@ -222,16 +222,16 @@ List.prototype.expandSort = function (input) {
  * @param  {Function} callback
  */
 List.prototype.loadItem = function (itemId, options, callback) {
-    if (arguments.length === 2 && typeof options === "function") {
+    if (arguments.length === 2 && typeof options === 'function') {
         callback = options;
         options = null;
     }
-    let url = Keystone.adminPath + "/api/" + this.path + "/" + itemId;
+    let url = Keystone.adminPath + '/api/' + this.path + '/' + itemId;
     const query = qs.stringify(options);
-    if (query.length) url += "?" + query;
+    if (query.length) url += '?' + query;
     xhr({
         url: url,
-        responseType: "json",
+        responseType: 'json',
     }, (err, resp, data) => {
         if (err) return callback(err);
         // Pass the data as result or error, depending on the statusCode
@@ -251,10 +251,10 @@ List.prototype.loadItem = function (itemId, options, callback) {
  * @param  {Function} callback
  */
 List.prototype.loadItems = function (options, callback) {
-    const url = Keystone.adminPath + "/api/" + this.path + buildQueryString(options);
+    const url = Keystone.adminPath + '/api/' + this.path + buildQueryString(options);
     xhr({
         url: url,
-        responseType: "json",
+        responseType: 'json',
     }, (err, resp, data) => {
         if (err) callback(err);
         // Pass the data as result or error, depending on the statusCode
@@ -275,17 +275,17 @@ List.prototype.loadItems = function (options, callback) {
  * @return {String}         The download URL
  */
 List.prototype.getDownloadURL = function (options) {
-    const url = Keystone.adminPath + "/api/" + this.path;
+    const url = Keystone.adminPath + '/api/' + this.path;
     const parts = [];
-    if (options.format !== "json") {
-        options.format = "csv";
+    if (options.format !== 'json') {
+        options.format = 'csv';
     }
-    parts.push(options.search ? "search=" + options.search : "");
-    parts.push(options.filters.length ? "filters=" + JSON.stringify(getFilters(options.filters)) : "");
-    parts.push(options.columns ? "select=" + options.columns.map(i => i.path).join(",") : "");
-    parts.push(options.sort ? "sort=" + getSortString(options.sort) : "");
-    parts.push("expandRelationshipFields=true");
-    return url + "/export." + options.format + "?" + parts.filter(truthy).join("&");
+    parts.push(options.search ? 'search=' + options.search : '');
+    parts.push(options.filters.length ? 'filters=' + JSON.stringify(getFilters(options.filters)) : '');
+    parts.push(options.columns ? 'select=' + options.columns.map(i => i.path).join(',') : '');
+    parts.push(options.sort ? 'sort=' + getSortString(options.sort) : '');
+    parts.push('expandRelationshipFields=true');
+    return url + '/export.' + options.format + '?' + parts.filter(truthy).join('&');
 };
 
 /**
@@ -305,10 +305,10 @@ List.prototype.deleteItem = function (itemId, callback) {
  * @param  {Function} callback
  */
 List.prototype.deleteItems = function (itemIds, callback) {
-    const url = Keystone.adminPath + "/api/" + this.path + "/delete";
+    const url = Keystone.adminPath + '/api/' + this.path + '/delete';
     xhr({
         url: url,
-        method: "POST",
+        method: 'POST',
         headers: assign({}, Keystone.csrf.header),
         json: {
             ids: itemIds,
@@ -325,17 +325,17 @@ List.prototype.deleteItems = function (itemIds, callback) {
 };
 
 List.prototype.reorderItems = function (item, oldSortOrder, newSortOrder, pageOptions, callback) {
-    const url = Keystone.adminPath + "/api/" + this.path + "/" + item.id + "/sortOrder/" + oldSortOrder + "/" + newSortOrder + "/" + buildQueryString(pageOptions);
+    const url = Keystone.adminPath + '/api/' + this.path + '/' + item.id + '/sortOrder/' + oldSortOrder + '/' + newSortOrder + '/' + buildQueryString(pageOptions);
     xhr({
         url: url,
-        method: "POST",
+        method: 'POST',
         headers: assign({}, Keystone.csrf.header),
     }, (err, resp, body) => {
         if (err) return callback(err);
         try {
             body = JSON.parse(body);
         } catch (e) {
-            console.log("Error parsing results json:", e, body);
+            console.log('Error parsing results json:', e, body);
             return callback(e);
         }
         // Pass the body as result or error, depending on the statusCode

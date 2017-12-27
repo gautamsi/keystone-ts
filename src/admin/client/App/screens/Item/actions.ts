@@ -97,7 +97,7 @@ export function relationshipDataLoaded (path, data) {
 		relationshipPath: path,
 		data,
 	};
-};
+}
 
 /**
  * Called when there was an error during the loading of the current item data,

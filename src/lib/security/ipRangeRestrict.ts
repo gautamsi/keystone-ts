@@ -1,8 +1,8 @@
 'use strict';
 
-var _ = require('lodash');
-var range_check = require('range_check');
-var util = require('util');
+const _ = require('lodash');
+const range_check = require('range_check');
+const util = require('util');
 
 /**
  * Implement IP range-based access control.
@@ -40,7 +40,7 @@ export default function (ipRanges, wrapHTMLError) {
 
 		// The set of allowed ranges has to be separated by space
 		// characters or a comma.
-		var allowedRanges = ipRanges.split(/\s+|,/);
+		let allowedRanges = ipRanges.split(/\s+|,/);
 
 		// Keep only those ranges that match CIDR format.
 		allowedRanges = _.filter(allowedRanges, function (ipRange) {
@@ -55,19 +55,19 @@ export default function (ipRanges, wrapHTMLError) {
 		// true. When it *is* set the value for ips is extracted from the
 		// X-Forwarded-For request header. The originating IP address is
 		// the last one in the array.
-		var requestIP = (req.ips.length > 0) ? req.ips.slice().pop() : req.ip;
+		const requestIP = (req.ips.length > 0) ? req.ips.slice().pop() : req.ip;
 
 		// Deny the request if request IP is not in one of the allowed
 		// IP address ranges.
-		var requestAllowed = range_check.inRange(requestIP, allowedRanges);
+		const requestAllowed = range_check.inRange(requestIP, allowedRanges);
 
 		if (!requestAllowed) {
-			var msg = '-> blocked request from %s (not in allowed IP range)';
+			const msg = '-> blocked request from %s (not in allowed IP range)';
 			console.log(util.format(msg, req.ip));
 			// Display error page to the user.
-			var title = 'Sorry, your request is not authorized (403)';
-			var message = 'Requests from outside permitted IP range are not allowed';
-			var htmlError = wrapHTMLError(title, message);
+			const title = 'Sorry, your request is not authorized (403)';
+			const message = 'Requests from outside permitted IP range are not allowed';
+			const htmlError = wrapHTMLError(title, message);
 
 			return res.status(403).send(htmlError);
 		}
@@ -76,4 +76,4 @@ export default function (ipRanges, wrapHTMLError) {
 
 	};
 
-};
+}

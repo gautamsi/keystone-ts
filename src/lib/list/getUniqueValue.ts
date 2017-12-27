@@ -17,21 +17,21 @@
  * @param {Function} callback(err, uniqueValue)
  */
 function getUniqueValue (path, generator, limit, callback) {
-	var model = this.model;
-	var count = 0;
-	var value;
+	const model = this.model;
+	let count = 0;
+	let value;
 	if (typeof limit === 'function') {
 		callback = limit;
 		limit = 10;
 	}
 	if (Array.isArray(generator)) {
-		var fn = generator[0];
-		var args = generator.slice(1);
+		const fn = generator[0];
+		const args = generator.slice(1);
 		generator = function () {
 			return fn.apply(this, args);
 		};
 	}
-	var check = function () {
+	const check = function () {
 		if (count++ > 10) {
 			return callback(undefined, undefined);
 		}

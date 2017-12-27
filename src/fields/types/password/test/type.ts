@@ -1,5 +1,5 @@
-var demand = require('must');
-var PasswordType = require('../PasswordType');
+const demand = require('must');
+const PasswordType = require('../PasswordType');
 
 export const initList = function (List) {
 	List.add({
@@ -54,7 +54,7 @@ export const initList = function (List) {
 export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update password if specified', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.password.updateItem(testItem, {
 				password: 'asdf',
 			}, function () {
@@ -64,7 +64,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update password with hash if specified', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.password.updateItem(testItem, {
 				password_hash: '12asdf34',
 			}, function () {
@@ -74,7 +74,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update password if both password and hash specified', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.password.updateItem(testItem, {
 				password: 'asdf',
 				password_hash: '12asdf34',
@@ -85,7 +85,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should clear password if passed password is null', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				password: 'asdf',
 			});
 			List.fields.password.updateItem(testItem, {
@@ -97,7 +97,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should clear password if passed hash is null', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				password: 'asdf',
 			});
 			List.fields.password.updateItem(testItem, {
@@ -109,7 +109,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should clear password if passed password is empty string', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				password: 'asdf',
 			});
 			List.fields.password.updateItem(testItem, {
@@ -121,7 +121,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should clear password if passed hash is empty string', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				password: 'asdf',
 			});
 			List.fields.password.updateItem(testItem, {
@@ -133,7 +133,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should not update if neither password nor hash specified', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.password.updateItem(testItem, {}, function () {
 				demand(testItem.password).be.undefined();
 				done();
@@ -395,7 +395,7 @@ export const testFieldType = function (List) {
 
 	describe('validateRequiredInput', function () {
 		it('should validate a hash value', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.password.validateRequiredInput(testItem, {
 				password_hash: '12asdf34',
 			}, function (result) {
@@ -405,7 +405,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate a password value', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.password.validateRequiredInput(testItem, {
 				password: 'asdf',
 			}, function (result) {
@@ -415,7 +415,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate a password and hash value', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.password.validateRequiredInput(testItem, {
 				password: 'asdf',
 				password_hash: '12asdf34',
@@ -426,7 +426,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate undefined password and hash values if a value exists already', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				password: 'asdf',
 			});
 			List.fields.password.validateRequiredInput(testItem, {}, function (result) {
@@ -436,7 +436,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate undefined password and hash values', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.password.validateRequiredInput(testItem, {}, function (result) {
 				demand(result).be.false();
 				done();
@@ -444,7 +444,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an empty password value', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.password.validateRequiredInput(testItem, {
 				password: '',
 			}, function (result) {
@@ -454,7 +454,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an empty hash value', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.password.validateRequiredInput(testItem, {
 				password_hash: '',
 			}, function (result) {
@@ -464,7 +464,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an empty hash and password value', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.password.validateRequiredInput(testItem, {
 				password: '',
 				password_hash: '',
@@ -475,7 +475,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an empty hash and password value even if a value exists', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				password: 'blabla',
 			});
 			List.fields.password.validateRequiredInput(testItem, {
@@ -488,7 +488,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate null password value even if a value exists', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				password: 'asdf',
 			});
 			List.fields.password.validateRequiredInput(testItem, {
@@ -500,7 +500,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate null hash value even if a value exists', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				password: 'asdf',
 			});
 			List.fields.password.validateRequiredInput(testItem, {
@@ -512,7 +512,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate null password and hash value even if a value exists', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				password: 'asdf',
 			});
 			List.fields.password.validateRequiredInput(testItem, {
@@ -527,7 +527,7 @@ export const testFieldType = function (List) {
 
 	describe('addFilterToQuery', function () {
 		it('should filter for existing values', function () {
-			var result = List.fields.password.addFilterToQuery({
+			const result = List.fields.password.addFilterToQuery({
 				exists: true,
 			});
 			demand(result.password).eql({
@@ -536,7 +536,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter for non-existing values', function () {
-			var result = List.fields.password.addFilterToQuery({
+			const result = List.fields.password.addFilterToQuery({
 				exists: false,
 			});
 			demand(result.password).be.null();

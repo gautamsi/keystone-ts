@@ -43,7 +43,7 @@ function LoadingButton ({ children, loading, ...props }) {
 			{children}
 		</Button>
 	);
-};
+}
 
 LoadingButton.propTypes = {
 	loading: PropTypes.bool,

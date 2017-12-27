@@ -1,7 +1,7 @@
-var session = require('../../../lib/session');
+const session = require('../../../lib/session');
 
 export default function SignoutRoute (req, res) {
-	var keystone = req.keystone;
+	const keystone = req.keystone;
 	session.signout(req, res, function () {
 		// After logging out, the user will be redirected to /signin?signedout
 		// It shows a bar on top of the sign in panel saying "You have been signed out".
@@ -13,4 +13,4 @@ export default function SignoutRoute (req, res) {
 			return res.redirect('/' + keystone.get('admin path') + '/signin?signedout');
 		}
 	});
-};
+}

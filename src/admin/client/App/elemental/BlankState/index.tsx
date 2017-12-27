@@ -20,7 +20,7 @@ function BlankState ({
 			{children}
 		</Component>
 	);
-};
+}
 
 BlankState.propTypes = {
 	component: PropTypes.oneOfType([

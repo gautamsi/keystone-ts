@@ -1,4 +1,4 @@
-var _ = require('lodash');
+const _ = require('lodash');
 
 export default function transform (doc, ret) {
 	if (doc._populatedRelationships) {
@@ -7,4 +7,4 @@ export default function transform (doc, ret) {
 			ret[key] = doc[key];
 		});
 	}
-};
+}

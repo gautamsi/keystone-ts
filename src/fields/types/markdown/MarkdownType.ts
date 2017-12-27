@@ -1,9 +1,9 @@
-var FieldType = require('../Type');
-var marked = require('marked');
-var sanitizeHtml = require('sanitize-html');
-var TextType = require('../text/TextType');
-var util = require('util');
-var utils = require('keystone-utils');
+const FieldType = require('../Type');
+const marked = require('marked');
+const sanitizeHtml = require('sanitize-html');
+const TextType = require('../text/TextType');
+const util = require('util');
+const utils = require('keystone-utils');
 
 /**
  * Markdown FieldType Constructor
@@ -42,15 +42,15 @@ markdown.prototype.validateRequiredInput = TextType.prototype.validateRequiredIn
  */
 markdown.prototype.addToSchema = function (schema) {
 
-	var paths = this.paths = {
+	const paths = this.paths = {
 		md: this.path + '.md',
 		html: this.path + '.html',
 	};
 
-	var markedOptions = this.markedOptions;
-	var sanitizeOptions = this.sanitizeOptions;
+	const markedOptions = this.markedOptions;
+	const sanitizeOptions = this.sanitizeOptions;
 
-	var setMarkdown = function (value) {
+	const setMarkdown = function (value) {
 		// Clear if saving invalid value
 		if (typeof value !== 'string') {
 			this.set(paths.md, undefined);
@@ -59,8 +59,8 @@ markdown.prototype.addToSchema = function (schema) {
 			return undefined;
 		}
 
-		var newMd = sanitizeHtml(value, sanitizeOptions);
-		var newHtml = marked(newMd, markedOptions);
+		const newMd = sanitizeHtml(value, sanitizeOptions);
+		const newHtml = marked(newMd, markedOptions);
 
 		// Return early if no changes to save
 		if (newMd === this.get(paths.md) && newHtml === this.get(paths.html)) {
@@ -87,12 +87,12 @@ markdown.prototype.addToSchema = function (schema) {
  * the only difference being that the path isn't this.path but this.paths.md)
  */
 markdown.prototype.addFilterToQuery = function (filter) {
-	var query = {};
+	const query = {};
 	if (filter.mode === 'exactly' && !filter.value) {
 		query[this.paths.md] = filter.inverted ? { $nin: ['', null] } : { $in: ['', null] };
 		return query;
 	}
-	var value = utils.escapeRegExp(filter.value);
+	let value = utils.escapeRegExp(filter.value);
 	if (filter.mode === 'beginsWith') {
 		value = '^' + value;
 	} else if (filter.mode === 'endsWith') {
@@ -116,7 +116,7 @@ markdown.prototype.format = function (item) {
  * Gets the field's data from an Item, as used by the React components
  */
 markdown.prototype.getData = function (item) {
-	var value = item.get(this.path);
+	const value = item.get(this.path);
 	return typeof value === 'object' ? value : {};
 };
 
@@ -145,7 +145,7 @@ markdown.prototype.isModified = function (item) {
  * Will accept either the field path, or paths.md
  */
 markdown.prototype.updateItem = function (item, data, callback) {
-	var value = this.getValueFromData(data);
+	const value = this.getValueFromData(data);
 	if (value !== undefined) {
 		item.set(this.paths.md, value);
 	}	else if (this.paths.md in data) {

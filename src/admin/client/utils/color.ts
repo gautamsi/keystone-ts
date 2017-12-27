@@ -19,7 +19,7 @@ function validateHex (color) {
 	}
 
 	return hex;
-};
+}
 
 /**
 	Fade Color
@@ -52,7 +52,7 @@ function fade (color, opacity = 100) {
 		+ ')';
 
 	return result;
-};
+}
 
 
 /**
@@ -73,9 +73,9 @@ function shade (color, percent) {
 	const hex = validateHex(color);
 
 	// 1.
-	let f = parseInt(hex, 16);
-	let t = decimalFraction < 0 ? 0 : 255;
-	let p = decimalFraction < 0 ? decimalFraction * -1 : decimalFraction;
+	const f = parseInt(hex, 16);
+	const t = decimalFraction < 0 ? 0 : 255;
+	const p = decimalFraction < 0 ? decimalFraction * -1 : decimalFraction;
 
 	const R = f >> 16;
 	const G = f >> 8 & 0x00FF;
@@ -86,13 +86,13 @@ function shade (color, percent) {
 		+ (Math.round((t - R) * p) + R) * 0x10000
 		+ (Math.round((t - G) * p) + G) * 0x100
 		+ (Math.round((t - B) * p) + B)).toString(16).slice(1);
-};
+}
 
 // shade helpers
 const lighten = shade;
 function darken (color, percent) {
 	return shade(color, percent * -1);
-};
+}
 
 
 /**

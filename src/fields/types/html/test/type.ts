@@ -1,6 +1,6 @@
-var demand = require('must');
-var HtmlType = require('../HtmlType');
-var TextType = require('../../text/TextType');
+const demand = require('must');
+const HtmlType = require('../HtmlType');
+const TextType = require('../../text/TextType');
 
 export const initList = function (List) {
 	List.add({
@@ -22,7 +22,7 @@ export const testFilters = function (List) { // eslint-disable-line no-unused-va
 export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.html.updateItem(testItem, {
 				html: 'foobar',
 			}, function () {
@@ -32,7 +32,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.html'].updateItem(testItem, {
 				nested: {
 					html: 'foobar',
@@ -44,7 +44,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.html'].updateItem(testItem, {
 				'nested.html': 'foobar',
 			}, function () {

@@ -14,7 +14,7 @@ const SIZES = {
 	horizontalMargin: 20,
 };
 
-var Popout = React.createClass({
+let Popout = React.createClass({
 	displayName: 'Popout',
 	propTypes: {
 		isOpen: React.PropTypes.bool,
@@ -61,7 +61,7 @@ var Popout = React.createClass({
 		let leftOffset = Math.max(pos.left + (pos.width / 2) - (this.props.width / 2), SIZES.horizontalMargin);
 		let topOffset = pos.top + pos.height + SIZES.arrowHeight;
 
-		var spaceOnRight = window.innerWidth - (leftOffset + this.props.width + SIZES.horizontalMargin);
+		let spaceOnRight = window.innerWidth - (leftOffset + this.props.width + SIZES.horizontalMargin);
 		if (spaceOnRight < 0) {
 			leftOffset = leftOffset + spaceOnRight;
 		}

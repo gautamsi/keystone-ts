@@ -2,7 +2,7 @@ import React from 'react';
 import ItemsTableCell from '../../components/ItemsTableCell';
 import ItemsTableValue from '../../components/ItemsTableValue';
 
-var InvalidColumn = React.createClass({
+let InvalidColumn = React.createClass({
 	displayName: 'InvalidColumn',
 	propTypes: {
 		col: React.PropTypes.object,

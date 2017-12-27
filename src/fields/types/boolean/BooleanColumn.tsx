@@ -3,7 +3,7 @@ import Checkbox from '../../components/Checkbox';
 import ItemsTableCell from '../../components/ItemsTableCell';
 import ItemsTableValue from '../../components/ItemsTableValue';
 
-var BooleanColumn = React.createClass({
+let BooleanColumn = React.createClass({
 	displayName: 'BooleanColumn',
 	propTypes: {
 		col: React.PropTypes.object,

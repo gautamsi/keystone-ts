@@ -13,7 +13,7 @@ function getDefaultValue () {
 	};
 }
 
-var CloudinaryImageFilter = React.createClass({
+let CloudinaryImageFilter = React.createClass({
 	propTypes: {
 		filter: React.PropTypes.shape({
 			exists: React.PropTypes.oneOf(OPTIONS.map(i => i.value)),

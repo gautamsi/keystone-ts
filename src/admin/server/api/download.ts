@@ -5,21 +5,21 @@ Has been replaced by the new implementation in list/download, but this version
 supports more features at the moment (custom .toCSV method on lists, etc)
 */
 
-var _ = require('lodash');
-var async = require('async');
-var moment = require('moment');
-var escapeValueForExcel = require('../security/escapeValueForExcel');
+const _ = require('lodash');
+const async = require('async');
+const moment = require('moment');
+const escapeValueForExcel = require('../security/escapeValueForExcel');
 
-var FN_ARGS = /^function\s*[^\(]*\(\s*([^\)]*)\)/m;
+const FN_ARGS = /^function\s*[^\(]*\(\s*([^\)]*)\)/m;
 
 export default function (req, res) {
 
-	var baby = require('babyparse');
-	var keystone = req.keystone;
+	const baby = require('babyparse');
+	const keystone = req.keystone;
 
-	var filters = req.list.processFilters(req.query.q);
-	var queryFilters = req.list.getSearchFilters(req.query.search, filters);
-	var relFields = [];
+	const filters = req.list.processFilters(req.query.q);
+	const queryFilters = req.list.getSearchFilters(req.query.search, filters);
+	const relFields = [];
 
 	_.forEach(req.list.fields, function (field) {
 		if (field.type === 'relationship') {
@@ -27,9 +27,9 @@ export default function (req, res) {
 		}
 	});
 
-	var getRowData = function getRowData (i) {
+	const getRowData = function getRowData (i) {
 
-		var rowData = { id: i.id };
+		const rowData = { id: i.id };
 
 		if (req.list.get('autokey')) {
 			rowData[req.list.get('autokey').path] = i.get(req.list.get('autokey').path);
@@ -39,12 +39,12 @@ export default function (req, res) {
 			if (field.type === 'boolean') {
 				rowData[field.path] = i.get(field.path) ? 'true' : 'false';
 			} else if (field.type === 'relationship') {
-				var refData = i.get(field.path);
+				const refData = i.get(field.path);
 				if (field.many) {
-					var values = [];
+					const values = [];
 					if (Array.isArray(refData) && refData.length) {
 						_.forEach(refData, function (i) {
-							var name = field.refList.getDocumentName(i);
+							let name = field.refList.getDocumentName(i);
 							if (keystone.get('csv expanded')) {
 								name = '[' + i.id + ',' + name + ']';
 							}
@@ -74,7 +74,7 @@ export default function (req, res) {
 
 	};
 
-	var query = req.list.model.find(queryFilters);
+	const query = req.list.model.find(queryFilters);
 	if (relFields) {
 		query.populate(relFields.join(' '));
 	}
@@ -82,12 +82,12 @@ export default function (req, res) {
 
 		if (err) return res.status(500).json(err);
 
-		var sendCSV = function (data) {
+		const sendCSV = function (data) {
 
 			res.attachment(req.list.path + '-' + moment().format('YYYYMMDD-HHMMSS') + '.csv');
 			res.setHeader('Content-Type', 'application/octet-stream');
 
-			var content = baby.unparse(data, {
+			const content = baby.unparse(data, {
 				delimiter: keystone.get('csv field delimiter') || ',',
 			});
 
@@ -98,7 +98,7 @@ export default function (req, res) {
 			// fast bail on no results
 			return sendCSV([]);
 		}
-		var data;
+		let data;
 
 		if (results[0].toCSV) {
 
@@ -114,17 +114,17 @@ export default function (req, res) {
 			 *   - callback (invokes async mode, must be provided last)
 			 */
 
-			var deps = _.map(results[0].toCSV.toString().match(FN_ARGS)[1].split(','), function (i) { return i.trim(); });
+			const deps = _.map(results[0].toCSV.toString().match(FN_ARGS)[1].split(','), function (i) { return i.trim(); });
 
-			var includeRowData = (deps.indexOf('row') > -1);
+			const includeRowData = (deps.indexOf('row') > -1);
 
-			var map = {
+			const map = {
 				req: req,
 				user: req.user,
 			};
 
-			var applyDeps = function (fn, _this, _map) {
-				var args = _.map(deps, function (key) {
+			const applyDeps = function (fn, _this, _map) {
+				const args = _.map(deps, function (key) {
 					return _map[key];
 				});
 				return fn.apply(_this, args);
@@ -133,7 +133,7 @@ export default function (req, res) {
 			if (_.last(deps) === 'callback') {
 				// Allow async toCSV by detecting the last argument is callback
 				return async.map(results, function (i, callback) {
-					var _map = _.clone(map);
+					const _map = _.clone(map);
 					_map.callback = callback;
 					if (includeRowData) {
 						_map.row = getRowData(i);
@@ -153,7 +153,7 @@ export default function (req, res) {
 				if (includeRowData) {
 					// if row data is required, add it to the map for each iteration
 					_.forEach(results, function (i) {
-						var _map = _.clone(map);
+						const _map = _.clone(map);
 						_map.row = getRowData(i);
 						data.push(applyDeps(i.toCSV, i, _map));
 					});
@@ -184,4 +184,4 @@ export default function (req, res) {
 
 	});
 
-};
+}

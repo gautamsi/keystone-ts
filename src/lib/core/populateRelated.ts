@@ -1,4 +1,4 @@
-var async = require('async');
+const async = require('async');
 
 /**
  * Populates relationships on a document or array of documents
@@ -20,4 +20,4 @@ export default function populateRelated (docs, relationships, callback) {
 		callback();
 	}
 	return this;
-};
+}

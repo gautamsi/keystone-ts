@@ -9,7 +9,7 @@ import evalDependsOn from '../../utils/evalDependsOn';
  * - Remove dependency on underscore
  */
 
-var lastId = 0;
+let lastId = 0;
 
 function getId () {
 	return 'keystone-html-' + lastId++;
@@ -17,7 +17,7 @@ function getId () {
 
 // Workaround for #2834 found here https://github.com/tinymce/tinymce/issues/794#issuecomment-203701329
 function removeTinyMCEInstance (editor) {
-	var oldLength = tinymce.editors.length;
+	let oldLength = tinymce.editors.length;
 	tinymce.remove(editor);
 	if (oldLength === tinymce.editors.length) {
 		tinymce.editors.remove(editor);
@@ -42,8 +42,8 @@ export = Field.create({
 	initWysiwyg () {
 		if (!this.props.wysiwyg) return;
 
-		var self = this;
-		var opts = this.getOptions();
+		let self = this;
+		let opts = this.getOptions();
 
 		opts.setup = function (editor) {
 			self.editor = editor;
@@ -97,7 +97,7 @@ export = Field.create({
 	},
 
 	valueChanged  (event) {
-		var content;
+		let content;
 		if (this.editor) {
 			content = this.editor.getContent();
 		} else {
@@ -112,14 +112,14 @@ export = Field.create({
 	},
 
 	getOptions () {
-		var plugins = ['code', 'link'];
-		var options = Object.assign(
+		let plugins = ['code', 'link'];
+		let options = Object.assign(
 				{},
 				Keystone.wysiwyg.options,
 				this.props.wysiwyg
 			);
-		var toolbar = options.overrideToolbar ? '' : 'bold italic | alignleft aligncenter alignright | bullist numlist | outdent indent | removeformat | link ';
-		var i;
+		let toolbar = options.overrideToolbar ? '' : 'bold italic | alignleft aligncenter alignright | bullist numlist | outdent indent | removeformat | link ';
+		let i;
 
 		if (options.enableImages) {
 			plugins.push('image');
@@ -132,20 +132,20 @@ export = Field.create({
 		}
 
 		if (options.additionalButtons) {
-			var additionalButtons = options.additionalButtons.split(',');
+			let additionalButtons = options.additionalButtons.split(',');
 			for (i = 0; i < additionalButtons.length; i++) {
 				toolbar += (' | ' + additionalButtons[i]);
 			}
 		}
 		if (options.additionalPlugins) {
-			var additionalPlugins = options.additionalPlugins.split(',');
+			let additionalPlugins = options.additionalPlugins.split(',');
 			for (i = 0; i < additionalPlugins.length; i++) {
 				plugins.push(additionalPlugins[i]);
 			}
 		}
 		if (options.importcss) {
 			plugins.push('importcss');
-			var importcssOptions = {
+			let importcssOptions = {
 				content_css: options.importcss,
 				importcss_append: true,
 				importcss_merge_classes: true,
@@ -158,7 +158,7 @@ export = Field.create({
 			toolbar += ' | code';
 		}
 
-		var opts = {
+		let opts = {
 			selector: '#' + this.state.id,
 			toolbar: toolbar,
 			plugins: plugins,
@@ -186,8 +186,8 @@ export = Field.create({
 	},
 
 	renderField () {
-		var className = this.state.isFocused ? 'is-focused' : '';
-		var style = {
+		let className = this.state.isFocused ? 'is-focused' : '';
+		let style = {
 			height: this.props.height,
 		};
 		return (

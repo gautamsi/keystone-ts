@@ -19,7 +19,7 @@ import _ from 'lodash';
 
 import FlashMessage from './FlashMessage';
 
-var FlashMessages = React.createClass({
+let FlashMessages = React.createClass({
 	displayName: 'FlashMessages',
 	propTypes: {
 		messages: React.PropTypes.oneOfType([

@@ -15,9 +15,9 @@
  * @api public
  */
 
-var async = require('async');
+const async = require('async');
 
-var dashes = '\n------------------------------------------------\n';
+const dashes = '\n------------------------------------------------\n';
 
 function start (events) {
 
@@ -46,16 +46,16 @@ function start (events) {
 
 	this.initExpressApp();
 
-	var keystone = this;
-	var app = keystone.app;
+	const keystone = this;
+	const app = keystone.app;
 
 	this.openDatabaseConnection(function () {
 
 		fireEvent('onMount');
 
-		var ssl = keystone.get('ssl');
-		var unixSocket = keystone.get('unix socket');
-		var startupMessages = ['KeystoneJS Started:'];
+		const ssl = keystone.get('ssl');
+		const unixSocket = keystone.get('unix socket');
+		const startupMessages = ['KeystoneJS Started:'];
 
 		async.parallel([
 			// HTTP Server

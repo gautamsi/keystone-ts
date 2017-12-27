@@ -1,5 +1,5 @@
-var demand = require('must');
-var NumberType = require('../NumberType');
+const demand = require('must');
+const NumberType = require('../NumberType');
 
 
 export const initList = function (List) {
@@ -27,7 +27,7 @@ export const testFieldType = function (List) {
 
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.number.updateItem(testItem, {
 				number: 42,
 			}, function () {
@@ -37,7 +37,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.number'].updateItem(testItem, {
 				nested: {
 					number: 42,
@@ -50,7 +50,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.number'].updateItem(testItem, {
 				'nested.number': 42,
 			}, function () {
@@ -61,7 +61,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should null value with empty string', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			testItem.number = 1;
 			List.fields.number.updateItem(testItem, {
 				number: '',
@@ -72,7 +72,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should null value when null', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			testItem.number = 1;
 			List.fields.number.updateItem(testItem, {
 				number: null,
@@ -83,7 +83,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should not null value when undefined', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			testItem.number = 1;
 			List.fields.number.updateItem(testItem, {
 				number: undefined,
@@ -94,7 +94,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should convert string values', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				number: 1,
 			});
 			List.fields.number.updateItem(testItem, {
@@ -195,7 +195,7 @@ export const testFieldType = function (List) {
 
 	describe('validateRequiredInput', function () {
 		it('should validate numeric input', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.number.validateRequiredInput(testItem, { number: 1 }, function (result) {
 				demand(result).be.true();
 				done();
@@ -203,7 +203,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate numeric string input', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.number.validateRequiredInput(testItem, { number: '1' }, function (result) {
 				demand(result).be.true();
 				done();
@@ -211,7 +211,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate undefined input', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.number.validateRequiredInput(testItem, {}, function (result) {
 				demand(result).be.false();
 				done();
@@ -219,7 +219,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate undefined input if data exists', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				number: 1,
 			});
 			List.fields.number.validateRequiredInput(testItem, {}, function (result) {
@@ -229,7 +229,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate null input', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.number.validateRequiredInput(testItem, { number: null }, function (result) {
 				demand(result).be.false();
 				done();
@@ -237,7 +237,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate empty string input', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.number.validateRequiredInput(testItem, { number: '' }, function (result) {
 				demand(result).be.false();
 				done();
@@ -247,14 +247,14 @@ export const testFieldType = function (List) {
 
 	describe('addFilterToQuery', function () {
 		it('should filter for a specific number', function () {
-			var result = List.fields.number.addFilterToQuery({
+			const result = List.fields.number.addFilterToQuery({
 				value: 10,
 			});
 			demand(result.number).eql(10);
 		});
 
 		it('should filter greater than a specific number', function () {
-			var result = List.fields.number.addFilterToQuery({
+			const result = List.fields.number.addFilterToQuery({
 				value: 0,
 				mode: 'gt',
 			});
@@ -264,7 +264,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter less than a specific number', function () {
-			var result = List.fields.number.addFilterToQuery({
+			const result = List.fields.number.addFilterToQuery({
 				value: 10,
 				mode: 'lt',
 			});
@@ -274,7 +274,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should support inverted less than', function () {
-			var result = List.fields.number.addFilterToQuery({
+			const result = List.fields.number.addFilterToQuery({
 				value: 10,
 				mode: 'lt',
 				inverted: true,
@@ -285,7 +285,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should support inverted greater than', function () {
-			var result = List.fields.number.addFilterToQuery({
+			const result = List.fields.number.addFilterToQuery({
 				value: 10,
 				mode: 'gt',
 				inverted: true,
@@ -296,7 +296,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter for existance', function () {
-			var result = List.fields.number.addFilterToQuery({
+			const result = List.fields.number.addFilterToQuery({
 				mode: 'equals',
 			});
 			demand(result.number).eql({
@@ -305,7 +305,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter for non-existance', function () {
-			var result = List.fields.number.addFilterToQuery({
+			const result = List.fields.number.addFilterToQuery({
 				mode: 'equals',
 				inverted: true,
 			});
@@ -315,7 +315,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter between two numbers', function () {
-			var result = List.fields.number.addFilterToQuery({
+			const result = List.fields.number.addFilterToQuery({
 				mode: 'between',
 				value: {
 					min: 0,
@@ -329,7 +329,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter exluding a range between two numbers', function () {
-			var result = List.fields.number.addFilterToQuery({
+			const result = List.fields.number.addFilterToQuery({
 				mode: 'between',
 				value: {
 					min: 0,
@@ -346,7 +346,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter between two number strings', function () {
-			var result = List.fields.number.addFilterToQuery({
+			const result = List.fields.number.addFilterToQuery({
 				mode: 'between',
 				value: {
 					min: '0',
@@ -360,14 +360,14 @@ export const testFieldType = function (List) {
 		});
 
 		it('should not filter if the value is NaN', function () {
-			var result = List.fields.number.addFilterToQuery({
+			const result = List.fields.number.addFilterToQuery({
 				value: NaN,
 			});
 			demand(result.number).be.undefined();
 		});
 
 		it('should not filter between two numbers if one is NaN', function () {
-			var result = List.fields.number.addFilterToQuery({
+			const result = List.fields.number.addFilterToQuery({
 				mode: 'between',
 				value: {
 					min: NaN,
@@ -413,7 +413,7 @@ export const testFieldType = function (List) {
 	it('should validate no input', function () {
 		demand(List.fields.number.inputIsValid({})).be.true();
 		demand(List.fields.number.inputIsValid({}, true)).be.false();
-		var testItem = new List.model({
+		const testItem = new List.model({
 			number: 1,
 		});
 		demand(List.fields.number.inputIsValid({}, true, testItem)).be.true();
@@ -426,7 +426,7 @@ export const testFieldType = function (List) {
 		demand(List.fields.number.inputIsValid({
 			number: '',
 		}, true)).be.false();
-		var testItem = new List.model({
+		const testItem = new List.model({
 			number: 1,
 		});
 		demand(List.fields.number.inputIsValid({

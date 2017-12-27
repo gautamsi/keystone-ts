@@ -1,8 +1,8 @@
-var _ = require('lodash');
+const _ = require('lodash');
 
 export default function populateRelated (rel, callback) {
 
-	var item = this;
+	const item = this;
 
 	if (typeof callback !== 'function') {
 		throw new Error('List.populateRelated(rel, callback) requires a callback function.');
@@ -15,4 +15,4 @@ export default function populateRelated (rel, callback) {
 		callback(err, results);
 	}, true);
 
-};
+}

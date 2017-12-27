@@ -32,7 +32,7 @@ function DrilldownItem ({ className, href, label, separate, separator, style, ..
 			)}
 		</li>
 	);
-};
+}
 
 DrilldownItem.propTypes = {
 	href: PropTypes.string.isRequired,

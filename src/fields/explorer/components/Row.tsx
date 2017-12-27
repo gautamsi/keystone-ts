@@ -27,7 +27,7 @@ class ExplorerRow extends Component {
 			/>
 		);
 	}
-};
+}
 ExplorerRow.childContextTypes = {
 	isCollapsed: PropTypes.bool,
 };

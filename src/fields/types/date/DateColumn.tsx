@@ -3,7 +3,7 @@ import moment from 'moment';
 import ItemsTableCell from '../../components/ItemsTableCell';
 import ItemsTableValue from '../../components/ItemsTableValue';
 
-var DateColumn = React.createClass({
+let DateColumn = React.createClass({
 	displayName: 'DateColumn',
 	propTypes: {
 		col: React.PropTypes.object,

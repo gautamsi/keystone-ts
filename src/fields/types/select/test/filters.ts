@@ -1,5 +1,5 @@
-var demand = require('must');
-var SelectType = require('../SelectType');
+const demand = require('must');
+const SelectType = require('../SelectType');
 
 export const initList = function (List) {
 	List.add({

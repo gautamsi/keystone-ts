@@ -24,7 +24,7 @@ export function setDragBase (item, index) {
 			}
 		}
 	};
-};
+}
 
 export function resetDragPage () {
 	return {

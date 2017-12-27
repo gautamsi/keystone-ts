@@ -24,7 +24,7 @@ export = Field.create({
 	},
 
 	valueChanged (which, event) {
-		var newState = {};
+		let newState = {};
 		newState[which] = event.target.value;
 		this.setState(newState);
 	},
@@ -82,7 +82,7 @@ export = Field.create({
 	},
 
 	renderChangeButton () {
-		var label = this.state.passwordIsSet
+		let label = this.state.passwordIsSet
 			? 'Change Password'
 			: 'Set Password';
 

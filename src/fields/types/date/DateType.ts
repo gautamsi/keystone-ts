@@ -1,8 +1,8 @@
-var FieldType = require('../Type');
-var moment = require('moment');
-var util = require('util');
-var utils = require('keystone-utils');
-var TextType = require('../text/TextType');
+const FieldType = require('../Type');
+const moment = require('moment');
+const util = require('util');
+const utils = require('keystone-utils');
+const TextType = require('../text/TextType');
 
 /**
  * Date FieldType Constructor
@@ -44,7 +44,7 @@ date.prototype.validateRequiredInput = TextType.prototype.validateRequiredInput;
  * Add filters to a query
  */
 date.prototype.addFilterToQuery = function (filter) {
-	var query = {};
+	const query = {};
 	if (filter.mode === 'between') {
 		if (filter.after && filter.before) {
 			filter.after = moment(filter.after);
@@ -57,7 +57,7 @@ date.prototype.addFilterToQuery = function (filter) {
 			}
 		}
 	} else if (filter.value) {
-		var day = {
+		const day = {
 			moment: moment(filter.value),
 		};
 		day.start = day.moment.startOf('day').toDate();
@@ -93,7 +93,7 @@ date.prototype.format = function (item, format) {
  * Returns a new `moment` object with the field value
  */
 date.prototype.moment = function (item) {
-	var m = moment(item.get(this.path));
+	const m = moment(item.get(this.path));
 	if (this.isUTC) m.utc();
 	return m;
 };
@@ -103,7 +103,7 @@ date.prototype.moment = function (item) {
  * either the provided input format or the default for the field
  */
 date.prototype.parse = function (value, format, strict) {
-	var m = this.isUTC ? moment.utc : moment;
+	const m = this.isUTC ? moment.utc : moment;
 	// TODO Check should maybe be if (typeof value === 'string')
 	// use the parseFormatString. Ever relevant?
 	if (typeof value === 'number' || value instanceof Date) {
@@ -117,8 +117,8 @@ date.prototype.parse = function (value, format, strict) {
  * Asynchronously confirms that the provided date is valid
  */
 date.prototype.validateInput = function (data, callback) {
-	var value = this.getValueFromData(data);
-	var result = true;
+	const value = this.getValueFromData(data);
+	let result = true;
 	if (value) {
 		result = this.parse(value).isValid();
 	}
@@ -134,8 +134,8 @@ date.prototype.validateInput = function (data, callback) {
  * attempt to add the server offset to it to fix the date.
  */
 date.prototype.getData = function (item) {
-	var value = item.get(this.path);
-	var momentDate = this.isUTC ? moment.utc(value) : moment(value);
+	const value = item.get(this.path);
+	const momentDate = this.isUTC ? moment.utc(value) : moment(value);
 
 	if (this.isUTC) {
 		if (momentDate.format('HH:mm:ss:SSS') !== '00:00:00:000') {
@@ -144,7 +144,7 @@ date.prototype.getData = function (item) {
 			// if the time was recorded during daylight savings time or not, allow +/-
 			// 1 hour leeway.
 
-			var adjustedMomentDate = moment.utc(momentDate);
+			const adjustedMomentDate = moment.utc(momentDate);
 
 			// Add the server the time so that it is within +/- 1 hour of midnight.
 			adjustedMomentDate.add(this.timezoneUtcOffsetMinutes, 'minutes');
@@ -152,7 +152,7 @@ date.prototype.getData = function (item) {
 			// Add 1 hour to the time so then we know any valid date/time would be between
 			// 00:00 and 02:00 on the correct day
 			adjustedMomentDate.add(1, 'hours'); // So
-			var timeAsNumber = Number(adjustedMomentDate.format('HHmmssSSS'));
+			const timeAsNumber = Number(adjustedMomentDate.format('HHmmssSSS'));
 			if (timeAsNumber >= 0 && timeAsNumber <= 20000000) {
 				// Time is close enough to midnight so extract the date with a zeroed (ie. midnight) time value
 				return adjustedMomentDate.startOf('day').toDate();
@@ -176,7 +176,7 @@ date.prototype.getData = function (item) {
  */
 date.prototype.inputIsValid = function (data, required, item) {
 	if (!(this.path in data) && item && item.get(this.path)) return true;
-	var newValue = moment(data[this.path], this.parseFormatString);
+	const newValue = moment(data[this.path], this.parseFormatString);
 	if (required && (!newValue.isValid())) {
 		return false;
 	} else if (data[this.path] && newValue && !newValue.isValid()) {
@@ -190,10 +190,10 @@ date.prototype.inputIsValid = function (data, required, item) {
  * Updates the value for this field in the item from a data object
  */
 date.prototype.updateItem = function (item, data, callback) {
-	var value = this.getValueFromData(data);
+	const value = this.getValueFromData(data);
 	if (value !== null && value !== '') {
 		// If the value is not null, empty string or undefined, parse it
-		var newValue = this.parse(value);
+		const newValue = this.parse(value);
 		// If it's valid and not the same as the last value, save it
 		if (newValue.isValid() && (!item.get(this.path) || !newValue.isSame(item.get(this.path)))) {
 			item.set(this.path, newValue.toDate());

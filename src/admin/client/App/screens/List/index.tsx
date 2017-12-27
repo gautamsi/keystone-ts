@@ -319,7 +319,7 @@ const ListView = React.createClass({
 		// Just in case this API call takes a long time, we'll update the select all button with
 		// a spinner.
 		this.setState({ selectAllItemsLoading: true });
-		var self = this;
+		let self = this;
 		this.props.currentList.loadItems({ expandRelationshipFilters: false, filters: {} }, function (err, data) {
 			data.results.forEach(item => {
 				checkedItems[item.id] = true;

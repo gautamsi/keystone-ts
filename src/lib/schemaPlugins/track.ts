@@ -1,6 +1,6 @@
-var _ = require('lodash');
-var keystone = require('../../');
-var Types = require('../fieldTypes');
+const _ = require('lodash');
+const keystone = require('../../');
+const Types = require('../fieldTypes');
 
 /**
  * List track option
@@ -11,22 +11,22 @@ var Types = require('../fieldTypes');
 
 export default function track () {
 
-	var list = this;
-	var options = list.get('track');
-	var userModel = keystone.get('user model');
+	const list = this;
+	let options = list.get('track');
+	const userModel = keystone.get('user model');
 
 	if (!options) {
 		// if the track setting is falsy, bail
 		return;
 	}
 
-	var defaultOptions = {
+	const defaultOptions = {
 		createdAt: false,
 		createdBy: false,
 		updatedAt: false,
 		updatedBy: false,
 	};
-	var fields = {};
+	const fields = {};
 
 	// ensure track is a boolean or an object
 	if (!_.isBoolean(options) && !_.isObject(options)) {
@@ -56,7 +56,7 @@ export default function track () {
 	// validate option fields
 	_.forEach(options, function (value, key) {
 
-		var fieldName;
+		let fieldName;
 
 		// make sure the key isn't already defined as a field
 		if (_.has(list.fields, key)) {
@@ -108,7 +108,7 @@ export default function track () {
 	// add the pre-save schema plugin
 	list.schema.pre('save', function (next) {
 
-		var now = new Date();
+		const now = new Date();
 
 		// set createdAt/createdBy on new docs
 		if (this.isNew) {
@@ -134,4 +134,4 @@ export default function track () {
 
 	});
 
-};
+}

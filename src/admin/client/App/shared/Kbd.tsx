@@ -7,7 +7,7 @@ function Kbd ({ className, ...props }) {
 	props.className = css(classes.kbd);
 
 	return <kbd {...props} />;
-};
+}
 
 const classes = {
 	kbd: {

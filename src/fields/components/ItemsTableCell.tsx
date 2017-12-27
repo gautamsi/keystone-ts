@@ -5,6 +5,6 @@ function ItemsTableCell ({ className, ...props }) {
 	props.className = classnames('ItemList__col', className);
 
 	return <td {...props} />;
-};
+}
 
 export default ItemsTableCell;

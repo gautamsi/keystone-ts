@@ -1,12 +1,12 @@
-var async = require('async');
-var assign = require('object-assign');
-var listToArray = require('list-to-array');
+const async = require('async');
+const assign = require('object-assign');
+const listToArray = require('list-to-array');
 
 export default function (req, res) {
-	var where = {};
-	var fields = req.query.fields;
-	var includeCount = req.query.count !== 'false';
-	var includeResults = req.query.results !== 'false';
+	const where = {};
+	let fields = req.query.fields;
+	const includeCount = req.query.count !== 'false';
+	const includeResults = req.query.results !== 'false';
 	if (includeResults && fields) {
 		if (fields === 'false') {
 			fields = false;
@@ -18,7 +18,7 @@ export default function (req, res) {
 			return res.status(401).json({ error: 'fields must be undefined, a string, or an array' });
 		}
 	}
-	var filters = req.query.filters;
+	let filters = req.query.filters;
 	if (filters && typeof filters === 'string') {
 		try { filters = JSON.parse(req.query.filters); }
 		catch (e) { } // eslint-disable-line no-empty
@@ -29,7 +29,7 @@ export default function (req, res) {
 	if (req.query.search) {
 		assign(where, req.list.addSearchToQuery(req.query.search));
 	}
-	var query = req.list.model.find(where);
+	const query = req.list.model.find(where);
 	if (req.query.populate) {
 		query.populate(req.query.populate);
 	}
@@ -38,7 +38,7 @@ export default function (req, res) {
 			query.populate(i.path);
 		});
 	}
-	var sort = req.list.expandSort(req.query.sort);
+	const sort = req.list.expandSort(req.query.sort);
 	async.waterfall([
 		function (next) {
 			if (!includeCount) {
@@ -77,4 +77,4 @@ export default function (req, res) {
 				: undefined,
 		});
 	});
-};
+}

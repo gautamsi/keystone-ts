@@ -1,6 +1,6 @@
-var FieldType = require('../Type');
-var TextType = require('../text/TextType');
-var util = require('util');
+const FieldType = require('../Type');
+const TextType = require('../text/TextType');
+const util = require('util');
 
 
 /**

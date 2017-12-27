@@ -112,6 +112,6 @@ function prepareWidths (prefix, obj) {
 	}
 
 	return classes;
-};
+}
 
 export = GridCol;

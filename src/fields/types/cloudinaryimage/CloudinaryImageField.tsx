@@ -134,8 +134,8 @@ export = Field.create({
 			return alert('File reader not supported by browser.');
 		}
 
-		var reader = new FileReader();
-		var file = e.target.files[0];
+		let reader = new FileReader();
+		let file = e.target.files[0];
 		if (!file) return;
 
 		if (!file.type.match(SUPPORTED_REGEX)) {
@@ -161,7 +161,7 @@ export = Field.create({
 
 	// If we have a local file added then remove it and reset the file field.
 	handleRemove (e) {
-		var state = {};
+		let state = {};
 
 		if (this.state.userSelectedFile) {
 			state.userSelectedFile = null;

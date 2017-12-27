@@ -1,14 +1,14 @@
-var chalk = require('chalk');
-var crypto = require('crypto');
-var fs = require('fs-extra');
-var moment = require('moment');
-var packages = require('../../client/packages');
-var path = require('path');
+const chalk = require('chalk');
+const crypto = require('crypto');
+const fs = require('fs-extra');
+const moment = require('moment');
+const packages = require('../../client/packages');
+const path = require('path');
 
-var basedir = path.resolve(__dirname + '/../../client/');
-var devMode = process.env.KEYSTONE_DEV === 'true';
-var devWriteBundles = process.env.KEYSTONE_WRITE_BUNDLES === 'true';
-var devWriteDisc = process.env.KEYSTONE_WRITE_DISC === 'true';
+const basedir = path.resolve(__dirname + '/../../client/');
+const devMode = process.env.KEYSTONE_DEV === 'true';
+const devWriteBundles = process.env.KEYSTONE_WRITE_BUNDLES === 'true';
+const devWriteDisc = process.env.KEYSTONE_WRITE_DISC === 'true';
 
 function ts () {
 	return chalk.gray(moment().format('YYYY-MM-DD HH:MM:SS '));
@@ -27,21 +27,21 @@ function logError (file, err) {
 }
 
 export default function (opts) {
-	var stream = opts.stream;
-	var expose = opts.expose;
-	var file = opts.file;
-	var hash = opts.hash;
-	var writeToDisk = opts.writeToDisk;
+	const stream = opts.stream;
+	const expose = opts.expose;
+	const file = opts.file;
+	const hash = opts.hash;
+	const writeToDisk = opts.writeToDisk;
 
-	var b;
-	var building = false;
-	var queue = [];
-	var src;
-	var etag;
+	let b;
+	let building = false;
+	const queue = [];
+	let src;
+	let etag;
 
-	var logName = file.replace(/^\.\//, '');
-	var fileName = logName;
-	var outputFilename = path.resolve(path.join(__dirname, '../../bundles/js', hash + '-' + fileName));
+	const logName = file.replace(/^\.\//, '');
+	const fileName = logName;
+	const outputFilename = path.resolve(path.join(__dirname, '../../bundles/js', hash + '-' + fileName));
 
 	function updateBundle (newSrc) {
 		src = newSrc;
@@ -58,7 +58,7 @@ export default function (opts) {
 		}
 
 		if (devWriteDisc) {
-			var discFile = fileName.replace('.js', '.html');
+			const discFile = fileName.replace('.js', '.html');
 			require('disc').bundle(buff, function (err, html) {
 				if (err) {
 					logError(discFile, err);
@@ -73,10 +73,10 @@ export default function (opts) {
 	function build () {
 		if (building) return;
 		building = true;
-		var babelify = require('babelify');
-		var browserify = require('browserify');
-		var watchify = require('watchify');
-		var opts = { basedir: basedir };
+		const babelify = require('babelify');
+		const browserify = require('browserify');
+		const watchify = require('watchify');
+		const opts = { basedir: basedir };
 		if (devMode) {
 			logInit(logName);
 			opts.debug = true;
@@ -159,4 +159,4 @@ export default function (opts) {
 		serve: serve,
 		build: build,
 	};
-};
+}

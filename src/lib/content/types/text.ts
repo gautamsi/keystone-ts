@@ -2,8 +2,8 @@
  * Module dependencies.
  */
 
-var util = require('util');
-var super_ = require('../type');
+const util = require('util');
+const super_ = require('../type');
 
 /**
  * Text ContentType Constructor

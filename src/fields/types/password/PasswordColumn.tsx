@@ -2,7 +2,7 @@ import React from 'react';
 import ItemsTableCell from '../../components/ItemsTableCell';
 import ItemsTableValue from '../../components/ItemsTableValue';
 
-var PasswordColumn = React.createClass({
+let PasswordColumn = React.createClass({
 	displayName: 'PasswordColumn',
 	propTypes: {
 		col: React.PropTypes.object,

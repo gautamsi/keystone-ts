@@ -2,7 +2,7 @@ import React from 'react';
 import blacklist from 'blacklist';
 import assign from 'object-assign';
 
-var FooterBar = React.createClass({
+let FooterBar = React.createClass({
 	propTypes: {
 		style: React.PropTypes.object,
 	},
@@ -23,9 +23,9 @@ var FooterBar = React.createClass({
 		// Bail in IE8 because React doesn't support the onScroll event in that browser
 		// Conveniently (!) IE8 doesn't have window.getComputedStyle which we also use here
 		if (!window.getComputedStyle) return;
-		var footer = this.refs.footer;
+		let footer = this.refs.footer;
 		this.windowSize = this.getWindowSize();
-		var footerStyle = window.getComputedStyle(footer);
+		let footerStyle = window.getComputedStyle(footer);
 		this.footerSize = {
 			x: footer.offsetWidth,
 			y: footer.offsetHeight + parseInt(footerStyle.marginTop || '0'),
@@ -45,26 +45,26 @@ var FooterBar = React.createClass({
 		};
 	},
 	recalcPosition () {
-		var wrapper = this.refs.wrapper;
+		let wrapper = this.refs.wrapper;
 
 		this.footerSize.x = wrapper.offsetWidth;
 
-		var offsetTop = 0;
-		var offsetEl = wrapper;
+		let offsetTop = 0;
+		let offsetEl = wrapper;
 
 		while (offsetEl) {
 			offsetTop += offsetEl.offsetTop;
 			offsetEl = offsetEl.offsetParent;
 		}
 
-		var maxY = offsetTop + this.footerSize.y;
-		var viewY = window.scrollY + window.innerHeight;
+		let maxY = offsetTop + this.footerSize.y;
+		let viewY = window.scrollY + window.innerHeight;
 
-		var newSize = this.getWindowSize();
-		var sizeChanged = (newSize.x !== this.windowSize.x || newSize.y !== this.windowSize.y);
+		let newSize = this.getWindowSize();
+		let sizeChanged = (newSize.x !== this.windowSize.x || newSize.y !== this.windowSize.y);
 		this.windowSize = newSize;
 
-		var newState = {
+		let newState = {
 			width: this.footerSize.x,
 			height: this.footerSize.y,
 		};
@@ -82,13 +82,13 @@ var FooterBar = React.createClass({
 		}
 	},
 	render () {
-		var wrapperStyle = {
+		let wrapperStyle = {
 			height: this.state.height,
 			marginTop: 60,
 			position: 'relative',
 		};
-		var footerProps = blacklist(this.props, 'children', 'style');
-		var footerStyle = assign({}, this.props.style, {
+		let footerProps = blacklist(this.props, 'children', 'style');
+		let footerStyle = assign({}, this.props.style, {
 			position: this.state.position,
 			top: this.state.top,
 			width: this.state.width,

@@ -28,7 +28,7 @@ function getDefaultValue () {
 	};
 }
 
-var NumberArrayFilter = React.createClass({
+let NumberArrayFilter = React.createClass({
 	propTypes: {
 		filter: React.PropTypes.shape({
 			mode: React.PropTypes.oneOf(MODE_OPTIONS.map(i => i.value)),
@@ -54,7 +54,7 @@ var NumberArrayFilter = React.createClass({
 	// Returns a function that handles a specific type of onChange events for
 	// either 'minValue', 'maxValue' or simply 'value'
 	handleValueChangeBuilder (type) {
-		var self = this;
+		let self = this;
 		return function (e) {
 			switch (type) {
 				case 'minValue':

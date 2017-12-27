@@ -53,7 +53,7 @@ class FormInput extends Component {
 			/>
 		);
 	}
-};
+}
 
 const stylesShape = {
 	_definition: PropTypes.object,

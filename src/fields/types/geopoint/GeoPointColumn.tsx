@@ -2,7 +2,7 @@ import React from 'react';
 import ItemsTableCell from '../../components/ItemsTableCell';
 import ItemsTableValue from '../../components/ItemsTableValue';
 
-var GeoPointColumn = React.createClass({
+let GeoPointColumn = React.createClass({
 	displayName: 'GeoPointColumn',
 	propTypes: {
 		col: React.PropTypes.object,

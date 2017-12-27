@@ -69,8 +69,8 @@ export = Field.create({
 		);
 	},
 	renderField () {
-		var dateAsMoment = this.toMoment(this.props.value);
-		var value = this.props.value && dateAsMoment.isValid()
+		let dateAsMoment = this.toMoment(this.props.value);
+		let value = this.props.value && dateAsMoment.isValid()
 			? dateAsMoment.format(this.props.inputFormat)
 			: this.props.value;
 

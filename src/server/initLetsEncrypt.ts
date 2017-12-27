@@ -6,12 +6,12 @@
  * @api private
  */
 
-var letsencrypt = require('letsencrypt-express');
+const letsencrypt = require('letsencrypt-express');
 
 export default function (keystone, app) {
 
-	var options = keystone.get('letsencrypt');
-	var ssl = keystone.get('ssl');
+	const options = keystone.get('letsencrypt');
+	const ssl = keystone.get('ssl');
 	if (!options) {
 		return;
 	}
@@ -22,10 +22,10 @@ export default function (keystone, app) {
 		console.error('To use Let\'s Encrypt you need to have a regular HTTP listener as well. Please set ssl to either `true` or `"force"`.');
 	}
 
-	var email = options.email;
-	var approveDomains = options.domains;
-	var server = options.production ? 'production' : 'staging';
-	var agreeTos = options.tos;
+	const email = options.email;
+	let approveDomains = options.domains;
+	const server = options.production ? 'production' : 'staging';
+	const agreeTos = options.tos;
 
 	if (!Array.isArray(approveDomains)) {
 		approveDomains = [approveDomains];
@@ -35,7 +35,7 @@ export default function (keystone, app) {
 		return;
 	}
 	// TODO maybe we should use le-store-mongo
-	var lex = letsencrypt.create({
+	const lex = letsencrypt.create({
 		server: server,
 		approveDomains: approveDomains,
 		agreeTos: agreeTos,
@@ -44,4 +44,4 @@ export default function (keystone, app) {
 
 	keystone.set('https server options', lex.httpsOptions);
 	app.use(lex.middleware());
-};
+}

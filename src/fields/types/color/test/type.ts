@@ -1,6 +1,6 @@
-var demand = require('must');
-var ColorType = require('../ColorType');
-var TextType = require('../../text/TextType');
+const demand = require('must');
+const ColorType = require('../ColorType');
+const TextType = require('../../text/TextType');
 
 export const initList = function (List) {
 	List.add({
@@ -22,7 +22,7 @@ export const testFilters = function (List) { // eslint-disable-line no-unused-va
 export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.color.updateItem(testItem, {
 				color: '#ffffff',
 			}, function () {
@@ -32,7 +32,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.color'].updateItem(testItem, {
 				nested: {
 					color: '#ffffff',
@@ -44,7 +44,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.color'].updateItem(testItem, {
 				'nested.color': '#ffffff',
 			}, function () {

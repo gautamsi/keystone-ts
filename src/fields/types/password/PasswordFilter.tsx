@@ -13,7 +13,7 @@ function getDefaultValue () {
 	};
 }
 
-var PasswordFilter = React.createClass({
+let PasswordFilter = React.createClass({
 	propTypes: {
 		filter: React.PropTypes.shape({
 			exists: React.PropTypes.oneOf(EXISTS_OPTIONS.map(i => i.value)),

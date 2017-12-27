@@ -1,13 +1,13 @@
-var _ = require('lodash');
-var FieldType = require('../Type');
-var https = require('https');
-var keystone = require('../../../');
-var querystring = require('querystring');
-var util = require('util');
-var utils = require('keystone-utils');
+const _ = require('lodash');
+const FieldType = require('../Type');
+const https = require('https');
+const keystone = require('../../../');
+const querystring = require('querystring');
+const util = require('util');
+const utils = require('keystone-utils');
 
-var RADIUS_KM = 6371;
-var RADIUS_MILES = 3959;
+const RADIUS_KM = 6371;
+const RADIUS_MILES = 3959;
 
 /**
  * Location FieldType Constructor
@@ -55,10 +55,10 @@ util.inherits(location, FieldType);
  */
 location.prototype.addToSchema = function (schema) {
 
-	var field = this;
-	var options = this.options;
+	const field = this;
+	const options = this.options;
 
-	var paths = this.paths = {
+	const paths = this.paths = {
 		number: this.path + '.number',
 		name: this.path + '.name',
 		street1: this.path + '.street1',
@@ -75,8 +75,8 @@ location.prototype.addToSchema = function (schema) {
 		overwrite: this.path + '_improve_overwrite',
 	};
 
-	var getFieldDef = function (type, key) {
-		var def = { type: type };
+	const getFieldDef = function (type, key) {
+		const def = { type: type };
 		if (options.defaults[key]) {
 			def.default = options.defaults[key];
 		}
@@ -113,8 +113,8 @@ location.prototype.addToSchema = function (schema) {
 	// pre-save hook to fix blank geo fields
 	// see http://stackoverflow.com/questions/16388836/does-applying-a-2dsphere-index-on-a-mongoose-schema-force-the-location-field-to
 	schema.pre('save', function (next) {
-		var obj = field._path.get(this);
-		var geo = (obj.geo || []).map(Number).filter(_.isFinite);
+		const obj = field._path.get(this);
+		const geo = (obj.geo || []).map(Number).filter(_.isFinite);
 		obj.geo = (geo.length === 2) ? geo : undefined;
 		next();
 	});
@@ -125,7 +125,7 @@ location.prototype.addToSchema = function (schema) {
 /**
  * Add filters to a query
  */
-var FILTER_PATH_MAP = {
+const FILTER_PATH_MAP = {
 	street: 'street1',
 	city: 'suburb',
 	state: 'state',
@@ -133,11 +133,11 @@ var FILTER_PATH_MAP = {
 	country: 'country',
 };
 location.prototype.addFilterToQuery = function (filter) {
-	var query = {};
-	var field = this;
+	const query = {};
+	const field = this;
 	['street', 'city', 'state', 'code', 'country'].forEach(function (i) {
 		if (!filter[i]) return;
-		var value = utils.escapeRegExp(filter[i]);
+		let value = utils.escapeRegExp(filter[i]);
 		value = new RegExp(value, 'i');
 		query[field.paths[FILTER_PATH_MAP[i]]] = filter.inverted ? { $not: value } : value;
 	});
@@ -156,7 +156,7 @@ location.prototype.format = function (item, values, delimiter) {
 	if (!values) {
 		return item.get(this.paths.serialised);
 	}
-	var paths = this.paths;
+	const paths = this.paths;
 	values = values.split(' ').map(function (i) {
 		return item.get(paths[i]);
 	});
@@ -180,7 +180,7 @@ location.prototype.isModified = function (item) {
 
 location.prototype.getInputFromData = function (data) {
 	// Allow JSON structured data
-	var input = this.getValueFromData(data);
+	let input = this.getValueFromData(data);
 
 	// If there is no structured data, look for the flat paths
 	if (!input) {
@@ -218,9 +218,9 @@ location.prototype.validateInput = function (data, callback) {
  * TODO: Needs test coverage
  */
 location.prototype.validateRequiredInput = function (item, data, callback) {
-	var result = true;
-	var input = this.getInputFromData(data);
-	var currentValue = item.get(this.path);
+	let result = true;
+	const input = this.getInputFromData(data);
+	const currentValue = item.get(this.path);
 	this.requiredPaths.forEach(function (path) {
 		// ignore missing values if they already exist in the item
 		if (input[path] === undefined && currentValue[path]) return;
@@ -242,10 +242,10 @@ location.prototype.validateRequiredInput = function (item, data, callback) {
  */
 location.prototype.inputIsValid = function (data, required, item) {
 	if (!required) return true;
-	var paths = this.paths;
-	var nested = this._path.get(data);
-	var values = nested || data;
-	var valid = true;
+	const paths = this.paths;
+	const nested = this._path.get(data);
+	const values = nested || data;
+	let valid = true;
 	this.requiredPaths.forEach(function (path) {
 		if (nested) {
 			if (!(path in values) && item && item.get(paths[path])) {
@@ -271,12 +271,12 @@ location.prototype.inputIsValid = function (data, required, item) {
  */
 location.prototype.updateItem = function (item, data, callback) {
 
-	var paths = this.paths;
-	var fieldKeys = ['number', 'name', 'street1', 'street2', 'suburb', 'state', 'postcode', 'country'];
-	var geoKeys = ['geo', 'geo_lat', 'geo_lng'];
-	var valueKeys = fieldKeys.concat(geoKeys);
-	var valuePaths = valueKeys;
-	var values = this._path.get(data);
+	const paths = this.paths;
+	const fieldKeys = ['number', 'name', 'street1', 'street2', 'suburb', 'state', 'postcode', 'country'];
+	const geoKeys = ['geo', 'geo_lat', 'geo_lng'];
+	const valueKeys = fieldKeys.concat(geoKeys);
+	let valuePaths = valueKeys;
+	let values = this._path.get(data);
 
 	if (!values) {
 		// Handle flattened values
@@ -289,7 +289,7 @@ location.prototype.updateItem = function (item, data, callback) {
 	// convert valuePaths to a map for easier usage
 	valuePaths = _.zipObject(valueKeys, valuePaths);
 
-	var setValue = function (key) {
+	const setValue = function (key) {
 		if (valuePaths[key] in values && values[valuePaths[key]] !== item.get(paths[key])) {
 			item.set(paths[key], values[valuePaths[key]] || null);
 		}
@@ -298,12 +298,12 @@ location.prototype.updateItem = function (item, data, callback) {
 	_.forEach(fieldKeys, setValue);
 
 	if (valuePaths.geo in values) {
-		var oldGeo = item.get(paths.geo) || [];
+		const oldGeo = item.get(paths.geo) || [];
 		if (oldGeo.length > 1) {
 			oldGeo[0] = item.get(paths.geo)[1];
 			oldGeo[1] = item.get(paths.geo)[0];
 		}
-		var newGeo = values[valuePaths.geo];
+		let newGeo = values[valuePaths.geo];
 		if (!Array.isArray(newGeo) || newGeo.length !== 2) {
 			newGeo = [];
 		}
@@ -311,14 +311,14 @@ location.prototype.updateItem = function (item, data, callback) {
 			item.set(paths.geo, newGeo);
 		}
 	} else if (valuePaths.geo_lat in values && valuePaths.geo_lng in values) {
-		var lat = utils.number(values[valuePaths.geo_lat]);
-		var lng = utils.number(values[valuePaths.geo_lng]);
+		const lat = utils.number(values[valuePaths.geo_lat]);
+		const lng = utils.number(values[valuePaths.geo_lng]);
 		item.set(paths.geo, (lat && lng) ? [lng, lat] : undefined);
 	}
 
-	var doGoogleLookup = this.getValueFromData(data, '_improve');
+	const doGoogleLookup = this.getValueFromData(data, '_improve');
 	if (doGoogleLookup) {
-		var googleUpdateMode = this.getValueFromData(data, '_improve_overwrite') ? 'overwrite' : true;
+		const googleUpdateMode = this.getValueFromData(data, '_improve_overwrite') ? 'overwrite' : true;
 		this.googleLookup(item, false, googleUpdateMode, function (err, location, result) {
 			// TODO: we are currently discarding the error; it should probably be
 			// sent back in the response, needs consideration
@@ -340,7 +340,7 @@ function doGoogleGeocodeRequest (address, region, callback) {
 	// Note: the Geocoding API may only be used in conjunction with a Google map; geocoding results without displaying them on a map is prohibited.
 	// Please make sure your Keystone app complies with the Google Maps API License.
 
-	var options = {
+	const options = {
 		sensor: false,
 		language: 'en',
 		address: address,
@@ -359,16 +359,16 @@ function doGoogleGeocodeRequest (address, region, callback) {
 		options.key = keystone.get('google server api key');
 	}
 
-	var endpoint = 'https://maps.googleapis.com/maps/api/geocode/json?' + querystring.stringify(options);
+	const endpoint = 'https://maps.googleapis.com/maps/api/geocode/json?' + querystring.stringify(options);
 
 	https.get(endpoint, function (res) {
-		var data = [];
+		const data = [];
 		res.on('data', function (chunk) {
 			data.push(chunk);
 		})
 		.on('end', function () {
-			var dataBuff = data.join('').trim();
-			var result;
+			const dataBuff = data.join('').trim();
+			let result;
 			try {
 				result = JSON.parse(dataBuff);
 			}
@@ -403,9 +403,9 @@ location.prototype.googleLookup = function (item, region, update, callback) {
 		update = false;
 	}
 
-	var field = this;
-	var stored = item.get(this.path);
-	var address = item.get(this.paths.serialised);
+	const field = this;
+	const stored = item.get(this.path);
+	const address = item.get(this.paths.serialised);
 
 	if (address.length === 0) {
 		return callback({
@@ -423,11 +423,11 @@ location.prototype.googleLookup = function (item, region, update, callback) {
 
 		// use the first result
 		// if there were no results in the array, status would be ZERO_RESULTS
-		var result = geocode.results[0];
+		const result = geocode.results[0];
 
 		// parse the address components into a location object
 
-		var location = {};
+		const location = {};
 
 		_.forEach(result.address_components, function (val) {
 			if (_.indexOf(val.types, 'street_number') >= 0) {
@@ -493,13 +493,13 @@ location.prototype.googleLookup = function (item, region, update, callback) {
  * See http://en.wikipedia.org/wiki/Haversine_formula
  */
 function calculateDistance (point1, point2) {
-	var dLng = (point2[0] - point1[0]) * Math.PI / 180;
-	var dLat = (point2[1] - point1[1]) * Math.PI / 180;
-	var lat1 = (point1[1]) * Math.PI / 180;
-	var lat2 = (point2[1]) * Math.PI / 180;
+	const dLng = (point2[0] - point1[0]) * Math.PI / 180;
+	const dLat = (point2[1] - point1[1]) * Math.PI / 180;
+	const lat1 = (point1[1]) * Math.PI / 180;
+	const lat2 = (point2[1]) * Math.PI / 180;
 	/* eslint-disable space-infix-ops */
-	var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLng/2) * Math.sin(dLng/2) * Math.cos(lat1) * Math.cos(lat2);
-	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLng / 2) * Math.sin(dLng / 2) * Math.cos(lat1) * Math.cos(lat2);
+	const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	/* eslint-enable space-infix-ops */
 	return c;
 }

@@ -12,6 +12,6 @@ function escapeValueForExcel (value) {
 		return ' ' + value;
 	}
 	return value;
-};
+}
 
 export default escapeValueForExcel;

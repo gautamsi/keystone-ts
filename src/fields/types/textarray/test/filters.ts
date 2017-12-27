@@ -1,5 +1,5 @@
-var demand = require('must');
-var TextArrayType = require('../TextArrayType');
+const demand = require('must');
+const TextArrayType = require('../TextArrayType');
 
 export const initList = function (List) {
 	List.add({

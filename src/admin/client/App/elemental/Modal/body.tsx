@@ -12,7 +12,7 @@ function ModalBody ({
 			{...props}
 		/>
 	);
-};
+}
 
 const classes = {
 	body: {

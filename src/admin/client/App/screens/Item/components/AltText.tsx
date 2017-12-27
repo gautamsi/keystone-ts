@@ -48,7 +48,7 @@ class AltText extends Component {
 
 		return <Component {...props} />;
 	}
-};
+}
 
 const SUPPORTED_KEYS = [
 	'<alt>',

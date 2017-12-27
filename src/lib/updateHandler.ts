@@ -1,5 +1,5 @@
-var _ = require('lodash');
-var assign = require('object-assign');
+const _ = require('lodash');
+const assign = require('object-assign');
 
 // NOTE: the old signature was UpdateHandler (list, item, req, res, options)
 // the `res` argument has been deprecated, but we still detect and handle it
@@ -45,9 +45,9 @@ UpdateHandler.prototype.process = function (data, options, callback) {
 		options = {};
 	}
 
-	var item = this.item;
-	var list = this.list;
-	var req = this.req;
+	const item = this.item;
+	const list = this.list;
+	const req = this.req;
 	options = assign({}, this.options, options);
 
 	// pass the user from the request by default
@@ -61,7 +61,7 @@ UpdateHandler.prototype.process = function (data, options, callback) {
 	}
 
 	function flashErrors (err) {
-		var errorMessage = options.errorMessage || 'There was a problem saving your changes';
+		const errorMessage = options.errorMessage || 'There was a problem saving your changes';
 		// Detect Keystone validation errors
 		if (err.error === 'validation errors') {
 			if (options.flashErrors === true || options.flashErrors === 'validation') {
@@ -96,7 +96,7 @@ UpdateHandler.prototype.process = function (data, options, callback) {
 		// Fallback
 		else {
 			if (options.flashErrors === true || options.flashErrors === 'update') {
-				var errors = [];
+				const errors = [];
 				if (typeof err.error === 'string') {
 					errors.push(err.error);
 				}

@@ -24,7 +24,7 @@ function getDefaultValue () {
 	};
 }
 
-var RelationshipFilter = React.createClass({
+let RelationshipFilter = React.createClass({
 	propTypes: {
 		field: React.PropTypes.object,
 		filter: React.PropTypes.shape({
@@ -90,13 +90,13 @@ var RelationshipFilter = React.createClass({
 		this._itemsCache[item.id] = item;
 	},
 	buildFilters () {
-		var filters = {};
+		let filters = {};
 		_.forEach(this.props.field.filters, function (value, key) {
 			if (value[0] === ':') return;
 			filters[key] = value;
 		}, this);
 
-		var parts = [];
+		let parts = [];
 		_.forEach(filters, function (val, key) {
 			parts.push('filters[' + key + '][value]=' + encodeURIComponent(val));
 		});

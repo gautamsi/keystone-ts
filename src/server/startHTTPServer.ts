@@ -9,23 +9,23 @@
  * @api private
  */
 
-var http = require('http');
+const http = require('http');
 
 export default function (keystone, app, callback) {
 
-	var host = keystone.get('host');
-	var port = keystone.get('port');
-	var forceSsl = (keystone.get('ssl') === 'force');
+	const host = keystone.get('host');
+	const port = keystone.get('port');
+	const forceSsl = (keystone.get('ssl') === 'force');
 
 	keystone.httpServer = http
 	.createServer(app)
 	.listen(port, host, function ready (err) {
 		if (err) { return callback(err); }
 
-		var message = keystone.get('name') + ' is ready on '
+		const message = keystone.get('name') + ' is ready on '
 		+ 'http://' + host + ':' + port
 		+ (forceSsl ? ' (SSL redirect)' : '');
 		callback(null, message);
 	});
 
-};
+}

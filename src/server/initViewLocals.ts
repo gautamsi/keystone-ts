@@ -1,4 +1,4 @@
-var assign = require('object-assign');
+const assign = require('object-assign');
 
 export default function initViewLocals (keystone, app) {
 	// Apply locals
@@ -11,4 +11,4 @@ export default function initViewLocals (keystone, app) {
 	if (app.locals.pretty === undefined && keystone.get('env') !== 'production') {
 		app.locals.pretty = true;
 	}
-};
+}

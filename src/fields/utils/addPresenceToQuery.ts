@@ -5,7 +5,7 @@
  * @param {Object} currentPathQuery The current request query
  */
 function addPresenceToQuery (presence, currentPathQuery) {
-	var newQuery;
+	let newQuery;
 	// Adds $elemMatch if the presence choice is 'all'
 	// ('all' is the default)
 	if (presence === 'some') {

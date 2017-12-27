@@ -1,10 +1,10 @@
-var React = require('react');
+let React = require('react');
 
-var LocalFilesColumn = React.createClass({
+let LocalFilesColumn = React.createClass({
 	renderValue: function () {
-		var value = this.props.data.fields[this.props.col.path];
+		let value = this.props.data.fields[this.props.col.path];
 		if (value.length === 0) return '';
-		var fileOrFiles = (value.length > 1) ? 'Files' : 'File';
+		let fileOrFiles = (value.length > 1) ? 'Files' : 'File';
 		return value.length + ' ' + fileOrFiles;
 	},
 	render: function () {

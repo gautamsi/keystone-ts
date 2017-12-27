@@ -1,4 +1,4 @@
-var debug = require('debug')('keystone:core:closeDatabaseConnection');
+const debug = require('debug')('keystone:core:closeDatabaseConnection');
 
 export default function closeDatabaseConnection (callback) {
 	this.mongoose.disconnect(function () {
@@ -6,4 +6,4 @@ export default function closeDatabaseConnection (callback) {
 		callback && callback();
 	});
 	return this;
-};
+}

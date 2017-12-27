@@ -1,18 +1,18 @@
-var _ = require('lodash');
-var utils = require('keystone-utils');
+const _ = require('lodash');
+const utils = require('keystone-utils');
 
 export default function autokey () {
 
-	var autokey = this.autokey = _.clone(this.get('autokey'));
-	var def = {};
-	var list = this;
+	const autokey = this.autokey = _.clone(this.get('autokey'));
+	const def = {};
+	const list = this;
 
 	if (!autokey.from) {
-		var fromMsg = 'Invalid List Option (autokey) for ' + list.key + ' (from is required)\n';
+		const fromMsg = 'Invalid List Option (autokey) for ' + list.key + ' (from is required)\n';
 		throw new Error(fromMsg);
 	}
 	if (!autokey.path) {
-		var pathMsg = 'Invalid List Option (autokey) for ' + list.key + ' (path is required)\n';
+		const pathMsg = 'Invalid List Option (autokey) for ' + list.key + ' (path is required)\n';
 		throw new Error(pathMsg);
 	}
 
@@ -36,9 +36,9 @@ export default function autokey () {
 
 	this.schema.add(def);
 
-	var getUniqueKey = function (doc, src, callback) {
+	const getUniqueKey = function (doc, src, callback) {
 
-		var q = list.model.find().where(autokey.path, src);
+		const q = list.model.find().where(autokey.path, src);
 
 		if (_.isObject(autokey.unique)) {
 			_.forEach(autokey.unique, function (k, v) {
@@ -55,7 +55,7 @@ export default function autokey () {
 				callback(err);
 			// deliberate use of implicit type coercion with == because doc.id may need to become a String
 			} else if (results.length && (results.length > 1 || results[0].id != doc.id)) { // eslint-disable-line eqeqeq
-				var inc = src.match(/^(.+)\-(\d+)$/);
+				let inc = src.match(/^(.+)\-(\d+)$/);
 				if (inc && inc.length === 3) {
 					src = inc[1];
 					inc = '-' + ((inc[2] * 1) + 1);
@@ -72,9 +72,9 @@ export default function autokey () {
 
 	this.schema.pre('save', function (next) {
 
-		var modified = false;
-		var incomplete = false;
-		var values = [];
+		let modified = false;
+		let incomplete = false;
+		const values = [];
 
 		autokey.from.forEach(function (ops) {
 			if (list.fields[ops.path]) {
@@ -104,7 +104,7 @@ export default function autokey () {
 		if ((!modified || autokey.fixed) && (this.get(autokey.path) || !this.isSelected(autokey.path))) {
 			return next();
 		}
-		var newKey = utils.slug(values.join(' '), null, { locale: autokey.locale }) || this.id;
+		const newKey = utils.slug(values.join(' '), null, { locale: autokey.locale }) || this.id;
 		if (autokey.unique) {
 			return getUniqueKey(this, newKey, next);
 		} else {
@@ -114,4 +114,4 @@ export default function autokey () {
 
 	});
 
-};
+}

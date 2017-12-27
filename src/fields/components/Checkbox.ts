@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { darken, fade } from '../../admin/client/utils/color';
 import E from '../../admin/client/constants';
 
-var Checkbox = React.createClass({
+const Checkbox = React.createClass({
 	displayName: 'Checkbox',
 	propTypes: {
 		checked: React.PropTypes.bool,

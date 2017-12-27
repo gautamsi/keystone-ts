@@ -4,14 +4,14 @@
  */
 
 function declaresTextIndex () {
-	var indexes = this.schema.indexes();
+	const indexes = this.schema.indexes();
 
-	for (var i = 0; i < indexes.length; i++) {
-		var fields = indexes[i][0];
-		var fieldNames = Object.keys(fields);
+	for (let i = 0; i < indexes.length; i++) {
+		const fields = indexes[i][0];
+		const fieldNames = Object.keys(fields);
 
-		for (var h = 0; h < fieldNames.length; h++) {
-			var val = fields[fieldNames[h]];
+		for (let h = 0; h < fieldNames.length; h++) {
+			const val = fields[fieldNames[h]];
 			if (typeof val === 'string' && val.toLowerCase() === 'text') return true;
 		}
 	}

@@ -1,16 +1,16 @@
-var utils = require('keystone-utils');
-var session = require('../../../../lib/session');
+const utils = require('keystone-utils');
+const session = require('../../../../lib/session');
 
 function signin (req, res) {
-	var keystone = req.keystone;
+	const keystone = req.keystone;
 	if (!keystone.security.csrf.validate(req)) {
 		return res.apiError(403, 'invalid csrf');
 	}
 	if (!req.body.email || !req.body.password) {
 		return res.status(401).json({ error: 'email and password required' });
 	}
-	var User = keystone.list(keystone.get('user model'));
-	var emailRegExp = new RegExp('^' + utils.escapeRegExp(req.body.email) + '$', 'i');
+	const User = keystone.list(keystone.get('user model'));
+	const emailRegExp = new RegExp('^' + utils.escapeRegExp(req.body.email) + '$', 'i');
 	User.model.findOne({ email: emailRegExp }).exec(function (err, user) {
 		if (user) {
 			keystone.callHook(user, 'pre:signin', req, function (err) {

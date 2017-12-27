@@ -1,9 +1,9 @@
-var debug = require('debug')('keystone:core:openDatabaseConnection');
+const debug = require('debug')('keystone:core:openDatabaseConnection');
 
 export default function openDatabaseConnection (callback) {
 
-	var keystone = this;
-	var mongoConnectionOpen = false;
+	const keystone = this;
+	let mongoConnectionOpen = false;
 
 	// support replica sets for mongoose
 	if (keystone.get('mongo replica set')) {
@@ -17,16 +17,16 @@ export default function openDatabaseConnection (callback) {
 		}
 
 		debug('setting up mongo replica set');
-		var replicaData = keystone.get('mongo replica set');
-		var replica = '';
+		const replicaData = keystone.get('mongo replica set');
+		let replica = '';
 
-		var credentials = (replicaData.username && replicaData.password) ? replicaData.username + ':' + replicaData.password + '@' : '';
+		const credentials = (replicaData.username && replicaData.password) ? replicaData.username + ':' + replicaData.password + '@' : '';
 
 		replicaData.db.servers.forEach(function (server) {
 			replica += 'mongodb://' + credentials + server.host + ':' + server.port + '/' + replicaData.db.name + ',';
 		});
 
-		var options = {
+		const options = {
 			auth: { authSource: replicaData.authSource },
 			replset: {
 				rs_name: replicaData.db.replicaSetOptions.rs_name,
@@ -67,7 +67,7 @@ export default function openDatabaseConnection (callback) {
 		debug('mongo connection open');
 		mongoConnectionOpen = true;
 
-		var connected = function () {
+		const connected = function () {
 			if (keystone.get('auto update')) {
 				debug('applying auto update');
 				keystone.applyUpdates(callback);
@@ -85,4 +85,4 @@ export default function openDatabaseConnection (callback) {
 	});
 
 	return this;
-};
+}

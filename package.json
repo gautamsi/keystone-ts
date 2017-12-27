@@ -113,7 +113,6 @@
     "@types/node": "^7.0.50",
     "@types/shelljs": "^0.7.7",
     "@types/supertest": "^2.0.4",
-    "@ljharb/eslint-config": "^11.0.0",
     "browserify-middleware": "7.1.0",
     "codeclimate-test-reporter": "0.5.0",
     "concurrently": "^3.5.1",
@@ -196,23 +195,24 @@
     "test-cov": "istanbul cover ./node_modules/mocha/bin/_mocha",
     "posttest-cov": "if [ -n \"$CODECLIMATE_REPO_TOKEN\" ]; then codeclimate-test-reporter < coverage/lcov.info; fi",
     "clean": "rimraf ./coverage",
-    "fields-explorer": "node ./fields/explorer/server.js",
-    "new": {
-        "start": "npm run serve",
-        "build": "npm run build-sass && npm run build-ts && npm run tslint && npm run copy-static-assets",
-        "serve": "node dist/server.js",
-        "watch-node": "nodemon dist/server.js",
-        "watch": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run watch-node\"",
-        "test": "jest --forceExit",
-        "build-ts": "tsc",
-        "watch-ts": "tsc -w",
-        "build-sass": "node-sass src/public/css/main.scss dist/public/css/main.css",
-        "watch-sass": "node-sass -w src/public/css/main.scss dist/public/css/main.css",
-        "tslint": "tslint -c tslint.json -p tsconfig.json",
-        "copy-static-assets": "ts-node copyStaticAssets.ts",
-        "debug": "npm run build && npm run watch-debug",
-        "serve-debug": "nodemon --inspect dist/server.js",
-        "watch-debug": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run serve-debug\""    
-    }
-  }
+    "fields-explorer": "node ./fields/explorer/server.js"
+  },
+"new_Script": {
+    "start": "npm run serve",
+    "build": "npm run build-sass && npm run build-ts && npm run tslint && npm run copy-static-assets",
+    "serve": "node dist/server.js",
+    "watch-node": "nodemon dist/server.js",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "test": "jest --forceExit",
+    "build-ts": "tsc",
+    "watch-ts": "tsc -w",
+    "build-sass": "node-sass src/public/css/main.scss dist/public/css/main.css",
+    "watch-sass": "node-sass -w src/public/css/main.scss dist/public/css/main.css",
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "copy-static-assets": "ts-node copyStaticAssets.ts",
+    "debug": "npm run build && npm run watch-debug",
+    "serve-debug": "nodemon --inspect dist/server.js",
+    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run serve-debug\""    
+}
+  
 }

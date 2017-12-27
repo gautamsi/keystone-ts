@@ -1,34 +1,34 @@
-var demand = require('must');
-var addPresenceToQuery = require('../addPresenceToQuery');
-var evalDependsOn = require('../evalDependsOn');
+const demand = require('must');
+const addPresenceToQuery = require('../addPresenceToQuery');
+const evalDependsOn = require('../evalDependsOn');
 
 export const testUtils = function () {
 	describe('addPresenceToQuery', function () {
 		it('should add $elemMatch if the presence is some', function () {
-			var someFilter = { somepath: 'somefilter' };
-			var result = addPresenceToQuery('some', someFilter);
+			const someFilter = { somepath: 'somefilter' };
+			const result = addPresenceToQuery('some', someFilter);
 			demand(result).eql({
 				$elemMatch: someFilter,
 			});
 		});
 
 		it('should add $not if the presence is none', function () {
-			var someFilter = { somepath: 'somefilter' };
-			var result = addPresenceToQuery('none', someFilter);
+			const someFilter = { somepath: 'somefilter' };
+			const result = addPresenceToQuery('none', someFilter);
 			demand(result).eql({
 				$not: someFilter,
 			});
 		});
 
 		it('should not change anything if no presence is passed', function () {
-			var someFilter = { somepath: 'somefilter' };
-			var result = addPresenceToQuery('', someFilter);
+			const someFilter = { somepath: 'somefilter' };
+			const result = addPresenceToQuery('', someFilter);
 			demand(result).eql(someFilter);
 		});
 
 		it('should not change anything if an invalid presence is passed', function () {
-			var someFilter = { somepath: 'somefilter' };
-			var result = addPresenceToQuery('invalidstuffhere', someFilter);
+			const someFilter = { somepath: 'somefilter' };
+			const result = addPresenceToQuery('invalidstuffhere', someFilter);
 			demand(result).eql(someFilter);
 		});
 	});

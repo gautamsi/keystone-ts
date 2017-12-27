@@ -66,7 +66,7 @@ class ResponsiveText extends Component {
 
 		return text ? <Component {...props}>{text}</Component> : null;
 	}
-};
+}
 
 ResponsiveText.propTypes = {
 	hiddenLG: PropTypes.string,

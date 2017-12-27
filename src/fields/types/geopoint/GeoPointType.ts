@@ -1,10 +1,10 @@
-var _ = require('lodash');
-var FieldType = require('../Type');
-var util = require('util');
-var utils = require('keystone-utils');
+const _ = require('lodash');
+const FieldType = require('../Type');
+const util = require('util');
+const utils = require('keystone-utils');
 
 // Validation and value parsing regular expression
-var REGEXP_LNGLAT = /^\s*(\-?\d+(?:\.\d+)?)\s*\,\s*(\-?\d+(?:\.\d+)?)\s*$/;
+const REGEXP_LNGLAT = /^\s*(\-?\d+(?:\.\d+)?)\s*\,\s*(\-?\d+(?:\.\d+)?)\s*$/;
 
 /**
  * Geo FieldType Constructor
@@ -31,7 +31,7 @@ geopoint.prototype.addToSchema = function (schema) {
  * Gets the field's data from an Item, as used by the React components
  */
 geopoint.prototype.getData = function (item) {
-	var points = item.get(this.path);
+	const points = item.get(this.path);
 	return (points && points.length === 2) ? points : [];
 };
 
@@ -49,8 +49,8 @@ geopoint.prototype.format = function (item) {
  * Asynchronously confirms that the provided value is valid
  */
 geopoint.prototype.validateInput = function (data, callback) {
-	var value = this.getValueFromData(data);
-	var result = false;
+	let value = this.getValueFromData(data);
+	let result = false;
 	if (value === undefined || value === null || value === '' || (Array.isArray(value) && value.length === 2 && value.join('') === '')) {
 		result = true;
 	} else {
@@ -68,8 +68,8 @@ geopoint.prototype.validateInput = function (data, callback) {
  * Asynchronously confirms that the a value is present
  */
 geopoint.prototype.validateRequiredInput = function (item, data, callback) {
-	var value = this.getValueFromData(data);
-	var result = (value || (value === undefined && item.get(this.path) && item.get(this.path).length === 2)) ? true : false;
+	const value = this.getValueFromData(data);
+	const result = (value || (value === undefined && item.get(this.path) && item.get(this.path).length === 2)) ? true : false;
 	utils.defer(callback, result);
 };
 
@@ -79,7 +79,7 @@ geopoint.prototype.validateRequiredInput = function (item, data, callback) {
  * Deprecated
  */
 geopoint.prototype.inputIsValid = function (data, required, item) { // eslint-disable-line no-unused-vars
-	var values = this.getValueFromData(data);
+	let values = this.getValueFromData(data);
 	// Input is valid if the field is not required, and not present
 	if (values === undefined && !required) return true;
 	if (Array.isArray(values)) {
@@ -100,7 +100,7 @@ geopoint.prototype.inputIsValid = function (data, required, item) { // eslint-di
  * @param {Number} filter.distance.value The distance value
  */
 geopoint.prototype.addFilterToQuery = function (filter) {
-	var query = {};
+	const query = {};
 	// If latitude or longitude aren't specified, don't filter anything
 	if (filter.lon && filter.lat) {
 		query[this.path] = {
@@ -112,7 +112,7 @@ geopoint.prototype.addFilterToQuery = function (filter) {
 			},
 		};
 		// MongoDB wants meters, but we accept kilometers via input so we * 1000
-		var distance = (filter.distance.value && filter.distance.value * 1000) || 500000;
+		const distance = (filter.distance.value && filter.distance.value * 1000) || 500000;
 		if (filter.distance.mode === 'min') {
 			query[this.path].$near.$minDistance = distance;
 		} else {
@@ -126,11 +126,11 @@ geopoint.prototype.addFilterToQuery = function (filter) {
  * Updates the value for this field in the item from a data object
  */
 geopoint.prototype.updateItem = function (item, data, callback) {
-	var value = this.getValueFromData(data);
+	const value = this.getValueFromData(data);
 	if (value === undefined) return process.nextTick(callback);
 	if (typeof value === 'string') {
 		// Value should be formatted lng,lat
-		var values = REGEXP_LNGLAT.exec(value);
+		const values = REGEXP_LNGLAT.exec(value);
 		if (values) {
 			item.set(this.path, [values[1], values[2]]);
 		} else {

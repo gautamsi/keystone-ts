@@ -4,7 +4,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { Sortable } from './ItemsTableRow';
 import DropZone from './ItemsTableDragDropZone';
 
-var ItemsTableDragDrop = React.createClass({
+let ItemsTableDragDrop = React.createClass({
 	displayName: 'ItemsTableDragDrop',
 	propTypes: {
 		columns: React.PropTypes.array,

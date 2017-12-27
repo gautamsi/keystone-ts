@@ -21,7 +21,7 @@ function LabelledControl ({
 			<span className={css(classes.label)}>{label}</span>
 		</label>
 	);
-};
+}
 
 LabelledControl.propTypes = {
 	inline: PropTypes.bool,

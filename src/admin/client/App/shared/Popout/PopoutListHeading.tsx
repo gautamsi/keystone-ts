@@ -6,7 +6,7 @@ import React from 'react';
 import blacklist from 'blacklist';
 import classnames from 'classnames';
 
-var PopoutListHeading = React.createClass({
+let PopoutListHeading = React.createClass({
 	displayName: 'PopoutListHeading',
 	propTypes: {
 		children: React.PropTypes.node.isRequired,

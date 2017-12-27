@@ -36,7 +36,7 @@ class FormSelect extends Component {
 			</div>
 		);
 	}
-};
+}
 
 FormSelect.contextTypes = {
 	formFieldId: PropTypes.string,

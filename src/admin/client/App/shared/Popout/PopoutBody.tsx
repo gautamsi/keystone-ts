@@ -6,7 +6,7 @@ import React from 'react';
 import blacklist from 'blacklist';
 import classnames from 'classnames';
 
-var PopoutBody = React.createClass({
+let PopoutBody = React.createClass({
 	displayName: 'PopoutBody',
 	propTypes: {
 		children: React.PropTypes.node.isRequired,

@@ -5,7 +5,7 @@ function ScreenReaderOnly ({ className, ...props }) {
 	props.className = css(classes.srOnly, className);
 
 	return <span {...props} />;
-};
+}
 
 const classes = {
 	srOnly: {

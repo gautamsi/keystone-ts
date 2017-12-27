@@ -1,4 +1,4 @@
-var demand = require('must');
+const demand = require('must');
 
 export const initList = function (List) {
 	List.add({
@@ -20,7 +20,7 @@ export const initList = function (List) {
 export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.text.updateItem(testItem, {
 				text: 'value',
 			}, function () {
@@ -30,7 +30,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.text'].updateItem(testItem, {
 				nested: {
 					text: 'value',
@@ -42,14 +42,14 @@ export const testFieldType = function (List) {
 		});
 
 		it('should truncate text with a length', function () {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				text: 'hello world',
 			});
 			demand(testItem._.text.crop(8)).be('hello wo');
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.text'].updateItem(testItem, {
 				'nested.text': 'value',
 			}, function () {
@@ -155,7 +155,7 @@ export const testFieldType = function (List) {
 
 	describe('validateRequiredInput', function () {
 		it('should validate input present', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.text.validateRequiredInput(testItem, { text: 'a' }, function (result) {
 				demand(result).be.true();
 				done();
@@ -163,7 +163,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate undefined', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.text.validateRequiredInput(testItem, { text: undefined }, function (result) {
 				demand(result).be.false();
 				done();
@@ -171,7 +171,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate undefined if a previous value exists', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				text: 'a',
 			});
 			List.fields.text.validateRequiredInput(testItem, { text: undefined }, function (result) {
@@ -181,7 +181,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate empty string', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.text.validateRequiredInput(testItem, { text: '' }, function (result) {
 				demand(result).be.false();
 				done();
@@ -189,7 +189,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate null', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.text.validateRequiredInput(testItem, { text: null }, function (result) {
 				demand(result).be.false();
 				done();
@@ -199,14 +199,14 @@ export const testFieldType = function (List) {
 
 	describe('addFilterToQuery', function () {
 		it('should return a regex with the "i" flag set', function () {
-			var result = List.fields.text.addFilterToQuery({
+			const result = List.fields.text.addFilterToQuery({
 				value: 'abc',
 			});
 			demand(result.text).eql(/abc/i);
 		});
 
 		it('should allow case sensitive matching', function () {
-			var result = List.fields.text.addFilterToQuery({
+			const result = List.fields.text.addFilterToQuery({
 				value: 'abc',
 				caseSensitive: true,
 			});
@@ -214,7 +214,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow inverted matching', function () {
-			var result = List.fields.text.addFilterToQuery({
+			const result = List.fields.text.addFilterToQuery({
 				value: 'abc',
 				inverted: true,
 			});
@@ -224,7 +224,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow exact matching', function () {
-			var result = List.fields.text.addFilterToQuery({
+			const result = List.fields.text.addFilterToQuery({
 				value: 'abc',
 				mode: 'exactly',
 			});
@@ -232,7 +232,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow matching the end', function () {
-			var result = List.fields.text.addFilterToQuery({
+			const result = List.fields.text.addFilterToQuery({
 				value: 'abc',
 				mode: 'endsWith',
 			});
@@ -240,7 +240,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow matching the start', function () {
-			var result = List.fields.text.addFilterToQuery({
+			const result = List.fields.text.addFilterToQuery({
 				value: 'abc',
 				mode: 'beginsWith',
 			});
@@ -248,7 +248,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow matching empty values in exact mode', function () {
-			var result = List.fields.text.addFilterToQuery({
+			const result = List.fields.text.addFilterToQuery({
 				mode: 'exactly',
 			});
 			demand(result.text).eql({
@@ -257,7 +257,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow matching non-empty values in exact mode with the inverted option', function () {
-			var result = List.fields.text.addFilterToQuery({
+			const result = List.fields.text.addFilterToQuery({
 				mode: 'exactly',
 				inverted: true,
 			});

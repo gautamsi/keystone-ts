@@ -1,4 +1,4 @@
-var fields = {
+const fields = {
 	get AzureFile () { return require('../fields/types/azurefile/AzureFileType'); },
 	get Boolean () { return require('../fields/types/boolean/BooleanType'); },
 	get CloudinaryImage () { return require('../fields/types/cloudinaryimage/CloudinaryImageType'); },

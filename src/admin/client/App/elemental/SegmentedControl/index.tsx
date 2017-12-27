@@ -45,7 +45,7 @@ function SegmentedControl ({
 				);
 			})}
 		</div>);
-};
+}
 
 const valuePropShape = [
 	PropTypes.bool,

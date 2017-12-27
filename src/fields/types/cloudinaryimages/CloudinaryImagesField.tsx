@@ -126,7 +126,7 @@ export = Field.create({
 		this.setState({ thumbnails: newThumbnails });
 	},
 	getCount (key) {
-		var count = 0;
+		let count = 0;
 
 		this.state.thumbnails.forEach((thumb) => {
 			if (thumb && thumb.props[key]) count++;

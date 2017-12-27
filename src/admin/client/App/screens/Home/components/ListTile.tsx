@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 /**
  * Displays information about a list and lets you create a new one.
  */
-var ListTile = React.createClass({
+let ListTile = React.createClass({
 	propTypes: {
 		count: React.PropTypes.string,
 		hideCreateButton: React.PropTypes.bool,
@@ -14,7 +14,7 @@ var ListTile = React.createClass({
 		spinner: React.PropTypes.object,
 	},
 	render () {
-		var opts = {
+		let opts = {
 			'data-list-path': this.props.path,
 		};
 		return (

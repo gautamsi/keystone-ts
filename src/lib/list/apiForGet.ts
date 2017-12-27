@@ -34,13 +34,13 @@ A function that transforms the object before it is sent as JSON.
 */
 
 export default function apiForGet (options) {
-	var idParam = options.id || 'id';
-	var List = this;
+	const idParam = options.id || 'id';
+	const List = this;
 	return function (req, res) {
-		var id = req.params[idParam];
-		var query = List.model.findById(id);
+		const id = req.params[idParam];
+		const query = List.model.findById(id);
 		if (typeof options.query === 'function') {
-			var result = options.query(query, req);
+			const result = options.query(query, req);
 			if (result === false) return;
 		} else if (typeof options.query === 'object') {
 			query.where(options.query);
@@ -57,4 +57,4 @@ export default function apiForGet (options) {
 			});
 		});
 	};
-};
+}

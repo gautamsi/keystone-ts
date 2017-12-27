@@ -12,7 +12,7 @@ function getDefaultValue () {
 	};
 }
 
-var BooleanFilter = React.createClass({
+let BooleanFilter = React.createClass({
 	propTypes: {
 		filter: React.PropTypes.shape({
 			value: React.PropTypes.bool,

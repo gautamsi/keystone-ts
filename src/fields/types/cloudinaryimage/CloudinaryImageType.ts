@@ -1,19 +1,19 @@
-var _ = require('lodash');
-var assign = require('object-assign');
-var ensureCallback = require('keystone-storage-namefunctions/ensureCallback');
-var FieldType = require('../Type');
-var keystone = require('../../../');
-var nameFunctions = require('keystone-storage-namefunctions');
-var prototypeMethods = require('keystone-storage-namefunctions/prototypeMethods');
-var sanitize = require('sanitize-filename');
-var util = require('util');
-var utils = require('keystone-utils');
+const _ = require('lodash');
+const assign = require('object-assign');
+const ensureCallback = require('keystone-storage-namefunctions/ensureCallback');
+const FieldType = require('../Type');
+const keystone = require('../../../');
+const nameFunctions = require('keystone-storage-namefunctions');
+const prototypeMethods = require('keystone-storage-namefunctions/prototypeMethods');
+const sanitize = require('sanitize-filename');
+const util = require('util');
+const utils = require('keystone-utils');
 
 /*
 var CLOUDINARY_FIELDS = ['public_id', 'version', 'signature', 'format', 'resource_type', 'url', 'width', 'height', 'secure_url'];
 */
 
-var DEFAULT_OPTIONS = {
+const DEFAULT_OPTIONS = {
 	// This makes Cloudinary assign a unique public_id and is the same as
 	//   the legacy implementation
 	generateFilename: () => undefined,
@@ -70,12 +70,12 @@ util.inherits(cloudinaryimage, FieldType);
  * Gets the folder for images in this field
  */
 cloudinaryimage.prototype.getFolder = function () {
-	var folder = null;
+	let folder = null;
 	if (keystone.get('cloudinary folders') || this.options.folder) {
 		if (typeof this.options.folder === 'string') {
 			folder = this.options.folder;
 		} else {
-			var folderList = keystone.get('cloudinary prefix') ? [keystone.get('cloudinary prefix')] : [];
+			const folderList = keystone.get('cloudinary prefix') ? [keystone.get('cloudinary prefix')] : [];
 			folderList.push(this.list.path);
 			folderList.push(this.path);
 			folder = folderList.join('/');
@@ -89,11 +89,11 @@ cloudinaryimage.prototype.getFolder = function () {
  */
 cloudinaryimage.prototype.addToSchema = function (schema) {
 
-	var cloudinary = require('cloudinary');
+	const cloudinary = require('cloudinary');
 
-	var field = this;
+	const field = this;
 
-	var paths = this.paths = {
+	const paths = this.paths = {
 		// cloudinary fields
 		public_id: this.path + '.public_id',
 		version: this.path + '.version',
@@ -111,7 +111,7 @@ cloudinaryimage.prototype.addToSchema = function (schema) {
 		select: this.path + '_select',
 	};
 
-	var schemaPaths = this._path.addTo({}, {
+	const schemaPaths = this._path.addTo({}, {
 		public_id: String,
 		version: Number,
 		signature: String,
@@ -125,7 +125,7 @@ cloudinaryimage.prototype.addToSchema = function (schema) {
 
 	schema.add(schemaPaths);
 
-	var exists = function (item) {
+	const exists = function (item) {
 		return (item.get(paths.public_id) ? true : false);
 	};
 
@@ -139,7 +139,7 @@ cloudinaryimage.prototype.addToSchema = function (schema) {
 		return schemaMethods.folder.apply(this);
 	});
 
-	var src = function (item, options) {
+	const src = function (item, options) {
 		if (!exists(item)) {
 			return '';
 		}
@@ -159,11 +159,11 @@ cloudinaryimage.prototype.addToSchema = function (schema) {
 		return cloudinary.url(item.get(paths.public_id), options);
 	};
 
-	var reset = function (item) {
+	const reset = function (item) {
 		item.set(field.path, getEmptyValue());
 	};
 
-	var addSize = function (options, width, height, other) {
+	const addSize = function (options, width, height, other) {
 		if (width) options.width = width;
 		if (height) options.height = height;
 		if (typeof other === 'object') {
@@ -172,7 +172,7 @@ cloudinaryimage.prototype.addToSchema = function (schema) {
 		return options;
 	};
 
-	var schemaMethods = {
+	const schemaMethods = {
 		exists: function () {
 			return exists(this);
 		},
@@ -226,8 +226,8 @@ cloudinaryimage.prototype.addToSchema = function (schema) {
 		 * @api public
 		 */
 		delete: function () {
-			var _this = this;
-			var promise = new Promise(function (resolve) {
+			const _this = this;
+			const promise = new Promise(function (resolve) {
 				cloudinary.uploader.destroy(_this.get(paths.public_id), function (result) {
 					resolve(result);
 				});
@@ -241,7 +241,7 @@ cloudinaryimage.prototype.addToSchema = function (schema) {
 		 * @api public
 		 */
 		upload: function (file, options) {
-			var promise = new Promise(function (resolve) {
+			const promise = new Promise(function (resolve) {
 				cloudinary.uploader.upload(file, function (result) {
 					resolve(result);
 				}, options);
@@ -273,7 +273,7 @@ cloudinaryimage.prototype.format = function (item) {
  * Gets the field's data from an Item, as used by the React components
  */
 cloudinaryimage.prototype.getData = function (item) {
-	var value = item.get(this.path);
+	const value = item.get(this.path);
 	return typeof value === 'object' ? value : {};
 };
 
@@ -316,8 +316,8 @@ function validateInput (value) {
  * Validates that a value for this field has been provided in a data object
  */
 cloudinaryimage.prototype.validateInput = function (data, callback) {
-	var value = this.getValueFromData(data);
-	var result = validateInput(value);
+	const value = this.getValueFromData(data);
+	const result = validateInput(value);
 	utils.defer(callback, result);
 };
 
@@ -328,7 +328,7 @@ cloudinaryimage.prototype.validateRequiredInput = function (item, data, callback
 	// TODO: We need to also get the `files` argument, so we can check for
 	// uploaded files. without it, this will return false negatives so we
 	// can't actually validate required input at the moment.
-	var result = true;
+	const result = true;
 	// var value = this.getValueFromData(data);
 	// var result = (value || item.get(this.path).public_id) ? true : false;
 	utils.defer(callback, result);
@@ -348,14 +348,14 @@ cloudinaryimage.prototype.inputIsValid = function () {
  * the end of the a url to dynamically convert the image filetype
  */
 function trimSupportedFileExtensions (publicId) {
-	var supportedExtensions = [
+	const supportedExtensions = [
 		'.jpg', '.jpe', '.jpeg', '.jpc', '.jp2', '.j2k', '.wdp', '.jxr',
 		'.hdp', '.png', '.gif', '.webp', '.bmp', '.tif', '.tiff', '.ico',
 		'.pdf', '.ps', '.ept', '.eps', '.eps3', '.psd', '.svg', '.ai',
 		'.djvu', '.flif', '.tga',
 	];
-	for (var i = 0; i < supportedExtensions.length; i++) {
-		var extension = supportedExtensions[i];
+	for (let i = 0; i < supportedExtensions.length; i++) {
+		const extension = supportedExtensions[i];
 		if (_.endsWith(publicId, extension)) {
 			return publicId.slice(0, -extension.length);
 		}
@@ -378,12 +378,12 @@ cloudinaryimage.prototype.updateItem = function (item, data, files, callback) {
 		files = {};
 	}
 
-	var cloudinary = require('cloudinary');
-	var field = this;
+	const cloudinary = require('cloudinary');
+	const field = this;
 
 	// Prepare values
-	var value = this.getValueFromData(data);
-	var uploadedFile;
+	let value = this.getValueFromData(data);
+	let uploadedFile;
 
 	// Providing the string "remove" removes the file and resets the field
 	if (value === 'remove') {
@@ -416,8 +416,8 @@ cloudinaryimage.prototype.updateItem = function (item, data, files, callback) {
 
 	// If we have a file to upload, we do that and stop here
 	if (uploadedFile) {
-		var tagPrefix = keystone.get('cloudinary prefix') || '';
-		var uploadOptions = {
+		let tagPrefix = keystone.get('cloudinary prefix') || '';
+		const uploadOptions = {
 			tags: [],
 		};
 		if (tagPrefix.length) {
@@ -428,7 +428,7 @@ cloudinaryimage.prototype.updateItem = function (item, data, files, callback) {
 		if (keystone.get('env') !== 'production') {
 			uploadOptions.tags.push(tagPrefix + 'dev');
 		}
-		var folder = this.getFolder();
+		const folder = this.getFolder();
 		if (folder) {
 			uploadOptions.folder = folder;
 		}
@@ -478,7 +478,7 @@ cloudinaryimage.prototype.retryFilename = prototypeMethods.retryFilename;
 cloudinaryimage.prototype.getFilename = prototypeMethods.getFilename;
 
 cloudinaryimage.prototype.fileExists = function (filename, callback) {
-	var cloudinary = require('cloudinary');
+	const cloudinary = require('cloudinary');
 	cloudinary.api.resource(filename, function (result) {
 		if (result.error && result.error.http_code === 404) {
 			// File doesn't exist
@@ -504,8 +504,8 @@ cloudinaryimage.prototype.fileExists = function (filename, callback) {
  */
 cloudinaryimage.prototype.getRequestHandler = function (item, req, paths, callback) {
 
-	var cloudinary = require('cloudinary');
-	var field = this;
+	const cloudinary = require('cloudinary');
+	const field = this;
 	if (utils.isFunction(paths)) {
 		callback = paths;
 		paths = field.paths;
@@ -516,7 +516,7 @@ cloudinaryimage.prototype.getRequestHandler = function (item, req, paths, callba
 
 	return function () {
 		if (req.body) {
-			var action = req.body[paths.action];
+			const action = req.body[paths.action];
 			if (/^(delete|reset)$/.test(action)) {
 				field.apply(item, action);
 			}
@@ -531,12 +531,12 @@ cloudinaryimage.prototype.getRequestHandler = function (item, req, paths, callba
 				}
 			});
 		} else if (req.files && req.files[paths.upload] && req.files[paths.upload].size) {
-			var tp = keystone.get('cloudinary prefix') || '';
-			var imageDelete;
+			let tp = keystone.get('cloudinary prefix') || '';
+			let imageDelete;
 			if (tp.length) {
 				tp += '_';
 			}
-			var uploadOptions = {
+			const uploadOptions = {
 				tags: [tp + field.list.path + '_' + field.path, tp + field.list.path + '_' + field.path + '_' + item.id],
 			};
 			if (keystone.get('cloudinary folders')) {
@@ -549,7 +549,7 @@ cloudinaryimage.prototype.getRequestHandler = function (item, req, paths, callba
 				uploadOptions.tags.push(tp + 'dev');
 			}
 			if (field.options.publicID) {
-				var publicIdValue = item.get(field.options.publicID);
+				const publicIdValue = item.get(field.options.publicID);
 				if (publicIdValue) {
 					uploadOptions.public_id = publicIdValue;
 				}
@@ -563,7 +563,7 @@ cloudinaryimage.prototype.getRequestHandler = function (item, req, paths, callba
 			}
 
 			// callback to be called upon completion of the 'upload' method
-			var uploadComplete = function (result) {
+			const uploadComplete = function (result) {
 				if (result.error) {
 					callback(result.error);
 				} else {

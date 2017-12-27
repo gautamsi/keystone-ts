@@ -22,7 +22,7 @@ function getDefaultValue () {
 	};
 }
 
-var NumberFilter = React.createClass({
+let NumberFilter = React.createClass({
 	statics: {
 		getDefaultValue: getDefaultValue,
 	},

@@ -1,7 +1,7 @@
-var FieldType = require('../Type');
-var TextType = require('../text/TextType');
-var util = require('util');
-var utils = require('keystone-utils');
+const FieldType = require('../Type');
+const TextType = require('../text/TextType');
+const util = require('util');
+const utils = require('keystone-utils');
 
 /**
  * Key FieldType Constructor
@@ -35,7 +35,7 @@ key.prototype.generateKey = function (str) {
  * Deprecated
  */
 key.prototype.inputIsValid = function (data, required, item) {
-	var value = this.getValueFromData(data);
+	let value = this.getValueFromData(data);
 	if (value === undefined && item && item.get(this.path)) {
 		return true;
 	}
@@ -47,7 +47,7 @@ key.prototype.inputIsValid = function (data, required, item) {
  * Updates the value for this field in the item from a data object
  */
 key.prototype.updateItem = function (item, data, callback) {
-	var value = this.getValueFromData(data);
+	let value = this.getValueFromData(data);
 	if (value === undefined) {
 		return process.nextTick(callback);
 	}

@@ -1,4 +1,4 @@
-var assign = require('object-assign');
+const assign = require('object-assign');
 
 /*
 	This middleware simplifies returning errors from the API.
@@ -27,8 +27,7 @@ export default function (req, res, next) {
 		// unpack { error, detail } objects passed as the error argument w/o detail argument
 		if (!detail && typeof error === 'object'
 			&& error.toString() === '[object Object]'
-			&& error.error && error.detail)
-		{
+			&& error.error && error.detail) {
 			detail = error.detail;
 			error = error.error;
 		}
@@ -40,7 +39,7 @@ export default function (req, res, next) {
 			detail = detail.name !== 'Error' ? detail.name + ': ' + detail.message : detail.message;
 		}
 		// send error as json
-		var data = typeof error === 'string' || (error && detail)
+		const data = typeof error === 'string' || (error && detail)
 			? { error: error, detail: detail }
 			: error;
 		res.json(data);
@@ -49,4 +48,4 @@ export default function (req, res, next) {
 		}, data);
 	};
 	next();
-};
+}

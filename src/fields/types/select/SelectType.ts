@@ -1,7 +1,7 @@
-var _ = require('lodash');
-var FieldType = require('../Type');
-var util = require('util');
-var utils = require('keystone-utils');
+const _ = require('lodash');
+const FieldType = require('../Type');
+const util = require('util');
+const utils = require('keystone-utils');
 
 /**
  * Select FieldType Constructor
@@ -21,7 +21,7 @@ function select (list, path, options) {
 		throw new Error('Select fields require an options array.');
 	}
 	this.ops = options.options.map(function (i) {
-		var op = typeof i === 'string' ? { value: i.trim(), label: utils.keyToLabel(i) } : i;
+		let op = typeof i === 'string' ? { value: i.trim(), label: utils.keyToLabel(i) } : i;
 		if (!_.isObject(op)) {
 			op = { label: '' + i, value: '' + i };
 		}
@@ -53,7 +53,7 @@ util.inherits(select, FieldType);
  * and retrieving all of the defined options.
  */
 select.prototype.addToSchema = function (schema) {
-	var field = this;
+	const field = this;
 	this.paths = {
 		data: this.options.dataPath || this.path + 'Data',
 		label: this.options.labelPath || this.path + 'Label',
@@ -86,7 +86,7 @@ select.prototype.addToSchema = function (schema) {
  * Returns a key value from the selected option
  */
 select.prototype.pluck = function (item, property, _default) {
-	var option = item.get(this.paths.data);
+	const option = item.get(this.paths.data);
 	return (option) ? option[property] : _default;
 };
 
@@ -108,7 +108,7 @@ select.prototype.cloneMap = function () {
  * Add filters to a query
  */
 select.prototype.addFilterToQuery = function (filter) {
-	var query = {};
+	const query = {};
 	if (!Array.isArray(filter.value)) {
 		if (filter.value) {
 			filter.value = [filter.value];
@@ -130,11 +130,11 @@ select.prototype.addFilterToQuery = function (filter) {
  * Asynchronously confirms that the provided value is valid
  */
 select.prototype.validateInput = function (data, callback) {
-	var value = this.getValueFromData(data);
+	let value = this.getValueFromData(data);
 	if (typeof value === 'string' && this.numeric) {
 		value = utils.number(value);
 	}
-	var result = value === undefined || value === null || value === '' || (value in this.map) ? true : false;
+	const result = value === undefined || value === null || value === '' || (value in this.map) ? true : false;
 	utils.defer(callback, result);
 };
 
@@ -142,8 +142,8 @@ select.prototype.validateInput = function (data, callback) {
  * Asynchronously confirms that the provided value is present
  */
 select.prototype.validateRequiredInput = function (item, data, callback) {
-	var value = this.getValueFromData(data);
-	var result = false;
+	const value = this.getValueFromData(data);
+	let result = false;
 	if (value === undefined) {
 		if (item.get(this.path)) {
 			result = true;

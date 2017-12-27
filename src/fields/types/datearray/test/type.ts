@@ -1,6 +1,6 @@
-var demand = require('must');
-var DateArrayType = require('../DateArrayType');
-var moment = require('moment');
+const demand = require('must');
+const DateArrayType = require('../DateArrayType');
+const moment = require('moment');
 
 export const initList = function (List) {
 	List.add({
@@ -26,7 +26,7 @@ export const testFieldType = function (List) {
 	});
 
 	it('should default to an empty array', function () {
-		var testItem = new List.model();
+		const testItem = new List.model();
 		demand(testItem.get('datearr')).eql([]);
 	});
 
@@ -177,7 +177,7 @@ export const testFieldType = function (List) {
 
 	describe('validateRequiredInput', function () {
 		it('should validate an array of dates', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.datearr.validateRequiredInput(testItem, {
 				datearr: ['2015-01-01', '2015-01-02'],
 			}, function (result) {
@@ -187,7 +187,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate a date', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.datearr.validateRequiredInput(testItem, {
 				datearr: '2015-01-01',
 			}, function (result) {
@@ -197,7 +197,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate a nested array of dates', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.datearr'].validateRequiredInput(testItem, {
 				nested: {
 					datearr: ['2015-01-01', '2015-01-02'],
@@ -218,7 +218,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an empty string', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.datearr.validateRequiredInput(testItem, {
 				datearr: '',
 			}, function (result) {
@@ -228,7 +228,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate undefined', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.datearr.validateRequiredInput(testItem, {
 				datearr: undefined,
 			}, function (result) {
@@ -238,7 +238,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate undefined if a value exists', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				datearr: ['2015-01-01'],
 			});
 			List.fields.datearr.validateRequiredInput(testItem, {
@@ -250,7 +250,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate null', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.datearr.validateRequiredInput(testItem, {
 				datearr: null,
 			}, function (result) {
@@ -260,7 +260,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an array with an empty string', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.datearr.validateRequiredInput(testItem, {
 				datearr: [''],
 			}, function (result) {
@@ -270,7 +270,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an array with empty strings', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.datearr.validateRequiredInput(testItem, {
 				datearr: ['2015-01-01', '', '2015-01-02'],
 			}, function (result) {
@@ -282,7 +282,7 @@ export const testFieldType = function (List) {
 
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.datearr.updateItem(testItem, {
 				datearr: ['2015-01-01', '2015-01-02', '2015-01-03', '2015-01-04'],
 			}, function () {
@@ -292,7 +292,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.datearr'].updateItem(testItem, {
 				nested: {
 					datearr: ['2015-01-01', '2015-01-02', '2015-01-03', '2015-01-04'],
@@ -304,7 +304,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.datearr'].updateItem(testItem, {
 				'nested.datearr': ['2015-01-01', '2015-01-02', '2015-01-03', '2015-01-04'],
 			}, function () {
@@ -315,7 +315,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update empty arrays', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.datearr.updateItem(testItem, {
 				datearr: [],
 			}, function () {
@@ -325,7 +325,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should be delete all items in the array when the data object is undefined', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.datearr.updateItem(testItem, {
 				datearr: ['2015-01-01', '2015-01-02', '2015-01-03', '2015-01-04'],
 			}, function () {
@@ -339,7 +339,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should default on null', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.datearr.updateItem(testItem, {
 				datearr: null,
 			}, function () {
@@ -349,7 +349,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow a single date value', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.datearr.updateItem(testItem, {
 				datearr: '2015-01-01',
 			}, function () {
@@ -362,7 +362,7 @@ export const testFieldType = function (List) {
 	describe('addFilterToQuery', function () {
 		describe('"some" present', function () {
 			it('should filter a specific date', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'some',
 					value: '2015-01-01',
 				});
@@ -375,7 +375,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter after a specific datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'some',
 					mode: 'after',
 					value: '2015-01-01',
@@ -388,7 +388,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter before a specific datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'some',
 					mode: 'before',
 					value: '2015-01-01',
@@ -401,7 +401,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter between two specified datearrs', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'some',
 					mode: 'between',
 					after: '2015-01-01',
@@ -416,7 +416,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode if no value is specified', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'some',
 					mode: 'between',
 				});
@@ -424,7 +424,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode without an after datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'some',
 					mode: 'between',
 					before: '2015-01-01',
@@ -433,7 +433,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode without a before datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'some',
 					mode: 'between',
 					after: '2015-01-01',
@@ -442,7 +442,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode with an invalid after datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'some',
 					mode: 'between',
 					after: 'notadatearr',
@@ -451,7 +451,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode with an invalid before datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'some',
 					mode: 'between',
 					before: 'notadatearr',
@@ -462,7 +462,7 @@ export const testFieldType = function (List) {
 
 		describe('"none" present', function () {
 			it('should filter a specific date', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'none',
 					value: '2015-01-01',
 				});
@@ -475,7 +475,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter after a specific datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'none',
 					mode: 'after',
 					value: '2015-01-01',
@@ -488,7 +488,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter before a specific datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'none',
 					mode: 'before',
 					value: '2015-01-01',
@@ -501,7 +501,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter between two specified datearrs', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'none',
 					mode: 'between',
 					after: '2015-01-01',
@@ -516,7 +516,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode if no value is specified', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'none',
 					mode: 'between',
 				});
@@ -524,7 +524,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode without an after datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'none',
 					mode: 'between',
 					before: '2015-01-01',
@@ -533,7 +533,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode without a before datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'none',
 					mode: 'between',
 					after: '2015-01-01',
@@ -542,7 +542,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode with an invalid after datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'none',
 					mode: 'between',
 					after: 'notadatearr',
@@ -551,7 +551,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode with an invalid before datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					presence: 'none',
 					mode: 'between',
 					before: 'notadatearr',
@@ -563,7 +563,7 @@ export const testFieldType = function (List) {
 		// Should default to "some" present behaviour
 		describe('no presence option specified', function () {
 			it('should filter a specific date', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					value: '2015-01-01',
 				});
 				demand(result.datearr).eql({
@@ -575,7 +575,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter after a specific datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					mode: 'after',
 					value: '2015-01-01',
 				});
@@ -587,7 +587,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter before a specific datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					mode: 'before',
 					value: '2015-01-01',
 				});
@@ -599,7 +599,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter between two specified datearrs', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					mode: 'between',
 					after: '2015-01-01',
 					before: '2016-01-01',
@@ -613,14 +613,14 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode if no value is specified', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					mode: 'between',
 				});
 				demand(result.datearr).be.undefined();
 			});
 
 			it('should not filter anything in between mode without an after datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					mode: 'between',
 					before: '2015-01-01',
 				});
@@ -628,7 +628,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode without a before datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					mode: 'between',
 					after: '2015-01-01',
 				});
@@ -636,7 +636,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode with an invalid after datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					mode: 'between',
 					after: 'notadatearr',
 				});
@@ -644,7 +644,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter anything in between mode with an invalid before datearr', function () {
-				var result = List.fields.datearr.addFilterToQuery({
+				const result = List.fields.datearr.addFilterToQuery({
 					mode: 'between',
 					before: 'notadatearr',
 				});
@@ -667,7 +667,7 @@ export const testFieldType = function (List) {
 	});
 
 	it('should validate no input', function () {
-		var testItem = new List.model();
+		const testItem = new List.model();
 		demand(List.fields.datearr.inputIsValid({})).be.true();
 		demand(List.fields.datearr.inputIsValid({}, true)).be.false();
 		testItem.datearr = ['2015-03-03'];

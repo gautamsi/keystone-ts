@@ -21,7 +21,7 @@ function ListHeaderTitle ({
 			/>
 		</h2>
 	);
-};
+}
 
 ListHeaderTitle.propTypes = {
 	activeSort: PropTypes.object,

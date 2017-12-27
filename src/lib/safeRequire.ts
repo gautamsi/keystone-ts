@@ -10,4 +10,4 @@ export default function safeRequire (library, feature) {
 
 		throw error;
 	}
-};
+}

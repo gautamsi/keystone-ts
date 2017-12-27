@@ -13,10 +13,10 @@
 
 export default function (keystone) {
 	return function frameGuard (req, res, next) {
-		var options = keystone.get('frame guard');
+		const options = keystone.get('frame guard');
 		if (options) {
 			res.header('x-frame-options', options);
 		}
 		next();
 	};
-};
+}

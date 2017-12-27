@@ -1,7 +1,7 @@
-var FieldType = require('../Type');
-var util = require('util');
-var utils = require('keystone-utils');
-var addPresenceToQuery = require('../../utils/addPresenceToQuery');
+const FieldType = require('../Type');
+const util = require('util');
+const utils = require('keystone-utils');
+const addPresenceToQuery = require('../../utils/addPresenceToQuery');
 
 /**
  * TextArray FieldType Constructor
@@ -36,8 +36,8 @@ textarray.prototype.format = function (item, separator) {
  * @param {String|Object} filter.value 		The value that is filtered for
  */
 textarray.prototype.addFilterToQuery = function (filter) {
-	var query = {};
-	var presence = filter.presence || 'some';
+	const query = {};
+	const presence = filter.presence || 'some';
 	// Filter empty/non-empty arrays
 	if (!filter.value) {
 		// "At least one element contains nothing"
@@ -54,7 +54,7 @@ textarray.prototype.addFilterToQuery = function (filter) {
 		};
 		return query;
 	}
-	var value = utils.escapeRegExp(filter.value);
+	let value = utils.escapeRegExp(filter.value);
 	if (filter.mode === 'beginsWith') {
 		value = '^' + value;
 	} else if (filter.mode === 'endsWith') {
@@ -77,8 +77,8 @@ textarray.prototype.addFilterToQuery = function (filter) {
  * Asynchronously confirms that the provided value is valid
  */
 textarray.prototype.validateInput = function (data, callback) {
-	var value = this.getValueFromData(data);
-	var result = true;
+	let value = this.getValueFromData(data);
+	let result = true;
 	// If the value is null, undefined or an empty string
 	// bail early since updateItem sanitizes that just fine
 	if (value !== undefined && value !== null && value !== '') {
@@ -87,8 +87,8 @@ textarray.prototype.validateInput = function (data, callback) {
 		if (!Array.isArray(value)) {
 			value = [value];
 		}
-		for (var i = 0; i < value.length; i++) {
-			var thisValue = value[i];
+		for (let i = 0; i < value.length; i++) {
+			const thisValue = value[i];
 			// If the current value is not a string and is neither false nor
 			// undefined, fail the validation
 			if (typeof thisValue !== 'string') {
@@ -104,8 +104,8 @@ textarray.prototype.validateInput = function (data, callback) {
  * Asynchronously confirms that the a value is present
  */
 textarray.prototype.validateRequiredInput = function (item, data, callback) {
-	var value = this.getValueFromData(data);
-	var result = false;
+	const value = this.getValueFromData(data);
+	let result = false;
 	// If the value is undefined and we have something stored already, validate
 	if (value === undefined) {
 		if (item.get(this.path) && item.get(this.path).length) {
@@ -119,9 +119,9 @@ textarray.prototype.validateRequiredInput = function (item, data, callback) {
 		}
 	// If it's an array of only strings and/or strinigfy-able data, validate
 	} else if (Array.isArray(value)) {
-		var invalidContent = false;
-		for (var i = 0; i < value.length; i++) {
-			var thisValue = value[i];
+		let invalidContent = false;
+		for (let i = 0; i < value.length; i++) {
+			const thisValue = value[i];
 			// If even a single item is not a string or an empty string, invalidate
 			if (typeof thisValue !== 'string' || thisValue === '') {
 				invalidContent = true;
@@ -141,7 +141,7 @@ textarray.prototype.validateRequiredInput = function (item, data, callback) {
  * Deprecated
  */
 textarray.prototype.inputIsValid = function (data, required, item) {
-	var value = this.getValueFromData(data);
+	const value = this.getValueFromData(data);
 	if (required) {
 		if (value === undefined && item && item.get(this.path) && item.get(this.path).length) {
 			return true;
@@ -161,7 +161,7 @@ textarray.prototype.inputIsValid = function (data, required, item) {
  * If the data object does not contain the value, then the value is set to empty array.
  */
 textarray.prototype.updateItem = function (item, data, callback) {
-	var value = this.getValueFromData(data);
+	let value = this.getValueFromData(data);
 	if (value === undefined || value === null || value === '') {
 		value = [];
 	}

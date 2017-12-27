@@ -9,12 +9,12 @@
  * @api private
  */
 
-var fs = require('fs');
+const fs = require('fs');
 
 export default function (keystone, app, callback) {
 
-	var unixSocket = keystone.get('unix socket');
-	var message = keystone.get('name') + ' is ready on ' + unixSocket;
+	const unixSocket = keystone.get('unix socket');
+	const message = keystone.get('name') + ' is ready on ' + unixSocket;
 
 	fs.unlink(unixSocket, function () {
 		// we expect err if the file is new so don't capture the argument
@@ -24,4 +24,4 @@ export default function (keystone, app, callback) {
 		fs.chmod(unixSocket, 0x777);
 	});
 
-};
+}

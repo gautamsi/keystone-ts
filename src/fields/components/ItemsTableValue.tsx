@@ -34,7 +34,7 @@ function ItemsTableValue ({
 	props.to = linkRef;
 
 	return <Component {...props} />;
-};
+}
 
 ItemsTableValue.propTypes = {
 	component: PropTypes.oneOfType([

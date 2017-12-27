@@ -3,10 +3,10 @@
  * describing the text index that should exist.
  */
 function buildSearchTextIndex () {
-	var idxDef = {};
+	const idxDef = {};
 
-	for (var i = 0; i < this.searchFields.length; i++) {
-		var sf = this.searchFields[i];
+	for (let i = 0; i < this.searchFields.length; i++) {
+		const sf = this.searchFields[i];
 		if (!sf.path || !sf.field) continue;
 
 		// TODO: Allow fields to define their own `getTextIndex` method, so that
@@ -17,9 +17,9 @@ function buildSearchTextIndex () {
 
 		// Does the field have a single path or does it use nested values (like 'name')
 		if (sf.field.paths) {
-			var nFields = sf.field.paths;
-			var nKeys = Object.keys(nFields);
-			for (var n = 0; n < nKeys.length; n++) {
+			const nFields = sf.field.paths;
+			const nKeys = Object.keys(nFields);
+			for (let n = 0; n < nKeys.length; n++) {
 				idxDef[nFields[nKeys[n]]] = 'text';
 			}
 		}

@@ -1,7 +1,7 @@
-var FieldType = require('../Type');
-var TextType = require('../text/TextType');
-var util = require('util');
-var utils = require('keystone-utils');
+const FieldType = require('../Type');
+const TextType = require('../text/TextType');
+const util = require('util');
+const utils = require('keystone-utils');
 
 
 /**

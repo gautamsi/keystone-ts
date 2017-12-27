@@ -20,7 +20,7 @@ const MODE_OPTIONS = [
 	{ label: 'Between', value: 'between' },
 ];
 
-var DayPickerIndicator = React.createClass({
+let DayPickerIndicator = React.createClass({
 	render () {
 		return (
 			<span className="DayPicker-Indicator">
@@ -41,7 +41,7 @@ function getDefaultValue () {
 	};
 }
 
-var DateFilter = React.createClass({
+let DateFilter = React.createClass({
 	displayName: 'DateFilter',
 	propTypes: {
 		filter: React.PropTypes.shape({

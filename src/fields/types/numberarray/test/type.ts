@@ -1,5 +1,5 @@
-var demand = require('must');
-var NumberArrayType = require('../NumberArrayType');
+const demand = require('must');
+const NumberArrayType = require('../NumberArrayType');
 
 export const initList = function (List) {
 	List.add({
@@ -25,7 +25,7 @@ export const testFieldType = function (List) {
 	});
 
 	it('should default to an empty array', function () {
-		var testItem = new List.model();
+		const testItem = new List.model();
 		demand(testItem.get('numarr')).eql([]);
 	});
 
@@ -184,7 +184,7 @@ export const testFieldType = function (List) {
 
 	describe('validateRequiredInput', function () {
 		it('should validate an array of numbers', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.validateRequiredInput(testItem, {
 				numarr: [1, 2, 3],
 			}, function (result) {
@@ -194,7 +194,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate a nested array of numbers', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.numarr'].validateRequiredInput(testItem, {
 				nested: {
 					numarr: [1, 2],
@@ -215,7 +215,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an empty string', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.validateRequiredInput(testItem, {
 				numarr: '',
 			}, function (result) {
@@ -225,7 +225,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate undefined', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.validateRequiredInput(testItem, {
 				numarr: undefined,
 			}, function (result) {
@@ -235,7 +235,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate undefined if a value exists', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				numarr: [1],
 			});
 			List.fields.numarr.validateRequiredInput(testItem, {
@@ -247,7 +247,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate null', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.validateRequiredInput(testItem, {
 				numarr: null,
 			}, function (result) {
@@ -257,7 +257,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an array with an empty string', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.validateRequiredInput(testItem, {
 				numarr: [''],
 			}, function (result) {
@@ -267,7 +267,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an array with empty strings', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.validateRequiredInput(testItem, {
 				numarr: [1, '', 2, '3'],
 			}, function (result) {
@@ -279,7 +279,7 @@ export const testFieldType = function (List) {
 
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.updateItem(testItem, {
 				numarr: [1, 2, 3, 42],
 			}, function () {
@@ -289,7 +289,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.numarr'].updateItem(testItem, {
 				nested: {
 					numarr: [1, 2, 3, 42],
@@ -301,7 +301,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.numarr'].updateItem(testItem, {
 				'nested.numarr': [1, 2, 3, 42],
 			}, function () {
@@ -311,7 +311,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update empty arrays', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.updateItem(testItem, {
 				numarr: [],
 			}, function () {
@@ -321,7 +321,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should delete all items of the array if the data object is undefined', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.updateItem(testItem, {
 				numarr: [1, 2, 3, 42],
 			}, function () {
@@ -335,7 +335,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should default on null', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.updateItem(testItem, {
 				numarr: null,
 			}, function () {
@@ -345,7 +345,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow a single numeric value', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.updateItem(testItem, {
 				numarr: 1,
 			}, function () {
@@ -355,7 +355,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should convert strings to numbers', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.updateItem(testItem, {
 				numarr: '1',
 			}, function () {
@@ -365,7 +365,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow decimals', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.updateItem(testItem, {
 				numarr: [0.1, '0.2'],
 			}, function () {
@@ -375,7 +375,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should ignore non-numeric strings and complex values', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.numarr.updateItem(testItem, {
 				numarr: ['1', 'two', {}, 42],
 			}, function () {
@@ -388,7 +388,7 @@ export const testFieldType = function (List) {
 	describe('addFilterToQuery', function () {
 		describe('"some" present', function () {
 			it('should filter for a specific number', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'some',
 					value: 10,
 				});
@@ -400,7 +400,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter greater than a specific number', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'some',
 					value: 0,
 					mode: 'gt',
@@ -413,7 +413,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter less than a specific number', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'some',
 					value: 10,
 					mode: 'lt',
@@ -426,7 +426,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter for existance', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'some',
 				});
 				demand(result.numarr).eql({
@@ -435,7 +435,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter between two numbers', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'some',
 					mode: 'between',
 					value: {
@@ -452,7 +452,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter between two number strings', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'some',
 					mode: 'between',
 					value: {
@@ -469,7 +469,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter if the value is NaN', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'some',
 					value: NaN,
 				});
@@ -477,7 +477,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter between two numbers if one is NaN', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'some',
 					mode: 'between',
 					value: {
@@ -491,7 +491,7 @@ export const testFieldType = function (List) {
 
 		describe('"none" present', function () {
 			it('should filter for a non-existing specific number', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'none',
 					value: 10,
 				});
@@ -503,7 +503,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter greater than a specific number', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'none',
 					value: 0,
 					mode: 'gt',
@@ -516,7 +516,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter less than a specific number', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'none',
 					value: 10,
 					mode: 'lt',
@@ -529,7 +529,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter for existance', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'none',
 				});
 				demand(result.numarr).eql({
@@ -540,7 +540,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter between two numbers', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'none',
 					mode: 'between',
 					value: {
@@ -557,7 +557,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter between two number strings', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'none',
 					mode: 'between',
 					value: {
@@ -574,7 +574,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter if the value is NaN', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'none',
 					value: NaN,
 				});
@@ -582,7 +582,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter between two numbers if one is NaN', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					presence: 'none',
 					mode: 'between',
 					value: {
@@ -597,7 +597,7 @@ export const testFieldType = function (List) {
 		// Should default to the "some" behaviour
 		describe('no presence option specified', function () {
 			it('should filter for a specific number', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					value: 10,
 				});
 				demand(result.numarr).eql({
@@ -608,7 +608,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter greater than a specific number', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					value: 0,
 					mode: 'gt',
 				});
@@ -620,7 +620,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter less than a specific number', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					value: 10,
 					mode: 'lt',
 				});
@@ -632,7 +632,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter for existance', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					mode: 'equals',
 				});
 				demand(result.numarr).eql({
@@ -641,7 +641,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter between two numbers', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					mode: 'between',
 					value: {
 						min: 0,
@@ -657,7 +657,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should filter between two number strings', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					mode: 'between',
 					value: {
 						min: '0',
@@ -673,14 +673,14 @@ export const testFieldType = function (List) {
 			});
 
 			it('should not filter if the value is NaN', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					value: NaN,
 				});
 				demand(result.numarr).be.undefined();
 			});
 
 			it('should not filter between two numbers if one is NaN', function () {
-				var result = List.fields.numarr.addFilterToQuery({
+				const result = List.fields.numarr.addFilterToQuery({
 					mode: 'between',
 					value: {
 						min: NaN,
@@ -704,7 +704,7 @@ export const testFieldType = function (List) {
 	});
 
 	it('should validate no input', function () {
-		var testItem = new List.model();
+		const testItem = new List.model();
 		demand(List.fields.numarr.inputIsValid({})).be.true();
 		demand(List.fields.numarr.inputIsValid({}, true)).be.false();
 		testItem.numarr = [1];

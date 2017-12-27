@@ -7,7 +7,7 @@ import InvalidFieldType from '../../../shared/InvalidFieldType';
 import { plural } from '../../../../utils/string';
 import { BlankState, Button, Form, Modal } from '../../../elemental';
 
-var UpdateForm = React.createClass({
+let UpdateForm = React.createClass({
 	displayName: 'UpdateForm',
 	propTypes: {
 		isOpen: React.PropTypes.bool,
@@ -41,7 +41,7 @@ var UpdateForm = React.createClass({
 		return Object.keys(fields).map(key => ({ value: fields[key].path, label: fields[key].label }));
 	},
 	getFieldProps (field) {
-		var props = assign({}, field);
+		let props = assign({}, field);
 		props.value = this.state.fields[field.path];
 		props.values = this.state.fields;
 		props.onChange = this.handleChange;
@@ -77,7 +77,7 @@ var UpdateForm = React.createClass({
 				formFields.push(React.createElement(InvalidFieldType, { type: field.type, path: field.path, key: field.path }));
 				return;
 			}
-			var fieldProps = this.getFieldProps(field);
+			let fieldProps = this.getFieldProps(field);
 			if (!focusRef) {
 				fieldProps.ref = focusRef = 'focusTarget';
 			}

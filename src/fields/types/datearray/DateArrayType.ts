@@ -1,9 +1,9 @@
-var FieldType = require('../Type');
-var moment = require('moment');
-var util = require('util');
-var utils = require('keystone-utils');
-var addPresenceToQuery = require('../../utils/addPresenceToQuery');
-var DateType = require('../date/DateType');
+const FieldType = require('../Type');
+const moment = require('moment');
+const util = require('util');
+const utils = require('keystone-utils');
+const addPresenceToQuery = require('../../utils/addPresenceToQuery');
+const DateType = require('../date/DateType');
 
 /**
  * Date FieldType Constructor
@@ -30,7 +30,7 @@ util.inherits(datearray, FieldType);
  * Formats the field value
  */
 datearray.prototype.format = function (item, format, separator) {
-	var value = item.get(this.path);
+	let value = item.get(this.path);
 	if (format || this.formatString) {
 		value = value.map(function (d) {
 			return moment(d).format(format || this._formatString);
@@ -43,14 +43,14 @@ datearray.prototype.format = function (item, format, separator) {
  * Asynchronously confirms that the provided value is valid
  */
 datearray.prototype.validateInput = function (data, callback) {
-	var value = this.getValueFromData(data);
-	var result = true;
+	let value = this.getValueFromData(data);
+	let result = true;
 	if (value !== undefined && value !== null && value !== '') {
 		if (!Array.isArray(value)) {
 			value = [value];
 		}
-		for (var i = 0; i < value.length; i++) {
-			var currentValue;
+		for (let i = 0; i < value.length; i++) {
+			let currentValue;
 			// If we pass it an epoch, parse it without the format string
 			if (typeof value[i] === 'number') {
 				currentValue = moment(value[i]);
@@ -71,8 +71,8 @@ datearray.prototype.validateInput = function (data, callback) {
  * Asynchronously confirms that the a value is present
  */
 datearray.prototype.validateRequiredInput = function (item, data, callback) {
-	var value = this.getValueFromData(data);
-	var result = false;
+	const value = this.getValueFromData(data);
+	let result = false;
 	// If the field is undefined but has a value saved already, validate
 	if (value === undefined) {
 		if (item.get(this.path) && item.get(this.path).length) {
@@ -85,9 +85,9 @@ datearray.prototype.validateRequiredInput = function (item, data, callback) {
 		}
 	// If it's an array of only dates and/or dateify-able data, validate
 	} else if (Array.isArray(value)) {
-		var invalidContent = false;
-		for (var i = 0; i < value.length; i++) {
-			var currentValue;
+		let invalidContent = false;
+		for (let i = 0; i < value.length; i++) {
+			let currentValue;
 			// If we pass it an epoch, parse it without the format string
 			if (typeof value[i] === 'number') {
 				currentValue = moment(value[i]);
@@ -118,8 +118,8 @@ datearray.prototype.validateRequiredInput = function (item, data, callback) {
  * @param {String|Object} filter.value 		The value that is filtered for
  */
 datearray.prototype.addFilterToQuery = function (filter) {
-	var dateTypeAddFilterToQuery = DateType.prototype.addFilterToQuery.bind(this);
-	var query = dateTypeAddFilterToQuery(filter);
+	const dateTypeAddFilterToQuery = DateType.prototype.addFilterToQuery.bind(this);
+	const query = dateTypeAddFilterToQuery(filter);
 	if (query[this.path]) {
 		query[this.path] = addPresenceToQuery(filter.presence || 'some', query[this.path]);
 	}
@@ -134,8 +134,8 @@ datearray.prototype.addFilterToQuery = function (filter) {
  */
 datearray.prototype.inputIsValid = function (data, required, item) {
 
-	var value = this.getValueFromData(data);
-	var parseFormatString = this.parseFormatString;
+	let value = this.getValueFromData(data);
+	const parseFormatString = this.parseFormatString;
 
 	if (typeof value === 'string') {
 		if (!moment(value, parseFormatString).isValid()) {
@@ -181,7 +181,7 @@ datearray.prototype.inputIsValid = function (data, required, item) {
  */
 datearray.prototype.updateItem = function (item, data, callback) {
 
-	var value = this.getValueFromData(data);
+	let value = this.getValueFromData(data);
 
 	if (Array.isArray(value)) {
 		// Only save valid dates

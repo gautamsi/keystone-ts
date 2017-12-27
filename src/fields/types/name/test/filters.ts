@@ -1,5 +1,5 @@
-var demand = require('must');
-var NameType = require('../NameType');
+const demand = require('must');
+const NameType = require('../NameType');
 
 export const initList = function (List) {
 	List.add({
@@ -55,7 +55,7 @@ function getTestItems () {
 			},
 		},
 	];
-};
+}
 
 export const getTestItems = getTestItems;
 

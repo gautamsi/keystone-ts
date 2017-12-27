@@ -8,7 +8,7 @@ import ListHeaderButton from './ListHeaderButton';
 
 import { setActiveColumns } from '../actions';
 
-var ListColumnsForm = React.createClass({
+let ListColumnsForm = React.createClass({
 	displayName: 'ListColumnsForm',
 	getInitialState () {
 		return {
@@ -17,7 +17,7 @@ var ListColumnsForm = React.createClass({
 		};
 	},
 	getSelectedColumnsFromStore () {
-		var selectedColumns = {};
+		let selectedColumns = {};
 		this.props.activeColumns.forEach(col => {
 			selectedColumns[col.path] = true;
 		});

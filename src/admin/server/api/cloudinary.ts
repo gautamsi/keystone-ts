@@ -4,18 +4,18 @@ TODO: Needs Review and Spec
 
 export default {
 	upload: function (req, res) {
-		var cloudinary = require('cloudinary');
-		var keystone = req.keystone;
+		const cloudinary = require('cloudinary');
+		const keystone = req.keystone;
 
 		if (req.files && req.files.file) {
-			var options = {};
+			const options = {};
 
 			if (keystone.get('wysiwyg cloudinary images filenameAsPublicID')) {
 				options.public_id = req.files.file.originalname.substring(0, req.files.file.originalname.lastIndexOf('.'));
 			}
 
 			cloudinary.uploader.upload(req.files.file.path, function (result) {
-				var sendResult = function () {
+				const sendResult = function () {
 					if (result.error) {
 						res.send({ error: { message: result.error.message } });
 					} else {
@@ -35,10 +35,10 @@ export default {
 		}
 	},
 	autocomplete: function (req, res) {
-		var cloudinary = require('cloudinary');
-		var max = req.query.max || 10;
-		var prefix = req.query.prefix || '';
-		var next = req.query.next || null;
+		const cloudinary = require('cloudinary');
+		const max = req.query.max || 10;
+		const prefix = req.query.prefix || '';
+		const next = req.query.next || null;
 
 		cloudinary.api.resources(function (result) {
 			if (result.error) {
@@ -57,7 +57,7 @@ export default {
 		});
 	},
 	get: function (req, res) {
-		var cloudinary = require('cloudinary');
+		const cloudinary = require('cloudinary');
 		cloudinary.api.resource(req.query.id, function (result) {
 			if (result.error) {
 				res.json({ error: { message: result.error.message } });

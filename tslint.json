@@ -1,12 +1,22 @@
 {
+    "linterOptions": {
+        "exclude": [
+            "src/**/*.tsx"
+        ]
+    },
     "rules": {
+        "trailing-comma": [false, {"multiline": "always", "singleline": "never"}],
         "class-name": true,
+        "eofline": true,
+        "triple-equals": [true, "allow-null-check"],
+        "forin": true,
+        "curly": [true, "ignore-same-line"],
         "comment-format": [
             true,
             "check-space"
         ],
         "indent": [
-            true,
+            false,
             "spaces"
         ],
         "one-line": [
@@ -17,8 +27,9 @@
         "no-var-keyword": true,
         "quotemark": [
             true,
-            "double",
-            "avoid-escape"
+            "single",
+            "avoid-escape",
+            "jsx-double"
         ],
         "semicolon": [
             true,
@@ -53,8 +64,8 @@
         ],
         "no-internal-module": true,
         "no-trailing-whitespace": true,
-        "no-null-keyword": true,
-        "prefer-const": true,
-        "jsdoc-format": true
+        "no-null-keyword": false,
+        "prefer-const": false,
+        "jsdoc-format": false
     }
 }

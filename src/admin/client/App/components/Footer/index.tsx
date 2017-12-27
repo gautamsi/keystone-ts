@@ -8,7 +8,7 @@ import { css } from 'glamor';
 import { Container } from '../../elemental';
 import theme from '../../../theme';
 
-var Footer = React.createClass({
+let Footer = React.createClass({
 	displayName: 'Footer',
 	propTypes: {
 		appversion: React.PropTypes.string,

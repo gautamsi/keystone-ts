@@ -43,7 +43,7 @@ function getDefaultValue () {
 	};
 }
 
-var DateFilter = React.createClass({
+let DateFilter = React.createClass({
 	displayName: 'DateFilter',
 	propTypes: {
 		filter: PropTypes.shape({

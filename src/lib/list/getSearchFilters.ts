@@ -1,8 +1,8 @@
-var _ = require('lodash');
-var moment = require('moment');
-var utils = require('keystone-utils');
+const _ = require('lodash');
+const moment = require('moment');
+const utils = require('keystone-utils');
 
-var debug = require('debug')('keystone:core:list:getSearchFilters');
+const debug = require('debug')('keystone:core:list:getSearchFilters');
 
 /**
  * Gets filters for a Mongoose query that will search for the provided string,
@@ -21,8 +21,8 @@ var debug = require('debug')('keystone:core:list:getSearchFilters');
  * @param {Object} additional filters
  */
 function getSearchFilters (search, add) {
-	var filters = {};
-	var list = this;
+	let filters = {};
+	const list = this;
 
 	search = String(search || '').trim();
 
@@ -35,13 +35,13 @@ function getSearchFilters (search, add) {
 			filters.$text = { $search: search };
 		}
 		else {
-			var searchFilter;
-			var searchParts = search.split(' ');
-			var searchRx = new RegExp(utils.escapeRegExp(search), 'i');
-			var splitSearchRx = new RegExp((searchParts.length > 1) ? _.map(searchParts, utils.escapeRegExp).join('|') : search, 'i');
-			var searchFields = this.get('searchFields');
-			var searchFilters = [];
-			var searchIdField = utils.isValidObjectId(search);
+			let searchFilter;
+			const searchParts = search.split(' ');
+			const searchRx = new RegExp(utils.escapeRegExp(search), 'i');
+			const splitSearchRx = new RegExp((searchParts.length > 1) ? _.map(searchParts, utils.escapeRegExp).join('|') : search, 'i');
+			let searchFields = this.get('searchFields');
+			const searchFilters = [];
+			const searchIdField = utils.isValidObjectId(search);
 
 			if (typeof searchFields === 'string') {
 				searchFields = searchFields.split(',');
@@ -54,12 +54,12 @@ function getSearchFilters (search, add) {
 					path = list.mappings.name;
 				}
 
-				var field = list.fields[path];
+				const field = list.fields[path];
 
 				if (field && field.type === 'name') {
-					var first = {};
+					const first = {};
 					first[field.paths.first] = splitSearchRx;
-					var last = {};
+					const last = {};
 					last[field.paths.last] = splitSearchRx;
 					searchFilter = {};
 					searchFilter.$or = [first, last];
@@ -93,9 +93,9 @@ function getSearchFilters (search, add) {
 
 	if (add) {
 		_.forEach(add, function (filter) {
-			var cond;
-			var path = filter.key;
-			var value = filter.value;
+			let cond;
+			const path = filter.key;
+			let value = filter.value;
 
 			switch (filter.field.type) {
 				case 'boolean':
@@ -117,7 +117,7 @@ function getSearchFilters (search, add) {
 
 				case 'location':
 					_.forEach(['street1', 'suburb', 'state', 'postcode', 'country'], function (pathKey, i) {
-						var value = filter.value[i];
+						const value = filter.value[i];
 						if (value) {
 							filters[filter.field.paths[pathKey]] = new RegExp(utils.escapeRegExp(value), 'i');
 						}
@@ -199,8 +199,8 @@ function getSearchFilters (search, add) {
 					} else {
 						value = moment(value);
 						if (value && value.isValid()) {
-							var start = moment(value).startOf('day').toDate();
-							var end = moment(value).endOf('day').toDate();
+							const start = moment(value).startOf('day').toDate();
+							const end = moment(value).endOf('day').toDate();
 							if (filter.operator === 'gt') {
 								filters[path] = { $gt: end };
 							} else if (filter.operator === 'lt') {
@@ -239,7 +239,7 @@ function getSearchFilters (search, add) {
 		});
 	}
 
-	debug('Applying filters to list \'' + list.key + '\':', filters);
+	debug("Applying filters to list '" + list.key + "':", filters);
 	return filters;
 }
 

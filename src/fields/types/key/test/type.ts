@@ -1,6 +1,6 @@
-var demand = require('must');
-var KeyType = require('../KeyType');
-var TextType = require('../../text/TextType');
+const demand = require('must');
+const KeyType = require('../KeyType');
+const TextType = require('../../text/TextType');
 
 export const initList = function (List) {
 	List.add({
@@ -15,7 +15,7 @@ export const initList = function (List) {
 export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.key.updateItem(testItem, {
 				key: 'foobar',
 			}, function () {
@@ -25,7 +25,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.key'].updateItem(testItem, {
 				nested: {
 					key: 'foobar',
@@ -37,7 +37,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.key'].updateItem(testItem, {
 				'nested.key': 'foobar',
 			}, function () {
@@ -47,7 +47,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update the item with a slugified value', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.key.updateItem(testItem, {
 				key: 'A b ç',
 			}, function () {
@@ -57,7 +57,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should use the separator option for the slugified value', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.customSeparator.updateItem(testItem, {
 				customSeparator: 'A b ç',
 			}, function () {
@@ -93,21 +93,21 @@ export const testFieldType = function (List) {
 	/* Deprecated inputIsValid method tests */
 
 	it('should invalidate input with stripped characters', function () {
-		var testItem = new List.model();
+		const testItem = new List.model();
 		List.fields.key.inputIsValid({
 			key: '()',
 		}, true, testItem).must.be.false();
 	});
 
 	it('should invalidate input with just whitespace', function () {
-		var testItem = new List.model();
+		const testItem = new List.model();
 		List.fields.key.inputIsValid({
 			key: ' ',
 		}, true, testItem).must.be.false();
 	});
 
 	it('should validate input with non-key characters', function () {
-		var testItem = new List.model();
+		const testItem = new List.model();
 		List.fields.key.inputIsValid({
 			key: 'A b',
 		}, true, testItem).must.be.true();

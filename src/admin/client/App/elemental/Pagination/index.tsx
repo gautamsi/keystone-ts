@@ -77,7 +77,7 @@ class Pagination extends Component {
 			</div>
 		);
 	}
-};
+}
 
 const classes = {
 	container: {

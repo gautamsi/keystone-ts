@@ -100,7 +100,7 @@ export const EditFormHeader = React.createClass({
 		);
 	},
 	renderSearch () {
-		var list = this.props.list;
+		let list = this.props.list;
 		return (
 			<form action={`${Keystone.adminPath}/${list.path}`} className="EditForm__header__search">
 				<EditFormHeaderSearch

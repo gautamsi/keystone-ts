@@ -1,9 +1,9 @@
-var _ = require('lodash');
-var express = require('express');
-var grappling = require('grappling-hook');
-var path = require('path');
-var utils = require('keystone-utils');
-var importer = require('./lib/core/importer');
+import * as _ from 'lodash';
+import * as express from 'express';
+import * as grappling from 'grappling-hook';
+import * as path from 'path';
+import * as utils from 'keystone-utils';
+import importer from './lib/core/importer';
 
 /**
  * Don't use process.cwd() as it breaks module encapsulation
@@ -11,8 +11,8 @@ var importer = require('./lib/core/importer');
  * This way, the consuming app/module can be an embedded node_module and path resolutions will still work
  * (process.cwd() breaks module encapsulation if the consuming app/module is itself a node_module)
  */
-var moduleRoot = (function (_rootPath) {
-	var parts = _rootPath.split(path.sep);
+let moduleRoot = (function (_rootPath) {
+	let parts = _rootPath.split(path.sep);
 	parts.pop(); // get rid of /node_modules from the end of the path
 	return parts.join(path.sep);
 })(module.parent ? module.parent.paths[0] : module.paths[0]);
@@ -21,7 +21,7 @@ var moduleRoot = (function (_rootPath) {
 /**
  * Keystone Class
  */
-var Keystone = function () {
+let Keystone = function () {
 	grappling.mixin(this).allowHooks('pre:static', 'pre:bodyparser', 'pre:session', 'pre:logger', 'pre:admin', 'pre:routes', 'pre:render', 'updates', 'signin', 'signout');
 	this.lists = {};
 	this.fieldTypes = {};
@@ -99,7 +99,7 @@ _.extend(Keystone.prototype, require('./lib/core/options'));
 
 
 Keystone.prototype.prefixModel = function (key) {
-	var modelPrefix = this.get('model prefix');
+	let modelPrefix = this.get('model prefix');
 
 	if (modelPrefix) {
 		key = modelPrefix + '_' + key;
@@ -136,7 +136,7 @@ Keystone.prototype.routes = function () {
 /**
  * The exports object is an instance of Keystone.
  */
-var keystone = module.exports = new Keystone();
+let keystone = module.exports = new Keystone();
 
 /*
 	Note: until #1777 is complete, the order of execution here with the requires
@@ -182,7 +182,7 @@ Keystone.prototype.import = function (dirname) {
  */
 
 Keystone.prototype.applyUpdates = function (callback) {
-	var self = this;
+	let self = this;
 	self.callHook('pre:updates', function (err) {
 		if (err) return callback(err);
 		require('./lib/updates').apply(function (err) {
@@ -200,7 +200,7 @@ Keystone.prototype.applyUpdates = function (callback) {
 Keystone.prototype.console = {};
 Keystone.prototype.console.err = function (type, msg) {
 	if (keystone.get('logger')) {
-		var dashes = '\n------------------------------------------------\n';
+		let dashes = '\n------------------------------------------------\n';
 		console.log(dashes + 'KeystoneJS: ' + type + ':\n\n' + msg + dashes);
 	}
 };

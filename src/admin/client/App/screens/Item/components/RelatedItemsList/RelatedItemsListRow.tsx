@@ -50,7 +50,7 @@ RelatedItemsListRow.propTypes = {
 	connectDragPreview: PropTypes.func, // eslint-disable-line react/sort-prop-types
 };
 
-export = exports = RelatedItemsListRow;
+export default RelatedItemsListRow;
 
 // Expose Sortable
 
@@ -135,7 +135,7 @@ function dropProps (connect) {
 	return {
 		connectDropTarget: connect.dropTarget(),
 	};
-};
+}
 
 // export const Sortable = RelatedItemsListRow;
 export const Sortable = DragSource('item', dragItem, dragProps)(DropTarget('item', dropItem, dropProps)(RelatedItemsListRow));

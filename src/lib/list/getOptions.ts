@@ -1,10 +1,10 @@
-var _ = require('lodash');
+const _ = require('lodash');
 
 /**
  * Gets the options for the List, as used by the React components
  */
 function getOptions () {
-	var ops = {
+	const ops = {
 		autocreate: this.options.autocreate,
 		autokey: this.autokey,
 		defaultColumns: this.options.defaultColumns,

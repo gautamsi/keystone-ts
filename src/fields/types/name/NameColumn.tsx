@@ -3,7 +3,7 @@ import ItemsTableCell from '../../components/ItemsTableCell';
 import ItemsTableValue from '../../components/ItemsTableValue';
 import displayName from 'display-name';
 
-var NameColumn = React.createClass({
+let NameColumn = React.createClass({
 	displayName: 'NameColumn',
 	propTypes: {
 		col: React.PropTypes.object,
@@ -11,7 +11,7 @@ var NameColumn = React.createClass({
 		linkTo: React.PropTypes.string,
 	},
 	renderValue () {
-		var value = this.props.data.fields[this.props.col.path];
+		let value = this.props.data.fields[this.props.col.path];
 		if (!value || (!value.first && !value.last)) return '(no name)';
 		return displayName(value.first, value.last);
 	},

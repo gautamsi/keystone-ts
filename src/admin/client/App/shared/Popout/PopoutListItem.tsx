@@ -6,7 +6,7 @@ import React from 'react';
 import blacklist from 'blacklist';
 import classnames from 'classnames';
 
-var PopoutListItem = React.createClass({
+let PopoutListItem = React.createClass({
 	displayName: 'PopoutListItem',
 	propTypes: {
 		icon: React.PropTypes.string,

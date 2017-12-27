@@ -15,7 +15,7 @@ function Page ({
 	return (
 		<button {...props} />
 	);
-};
+}
 
 Page.propTypes = {
 	disabled: PropTypes.bool,

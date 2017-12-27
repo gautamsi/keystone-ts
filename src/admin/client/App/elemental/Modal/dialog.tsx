@@ -91,7 +91,7 @@ class ModalDialog extends Component {
 			</Portal>
 		);
 	}
-};
+}
 
 ModalDialog.propTypes = {
 	backdropClosesModal: PropTypes.bool,

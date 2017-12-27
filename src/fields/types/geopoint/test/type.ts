@@ -1,5 +1,5 @@
-var demand = require('must');
-var GeoPointType = require('../GeoPointType');
+const demand = require('must');
+const GeoPointType = require('../GeoPointType');
 
 export const initList = function (List) {
 	List.add({
@@ -13,7 +13,7 @@ export const initList = function (List) {
 export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.geo.updateItem(testItem, {
 				geo: [1, 2],
 			}, function () {
@@ -24,7 +24,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.geo'].updateItem(testItem, {
 				nested: {
 					geo: [1, 2],
@@ -37,7 +37,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.geo'].updateItem(testItem, {
 				'nested.geo': [1, 2],
 			}, function () {
@@ -203,7 +203,7 @@ export const testFieldType = function (List) {
 
 	describe('validateRequiredInput', function () {
 		it('should validate an array with two items as input', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.geo.validateRequiredInput(testItem, {
 				geo: [2, 3],
 			}, function (result) {
@@ -213,7 +213,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate a well-formatted string as input', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.geo.validateRequiredInput(testItem, {
 				geo: '3.14, 1.59',
 			}, function (result) {
@@ -223,7 +223,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate undefined', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.geo.validateRequiredInput(testItem, {
 				geo: undefined,
 			}, function (result) {
@@ -233,7 +233,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate undefined if a previous value exists', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				geo: [3.14, 1.5],
 			});
 			List.fields.geo.validateRequiredInput(testItem, {
@@ -245,7 +245,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate empty string', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.geo.validateRequiredInput(testItem, {
 				geo: '',
 			}, function (result) {
@@ -255,7 +255,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate null', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.geo.validateRequiredInput(testItem, {
 				geo: null,
 			}, function (result) {
@@ -267,7 +267,7 @@ export const testFieldType = function (List) {
 
 	describe('addFilterToQuery', function () {
 		it('should filter for a latitude and a longitude with a maximum distance', function () {
-			var result = List.fields.geo.addFilterToQuery({
+			const result = List.fields.geo.addFilterToQuery({
 				lat: 33,
 				lon: 151,
 				distance: {
@@ -288,7 +288,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter for a latitude and a longitude with a minimum distance', function () {
-			var result = List.fields.geo.addFilterToQuery({
+			const result = List.fields.geo.addFilterToQuery({
 				lat: 31,
 				lon: 151,
 				distance: {
@@ -309,7 +309,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should default to max distance', function () {
-			var result = List.fields.geo.addFilterToQuery({
+			const result = List.fields.geo.addFilterToQuery({
 				lat: 31,
 				lon: 151,
 				distance: {
@@ -330,7 +330,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should default to a 500km radius', function () {
-			var result = List.fields.geo.addFilterToQuery({
+			const result = List.fields.geo.addFilterToQuery({
 				lat: 31,
 				lon: 151,
 				distance: {
@@ -351,7 +351,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should not filter anything if the latitude is undefined', function () {
-			var result = List.fields.geo.addFilterToQuery({
+			const result = List.fields.geo.addFilterToQuery({
 				lat: undefined,
 				lon: 151,
 			});
@@ -360,7 +360,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should not filter anything if the longitude is undefined', function () {
-			var result = List.fields.geo.addFilterToQuery({
+			const result = List.fields.geo.addFilterToQuery({
 				lat: 31,
 				lon: undefined,
 			});

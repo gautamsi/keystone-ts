@@ -9,7 +9,7 @@ const moreIndicatorStyle = {
 	marginLeft: 8,
 };
 
-var RelationshipColumn = React.createClass({
+let RelationshipColumn = React.createClass({
 	displayName: 'RelationshipColumn',
 	propTypes: {
 		col: React.PropTypes.object,

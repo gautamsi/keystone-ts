@@ -207,7 +207,7 @@ function lists (state = initialState, action) {
 			const item = currentItems[action.prevIndex];
 			// Remove item at prevIndex from array and save that array in
 			// itemsWithoutItem
-			let itemsWithoutItem = currentItems
+			const itemsWithoutItem = currentItems
 				.slice(0, action.prevIndex)
 				.concat(
 					currentItems.slice(

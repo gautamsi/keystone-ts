@@ -1,22 +1,22 @@
-var _ = require('lodash');
-var session = require('express-session');
-var cookieParser = require('cookie-parser');
-var debug = require('debug')('keystone:core:initExpressSession');
-var Promise = require('es6-promise').Promise;
-var safeRequire = require('../safeRequire');
+const _ = require('lodash');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const debug = require('debug')('keystone:core:initExpressSession');
+const Promise = require('es6-promise').Promise;
+const safeRequire = require('../safeRequire');
 
 export default function initExpressSession (mongoose) {
 
 	if (this.expressSession) return this;
 
-	var sessionStorePromise;
+	let sessionStorePromise;
 
 	// Initialise and validate session options
 	if (!this.get('cookie secret')) {
 		console.error('\nKeystoneJS Configuration Error:\n\nPlease provide a `cookie secret` value for session encryption.\n');
 		process.exit(1);
 	}
-	var sessionOptions = this.get('session options');
+	let sessionOptions = this.get('session options');
 
 	if (typeof sessionOptions !== 'object') {
 		sessionOptions = {};
@@ -36,13 +36,13 @@ export default function initExpressSession (mongoose) {
 
 	sessionOptions.cookieParser = cookieParser(this.get('cookie secret'));
 
-	var sessionStore = this.get('session store');
+	let sessionStore = this.get('session store');
 
 	if (typeof sessionStore === 'function') {
 		sessionOptions.store = sessionStore(session);
 	} else if (sessionStore) {
 
-		var sessionStoreOptions = this.get('session store options') || {};
+		const sessionStoreOptions = this.get('session store options') || {};
 
 		// Perform any session store specific configuration or exit on an unsupported session store
 
@@ -103,7 +103,7 @@ export default function initExpressSession (mongoose) {
 		}
 
 		// Initialize the session store
-		var SessionStore = safeRequire(sessionStore, this.get('session store') + ' as a `session store` option')(session);
+		const SessionStore = safeRequire(sessionStore, this.get('session store') + ' as a `session store` option')(session);
 
 		sessionStorePromise = new Promise(
 			function (resolve, reject) {
@@ -126,4 +126,4 @@ export default function initExpressSession (mongoose) {
 	this.sessionStorePromise = sessionStorePromise;
 
 	return this;
-};
+}

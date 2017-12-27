@@ -4,7 +4,7 @@ import ItemsTableValue from '../../components/ItemsTableValue';
 
 const SUB_FIELDS = ['street1', 'suburb', 'state', 'postcode', 'country'];
 
-var LocationColumn = React.createClass({
+let LocationColumn = React.createClass({
 	displayName: 'LocationColumn',
 	propTypes: {
 		col: React.PropTypes.object,

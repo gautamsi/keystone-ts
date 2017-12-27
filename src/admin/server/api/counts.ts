@@ -1,8 +1,8 @@
-var async = require('async');
+const async = require('async');
 
 export default function (req, res) {
-	var keystone = req.keystone;
-	var counts = {};
+	const keystone = req.keystone;
+	const counts = {};
 	async.each(keystone.lists, function (list, next) {
 		list.model.count(function (err, count) {
 			counts[list.key] = count;
@@ -14,4 +14,4 @@ export default function (req, res) {
 			counts: counts,
 		});
 	});
-};
+}

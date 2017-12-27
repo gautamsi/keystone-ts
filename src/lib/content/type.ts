@@ -3,7 +3,7 @@
  * @api private
  */
 
-var Type = function (path, options) { // eslint-disable-line no-unused-vars
+const Type = function (path, options) { // eslint-disable-line no-unused-vars
 	// TODO
 };
 

@@ -1,17 +1,17 @@
 /*!
  * Module dependencies.
  */
-var _ = require('lodash');
-var assign = require('object-assign');
-var di = require('asyncdi');
-var marked = require('marked');
-var Path = require('../../lib/path');
-var utils = require('keystone-utils');
-var evalDependsOn = require('../utils/evalDependsOn.js');
-var definePrototypeGetters = require('../utils/definePrototypeGetters.js');
-var debug = require('debug')('keystone:fields:types:Type');
+const _ = require('lodash');
+const assign = require('object-assign');
+const di = require('asyncdi');
+const marked = require('marked');
+const Path = require('../../lib/path');
+const utils = require('keystone-utils');
+const evalDependsOn = require('../utils/evalDependsOn.js');
+const definePrototypeGetters = require('../utils/definePrototypeGetters.js');
+const debug = require('debug')('keystone:fields:types:Type');
 
-var DEFAULT_OPTION_KEYS = [
+const DEFAULT_OPTION_KEYS = [
 	'path',
 	'paths',
 	'type',
@@ -69,7 +69,7 @@ function Field (list, path, options) {
 
 	// if dependsOn and required, set required to a function for validation
 	if (this.options.dependsOn && this.options.required === true) {
-		var opts = this.options;
+		const opts = this.options;
 		this.options.required = function () {
 			// `this` refers to the validating document
 			debug('validate dependsOn required', evalDependsOn(opts.dependsOn, this.toObject()));
@@ -86,7 +86,7 @@ function Field (list, path, options) {
 	}
 
 	// Convert notes from markdown to html
-	var note = null;
+	let note = null;
 	Object.defineProperty(this, 'note', {
 		get: function () {
 			return (note === null) ? (note = (this.options.note) ? marked(this.options.note) : '') : note;
@@ -101,7 +101,7 @@ function Field (list, path, options) {
 Field.prototype.getOptions = function () {
 	if (!this.__options) {
 		this.__options = {};
-		var optionKeys = DEFAULT_OPTION_KEYS;
+		let optionKeys = DEFAULT_OPTION_KEYS;
 		if (_.isArray(this._properties)) {
 			optionKeys = optionKeys.concat(this._properties);
 		}
@@ -127,7 +127,7 @@ Field.prototype.getOptions = function () {
  */
 Field.prototype.getSize = function () {
 	if (!this.__size) {
-		var size = this._fixedSize || this.options.size || this.options.width;
+		let size = this._fixedSize || this.options.size || this.options.width;
 		if (size !== 'small' && size !== 'medium' && size !== 'large' && size !== 'full') {
 			size = this._defaultSize || 'full';
 		}
@@ -154,8 +154,8 @@ Field.prototype.getData = function (item) {
  * Field watching implementation
  */
 Field.prototype.getPreSaveWatcher = function () {
-	var field = this;
-	var applyValue;
+	const field = this;
+	let applyValue;
 
 	if (this.options.watch === true) {
 		// watch == true means always apply the value method
@@ -169,7 +169,7 @@ Field.prototype.getPreSaveWatcher = function () {
 			applyValue = this.options.watch;
 		} else if (_.isArray(this.options.watch)) {
 			applyValue = function (item) {
-				var pass = false;
+				let pass = false;
 				field.options.watch.forEach(function (path) {
 					if (item.isModified(path)) pass = true;
 				});
@@ -177,7 +177,7 @@ Field.prototype.getPreSaveWatcher = function () {
 			};
 		} else if (_.isObject(this.options.watch)) {
 			applyValue = function (item) {
-				var pass = false;
+				let pass = false;
 				_.forEach(field.options.watch, function (value, path) {
 					if (item.isModified(path) && item.get(path) === value) pass = true;
 				});
@@ -236,7 +236,7 @@ definePrototypeGetters(Field, {
  * Overridden by some fieldType Classes
  */
 Field.prototype.addToSchema = function (schema) {
-	var ops = (this._nativeType) ? _.defaults({ type: this._nativeType }, this.options) : this.options;
+	const ops = (this._nativeType) ? _.defaults({ type: this._nativeType }, this.options) : this.options;
 	schema.path(this.path, ops);
 	this.bindUnderscoreMethods();
 };
@@ -247,7 +247,7 @@ Field.prototype.addToSchema = function (schema) {
  * Always includes the `update` method
  */
 Field.prototype.bindUnderscoreMethods = function () {
-	var field = this;
+	const field = this;
 	(this._underscoreMethods || []).concat({ fn: 'updateItem', as: 'update' }).forEach(function (method) {
 		if (typeof method === 'string') {
 			method = { fn: method, as: method };
@@ -256,7 +256,7 @@ Field.prototype.bindUnderscoreMethods = function () {
 			throw new Error('Invalid underscore method (' + method.fn + ') applied to ' + field.list.key + '.' + field.path + ' (' + field.type + ')');
 		}
 		field.underscoreMethod(method.as, function () {
-			var args = [this].concat(Array.prototype.slice.call(arguments));
+			const args = [this].concat(Array.prototype.slice.call(arguments));
 			return field[method.fn].apply(field, args);
 		});
 	});
@@ -279,7 +279,7 @@ Field.prototype.underscoreMethod = function (path, fn) {
  * @api public
  */
 Field.prototype.format = function (item) {
-	var value = item.get(this.path);
+	const value = item.get(this.path);
 	if (value === undefined) return '';
 	return value;
 };
@@ -324,7 +324,7 @@ Field.prototype.validateRequiredInput = function (item, data, callback) {
  */
 Field.prototype.inputIsValid = function (data, required, item) {
 	if (!required) return true;
-	var value = this.getValueFromData(data);
+	const value = this.getValueFromData(data);
 	if (value === undefined && item && item.get(this.path)) return true;
 	if (typeof data[this.path] === 'string') {
 		return (data[this.path].trim()) ? true : false;
@@ -340,7 +340,7 @@ Field.prototype.inputIsValid = function (data, required, item) {
  * @api public
  */
 Field.prototype.updateItem = function (item, data, callback) {
-	var value = this.getValueFromData(data);
+	const value = this.getValueFromData(data);
 	// This is a deliberate type coercion so that numbers from forms play nice
 	if (value !== undefined && value != item.get(this.path)) { // eslint-disable-line eqeqeq
 		item.set(this.path, value);

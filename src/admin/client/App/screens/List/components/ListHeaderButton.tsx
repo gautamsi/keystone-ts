@@ -9,7 +9,7 @@ function ListHeaderButton ({ className, label, glyph, ...props }) {
 			<span className={css(classes.label)}>{label}</span>
 		</DropdownButton>
 	);
-};
+}
 
 ListHeaderButton.propTypes = {
 	glyph: PropTypes.string.isRequired,

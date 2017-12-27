@@ -1,28 +1,28 @@
-import * as crypto from "crypto";
-import * as scmp from "scmp";
-import * as utils from "keystone-utils";
+import * as crypto from 'crypto';
+import * as scmp from 'scmp';
+import * as utils from 'keystone-utils';
 
 // The DISABLE_CSRF environment variable is available to automatically pass
 // CSRF validation. This is useful in development scenarios where you want to
 // restart the node process and aren't using a persistent session store, but
 // should NEVER be set in production environments!!
-const DISABLE_CSRF = process.env.DISABLE_CSRF === "true";
+const DISABLE_CSRF = process.env.DISABLE_CSRF === 'true';
 
-export const TOKEN_KEY = "_csrf";
-export const LOCAL_KEY = "csrf_token_key";
-export const LOCAL_VALUE = "csrf_token_value";
-export const SECRET_KEY = TOKEN_KEY + "_secret";
+export const TOKEN_KEY = '_csrf';
+export const LOCAL_KEY = 'csrf_token_key';
+export const LOCAL_VALUE = 'csrf_token_value';
+export const SECRET_KEY = TOKEN_KEY + '_secret';
 export const SECRET_LENGTH = 10;
-export const CSRF_HEADER_KEY = "x-csrf-token";
-export const XSRF_HEADER_KEY = "x-xsrf-token";
-export const XSRF_COOKIE_KEY = "XSRF-TOKEN";
+export const CSRF_HEADER_KEY = 'x-csrf-token';
+export const XSRF_HEADER_KEY = 'x-xsrf-token';
+export const XSRF_COOKIE_KEY = 'XSRF-TOKEN';
 
 function tokenize(salt, secret) {
-    return salt + crypto.createHash("sha1").update(salt + secret).digest("hex");
+    return salt + crypto.createHash('sha1').update(salt + secret).digest('hex');
 }
 
 export const createSecret = function () {
-    return crypto.pseudoRandomBytes(SECRET_LENGTH).toString("base64");
+    return crypto.pseudoRandomBytes(SECRET_LENGTH).toString('base64');
 };
 
 export const getSecret = function (req) {
@@ -55,7 +55,7 @@ export const requestToken = function (req) {
     // since the calling page itself can't access the cookie, it will be unable to add the CSRF header, body or query param to the request.
     // The fact that we *don't* check the CSRF value that comes in with the cookie is what makes this CSRF implementation work.
     // See.. https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token
-    return "";
+    return '';
 };
 
 export const validate = function (req, token?) {
@@ -64,7 +64,7 @@ export const validate = function (req, token?) {
     if (arguments.length === 1) {
         token = requestToken(req);
     }
-    if (typeof token !== "string") {
+    if (typeof token !== 'string') {
         return false;
     }
     return scmp(
@@ -86,7 +86,7 @@ export const middleware = {
         // Allow environment variable to disable check
         if (DISABLE_CSRF) return next();
         // Bail on safe methods
-        if (req.method === "GET" || req.method === "HEAD" || req.method === "OPTIONS") {
+        if (req.method === 'GET' || req.method === 'HEAD' || req.method === 'OPTIONS') {
             return next();
         }
         // Validate token
@@ -94,7 +94,7 @@ export const middleware = {
             next();
         } else {
             res.statusCode = 403;
-            next(new Error("CSRF token mismatch"));
+            next(new Error('CSRF token mismatch'));
         }
     },
 };

@@ -1,19 +1,19 @@
-var _ = require('lodash');
-var bcrypt = require('bcrypt-nodejs');
-var FieldType = require('../Type');
-var util = require('util');
-var utils = require('keystone-utils');
-var dumbPasswords = require('dumb-passwords');
+const _ = require('lodash');
+const bcrypt = require('bcrypt-nodejs');
+const FieldType = require('../Type');
+const util = require('util');
+const utils = require('keystone-utils');
+const dumbPasswords = require('dumb-passwords');
 
 
-var regexChunk = {
+const regexChunk = {
 	digitChar: /\d/,
 	spChar: /[!@#\$%\^&\*()\+]/,
 	asciiChar: /^[\u0020-\u007E]+$/,
 	lowChar: /[a-z]/,
 	upperChar: /[A-Z]/,
 };
-var detailMsg = {
+const detailMsg = {
 	digitChar: 'enter at least one digit',
 	spChar: 'enter at least one special character',
 	asciiChar: 'only ASCII characters are allowed',
@@ -37,7 +37,7 @@ function password (list, path, options) {
 
 	password.super_.call(this, list, path, options);
 
-	for (var key in this.options.complexity) {
+	for (const key in this.options.complexity) {
 		if ({}.hasOwnProperty.call(this.options.complexity, key)) {
 			if (key in regexChunk !== key in this.options.complexity) {
 				throw new Error('FieldType.Password: options.complexity - option does not exist.');
@@ -62,8 +62,8 @@ util.inherits(password, FieldType);
  * @api public
  */
 password.prototype.addToSchema = function (schema) {
-	var field = this;
-	var needs_hashing = '__' + field.path + '_needs_hashing';
+	const field = this;
+	const needs_hashing = '__' + field.path + '_needs_hashing';
 
 	this.paths = {
 		confirm: this.options.confirmPath || this.path + '_confirm',
@@ -92,7 +92,7 @@ password.prototype.addToSchema = function (schema) {
 			this[needs_hashing] = false;
 			return next();
 		}
-		var item = this;
+		const item = this;
 		bcrypt.genSalt(field.options.workFactor, function (err, salt) {
 			if (err) {
 				return next(err);
@@ -117,7 +117,7 @@ password.prototype.addToSchema = function (schema) {
  * Add filters to a query
  */
 password.prototype.addFilterToQuery = function (filter) {
-	var query = {};
+	const query = {};
 	query[this.path] = (filter.exists) ? { $ne: null } : null;
 	return query;
 };
@@ -145,9 +145,9 @@ password.prototype.getData = function (item) {
  */
 password.prototype.format = function (item) {
 	if (!item.get(this.path)) return '';
-	var len = Math.round(Math.random() * 4) + 6;
-	var stars = '';
-	for (var i = 0; i < len; i++) stars += '*';
+	const len = Math.round(Math.random() * 4) + 6;
+	let stars = '';
+	for (let i = 0; i < len; i++) stars += '*';
 	return stars;
 };
 
@@ -158,7 +158,7 @@ password.prototype.format = function (item) {
  */
 password.prototype.compare = function (item, candidate, callback) {
 	if (typeof callback !== 'function') throw new Error('Password.compare() requires a callback function.');
-	var value = item.get(this.path);
+	const value = item.get(this.path);
 	if (!value) return callback(null, false);
 	bcrypt.compare(candidate, item.get(this.path), callback);
 };
@@ -167,17 +167,17 @@ password.prototype.compare = function (item, candidate, callback) {
  * Asynchronously confirms that the provided password is valid
  */
 password.prototype.validateInput = function (data, callback) {
-	var { min, max, complexity, rejectCommon } = this.options;
-	var confirmValue = this.getValueFromData(data, '_confirm');
-	var passwordValue = this.getValueFromData(data);
+	const { min, max, complexity, rejectCommon } = this.options;
+	const confirmValue = this.getValueFromData(data, '_confirm');
+	const passwordValue = this.getValueFromData(data);
 
-	var validation = validate(passwordValue, confirmValue, min, max, complexity, rejectCommon);
+	const validation = validate(passwordValue, confirmValue, min, max, complexity, rejectCommon);
 
 	utils.defer(callback, validation.result, validation.detail);
 };
 
-var validate = password.validate = function (pass, confirm, min, max, complexity, rejectCommon) {
-	var messages = [];
+const validate = password.validate = function (pass, confirm, min, max, complexity, rejectCommon) {
+	const messages = [];
 
 	if (confirm !== undefined
 		&& pass !== confirm) {
@@ -192,9 +192,9 @@ var validate = password.validate = function (pass, confirm, min, max, complexity
 		messages.push('Password must not be longer than ' + max + ' characters.');
 	}
 
-	for (var prop in complexity) {
+	for (const prop in complexity) {
 		if (complexity[prop] && typeof pass === 'string') {
-			var complexityCheck = (regexChunk[prop]).test(pass);
+			const complexityCheck = (regexChunk[prop]).test(pass);
 			if (!complexityCheck) {
 				messages.push(detailMsg[prop]);
 			}
@@ -215,9 +215,9 @@ var validate = password.validate = function (pass, confirm, min, max, complexity
  * Asynchronously confirms that the provided password is valid
  */
 password.prototype.validateRequiredInput = function (item, data, callback) {
-	var hashValue = this.getValueFromData(data, '_hash');
-	var passwordValue = this.getValueFromData(data);
-	var result = hashValue || passwordValue ? true : false;
+	const hashValue = this.getValueFromData(data, '_hash');
+	const passwordValue = this.getValueFromData(data);
+	let result = hashValue || passwordValue ? true : false;
 	if (!result && passwordValue === undefined && hashValue === undefined && item.get(this.path)) result = true;
 	utils.defer(callback, result);
 };
@@ -247,8 +247,8 @@ password.prototype.inputIsValid = function (data, required, item) {
  * @api public
  */
 password.prototype.updateItem = function (item, data, callback) {
-	var hashValue = this.getValueFromData(data, '_hash');
-	var passwordValue = this.getValueFromData(data);
+	const hashValue = this.getValueFromData(data, '_hash');
+	const passwordValue = this.getValueFromData(data);
 	if (passwordValue !== undefined) {
 		item.set(this.path, passwordValue);
 	} else if (hashValue !== undefined) {

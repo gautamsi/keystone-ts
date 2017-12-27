@@ -37,7 +37,7 @@ function ModalHeader ({
 			)}
 		</div>
 	);
-};
+}
 
 ModalHeader.propTypes = {
 	children: PropTypes.node,

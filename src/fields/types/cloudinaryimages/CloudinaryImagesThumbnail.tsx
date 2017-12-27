@@ -53,7 +53,7 @@ function CloudinaryImagesThumbnail ({
 		</div>
 	);
 
-};
+}
 
 CloudinaryImagesThumbnail.propTypes = {
 	imageSourceLarge: PropTypes.string,

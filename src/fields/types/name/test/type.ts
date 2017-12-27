@@ -1,5 +1,5 @@
-var demand = require('must');
-var NameType = require('../NameType');
+const demand = require('must');
+const NameType = require('../NameType');
 
 export const initList = function (List) {
 	List.add({
@@ -10,7 +10,7 @@ export const initList = function (List) {
 export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update the full name', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.name.updateItem(testItem, {
 				name: 'Max Mustermann',
 			}, function () {
@@ -20,7 +20,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update the first name', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.name.updateItem(testItem, {
 				name: {
 					first: 'Max',
@@ -32,7 +32,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update the last name', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.name.updateItem(testItem, {
 				name: {
 					last: 'Max',
@@ -383,7 +383,7 @@ export const testFieldType = function (List) {
 
 	describe('validateRequiredInput', function () {
 		it('should validate input present', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.name.validateRequiredInput(testItem, {
 				name: 'Max',
 			}, function (result) {
@@ -393,7 +393,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate undefined', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.name.validateRequiredInput(testItem, {
 				name: undefined,
 			}, function (result) {
@@ -403,7 +403,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate undefined if a previous value exists', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				'name.first': 'Max',
 			});
 			List.fields.name.validateRequiredInput(testItem, {
@@ -415,7 +415,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate empty string', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.name.validateRequiredInput(testItem, {
 				name: '',
 			}, function (result) {
@@ -425,7 +425,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate null', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.name.validateRequiredInput(testItem, {
 				name: null,
 			}, function (result) {
@@ -436,7 +436,7 @@ export const testFieldType = function (List) {
 
 		describe('first name', function () {
 			it('should validate input present', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.name.validateRequiredInput(testItem, {
 					name_first: 'Max',
 				}, function (result) {
@@ -446,7 +446,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should invalidate undefined', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.name.validateRequiredInput(testItem, {
 					name_first: undefined,
 				}, function (result) {
@@ -456,7 +456,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should validate undefined if a previous value exists', function (done) {
-				var testItem = new List.model({
+				const testItem = new List.model({
 					'name.first': 'Max',
 				});
 				List.fields.name.validateRequiredInput(testItem, {
@@ -468,7 +468,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should invalidate empty string', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.name.validateRequiredInput(testItem, {
 					name_first: '',
 				}, function (result) {
@@ -478,7 +478,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should invalidate null', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.name.validateRequiredInput(testItem, {
 					name_first: null,
 				}, function (result) {
@@ -490,7 +490,7 @@ export const testFieldType = function (List) {
 
 		describe('last name', function () {
 			it('should validate input present', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.name.validateRequiredInput(testItem, {
 					name_last: 'Max',
 				}, function (result) {
@@ -500,7 +500,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should invalidate undefined', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.name.validateRequiredInput(testItem, {
 					name_last: undefined,
 				}, function (result) {
@@ -510,7 +510,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should validate undefined if a previous value exists', function (done) {
-				var testItem = new List.model({
+				const testItem = new List.model({
 					'name.last': 'Max',
 				});
 				List.fields.name.validateRequiredInput(testItem, {
@@ -522,7 +522,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should invalidate empty string', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.name.validateRequiredInput(testItem, {
 					name_last: '',
 				}, function (result) {
@@ -532,7 +532,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should invalidate null', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.name.validateRequiredInput(testItem, {
 					name_last: null,
 				}, function (result) {
@@ -545,7 +545,7 @@ export const testFieldType = function (List) {
 
 	describe('addFilterToQuery', function () {
 		it('should return a regex with the "i" flag set', function () {
-			var result = List.fields.name.addFilterToQuery({
+			const result = List.fields.name.addFilterToQuery({
 				value: 'abc',
 			});
 
@@ -558,7 +558,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow case sensitive matching', function () {
-			var result = List.fields.name.addFilterToQuery({
+			const result = List.fields.name.addFilterToQuery({
 				value: 'abc',
 				caseSensitive: true,
 			});
@@ -572,7 +572,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow inverted matching', function () {
-			var result = List.fields.name.addFilterToQuery({
+			const result = List.fields.name.addFilterToQuery({
 				value: 'abc',
 				inverted: true,
 			});
@@ -585,7 +585,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow exact matching', function () {
-			var result = List.fields.name.addFilterToQuery({
+			const result = List.fields.name.addFilterToQuery({
 				value: 'abc',
 				mode: 'exactly',
 			});
@@ -598,7 +598,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow matching the end', function () {
-			var result = List.fields.name.addFilterToQuery({
+			const result = List.fields.name.addFilterToQuery({
 				value: 'abc',
 				mode: 'endsWith',
 			});
@@ -611,7 +611,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow matching the start', function () {
-			var result = List.fields.name.addFilterToQuery({
+			const result = List.fields.name.addFilterToQuery({
 				value: 'abc',
 				mode: 'beginsWith',
 			});
@@ -624,7 +624,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow matching empty values in exact mode', function () {
-			var result = List.fields.name.addFilterToQuery({
+			const result = List.fields.name.addFilterToQuery({
 				mode: 'exactly',
 			});
 			demand(result['name.first']).eql({
@@ -636,7 +636,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow matching non-empty values in exact mode with the inverted option', function () {
-			var result = List.fields.name.addFilterToQuery({
+			const result = List.fields.name.addFilterToQuery({
 				mode: 'exactly',
 				inverted: true,
 			});

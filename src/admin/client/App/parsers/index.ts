@@ -16,7 +16,7 @@ function columnsParser (columns, currentList) {
 		return currentList.expandColumns(currentList.defaultColumns);
 	}
 	return currentList.expandColumns(columns);
-};
+}
 
 /**
  * Returns an expanded sort object, given a sort path and currentList object.

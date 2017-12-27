@@ -23,7 +23,7 @@ function FileChangeMessage ({ style, color, ...props }) {
 			{...props}
 		/>
 	);
-};
+}
 
 FileChangeMessage.propTypes = {
 	color: PropTypes.oneOf(['danger', 'default', 'success']),

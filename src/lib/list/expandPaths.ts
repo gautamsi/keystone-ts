@@ -1,4 +1,4 @@
-var listToArray = require('list-to-array');
+const listToArray = require('list-to-array');
 
 function expandPaths (paths) {
 	return listToArray(paths).map(function (path) {

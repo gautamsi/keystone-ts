@@ -11,7 +11,7 @@ function NestedFormField ({ children, className, label, ...props }) {
 			{children}
 		</FormField>
 	);
-};
+}
 const classes = {
 	label: {
 		color: theme.color.gray40,

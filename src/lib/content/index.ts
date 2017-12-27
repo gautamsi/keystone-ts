@@ -1,6 +1,6 @@
-var _ = require('lodash');
-var keystone = require('../../');
-var utils = keystone.utils;
+const _ = require('lodash');
+const keystone = require('../../');
+const utils = keystone.utils;
 
 /**
  * Content Class
@@ -10,7 +10,7 @@ var utils = keystone.utils;
  * @api public
  */
 
-var Content = function () {};
+const Content = function () {};
 
 /**
  * Loads page content by page key (optional).
@@ -33,7 +33,7 @@ Content.prototype.fetch = function (page, callback) {
 		page = null;
 	}
 
-	var content = this;
+	const content = this;
 
 	if (!this.AppContent) {
 		return callback({ error: 'invalid page', message: 'No pages have been registered.' });
@@ -59,7 +59,7 @@ Content.prototype.fetch = function (page, callback) {
 
 			if (err) return callback(err);
 
-			var data = {};
+			const data = {};
 
 			results.forEach(function (i) {
 				if (content.pages[i.key]) {
@@ -175,14 +175,14 @@ Content.prototype.initModel = function () {
 
 	if (this.AppContent) return;
 
-	var contentSchemaDef = {
+	const contentSchemaDef = {
 		createdAt: { type: Date, default: Date.now },
 		data: { type: keystone.mongoose.Schema.Types.Mixed },
 	};
 
-	var ContentSchema = new keystone.mongoose.Schema(contentSchemaDef);
+	const ContentSchema = new keystone.mongoose.Schema(contentSchemaDef);
 
-	var PageSchema = new keystone.mongoose.Schema({
+	const PageSchema = new keystone.mongoose.Schema({
 		page: { type: String, index: true },
 		lastChangeDate: { type: Date, index: true },
 		content: contentSchemaDef,
@@ -209,13 +209,13 @@ Content.prototype.editable = function (user, options) {
 
 	if (options.list) {
 
-		var list = keystone.list(options.list);
+		const list = keystone.list(options.list);
 
 		if (!list) {
 			return JSON.stringify({ type: 'error', err: 'list not found' });
 		}
 
-		var data = {
+		const data = {
 			type: 'list',
 			path: list.getAdminURL(),
 			singular: list.singular,

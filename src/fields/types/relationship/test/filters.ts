@@ -1,6 +1,6 @@
-var async = require('async');
-var demand = require('must');
-var RelationshipType = require('../RelationshipType');
+const async = require('async');
+const demand = require('must');
+const RelationshipType = require('../RelationshipType');
 
 export const initList = function (List) {
 	List.add({
@@ -8,7 +8,7 @@ export const initList = function (List) {
 	});
 };
 
-var items;
+let items;
 
 export const getTestItems = function (List, callback) {
 	async.mapValues({

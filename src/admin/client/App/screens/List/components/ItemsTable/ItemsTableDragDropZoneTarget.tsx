@@ -12,7 +12,7 @@ import { setCurrentPage } from '../../actions';
 let timeoutID = false;
 
 // drop target
-var ItemsTableDragDropZoneTarget = React.createClass({
+let ItemsTableDragDropZoneTarget = React.createClass({
 	displayName: 'ItemsTableDragDropZoneTarget',
 	propTypes: {
 		className: React.PropTypes.string,
@@ -99,6 +99,6 @@ function dropProps (connect, monitor) {
 		connectDropTarget: connect.dropTarget(),
 		isOver: monitor.isOver(),
 	};
-};
+}
 
 export = DropTarget('item', dropTarget, dropProps)(ItemsTableDragDropZoneTarget);

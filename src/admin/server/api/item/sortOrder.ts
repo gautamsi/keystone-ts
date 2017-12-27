@@ -2,10 +2,10 @@
 TODO: Needs Review and Spec
 */
 
-var getList = require('../list/get');
+const getList = require('../list/get');
 
 export default function (req, res) {
-	var keystone = req.keystone;
+	const keystone = req.keystone;
 	if (!keystone.security.csrf.validate(req)) {
 		console.log('Refusing to reorder ' + req.list.key + ' ' + req.params.id + '; CSRF failure');
 		return res.apiError(403, 'invalid csrf');
@@ -14,4 +14,4 @@ export default function (req, res) {
 		if (err) return res.apiError('database error', err);
 		return getList(req, res);
 	});
-};
+}

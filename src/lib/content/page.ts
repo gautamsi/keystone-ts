@@ -1,8 +1,8 @@
-var _ = require('lodash');
-var assign = require('object-assign');
-var keystone = require('../../');
-var utils = keystone.utils;
-var Type = require('./type');
+const _ = require('lodash');
+const assign = require('object-assign');
+const keystone = require('../../');
+const utils = keystone.utils;
+const Type = require('./type');
 
 /**
  * Page Class
@@ -94,7 +94,7 @@ Page.prototype.add = function (fields) {
 		throw new Error('keystone.content.Page.add() Error: fields must be an object.');
 	}
 
-	var self = this;
+	const self = this;
 
 	_.forEach(fields, function (options, path) {
 

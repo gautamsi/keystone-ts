@@ -59,8 +59,8 @@ export = Field.create({
 	},
 
 	handleChange (dateValue, timeValue, tzOffsetValue) {
-		var value = dateValue + ' ' + timeValue;
-		var datetimeFormat = this.dateInputFormat + ' ' + this.timeInputFormat;
+		let value = dateValue + ' ' + timeValue;
+		let datetimeFormat = this.dateInputFormat + ' ' + this.timeInputFormat;
 
 		// if the change included a timezone offset, include that in the calculation (so NOW works correctly during DST changes)
 		if (typeof tzOffsetValue !== 'undefined') {
@@ -89,9 +89,9 @@ export = Field.create({
 	},
 
 	setNow () {
-		var dateValue = this.moment().format(this.dateInputFormat);
-		var timeValue = this.moment().format(this.timeInputFormat);
-		var tzOffsetValue = this.moment().format(this.tzOffsetInputFormat);
+		let dateValue = this.moment().format(this.dateInputFormat);
+		let timeValue = this.moment().format(this.timeInputFormat);
+		let tzOffsetValue = this.moment().format(this.tzOffsetInputFormat);
 		this.setState({
 			dateValue: dateValue,
 			timeValue: timeValue,
@@ -106,7 +106,7 @@ export = Field.create({
 	},
 
 	renderUI () {
-		var input;
+		let input;
 		if (this.shouldRenderField()) {
 			input = (
 				<div>

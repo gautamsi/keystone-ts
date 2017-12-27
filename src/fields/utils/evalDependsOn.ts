@@ -1,4 +1,4 @@
-var ExMatch = require('expression-match'); // Matches objects with expressions
+const ExMatch = require('expression-match'); // Matches objects with expressions
 
 /**
  * Checks if something is an object
@@ -8,7 +8,7 @@ var ExMatch = require('expression-match'); // Matches objects with expressions
  */
 function isObject (arg) {
 	return Object.prototype.toString.call(arg) === '[object Object]';
-};
+}
 
 /**
  * Evaluates the visibility of a field based on its dependencies and their values
@@ -25,6 +25,6 @@ export default function evalDependsOn (dependsOn, values) {
 
 	// Checks if the current field should be displayed, based on the values of
 	// other fields and the dependsOn configuration of this field
-	var Match = new ExMatch(dependsOn, values, false);
+	const Match = new ExMatch(dependsOn, values, false);
 	return Match.match();
-};
+}

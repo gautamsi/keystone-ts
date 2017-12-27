@@ -18,7 +18,7 @@ function Container ({
 	);
 
 	return <Component {...props} />;
-};
+}
 
 Container.propTypes = {
 	clearFloatingChildren: PropTypes.bool,

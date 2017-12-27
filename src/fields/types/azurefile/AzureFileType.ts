@@ -77,11 +77,11 @@ Object.defineProperty(azurefile.prototype, 'azurefileconfig', {
  */
 azurefile.prototype.addToSchema = function (schema) {
 
-	var azure = require('azure-storage');
+	const azure = require('azure-storage');
 
-	var field = this;
+	const field = this;
 
-	var paths = this.paths = {
+	const paths = this.paths = {
 		// fields
 		filename: this.path + '.filename',
 		path: this.path + '.path',
@@ -96,7 +96,7 @@ azurefile.prototype.addToSchema = function (schema) {
 		action: this.path + '_action',
 	};
 
-	var schemaPaths = this._path.addTo({}, {
+	const schemaPaths = this._path.addTo({}, {
 		filename: String,
 		path: String,
 		size: Number,
@@ -108,7 +108,7 @@ azurefile.prototype.addToSchema = function (schema) {
 
 	schema.add(schemaPaths);
 
-	var exists = function (item) {
+	const exists = function (item) {
 		return (item.get(paths.url) ? true : false);
 	};
 
@@ -117,7 +117,7 @@ azurefile.prototype.addToSchema = function (schema) {
 		return schemaMethods.exists.apply(this);
 	});
 
-	var reset = function (item) {
+	const reset = function (item) {
 		item.set(field.path, {
 			filename: '',
 			path: '',
@@ -127,7 +127,7 @@ azurefile.prototype.addToSchema = function (schema) {
 		});
 	};
 
-	var schemaMethods = {
+	const schemaMethods = {
 		exists: function () {
 			return exists(this);
 		},
@@ -204,10 +204,10 @@ azurefile.prototype.updateItem = function (item, data, callback) {
  */
 azurefile.prototype.uploadFile = function (item, file, update, callback) {
 
-	var azure = require('azure-storage');
+	const azure = require('azure-storage');
 
-	var field = this;
-	var filetype = file.mimetype || file.type;
+	const field = this;
+	const filetype = file.mimetype || file.type;
 
 	if (field.options.allowedTypes && !_.contains(field.options.allowedTypes, filetype)) {
 		return callback(new Error('Unsupported File Type: ' + filetype));
@@ -218,9 +218,9 @@ azurefile.prototype.uploadFile = function (item, file, update, callback) {
 		update = false;
 	}
 
-	var doUpload = function () {
-		var blobService = azure.createBlobService();
-		var container = field.options.containerFormatter(item, file.name);
+	const doUpload = function () {
+		const blobService = azure.createBlobService();
+		const container = field.options.containerFormatter(item, file.name);
 
 		blobService.createContainerIfNotExists(container, { publicAccessLevel: 'blob' }, function (err) {
 
@@ -230,7 +230,7 @@ azurefile.prototype.uploadFile = function (item, file, update, callback) {
 
 				if (err) return callback(err);
 
-				var fileData = {
+				const fileData = {
 					filename: blob.blob,
 					size: file.size,
 					filetype: filetype,
@@ -264,7 +264,7 @@ azurefile.prototype.uploadFile = function (item, file, update, callback) {
  */
 azurefile.prototype.getRequestHandler = function (item, req, paths, callback) {
 
-	var field = this;
+	const field = this;
 
 	if (utils.isFunction(paths)) {
 		callback = paths;
@@ -277,7 +277,7 @@ azurefile.prototype.getRequestHandler = function (item, req, paths, callback) {
 
 	return function () {
 		if (req.body) {
-			var action = req.body[paths.action];
+			const action = req.body[paths.action];
 
 			if (/^(delete|reset)$/.test(action)) {
 				field.apply(item, action);

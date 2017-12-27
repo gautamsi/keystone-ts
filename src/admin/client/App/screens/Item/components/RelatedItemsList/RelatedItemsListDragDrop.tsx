@@ -19,7 +19,7 @@ class RelatedItemsListDragDrop extends Component {
 			</tbody>
 		);
 	}
-};
+}
 RelatedItemsListDragDrop.propTypes = {
 	columns: PropTypes.array.isRequired,
 	dispatch: React.PropTypes.func.isRequired,

@@ -1,5 +1,5 @@
-var _ = require('lodash');
-var utils = require('keystone-utils');
+const _ = require('lodash');
+const utils = require('keystone-utils');
 
 /**
  * Adds one or more redirections (urls that are redirected when no matching

@@ -21,7 +21,7 @@ const BUTTON_COLORS = ['default', 'primary', 'success', 'warning', 'danger', 'ca
 
 class Button extends Component {
 	render () {
-		var {
+		let {
 			active,
 			cssStyles,
 			block,
@@ -60,7 +60,7 @@ class Button extends Component {
 
 		return <Tag {...props} />;
 	}
-};
+}
 
 Button.propTypes = {
 	active: PropTypes.bool,

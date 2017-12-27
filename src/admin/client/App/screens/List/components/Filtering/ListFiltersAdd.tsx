@@ -11,7 +11,7 @@ import ListHeaderButton from '../ListHeaderButton';
 
 import { setFilter } from '../../actions';
 
-var ListFiltersAdd = React.createClass({
+let ListFiltersAdd = React.createClass({
 	displayName: 'ListFiltersAdd',
 	propTypes: {
 		maxHeight: React.PropTypes.number,

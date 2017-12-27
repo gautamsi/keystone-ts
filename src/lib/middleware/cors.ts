@@ -18,7 +18,7 @@
 export default function (keystone) {
 	return function cors (req, res, next) {
 
-		var origin = keystone.get('cors allow origin');
+		const origin = keystone.get('cors allow origin');
 		if (origin) {
 			res.header('Access-Control-Allow-Origin', origin === true ? '*' : origin);
 		}
@@ -32,4 +32,4 @@ export default function (keystone) {
 
 		next();
 	};
-};
+}

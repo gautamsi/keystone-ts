@@ -37,13 +37,13 @@ export function * updateParams () {
 	const { index } = yield select((state) => state.lists.page);
 
 	// Get the data into the right format, set the defaults
-	let sort = createSortQueryParams(activeState.sort.rawInput, currentList.defaultSort);
-	let page = createPageQueryParams(index, 1);
+	const sort = createSortQueryParams(activeState.sort.rawInput, currentList.defaultSort);
+	const page = createPageQueryParams(index, 1);
 
-	let columns = stringifyColumns(activeState.columns, currentList.defaultColumnPaths);
-	let search = activeState.search;
+	const columns = stringifyColumns(activeState.columns, currentList.defaultColumnPaths);
+	const search = activeState.search;
 
-	let filters = parametizeFilters(activeState.filters);
+	const filters = parametizeFilters(activeState.filters);
 
 	const newParams = updateQueryParams({
 		page,

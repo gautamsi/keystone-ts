@@ -1,8 +1,8 @@
-var crypto = require('crypto');
-var forEach = require('lodash/forEach');
+const crypto = require('crypto');
+const forEach = require('lodash/forEach');
 
 function createKeystoneHash () {
-	var hash = crypto.createHash('md5');
+	const hash = crypto.createHash('md5');
 	hash.update(this.version);
 
 	forEach(this.lists, function (list, key) {

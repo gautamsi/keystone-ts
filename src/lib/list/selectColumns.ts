@@ -6,9 +6,9 @@
  */
 function selectColumns (q, cols) {
 	// Populate relationship columns
-	var select = [];
-	var populate = {};
-	var path;
+	const select = [];
+	const populate = {};
+	let path;
 	cols.forEach(function (col) {
 		select.push(col.path);
 		if (col.populate) {

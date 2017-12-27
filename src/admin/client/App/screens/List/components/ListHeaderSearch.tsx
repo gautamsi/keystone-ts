@@ -34,7 +34,7 @@ function ListHeaderSearch ({
 			</button>
 		</div>
 	);
-};
+}
 
 ListHeaderSearch.propTypes = {
 	focusInput: PropTypes.bool,

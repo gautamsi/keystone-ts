@@ -3,7 +3,7 @@ import * as bodyParser from 'body-parser';
 
 export function bindIPRestrictions (keystone, app) {
 	// Set up body options and cookie parser
-	var bodyParserParams = {};
+	const bodyParserParams: any = {};
 	if (keystone.get('file limit')) {
 		bodyParserParams.limit = keystone.get('file limit');
 	}
@@ -13,4 +13,4 @@ export function bindIPRestrictions (keystone, app) {
 	app.use(multer({
 		includeEmptyFields: true,
 	}));
-};
+}

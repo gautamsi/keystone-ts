@@ -8,7 +8,7 @@ export = Field.create({
 		type: 'Number',
 	},
 	valueChanged (event) {
-		var newValue = event.target.value;
+		let newValue = event.target.value;
 		if (/^-?\d*\.?\d*$/.test(newValue)) {
 			this.props.onChange({
 				path: this.props.path,

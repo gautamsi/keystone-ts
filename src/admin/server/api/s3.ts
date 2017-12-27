@@ -5,9 +5,9 @@ TODO: Needs Review and Spec
 export default {
 
 	upload: function (req, res) {
-		var knox = require('knox');
-		var keystone = req.keystone;
-		var Types = keystone.Field.Types;
+		const knox = require('knox');
+		const keystone = req.keystone;
+		const Types = keystone.Field.Types;
 
 		if (!keystone.security.csrf.validate(req, req.body.authenticity_token)) {
 			return res.status(403).send({ error: { message: 'invalid csrf' } });
@@ -15,17 +15,17 @@ export default {
 
 		if (req.files && req.files.file) {
 
-			var s3Config = keystone.get('s3 config');
+			const s3Config = keystone.get('s3 config');
 
-			var file = req.files.file;
-			var path = s3Config.s3path ? s3Config.s3path + '/' : '';
+			const file = req.files.file;
+			const path = s3Config.s3path ? s3Config.s3path + '/' : '';
 
-			var headers = Types.S3File.prototype.generateHeaders.call({ s3config: s3Config, options: {} }, null, file);
+			const headers = Types.S3File.prototype.generateHeaders.call({ s3config: s3Config, options: {} }, null, file);
 
-			var s3Client = knox.createClient(s3Config);
+			const s3Client = knox.createClient(s3Config);
 
 			s3Client.putFile(file.path, path + file.name, headers, function (err, s3Response) {
-				var sendResult = function () {
+				const sendResult = function () {
 					if (err) {
 						return res.send({ error: { message: err.message } });
 					}
@@ -34,7 +34,7 @@ export default {
 						if (s3Response.statusCode !== 200) {
 							return res.send({ error: { message: 'Amazon returned Http Code: ' + s3Response.statusCode } });
 						} else {
-							var region = 's3';
+							let region = 's3';
 							if (s3Config.region && s3Config.region !== 'us-east-1') {
 								region = 's3-' + s3Config.region;
 							}

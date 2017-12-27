@@ -1,22 +1,22 @@
-var keystone = require('../../../');
-var _ = require('lodash');
-var async = require('async');
+const keystone = require('../../../');
+const _ = require('lodash');
+const async = require('async');
 
 export default function getRelated (paths, callback, nocollapse) {
 
-	var item = this;
-	var list = this.list;
-	var queue = {};
+	const item = this;
+	const list = this.list;
+	const queue = {};
 
 	if (typeof callback !== 'function') {
 		throw new Error('List.getRelated(paths, callback, nocollapse) requires a callback function.');
 	}
 
 	if (typeof paths === 'string') {
-		var pathsArr = paths.split(' ');
-		var lastPath = '';
+		const pathsArr = paths.split(' ');
+		let lastPath = '';
 		paths = [];
-		for (var i = 0; i < pathsArr.length; i++) {
+		for (let i = 0; i < pathsArr.length; i++) {
 			lastPath += (lastPath.length ? ' ' : '') + pathsArr[i];
 			if (lastPath.indexOf('[') < 0 || lastPath.charAt(lastPath.length - 1) === ']') {
 				paths.push(lastPath);
@@ -27,7 +27,7 @@ export default function getRelated (paths, callback, nocollapse) {
 
 	_.forEach(paths, function (options) {
 
-		var populateString = '';
+		let populateString = '';
 
 		if (typeof options === 'string') {
 			if (options.indexOf('[') > 0) {
@@ -39,13 +39,13 @@ export default function getRelated (paths, callback, nocollapse) {
 		options.populate = options.populate || [];
 		options.related = options.related || [];
 
-		var relationship = list.relationships[options.path];
+		const relationship = list.relationships[options.path];
 		if (!relationship) throw new Error('List.getRelated: list ' + list.key + ' does not have a relationship ' + options.path + '.');
 
-		var refList = keystone.list(relationship.ref);
+		const refList = keystone.list(relationship.ref);
 		if (!refList) throw new Error('List.getRelated: list ' + relationship.ref + ' does not exist.');
 
-		var relField = refList.fields[relationship.refPath];
+		const relField = refList.fields[relationship.refPath];
 		if (!relField || relField.type !== 'relationship') throw new Error('List.getRelated: relationship ' + relationship.ref + ' on list ' + list.key + ' refers to a path (' + relationship.refPath + ') which is not a relationship field.');
 
 		if (populateString.length) {
@@ -62,7 +62,7 @@ export default function getRelated (paths, callback, nocollapse) {
 
 		queue[relationship.path] = function (done) {
 
-			var query = refList.model.find().where(relField.path);
+			const query = refList.model.find().where(relField.path);
 
 			if (options.populate) {
 				query.populate(options.populate);
@@ -109,4 +109,4 @@ export default function getRelated (paths, callback, nocollapse) {
 		callback(err, results);
 	});
 
-};
+}

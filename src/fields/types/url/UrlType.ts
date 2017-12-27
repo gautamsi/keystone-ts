@@ -1,6 +1,6 @@
-var FieldType = require('../Type');
-var TextType = require('../text/TextType');
-var util = require('util');
+const FieldType = require('../Type');
+const TextType = require('../text/TextType');
+const util = require('util');
 
 
 /**
@@ -31,7 +31,7 @@ url.prototype.addFilterToQuery = TextType.prototype.addFilterToQuery;
  * which strips the leading protocol from the value for simpler display
  */
 url.prototype.format = function (item) {
-	var url = item.get(this.path) || '';
+	const url = item.get(this.path) || '';
 	if (this.options.format === false) {
 		return url;
 	} else if (typeof this.options.format === 'function') {

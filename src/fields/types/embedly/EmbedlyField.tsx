@@ -43,9 +43,9 @@ export = Field.create({
 	renderPreview () {
 		if (!this.props.value.thumbnailUrl) return;
 
-		var image = <img width={this.props.value.thumbnailWidth} height={this.props.value.thumbnailHeight} src={this.props.value.thumbnailUrl} />;
+		let image = <img width={this.props.value.thumbnailWidth} height={this.props.value.thumbnailHeight} src={this.props.value.thumbnailUrl} />;
 
-		var preview = this.props.value.url ? (
+		let preview = this.props.value.url ? (
 			<ImageThumbnail component="a" href={this.props.value.url} target="_blank">
 				{image}
 			</ImageThumbnail>

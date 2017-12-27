@@ -21,7 +21,7 @@ function FormNote ({
 	) : (
 		<Component {...props}>{children}</Component>
 	);
-};
+}
 FormNote.propTypes = {
 	component: PropTypes.oneOfType([
 		PropTypes.func,

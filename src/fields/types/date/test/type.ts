@@ -1,7 +1,7 @@
-var demand = require('must');
-var DateType = require('../DateType');
-var TextType = require('../../text/TextType');
-var moment = require('moment');
+const demand = require('must');
+const DateType = require('../DateType');
+const TextType = require('../../text/TextType');
+const moment = require('moment');
 
 export const initList = function (List) {
 	List.add({
@@ -30,7 +30,7 @@ export const testFieldType = function (List) {
 
 	describe('updateItem', function () {
 		it('should normalize dates with moment', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.date.updateItem(testItem, {
 				date: '2015-01-01',
 			}, function () {
@@ -40,7 +40,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should clear the value when passed ""', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				date: '2015-01-01',
 			});
 			List.fields.date.updateItem(testItem, {
@@ -52,7 +52,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should clear the value when passed null', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				date: '2015-01-01',
 			});
 			List.fields.date.updateItem(testItem, {
@@ -64,7 +64,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should not clear the value when a value exists and passed undefined', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				date: '2015-01-01',
 			});
 			List.fields.date.updateItem(testItem, {
@@ -78,7 +78,7 @@ export const testFieldType = function (List) {
 
 	describe('getData', function () {
 		it('Retrieval of date set in current timezone', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.date.updateItem(testItem, {
 				date: moment('2015-01-01', 'YYYY-MM-DD'),
 			}, function () {
@@ -88,7 +88,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('Retrieval of UTC date', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.utcDate.updateItem(testItem, {
 				utcDate: moment.utc('2015-01-01', 'YYYY-MM-DD'),
 			}, function () {
@@ -98,8 +98,8 @@ export const testFieldType = function (List) {
 		});
 
 		it('Retrieval of fixable GMT date corrupted with timezone offset', function (done) {
-			var testItem = new List.model();
-			var timeToCompareInTimezone = moment.utc('2015-01-01', 'YYYY-MM-DD');
+			const testItem = new List.model();
+			const timeToCompareInTimezone = moment.utc('2015-01-01', 'YYYY-MM-DD');
 			timeToCompareInTimezone.add(-List.fields.utcDateForcedTZ.timezoneUtcOffsetMinutes, 'minutes');
 			List.fields.utcDateForcedTZ.updateItem(testItem, {
 				utcDateForcedTZ: timeToCompareInTimezone, // Creates time in whatever timezone the test is run in or utcDateForcedTZ is configured to
@@ -110,8 +110,8 @@ export const testFieldType = function (List) {
 		});
 
 		it('Retrieval of non-fixable GMT date corrupted with timezone offset', function (done) {
-			var testItem = new List.model();
-			var timeToCompareInTimezone = moment.utc('2015-01-01', 'YYYY-MM-DD');
+			const testItem = new List.model();
+			const timeToCompareInTimezone = moment.utc('2015-01-01', 'YYYY-MM-DD');
 			timeToCompareInTimezone.add(-540, 'minutes');
 			List.fields.utcDateForcedTZ.updateItem(testItem, {
 				utcDateForcedTZ: timeToCompareInTimezone, // Creates time in whatever timezone the test is run in or utcDateForcedTZ is configured to
@@ -216,7 +216,7 @@ export const testFieldType = function (List) {
 
 	describe('addFilterToQuery', function () {
 		it('should filter a specific date', function () {
-			var result = List.fields.date.addFilterToQuery({
+			const result = List.fields.date.addFilterToQuery({
 				value: '2015-01-01',
 			});
 			demand(result.date).eql({
@@ -226,7 +226,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter after a specific date', function () {
-			var result = List.fields.date.addFilterToQuery({
+			const result = List.fields.date.addFilterToQuery({
 				mode: 'after',
 				value: '2015-01-01',
 			});
@@ -236,7 +236,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter before a specific date', function () {
-			var result = List.fields.date.addFilterToQuery({
+			const result = List.fields.date.addFilterToQuery({
 				mode: 'before',
 				value: '2015-01-01',
 			});
@@ -246,7 +246,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter between two specified dates', function () {
-			var result = List.fields.date.addFilterToQuery({
+			const result = List.fields.date.addFilterToQuery({
 				mode: 'between',
 				after: '2015-01-01',
 				before: '2016-01-01',
@@ -258,7 +258,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should support inverted filtering', function () {
-			var result = List.fields.date.addFilterToQuery({
+			const result = List.fields.date.addFilterToQuery({
 				value: '2015-01-01',
 				inverted: true,
 			});
@@ -271,14 +271,14 @@ export const testFieldType = function (List) {
 		});
 
 		it('should not filter anything in between mode if no value is specified', function () {
-			var result = List.fields.date.addFilterToQuery({
+			const result = List.fields.date.addFilterToQuery({
 				mode: 'between',
 			});
 			demand(result.date).be.undefined();
 		});
 
 		it('should not filter anything in between mode without an after date', function () {
-			var result = List.fields.date.addFilterToQuery({
+			const result = List.fields.date.addFilterToQuery({
 				mode: 'between',
 				before: '2015-01-01',
 			});
@@ -286,7 +286,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should not filter anything in between mode without a before date', function () {
-			var result = List.fields.date.addFilterToQuery({
+			const result = List.fields.date.addFilterToQuery({
 				mode: 'between',
 				after: '2015-01-01',
 			});
@@ -294,7 +294,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should not filter anything in between mode with an invalid after date', function () {
-			var result = List.fields.date.addFilterToQuery({
+			const result = List.fields.date.addFilterToQuery({
 				mode: 'between',
 				after: 'notadate',
 			});
@@ -302,7 +302,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should not filter anything in between mode with an invalid before date', function () {
-			var result = List.fields.date.addFilterToQuery({
+			const result = List.fields.date.addFilterToQuery({
 				mode: 'between',
 				before: 'notadate',
 			});
@@ -312,24 +312,24 @@ export const testFieldType = function (List) {
 
 	describe('format', function () {
 		it('should return an empty string if no date exists', function () {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			demand(testItem._.date.format()).equal('');
 		});
 
 		it('should parse date input and return a moment object', function () {
-			var m = List.fields.date.parse('2016-02-27');
+			const m = List.fields.date.parse('2016-02-27');
 			demand(m.format('YYYY-MM-DD')).equal('2016-02-27');
 		});
 
 		it('should format the date value using moment', function () {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			testItem.date = new Date(2013, 11, 4);
 			demand(testItem._.date.format()).equal('4th Dec 2013');
 			demand(testItem._.date.format('YYYYMMDD')).equal('20131204');
 		});
 
 		it('should return a moment object set to the field value', function () {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			testItem.date = new Date(2013, 11, 4);
 			demand(testItem._.date.moment()._isAMomentObject);
 			demand(testItem._.date.moment().format('YYYYMMDD')).equal('20131204');

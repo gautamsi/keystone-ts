@@ -6,7 +6,7 @@ import Kbd from '../../../shared/Kbd';
 import Popout from '../../../shared/Popout';
 import PopoutList from '../../../shared/Popout/PopoutList';
 
-var ListSort = React.createClass({
+let ListSort = React.createClass({
 	displayName: 'ListSort',
 	propTypes: {
 		handleSortSelect: PropTypes.func.isRequired,

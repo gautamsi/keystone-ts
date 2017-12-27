@@ -1,6 +1,6 @@
-var callerId = require('caller-id');
-var path = require('path');
-var url = require('url');
+const callerId = require('caller-id');
+const path = require('path');
+const url = require('url');
 
 /**
  * This file contains methods specific to dealing with Keystone's options.
@@ -30,15 +30,15 @@ export const set = function (key, value) {
 			throw new Error('The option "' + key + '" is no longer supported. See https://github.com/keystonejs/keystone/wiki/0.3.x-to-0.4.x-Changes');
 		// handle special settings
 		case 'cloudinary config':
-			var cloudinary = require('cloudinary');
+			const cloudinary = require('cloudinary');
 			if (typeof value === 'string') {
-				var parts = url.parse(value, true);
-				var auth = parts.auth ? parts.auth.split(':') : [];
+				const parts = url.parse(value, true);
+				const auth = parts.auth ? parts.auth.split(':') : [];
 				value = {
 					cloud_name: parts.host,
 					api_key: auth[0],
 					api_secret: auth[1],
-					private_cdn: parts.pathname != null,
+					private_cdn: parts.pathname != undefined,
 					secure_distribution: parts.pathname && parts.pathname.substring(1),
 				};
 			}
@@ -68,7 +68,7 @@ export const set = function (key, value) {
 		case 'module root':
 			// if relative path is used, resolve it based on the caller's path
 			if (!isAbsolutePath(value)) {
-				var caller = callerId.getData();
+				const caller = callerId.getData();
 				value = path.resolve(path.dirname(caller.filePath), value);
 			}
 			break;
@@ -79,7 +79,7 @@ export const set = function (key, value) {
 			this.mongoose = value;
 			break;
 		case 'frame guard':
-			var validFrameGuardOptions = ['deny', 'sameorigin'];
+			const validFrameGuardOptions = ['deny', 'sameorigin'];
 
 			if (value === true) {
 				value = 'deny';
@@ -111,9 +111,9 @@ export const options = function (options) {
 		return this._options;
 	}
 	if (typeof options === 'object') {
-		var keys = Object.keys(options);
-		var i = keys.length;
-		var k;
+		const keys = Object.keys(options);
+		let i = keys.length;
+		let k;
 		while (i--) {
 			k = keys[i];
 			this.set(k, options[k]);

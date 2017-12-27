@@ -1,5 +1,5 @@
 export default function (keystone, app) {
-	var portString;
+	let portString;
 	function sslRedirect (req, res, next) {
 		if (req.secure) {
 			next();
@@ -11,10 +11,10 @@ export default function (keystone, app) {
 				res.redirect(302, 'https://' + req.hostname + portString + req.originalUrl);
 			}
 		}
-	};
+	}
 
 	if (keystone.get('ssl') === 'force') {
-		var port = keystone.get('ssl public port') || keystone.get('ssl port');
+		const port = keystone.get('ssl public port') || keystone.get('ssl port');
 		if (Number(port) === 443) {
 			portString = '';
 		} else {
@@ -22,4 +22,4 @@ export default function (keystone, app) {
 		}
 		app.use(sslRedirect);
 	}
-};
+}

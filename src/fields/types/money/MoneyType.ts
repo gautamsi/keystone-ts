@@ -1,7 +1,7 @@
-var FieldType = require('../Type');
-var NumberType = require('../number/NumberType');
-var numeral = require('numeral');
-var util = require('util');
+const FieldType = require('../Type');
+const NumberType = require('../number/NumberType');
+const numeral = require('numeral');
+const util = require('util');
 
 /**
  * Money FieldType Constructor

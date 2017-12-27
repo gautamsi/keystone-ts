@@ -11,7 +11,7 @@ const FORMAT_OPTIONS = [
 	{ label: 'JSON', value: 'json' },
 ];
 
-var ListDownloadForm = React.createClass({
+let ListDownloadForm = React.createClass({
 	propTypes: {
 		activeColumns: PropTypes.array,
 		dispatch: PropTypes.func.isRequired,
@@ -26,7 +26,7 @@ var ListDownloadForm = React.createClass({
 		};
 	},
 	getDefaultSelectedColumns () {
-		var selectedColumns = {};
+		let selectedColumns = {};
 		this.props.activeColumns.forEach(col => {
 			selectedColumns[col.path] = true;
 		});

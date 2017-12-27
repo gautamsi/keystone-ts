@@ -2,7 +2,7 @@ import React from 'react';
 import ItemsTableCell from '../../components/ItemsTableCell';
 import ItemsTableValue from '../../components/ItemsTableValue';
 
-var EmailColumn = React.createClass({
+let EmailColumn = React.createClass({
 	displayName: 'EmailColumn',
 	propTypes: {
 		col: React.PropTypes.object,

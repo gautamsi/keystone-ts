@@ -1,12 +1,12 @@
-var _ = require('lodash');
-var async = require('async');
-var listToArray = require('list-to-array');
+const _ = require('lodash');
+const async = require('async');
+const listToArray = require('list-to-array');
 
 export default function (req, res) {
-	var keystone = req.keystone;
-	var query = req.list.model.findById(req.params.id);
+	const keystone = req.keystone;
+	const query = req.list.model.findById(req.params.id);
 
-	var fields = req.query.fields;
+	let fields = req.query.fields;
 	if (fields === 'false') {
 		fields = false;
 	}
@@ -22,8 +22,8 @@ export default function (req, res) {
 		if (err) return res.status(500).json({ err: 'database error', detail: err });
 		if (!item) return res.status(404).json({ err: 'not found', id: req.params.id });
 
-		var tasks = [];
-		var drilldown;
+		const tasks = [];
+		let drilldown;
 
 		/* Drilldown (optional, provided if ?drilldown=true in querystring) */
 		if (req.query.drilldown === 'true' && req.list.get('drilldown')) {
@@ -41,13 +41,13 @@ export default function (req, res) {
 
 				async.eachSeries(drilldown.def, function (path, done) {
 
-					var field = req.list.fields[path];
+					const field = req.list.fields[path];
 
 					if (!field || field.type !== 'relationship') {
 						throw new Error('Drilldown for ' + req.list.key + ' is invalid: field at path ' + path + ' is not a relationship.');
 					}
 
-					var refList = field.refList;
+					const refList = field.refList;
 
 					if (field.many) {
 						if (!item.get(field.path).length) {
@@ -57,7 +57,7 @@ export default function (req, res) {
 							if (err || !results) {
 								done(err);
 							}
-							var more = (results.length === 4) ? results.pop() : false;
+							const more = (results.length === 4) ? results.pop() : false;
 							if (results.length) {
 								// drilldown.data[path] = results;
 								drilldown.items.push({
@@ -115,4 +115,4 @@ export default function (req, res) {
 			}));
 		});
 	});
-};
+}

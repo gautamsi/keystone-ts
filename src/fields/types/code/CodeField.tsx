@@ -30,7 +30,7 @@ export = Field.create({
 			return;
 		}
 
-		var options = _.defaults({}, this.props.editor, {
+		let options = _.defaults({}, this.props.editor, {
 			lineNumbers: true,
 			readOnly: this.shouldRenderField() ? false : true,
 		});
@@ -64,7 +64,7 @@ export = Field.create({
 		});
 	},
 	codemirrorValueChanged (doc, change) {
-		var newValue = doc.getValue();
+		let newValue = doc.getValue();
 		this._currentCodemirrorValue = newValue;
 		this.props.onChange({
 			path: this.props.path,

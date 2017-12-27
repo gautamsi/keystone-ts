@@ -24,7 +24,7 @@ function FormInputNoedit ({
 	);
 
 	return <Component {...props} />;
-};
+}
 
 FormInputNoedit.propTypes = {
 	component: PropTypes.oneOfType([

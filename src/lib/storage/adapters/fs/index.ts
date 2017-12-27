@@ -1,15 +1,15 @@
-var assign = require('object-assign');
-var ensureCallback = require('keystone-storage-namefunctions/ensureCallback');
-var fs = require('fs-extra');
-var nameFunctions = require('keystone-storage-namefunctions');
-var path = require('path');
-var prototypeMethods = require('keystone-storage-namefunctions/prototypeMethods');
-var sanitize = require('sanitize-filename');
-var url = require('url');
+const assign = require('object-assign');
+const ensureCallback = require('keystone-storage-namefunctions/ensureCallback');
+const fs = require('fs-extra');
+const nameFunctions = require('keystone-storage-namefunctions');
+const path = require('path');
+const prototypeMethods = require('keystone-storage-namefunctions/prototypeMethods');
+const sanitize = require('sanitize-filename');
+const url = require('url');
 
-var debug = require('debug')('keystone:storage:adapter:fs');
+const debug = require('debug')('keystone:storage:adapter:fs');
 
-var DEFAULT_OPTIONS = {
+const DEFAULT_OPTIONS = {
 	generateFilename: nameFunctions.randomFilename,
 	whenExists: 'retry',
 	retryAttempts: 3, // For whenExists: 'retry'.
@@ -30,7 +30,7 @@ function ensurePath (path) {
 		if (e.code === 'ENOENT') {
 			// Recover by creating the directory.
 			fs.mkdirsSync(path);
-			debug('Storage output path \'' + path + '\' created');
+			debug("Storage output path '" + path + "' created");
 			return;
 		}
 		throw e;
@@ -71,7 +71,7 @@ FSAdapter.prototype.retryFilename = prototypeMethods.retryFilename;
 	with the filename in the field value
 */
 FSAdapter.prototype.getFileURL = function (file) {
-	var publicPath = this.options.publicPath;
+	const publicPath = this.options.publicPath;
 	if (!publicPath) return null; // No URL.
 
 	return url.resolve(publicPath, file.filename);
@@ -91,20 +91,20 @@ FSAdapter.prototype.pathForFile = function (filename) {
 */
 FSAdapter.prototype.uploadFile = function (file, callback) {
 	debug('Uploading file', file);
-	var options = this.options;
+	const options = this.options;
 	this.getFilename(file, function (err, filename) {
 		if (err) return callback(err);
 		filename = sanitize(filename);
 		debug('Uploading file with filename: %s', filename);
-		var uploadPath = path.resolve(options.path, filename);
-		var fsOptions = {};
+		const uploadPath = path.resolve(options.path, filename);
+		const fsOptions = {};
 		fsOptions.clobber = options.whenExists === 'overwrite';
 		fs.move(file.path, uploadPath, fsOptions, function (err) {
 			if (err) return callback(err);
 
 			// TODO: Chmod the file.
 
-			var data = {
+			const data = {
 				filename: filename,
 				size: file.size,
 				mimetype: file.mimetype,
@@ -131,7 +131,7 @@ FSAdapter.prototype.removeFile = function (file, callback) {
 };
 
 FSAdapter.prototype.fileExists = function (filename, callback) {
-	var path = this.pathForFile(filename);
+	const path = this.pathForFile(filename);
 	debug('Checking for file at path %s', filename);
 	// Returns (err, bool) to the callback based on whether or not the file
 	// already exists. Used if whenExists: 'error' or 'retry' in the options

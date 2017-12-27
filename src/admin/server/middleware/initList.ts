@@ -1,5 +1,5 @@
 export default function initList (req, res, next) {
-	var keystone = req.keystone;
+	const keystone = req.keystone;
 	req.list = keystone.list(req.params.list);
 	if (!req.list) {
 		if (req.headers.accept === 'application/json') {
@@ -9,4 +9,4 @@ export default function initList (req, res, next) {
 		return res.redirect('/' + keystone.get('admin path'));
 	}
 	next();
-};
+}

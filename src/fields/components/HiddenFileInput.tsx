@@ -50,7 +50,7 @@ class HiddenFileInput extends Component {
 			/>
 		);
 	}
-};
+}
 
 HiddenFileInput.propTypes = {
 	onChange: PropTypes.func.isRequired,

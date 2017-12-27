@@ -1,12 +1,12 @@
-var utils = require('keystone-utils');
+const utils = require('keystone-utils');
 
 /**
  * Registers relationships to this list defined on others
  */
 function relationship (def) {
-	var keystone = this.keystone;
+	const keystone = this.keystone;
 	if (arguments.length > 1) {
-		for (var i = 0; i < arguments.length; i++) {
+		for (let i = 0; i < arguments.length; i++) {
 			this.relationship(arguments[i]);
 		}
 		return this;

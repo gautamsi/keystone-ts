@@ -5,4 +5,4 @@ export default function initTrustProxy (keystone, app) {
 	} else {
 		app.disable('trust proxy');
 	}
-};
+}

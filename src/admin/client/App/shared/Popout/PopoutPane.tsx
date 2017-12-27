@@ -6,7 +6,7 @@ import React from 'react';
 import blacklist from 'blacklist';
 import classnames from 'classnames';
 
-var PopoutPane = React.createClass({
+let PopoutPane = React.createClass({
 	displayName: 'PopoutPane',
 	propTypes: {
 		children: React.PropTypes.node.isRequired,

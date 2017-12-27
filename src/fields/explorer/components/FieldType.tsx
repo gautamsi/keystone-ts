@@ -25,7 +25,7 @@ const ExplorerFieldType = React.createClass({
 		});
 	},
 	onFieldChange (e) {
-		var logValue = typeof e.value === 'string' ? `"${e.value}"` : e.value;
+		let logValue = typeof e.value === 'string' ? `"${e.value}"` : e.value;
 		console.log(`${this.props.params.type} field value changed:`, logValue);
 		this.setState({
 			value: e.value,

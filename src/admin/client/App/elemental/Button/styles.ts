@@ -207,7 +207,7 @@ function buttonHollowVariant (textColor, borderColor) {
 		},
 		active: activeStyles,
 	};
-};
+}
 export const hollow = (color) => {
 	// TODO: better handling of cancel and delete colors
 	if (color === 'cancel' || color === 'delete') color = 'danger';
@@ -238,7 +238,7 @@ function buttonLinkVariant (textColor, hoverColor) {
 		},
 		active: hoverStyles,
 	};
-};
+}
 function buttonLinkDelete () {
 	const styles = buttonLinkVariant(theme.color.gray40, theme.color.danger);
 	const hoverStyles = {

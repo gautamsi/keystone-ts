@@ -9,25 +9,25 @@
  * @api private
  */
 
-var https;
+let https;
 try {
 	// Use spdy if available
 	https = require('spdy');
 } catch (e) {
 	https = require('https');
 }
-var tls = require('tls');
-var fs = require('fs');
+const tls = require('tls');
+const fs = require('fs');
 
 export default function (keystone, app, created, callback) {
 
-	var ssl = keystone.get('ssl');
-	var host = keystone.get('ssl host') || keystone.get('host');
-	var port = keystone.get('ssl port');
-	var message = (ssl === 'only') ? keystone.get('name') + ' (SSL) is ready on ' : 'SSL Server is ready on ';
-	var sniFunc;
+	const ssl = keystone.get('ssl');
+	const host = keystone.get('ssl host') || keystone.get('host');
+	const port = keystone.get('ssl port');
+	let message = (ssl === 'only') ? keystone.get('name') + ' (SSL) is ready on ' : 'SSL Server is ready on ';
+	let sniFunc;
 
-	var options = keystone.get('https server options') || {};
+	const options = keystone.get('https server options') || {};
 	if (options.NPNProtocols && options.NPNProtocols.length === 1 && options.NPNProtocols[0] === 'http/1.1') {
 		// Remove default value so spdy can use its own better ones
 		delete options.NPNProtocols;
@@ -63,7 +63,7 @@ export default function (keystone, app, created, callback) {
 	sniFunc = keystone.get('ssl sni');
 	if (sniFunc) {
 		options.SNICallback = function (host, cb) {
-			var ctx = sniFunc(host);
+			const ctx = sniFunc(host);
 			cb(null, ctx && tls.createSecureContext(ctx));
 		};
 	}
@@ -71,9 +71,9 @@ export default function (keystone, app, created, callback) {
 	if ((!options.key || !options.cert) && !options.pfx && !keystone.get('letsencrypt')) {
 		if (sniFunc) {
 			// We populate the config with what sniFunc returns for localhost
-			var localCtx = sniFunc('localhost');
+			const localCtx = sniFunc('localhost');
 			if (localCtx) {
-				for (var prop in localCtx) {
+				for (const prop in localCtx) {
 					if (localCtx.hasOwnProperty(prop)) {
 						options[prop] = localCtx[prop];
 					}
@@ -89,7 +89,7 @@ export default function (keystone, app, created, callback) {
 		}
 	}
 
-	var server = https.createServer(options, app);
+	const server = https.createServer(options, app);
 	created();
 
 	function ready (err) {
@@ -98,4 +98,4 @@ export default function (keystone, app, created, callback) {
 
 	message += 'https://' + host + ':' + port;
 	keystone.httpsServer = server.listen(port, host, ready);
-};
+}

@@ -1,4 +1,4 @@
-var utils = require('keystone-utils');
+const utils = require('keystone-utils');
 
 /**
  * Path Class
@@ -10,12 +10,12 @@ export default function Path (str) {
 		return new Path(str);
 	}
 
-	var parts = this.parts = str.split('.');
-	var last = this.parts[this.parts.length - 1];
+	const parts = this.parts = str.split('.');
+	const last = this.parts[this.parts.length - 1];
 
 	this.addTo = function (obj, val) {
-		var o = obj;
-		for (var i = 0; i < parts.length - 1; i++) {
+		let o = obj;
+		for (let i = 0; i < parts.length - 1; i++) {
 			if (!utils.isObject(o[parts[i]])) {
 				o[parts[i]] = {};
 			}
@@ -27,10 +27,10 @@ export default function Path (str) {
 
 	this.get = function (obj, subpath) {
 		if (typeof obj !== 'object') throw new TypeError('Path.get: obj argument must be an Object');
-		var i;
+		let i;
 		if (subpath) {
-			var nested = subpath.charAt(0) === '.';
-			var flatPath = str + subpath;
+			const nested = subpath.charAt(0) === '.';
+			const flatPath = str + subpath;
 			if (flatPath in obj) {
 				return obj[flatPath];
 			}
@@ -57,4 +57,4 @@ export default function Path (str) {
 
 	return this;
 
-};
+}

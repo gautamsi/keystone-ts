@@ -28,7 +28,7 @@ function getDefaultValue () {
 	};
 }
 
-var TextFilter = React.createClass({
+let TextFilter = React.createClass({
 	propTypes: {
 		filter: React.PropTypes.shape({
 			mode: React.PropTypes.oneOf(MODE_OPTIONS.map(i => i.value)),

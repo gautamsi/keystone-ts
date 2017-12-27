@@ -1,8 +1,8 @@
-var FieldType = require('../Type');
-var numeral = require('numeral');
-var util = require('util');
-var utils = require('keystone-utils');
-var addPresenceToQuery = require('../../utils/addPresenceToQuery');
+const FieldType = require('../Type');
+const numeral = require('numeral');
+const util = require('util');
+const utils = require('keystone-utils');
+const addPresenceToQuery = require('../../utils/addPresenceToQuery');
 
 /**
  * Number FieldType Constructor
@@ -27,7 +27,7 @@ util.inherits(numberarray, FieldType);
  * Formats the field value
  */
 numberarray.prototype.format = function (item, format, separator) {
-	var value = item.get(this.path);
+	let value = item.get(this.path);
 	if (format || this._formatString) {
 		value = value.map(function (n) {
 			return numeral(n).format(format || this._formatString);
@@ -47,16 +47,16 @@ function isValidNumber (value) {
  * Asynchronously confirms that the provided value is valid
  */
 numberarray.prototype.validateInput = function (data, callback) {
-	var value = this.getValueFromData(data);
-	var result = true;
+	let value = this.getValueFromData(data);
+	let result = true;
 	// Let undefined, empty string and null pass
 	if (value !== undefined && value !== '' && value !== null) {
 		// Coerce a single value to an array
 		if (!Array.isArray(value)) {
 			value = [value];
 		}
-		for (var i = 0; i < value.length; i++) {
-			var thisValue = value[i];
+		for (let i = 0; i < value.length; i++) {
+			let thisValue = value[i];
 			// If it's a string, check if there's a number in the string
 			if (typeof thisValue === 'string') {
 				thisValue = utils.number(thisValue);
@@ -75,8 +75,8 @@ numberarray.prototype.validateInput = function (data, callback) {
  * Asynchronously confirms that the a value is present
  */
 numberarray.prototype.validateRequiredInput = function (item, data, callback) {
-	var value = this.getValueFromData(data);
-	var result = false;
+	const value = this.getValueFromData(data);
+	let result = false;
 	// If the field is undefined but has a value saved already, validate
 	if (value === undefined) {
 		if (item.get(this.path) && item.get(this.path).length) {
@@ -88,9 +88,9 @@ numberarray.prototype.validateRequiredInput = function (item, data, callback) {
 		result = true;
 	// If it's an array of only numbers and/or numberify-able data, validate
 	} else if (Array.isArray(value)) {
-		var invalidContent = false;
-		for (var i = 0; i < value.length; i++) {
-			var thisValue = value[i];
+		let invalidContent = false;
+		for (let i = 0; i < value.length; i++) {
+			let thisValue = value[i];
 			// If it's a string, check if there's a number in the string
 			if (typeof thisValue === 'string') {
 				thisValue = utils.number(thisValue);
@@ -119,8 +119,8 @@ numberarray.prototype.validateRequiredInput = function (item, data, callback) {
  * @param {String|Object} filter.value 		The value that is filtered for
  */
 numberarray.prototype.addFilterToQuery = function (filter) {
-	var query = {};
-	var presence = filter.presence || 'some';
+	const query = {};
+	const presence = filter.presence || 'some';
 	// Filter empty/non-empty arrays (copied from textarray)
 	if (filter.value === undefined
 		|| filter.value === null
@@ -141,8 +141,8 @@ numberarray.prototype.addFilterToQuery = function (filter) {
 	}
 	// Filter between two numbers
 	if (filter.mode === 'between') {
-		var min = utils.number(filter.value.min);
-		var max = utils.number(filter.value.max);
+		const min = utils.number(filter.value.min);
+		const max = utils.number(filter.value.max);
 		if (!isNaN(min) && !isNaN(max)) {
 			query[this.path] = {
 				$gte: min,
@@ -152,7 +152,7 @@ numberarray.prototype.addFilterToQuery = function (filter) {
 		}
 		return query;
 	}
-	var value = utils.number(filter.value);
+	const value = utils.number(filter.value);
 	// Filter greater than, less than and equals
 	if (!isNaN(value)) {
 		if (filter.mode === 'gt') {
@@ -182,7 +182,7 @@ numberarray.prototype.addFilterToQuery = function (filter) {
  * Deprecated
  */
 numberarray.prototype.inputIsValid = function (data, required, item) {
-	var value = this.getValueFromData(data);
+	const value = this.getValueFromData(data);
 	if (required) {
 		if (value === undefined && item && item.get(this.path) && item.get(this.path).length) {
 			return true;
@@ -200,7 +200,7 @@ numberarray.prototype.inputIsValid = function (data, required, item) {
 		}
 	}
 	if (Array.isArray(value)) {
-		for (var index = 0; index < value.length; index++) {
+		for (let index = 0; index < value.length; index++) {
 			if (!isValidNumber(value[index])) {
 				return false;
 			}
@@ -213,7 +213,7 @@ numberarray.prototype.inputIsValid = function (data, required, item) {
  * Updates the value for this field in the item from a data object
  */
 numberarray.prototype.updateItem = function (item, data, callback) {
-	var value = this.getValueFromData(data);
+	let value = this.getValueFromData(data);
 	if (value === undefined || value === null || value === '') {
 		value = [];
 	}

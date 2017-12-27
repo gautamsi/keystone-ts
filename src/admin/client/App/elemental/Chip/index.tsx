@@ -41,7 +41,7 @@ function Chip ({
 			)}
 		</div>
 	);
-};
+}
 
 Chip.propTypes = {
 	color: PropTypes.oneOf(Object.keys(colors)).isRequired,

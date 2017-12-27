@@ -1,20 +1,20 @@
-var _ = require('lodash');
-var listToArray = require('list-to-array');
-var escapeValueForExcel = require('../security/escapeValueForExcel');
+const _ = require('lodash');
+const listToArray = require('list-to-array');
+const escapeValueForExcel = require('../security/escapeValueForExcel');
 
 /**
  * Applies option field transforms to get the CSV value for a field
  */
 
 function transformFieldValue (field, item, options) {
-	var transform = typeof field.options.toCSV === 'string'
+	const transform = typeof field.options.toCSV === 'string'
 		? listToArray(field.options.toCSV)
 		: field.options.toCSV;
 	if (typeof transform === 'function') {
 		return transform.call(item, field, options);
 	}
 	if (Array.isArray(transform)) {
-		var value = item.get(field.path);
+		const value = item.get(field.path);
 		if (transform.length === 1) {
 			return value[transform[0]];
 		} else {
@@ -36,7 +36,7 @@ function getCSVData (item, options) {
 	if (options.fields === undefined) {
 		options.fields = Object.keys(this.options.fields);
 	}
-	var data = {
+	const data = {
 		id: String(item.id),
 	};
 	if (this.autokey) {
@@ -50,7 +50,7 @@ function getCSVData (item, options) {
 			throw new Error('List.getCSV: options.fields must be undefined, a string, or an array.');
 		}
 		options.fields.forEach(function (path) {
-			var field = this.fields[path];
+			const field = this.fields[path];
 			if (!field) {
 				// if the path isn't actually a field, just add the value from
 				// that path in the mongoose document.
@@ -64,7 +64,7 @@ function getCSVData (item, options) {
 			}
 			// relationship values should be expanded into separate name and
 			// id pairs using the field's getExpandedData method.
-			var expanded = field.getExpandedData(item);
+			const expanded = field.getExpandedData(item);
 			if (field.many) {
 				// for many-type relationships, ensure the value is an array,
 				// and turn it into a list of 'name (id)' values
@@ -79,7 +79,7 @@ function getCSVData (item, options) {
 		}, this);
 	}
 	if (typeof item.getCSVData === 'function') {
-		var ext = item.getCSVData(data, options);
+		const ext = item.getCSVData(data, options);
 		if (typeof ext === 'object') {
 			_.forOwn(ext, function (value, key) {
 				if (value === undefined) {
@@ -92,7 +92,7 @@ function getCSVData (item, options) {
 	}
 	// Copy each value into the return structure, flattening arrays into lists and
 	// flattening objects into a column per property (one level only)
-	var rtn = {};
+	const rtn = {};
 	_.forOwn(data, function (value, prop) {
 		if (Array.isArray(value)) {
 			// Array values are serialised to JSON, this should be an edge-case catch
@@ -103,7 +103,7 @@ function getCSVData (item, options) {
 			// For object values, we loop through each key and add it to its own column
 			// in the csv. Complex values are serialised to JSON.
 			_.forOwn(value, function (v, i) {
-				var suffix = i.substr(0, 1).toUpperCase() + i.substr(1);
+				const suffix = i.substr(0, 1).toUpperCase() + i.substr(1);
 				rtn[prop + suffix] = (typeof v === 'object') ? JSON.stringify(v) : v;
 			});
 		} else {

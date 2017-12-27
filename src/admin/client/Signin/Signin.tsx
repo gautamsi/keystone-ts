@@ -12,7 +12,7 @@ import Brand from './components/Brand';
 import UserInfo from './components/UserInfo';
 import LoginForm from './components/LoginForm';
 
-var SigninView = React.createClass({
+let SigninView = React.createClass({
 	getInitialState () {
 		return {
 			email: '',

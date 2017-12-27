@@ -5,14 +5,14 @@
  * @param {Object} page options
  */
 function getPages (options, maxPages) {
-	var surround = Math.floor(maxPages / 2);
-	var firstPage = maxPages ? Math.max(1, options.currentPage - surround) : 1;
-	var padRight = Math.max(((options.currentPage - surround) - 1) * -1, 0);
-	var lastPage = maxPages ? Math.min(options.totalPages, options.currentPage + surround + padRight) : options.totalPages;
-	var padLeft = Math.max(((options.currentPage + surround) - lastPage), 0);
+	const surround = Math.floor(maxPages / 2);
+	let firstPage = maxPages ? Math.max(1, options.currentPage - surround) : 1;
+	const padRight = Math.max(((options.currentPage - surround) - 1) * -1, 0);
+	const lastPage = maxPages ? Math.min(options.totalPages, options.currentPage + surround + padRight) : options.totalPages;
+	const padLeft = Math.max(((options.currentPage + surround) - lastPage), 0);
 	options.pages = [];
 	firstPage = Math.max(Math.min(firstPage, firstPage - padLeft), 1);
-	for (var i = firstPage; i <= lastPage; i++) {
+	for (let i = firstPage; i <= lastPage; i++) {
 		options.pages.push(i);
 	}
 	if (firstPage !== 1) {

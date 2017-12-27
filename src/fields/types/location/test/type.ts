@@ -1,5 +1,5 @@
-var demand = require('must');
-var LocationType = require('../LocationType');
+const demand = require('must');
+const LocationType = require('../LocationType');
 
 export const initList = function (List) {
 	List.add({
@@ -12,7 +12,7 @@ export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		describe('flat paths', function () {
 			it('should update the number', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					'locationBasic.number': 'number',
 				}, function () {
@@ -22,7 +22,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the name', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					'locationBasic.name': 'name',
 				}, function () {
@@ -32,7 +32,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the street1', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					'locationBasic.street1': 'street1',
 				}, function () {
@@ -42,7 +42,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the street2', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					'locationBasic.street2': 'street2',
 				}, function () {
@@ -52,7 +52,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the suburb', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					'locationBasic.suburb': 'suburb',
 				}, function () {
@@ -62,7 +62,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the state', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					'locationBasic.state': 'state',
 				}, function () {
@@ -72,7 +72,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the postcode', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					'locationBasic.postcode': 'postcode',
 				}, function () {
@@ -82,7 +82,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the country', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					'locationBasic.country': 'country',
 				}, function () {
@@ -92,7 +92,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the geo', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					'locationBasic.geo': [3.14, 1.59],
 				}, function () {
@@ -105,7 +105,7 @@ export const testFieldType = function (List) {
 
 		describe('nested paths', function () {
 			it('should update the number', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					locationBasic: {
 						number: 'number',
@@ -117,7 +117,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the name', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					locationBasic: {
 						name: 'name',
@@ -129,7 +129,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the street1', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					locationBasic: {
 						street1: 'street1',
@@ -141,7 +141,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the street2', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					locationBasic: {
 						street2: 'street2',
@@ -153,7 +153,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the suburb', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					locationBasic: {
 						suburb: 'suburb',
@@ -165,7 +165,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the state', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					locationBasic: {
 						state: 'state',
@@ -177,7 +177,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the postcode', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					locationBasic: {
 						postcode: 'postcode',
@@ -189,7 +189,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the country', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					locationBasic: {
 						country: 'country',
@@ -201,7 +201,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should update the geo', function (done) {
-				var testItem = new List.model();
+				const testItem = new List.model();
 				List.fields.locationBasic.updateItem(testItem, {
 					locationBasic: {
 						geo: [3.14, 1.59],
@@ -215,7 +215,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should remove the location.geo path without valid values', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.locationBasic.updateItem(testItem, {
 				'locationBasic.geo': ['151.2099', '-33.865143'],
 			}, function () {
@@ -239,66 +239,66 @@ export const testFieldType = function (List) {
 
 	describe('kmFrom()', function () {
 		it('should return a number', function () {
-			var testItem = new List.model();
+			const testItem = new List.model();
 
 			testItem.locationBasic = {
 				geo: [151.2093, -33.8688],
 			};
-			var diff = testItem._.locationBasic.kmFrom([151, -33]);
+			const diff = testItem._.locationBasic.kmFrom([151, -33]);
 			demand(diff).eql(98.5390186615803);
 		});
 	});
 
 	describe('milesFrom()', function () {
 		it('should return a number', function () {
-			var testItem = new List.model();
+			const testItem = new List.model();
 
 			testItem.locationBasic = {
 				geo: [151.2093, -33.8688],
 			};
-			var diff = testItem._.locationBasic.milesFrom([151, -33]);
+			const diff = testItem._.locationBasic.milesFrom([151, -33]);
 			demand(diff).eql(61.23308348472711);
 		});
 	});
 
 	describe('addFilterToQuery', function () {
 		it('should allow to filter by street', function () {
-			var result = List.fields.locationBasic.addFilterToQuery({
+			const result = List.fields.locationBasic.addFilterToQuery({
 				street: 'Broadway',
 			});
 			demand(result['locationBasic.street1']).eql(/Broadway/i);
 		});
 
 		it('should allow to filter by city', function () {
-			var result = List.fields.locationBasic.addFilterToQuery({
+			const result = List.fields.locationBasic.addFilterToQuery({
 				city: 'NYC',
 			});
 			demand(result['locationBasic.suburb']).eql(/NYC/i);
 		});
 
 		it('should allow to filter by state', function () {
-			var result = List.fields.locationBasic.addFilterToQuery({
+			const result = List.fields.locationBasic.addFilterToQuery({
 				state: 'New York',
 			});
 			demand(result['locationBasic.state']).eql(/New York/i);
 		});
 
 		it('should allow to filter by code', function () {
-			var result = List.fields.locationBasic.addFilterToQuery({
+			const result = List.fields.locationBasic.addFilterToQuery({
 				code: 10023,
 			});
 			demand(result['locationBasic.postcode']).eql(/10023/i);
 		});
 
 		it('should allow to filter by country', function () {
-			var result = List.fields.locationBasic.addFilterToQuery({
+			const result = List.fields.locationBasic.addFilterToQuery({
 				country: 'USA',
 			});
 			demand(result['locationBasic.country']).eql(/USA/i);
 		});
 
 		it('should support inverted mode', function () {
-			var result = List.fields.locationBasic.addFilterToQuery({
+			const result = List.fields.locationBasic.addFilterToQuery({
 				country: 'USA',
 				inverted: true,
 			});
@@ -312,7 +312,7 @@ export const testFieldType = function (List) {
 	/* Deprecated inputIsValid method tests */
 
 	it('should validate required fields', function () {
-		var testItem = new List.model();
+		const testItem = new List.model();
 		// List.fields.locationBasic.inputIsValid({}, true, testItem).must.be.false();
 		List.fields.locationBasic.inputIsValid({
 			'locationBasic.street1': 'street1',

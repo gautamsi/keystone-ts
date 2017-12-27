@@ -1,8 +1,8 @@
-var FieldType = require('../Type');
-var util = require('util');
-var utils = require('keystone-utils');
+const FieldType = require('../Type');
+const util = require('util');
+const utils = require('keystone-utils');
 
-var debug = require('debug')('keystone:fields:file');
+const debug = require('debug')('keystone:fields:file');
 
 /**
  * File FieldType Constructor
@@ -26,7 +26,7 @@ util.inherits(file, FieldType);
  */
 file.prototype.addToSchema = function (schema) {
 
-	var field = this;
+	const field = this;
 
 	this.paths = {};
 	// add field paths from the storage schema
@@ -34,7 +34,7 @@ file.prototype.addToSchema = function (schema) {
 		field.paths[path] = field.path + '.' + path;
 	});
 
-	var schemaPaths = this._path.addTo({}, this.storage.schema);
+	const schemaPaths = this._path.addTo({}, this.storage.schema);
 	schema.add(schemaPaths);
 
 	this.bindUnderscoreMethods();
@@ -44,7 +44,7 @@ file.prototype.addToSchema = function (schema) {
  * Uploads a new file
  */
 file.prototype.upload = function (item, file, callback) {
-	var field = this;
+	const field = this;
 	// TODO; Validate there is actuall a file to upload
 	debug('[%s.%s] Uploading file for item %s:', this.list.key, this.path, item.id, file);
 	this.storage.uploadFile(file, function (err, result) {
@@ -59,7 +59,7 @@ file.prototype.upload = function (item, file, callback) {
  * Resets the field value
  */
 file.prototype.reset = function (item) {
-	var value = {};
+	const value = {};
 	Object.keys(this.storage.schema).forEach(function (path) {
 		value[path] = null;
 	});
@@ -79,7 +79,7 @@ file.prototype.remove = function (item) {
  * Formats the field value
  */
 file.prototype.format = function (item) {
-	var value = item.get(this.path);
+	const value = item.get(this.path);
 	if (value) return value.filename || '';
 	return '';
 };
@@ -88,8 +88,8 @@ file.prototype.format = function (item) {
  * Detects whether the field has been modified
  */
 file.prototype.isModified = function (item) {
-	var modified = false;
-	var paths = this.paths;
+	let modified = false;
+	const paths = this.paths;
 	Object.keys(this.storageSchema).forEach(function (path) {
 		if (item.isModified(paths[path])) modified = true;
 	});
@@ -112,9 +112,9 @@ function validateInput (value) {
  * Validates that a value for this field has been provided in a data object
  */
 file.prototype.validateInput = function (data, callback) {
-	var value = this.getValueFromData(data);
+	const value = this.getValueFromData(data);
 	debug('[%s.%s] Validating input: ', this.list.key, this.path, value);
-	var result = validateInput(value);
+	const result = validateInput(value);
 	debug('[%s.%s] Validation result: ', this.list.key, this.path, result);
 	utils.defer(callback, result);
 };
@@ -126,7 +126,7 @@ file.prototype.validateRequiredInput = function (item, data, callback) {
 	// TODO: We need to also get the `files` argument, so we can check for
 	// uploaded files. without it, this will return false negatives so we
 	// can't actually validate required input at the moment.
-	var result = true;
+	const result = true;
 	// var value = this.getValueFromData(data);
 	// debug('[%s.%s] Validating required input: ', this.list.key, this.path, value);
 	// TODO: Need to actually check a dynamic path based on the adapter
@@ -152,8 +152,8 @@ file.prototype.updateItem = function (item, data, files, callback) {
 	}
 
 	// Prepare values
-	var value = this.getValueFromData(data);
-	var uploadedFile;
+	let value = this.getValueFromData(data);
+	let uploadedFile;
 
 	// Providing the string "remove" removes the file and resets the field
 	if (value === 'remove') {

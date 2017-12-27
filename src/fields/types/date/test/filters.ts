@@ -1,5 +1,5 @@
-var demand = require('must');
-var moment = require('moment');
+const demand = require('must');
+const moment = require('moment');
 
 export const initList = function (List) {
 	List.add({

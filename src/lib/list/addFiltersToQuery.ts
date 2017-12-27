@@ -1,5 +1,5 @@
-var assign = require('object-assign');
-var debug = require('debug')('keystone:core:list:addFiltersToQuery');
+const assign = require('object-assign');
+const debug = require('debug')('keystone:core:list:addFiltersToQuery');
 
 function combineQueries (a, b) {
 	if (a.$or && b.$or) {
@@ -15,10 +15,10 @@ function combineQueries (a, b) {
 }
 
 function addFiltersToQuery (filters) {
-	var fields = Object.keys(this.fields);
-	var query = {};
+	const fields = Object.keys(this.fields);
+	const query = {};
 	fields.forEach(function (path) {
-		var field = this.fields[path];
+		const field = this.fields[path];
 		if (!field.addFilterToQuery || !filters[field.path]) return;
 		combineQueries(query, field.addFilterToQuery(filters[field.path]));
 	}, this);

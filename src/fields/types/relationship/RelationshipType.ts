@@ -1,9 +1,9 @@
-var _ = require('lodash');
-var FieldType = require('../Type');
-var keystone = require('../../../');
-var util = require('util');
-var utils = require('keystone-utils');
-var definePrototypeGetters = require('../../utils/definePrototypeGetters');
+const _ = require('lodash');
+const FieldType = require('../Type');
+const keystone = require('../../../');
+const util = require('util');
+const utils = require('keystone-utils');
+const definePrototypeGetters = require('../../utils/definePrototypeGetters');
 
 /**
  * Relationship FieldType Constructor
@@ -27,7 +27,7 @@ util.inherits(relationship, FieldType);
  * Get client-side properties to pass to react field.
  */
 relationship.prototype.getProperties = function () {
-	var refList = this.refList;
+	const refList = this.refList;
 	return {
 		refList: {
 			singular: refList.singular,
@@ -55,7 +55,7 @@ function truthy (value) {
 }
 
 relationship.prototype.getExpandedData = function (item) {
-	var value = item.get(this.path);
+	const value = item.get(this.path);
 	if (this.many) {
 		if (!value || !Array.isArray(value)) return [];
 		return value.map(expandRelatedItemData.bind(this)).filter(truthy);
@@ -68,8 +68,8 @@ relationship.prototype.getExpandedData = function (item) {
  * Registers the field on the List's Mongoose Schema.
  */
 relationship.prototype.addToSchema = function (schema) {
-	var field = this;
-	var def = {
+	const field = this;
+	const def = {
 		type: this._nativeType,
 		ref: this.options.ref,
 		index: (this.options.index ? true : false),
@@ -90,7 +90,7 @@ relationship.prototype.addToSchema = function (schema) {
  * Gets the field's data from an Item, as used by the React components
  */
 relationship.prototype.getData = function (item) {
-	var value = item.get(this.path);
+	const value = item.get(this.path);
 	if (this.many) {
 		return Array.isArray(value) ? value : [];
 	} else {
@@ -102,7 +102,7 @@ relationship.prototype.getData = function (item) {
  * Add filters to a query
  */
 relationship.prototype.addFilterToQuery = function (filter) {
-	var query = {};
+	const query = {};
 	if (!Array.isArray(filter.value)) {
 		if (typeof filter.value === 'string' && filter.value) {
 			filter.value = [filter.value];
@@ -126,7 +126,7 @@ relationship.prototype.addFilterToQuery = function (filter) {
  * Formats the field value
  */
 relationship.prototype.format = function (item) {
-	var value = item.get(this.path);
+	const value = item.get(this.path);
 	// force the formatted value to be a string - unexpected things happen with ObjectIds.
 	return this.many ? value.join(', ') : (value || '') + '';
 };
@@ -139,8 +139,8 @@ relationship.prototype.format = function (item) {
  * mongoose) would fail validation. not sure if this is an issue.
  */
 relationship.prototype.validateInput = function (data, callback) {
-	var value = this.getValueFromData(data);
-	var result = false;
+	let value = this.getValueFromData(data);
+	let result = false;
 	if (value === undefined || value === null || value === '') {
 		result = true;
 	} else {
@@ -167,8 +167,8 @@ relationship.prototype.validateInput = function (data, callback) {
  * Asynchronously confirms that the provided value is present
  */
 relationship.prototype.validateRequiredInput = function (item, data, callback) {
-	var value = this.getValueFromData(data);
-	var result = false;
+	let value = this.getValueFromData(data);
+	let result = false;
 	if (value === undefined) {
 		if (this.many) {
 			if (item.get(this.path).length) {
@@ -221,16 +221,16 @@ relationship.prototype.updateItem = function (item, data, callback) {
 		throw new Error('fieldTypes.relationship.updateItem() Error - You cannot update populated relationships.');
 	}
 
-	var value = this.getValueFromData(data);
+	const value = this.getValueFromData(data);
 	if (value === undefined) {
 		return process.nextTick(callback);
 	}
 
 	// Are we handling a many relationship or just one value?
 	if (this.many) {
-		var arr = item.get(this.path);
-		var _old = arr.map(function (i) { return String(i); });
-		var _new = value;
+		const arr = item.get(this.path);
+		const _old = arr.map(function (i) { return String(i); });
+		let _new = value;
 		if (!utils.isArray(_new)) {
 			_new = String(_new || '').split(',');
 		}

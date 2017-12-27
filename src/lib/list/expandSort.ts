@@ -1,10 +1,10 @@
-var listToArray = require('list-to-array');
+const listToArray = require('list-to-array');
 
 function truthy (i) { return i; }
 
 function expandSort (input) {
-	var fields = this.fields;
-	var sort = {
+	const fields = this.fields;
+	const sort = {
 		rawInput: input || this.defaultSort,
 		isDefaultSort: false,
 	};
@@ -14,12 +14,12 @@ function expandSort (input) {
 		sort.input = this.sortable ? 'sortOrder' : this.namePath;
 	}
 	sort.paths = listToArray(sort.input).map(function (path) {
-		var invert = false;
+		let invert = false;
 		if (path.charAt(0) === '-') {
 			invert = true;
 			path = path.substr(1);
 		}
-		var field = fields[path];
+		const field = fields[path];
 		if (!field) {
 			return;
 		}

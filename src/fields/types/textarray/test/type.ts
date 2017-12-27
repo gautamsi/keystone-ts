@@ -1,5 +1,5 @@
-var demand = require('must');
-var TextArrayType = require('../TextArrayType');
+const demand = require('must');
+const TextArrayType = require('../TextArrayType');
 
 export const initList = function (List) {
 	List.add({
@@ -13,7 +13,7 @@ export const initList = function (List) {
 
 export const testFieldType = function (List) {
 	it('should default to an empty array', function () {
-		var testItem = new List.model();
+		const testItem = new List.model();
 		demand(testItem.get('textarr')).eql([]);
 	});
 
@@ -133,7 +133,7 @@ export const testFieldType = function (List) {
 
 	describe('validateRequiredInput', function () {
 		it('should validate an array of strings', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.textarr.validateRequiredInput(testItem, {
 				textarr: ['a', 'b'],
 			}, function (result) {
@@ -143,7 +143,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate a nested array of strings', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.textarr'].validateRequiredInput(testItem, {
 				nested: {
 					textarr: ['a', 'b'],
@@ -164,7 +164,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an empty string', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.textarr.validateRequiredInput(testItem, {
 				textarr: '',
 			}, function (result) {
@@ -174,7 +174,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate undefined', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.textarr.validateRequiredInput(testItem, {
 				textarr: undefined,
 			}, function (result) {
@@ -184,7 +184,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate undefined if a value exists', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				textarr: ['a'],
 			});
 			List.fields.textarr.validateRequiredInput(testItem, {
@@ -196,7 +196,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate null', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.textarr.validateRequiredInput(testItem, {
 				textarr: null,
 			}, function (result) {
@@ -206,7 +206,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an array with an empty string', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.textarr.validateRequiredInput(testItem, {
 				textarr: [''],
 			}, function (result) {
@@ -216,7 +216,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate an array with empty strings', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.textarr.validateRequiredInput(testItem, {
 				textarr: ['a', 'b', ''],
 			}, function (result) {
@@ -228,7 +228,7 @@ export const testFieldType = function (List) {
 
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.textarr.updateItem(testItem, {
 				textarr: ['a', 'b'],
 			}, function () {
@@ -238,7 +238,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.textarr'].updateItem(testItem, {
 				nested: {
 					textarr: ['a', 'b'],
@@ -250,7 +250,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.textarr'].updateItem(testItem, {
 				'nested.textarr': ['a', 'b'],
 			}, function () {
@@ -260,7 +260,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields non-empty arrays to empty arrays when the data is empty', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.textarr'].updateItem(testItem, {
 				'nested.textarr': ['a', 'b'],
 			}, function () {
@@ -272,7 +272,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update non-empty arrays to empty arrays when the data is empty', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.textarr.updateItem(testItem, {
 				textarr: ['a', 'b'],
 			}, function () {
@@ -284,7 +284,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update empty arrays', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.textarr.updateItem(testItem, {
 				textarr: [],
 			}, function () {
@@ -294,7 +294,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should default on null', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.textarr.updateItem(testItem, {
 				textarr: null,
 			}, function () {
@@ -304,7 +304,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow a single string value', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.textarr.updateItem(testItem, {
 				textarr: 'a',
 			}, function () {
@@ -314,8 +314,8 @@ export const testFieldType = function (List) {
 		});
 
 		it('should convert truthy values with toString methods to strings', function (done) {
-			var testItem = new List.model();
-			var time = new Date();
+			const testItem = new List.model();
+			const time = new Date();
 			List.fields.textarr.updateItem(testItem, {
 				textarr: [1, 'a', true, false, null, undefined, [], {}, time],
 			}, function () {
@@ -328,7 +328,7 @@ export const testFieldType = function (List) {
 	describe('addFilterToQuery', function () {
 		describe('"some" present', function () {
 			it('should return a regex with the "i" flag set', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					presence: 'some',
 					value: 'abc',
 				});
@@ -340,7 +340,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow case sensitive matching', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					presence: 'some',
 					value: 'abc',
 					caseSensitive: true,
@@ -353,7 +353,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow exact matching', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					presence: 'some',
 					value: 'abc',
 					mode: 'exactly',
@@ -366,7 +366,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow matching the end', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					presence: 'some',
 					value: 'abc',
 					mode: 'endsWith',
@@ -379,7 +379,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow matching the start', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					presence: 'some',
 					value: 'abc',
 					mode: 'beginsWith',
@@ -392,7 +392,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow matching empty values', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					presence: 'some',
 				});
 				demand(result.textarr).eql({
@@ -403,7 +403,7 @@ export const testFieldType = function (List) {
 
 		describe('"none" present', function () {
 			it('should return a regex with the "i" flag set', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					presence: 'none',
 					value: 'abc',
 				});
@@ -413,7 +413,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow case sensitive matching', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					presence: 'none',
 					value: 'abc',
 					caseSensitive: true,
@@ -424,7 +424,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow exact matching', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					presence: 'none',
 					value: 'abc',
 					mode: 'exactly',
@@ -435,7 +435,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow matching the end', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					presence: 'none',
 					value: 'abc',
 					mode: 'endsWith',
@@ -446,7 +446,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow matching the start', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					presence: 'none',
 					value: 'abc',
 					mode: 'beginsWith',
@@ -457,7 +457,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow matching non-empty values', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					presence: 'none',
 				});
 				demand(result.textarr).eql({
@@ -471,7 +471,7 @@ export const testFieldType = function (List) {
 		// Presence undefined should behave exactly like presence === 'some'
 		describe('no presence option', function () {
 			it('should return a regex with the "i" flag set', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					value: 'abc',
 				});
 				demand(result.textarr).eql({
@@ -482,7 +482,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow case sensitive matching', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					value: 'abc',
 					caseSensitive: true,
 				});
@@ -494,7 +494,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow exact matching', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					value: 'abc',
 					mode: 'exactly',
 				});
@@ -506,7 +506,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow matching the end', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					value: 'abc',
 					mode: 'endsWith',
 				});
@@ -518,7 +518,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow matching the start', function () {
-				var result = List.fields.textarr.addFilterToQuery({
+				const result = List.fields.textarr.addFilterToQuery({
 					value: 'abc',
 					mode: 'beginsWith',
 				});
@@ -530,7 +530,7 @@ export const testFieldType = function (List) {
 			});
 
 			it('should allow matching empty values in exact mode', function () {
-				var result = List.fields.textarr.addFilterToQuery({});
+				const result = List.fields.textarr.addFilterToQuery({});
 				demand(result.textarr).eql({
 					$size: 0,
 				});
@@ -540,21 +540,21 @@ export const testFieldType = function (List) {
 
 	describe('format', function () {
 		it('should use the default separator for formatting', function () {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				textarr: ['one', 'two', 'three'],
 			});
 			demand(testItem._.textarr.format()).be('one | two | three');
 		});
 
 		it('should use the provided separator for formatting', function () {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				textarr: ['one', 'two', 'three'],
 			});
 			demand(testItem._.textarr.format(', ')).be('one, two, three');
 		});
 
 		it('should use the specified separator for formatting', function () {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				customSeparator: ['one', 'two', 'three'],
 			});
 			demand(testItem._.customSeparator.format()).be('one * two * three');
@@ -573,7 +573,7 @@ export const testFieldType = function (List) {
 	});
 
 	it('should validate no input', function () {
-		var testItem = new List.model();
+		const testItem = new List.model();
 		demand(List.fields.textarr.inputIsValid({})).be.true();
 		demand(List.fields.textarr.inputIsValid({}, true)).be.false();
 		testItem.textarr = ['a'];

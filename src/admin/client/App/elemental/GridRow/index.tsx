@@ -26,7 +26,7 @@ class GridRow extends Component {
 			</div>
 		);
 	}
-};
+}
 
 GridRow.childContextTypes = {
 	gutter: PropTypes.number,

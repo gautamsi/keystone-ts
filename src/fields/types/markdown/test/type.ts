@@ -1,6 +1,6 @@
-var demand = require('must');
-var MarkdownType = require('../MarkdownType');
-var TextType = require('../../text/TextType');
+const demand = require('must');
+const MarkdownType = require('../MarkdownType');
+const TextType = require('../../text/TextType');
 
 export const initList = function (List) {
 	List.add({
@@ -14,7 +14,7 @@ export const initList = function (List) {
 export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.markdown.updateItem(testItem, {
 				markdown: 'foobar',
 			}, function () {
@@ -24,7 +24,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.markdown'].updateItem(testItem, {
 				nested: {
 					markdown: 'foobar',
@@ -36,7 +36,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.markdown'].updateItem(testItem, {
 				'nested.markdown': 'foobar',
 			}, function () {
@@ -56,14 +56,14 @@ export const testFieldType = function (List) {
 
 	describe('addFilterToQuery', function () {
 		it('should return a regex with the "i" flag set', function () {
-			var result = List.fields.markdown.addFilterToQuery({
+			const result = List.fields.markdown.addFilterToQuery({
 				value: 'abc',
 			});
 			demand(result['markdown.md']).eql(/abc/i);
 		});
 
 		it('should allow case sensitive matching', function () {
-			var result = List.fields.markdown.addFilterToQuery({
+			const result = List.fields.markdown.addFilterToQuery({
 				value: 'abc',
 				caseSensitive: true,
 			});
@@ -71,7 +71,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow inverted matching', function () {
-			var result = List.fields.markdown.addFilterToQuery({
+			const result = List.fields.markdown.addFilterToQuery({
 				value: 'abc',
 				inverted: true,
 			});
@@ -81,7 +81,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow exact matching', function () {
-			var result = List.fields.markdown.addFilterToQuery({
+			const result = List.fields.markdown.addFilterToQuery({
 				value: 'abc',
 				mode: 'exactly',
 			});
@@ -89,7 +89,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow matching the end', function () {
-			var result = List.fields.markdown.addFilterToQuery({
+			const result = List.fields.markdown.addFilterToQuery({
 				value: 'abc',
 				mode: 'endsWith',
 			});
@@ -97,7 +97,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow matching the start', function () {
-			var result = List.fields.markdown.addFilterToQuery({
+			const result = List.fields.markdown.addFilterToQuery({
 				value: 'abc',
 				mode: 'beginsWith',
 			});
@@ -105,7 +105,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow matching empty values in exact mode', function () {
-			var result = List.fields.markdown.addFilterToQuery({
+			const result = List.fields.markdown.addFilterToQuery({
 				mode: 'exactly',
 			});
 			demand(result['markdown.md']).eql({
@@ -114,7 +114,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should allow matching non-empty values in exact mode with the inverted option', function () {
-			var result = List.fields.markdown.addFilterToQuery({
+			const result = List.fields.markdown.addFilterToQuery({
 				mode: 'exactly',
 				inverted: true,
 			});

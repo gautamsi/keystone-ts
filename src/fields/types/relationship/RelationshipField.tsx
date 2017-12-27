@@ -55,13 +55,13 @@ export = Field.create({
 	},
 
 	buildFilters () {
-		var filters = {};
+		let filters = {};
 
 		_.forEach(this.props.filters, (value, key) => {
 			if (typeof value === 'string' && value[0] === ':') {
-				var fieldName = value.slice(1);
+				let fieldName = value.slice(1);
 
-				var val = this.props.values[fieldName];
+				let val = this.props.values[fieldName];
 				if (val) {
 					filters[key] = val;
 					return;
@@ -77,7 +77,7 @@ export = Field.create({
 			}
 		}, this);
 
-		var parts = [];
+		let parts = [];
 
 		_.forEach(filters, function (val, key) {
 			parts.push('filters[' + key + '][value]=' + encodeURIComponent(val));
@@ -97,7 +97,7 @@ export = Field.create({
 				loading: false,
 				value: null,
 			});
-		};
+		}
 		values = Array.isArray(values) ? values : values.split(',');
 		const cachedValues = values.map(i => this._itemsCache[i]).filter(i => i);
 		if (cachedValues.length === values.length) {

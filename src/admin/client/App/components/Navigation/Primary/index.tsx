@@ -7,7 +7,7 @@ import React from 'react';
 import { Container } from '../../../elemental';
 import PrimaryNavItem from './NavItem';
 
-var PrimaryNavigation = React.createClass({
+let PrimaryNavigation = React.createClass({
 	displayName: 'PrimaryNavigation',
 	propTypes: {
 		brand: React.PropTypes.string,

@@ -27,7 +27,7 @@ class Form extends Component {
 
 		return <Component {...props} />;
 	}
-};
+}
 
 Form.childContextTypes = {
 	formLayout: PropTypes.oneOf(['basic', 'horizontal', 'inline']),

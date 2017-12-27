@@ -35,7 +35,7 @@ export = Field.create({
 
 	componentWillMount () {
 		const { value = [] } = this.props;
-		var collapsedFields = {};
+		let collapsedFields = {};
 		_.forEach(['number', 'name', 'street2', 'geo'], (i) => {
 			if (!value[i]) {
 				collapsedFields[i] = true;
@@ -208,7 +208,7 @@ export = Field.create({
 	},
 
 	updateGoogleOption (key, e) {
-		var newState = {};
+		let newState = {};
 		newState[key] = e.target.checked;
 		this.setState(newState);
 	},
@@ -221,7 +221,7 @@ export = Field.create({
 	renderGoogleOptions () {
 		const { paths, enableMapsAPI } = this.props;
 		if (!enableMapsAPI) return null;
-		var replace = this.state.improve ? (
+		let replace = this.state.improve ? (
 			<LabelledControl
 				checked={this.state.overwrite}
 				label="Replace existing data"
@@ -264,7 +264,7 @@ export = Field.create({
 		}
 
 		/* eslint-disable no-script-url */
-		var showMore = !_.isEmpty(this.state.collapsedFields)
+		let showMore = !_.isEmpty(this.state.collapsedFields)
 			? <CollapsedFieldLabel onClick={this.uncollapseFields}>(show more fields)</CollapsedFieldLabel>
 			: null;
 		/* eslint-enable */

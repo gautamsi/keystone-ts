@@ -29,10 +29,10 @@ const CreateForm = React.createClass({
 	getInitialState () {
 		// Set the field values to their default values when first rendering the
 		// form. (If they have a default value, that is)
-		var values = {};
+		let values = {};
 		Object.keys(this.props.list.fields).forEach(key => {
-			var field = this.props.list.fields[key];
-			var FieldComponent = Fields[field.type];
+			let field = this.props.list.fields[key];
+			let FieldComponent = Fields[field.type];
 			values[field.path] = FieldComponent.getDefaultValue(field);
 		});
 		return {
@@ -53,7 +53,7 @@ const CreateForm = React.createClass({
 	},
 	// Handle input change events
 	handleChange (event) {
-		var values = assign({}, this.state.values);
+		let values = assign({}, this.state.values);
 		values[event.path] = event.value;
 		this.setState({
 			values: values,
@@ -61,7 +61,7 @@ const CreateForm = React.createClass({
 	},
 	// Set the props of a field
 	getFieldProps (field) {
-		var props = assign({}, field);
+		let props = assign({}, field);
 		props.value = this.state.values[field.path];
 		props.values = this.state.values;
 		props.onChange = this.handleChange;
@@ -112,15 +112,15 @@ const CreateForm = React.createClass({
 	renderForm () {
 		if (!this.props.isOpen) return;
 
-		var form = [];
-		var list = this.props.list;
-		var nameField = this.props.list.nameField;
-		var focusWasSet;
+		let form = [];
+		let list = this.props.list;
+		let nameField = this.props.list.nameField;
+		let focusWasSet;
 
 		// If the name field is an initial one, we need to render a proper
 		// input for it
 		if (list.nameIsInitial) {
-			var nameFieldProps = this.getFieldProps(nameField);
+			let nameFieldProps = this.getFieldProps(nameField);
 			nameFieldProps.autoFocus = focusWasSet = true;
 			if (nameField.type === 'text') {
 				nameFieldProps.className = 'item-name-field';
@@ -132,7 +132,7 @@ const CreateForm = React.createClass({
 
 		// Render inputs for all initial fields
 		Object.keys(list.initialFields).forEach(key => {
-			var field = list.fields[list.initialFields[key]];
+			let field = list.fields[list.initialFields[key]];
 			// If there's something weird passed in as field type, render the
 			// invalid field type component
 			if (typeof Fields[field.type] !== 'function') {
@@ -140,7 +140,7 @@ const CreateForm = React.createClass({
 				return;
 			}
 			// Get the props for the input field
-			var fieldProps = this.getFieldProps(field);
+			let fieldProps = this.getFieldProps(field);
 			// If there was no focusRef set previously, set the current field to
 			// be the one to be focussed. Generally the first input field, if
 			// there's an initial name field that takes precedence.

@@ -2,8 +2,8 @@
  * A few helper methods for strings
  */
 
-import inflect from "i";
-import { compact, size } from "lodash";
+import inflect from 'i';
+import { compact, size } from 'lodash';
 
 /**
  * Displays the singular or plural of a string based on a number
@@ -22,16 +22,16 @@ export const plural = function (count, sn, pl) {
     if (arguments.length === 1) {
         return inflect.pluralize(count);
     }
-    if (typeof sn !== "string") sn = "";
+    if (typeof sn !== 'string') sn = '';
     if (!pl) {
         pl = inflect.pluralize(sn);
     }
-    if (typeof count === "string") {
+    if (typeof count === 'string') {
         count = Number(count);
-    } else if (typeof count !== "number") {
+    } else if (typeof count !== 'number') {
         count = size(count);
     }
-    return (count === 1 ? sn : pl).replace("*", count);
+    return (count === 1 ? sn : pl).replace('*', count);
 };
 
 
@@ -45,7 +45,7 @@ export const plural = function (count, sn, pl) {
 
 export const upcase = function (str) {
     if (str && str.toString) str = str.toString();
-    if (typeof str !== "string" || !str.length) return "";
+    if (typeof str !== 'string' || !str.length) return '';
     return (str.substr(0, 1).toUpperCase() + str.substr(1));
 };
 
@@ -60,7 +60,7 @@ export const upcase = function (str) {
 
 export const downcase = function (str) {
     if (str && str.toString) str = str.toString();
-    if (typeof str !== "string" || !str.length) return "";
+    if (typeof str !== 'string' || !str.length) return '';
     return (str.substr(0, 1).toLowerCase() + str.substr(1));
 };
 
@@ -75,15 +75,15 @@ export const downcase = function (str) {
 
 export const titlecase = function (str) {
     if (str && str.toString) str = str.toString();
-    if (typeof str !== "string" || !str.length) return "";
-    str = str.replace(/([a-z])([A-Z])/g, "$1 $2");
+    if (typeof str !== 'string' || !str.length) return '';
+    str = str.replace(/([a-z])([A-Z])/g, '$1 $2');
     const parts = str.split(/\s|_|\-/);
     for (let i = 0; i < parts.length; i++) {
         if (parts[i] && !/^[A-Z0-9]+$/.test(parts[i])) {
             parts[i] = upcase(parts[i]);
         }
     }
-    return compact(parts).join(" ");
+    return compact(parts).join(' ');
 };
 
 

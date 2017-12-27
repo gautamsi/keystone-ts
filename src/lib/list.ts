@@ -1,5 +1,5 @@
-var _ = require('lodash');
-var utils = require('keystone-utils');
+const _ = require('lodash');
+const utils = require('keystone-utils');
 
 export default function (keystone) {
 
@@ -7,7 +7,7 @@ export default function (keystone) {
 		if (!(this instanceof List)) return new List(key, options);
 		this.keystone = keystone;
 
-		var defaultOptions = {
+		let defaultOptions = {
 			schema: {
 				collection: keystone.prefixModel(key),
 			},
@@ -27,7 +27,7 @@ export default function (keystone) {
 		};
 
 		// initialFields values are initialised on demand by the getter
-		var initialFields;
+		let initialFields;
 
 		// Inherit default options from parent list if it exists
 		if (options && options.inherits) {
@@ -62,7 +62,7 @@ export default function (keystone) {
 			modifiedOn: null,
 		};
 
-		var self = this;
+		const self = this;
 
 		// init mappings
 		_.forEach(this.options.map, function (val, key) { self.map(key, val); });
@@ -96,7 +96,7 @@ export default function (keystone) {
 			return initialFields || (initialFields = _.filter(this.fields, function (i) { return i.initial; }));
 		} });
 		if (this.get('inherits')) {
-			var parentFields = this.get('inherits').schemaFields;
+			const parentFields = this.get('inherits').schemaFields;
 			this.add.apply(this, parentFields);
 		}
 	}
@@ -120,7 +120,7 @@ export default function (keystone) {
 	// Default Sort Field
 	Object.defineProperty(List.prototype, 'defaultSort', {
 		get: function () {
-			var ds = this.get('defaultSort');
+			const ds = this.get('defaultSort');
 			return (ds === '__default__') ? (this.get('sortable') ? 'sortOrder' : this.namePath) : ds;
 		}, set: function (value) {
 			this.set('defaultSort', value);
@@ -174,4 +174,4 @@ export default function (keystone) {
 
 	return List;
 
-};
+}

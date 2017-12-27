@@ -8,7 +8,7 @@ import React from 'react';
 import DropZoneTarget from './ItemsTableDragDropZoneTarget';
 import classnames from 'classnames';
 
-var ItemsTableDragDropZone = React.createClass({
+let ItemsTableDragDropZone = React.createClass({
 	displayName: 'ItemsTableDragDropZone',
 	propTypes: {
 		columns: React.PropTypes.array,

@@ -34,7 +34,7 @@ const ColorField = Field.create({
 		});
 	},
 	handleInputChange (event) {
-		var newValue = event.target.value;
+		let newValue = event.target.value;
 		if (/^([0-9A-F]{3}){1,2}$/.test(newValue)) {
 			newValue = '#' + newValue;
 		}
@@ -49,7 +49,7 @@ const ColorField = Field.create({
 		this.setState({ displayColorPicker: false });
 	},
 	handlePickerChange (color) {
-		var newValue = color.hex;
+		let newValue = color.hex;
 
 		if (newValue === this.props.value) return;
 

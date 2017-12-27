@@ -1,6 +1,6 @@
-var demand = require('must');
-var MoneyType = require('../MoneyType');
-var NumberType = require('../../number/NumberType');
+const demand = require('must');
+const MoneyType = require('../MoneyType');
+const NumberType = require('../../number/NumberType');
 
 export const initList = function (List) {
 	List.add({
@@ -28,7 +28,7 @@ export const testFieldType = function (List) {
 
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.money.updateItem(testItem, {
 				money: 42,
 			}, function () {
@@ -38,7 +38,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.money'].updateItem(testItem, {
 				nested: {
 					money: 42,
@@ -50,7 +50,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.money'].updateItem(testItem, {
 				'nested.money': 42,
 			}, function () {
@@ -74,7 +74,7 @@ export const testFieldType = function (List) {
 
 	describe('format', function () {
 		it('should properly format', function () {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			testItem.money = 1234;
 			demand(testItem._.money.format()).be('$1,234.00');
 			testItem.money = -244;
@@ -82,7 +82,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should ignore formatting if the format option is false', function () {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			testItem.noFormat = 1234;
 			demand(testItem._.noFormat.format()).be(1234);
 			testItem.noFormat = -244;
@@ -135,7 +135,7 @@ export const testFieldType = function (List) {
 	});
 
 	it('should validate no input', function () {
-		var testItem = new List.model();
+		const testItem = new List.model();
 		demand(List.fields.money.inputIsValid({})).be.true();
 		demand(List.fields.money.inputIsValid({}, true)).be.false();
 		demand(List.fields.money.inputIsValid({ money: '' })).be.true();

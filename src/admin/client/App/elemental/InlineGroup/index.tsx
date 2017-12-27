@@ -50,7 +50,7 @@ function InlineGroup ({
 	});
 
 	return <Component {...props} />;
-};
+}
 
 InlineGroup.propTypes = {
 	block: PropTypes.bool,

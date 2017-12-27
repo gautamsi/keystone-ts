@@ -1,14 +1,14 @@
-var React = require('react');
+let React = require('react');
 
 import _ from 'lodash';
 import { findDOMNode } from 'react-dom';
 
-var Button = require('elemental').Button;
-var FormField = require('elemental').FormField;
-var FormInput = require('elemental').FormInput;
+let Button = require('elemental').Button;
+let FormField = require('elemental').FormField;
+let FormInput = require('elemental').FormInput;
 
-var lastId = 0;
-var ENTER_KEYCODE = 13;
+let lastId = 0;
+let ENTER_KEYCODE = 13;
 
 function newItem (value) {
 	lastId = lastId + 1;
@@ -35,7 +35,7 @@ export = {
 	},
 
 	addItem: function () {
-		var newValues = this.state.values.concat(newItem(''));
+		let newValues = this.state.values.concat(newItem(''));
 		this.setState({
 			values: newValues,
 		}, () => {
@@ -46,7 +46,7 @@ export = {
 	},
 
 	removeItem: function (i) {
-		var newValues = _.without(this.state.values, i);
+		let newValues = _.without(this.state.values, i);
 		this.setState({
 			values: newValues,
 		}, function () {
@@ -56,9 +56,9 @@ export = {
 	},
 
 	updateItem: function (i, event) {
-		var updatedValues = this.state.values;
-		var updateIndex = updatedValues.indexOf(i);
-		var newValue = event.value || event.target.value;
+		let updatedValues = this.state.values;
+		let updateIndex = updatedValues.indexOf(i);
+		let newValue = event.value || event.target.value;
 		updatedValues[updateIndex].value = this.cleanInput ? this.cleanInput(newValue) : newValue;
 		this.setState({
 			values: updatedValues,

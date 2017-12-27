@@ -2,12 +2,12 @@
 * Creates multiple items in one or more Lists
 */
 
-var _ = require('lodash');
-var async = require('async');
-var utils = require('keystone-utils');
-var debug = require('debug')('keystone:core:createItems');
+const _ = require('lodash');
+const async = require('async');
+const utils = require('keystone-utils');
+const debug = require('debug')('keystone:core:createItems');
 
-var MONGO_ID_REGEXP = /^[0-9a-fA-F]{8}[0-9a-fA-F]{6}[0-9a-fA-F]{4}[0-9a-fA-F]{6}$/;
+const MONGO_ID_REGEXP = /^[0-9a-fA-F]{8}[0-9a-fA-F]{6}[0-9a-fA-F]{4}[0-9a-fA-F]{6}$/;
 
 function isMongoId (value) {
 	return MONGO_ID_REGEXP.test(value);
@@ -15,15 +15,15 @@ function isMongoId (value) {
 
 function createItems (data, ops, callback) {
 
-	var keystone = this;
+	const keystone = this;
 
-	var options = {
+	const options = {
 		verbose: false,
 		strict: true,
 		refs: null,
 	};
 
-	var dashes = '------------------------------------------------';
+	const dashes = '------------------------------------------------';
 
 	if (!_.isObject(data)) {
 		throw new Error('keystone.createItems() requires a data object as the first argument.');
@@ -37,9 +37,9 @@ function createItems (data, ops, callback) {
 		callback = ops;
 	}
 
-	var lists = _.keys(data);
-	var refs = options.refs || {};
-	var stats = {};
+	const lists = _.keys(data);
+	const refs = options.refs || {};
+	const stats = {};
 
 	// logger function
 	function writeLog (data) {
@@ -52,8 +52,8 @@ function createItems (data, ops, callback) {
 		function (next) {
 			async.eachSeries(lists, function (key, doneList) {
 
-				var list = keystone.list(key);
-				var relationshipPaths = _.filter(list.fields, { type: 'relationship' }).map(function (i) { return i.path; });
+				const list = keystone.list(key);
+				const relationshipPaths = _.filter(list.fields, { type: 'relationship' }).map(function (i) { return i.path; });
 
 				if (!list) {
 					if (options.strict) {
@@ -79,8 +79,8 @@ function createItems (data, ops, callback) {
 					warnings: 0,
 				};
 
-				var itemsProcessed = 0;
-				var totalItems = data[key].length;
+				let itemsProcessed = 0;
+				const totalItems = data[key].length;
 
 				if (options.verbose) {
 					writeLog(dashes);
@@ -103,7 +103,7 @@ function createItems (data, ops, callback) {
 						}
 					});
 
-					var doc = data.__doc = new list.model();
+					const doc = data.__doc = new list.model();
 
 					if (data.__ref) {
 						refs[list.key][data.__ref] = doc;
@@ -120,7 +120,7 @@ function createItems (data, ops, callback) {
 					}, function (err) {
 						if (!err) {
 							if (options.verbose) {
-								var documentName = list.getDocumentName(doc);
+								const documentName = list.getDocumentName(doc);
 								writeLog('Creating item [' + itemsProcessed + ' of ' + totalItems + '] - ' + documentName);
 							}
 
@@ -148,15 +148,15 @@ function createItems (data, ops, callback) {
 
 			async.each(lists, function (key, doneList) {
 
-				var list = keystone.list(key);
-				var relationships = _.filter(list.fields, { type: 'relationship' });
+				const list = keystone.list(key);
+				const relationships = _.filter(list.fields, { type: 'relationship' });
 
 				if (!list || !relationships.length) {
 					return doneList();
 				}
 
-				var itemsProcessed = 0;
-				var totalItems = data[key].length;
+				let itemsProcessed = 0;
+				const totalItems = data[key].length;
 
 				if (options.verbose) {
 					writeLog(dashes);
@@ -167,20 +167,20 @@ function createItems (data, ops, callback) {
 
 				async.each(data[key], function (srcData, doneItem) {
 
-					var doc = srcData.__doc;
-					var relationshipsUpdated = 0;
+					const doc = srcData.__doc;
+					let relationshipsUpdated = 0;
 
 					itemsProcessed++;
 
 					if (options.verbose) {
-						var documentName = list.getDocumentName(doc);
+						const documentName = list.getDocumentName(doc);
 						writeLog('Processing item [' + itemsProcessed + ' of ' + totalItems + '] - ' + documentName);
 					}
 
 					async.each(relationships, function (field, doneField) {
 
-						var fieldValue = null;
-						var refsLookup = null;
+						let fieldValue = null;
+						let refsLookup = null;
 
 						if (!field.path) {
 							writeLog('WARNING:  Invalid relationship (undefined list path) [List: ' + key + ']');
@@ -215,13 +215,13 @@ function createItems (data, ops, callback) {
 
 							relationshipsUpdated++;
 
-							var fn = fieldValue;
-							var argsRegExp = /^function\s*[^\(]*\(\s*([^\)]*)\)/m;
-							var lists = fn.toString().match(argsRegExp)[1].split(',').map(function (i) { return i.trim(); });
-							var args = lists.map(function (i) {
+							const fn = fieldValue;
+							const argsRegExp = /^function\s*[^\(]*\(\s*([^\)]*)\)/m;
+							const lists = fn.toString().match(argsRegExp)[1].split(',').map(function (i) { return i.trim(); });
+							const args = lists.map(function (i) {
 								return keystone.list(i);
 							});
-							var query = fn.apply(keystone, args);
+							const query = fn.apply(keystone, args);
 
 							query.exec(function (err, results) {
 								if (err) { debug('error ', err); }
@@ -237,7 +237,7 @@ function createItems (data, ops, callback) {
 
 							if (field.many) {
 
-								var refsArr = _.compact(fieldValue.map(function (ref) {
+								const refsArr = _.compact(fieldValue.map(function (ref) {
 									return isMongoId(ref) ? ref : refsLookup && refsLookup[ref] && refsLookup[ref].id;
 								}));
 
@@ -263,7 +263,7 @@ function createItems (data, ops, callback) {
 
 						} else if (typeof fieldValue === 'string') {
 
-							var refItem = isMongoId(fieldValue) ? fieldValue : refsLookup && refsLookup[fieldValue] && refsLookup[fieldValue].id;
+							const refItem = isMongoId(fieldValue) ? fieldValue : refsLookup && refsLookup[fieldValue] && refsLookup[fieldValue].id;
 
 							if (!refItem) {
 								return options.strict ? doneField({
@@ -323,7 +323,7 @@ function createItems (data, ops, callback) {
 			return callback && callback(err);
 		}
 
-		var msg = '\nSuccessfully created:\n';
+		let msg = '\nSuccessfully created:\n';
 		_.forEach(stats, function (list) {
 			msg += '\n*   ' + utils.plural(list.created, '* ' + list.singular, '* ' + list.plural);
 			if (list.warnings) {

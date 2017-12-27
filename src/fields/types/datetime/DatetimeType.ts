@@ -1,11 +1,11 @@
-var moment = require('moment');
-var DateType = require('../date/DateType');
-var FieldType = require('../Type');
-var util = require('util');
-var utils = require('keystone-utils');
+const moment = require('moment');
+const DateType = require('../date/DateType');
+const FieldType = require('../Type');
+const util = require('util');
+const utils = require('keystone-utils');
 
 // ISO_8601 is needed for the automatically created createdAt and updatedAt fields
-var parseFormats = ['YYYY-MM-DD', 'YYYY-MM-DD h:m:s a', 'YYYY-MM-DD h:m a', 'YYYY-MM-DD H:m:s', 'YYYY-MM-DD H:m', 'YYYY-MM-DD h:mm:s a Z', moment.ISO_8601];
+const parseFormats = ['YYYY-MM-DD', 'YYYY-MM-DD h:m:s a', 'YYYY-MM-DD h:m a', 'YYYY-MM-DD H:m:s', 'YYYY-MM-DD H:m', 'YYYY-MM-DD h:mm:s a Z', moment.ISO_8601];
 /**
  * DateTime FieldType Constructor
  * @extends Field
@@ -43,11 +43,11 @@ datetime.prototype.addFilterToQuery = DateType.prototype.addFilterToQuery;
  * Get the value from a data object; may be simple or a pair of fields
  */
 datetime.prototype.getInputFromData = function (data) {
-	var dateValue = this.getValueFromData(data, '_date');
-	var timeValue = this.getValueFromData(data, '_time');
-	var tzOffsetValue = this.getValueFromData(data, '_tzOffset');
+	const dateValue = this.getValueFromData(data, '_date');
+	const timeValue = this.getValueFromData(data, '_time');
+	const tzOffsetValue = this.getValueFromData(data, '_tzOffset');
 	if (dateValue && timeValue) {
-		var combined = dateValue + ' ' + timeValue;
+		let combined = dateValue + ' ' + timeValue;
 		if (typeof tzOffsetValue !== 'undefined') {
 			combined += ' ' + tzOffsetValue;
 		}
@@ -59,8 +59,8 @@ datetime.prototype.getInputFromData = function (data) {
 
 
 datetime.prototype.validateRequiredInput = function (item, data, callback) {
-	var value = this.getInputFromData(data);
-	var result = !!value;
+	const value = this.getInputFromData(data);
+	let result = !!value;
 	if (value === undefined && item.get(this.path)) {
 		result = true;
 	}
@@ -72,10 +72,10 @@ datetime.prototype.validateRequiredInput = function (item, data, callback) {
  * undefined, null or an empty string
  */
 datetime.prototype.validateInput = function (data, callback) {
-	var value = this.getInputFromData(data);
+	const value = this.getInputFromData(data);
 	// If the value is null, undefined or an empty string
 	// bail early since updateItem sanitizes that just fine
-	var result = true;
+	let result = true;
 	if (value) {
 		result = this.parse(value, this.parseFormatString, true).isValid();
 	}
@@ -90,7 +90,7 @@ datetime.prototype.validateInput = function (data, callback) {
  */
 datetime.prototype.inputIsValid = function (data, required, item) {
 	if (!(this.path in data && !(this.paths.date in data && this.paths.time in data)) && item && item.get(this.path)) return true;
-	var newValue = moment(this.getInputFromData(data), parseFormats);
+	const newValue = moment(this.getInputFromData(data), parseFormats);
 	if (required && (!newValue || !newValue.isValid())) {
 		return false;
 	} else if (this.getInputFromData(data) && newValue && !newValue.isValid()) {
@@ -105,11 +105,11 @@ datetime.prototype.inputIsValid = function (data, required, item) {
  */
 datetime.prototype.updateItem = function (item, data, callback) {
 	// Get the values from the data
-	var value = this.getInputFromData(data);
+	const value = this.getInputFromData(data);
 	if (value !== undefined) {
 		if (value !== null && value !== '') {
 			// If the value is not null, empty string or undefined, parse it
-			var newValue = this.parse(value, this.parseFormatString, true);
+			const newValue = this.parse(value, this.parseFormatString, true);
 			// If it's valid and not the same as the last value, save it
 			if (!item.get(this.path) || !newValue.isSame(item.get(this.path))) {
 				item.set(this.path, newValue.toDate());

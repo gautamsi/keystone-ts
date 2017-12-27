@@ -5,13 +5,13 @@
  * @api private
  */
 
-var _ = require('lodash');
-var utils = require('keystone-utils');
+const _ = require('lodash');
+const utils = require('keystone-utils');
 
 export default function initNav (sections) {
-	var keystone = this;
+	const keystone = this;
 
-	var nav = {
+	const nav = {
 		sections: [],
 		by: {
 			list: {},
@@ -39,7 +39,7 @@ export default function initNav (sections) {
 		section.key = key;
 		section.lists = _.map(section.lists, function (i) {
 			if (typeof i === 'string') {
-				var list = keystone.list(i);
+				const list = keystone.list(i);
 				if (!list) {
 					throw new Error('Invalid Keystone Option (nav): list ' + i + ' has not been defined.\n');
 				}
@@ -71,4 +71,4 @@ export default function initNav (sections) {
 	});
 
 	return nav;
-};
+}

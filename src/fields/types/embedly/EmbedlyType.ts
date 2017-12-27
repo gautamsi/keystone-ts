@@ -1,8 +1,8 @@
-var _ = require('lodash');
-var keystone = require('../../../');
-var util = require('util');
-var EmbedlyAPI = require('embedly');
-var FieldType = require('../Type');
+const _ = require('lodash');
+const keystone = require('../../../');
+const util = require('util');
+const EmbedlyAPI = require('embedly');
+const FieldType = require('../Type');
 
 /**
  * Embedly FieldType Constructor
@@ -52,7 +52,7 @@ util.inherits(embedly, FieldType);
  */
 embedly.prototype.addToSchema = function (schema) {
 
-	var field = this;
+	const field = this;
 
 	this.paths = {
 		exists: this.path + '.exists',
@@ -101,17 +101,17 @@ embedly.prototype.addToSchema = function (schema) {
 			return next();
 		}
 
-		var fromValue = this.get(field.fromPath);
+		const fromValue = this.get(field.fromPath);
 
 		if (!fromValue) {
 			field.reset(this);
 			return next();
 		}
 
-		var post = this;
+		const post = this;
 
-		var api = new EmbedlyAPI({ key: keystone.get('embedly api key') });
-		var opts = _.defaults({ url: fromValue }, field.embedlyOptions);
+		const api = new EmbedlyAPI({ key: keystone.get('embedly api key') });
+		const opts = _.defaults({ url: fromValue }, field.embedlyOptions);
 
 		api.oembed(opts, function (err, objs) {
 			if (err) {
@@ -119,7 +119,7 @@ embedly.prototype.addToSchema = function (schema) {
 				console.error(err, objs);
 				field.reset(post);
 			} else {
-				var data = objs[0];
+				const data = objs[0];
 				if (data && data.type !== 'error') {
 					post.set(field.path, {
 						exists: true,
@@ -190,7 +190,7 @@ embedly.prototype.format = function (item) {
  * Gets the field's data from an Item, as used by the React components
  */
 embedly.prototype.getData = function (item) {
-	var value = item.get(this.path);
+	const value = item.get(this.path);
 	return typeof value === 'object' ? value : {};
 };
 

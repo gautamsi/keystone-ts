@@ -1,10 +1,10 @@
 declare var require;
-var compression = require('compression');
-var favicon = require('serve-favicon');
-var methodOverride = require('method-override');
-var morgan = require('morgan');
+const compression = require('compression');
+const favicon = require('serve-favicon');
+const methodOverride = require('method-override');
+const morgan = require('morgan');
 
-var language = require('../lib/middleware/language');
+const language = require('../lib/middleware/language');
 
 export default function createApp (keystone, express) {
 
@@ -15,7 +15,7 @@ export default function createApp (keystone, express) {
 		keystone.app = express();
 	}
 
-	var app = keystone.app;
+	const app = keystone.app;
 	require('./initLetsEncrypt')(keystone, app);
 	require('./initSslRedirect')(keystone, app);
 
@@ -64,10 +64,10 @@ export default function createApp (keystone, express) {
 	});
 	// Bind default logger (morgan)
 	if (keystone.get('logger')) {
-		var loggerOptions = keystone.get('logger options');
-		var hasOwnProperty = Object.prototype.hasOwnProperty;
+		const loggerOptions = keystone.get('logger options');
+		const hasOwnProperty = Object.prototype.hasOwnProperty;
 		if (loggerOptions && typeof loggerOptions.tokens === 'object') {
-			for (var key in loggerOptions.tokens) {
+			for (const key in loggerOptions.tokens) {
 				if (hasOwnProperty.call(loggerOptions.tokens, key) && typeof loggerOptions.tokens[key] === 'function') {
 					morgan.token(key, loggerOptions.tokens[key]);
 				}
@@ -105,7 +105,7 @@ export default function createApp (keystone, express) {
 	app.use(methodOverride());
 
 	// Set language preferences
-	var languageOptions = keystone.get('language options') || {};
+	const languageOptions = keystone.get('language options') || {};
 	if (!languageOptions.disable) {
 		app.use(language(keystone));
 	}
@@ -124,7 +124,7 @@ export default function createApp (keystone, express) {
 	});
 
 	// Configure application routes
-	var appRouter = keystone.get('routes');
+	const appRouter = keystone.get('routes');
 	if (typeof appRouter === 'function') {
 		if (appRouter.length === 3) {
 			// new:
@@ -156,4 +156,4 @@ export default function createApp (keystone, express) {
 
 	return app;
 
-};
+}

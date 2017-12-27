@@ -33,7 +33,7 @@ function FormLabel ({
 	}
 
 	return <Component {...props} />;
-};
+}
 
 const stylesShape = {
 	_definition: PropTypes.object,

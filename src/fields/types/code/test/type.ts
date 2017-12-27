@@ -1,6 +1,6 @@
-var demand = require('must');
-var CodeType = require('../CodeType');
-var TextType = require('../../text/TextType');
+const demand = require('must');
+const CodeType = require('../CodeType');
+const TextType = require('../../text/TextType');
 
 export const initList = function (List) {
 	List.add({
@@ -29,7 +29,7 @@ export const initList = function (List) {
 export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.code.updateItem(testItem, {
 				code: 'foo(bar);',
 			}, function () {
@@ -39,7 +39,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.code'].updateItem(testItem, {
 				nested: {
 					code: 'foo(bar);',
@@ -51,7 +51,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.code'].updateItem(testItem, {
 				'nested.code': 'foo(bar);',
 			}, function () {

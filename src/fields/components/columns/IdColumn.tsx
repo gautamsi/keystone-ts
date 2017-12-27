@@ -2,7 +2,7 @@ import React from 'react';
 import ItemsTableCell from '../../components/ItemsTableCell';
 import ItemsTableValue from '../../components/ItemsTableValue';
 
-var IdColumn = React.createClass({
+let IdColumn = React.createClass({
 	displayName: 'IdColumn',
 	propTypes: {
 		col: React.PropTypes.object,

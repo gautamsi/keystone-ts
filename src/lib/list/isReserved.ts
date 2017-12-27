@@ -3,7 +3,7 @@
  * of `Object.prototype` method keys as well as internal mongo paths.
  */
 
-var reservedPaths = [
+const reservedPaths = [
 	'_',
 	'__defineGetter__',
 	'__defineSetter__',

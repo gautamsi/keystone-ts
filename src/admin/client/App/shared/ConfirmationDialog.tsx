@@ -43,7 +43,7 @@ function ConfirmationDialog ({
 			</Modal.Footer>
 		</Modal.Dialog>
 	);
-};
+}
 ConfirmationDialog.propTypes = {
 	body: PropTypes.string,
 	cancelLabel: PropTypes.string,

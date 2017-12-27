@@ -23,7 +23,7 @@ function getDefaultValue () {
 	};
 }
 
-var TextFilter = React.createClass({
+let TextFilter = React.createClass({
 	propTypes: {
 		filter: React.PropTypes.shape({
 			lat: React.PropTypes.number,

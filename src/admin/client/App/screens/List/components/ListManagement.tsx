@@ -97,7 +97,7 @@ function ListManagement ({
 			</Group>
 		</div>
 	);
-};
+}
 
 ListManagement.propTypes = {
 	checkedItems: PropTypes.number,

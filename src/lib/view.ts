@@ -2,10 +2,10 @@
  * Module dependencies.
  */
 
-var _ = require('lodash');
-var async = require('async');
-var keystone = require('../');
-var utils = require('keystone-utils');
+const _ = require('lodash');
+const async = require('async');
+const keystone = require('../');
+const utils = require('keystone-utils');
 
 /**
  * View Constructor
@@ -48,8 +48,8 @@ export default View;
 
 View.prototype.on = function (on) {
 
-	var req = this.req;
-	var callback = arguments[1];
+	const req = this.req;
+	let callback = arguments[1];
 
 	if (typeof on === 'function') {
 
@@ -85,10 +85,10 @@ View.prototype.on = function (on) {
 		 *     });
 		 */
 
-		var check = function (value, path) {
-			var ctx = req;
-			var parts = path.split('.');
-			for (var i = 0; i < parts.length - 1; i++) {
+		const check = function (value, path) {
+			let ctx = req;
+			const parts = path.split('.');
+			for (let i = 0; i < parts.length - 1; i++) {
 				if (!ctx[parts[i]]) {
 					return false;
 				}
@@ -136,14 +136,14 @@ View.prototype.on = function (on) {
 
 			callback = arguments[2];
 
-			var values = {};
+			let values = {};
 			if (utils.isString(arguments[1])) {
 				values[arguments[1]] = true;
 			} else {
 				values = arguments[1];
 			}
 
-			var ctx = (on === 'post' || on === 'put') ? req.body : req.query;
+			const ctx = (on === 'post' || on === 'put') ? req.body : req.query;
 
 			if (!_.every(values || {}, function (value, path) {
 				return (value === true && path in ctx) ? true : (ctx[path] === value);
@@ -187,7 +187,7 @@ View.prototype.on = function (on) {
 
 };
 
-var QueryCallbacks = function (options) {
+const QueryCallbacks = function (options) {
 	if (utils.isString(options)) {
 		options = { then: options };
 	} else {
@@ -243,13 +243,13 @@ QueryCallbacks.prototype.then = function (fn) { this.callbacks.then = fn; return
 
 View.prototype.query = function (key, query, options) {
 
-	var locals = this.res.locals;
-	var parts = key.split('.');
-	var chain = new QueryCallbacks(options);
+	let locals = this.res.locals;
+	const parts = key.split('.');
+	const chain = new QueryCallbacks(options);
 
 	key = parts.pop();
 
-	for (var i = 0; i < parts.length; i++) {
+	for (let i = 0; i < parts.length; i++) {
 		if (!locals[parts[i]]) {
 			locals[parts[i]] = {};
 		}
@@ -260,7 +260,7 @@ View.prototype.query = function (key, query, options) {
 		query.exec(function (err, results) {
 
 			locals[key] = results;
-			var callbacks = chain.callbacks;
+			const callbacks = chain.callbacks;
 
 			if (err) {
 				if ('err' in callbacks) {
@@ -318,11 +318,11 @@ View.prototype.query = function (key, query, options) {
  */
 View.prototype.render = function (renderFn, locals, callback) {
 
-	var req = this.req;
-	var res = this.res;
+	const req = this.req;
+	const res = this.res;
 
 	if (typeof renderFn === 'string') {
-		var viewPath = renderFn;
+		const viewPath = renderFn;
 		renderFn = function () {
 			if (typeof locals === 'function') {
 				locals = locals();
@@ -339,7 +339,7 @@ View.prototype.render = function (renderFn, locals, callback) {
 	this.initQueue.push.apply(this.initQueue, this.actionQueue);
 	this.initQueue.push.apply(this.initQueue, this.queryQueue);
 
-	var preRenderQueue = [];
+	const preRenderQueue = [];
 
 	// Add Keystone's global pre('render') queue
 	keystone.getMiddleware('pre:render').forEach(function (fn) {

@@ -1,8 +1,8 @@
-var _ = require('lodash');
-var FieldType = require('../Type');
-var util = require('util');
-var utils = require('keystone-utils');
-var displayName = require('display-name');
+const _ = require('lodash');
+const FieldType = require('../Type');
+const util = require('util');
+const utils = require('keystone-utils');
+const displayName = require('display-name');
 
 /**
  * Name FieldType Constructor
@@ -26,7 +26,7 @@ util.inherits(name, FieldType);
  * @api public
  */
 name.prototype.addToSchema = function (schema) {
-	var paths = this.paths = {
+	const paths = this.paths = {
 		first: this.path + '.first',
 		last: this.path + '.last',
 		full: this.path + '.full',
@@ -48,7 +48,7 @@ name.prototype.addToSchema = function (schema) {
 			this.set(paths.last, undefined);
 			return;
 		}
-		var split = value.split(' ');
+		const split = value.split(' ');
 		this.set(paths.first, split.shift());
 		this.set(paths.last, split.join(' ') || undefined);
 	});
@@ -70,12 +70,12 @@ name.prototype.getSortString = function (options) {
  * Add filters to a query
  */
 name.prototype.addFilterToQuery = function (filter) {
-	var query = {};
+	const query = {};
 	if (filter.mode === 'exactly' && !filter.value) {
 		query[this.paths.first] = query[this.paths.last] = filter.inverted ? { $nin: ['', null] } : { $in: ['', null] };
 		return query;
 	}
-	var value = utils.escapeRegExp(filter.value);
+	let value = utils.escapeRegExp(filter.value);
 	if (filter.mode === 'beginsWith') {
 		value = '^' + value;
 	} else if (filter.mode === 'endsWith') {
@@ -87,8 +87,8 @@ name.prototype.addFilterToQuery = function (filter) {
 	if (filter.inverted) {
 		query[this.paths.first] = query[this.paths.last] = { $not: value };
 	} else {
-		var first = {}; first[this.paths.first] = value;
-		var last = {}; last[this.paths.last] = value;
+		const first = {}; first[this.paths.first] = value;
+		const last = {}; last[this.paths.last] = value;
 		query.$or = [first, last];
 	}
 	return query;
@@ -110,9 +110,9 @@ name.prototype.getInputFromData = function (data) {
 	if (data[this.path] === null) {
 		return null;
 	}
-	var first = this.getValueFromData(data, '_first');
+	let first = this.getValueFromData(data, '_first');
 	if (first === undefined) first = this.getValueFromData(data, '.first');
-	var last = this.getValueFromData(data, '_last');
+	let last = this.getValueFromData(data, '_last');
 	if (last === undefined) last = this.getValueFromData(data, '.last');
 	if (first !== undefined || last !== undefined) {
 		return {
@@ -127,8 +127,8 @@ name.prototype.getInputFromData = function (data) {
  * Validates that a value for this field has been provided in a data object
  */
 name.prototype.validateInput = function (data, callback) {
-	var value = this.getInputFromData(data);
-	var result = value === undefined
+	const value = this.getInputFromData(data);
+	const result = value === undefined
 		|| value === null
 		|| typeof value === 'string'
 		|| (typeof value === 'object' && (
@@ -144,8 +144,8 @@ name.prototype.validateInput = function (data, callback) {
  * Validates that input has been provided
  */
 name.prototype.validateRequiredInput = function (item, data, callback) {
-	var value = this.getInputFromData(data);
-	var result;
+	const value = this.getInputFromData(data);
+	let result;
 	if (value === null) {
 		result = false;
 	} else {
@@ -199,8 +199,8 @@ name.prototype.isModified = function (item) {
  * @api public
  */
 name.prototype.updateItem = function (item, data, callback) {
-	var paths = this.paths;
-	var value = this.getInputFromData(data);
+	const paths = this.paths;
+	const value = this.getInputFromData(data);
 	if (typeof value === 'string' || value === null) {
 		item.set(paths.full, value);
 	} else if (typeof value === 'object') {

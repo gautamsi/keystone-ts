@@ -8,7 +8,7 @@ See https://github.com/keystonejs/keystone/wiki/File-Fields-Upgrade-Guide
 
 /* eslint-disable */
 
-var loggedWarning = false;
+const loggedWarning = false;
 
 /**
  * S3File FieldType Constructor
@@ -68,10 +68,10 @@ Object.defineProperty(s3file.prototype, 's3config', {
  */
 s3file.prototype.addToSchema = function (schema) {
 
-	var knox = require('knox');
-	var field = this;
+	const knox = require('knox');
+	const field = this;
 
-	var paths = this.paths = {
+	const paths = this.paths = {
 		// fields
 		filename: this.path + '.filename',
 		originalname: this.path + '.originalname',
@@ -85,7 +85,7 @@ s3file.prototype.addToSchema = function (schema) {
 		action: this.path + '_action',
 	};
 
-	var schemaPaths = this._path.addTo({}, {
+	const schemaPaths = this._path.addTo({}, {
 		filename: String,
 		originalname: String,
 		path: String,
@@ -96,7 +96,7 @@ s3file.prototype.addToSchema = function (schema) {
 
 	schema.add(schemaPaths);
 
-	var exists = function (item) {
+	const exists = function (item) {
 		return (item.get(paths.url) ? true : false);
 	};
 
@@ -105,7 +105,7 @@ s3file.prototype.addToSchema = function (schema) {
 		return schemaMethods.exists.apply(this);
 	});
 
-	var reset = function (item) {
+	const reset = function (item) {
 		item.set(field.path, {
 			filename: '',
 			originalname: '',
@@ -116,7 +116,7 @@ s3file.prototype.addToSchema = function (schema) {
 		});
 	};
 
-	var schemaMethods = {
+	const schemaMethods = {
 		exists: function () {
 			return exists(this);
 		},
@@ -135,7 +135,7 @@ s3file.prototype.addToSchema = function (schema) {
 		 */
 		delete: function () {
 			try {
-				var client = knox.createClient(field.s3config);
+				const client = knox.createClient(field.s3config);
 				client.deleteFile(this.get(paths.path) + this.get(paths.filename), function (err, res) { return res ? res.resume() : false; }); // eslint-disable-line handle-callback-err
 			} catch (e) {} // eslint-disable-line no-empty
 			reset(this);
@@ -202,11 +202,11 @@ s3file.prototype.updateItem = function (item, data, callback) { // eslint-disabl
  * @param callback {Function} a callback function to call when validation is complete
  * @return {Boolean}
  */
-var validateHeader = function (header, callback) {
-	var HEADER_NAME_KEY = 'name';
-	var HEADER_VALUE_KEY = 'value';
-	var validKeys = [HEADER_NAME_KEY, HEADER_VALUE_KEY];
-	var filteredKeys;
+const validateHeader = function (header, callback) {
+	const HEADER_NAME_KEY = 'name';
+	const HEADER_VALUE_KEY = 'value';
+	const validKeys = [HEADER_NAME_KEY, HEADER_VALUE_KEY];
+	let filteredKeys;
 
 	if (!_.has(header, HEADER_NAME_KEY)) {
 		return callback(new Error('Unsupported Header option: missing required key "' + HEADER_NAME_KEY + '" in ' + JSON.stringify(header)));
@@ -232,8 +232,8 @@ var validateHeader = function (header, callback) {
  * @param callback {Function} a callback function to call when validation is complete
  * @return {Boolean}
  */
-var validateHeaders = function (headers, callback) {
-	var _headers = [];
+const validateHeaders = function (headers, callback) {
+	const _headers = [];
 
 	if (!_.isObject(headers)) {
 		return callback(new Error('Unsupported Header option: headers must be an Object ' + JSON.stringify(headers)));
@@ -258,23 +258,23 @@ var validateHeaders = function (headers, callback) {
  * @return {Object}
  */
 s3file.prototype.generateHeaders = function (item, file, callback) {
-	var field = this;
-	var filetype = file.mimetype || file.type;
-	var headers = {
+	const field = this;
+	const filetype = file.mimetype || file.type;
+	let headers = {
 		'Content-Type': filetype,
 		'x-amz-acl': 'public-read',
 	};
-	var customHeaders = {};
-	var headersOption = {};
-	var computedHeaders;
-	var defaultHeaders;
+	let customHeaders = {};
+	let headersOption = {};
+	let computedHeaders;
+	let defaultHeaders;
 
 
 	if (_.has(field.s3config, 'default headers')) {
 		defaultHeaders = field.s3config['default headers'];
 		if (_.isArray(defaultHeaders)) {
 			_.forEach(defaultHeaders, function (header) {
-				var _header = {};
+				const _header = {};
 				if (validateHeader(header, callback)) {
 					_header[header.name] = header.value;
 					customHeaders = assign(customHeaders, _header);
@@ -295,7 +295,7 @@ s3file.prototype.generateHeaders = function (item, file, callback) {
 
 			if (_.isArray(computedHeaders)) {
 				_.forEach(computedHeaders, function (header) {
-					var _header = {};
+					const _header = {};
 					if (validateHeader(header, callback)) {
 						_header[header.name] = header.value;
 						customHeaders = assign(customHeaders, _header);
@@ -309,7 +309,7 @@ s3file.prototype.generateHeaders = function (item, file, callback) {
 
 		} else if (_.isArray(headersOption)) {
 			_.forEach(headersOption, function (header) {
-				var _header = {};
+				const _header = {};
 				if (validateHeader(header, callback)) {
 					_header[header.name] = header.value;
 					customHeaders = assign(customHeaders, _header);
@@ -333,14 +333,14 @@ s3file.prototype.generateHeaders = function (item, file, callback) {
  */
 s3file.prototype.uploadFile = function (item, file, update, callback) {
 
-	var knox = require('knox');
-	var field = this;
-	var path = field.options.s3path ? field.options.s3path + '/' : '';
-	var prefix = field.options.datePrefix ? moment().format(field.options.datePrefix) + '-' : '';
-	var filename = prefix + file.name;
-	var originalname = file.originalname;
-	var filetype = file.mimetype || file.type;
-	var headers;
+	const knox = require('knox');
+	const field = this;
+	let path = field.options.s3path ? field.options.s3path + '/' : '';
+	const prefix = field.options.datePrefix ? moment().format(field.options.datePrefix) + '-' : '';
+	let filename = prefix + file.name;
+	const originalname = file.originalname;
+	const filetype = file.mimetype || file.type;
+	let headers;
 
 	if (typeof update === 'function') {
 		callback = update;
@@ -351,7 +351,7 @@ s3file.prototype.uploadFile = function (item, file, update, callback) {
 		return callback(new Error('Unsupported File Type: ' + filetype));
 	}
 
-	var doUpload = function () {
+	const doUpload = function () {
 
 		if (typeof field.options.path === 'function') {
 			path = field.options.path(item, path);
@@ -374,10 +374,10 @@ s3file.prototype.uploadFile = function (item, file, update, callback) {
 				}
 			}
 
-			var protocol = (field.s3config.protocol && field.s3config.protocol + ':') || '';
-			var url = res.req.url.replace(/^https?:/i, protocol).replace(/%25/g, '%');
+			const protocol = (field.s3config.protocol && field.s3config.protocol + ':') || '';
+			const url = res.req.url.replace(/^https?:/i, protocol).replace(/%25/g, '%');
 
-			var fileData = {
+			const fileData = {
 				filename: filename,
 				originalname: originalname,
 				path: path,
@@ -411,7 +411,7 @@ s3file.prototype.uploadFile = function (item, file, update, callback) {
  */
 s3file.prototype.getRequestHandler = function (item, req, paths, callback) {
 
-	var field = this;
+	const field = this;
 
 	if (utils.isFunction(paths)) {
 		callback = paths;
@@ -425,7 +425,7 @@ s3file.prototype.getRequestHandler = function (item, req, paths, callback) {
 	return function () {
 
 		if (req.body) {
-			var action = req.body[paths.action];
+			const action = req.body[paths.action];
 
 			if (/^(delete|reset)$/.test(action)) {
 				field.apply(item, action);

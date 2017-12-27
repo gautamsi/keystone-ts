@@ -1,5 +1,5 @@
-var demand = require('must');
-var RelationshipType = require('../RelationshipType');
+const demand = require('must');
+const RelationshipType = require('../RelationshipType');
 
 export const initList = function (List) {
 	// We can use relationships that refer to the same List to test
@@ -11,7 +11,7 @@ export const initList = function (List) {
 
 export const testFieldType = function (List) {
 
-	var relatedItem = new List.model();
+	const relatedItem = new List.model();
 	before(function (done) {
 		relatedItem.save(done);
 	});
@@ -74,7 +74,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate required present input', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.single.validateRequiredInput(testItem, { single: relatedItem.id }, function (result) {
 				demand(result).be.true();
 				done();
@@ -82,7 +82,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate required present input with item', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.single.validateRequiredInput(testItem, { single: relatedItem }, function (result) {
 				demand(result).be.true();
 				done();
@@ -90,7 +90,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate required present input with existing value', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				single: relatedItem.id,
 			});
 			List.fields.single.validateRequiredInput(testItem, { single: relatedItem.id }, function (result) {
@@ -100,7 +100,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate required not present input', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.single.validateRequiredInput(testItem, {}, function (result) {
 				demand(result).be.false();
 				done();
@@ -108,7 +108,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should validate required input with existing value', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				single: relatedItem.id,
 			});
 			List.fields.single.validateRequiredInput(testItem, {}, function (result) {
@@ -118,7 +118,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should invalidate required blank input with existing value', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				single: relatedItem.id,
 			});
 			List.fields.single.validateRequiredInput(testItem, { single: '' }, function (result) {
@@ -128,7 +128,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should save the provided value', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.single.updateItem(testItem, { single: relatedItem.id }, function () {
 				// TODO: We should be testing for errors here
 				testItem.save(function (err, updatedItem) {
@@ -141,7 +141,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should save the provided value with an item object', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.single.updateItem(testItem, { single: relatedItem }, function () {
 				// TODO: We should be testing for errors here
 				testItem.save(function (err, updatedItem) {
@@ -154,7 +154,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should clear the current value when provided null', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				single: relatedItem.id,
 			});
 			testItem.save(function (err) {
@@ -171,7 +171,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should clear the current value when provided ""', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				single: relatedItem.id,
 			});
 			testItem.save(function (err) {
@@ -188,7 +188,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should not clear the current value when data object does not contain the field', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				single: relatedItem.id,
 			});
 			testItem.save(function (err) {
@@ -248,7 +248,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should not clear the current values when data object does not contain the field', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				many: [relatedItem.id, relatedItem.id],
 			});
 			testItem.save(function (err) {
@@ -266,7 +266,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update the current values with the new values from the data object', function (done) {
-			var testItem = new List.model({
+			const testItem = new List.model({
 				many: [relatedItem.id, relatedItem.id, relatedItem.id],
 			});
 			testItem.save(function (err) {
@@ -284,7 +284,7 @@ export const testFieldType = function (List) {
 
 	describe('addFilterToQuery', function () {
 		it('should filter arrays', function () {
-			var result = List.fields.single.addFilterToQuery({
+			const result = List.fields.single.addFilterToQuery({
 				value: ['Some', 'strings'],
 			});
 			demand(result.single).eql({
@@ -293,7 +293,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should convert a single string to an array and filter that', function () {
-			var result = List.fields.single.addFilterToQuery({
+			const result = List.fields.single.addFilterToQuery({
 				value: 'a string',
 			});
 			demand(result.single).eql({
@@ -302,7 +302,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should support inverted filtering with an array', function () {
-			var result = List.fields.single.addFilterToQuery({
+			const result = List.fields.single.addFilterToQuery({
 				value: ['Some', 'strings'],
 				inverted: true,
 			});
@@ -312,12 +312,12 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter by existance if no value is specified', function () {
-			var result = List.fields.single.addFilterToQuery({});
+			const result = List.fields.single.addFilterToQuery({});
 			demand(result.single).be.null();
 		});
 
 		it('should filter by non-existance if no value is specified', function () {
-			var result = List.fields.single.addFilterToQuery({
+			const result = List.fields.single.addFilterToQuery({
 				inverted: true,
 			});
 			demand(result.single).eql({
@@ -326,14 +326,14 @@ export const testFieldType = function (List) {
 		});
 
 		it('should filter by emptiness if many is true and no value is specified', function () {
-			var result = List.fields.many.addFilterToQuery({});
+			const result = List.fields.many.addFilterToQuery({});
 			demand(result.many).eql({
 				$size: 0,
 			});
 		});
 
 		it('should filter by non-emptiness if many is true and no value is specified', function () {
-			var result = List.fields.many.addFilterToQuery({
+			const result = List.fields.many.addFilterToQuery({
 				inverted: true,
 			});
 			demand(result.many).eql({

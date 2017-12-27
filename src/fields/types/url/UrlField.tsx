@@ -8,7 +8,7 @@ export = Field.create({
 		type: 'Url',
 	},
 	openValue () {
-		var href = this.props.value;
+		let href = this.props.value;
 		if (!href) return;
 		if (!/^(mailto\:)|(\w+\:\/\/)/.test(href)) {
 			href = 'http://' + href;

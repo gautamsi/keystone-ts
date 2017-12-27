@@ -2,10 +2,10 @@
 TODO: Needs Review and Spec
 */
 
-var async = require('async');
+const async = require('async');
 
 export default function (req, res) {
-	var keystone = req.keystone;
+	const keystone = req.keystone;
 	if (!keystone.security.csrf.validate(req)) {
 		return res.apiError(403, 'invalid csrf');
 	}
@@ -38,4 +38,4 @@ export default function (req, res) {
 			items: results,
 		});
 	});
-};
+}

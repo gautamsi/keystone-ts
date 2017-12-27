@@ -1,6 +1,6 @@
-var demand = require('must');
-var UrlType = require('../UrlType');
-var TextType = require('../../text/TextType');
+const demand = require('must');
+const UrlType = require('../UrlType');
+const TextType = require('../../text/TextType');
 
 function customFormat (url) {
 	return url.toUpperCase();
@@ -19,7 +19,7 @@ export const initList = function (List) {
 export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.url.updateItem(testItem, {
 				url: 'value',
 			}, function () {
@@ -29,7 +29,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.url'].updateItem(testItem, {
 				nested: {
 					url: 'value',
@@ -41,7 +41,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.url'].updateItem(testItem, {
 				'nested.url': 'value',
 			}, function () {
@@ -65,7 +65,7 @@ export const testFieldType = function (List) {
 
 	describe('format', function () {
 		it('should strip the protocol when formatting', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.url.updateItem(testItem, {
 				url: 'http://www.keystonejs.com',
 			}, function () {
@@ -75,7 +75,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should call custom format methods', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.customFormat.updateItem(testItem, {
 				customFormat: 'http://www.keystonejs.com',
 			}, function () {

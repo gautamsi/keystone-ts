@@ -1,16 +1,16 @@
-var _ = require('lodash');
-var utils = require('keystone-utils');
+const _ = require('lodash');
+const utils = require('keystone-utils');
 
 /**
  * Adds one or more fields to the List
  * Based on Mongoose's Schema.add
  */
 function add () {
-	var add = function (obj, prefix) {
+	const add = function (obj, prefix) {
 		prefix = prefix || '';
-		var keys = Object.keys(obj);
-		for (var i = 0; i < keys.length; ++i) {
-			var key = keys[i];
+		const keys = Object.keys(obj);
+		for (let i = 0; i < keys.length; ++i) {
+			const key = keys[i];
 			if (!obj[key]) {
 				throw new Error(
 					'Invalid value for schema path `' + prefix + key + '` in `' + this.key + '`.\n'
@@ -32,7 +32,7 @@ function add () {
 		}
 	}.bind(this);
 
-	var addField = function (path, options) {
+	const addField = function (path, options) {
 		if (this.isReserved(path)) {
 			throw new Error('Path ' + path + ' on list ' + this.key + ' is a reserved path');
 		}
@@ -42,8 +42,8 @@ function add () {
 		});
 	}.bind(this);
 
-	var args = Array.prototype.slice.call(arguments);
-	var self = this;
+	const args = Array.prototype.slice.call(arguments);
+	const self = this;
 
 	_.forEach(args, function (def) {
 		self.schemaFields.push(def);

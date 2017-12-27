@@ -1,4 +1,4 @@
-var queryfilterlib = require('queryfilter');
+const queryfilterlib = require('queryfilter');
 
 /**
  * Processes a filter string into a filters object
@@ -9,8 +9,8 @@ var queryfilterlib = require('queryfilter');
  * @param {String} filters
  */
 function processFilters (q) {
-	var list = this;
-	var filters = {};
+	const list = this;
+	const filters = {};
 	queryfilterlib.QueryFilters.create(q).getFilters().forEach(function (filter) {
 		filter.path = filter.key; // alias for b/c
 		filter.field = list.fields[filter.key];

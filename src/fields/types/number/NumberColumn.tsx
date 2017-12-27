@@ -3,7 +3,7 @@ import numeral from 'numeral';
 import ItemsTableCell from '../../components/ItemsTableCell';
 import ItemsTableValue from '../../components/ItemsTableValue';
 
-var NumberColumn = React.createClass({
+let NumberColumn = React.createClass({
 	displayName: 'NumberColumn',
 	propTypes: {
 		col: React.PropTypes.object,

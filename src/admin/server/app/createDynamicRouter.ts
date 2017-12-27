@@ -9,10 +9,10 @@ export default function createDynamicRouter (keystone) {
 		keystone.nav = keystone.initNav();
 	}
 
-	var router = express.Router();
-	var IndexRoute = require('../routes/index');
-	var SigninRoute = require('../routes/signin');
-	var SignoutRoute = require('../routes/signout');
+	const router = express.Router();
+	const IndexRoute = require('../routes/index');
+	const SigninRoute = require('../routes/signin');
+	const SignoutRoute = require('../routes/signout');
 
 	// Use bodyParser and multer to parse request bodies and file uploads
 	router.use(bodyParser.json({}));
@@ -75,7 +75,7 @@ export default function createDynamicRouter (keystone) {
 	}
 
 	// #5: Core Lists API
-	var initList = require('../middleware/initList');
+	const initList = require('../middleware/initList');
 
 	// lists
 	router.all('/api/counts', require('../api/counts'));
@@ -97,4 +97,4 @@ export default function createDynamicRouter (keystone) {
 	// TODO: catch 404s and errors with Admin-UI specific handlers
 
 	return router;
-};
+}

@@ -1,6 +1,6 @@
-var demand = require('must');
-var EmailType = require('../EmailType');
-var TextType = require('../../text/TextType');
+const demand = require('must');
+const EmailType = require('../EmailType');
+const TextType = require('../../text/TextType');
 
 export const initList = function (List) {
 	List.add({
@@ -22,7 +22,7 @@ export const testFilters = function (List) { // eslint-disable-line no-unused-va
 export const testFieldType = function (List) {
 	describe('updateItem', function () {
 		it('should update top level fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields.email.updateItem(testItem, {
 				email: 'sebastian@thinkmill.com.au',
 			}, function () {
@@ -32,7 +32,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.email'].updateItem(testItem, {
 				nested: {
 					email: 'sebastian@thinkmill.com.au',
@@ -44,7 +44,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should update nested fields with flat paths', function (done) {
-			var testItem = new List.model();
+			const testItem = new List.model();
 			List.fields['nested.email'].updateItem(testItem, {
 				'nested.email': 'sebastian@thinkmill.com.au',
 			}, function () {
@@ -177,7 +177,7 @@ export const testFieldType = function (List) {
 	});
 
 	describe('gravatarUrl', function () {
-		var testItem;
+		let testItem;
 
 		beforeEach(function () {
 			testItem = new List.model();
@@ -185,7 +185,7 @@ export const testFieldType = function (List) {
 		});
 
 		it('should return an empty string if no email is specified', function () {
-			var testItem2 = new List.model();
+			const testItem2 = new List.model();
 			demand(testItem2._.email.gravatarUrl()).be('');
 		});
 

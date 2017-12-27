@@ -14,7 +14,7 @@ import {
 	loadCounts,
 } from './actions';
 
-var HomeView = React.createClass({
+let HomeView = React.createClass({
 	displayName: 'HomeView',
 	getInitialState () {
 		return {

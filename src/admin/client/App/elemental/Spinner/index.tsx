@@ -20,7 +20,7 @@ function Spinner ({ className, size, color, ...props }) {
 			<ScreenReaderOnly>Loading...</ScreenReaderOnly>
 		</div>
 	);
-};
+}
 
 Spinner.propTypes = {
 	color: PropTypes.oneOf(colors),

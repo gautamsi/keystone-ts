@@ -1,10 +1,10 @@
-var assign = require('object-assign');
-var fs = require('fs-extra');
-var path = require('path');
-var mime = require('mime-types');
-var nameFunctions = require('keystone-storage-namefunctions');
+const assign = require('object-assign');
+const fs = require('fs-extra');
+const path = require('path');
+const mime = require('mime-types');
+const nameFunctions = require('keystone-storage-namefunctions');
 
-var debug = require('debug')('keystone:storage:adapter:fs');
+const debug = require('debug')('keystone:storage:adapter:fs');
 
 /**
 	The Adapter Compatibility Level is used to ensure that provided adapters
@@ -14,7 +14,7 @@ var debug = require('debug')('keystone:storage:adapter:fs');
 	The Adapter Compatibility Level must be an exact match or an error will be
 	thrown when the Storage instance is initialised.
 */
-var ADAPTER_COMPATIBILITY_LEVEL = 1;
+const ADAPTER_COMPATIBILITY_LEVEL = 1;
 
 /**
 	This is the default storage schema for file fields. These paths will be
@@ -22,7 +22,7 @@ var ADAPTER_COMPATIBILITY_LEVEL = 1;
 
 	Storage Adapters can specify additional schema properties.
 */
-var SCHEMA_TYPES = {
+const SCHEMA_TYPES = {
 //	filename: String,       // the filename, without the full path
 	size: Number,           // the size of the file
 	mimetype: String,       // the mime type of the file
@@ -36,7 +36,7 @@ var SCHEMA_TYPES = {
 	options can override these (must be supported by the adapter, or the
 	adapter must use the default schema implementation)
 */
-var SCHEMA_FIELD_DEFAULTS = {
+const SCHEMA_FIELD_DEFAULTS = {
 //	filename: true,
 	size: true,
 	mimetype: true,
@@ -58,7 +58,7 @@ function Storage (options) {
 	// we're going to mutate options so get a clean copy of it
 	options = assign({}, options);
 
-	var AdapterType = options.adapter;
+	const AdapterType = options.adapter;
 	delete options.adapter;
 
 	if (typeof AdapterType !== 'function') {
@@ -78,15 +78,15 @@ function Storage (options) {
 	}
 
 	// assign ensures the default schema constant isn't exposed as a property
-	var schemaFields = assign({}, SCHEMA_FIELD_DEFAULTS, AdapterType.SCHEMA_FIELD_DEFAULTS, options.schema);
+	const schemaFields = assign({}, SCHEMA_FIELD_DEFAULTS, AdapterType.SCHEMA_FIELD_DEFAULTS, options.schema);
 	delete options.schema;
 
 	// Copy requested fields into local schema.
-	var schema = this.schema = {};
-	for (var path in schemaFields) {
+	const schema = this.schema = {};
+	for (const path in schemaFields) {
 		if (!schemaFields[path]) continue;
 
-		var type = AdapterType.SCHEMA_TYPES[path] || SCHEMA_TYPES[path];
+		const type = AdapterType.SCHEMA_TYPES[path] || SCHEMA_TYPES[path];
 		if (!type) throw Error('Unknown type for requested schema field ' + path);
 		schema[path] = type;
 	}
@@ -138,7 +138,7 @@ function normalizeFile (file, schema, callback) {
 	public url for the file. The result is what is saved back to the field.
 */
 Storage.prototype.uploadFile = function (file, callback) {
-	var self = this;
+	const self = this;
 
 	// Ensure a file object has been provided
 	if (!file) return callback(Error('Cannot upload file - No file object provided'));

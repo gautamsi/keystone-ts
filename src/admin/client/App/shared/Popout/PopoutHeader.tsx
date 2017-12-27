@@ -15,7 +15,7 @@ const PopoutHeader = React.createClass({
 	},
 	render () {
 		// If we have a left action and a left icon, render a header button
-		var headerButton = (this.props.leftAction && this.props.leftIcon) ? (
+		let headerButton = (this.props.leftAction && this.props.leftIcon) ? (
 			<button
 				key={'button_' + this.props.transitionDirection}
 				type="button"
@@ -24,7 +24,7 @@ const PopoutHeader = React.createClass({
 			/>
 		) : null;
 		// If we have a title, render it
-		var headerTitle = this.props.title ? (
+		let headerTitle = this.props.title ? (
 			<span
 				key={'title_' + this.props.transitionDirection}
 				className="Popout__header__label"

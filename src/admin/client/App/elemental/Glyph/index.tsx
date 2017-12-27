@@ -37,7 +37,7 @@ function Glyph ({
 	};
 
 	return <Component {...props} />;
-};
+}
 
 Glyph.propTypes = {
 	color: PropTypes.oneOfType([

@@ -8,18 +8,18 @@ import { FormInput } from '../../../admin/client/App/elemental';
  */
 
 // Scope jQuery and the bootstrap-markdown editor so it will mount
-var $ = require('jquery');
+let $ = require('jquery');
 require('./lib/bootstrap-markdown');
 
 // Append/remove ### surround the selection
 // Source: https://github.com/toopay/bootstrap-markdown/blob/master/js/bootstrap-markdown.js#L909
-var toggleHeading = function (e, level) {
-	var chunk;
-	var cursor;
-	var selected = e.getSelection();
-	var content = e.getContent();
-	var pointer;
-	var prevChar;
+let toggleHeading = function (e, level) {
+	let chunk;
+	let cursor;
+	let selected = e.getSelection();
+	let content = e.getContent();
+	let pointer;
+	let prevChar;
 
 	if (selected.length === 0) {
 		// Give extra word
@@ -47,13 +47,13 @@ var toggleHeading = function (e, level) {
 	e.setSelection(cursor, cursor + chunk.length);
 };
 
-var renderMarkdown = function (component) {
+let renderMarkdown = function (component) {
 	// dependsOn means that sometimes the component is mounted as a null, so account for that & noop
 	if (!component.refs.markdownTextarea) {
 		return;
 	}
 
-	var options = {
+	let options = {
 		autofocus: false,
 		savable: false,
 		resize: 'vertical',
@@ -99,7 +99,7 @@ var renderMarkdown = function (component) {
 	};
 
 	if (component.props.toolbarOptions.hiddenButtons) {
-		var hiddenButtons = (typeof component.props.toolbarOptions.hiddenButtons === 'string')
+		let hiddenButtons = (typeof component.props.toolbarOptions.hiddenButtons === 'string')
 			? component.props.toolbarOptions.hiddenButtons.split(',')
 			: component.props.toolbarOptions.hiddenButtons;
 
@@ -110,7 +110,7 @@ var renderMarkdown = function (component) {
 };
 
 // Simple escaping of html tags and replacing newlines for displaying the raw markdown string within an html doc
-var escapeHtmlForRender = function (html) {
+let escapeHtmlForRender = function (html) {
 	return html
 		.replace(/\&/g, '&amp;')
 		.replace(/\</g, '&lt;')
