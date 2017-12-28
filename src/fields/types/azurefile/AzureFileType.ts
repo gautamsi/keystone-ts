@@ -295,4 +295,4 @@ azurefile.prototype.getRequestHandler = function (item, req, paths, callback) {
 };
 
 /* Export Field Type */
-export default azurefile;
+export = azurefile;

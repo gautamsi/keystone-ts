@@ -23,7 +23,7 @@ const util = require('util');
  * @param {function} wrapHTMLError
  */
 
-export default function (ipRanges, wrapHTMLError) {
+export = function (ipRanges, wrapHTMLError) {
 	/**
 	 * Returns an Express middleware.
 	 *

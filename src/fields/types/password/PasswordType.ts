@@ -258,4 +258,4 @@ password.prototype.updateItem = function (item, data, callback) {
 };
 
 /* Export Field Type */
-export default password;
+export = password;

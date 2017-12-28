@@ -24,4 +24,4 @@ function redirect () {
 	return this;
 }
 
-export default redirect;
+export = redirect;

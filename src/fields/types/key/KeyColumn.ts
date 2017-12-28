@@ -1,1 +1,1 @@
-export default require('../text/TextColumn');
+export = require('../text/TextColumn');

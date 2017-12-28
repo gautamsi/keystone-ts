@@ -1,4 +1,4 @@
-export default {
+export = {
 	Field: require('../MoneyField'),
 	Filter: require('../MoneyFilter'),
 	readme: require('fs').readFileSync('./fields/types/money/Readme.md', 'utf8'),

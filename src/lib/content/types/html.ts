@@ -26,4 +26,4 @@ util.inherits(html, super_);
  * Export class
  */
 
-export default html;
+export = html;

@@ -9,7 +9,7 @@ const async = require('async');
  * @api public
  */
 
-export default function populateRelated (docs, relationships, callback) {
+export = function populateRelated (docs, relationships, callback) {
 	if (Array.isArray(docs)) {
 		async.each(docs, function (doc, done) {
 			doc.populateRelated(relationships, done);

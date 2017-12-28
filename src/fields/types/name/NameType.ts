@@ -215,4 +215,4 @@ name.prototype.updateItem = function (item, data, callback) {
 };
 
 /* Export Field Type */
-export default name;
+export = name;

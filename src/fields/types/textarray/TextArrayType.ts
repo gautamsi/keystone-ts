@@ -181,4 +181,4 @@ textarray.prototype.updateItem = function (item, data, callback) {
 };
 
 /* Export Field Type */
-export default textarray;
+export = textarray;

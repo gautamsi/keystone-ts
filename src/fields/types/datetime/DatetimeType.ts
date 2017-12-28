@@ -123,4 +123,4 @@ datetime.prototype.updateItem = function (item, data, callback) {
 };
 
 /* Export Field Type */
-export default datetime;
+export = datetime;

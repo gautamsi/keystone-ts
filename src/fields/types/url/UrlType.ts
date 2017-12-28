@@ -49,4 +49,4 @@ function removeProtocolPrefix (url) {
 }
 
 /* Export Field Type */
-export default url;
+export = url;

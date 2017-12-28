@@ -1,4 +1,4 @@
-export default {
+export = {
 	Field: require('../CloudinaryImagesField'),
 	Filter: require('../CloudinaryImagesFilter'),
 	section: 'Miscellaneous',

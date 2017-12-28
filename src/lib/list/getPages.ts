@@ -25,4 +25,4 @@ function getPages (options, maxPages) {
 	}
 }
 
-export default getPages;
+export = getPages;

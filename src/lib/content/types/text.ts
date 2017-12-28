@@ -26,4 +26,4 @@ util.inherits(text, super_);
  * Export class
  */
 
-export default text;
+export = text;

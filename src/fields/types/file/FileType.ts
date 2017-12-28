@@ -193,4 +193,4 @@ file.prototype.updateItem = function (item, data, files, callback) {
 };
 
 /* Export Field Type */
-export default file;
+export = file;

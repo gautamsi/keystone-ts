@@ -1,4 +1,4 @@
-export default {
+export = {
 	Field: require('../TextarrayField'),
 	Filter: require('../TextarrayFilter'),
 	section: 'Text',

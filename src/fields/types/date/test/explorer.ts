@@ -1,4 +1,4 @@
-export default {
+export = {
 	Field: require('../DateField'),
 	Filter: require('../DateFilter'),
 	readme: require('fs').readFileSync('./fields/types/date/Readme.md', 'utf8'),

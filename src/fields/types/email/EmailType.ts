@@ -90,4 +90,4 @@ email.prototype.updateItem = function (item, data, callback) {
 };
 
 /* Export Field Type */
-export default email;
+export = email;

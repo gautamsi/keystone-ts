@@ -1,4 +1,4 @@
-export default {
+export = {
 	Field: require('../GeopointField'),
 	Filter: require('../GeopointFilter'),
 	section: 'Miscellaneous',

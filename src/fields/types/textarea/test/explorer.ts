@@ -1,4 +1,4 @@
-export default {
+export = {
 	Field: require('../TextareaField'),
 	Filter: require('../TextareaFilter'),
 	readme: require('fs').readFileSync('./fields/types/textarea/Readme.md', 'utf8'),

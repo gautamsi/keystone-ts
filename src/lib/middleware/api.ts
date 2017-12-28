@@ -20,7 +20,7 @@
 // a reference to the keystone instance, so it can be
 // passed as middeware to the express app.
 
-export default function (keystone) {
+export = function (keystone) {
 	return function initAPI (req, res, next) {
 
 		res.apiResponse = function (data) {

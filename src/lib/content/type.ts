@@ -12,4 +12,4 @@ const Type = function (path, options) { // eslint-disable-line no-unused-vars
  * Export class
  */
 
-export default Type;
+export = Type;

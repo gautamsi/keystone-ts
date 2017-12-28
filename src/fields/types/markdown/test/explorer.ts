@@ -1,4 +1,4 @@
-export default {
+export = {
 	Field: require('../MarkdownField'),
 	Filter: require('../MarkdownFilter'),
 	readme: require('fs').readFileSync('./fields/types/markdown/Readme.md', 'utf8'),

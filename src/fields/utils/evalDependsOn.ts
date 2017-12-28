@@ -18,7 +18,7 @@ function isObject (arg) {
  * @return {Boolean}			  If the current field should be displayed based
  *                          	  on it's dependencies and their values
  */
-export default function evalDependsOn (dependsOn, values) {
+export = function evalDependsOn (dependsOn, values) {
 	if (!isObject(dependsOn) || !Object.keys(dependsOn).length) {
 		return true;
 	}

@@ -32,4 +32,4 @@ function buildSearchTextIndex () {
 	return Object.keys(idxDef).length > 0 ? idxDef : false;
 }
 
-export default buildSearchTextIndex;
+export = buildSearchTextIndex;

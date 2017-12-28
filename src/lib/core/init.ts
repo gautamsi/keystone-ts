@@ -7,4 +7,4 @@ function init (options) {
 	return this;
 }
 
-export default init;
+export = init;

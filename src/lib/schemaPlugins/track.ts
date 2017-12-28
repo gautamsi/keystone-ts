@@ -9,7 +9,7 @@ const Types = require('../fieldTypes');
  * as well as the user who created/updated it.
  */
 
-export default function track () {
+function track () {
 
 	const list = this;
 	let options = list.get('track');
@@ -135,3 +135,5 @@ export default function track () {
 	});
 
 }
+
+export = track;

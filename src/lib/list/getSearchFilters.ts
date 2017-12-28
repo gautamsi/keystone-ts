@@ -243,4 +243,4 @@ function getSearchFilters (search, add) {
 	return filters;
 }
 
-export default getSearchFilters;
+export = getSearchFilters;

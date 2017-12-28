@@ -1,1 +1,1 @@
-export default require('../date/DateColumn');
+export = require('../date/DateColumn');

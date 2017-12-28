@@ -45,4 +45,4 @@ function getUniqueValue (path, generator, limit, callback) {
 	check();
 }
 
-export default getUniqueValue;
+export = getUniqueValue;

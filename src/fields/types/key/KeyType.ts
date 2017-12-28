@@ -59,4 +59,4 @@ key.prototype.updateItem = function (item, data, callback) {
 };
 
 /* Export Field Type */
-export default key;
+export = key;

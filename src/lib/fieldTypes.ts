@@ -32,4 +32,4 @@ const fields = {
 	get Url () { return require('../fields/types/url/UrlType'); },
 };
 
-export default fields;
+export = fields;

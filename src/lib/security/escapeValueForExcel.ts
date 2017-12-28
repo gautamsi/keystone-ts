@@ -14,4 +14,4 @@ function escapeValueForExcel (value) {
 	return value;
 }
 
-export default escapeValueForExcel;
+export = escapeValueForExcel;

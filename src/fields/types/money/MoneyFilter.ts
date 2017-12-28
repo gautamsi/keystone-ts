@@ -1,1 +1,1 @@
-export default require('../number/NumberFilter');
+export = require('../number/NumberFilter');

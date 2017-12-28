@@ -152,4 +152,4 @@ FSAdapter.prototype.fileExists = function (filename, callback) {
 	});
 };
 
-export default FSAdapter;
+export = FSAdapter;

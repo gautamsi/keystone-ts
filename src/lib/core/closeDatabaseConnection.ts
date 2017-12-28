@@ -1,6 +1,6 @@
 const debug = require('debug')('keystone:core:closeDatabaseConnection');
 
-export default function closeDatabaseConnection (callback) {
+export = function closeDatabaseConnection (callback) {
 	this.mongoose.disconnect(function () {
 		debug('mongo connection closed');
 		callback && callback();

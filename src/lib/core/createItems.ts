@@ -336,4 +336,4 @@ function createItems (data, ops, callback) {
 	});
 }
 
-export default createItems;
+export = createItems;

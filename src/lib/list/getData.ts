@@ -42,4 +42,4 @@ function getData (item, fields, expandRelationshipFields) {
 	return data;
 }
 
-export default getData;
+export = getData;

@@ -1,4 +1,4 @@
-export default {
+export = {
 	Field: require('../EmailField'),
 	Filter: require('../EmailFilter'),
 	section: 'Text',

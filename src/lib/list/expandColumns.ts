@@ -95,4 +95,4 @@ function expandColumns (cols) {
 	return expanded;
 }
 
-export default expandColumns;
+export = expandColumns;

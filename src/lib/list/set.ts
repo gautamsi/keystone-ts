@@ -13,4 +13,4 @@ function set (key, value) {
 	return value;
 }
 
-export default set;
+export = set;

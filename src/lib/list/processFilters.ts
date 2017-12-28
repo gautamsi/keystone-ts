@@ -19,4 +19,4 @@ function processFilters (q) {
 	return filters;
 }
 
-export default processFilters;
+export = processFilters;

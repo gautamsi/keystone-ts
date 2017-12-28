@@ -216,4 +216,4 @@ function updateItem (item, data, options, callback) {
 	});
 }
 
-export default updateItem;
+export = updateItem;

@@ -1,4 +1,4 @@
-export default {
+export = {
 	Field: require('../NumberField'),
 	Filter: require('../NumberFilter'),
 	readme: require('fs').readFileSync('./fields/types/number/Readme.md', 'utf8'),

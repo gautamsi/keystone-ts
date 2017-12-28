@@ -1,6 +1,6 @@
 import Field from '../Field';
 
-export default Field.create({
+export = Field.create({
 	displayName: 'TextField',
 	statics: {
 		type: 'Text',

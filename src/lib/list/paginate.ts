@@ -89,4 +89,4 @@ function paginate (options, callback) {
 	}
 }
 
-export default paginate;
+export = paginate;

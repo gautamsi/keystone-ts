@@ -38,4 +38,4 @@ function expandSort (input) {
 	return sort;
 }
 
-export default expandSort;
+export = expandSort;

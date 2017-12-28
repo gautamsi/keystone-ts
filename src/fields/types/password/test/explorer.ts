@@ -1,4 +1,4 @@
-export default {
+export = {
 	Field: require('../PasswordField'),
 	Filter: require('../PasswordFilter'),
 	section: 'Miscellaneous',

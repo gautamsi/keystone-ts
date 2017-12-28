@@ -1,4 +1,4 @@
-export default {
+export = {
 	Field: require('../SelectField'),
 	Filter: require('../SelectFilter'),
 	readme: require('fs').readFileSync('./fields/types/select/Readme.md', 'utf8'),

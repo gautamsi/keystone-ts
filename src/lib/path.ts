@@ -4,7 +4,7 @@ const utils = require('keystone-utils');
  * Path Class
  */
 
-export default function Path (str) {
+export = function Path (str) {
 
 	if (!(this instanceof Path)) {
 		return new Path(str);

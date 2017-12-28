@@ -1,6 +1,6 @@
 const debug = require('debug')('keystone:core:openDatabaseConnection');
 
-export default function openDatabaseConnection (callback) {
+export = function openDatabaseConnection (callback) {
 
 	const keystone = this;
 	let mongoConnectionOpen = false;

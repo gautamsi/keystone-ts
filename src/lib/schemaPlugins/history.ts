@@ -37,7 +37,7 @@ function getHistoryModel (list, userModel) {
  * When enabled, it tracks changes to each document on save or remove.
  */
 
-export default function history () {
+export = function history () {
 
 	const list = this;
 

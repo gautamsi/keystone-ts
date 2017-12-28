@@ -97,4 +97,4 @@ function start (events) {
 	return this;
 }
 
-export default start;
+export = start;
