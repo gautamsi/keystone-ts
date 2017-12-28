@@ -21,25 +21,25 @@ function tokenize(salt, secret) {
     return salt + crypto.createHash('sha1').update(salt + secret).digest('hex');
 }
 
-export const createSecret = function () {
+export function createSecret() {
     return crypto.pseudoRandomBytes(SECRET_LENGTH).toString('base64');
-};
+}
 
-export const getSecret = function (req) {
+export function getSecret(req) {
     return req.session[SECRET_KEY] || (req.session[SECRET_KEY] = createSecret());
-};
+}
 
-export const createToken = function (req) {
+export function createToken(req) {
     return tokenize(utils.randomString(SECRET_LENGTH), getSecret(req));
-};
+}
 
-export const getToken = function (req, res) {
+export function getToken(req, res) {
     res.locals[LOCAL_VALUE] = res.locals[LOCAL_VALUE] || createToken(req);
     res.cookie(XSRF_COOKIE_KEY, res.locals[LOCAL_VALUE]);
     return res.locals[LOCAL_VALUE];
-};
+}
 
-export const requestToken = function (req) {
+export function requestToken(req) {
     if (req.body && req.body[TOKEN_KEY]) {
         return req.body[TOKEN_KEY];
     } else if (req.query && req.query[TOKEN_KEY]) {
@@ -56,9 +56,9 @@ export const requestToken = function (req) {
     // The fact that we *don't* check the CSRF value that comes in with the cookie is what makes this CSRF implementation work.
     // See.. https://en.wikipedia.org/wiki/Cross-site_request_forgery#Cookie-to-header_token
     return '';
-};
+}
 
-export const validate = function (req, token?) {
+export function validate(req, token?) {
     // Allow environment variable to disable check
     if (DISABLE_CSRF) return true;
     if (arguments.length === 1) {
@@ -74,7 +74,7 @@ export const validate = function (req, token?) {
             req.session[SECRET_KEY]
         )
     );
-};
+}
 
 export const middleware = {
     init: function (req, res, next) {

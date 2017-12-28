@@ -1,20 +1,18 @@
-const safeRequire = require('../../../lib/safeRequire');
+import { safeRequire } from '../../../lib/safeRequire';
 
-function createHealthchecksHandler (keystone) {
-	const healthcheck = safeRequire('keystone-healthchecks', 'healthchecks');
-	let healthcheckConfig = keystone.get('healthchecks');
+export function createHealthchecksHandler(keystone) {
+    const healthcheck = safeRequire('keystone-healthchecks', 'healthchecks');
+    let healthcheckConfig = keystone.get('healthchecks');
 
-	if (healthcheckConfig === true) {
-		healthcheckConfig = {};
-		// By default, we simply bind the user model healthcheck if there is a
-		// user model. This validates we can successfully query the database.
-		if (keystone.get('user model')) {
-			const User = keystone.list(keystone.get('user model'));
-			healthcheckConfig.canQueryUsers = healthcheck.healthchecks.canQueryListFactory(User);
-		}
-	}
+    if (healthcheckConfig === true) {
+        healthcheckConfig = {};
+        // By default, we simply bind the user model healthcheck if there is a
+        // user model. This validates we can successfully query the database.
+        if (keystone.get('user model')) {
+            const User = keystone.list(keystone.get('user model'));
+            healthcheckConfig.canQueryUsers = healthcheck.healthchecks.canQueryListFactory(User);
+        }
+    }
 
-	return healthcheck.createRoute(healthcheckConfig);
+    return healthcheck.createRoute(healthcheckConfig);
 }
-
-export default createHealthchecksHandler;

@@ -2,11 +2,11 @@
 TODO: Needs Review and Spec
 */
 
-const moment = require('moment');
-const assign = require('object-assign');
+import * as moment from 'moment';
+import * as assign from 'object-assign';
+import * as baby from 'babyparse';
 
-export default function (req, res, next) {
-	const baby = require('babyparse');
+export function download(req, res, next) {
 	const keystone = req.keystone;
 
 	const format = req.params.format.split('.')[1]; // json or csv

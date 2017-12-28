@@ -1,9 +1,9 @@
-const ejs = require('ejs');
-const path = require('path');
+import * as ejs from 'ejs';
+import * as path from 'path';
 
 const templatePath = path.resolve(__dirname, '../templates/signin.html');
 
-export default function SigninRoute (req, res) {
+export function SigninRoute (req, res) {
 	const keystone = req.keystone;
 	const UserList = keystone.list(keystone.get('user model'));
 	const locals = {

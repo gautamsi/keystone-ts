@@ -11,12 +11,12 @@
  * @api public
  */
 
-export = function (keystone) {
-	return function frameGuard (req, res, next) {
-		const options = keystone.get('frame guard');
-		if (options) {
-			res.header('x-frame-options', options);
-		}
-		next();
-	};
+export function frameGuard(keystone) {
+    return function frameGuard(req, res, next) {
+        const options = keystone.get('frame guard');
+        if (options) {
+            res.header('x-frame-options', options);
+        }
+        next();
+    };
 }

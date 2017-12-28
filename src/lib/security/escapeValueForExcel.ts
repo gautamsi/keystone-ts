@@ -7,11 +7,10 @@
 
 const formulaTriggers = ['+', '-', '=', '@'];
 
-function escapeValueForExcel (value) {
-	if (formulaTriggers.indexOf(value.toString().slice(0, 1)) > 0) {
-		return ' ' + value;
-	}
-	return value;
+export function escapeValueForExcel(value) {
+    if (formulaTriggers.indexOf(value.toString().slice(0, 1)) > 0) {
+        return ' ' + value;
+    }
+    return value;
 }
 
-export = escapeValueForExcel;

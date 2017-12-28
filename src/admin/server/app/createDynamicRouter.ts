@@ -2,99 +2,113 @@ import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import * as multer from 'multer';
 
-export default function createDynamicRouter (keystone) {
-	// ensure keystone nav has been initialised
-	// TODO: move this elsewhere (on demand generation, or client-side?)
-	if (!keystone.nav) {
-		keystone.nav = keystone.initNav();
-	}
+import { createHealthchecksHandler } from './createHealthchecksHandler';
 
-	const router = express.Router();
-	const IndexRoute = require('../routes/index');
-	const SigninRoute = require('../routes/signin');
-	const SignoutRoute = require('../routes/signout');
+import { IndexRoute } from '../routes/index';
+import { SigninRoute } from '../routes/signin';
+import { SignoutRoute } from '../routes/signout';
 
-	// Use bodyParser and multer to parse request bodies and file uploads
-	router.use(bodyParser.json({}));
-	router.use(bodyParser.urlencoded({ extended: true }));
-	router.use(multer({ includeEmptyFields: true }));
+import { apiErrorMiddleware } from '../middleware/apiError';
+import { logErrorMiddleware } from '../middleware/logError';
+import { initListMiddleware } from '../middleware/initList';
 
-	// Bind the request to the keystone instance
-	router.use(function (req, res, next) {
-		req.keystone = keystone;
-		next();
-	});
+import { sessionHandler } from '../api/session';
+import { listHandler } from '../api/list';
+import { itemHandler } from '../api/item';
+import { cloudinaryHandler } from '../api/cloudinary';
+import { s3Handler } from '../api/s3';
+import { countsHandler } from '../api/counts';
 
-	if (keystone.get('healthchecks')) {
-		router.use('/server-health', require('./createHealthchecksHandler')(keystone));
-	}
+export function createDynamicRouter(keystone) {
+    // ensure keystone nav has been initialised
+    // TODO: move this elsewhere (on demand generation, or client-side?)
+    if (!keystone.nav) {
+        keystone.nav = keystone.initNav();
+    }
 
-	// Init API request helpers
-	router.use('/api', require('../middleware/apiError'));
-	router.use('/api', require('../middleware/logError'));
+    const router = express.Router();
 
-	// #1: Session API
-	// TODO: this should respect keystone auth options
-	router.get('/api/session', require('../api/session/get'));
-	router.post('/api/session/signin', require('../api/session/signin'));
-	router.post('/api/session/signout', require('../api/session/signout'));
 
-	// #2: Session Routes
-	// Bind auth middleware (generic or custom) to * routes, allowing
-	// access to the generic signin page if generic auth is used
-	if (keystone.get('auth') === true) {
-		// TODO: poor separation of concerns; settings should be defaulted elsewhere
-		if (!keystone.get('signout url')) {
-			keystone.set('signout url', '/' + keystone.get('admin path') + '/signout');
-		}
-		if (!keystone.get('signin url')) {
-			keystone.set('signin url', '/' + keystone.get('admin path') + '/signin');
-		}
-		if (!keystone.nativeApp || !keystone.get('session')) {
-			router.all('*', keystone.session.persist);
-		}
-		router.all('/signin', SigninRoute);
-		router.all('/signout', SignoutRoute);
-		router.use(keystone.session.keystoneAuth);
-	} else if (typeof keystone.get('auth') === 'function') {
-		router.use(keystone.get('auth'));
-	}
+    // Use bodyParser and multer to parse request bodies and file uploads
+    router.use(bodyParser.json({}));
+    router.use(bodyParser.urlencoded({ extended: true }));
+    router.use(multer({ includeEmptyFields: true }));
 
-	// #3: Home route
-	router.get('/', IndexRoute);
+    // Bind the request to the keystone instance
+    router.use(function (req, res, next) {
+        req['keystone'] = keystone;
+        next();
+    });
 
-	// #4: Cloudinary and S3 specific APIs
-	// TODO: poor separation of concerns; should / could this happen elsewhere?
-	if (keystone.get('cloudinary config')) {
-		router.get('/api/cloudinary/get', require('../api/cloudinary').get);
-		router.get('/api/cloudinary/autocomplete', require('../api/cloudinary').autocomplete);
-		router.post('/api/cloudinary/upload', require('../api/cloudinary').upload);
-	}
-	if (keystone.get('s3 config')) {
-		router.post('/api/s3/upload', require('../api/s3').upload);
-	}
+    if (keystone.get('healthchecks')) {
+        router.use('/server-health', createHealthchecksHandler(keystone));
+    }
 
-	// #5: Core Lists API
-	const initList = require('../middleware/initList');
+    // Init API request helpers
+    router.use('/api', apiErrorMiddleware);
+    router.use('/api', logErrorMiddleware);
 
-	// lists
-	router.all('/api/counts', require('../api/counts'));
-	router.get('/api/:list', initList, require('../api/list/get'));
-	router.get('/api/:list/:format(export.csv|export.json)', initList, require('../api/list/download'));
-	router.post('/api/:list/create', initList, require('../api/list/create'));
-	router.post('/api/:list/update', initList, require('../api/list/update'));
-	router.post('/api/:list/delete', initList, require('../api/list/delete'));
-	// items
-	router.get('/api/:list/:id', initList, require('../api/item/get'));
-	router.post('/api/:list/:id', initList, require('../api/item/update'));
-	router.post('/api/:list/:id/delete', initList, require('../api/list/delete'));
-	router.post('/api/:list/:id/sortOrder/:sortOrder/:newOrder', initList, require('../api/item/sortOrder'));
+    // #1: Session API
+    // TODO: this should respect keystone auth options
+    router.get('/api/session', sessionHandler.get);
+    router.post('/api/session/signin', sessionHandler.signin);
+    router.post('/api/session/signout', sessionHandler.signout);
 
-	// #6: List Routes
-	router.all('/:list/:page([0-9]{1,5})?', IndexRoute);
-	router.all('/:list/:item', IndexRoute);
+    // #2: Session Routes
+    // Bind auth middleware (generic or custom) to * routes, allowing
+    // access to the generic signin page if generic auth is used
+    if (keystone.get('auth') === true) {
+        // TODO: poor separation of concerns; settings should be defaulted elsewhere
+        if (!keystone.get('signout url')) {
+            keystone.set('signout url', '/' + keystone.get('admin path') + '/signout');
+        }
+        if (!keystone.get('signin url')) {
+            keystone.set('signin url', '/' + keystone.get('admin path') + '/signin');
+        }
+        if (!keystone.nativeApp || !keystone.get('session')) {
+            router.all('*', keystone.session.persist);
+        }
+        router.all('/signin', SigninRoute);
+        router.all('/signout', SignoutRoute);
+        router.use(keystone.session.keystoneAuth);
+    } else if (typeof keystone.get('auth') === 'function') {
+        router.use(keystone.get('auth'));
+    }
 
-	// TODO: catch 404s and errors with Admin-UI specific handlers
+    // #3: Home route
+    router.get('/', IndexRoute);
 
-	return router;
+    // #4: Cloudinary and S3 specific APIs
+    // TODO: poor separation of concerns; should / could this happen elsewhere?
+    if (keystone.get('cloudinary config')) {
+        router.get('/api/cloudinary/get', cloudinaryHandler.get);
+        router.get('/api/cloudinary/autocomplete', cloudinaryHandler.autocomplete);
+        router.post('/api/cloudinary/upload', cloudinaryHandler.upload);
+    }
+    if (keystone.get('s3 config')) {
+        router.post('/api/s3/upload', s3Handler.upload);
+    }
+
+    // #5: Core Lists API
+
+    // lists
+    router.all('/api/counts', countsHandler);
+    router.get('/api/:list', initListMiddleware, listHandler.get);
+    router.get('/api/:list/:format(export.csv|export.json)', initListMiddleware, listHandler.download);
+    router.post('/api/:list/create', initListMiddleware, listHandler.create);
+    router.post('/api/:list/update', initListMiddleware, listHandler.update);
+    router.post('/api/:list/delete', initListMiddleware, listHandler.delete);
+    // items
+    router.get('/api/:list/:id', initListMiddleware, itemHandler.get);
+    router.post('/api/:list/:id', initListMiddleware, itemHandler.update);
+    router.post('/api/:list/:id/delete', initListMiddleware, listHandler.delete);
+    router.post('/api/:list/:id/sortOrder/:sortOrder/:newOrder', initListMiddleware, itemHandler.sortOrder);
+
+    // #6: List Routes
+    router.all('/:list/:page([0-9]{1,5})?', IndexRoute);
+    router.all('/:list/:item', IndexRoute);
+
+    // TODO: catch 404s and errors with Admin-UI specific handlers
+
+    return router;
 }

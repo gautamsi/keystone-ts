@@ -9,23 +9,22 @@
  * @api private
  */
 
-const http = require('http');
+import * as http from 'http';
 
-export default function (keystone, app, callback) {
+export function startHTTPServer(keystone, app, callback) {
 
-	const host = keystone.get('host');
-	const port = keystone.get('port');
-	const forceSsl = (keystone.get('ssl') === 'force');
+    const host = keystone.get('host');
+    const port = keystone.get('port');
+    const forceSsl = (keystone.get('ssl') === 'force');
 
-	keystone.httpServer = http
-	.createServer(app)
-	.listen(port, host, function ready (err) {
-		if (err) { return callback(err); }
+    keystone.httpServer = http
+        .createServer(app)
+        .listen(port, host, function ready(err) {
+            if (err) { return callback(err); }
 
-		const message = keystone.get('name') + ' is ready on '
-		+ 'http://' + host + ':' + port
-		+ (forceSsl ? ' (SSL redirect)' : '');
-		callback(null, message);
-	});
-
+            const message = keystone.get('name') + ' is ready on '
+                + 'http://' + host + ':' + port
+                + (forceSsl ? ' (SSL redirect)' : '');
+            callback(null, message);
+        });
 }

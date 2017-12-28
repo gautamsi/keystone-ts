@@ -1,7 +1,7 @@
 const dashes = '\n------------------------------------------------\n';
-const utils = require('keystone-utils');
+import * as utils from 'keystone-utils';
 
-export default function bindErrorHandlers(keystone, app) {
+export function bindErrorHandlers(keystone, app) {
 
     // Handle 404 (no route matched) errors
     const default404Handler = function (req, res, next?) {

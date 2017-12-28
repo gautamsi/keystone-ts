@@ -1,24 +1,25 @@
-const crypto = require('crypto');
-const keystone = require('../');
-const scmp = require('scmp');
-const utils = require('keystone-utils');
-const _ = require('lodash');
+import * as crypto from 'crypto';
+import { Keystone } from '../keystone';
+import * as scmp from 'scmp';
+import * as utils from 'keystone-utils';
+import * as _ from 'lodash';
 
+const keystone = Keystone.instance;
 /**
  * Creates a hash of str with Keystone's cookie secret.
  * Only hashes the first half of the string.
  */
-function hash (str) {
-	// force type
-	str = '' + str;
-	// get the first half
-	str = str.substr(0, Math.round(str.length / 2));
-	// hash using sha256
-	return crypto
-		.createHmac('sha256', keystone.get('cookie secret'))
-		.update(str)
-		.digest('base64')
-		.replace(/\=+$/, '');
+function hash(str) {
+    // force type
+    str = '' + str;
+    // get the first half
+    str = str.substr(0, Math.round(str.length / 2));
+    // hash using sha256
+    return crypto
+        .createHmac('sha256', keystone.get('cookie secret'))
+        .update(str)
+        .digest('base64')
+        .replace(/\=+$/, '');
 }
 
 /**
@@ -30,47 +31,47 @@ function hash (str) {
  * @param {function()} onSuccess callback, is passed the User instance
  */
 
-export function signinWithUser (user, req, res, onSuccess, onFail?) {
-	if (arguments.length < 4) {
-		throw new Error('keystone.session.signinWithUser requires user, req and res objects, and an onSuccess callback.');
-	}
-	if (typeof user !== 'object') {
-		throw new Error('keystone.session.signinWithUser requires user to be an object.');
-	}
-	if (typeof req !== 'object') {
-		throw new Error('keystone.session.signinWithUser requires req to be an object.');
-	}
-	if (typeof res !== 'object') {
-		throw new Error('keystone.session.signinWithUser requires res to be an object.');
-	}
-	if (typeof onSuccess !== 'function') {
-		throw new Error('keystone.session.signinWithUser requires onSuccess to be a function.');
-	}
-	req.session.regenerate(function () {
-		req.user = user;
-		req.session.userId = user.id;
-		// if the user has a password set, store a persistence cookie to resume sessions
-		if (keystone.get('cookie signin') && user.password) {
-			const userToken = user.id + ':' + hash(user.password);
-			const cookieOpts = _.defaults({}, keystone.get('cookie signin options'), {
-				signed: true,
-				httpOnly: true,
-				maxAge: 10 * 24 * 60 * 60 * 1000,
-			});
-			res.cookie('keystone.uid', userToken, cookieOpts);
-		}
-		onSuccess(user);
-	});
+export function signinWithUser(user, req, res, onSuccess, onFail?) {
+    if (arguments.length < 4) {
+        throw new Error('keystone.session.signinWithUser requires user, req and res objects, and an onSuccess callback.');
+    }
+    if (typeof user !== 'object') {
+        throw new Error('keystone.session.signinWithUser requires user to be an object.');
+    }
+    if (typeof req !== 'object') {
+        throw new Error('keystone.session.signinWithUser requires req to be an object.');
+    }
+    if (typeof res !== 'object') {
+        throw new Error('keystone.session.signinWithUser requires res to be an object.');
+    }
+    if (typeof onSuccess !== 'function') {
+        throw new Error('keystone.session.signinWithUser requires onSuccess to be a function.');
+    }
+    req.session.regenerate(function () {
+        req.user = user;
+        req.session.userId = user.id;
+        // if the user has a password set, store a persistence cookie to resume sessions
+        if (keystone.get('cookie signin') && user.password) {
+            const userToken = user.id + ':' + hash(user.password);
+            const cookieOpts = _.defaults({}, keystone.get('cookie signin options'), {
+                signed: true,
+                httpOnly: true,
+                maxAge: 10 * 24 * 60 * 60 * 1000,
+            });
+            res.cookie('keystone.uid', userToken, cookieOpts);
+        }
+        onSuccess(user);
+    });
 }
 
-const postHookedSigninWithUser = function (user, req, res, onSuccess, onFail) {
-	keystone.callHook(user, 'post:signin', req, function (err) {
-		if (err) {
-			return onFail(err);
-		}
-		signinWithUser(user, req, res, onSuccess, onFail);
-	});
-};
+function postHookedSigninWithUser(user, req, res, onSuccess, onFail) {
+    keystone.callHook(user, 'post:signin', req, function (err) {
+        if (err) {
+            return onFail(err);
+        }
+        signinWithUser(user, req, res, onSuccess, onFail);
+    });
+}
 
 /**
  * Signs in a user user matching the lookup filters
@@ -82,55 +83,55 @@ const postHookedSigninWithUser = function (user, req, res, onSuccess, onFail) {
  * @param {function()} onFail callback
  */
 
-const doSignin = function (lookup, req, res, onSuccess, onFail) {
-	if (!lookup) {
-		return onFail(new Error('session.signin requires a User ID or Object as the first argument'));
-	}
-	const User = keystone.list(keystone.get('user model'));
-	if (typeof lookup.email === 'string' && typeof lookup.password === 'string') {
-		// ensure that it is an email, we don't want people being able to sign in by just using "\." and a haphazardly correct password.
-		if (!utils.isEmail(lookup.email)) {
-			return onFail(new Error('Incorrect email or password'));
-		}
-		// create regex for email lookup with special characters escaped
-		const emailRegExp = new RegExp('^' + utils.escapeRegExp(lookup.email) + '$', 'i');
-		// match email address and password
-		User.model.findOne({ email: emailRegExp }).exec(function (err, user) {
-			if (user) {
-				user._.password.compare(lookup.password, function (err, isMatch) {
-					if (!err && isMatch) {
-						postHookedSigninWithUser(user, req, res, onSuccess, onFail);
-					} else {
-						onFail(err || new Error('Incorrect email or password'));
-					}
-				});
-			} else {
-				onFail(err);
-			}
-		});
-	} else {
-		lookup = '' + lookup;
-		// match the userId, with optional password check
-		const userId = (lookup.indexOf(':') > 0) ? lookup.substr(0, lookup.indexOf(':')) : lookup;
-		const passwordCheck = (lookup.indexOf(':') > 0) ? lookup.substr(lookup.indexOf(':') + 1) : false;
-		User.model.findById(userId).exec(function (err, user) {
-			if (user && (!passwordCheck || scmp(passwordCheck, hash(user.password)))) {
-				postHookedSigninWithUser(user, req, res, onSuccess, onFail);
-			} else {
-				onFail(err || new Error('Incorrect user or password'));
-			}
-		});
-	}
-};
+function doSignin(lookup, req, res, onSuccess, onFail) {
+    if (!lookup) {
+        return onFail(new Error('session.signin requires a User ID or Object as the first argument'));
+    }
+    const User = keystone.list(keystone.get('user model'));
+    if (typeof lookup.email === 'string' && typeof lookup.password === 'string') {
+        // ensure that it is an email, we don't want people being able to sign in by just using "\." and a haphazardly correct password.
+        if (!utils.isEmail(lookup.email)) {
+            return onFail(new Error('Incorrect email or password'));
+        }
+        // create regex for email lookup with special characters escaped
+        const emailRegExp = new RegExp('^' + utils.escapeRegExp(lookup.email) + '$', 'i');
+        // match email address and password
+        User.model.findOne({ email: emailRegExp }).exec(function (err, user) {
+            if (user) {
+                user._.password.compare(lookup.password, function (err, isMatch) {
+                    if (!err && isMatch) {
+                        postHookedSigninWithUser(user, req, res, onSuccess, onFail);
+                    } else {
+                        onFail(err || new Error('Incorrect email or password'));
+                    }
+                });
+            } else {
+                onFail(err);
+            }
+        });
+    } else {
+        lookup = '' + lookup;
+        // match the userId, with optional password check
+        const userId = (lookup.indexOf(':') > 0) ? lookup.substr(0, lookup.indexOf(':')) : lookup;
+        const passwordCheck = (lookup.indexOf(':') > 0) ? lookup.substr(lookup.indexOf(':') + 1) : false;
+        User.model.findById(userId).exec(function (err, user) {
+            if (user && (!passwordCheck || scmp(passwordCheck, hash(user.password)))) {
+                postHookedSigninWithUser(user, req, res, onSuccess, onFail);
+            } else {
+                onFail(err || new Error('Incorrect user or password'));
+            }
+        });
+    }
+}
 
-export const signin = function (lookup, req, res, onSuccess, onFail) {
-	keystone.callHook({}, 'pre:signin', req, function (err) {
-		if (err) {
-			return onFail(err);
-		}
-		doSignin(lookup, req, res, onSuccess, onFail);
-	});
-};
+export function signin(lookup, req, res, onSuccess, onFail) {
+    keystone.callHook({}, 'pre:signin', req, function (err) {
+        if (err) {
+            return onFail(err);
+        }
+        doSignin(lookup, req, res, onSuccess, onFail);
+    });
+}
 
 /**
  * Signs the current user out and resets the session
@@ -140,32 +141,32 @@ export const signin = function (lookup, req, res, onSuccess, onFail) {
  * @param {function()} next callback
  */
 
-export const signout = function (req, res, next) {
-	keystone.callHook(req.user, 'pre:signout', function (err) {
-		if (err) {
-			console.log("An error occurred in signout 'pre' middleware", err);
-		}
-		const cookieOpts = _.defaults({}, keystone.get('cookie signin options'), {
-			signed: true,
-			httpOnly: true,
-		});
-		// Force the cookie to expire!
-		cookieOpts.maxAge = 0;
-		res.clearCookie('keystone.uid', cookieOpts);
-		req.user = null;
-		req.session.regenerate(function (err) {
-			if (err) {
-				return next(err);
-			}
-			keystone.callHook({}, 'post:signout', function (err) {
-				if (err) {
-					console.log("An error occurred in signout 'post' middleware", err);
-				}
-				next();
-			});
-		});
-	});
-};
+export function signout(req, res, next) {
+    keystone.callHook(req.user, 'pre:signout', function (err) {
+        if (err) {
+            console.log("An error occurred in signout 'pre' middleware", err);
+        }
+        const cookieOpts = _.defaults({}, keystone.get('cookie signin options'), {
+            signed: true,
+            httpOnly: true,
+        });
+        // Force the cookie to expire!
+        cookieOpts.maxAge = 0;
+        res.clearCookie('keystone.uid', cookieOpts);
+        req.user = null;
+        req.session.regenerate(function (err) {
+            if (err) {
+                return next(err);
+            }
+            keystone.callHook({}, 'post:signout', function (err) {
+                if (err) {
+                    console.log("An error occurred in signout 'post' middleware", err);
+                }
+                next();
+            });
+        });
+    });
+}
 
 /**
  * Middleware to ensure session persistence across server restarts
@@ -178,36 +179,36 @@ export const signout = function (req, res, next) {
  * @param {function()} next callback
  */
 
-export const persist = function (req, res, next) {
-	const User = keystone.list(keystone.get('user model'));
-	if (!req.session) {
-		console.error('\nKeystoneJS Runtime Error:\n\napp must have session middleware installed. Try adding "express-session" to your express instance.\n');
-		process.exit(1);
-	}
-	if (keystone.get('cookie signin') && !req.session.userId && req.signedCookies['keystone.uid'] && req.signedCookies['keystone.uid'].indexOf(':') > 0) {
-		signin(req.signedCookies['keystone.uid'], req, res, function () {
-			next();
-		}, function (err) {
-			const cookieOpts = _.defaults({}, keystone.get('cookie signin options'), {
-				signed: true,
-				httpOnly: true,
-			});
-			// Force the cookie to expire!
-			cookieOpts.maxAge = 0;
-			res.clearCookie('keystone.uid', cookieOpts);
-			req.user = null;
-			next();
-		});
-	} else if (req.session.userId) {
-		User.model.findById(req.session.userId).exec(function (err, user) {
-			if (err) return next(err);
-			req.user = user;
-			next();
-		});
-	} else {
-		next();
-	}
-};
+export function persist(req, res, next) {
+    const User = keystone.list(keystone.get('user model'));
+    if (!req.session) {
+        console.error('\nKeystoneJS Runtime Error:\n\napp must have session middleware installed. Try adding "express-session" to your express instance.\n');
+        process.exit(1);
+    }
+    if (keystone.get('cookie signin') && !req.session.userId && req.signedCookies['keystone.uid'] && req.signedCookies['keystone.uid'].indexOf(':') > 0) {
+        signin(req.signedCookies['keystone.uid'], req, res, function () {
+            next();
+        }, function (err) {
+            const cookieOpts = _.defaults({}, keystone.get('cookie signin options'), {
+                signed: true,
+                httpOnly: true,
+            });
+            // Force the cookie to expire!
+            cookieOpts.maxAge = 0;
+            res.clearCookie('keystone.uid', cookieOpts);
+            req.user = null;
+            next();
+        });
+    } else if (req.session.userId) {
+        User.model.findById(req.session.userId).exec(function (err, user) {
+            if (err) return next(err);
+            req.user = user;
+            next();
+        });
+    } else {
+        next();
+    }
+}
 
 /**
  * Middleware to enable access to Keystone
@@ -228,16 +229,16 @@ export const persist = function (req, res, next) {
  * @param {function()} next callback
  */
 
-export const keystoneAuth = function (req, res, next) {
-	if (!req.user || !req.user.canAccessKeystone) {
-		if (req.headers.accept === 'application/json') {
-			return req.user
-				? res.status(403).json({ error: 'not authorised' })
-				: res.status(401).json({ error: 'not signed in' });
-		}
-		const regex = new RegExp('^\/' + keystone.get('admin path') + '\/?$', 'i');
-		const from = regex.test(req.originalUrl) ? '' : '?from=' + req.originalUrl;
-		return res.redirect(keystone.get('signin url') + from);
-	}
-	next();
-};
+export function keystoneAuth(req, res, next) {
+    if (!req.user || !req.user.canAccessKeystone) {
+        if (req.headers.accept === 'application/json') {
+            return req.user
+                ? res.status(403).json({ error: 'not authorised' })
+                : res.status(401).json({ error: 'not signed in' });
+        }
+        const regex = new RegExp('^\/' + keystone.get('admin path') + '\/?$', 'i');
+        const from = regex.test(req.originalUrl) ? '' : '?from=' + req.originalUrl;
+        return res.redirect(keystone.get('signin url') + from);
+    }
+    next();
+}

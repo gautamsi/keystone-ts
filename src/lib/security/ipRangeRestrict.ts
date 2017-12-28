@@ -1,8 +1,6 @@
-'use strict';
-
-const _ = require('lodash');
-const range_check = require('range_check');
-const util = require('util');
+import * as _ from 'lodash';
+import * as range_check from 'range_check';
+import * as util from 'util';
 
 /**
  * Implement IP range-based access control.
@@ -23,7 +21,7 @@ const util = require('util');
  * @param {function} wrapHTMLError
  */
 
-export = function (ipRanges, wrapHTMLError) {
+export function ipRangeRestrict(ipRanges, wrapHTMLError) {
 	/**
 	 * Returns an Express middleware.
 	 *
@@ -31,49 +29,49 @@ export = function (ipRanges, wrapHTMLError) {
 	 * @param {app.response} res
 	 * @param {function} next
 	 */
-	return function (req, res, next) {
+    return function (req, res, next) {
 
-		// Require that at least one IP range has been provided.
-		if (_.isUndefined(ipRanges)) {
-			throw new Error('Allowed IP range is not defined');
-		}
+        // Require that at least one IP range has been provided.
+        if (_.isUndefined(ipRanges)) {
+            throw new Error('Allowed IP range is not defined');
+        }
 
-		// The set of allowed ranges has to be separated by space
-		// characters or a comma.
-		let allowedRanges = ipRanges.split(/\s+|,/);
+        // The set of allowed ranges has to be separated by space
+        // characters or a comma.
+        let allowedRanges = ipRanges.split(/\s+|,/);
 
-		// Keep only those ranges that match CIDR format.
-		allowedRanges = _.filter(allowedRanges, function (ipRange) {
-			return range_check.validRange(ipRange);
-		});
+        // Keep only those ranges that match CIDR format.
+        allowedRanges = _.filter(allowedRanges, function (ipRange) {
+            return range_check.validRange(ipRange);
+        });
 
-		if (allowedRanges.length <= 0) {
-			throw new Error('No valid CIDR ranges were specified');
-		}
+        if (allowedRanges.length <= 0) {
+            throw new Error('No valid CIDR ranges were specified');
+        }
 
-		// Using req.ips requires that express 'trust proxy' setting is
-		// true. When it *is* set the value for ips is extracted from the
-		// X-Forwarded-For request header. The originating IP address is
-		// the last one in the array.
-		const requestIP = (req.ips.length > 0) ? req.ips.slice().pop() : req.ip;
+        // Using req.ips requires that express 'trust proxy' setting is
+        // true. When it *is* set the value for ips is extracted from the
+        // X-Forwarded-For request header. The originating IP address is
+        // the last one in the array.
+        const requestIP = (req.ips.length > 0) ? req.ips.slice().pop() : req.ip;
 
-		// Deny the request if request IP is not in one of the allowed
-		// IP address ranges.
-		const requestAllowed = range_check.inRange(requestIP, allowedRanges);
+        // Deny the request if request IP is not in one of the allowed
+        // IP address ranges.
+        const requestAllowed = range_check.inRange(requestIP, allowedRanges);
 
-		if (!requestAllowed) {
-			const msg = '-> blocked request from %s (not in allowed IP range)';
-			console.log(util.format(msg, req.ip));
-			// Display error page to the user.
-			const title = 'Sorry, your request is not authorized (403)';
-			const message = 'Requests from outside permitted IP range are not allowed';
-			const htmlError = wrapHTMLError(title, message);
+        if (!requestAllowed) {
+            const msg = '-> blocked request from %s (not in allowed IP range)';
+            console.log(util.format(msg, req.ip));
+            // Display error page to the user.
+            const title = 'Sorry, your request is not authorized (403)';
+            const message = 'Requests from outside permitted IP range are not allowed';
+            const htmlError = wrapHTMLError(title, message);
 
-			return res.status(403).send(htmlError);
-		}
+            return res.status(403).send(htmlError);
+        }
 
-		next();
+        next();
 
-	};
+    };
 
 }

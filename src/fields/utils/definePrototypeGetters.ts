@@ -4,7 +4,7 @@
  * @param  {string}   key    The key the getter should be at
  * @param  {function} getter The getter itself
  */
-function definePrototypeGetter (Constructor, key, getter) {
+export function definePrototypeGetter (Constructor, key, getter) {
 	Object.defineProperty(Constructor.prototype, key, {
 		get: getter,
 	});
@@ -15,11 +15,8 @@ function definePrototypeGetter (Constructor, key, getter) {
  *
  * @param  {object} getterObj The getters with a getter at the key
  */
-function definePrototypeGetters (Constructor, getterObj) {
+export function definePrototypeGetters (Constructor, getterObj) {
 	Object.keys(getterObj).map(function (key) {
 		definePrototypeGetter(Constructor, key, getterObj[key]);
 	});
 }
-
-export = definePrototypeGetters;
-module.definePrototypeGetter = definePrototypeGetter;

@@ -1,4 +1,4 @@
-function signout (req, res) {
+export function signout (req, res) {
 	const keystone = req.keystone;
 	if (!keystone.security.csrf.validate(req)) {
 		return res.apiError(403, 'invalid csrf');
@@ -17,5 +17,3 @@ function signout (req, res) {
 		});
 	});
 }
-
-export default signout;

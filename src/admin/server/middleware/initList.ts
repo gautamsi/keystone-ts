@@ -1,4 +1,4 @@
-export default function initList (req, res, next) {
+export function initListMiddleware (req, res, next) {
 	const keystone = req.keystone;
 	req.list = keystone.list(req.params.list);
 	if (!req.list) {

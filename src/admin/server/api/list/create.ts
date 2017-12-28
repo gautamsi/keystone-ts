@@ -1,4 +1,4 @@
-export default function (req, res) {
+export function create(req, res) {
 	const keystone = req.keystone;
 	if (!keystone.security.csrf.validate(req)) {
 		return res.apiError(403, 'invalid csrf');

@@ -1,4 +1,4 @@
-export = function safeRequire (library, feature) {
+export function safeRequire (library, feature) {
 	try {
 		return require(library);
 	} catch (error) {
