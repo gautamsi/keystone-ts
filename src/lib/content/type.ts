@@ -3,13 +3,8 @@
  * @api private
  */
 
-const Type = function (path, options) { // eslint-disable-line no-unused-vars
-	// TODO
-};
-
-
-/*!
- * Export class
- */
-
-export = Type;
+export class Type {
+    constructor(path, options) { // eslint-disable-line no-unused-vars
+        // TODO
+    }
+}

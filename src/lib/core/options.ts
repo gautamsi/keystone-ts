@@ -18,7 +18,7 @@ function isAbsolutePath(value) {
  * Example:
  *     keystone.set('user model', 'User') // sets the 'user model' option to `User`
  */
-export const set = function (key, value?) {
+export function set(key, value?) {
 
     if (arguments.length === 1) {
         return this._options[key];
@@ -97,7 +97,7 @@ export const set = function (key, value?) {
 
     this._options[key] = value;
     return this;
-};
+}
 
 
 /**
@@ -106,7 +106,7 @@ export const set = function (key, value?) {
  * Example:
  *     keystone.options({test: value}) // sets the 'test' option to `value`
  */
-export const options = function (options) {
+export function options(options) {
     if (!arguments.length) {
         return this._options;
     }
@@ -120,7 +120,7 @@ export const options = function (options) {
         }
     }
     return this._options;
-};
+}
 
 
 /**

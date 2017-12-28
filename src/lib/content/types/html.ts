@@ -2,28 +2,16 @@
  * Module dependencies.
  */
 
-const util = require('util');
-const super_ = require('../type');
-
+import { Type } from '../type';
 /**
  * HTML ContentType Constructor
  * @extends Field
  * @api public
  */
+export class Html extends Type {
 
-function html (path, options) {
-	html.super_.call(path, options);
+    constructor(path, options) {
+        super(path, options);
+    }
+
 }
-
-/*!
- * Inherit from Type
- */
-
-util.inherits(html, super_);
-
-
-/*!
- * Export class
- */
-
-export = html;

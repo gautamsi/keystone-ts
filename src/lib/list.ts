@@ -1,177 +1,217 @@
-const _ = require('lodash');
-const utils = require('keystone-utils');
+import { Keystone } from '../../src/keystone';
 
-export = function (keystone) {
+import { Schema } from 'mongoose';
 
-	function List (key, options) {
-		if (!(this instanceof List)) return new List(key, options);
-		this.keystone = keystone;
+import * as _ from 'lodash';
+import * as utils from 'keystone-utils';
 
-		let defaultOptions = {
-			schema: {
-				collection: keystone.prefixModel(key),
-			},
-			noedit: false,
-			nocreate: false,
-			nodelete: false,
-			autocreate: false,
-			sortable: false,
-			hidden: false,
-			track: false,
-			inherits: false,
-			perPage: 100,
-			searchFields: '__name__',
-			searchUsesTextIndex: false,
-			defaultSort: '__default__',
-			defaultColumns: '__name__',
-		};
 
-		// initialFields values are initialised on demand by the getter
-		let initialFields;
+export class List {
+    static keystone: Keystone;
+    _initialFields: any;
+    model: any;
+    fieldTypes: {};
+    relationshipFields: any[];
+    relationships: {};
+    mappings: { name: any; createdBy: any; createdOn: any; modifiedBy: any; modifiedOn: any; };
+    fieldsArray: any[];
+    fields: {};
+    underscoreMethods: {};
+    uiElements: any[];
+    schemaFields: any[];
+    schema: any;
+    path: any;
+    key: any;
+    options: any;
+    _defaultColumns: any;
+    _searchFields: any;
 
-		// Inherit default options from parent list if it exists
-		if (options && options.inherits) {
-			if (options.inherits.options && options.inherits.options.inherits) {
-				throw new Error('Inherited Lists may not contain any inheritance');
-			}
-			defaultOptions = utils.options(defaultOptions, options.inherits.options);
-			if (options.inherits.options.track) {
-				options.track = false;
-			}
-		}
 
-		this.options = utils.options(defaultOptions, options);
 
-		// init properties
-		this.key = key;
-		this.path = this.get('path') || utils.keyToPath(key, true);
-		this.schema = new keystone.mongoose.Schema({}, this.options.schema);
-		this.schemaFields = [];
-		this.uiElements = [];
-		this.underscoreMethods = {};
-		this.fields = {};
-		this.fieldsArray = [];
-		this.fieldTypes = {};
-		this.relationshipFields = [];
-		this.relationships = {};
-		this.mappings = {
-			name: null,
-			createdBy: null,
-			createdOn: null,
-			modifiedBy: null,
-			modifiedOn: null,
-		};
+    // define property getters
 
-		const self = this;
+    get label(): any {
+        return this.get('label') || this.set('label', utils.plural(utils.keyToLabel(this.key)));
+    }
 
-		// init mappings
-		_.forEach(this.options.map, function (val, key) { self.map(key, val); });
+    get singular(): any {
+        return this.get('singular') || this.set('singular', utils.singular(this.label));
+    }
 
-		// define property getters
-		Object.defineProperty(this, 'label', { get: function () {
-			return this.get('label') || this.set('label', utils.plural(utils.keyToLabel(key)));
-		} });
-		Object.defineProperty(this, 'singular', { get: function () {
-			return this.get('singular') || this.set('singular', utils.singular(this.label));
-		} });
-		Object.defineProperty(this, 'plural', { get: function () {
-			return this.get('plural') || this.set('plural', utils.plural(this.singular));
-		} });
-		Object.defineProperty(this, 'namePath', { get: function () {
-			return this.mappings.name || '_id';
-		} });
-		Object.defineProperty(this, 'nameField', { get: function () {
-			return this.fields[this.mappings.name];
-		} });
-		Object.defineProperty(this, 'nameIsVirtual', { get: function () {
-			return this.model.schema.virtuals[this.mappings.name] ? true : false;
-		} });
-		Object.defineProperty(this, 'nameFieldIsFormHeader', { get: function () {
-			return (this.fields[this.mappings.name] && this.fields[this.mappings.name].type === 'text') ? !this.fields[this.mappings.name].noedit : false;
-		} });
-		Object.defineProperty(this, 'nameIsInitial', { get: function () {
-			return (this.fields[this.mappings.name] && this.fields[this.mappings.name].options.initial === undefined);
-		} });
-		Object.defineProperty(this, 'initialFields', { get: function () {
-			return initialFields || (initialFields = _.filter(this.fields, function (i) { return i.initial; }));
-		} });
-		if (this.get('inherits')) {
-			const parentFields = this.get('inherits').schemaFields;
-			this.add.apply(this, parentFields);
-		}
-	}
+    get plural(): any {
+        return this.get('plural') || this.set('plural', utils.plural(this.singular));
+    }
 
-	// TODO: Protect dynamic properties from being accessed until the List
-	// has been registered (otherwise, incomplete schema could be cached)
+    get namePath(): any {
+        return this.mappings.name || '_id';
+    }
 
-	// Search Fields
-	Object.defineProperty(List.prototype, 'searchFields', {
-		get: function () {
-			if (!this._searchFields) {
-				this._searchFields = this.expandPaths(this.get('searchFields'));
-			}
-			return this._searchFields;
-		}, set: function (value) {
-			this.set('searchFields', value);
-			delete this._searchFields;
-		},
-	});
+    get nameField(): any {
+        return this.fields[this.mappings.name];
+    }
 
-	// Default Sort Field
-	Object.defineProperty(List.prototype, 'defaultSort', {
-		get: function () {
-			const ds = this.get('defaultSort');
-			return (ds === '__default__') ? (this.get('sortable') ? 'sortOrder' : this.namePath) : ds;
-		}, set: function (value) {
-			this.set('defaultSort', value);
-		},
-	});
+    get nameIsVirtual(): any {
+        return this.model.schema.virtuals[this.mappings.name] ? true : false;
+    }
 
-	// Default Column Fields
-	Object.defineProperty(List.prototype, 'defaultColumns', {
-		get: function () {
-			if (!this._defaultColumns) {
-				this._defaultColumns = this.expandColumns(this.get('defaultColumns'));
-			}
-			return this._defaultColumns;
-		}, set: function (value) {
-			this.set('defaultColumns', value);
-			delete this._defaultColumns;
-		},
-	});
+    get nameFieldIsFormHeader(): any {
+        return (this.fields[this.mappings.name] && this.fields[this.mappings.name].type === 'text') ? !this.fields[this.mappings.name].noedit : false;
+    }
 
-	// Add prototype methods
-	List.prototype.add = require('./list/add');
-	List.prototype.addFiltersToQuery = require('./list/addFiltersToQuery');
-	List.prototype.addSearchToQuery = require('./list/addSearchToQuery');
-	List.prototype.automap = require('./list/automap');
-	List.prototype.apiForGet = require('./list/apiForGet');
-	List.prototype.expandColumns = require('./list/expandColumns');
-	List.prototype.expandPaths = require('./list/expandPaths');
-	List.prototype.expandSort = require('./list/expandSort');
-	List.prototype.field = require('./list/field');
-	List.prototype.get = List.prototype.set = require('./list/set');
-	List.prototype.getAdminURL = require('./list/getAdminURL');
-	List.prototype.getCSVData = require('./list/getCSVData');
-	List.prototype.getData = require('./list/getData');
-	List.prototype.getDocumentName = require('./list/getDocumentName');
-	List.prototype.getOptions = require('./list/getOptions');
-	List.prototype.getPages = require('./list/getPages');
-	List.prototype.getSearchFilters = require('./list/getSearchFilters');
-	List.prototype.getUniqueValue = require('./list/getUniqueValue');
-	List.prototype.isReserved = require('./list/isReserved');
-	List.prototype.map = require('./list/map');
-	List.prototype.paginate = require('./list/paginate');
-	List.prototype.processFilters = require('./list/processFilters');
-	List.prototype.register = require('./list/register');
-	List.prototype.relationship = require('./list/relationship');
-	List.prototype.selectColumns = require('./list/selectColumns');
-	List.prototype.updateItem = require('./list/updateItem');
-	List.prototype.underscoreMethod = require('./list/underscoreMethod');
-	List.prototype.buildSearchTextIndex = require('./list/buildSearchTextIndex');
-	List.prototype.declaresTextIndex = require('./list/declaresTextIndex');
-	List.prototype.ensureTextIndex = require('./list/ensureTextIndex');
+    get nameIsInitial(): any {
+        return (this.fields[this.mappings.name] && this.fields[this.mappings.name].options.initial === undefined);
+    }
 
-	return List;
+    get initialFields(): any {
+        return this._initialFields || (this._initialFields = _.filter(this.fields, function (i) { return i.initial; }));
+    }
 
+    // TODO: Protect dynamic properties from being accessed until the List
+    // has been registered (otherwise, incomplete schema could be cached)
+
+    // Search Fields
+
+    get searchFields(): any {
+        if (!this._searchFields) {
+            this._searchFields = this.expandPaths(this.get('searchFields'));
+        }
+        return this._searchFields;
+    }
+    set searchFields(value) {
+        this.set('searchFields', value);
+        delete this._searchFields;
+    }
+
+
+    // Default Sort Field
+
+    get defaultSort(): any {
+        const ds = this.get('defaultSort');
+        return (ds === '__default__') ? (this.get('sortable') ? 'sortOrder' : this.namePath) : ds;
+    }
+    set defaultSort(value) {
+        this.set('defaultSort', value);
+    }
+    // Default Column Fields
+
+    get defaultColumns(): any {
+        if (!this._defaultColumns) {
+            this._defaultColumns = this.expandColumns(this.get('defaultColumns'));
+        }
+        return this._defaultColumns;
+    }
+    set defaultColumns(value) {
+        this.set('defaultColumns', value);
+        delete this._defaultColumns;
+    }
+
+
+
+    constructor(key, options) {
+        if (!(this instanceof List)) return new List(key, options);
+
+        let defaultOptions = {
+            schema: {
+                collection: List.keystone.prefixModel(key),
+            },
+            noedit: false,
+            nocreate: false,
+            nodelete: false,
+            autocreate: false,
+            sortable: false,
+            hidden: false,
+            track: false,
+            inherits: false,
+            perPage: 100,
+            searchFields: '__name__',
+            searchUsesTextIndex: false,
+            defaultSort: '__default__',
+            defaultColumns: '__name__',
+        };
+
+        // initialFields values are initialised on demand by the getter
+        let initialFields;
+
+        // Inherit default options from parent list if it exists
+        if (options && options.inherits) {
+            if (options.inherits.options && options.inherits.options.inherits) {
+                throw new Error('Inherited Lists may not contain any inheritance');
+            }
+            defaultOptions = utils.options(defaultOptions, options.inherits.options);
+            if (options.inherits.options.track) {
+                options.track = false;
+            }
+        }
+
+        this.options = utils.options(defaultOptions, options);
+
+        // init properties
+        this.key = key;
+        this.path = this.get('path') || utils.keyToPath(key, true);
+        this.schema = new Schema({}, this.options.schema);
+        this.schemaFields = [];
+        this.uiElements = [];
+        this.underscoreMethods = {};
+        this.fields = {};
+        this.fieldsArray = [];
+        this.fieldTypes = {};
+        this.relationshipFields = [];
+        this.relationships = {};
+        this.mappings = {
+            name: null,
+            createdBy: null,
+            createdOn: null,
+            modifiedBy: null,
+            modifiedOn: null,
+        };
+
+        const self = this;
+
+        // init mappings
+        _.forEach(this.options.map, function (val, key) { self.map(key, val); });
+
+
+        if (this.get('inherits')) {
+            const parentFields = this.get('inherits').schemaFields;
+            this.add.apply(this, parentFields);
+        }
+    }
+
+    static init(keystone: Keystone): typeof List {
+        List.keystone = keystone;
+        return List;
+    }
+
+    // Add prototype methods
+    add = require('./list/add');
+    addFiltersToQuery = require('./list/addFiltersToQuery');
+    addSearchToQuery = require('./list/addSearchToQuery');
+    automap = require('./list/automap');
+    apiForGet = require('./list/apiForGet');
+    expandColumns = require('./list/expandColumns');
+    expandPaths = require('./list/expandPaths');
+    expandSort = require('./list/expandSort');
+    field = require('./list/field');
+    set = require('./list/set');
+    get = this.set;
+    getAdminURL = require('./list/getAdminURL');
+    getCSVData = require('./list/getCSVData');
+    getData = require('./list/getData');
+    getDocumentName = require('./list/getDocumentName');
+    getOptions = require('./list/getOptions');
+    getPages = require('./list/getPages');
+    getSearchFilters = require('./list/getSearchFilters');
+    getUniqueValue = require('./list/getUniqueValue');
+    isReserved = require('./list/isReserved');
+    map = require('./list/map');
+    paginate = require('./list/paginate');
+    processFilters = require('./list/processFilters');
+    register = require('./list/register');
+    relationship = require('./list/relationship');
+    selectColumns = require('./list/selectColumns');
+    updateItem = require('./list/updateItem');
+    underscoreMethod = require('./list/underscoreMethod');
+    buildSearchTextIndex = require('./list/buildSearchTextIndex');
+    declaresTextIndex = require('./list/declaresTextIndex');
+    ensureTextIndex = require('./list/ensureTextIndex');
 }

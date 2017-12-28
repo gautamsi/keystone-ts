@@ -1,2 +1,2 @@
-export const Text = require('./text');
-export const Html = require('./html');
+export { Text } from './text';
+export { Html } from './html';

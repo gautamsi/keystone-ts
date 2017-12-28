@@ -1,10 +1,12 @@
-const assign = require('object-assign');
-const fs = require('fs-extra');
-const path = require('path');
-const mime = require('mime-types');
-const nameFunctions = require('keystone-storage-namefunctions');
+import * as assign from 'object-assign';
+import * as fs from 'fs-extra';
+import * as path from 'path';
+import * as mime from 'mime-types';
+import * as nameFunctions from 'keystone-storage-namefunctions';
+import { FSAdapter } from './adapters/fs';
 
-const debug = require('debug')('keystone:storage:adapter:fs');
+import * as _debug from 'debug';
+const debug = _debug('keystone:storage:adapter:fs');
 
 /**
 	The Adapter Compatibility Level is used to ensure that provided adapters
@@ -23,12 +25,12 @@ const ADAPTER_COMPATIBILITY_LEVEL = 1;
 	Storage Adapters can specify additional schema properties.
 */
 const SCHEMA_TYPES = {
-//	filename: String,       // the filename, without the full path
-	size: Number,           // the size of the file
-	mimetype: String,       // the mime type of the file
-	path: String,           // the path (e.g directory) the file is stored in; not the full path to the file
-	originalname: String,   // the original (uploaded) name of the file; useful when filename generated
-	url: String,            // publicly accessible URL of the stored file
+    // filename: String,       // the filename, without the full path
+    size: Number,           // the size of the file
+    mimetype: String,       // the mime type of the file
+    path: String,           // the path (e.g directory) the file is stored in; not the full path to the file
+    originalname: String,   // the original (uploaded) name of the file; useful when filename generated
+    url: String,            // publicly accessible URL of the stored file
 };
 
 /**
@@ -37,12 +39,12 @@ const SCHEMA_TYPES = {
 	adapter must use the default schema implementation)
 */
 const SCHEMA_FIELD_DEFAULTS = {
-//	filename: true,
-	size: true,
-	mimetype: true,
-	path: false,
-	originalname: false,
-	url: false,
+    // filename: true,
+    size: true,
+    mimetype: true,
+    path: false,
+    originalname: false,
+    url: false,
 };
 
 // TODO: We could support custom schema mappings for backwards compatibilty
@@ -54,123 +56,130 @@ const SCHEMA_FIELD_DEFAULTS = {
 	Creates a new Keystone Storage instance, and validates and initialises the
 	specified adapter. Storage schema is configured from the adapter or default.
 */
-function Storage (options) {
-	// we're going to mutate options so get a clean copy of it
-	options = assign({}, options);
+export class Storage {
+    adapter: any;
+    schema: any;
 
-	const AdapterType = options.adapter;
-	delete options.adapter;
 
-	if (typeof AdapterType !== 'function') {
-		throw new Error('Invalid Storage Adapter\n'
-			+ 'The storage adapter specified is not a function. Did you '
-			+ 'require the right package?\n');
-	}
+    constructor(options) {
+        // we're going to mutate options so get a clean copy of it
+        options = assign({}, options);
 
-	debug('Initialising Storage with adapter ' + AdapterType.name);
+        const AdapterType = options.adapter;
+        delete options.adapter;
 
-	// ensure the adapter compatibilityLevel of the adapter matches
-	if (AdapterType.compatibilityLevel !== ADAPTER_COMPATIBILITY_LEVEL) {
-		throw new Error('Incompatible Storage Adapter\n'
-			+ 'The storage adapter specified (' + AdapterType.name + ') '
-			+ 'does not match the compatibility level required for this '
-			+ 'version of Keystone.\n');
-	}
+        if (typeof AdapterType !== 'function') {
+            throw new Error('Invalid Storage Adapter\n'
+                + 'The storage adapter specified is not a function. Did you '
+                + 'require the right package?\n');
+        }
 
-	// assign ensures the default schema constant isn't exposed as a property
-	const schemaFields = assign({}, SCHEMA_FIELD_DEFAULTS, AdapterType.SCHEMA_FIELD_DEFAULTS, options.schema);
-	delete options.schema;
+        debug('Initialising Storage with adapter ' + AdapterType.name);
 
-	// Copy requested fields into local schema.
-	const schema = this.schema = {};
-	for (const path in schemaFields) {
-		if (!schemaFields[path]) continue;
+        // ensure the adapter compatibilityLevel of the adapter matches
+        if (AdapterType.compatibilityLevel !== ADAPTER_COMPATIBILITY_LEVEL) {
+            throw new Error('Incompatible Storage Adapter\n'
+                + 'The storage adapter specified (' + AdapterType.name + ') '
+                + 'does not match the compatibility level required for this '
+                + 'version of Keystone.\n');
+        }
 
-		const type = AdapterType.SCHEMA_TYPES[path] || SCHEMA_TYPES[path];
-		if (!type) throw Error('Unknown type for requested schema field ' + path);
-		schema[path] = type;
-	}
+        // assign ensures the default schema constant isn't exposed as a property
+        const schemaFields = assign({}, SCHEMA_FIELD_DEFAULTS, AdapterType.SCHEMA_FIELD_DEFAULTS, options.schema);
+        delete options.schema;
 
-	// ensure Storage schema features are supported by the Adapter
-	if (schema.url && typeof AdapterType.prototype.getFileURL !== 'function') {
-		throw Error('URL schema field is not supported by the ' + AdapterType.name + ' adapter');
-	}
+        // Copy requested fields into local schema.
+        const schema: any = this.schema = {};
+        for (const path in schemaFields) {
+            if (!schemaFields[path]) continue;
 
-	// create the adapter
-	this.adapter = new AdapterType(options, schema);
+            const type = AdapterType.SCHEMA_TYPES[path] || SCHEMA_TYPES[path];
+            if (!type) throw Error('Unknown type for requested schema field ' + path);
+            schema[path] = type;
+        }
+
+        // ensure Storage schema features are supported by the Adapter
+        if (schema.url && typeof AdapterType.prototype.getFileURL !== 'function') {
+            throw Error('URL schema field is not supported by the ' + AdapterType.name + ' adapter');
+        }
+
+        // create the adapter
+        this.adapter = new AdapterType(options, schema);
+    }
+
+    uploadFile(file, callback) {
+        const self = this;
+
+        // Ensure a file object has been provided
+        if (!file) return callback(Error('Cannot upload file - No file object provided'));
+
+        // The path to the file is required
+        if (!file.path) return callback(Error('Cannot upload file - No source path'));
+
+        normalizeFile(file, this.schema, function (err, file) {
+            if (err) return callback(err);
+            self.adapter.uploadFile(file, function (err, result) {
+                if (err) return callback(err);
+                if (self.schema.url && self.adapter.getFileURL) {
+                    result.url = self.adapter.getFileURL(result);
+                }
+                callback(null, result);
+            });
+        });
+    }
+
+    /**
+        Removes a stored file by passing the field value to the adapter.
+    */
+    removeFile(value, callback) {
+        this.adapter.removeFile(value, callback);
+    }
+
+    /*
+        Built-in Adapters
+    */
+    static Adapters = {
+        FS: FSAdapter
+    };
+
 }
 
 // Helper function for figuring out the size of a file before uploading it.
-function getSize (file, callback) {
-	if (file.size) return callback(null, file.size);
+function getSize(file, callback) {
+    if (file.size) return callback(null, file.size);
 
-	fs.stat(file.path, function (err, stats) {
-		if (!stats.isFile()) {
-			return callback(Error(file.path + ' is not a file'));
-		}
+    fs.stat(file.path, function (err, stats) {
+        if (!stats.isFile()) {
+            return callback(Error(file.path + ' is not a file'));
+        }
 
-		callback(err, stats ? stats.size : null);
-	});
+        callback(err, stats ? stats.size : null);
+    });
 }
 
 // Helper to fill out missing fields in the file object
-function normalizeFile (file, schema, callback) {
-	// Detect required information if it wasn't provided by inspecting the
-	// file stored at file.path
-	if (schema.mimetype && !file.mimetype) file.mimetype = mime(file.path);
+function normalizeFile(file, schema, callback) {
+    // Detect required information if it wasn't provided by inspecting the
+    // file stored at file.path
+    if (schema.mimetype && !file.mimetype) file.mimetype = mime(file.path);
 
-	if (!file.originalname) {
-		file.originalname = file.name
-			|| (file.path) ? path.parse(file.path).base : 'unnamedfile';
-	}
+    if (!file.originalname) {
+        file.originalname = file.name
+            || (file.path) ? path.parse(file.path).base : 'unnamedfile';
+    }
 
-	if (schema.size && !file.size) {
-		getSize(file, function (err, size) {
-			if (err) return callback(err);
-			file.size = size;
-			callback(null, file);
-		});
-	} else callback(null, file);
+    if (schema.size && !file.size) {
+        getSize(file, function (err, size) {
+            if (err) return callback(err);
+            file.size = size;
+            callback(null, file);
+        });
+    } else callback(null, file);
 }
 
 /**
 	Uploads a new file via the adapter, then decorates the result with the
 	public url for the file. The result is what is saved back to the field.
 */
-Storage.prototype.uploadFile = function (file, callback) {
-	const self = this;
 
-	// Ensure a file object has been provided
-	if (!file) return callback(Error('Cannot upload file - No file object provided'));
-
-	// The path to the file is required
-	if (!file.path) return callback(Error('Cannot upload file - No source path'));
-
-	normalizeFile(file, this.schema, function (err, file) {
-		if (err) return callback(err);
-		self.adapter.uploadFile(file, function (err, result) {
-			if (err) return callback(err);
-			if (self.schema.url && self.adapter.getFileURL) {
-				result.url = self.adapter.getFileURL(result);
-			}
-			callback(null, result);
-		});
-	});
-};
-
-/**
-	Removes a stored file by passing the field value to the adapter.
-*/
-Storage.prototype.removeFile = function (value, callback) {
-	this.adapter.removeFile(value, callback);
-};
-
-/*
-	Built-in Adapters
-*/
-Storage.Adapters = {};
-Storage.Adapters.FS = require('./adapters/fs');
 assign(Storage, nameFunctions);
-
-
-export = Storage;
