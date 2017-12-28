@@ -1,15 +1,13 @@
-const crypto = require('crypto');
-const forEach = require('lodash/forEach');
+import * as crypto from 'crypto';
+import * as forEach from 'lodash/forEach');
 
-function createKeystoneHash () {
-	const hash = crypto.createHash('md5');
-	hash.update(this.version);
+export function createKeystoneHash() {
+    const hash = crypto.createHash('md5');
+    hash.update(this.version);
 
-	forEach(this.lists, function (list, key) {
-		hash.update(JSON.stringify(list.getOptions()));
-	});
+    forEach(this.lists, function (list, key) {
+        hash.update(JSON.stringify(list.getOptions()));
+    });
 
-	return hash.digest('hex').slice(0, 6);
+    return hash.digest('hex').slice(0, 6);
 }
-
-export = createKeystoneHash;

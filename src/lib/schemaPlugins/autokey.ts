@@ -1,7 +1,7 @@
-const _ = require('lodash');
-const utils = require('keystone-utils');
+import * as _ from 'lodash';
+import * as utils from 'keystone-utils';
 
-export = function autokey () {
+export function autokey () {
 
 	const autokey = this.autokey = _.clone(this.get('autokey'));
 	const def = {};

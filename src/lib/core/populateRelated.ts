@@ -1,4 +1,4 @@
-const async = require('async');
+import * as async from 'async';
 
 /**
  * Populates relationships on a document or array of documents
@@ -9,7 +9,7 @@ const async = require('async');
  * @api public
  */
 
-export = function populateRelated (docs, relationships, callback) {
+export function populateRelated (docs, relationships, callback) {
 	if (Array.isArray(docs)) {
 		async.each(docs, function (doc, done) {
 			doc.populateRelated(relationships, done);

@@ -1,4 +1,4 @@
-export = function initExpressApp (customApp) {
+export function initExpressApp (customApp) {
 	if (this.app) return this;
 	this.initDatabaseConfig();
 	this.initExpressSession(this.mongoose);

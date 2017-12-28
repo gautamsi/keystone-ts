@@ -1,6 +1,7 @@
-const debug = require('debug')('keystone:core:openDatabaseConnection');
+import * as _debug from 'debug';
+const debug = _debug('keystone:core:openDatabaseConnection');
 
-export = function openDatabaseConnection (callback) {
+export function openDatabaseConnection (callback) {
 
 	const keystone = this;
 	let mongoConnectionOpen = false;

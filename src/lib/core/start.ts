@@ -15,11 +15,11 @@
  * @api public
  */
 
-const async = require('async');
+import * as async from 'async';
 
 const dashes = '\n------------------------------------------------\n';
 
-function start (events) {
+export function start (events) {
 
 	if (typeof events === 'function') {
 		events = { onStart: events };
@@ -96,5 +96,3 @@ function start (events) {
 
 	return this;
 }
-
-export = start;

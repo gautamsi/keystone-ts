@@ -1,6 +1,6 @@
-const callerId = require('caller-id');
-const path = require('path');
-const url = require('url');
+import * as callerId from 'caller-id';
+import * as path from 'path';
+import * as url from 'url';
 
 /**
  * This file contains methods specific to dealing with Keystone's options.
@@ -38,7 +38,7 @@ export function set(key, value?) {
                     cloud_name: parts.host,
                     api_key: auth[0],
                     api_secret: auth[1],
-                    private_cdn: parts.pathname != undefined,
+                    private_cdn: parts.pathname !== undefined,
                     secure_distribution: parts.pathname && parts.pathname.substring(1),
                 };
             }

@@ -1,6 +1,6 @@
-const utils = require('keystone-utils');
+import * as utils from 'keystone-utils';
 
-export = function initDatabaseConfig () {
+export function initDatabaseConfig () {
 	if (!this.get('mongo')) {
 		const dbName = this.get('db name')
 			|| utils.slug(this.get('name'));

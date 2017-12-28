@@ -20,7 +20,7 @@ import * as path from 'path';
  * @api public
  */
 
-function dispatchImporter(rel__dirname) {
+export function dispatchImporter(rel__dirname) {
 
     function importer(from) {
         debug('importing ', from);
@@ -52,4 +52,3 @@ function dispatchImporter(rel__dirname) {
 
     return importer;
 }
-export = dispatchImporter;
