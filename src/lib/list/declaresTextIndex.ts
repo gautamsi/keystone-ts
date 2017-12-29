@@ -3,7 +3,7 @@
  * Note this doesn't check for text indexes that exist in the DB
  */
 
-function declaresTextIndex () {
+export function declaresTextIndex () {
 	const indexes = this.schema.indexes();
 
 	for (let i = 0; i < indexes.length; i++) {
@@ -17,5 +17,3 @@ function declaresTextIndex () {
 	}
 	return false;
 }
-
-export = declaresTextIndex;

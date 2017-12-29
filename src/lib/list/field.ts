@@ -2,7 +2,7 @@
  * Creates a new field at the specified path, with the provided options.
  * If no options are provides, returns the field at the specified path.
  */
-function field (path, options) {
+export function field (path, options) {
 	const Field = this.keystone.Field;
 	if (arguments.length === 1) {
 		return this.fields[path];
@@ -50,5 +50,3 @@ function field (path, options) {
 	}
 	return field;
 }
-
-export = field;

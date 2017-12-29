@@ -1,4 +1,5 @@
-const debug = require('debug')('keystone:core:list:ensureTextIndex');
+import * as _debug from 'debug';
+const debug = _debug('keystone:core:list:ensureTextIndex');
 
 // A basic string hashing function
 function hashString (string) {
@@ -25,7 +26,7 @@ function hashString (string) {
  * ensureIndexes() call or the connection error listener.
  * Or at least that's what was happening for me (mongoose v3.8.40, mongodb v1.4.38)..
  */
-function ensureTextIndex (callback) {
+export function ensureTextIndex (callback) {
 	const list = this;
 	const collection = list.model.collection;
 
@@ -102,5 +103,3 @@ function ensureTextIndex (callback) {
 		createNewIndex();
 	});
 }
-
-export = ensureTextIndex;

@@ -2,10 +2,10 @@
  * Gets the data from an Item ready to be serialised for client-side use, as
  * used by the React components and the Admin API
  */
-const listToArray = require('list-to-array');
+import * as listToArray from 'list-to-array';
 
-function getData (item, fields, expandRelationshipFields) {
-	const data = {
+export function getData (item, fields, expandRelationshipFields) {
+	const data: any = {
 		id: item.id,
 		name: this.getDocumentName(item),
 	};
@@ -41,5 +41,3 @@ function getData (item, fields, expandRelationshipFields) {
 	}
 	return data;
 }
-
-export = getData;

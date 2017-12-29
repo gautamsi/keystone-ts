@@ -4,7 +4,7 @@
  * @param {Query} query
  * @param {Array} columns
  */
-function selectColumns (q, cols) {
+export function selectColumns (q, cols) {
 	// Populate relationship columns
 	const select = [];
 	const populate = {};
@@ -25,5 +25,3 @@ function selectColumns (q, cols) {
 		}
 	}
 }
-
-export = selectColumns;

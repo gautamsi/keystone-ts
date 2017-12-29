@@ -1,9 +1,9 @@
-const utils = require('keystone-utils');
+import * as utils from 'keystone-utils';
 
 /**
  * Registers relationships to this list defined on others
  */
-function relationship (def) {
+export function relationship (def) {
 	const keystone = this.keystone;
 	if (arguments.length > 1) {
 		for (let i = 0; i < arguments.length; i++) {
@@ -36,5 +36,3 @@ function relationship (def) {
 	this.relationships[def.path] = def;
 	return this;
 }
-
-export = relationship;

@@ -1,6 +1,6 @@
-const listToArray = require('list-to-array');
+import * as listToArray from 'list-to-array';
 
-function expandPaths (paths) {
+export function expandPaths (paths) {
 	return listToArray(paths).map(function (path) {
 		if (path === '__name__') {
 			path = this.mappings.name;
@@ -11,5 +11,3 @@ function expandPaths (paths) {
 		};
 	}, this);
 }
-
-export = expandPaths;

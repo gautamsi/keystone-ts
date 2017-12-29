@@ -4,7 +4,7 @@
  * @param {Number} the maximum number pages to display in the pagination
  * @param {Object} page options
  */
-function getPages (options, maxPages) {
+export function getPages (options, maxPages) {
 	const surround = Math.floor(maxPages / 2);
 	let firstPage = maxPages ? Math.max(1, options.currentPage - surround) : 1;
 	const padRight = Math.max(((options.currentPage - surround) - 1) * -1, 0);
@@ -24,5 +24,3 @@ function getPages (options, maxPages) {
 		options.pages.push('...');
 	}
 }
-
-export = getPages;

@@ -7,8 +7,6 @@
  *
  * @param {Object} item
  */
-function getAdminURL (item) {
+export function getAdminURL (item) {
 	return '/' + this.keystone.get('admin path') + '/' + this.path + (item ? '/' + item.id : '');
 }
-
-export = getAdminURL;

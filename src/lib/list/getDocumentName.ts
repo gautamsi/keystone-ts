@@ -1,4 +1,4 @@
-const utils = require('keystone-utils');
+import * as utils from 'keystone-utils';
 
 /**
  * Gets the name of the provided document from the correct path
@@ -9,12 +9,10 @@ const utils = require('keystone-utils');
  * @param {Object} item
  * @param {Boolean} escape - causes HTML entities to be encoded
  */
-function getDocumentName (doc, escape) {
+export function getDocumentName (doc, escape) {
 	// console.log('getting document name for ' + doc.id, 'nameField: ' + this.nameField, 'namePath: ' + this.namePath);
 	// console.log('raw name value: ', doc.get(this.namePath));
 	// if (this.nameField) console.log('formatted name value: ', this.nameField.format(doc));
 	const name = String(this.nameField ? this.nameField.format(doc) : doc.get(this.namePath));
 	return (escape) ? utils.encodeHTMLEntities(name) : name;
 }
-
-export = getDocumentName;

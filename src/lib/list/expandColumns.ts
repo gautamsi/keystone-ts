@@ -1,4 +1,5 @@
-const utils = require('keystone-utils');
+import * as utils from 'keystone-utils';
+import * as _ from 'lodash';
 
 /**
  * Expands a comma-separated string or array of columns into valid column objects.
@@ -15,7 +16,7 @@ const utils = require('keystone-utils');
  * The field or path for the name of the item (defaults to ID if not set or detected)
  * is automatically prepended if not explicitly included.
  */
-function expandColumns (cols) {
+export function expandColumns (cols) {
 	if (typeof cols === 'string') {
 		cols = cols.split(',');
 	}
@@ -70,7 +71,7 @@ function expandColumns (cols) {
 		return col;
 	};
 	for (let i = 0; i < cols.length; i++) {
-		const def = {};
+		const def: any = {};
 		if (typeof cols[i] === 'string') {
 			let parts = cols[i].trim().split('|');
 			def.width = parts[1] || false;
@@ -94,5 +95,3 @@ function expandColumns (cols) {
 	}
 	return expanded;
 }
-
-export = expandColumns;

@@ -1,5 +1,6 @@
-const assign = require('object-assign');
-const debug = require('debug')('keystone:core:list:addFiltersToQuery');
+import * as assign from 'object-assign';
+import * as _debug from 'debug';
+const debug = _debug('keystone:core:list:addFiltersToQuery');
 
 function combineQueries (a, b) {
 	if (a.$or && b.$or) {
@@ -14,7 +15,7 @@ function combineQueries (a, b) {
 	return assign(a, b);
 }
 
-function addFiltersToQuery (filters) {
+export function addFiltersToQuery (filters) {
 	const fields = Object.keys(this.fields);
 	const query = {};
 	fields.forEach(function (path) {
@@ -26,5 +27,3 @@ function addFiltersToQuery (filters) {
 	debug('Adding filters to query, returned:', query);
 	return query;
 }
-
-export = addFiltersToQuery;

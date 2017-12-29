@@ -1,11 +1,11 @@
-const _ = require('lodash');
-const utils = require('keystone-utils');
+import * as _ from 'lodash';
+import * as utils from 'keystone-utils';
 
 /**
  * Adds one or more fields to the List
  * Based on Mongoose's Schema.add
  */
-function add () {
+export function add () {
 	const add = function (obj, prefix) {
 		prefix = prefix || '';
 		const keys = Object.keys(obj);
@@ -78,5 +78,3 @@ function add () {
 
 	return this;
 }
-
-export = add;

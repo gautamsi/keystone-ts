@@ -1,5 +1,5 @@
 import { Keystone } from '../../src/keystone';
-
+import { listMethods } from './list/listMethods';
 import { Schema } from 'mongoose';
 
 import * as _ from 'lodash';
@@ -183,35 +183,35 @@ export class List {
     }
 
     // Add prototype methods
-    add = require('./list/add');
-    addFiltersToQuery = require('./list/addFiltersToQuery');
-    addSearchToQuery = require('./list/addSearchToQuery');
-    automap = require('./list/automap');
-    apiForGet = require('./list/apiForGet');
-    expandColumns = require('./list/expandColumns');
-    expandPaths = require('./list/expandPaths');
-    expandSort = require('./list/expandSort');
-    field = require('./list/field');
-    set = require('./list/set');
+    add = listMethods.add.bind(this);
+    addFiltersToQuery = listMethods.addFiltersToQuery.bind(this);
+    addSearchToQuery = listMethods.addSearchToQuery.bind(this);
+    automap = listMethods.automap.bind(this);
+    apiForGet = listMethods.apiForGet.bind(this);
+    expandColumns = listMethods.expandColumns.bind(this);
+    expandPaths = listMethods.expandPaths.bind(this);
+    expandSort = listMethods.expandSort.bind(this);
+    field = listMethods.field.bind(this);
+    set = listMethods.set.bind(this);
     get = this.set;
-    getAdminURL = require('./list/getAdminURL');
-    getCSVData = require('./list/getCSVData');
-    getData = require('./list/getData');
-    getDocumentName = require('./list/getDocumentName');
-    getOptions = require('./list/getOptions');
-    getPages = require('./list/getPages');
-    getSearchFilters = require('./list/getSearchFilters');
-    getUniqueValue = require('./list/getUniqueValue');
-    isReserved = require('./list/isReserved');
-    map = require('./list/map');
-    paginate = require('./list/paginate');
-    processFilters = require('./list/processFilters');
-    register = require('./list/register');
-    relationship = require('./list/relationship');
-    selectColumns = require('./list/selectColumns');
-    updateItem = require('./list/updateItem');
-    underscoreMethod = require('./list/underscoreMethod');
-    buildSearchTextIndex = require('./list/buildSearchTextIndex');
-    declaresTextIndex = require('./list/declaresTextIndex');
-    ensureTextIndex = require('./list/ensureTextIndex');
+    getAdminURL = listMethods.getAdminURL.bind(this);
+    getCSVData = listMethods.getCSVData.bind(this);
+    getData = listMethods.getData.bind(this);
+    getDocumentName = listMethods.getDocumentName.bind(this);
+    getOptions = listMethods.getOptions.bind(this);
+    getPages = listMethods.getPages.bind(this);
+    getSearchFilters = listMethods.getSearchFilters.bind(this);
+    getUniqueValue = listMethods.getUniqueValue.bind(this);
+    isReserved = listMethods.isReserved.bind(this);
+    map = listMethods.map.bind(this);
+    paginate = listMethods.paginate.bind(this);
+    processFilters = listMethods.processFilters.bind(this);
+    register = listMethods.register.bind(this);
+    relationship = listMethods.relationship.bind(this);
+    selectColumns = listMethods.selectColumns.bind(this);
+    updateItem = listMethods.updateItem.bind(this);
+    underscoreMethod = listMethods.underscoreMethod.bind(this);
+    buildSearchTextIndex = listMethods.buildSearchTextIndex.bind(this);
+    declaresTextIndex = listMethods.declaresTextIndex.bind(this);
+    ensureTextIndex = listMethods.ensureTextIndex.bind(this);
 }

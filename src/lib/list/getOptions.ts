@@ -1,9 +1,9 @@
-const _ = require('lodash');
+import * as _ from 'lodash';
 
 /**
  * Gets the options for the List, as used by the React components
  */
-function getOptions () {
+export function getOptions () {
 	const ops = {
 		autocreate: this.options.autocreate,
 		autokey: this.autokey,
@@ -61,5 +61,3 @@ function getOptions () {
 	});
 	return ops;
 }
-
-export = getOptions;

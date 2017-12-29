@@ -33,7 +33,7 @@ An object of additional `where` conditions to add to the `query`
 A function that transforms the object before it is sent as JSON.
 */
 
-export = function apiForGet (options) {
+export function apiForGet (options) {
 	const idParam = options.id || 'id';
 	const List = this;
 	return function (req, res) {

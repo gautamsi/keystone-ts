@@ -2,9 +2,9 @@ const listToArray = require('list-to-array');
 
 function truthy (i) { return i; }
 
-function expandSort (input) {
+export function expandSort (input) {
 	const fields = this.fields;
-	const sort = {
+	const sort: any = {
 		rawInput: input || this.defaultSort,
 		isDefaultSort: false,
 	};
@@ -37,5 +37,3 @@ function expandSort (input) {
 	}).join(' ');
 	return sort;
 }
-
-export = expandSort;

@@ -2,7 +2,7 @@
  * Returns either false if the list has no search fields defined or a structure
  * describing the text index that should exist.
  */
-function buildSearchTextIndex () {
+export function buildSearchTextIndex () {
 	const idxDef = {};
 
 	for (let i = 0; i < this.searchFields.length; i++) {
@@ -31,5 +31,3 @@ function buildSearchTextIndex () {
 	// debug('text index for \'' + this.key + '\':', idxDef);
 	return Object.keys(idxDef).length > 0 ? idxDef : false;
 }
-
-export = buildSearchTextIndex;

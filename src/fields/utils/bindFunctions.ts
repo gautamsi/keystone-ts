@@ -7,6 +7,6 @@
 		bindFunctions.call(this, ['handleClick', 'handleOther']);
 	}
 */
-export = function bindFunctions (functions) {
+export function bindFunctions (functions) {
 	functions.forEach(f => (this[f] = this[f].bind(this)));
 }

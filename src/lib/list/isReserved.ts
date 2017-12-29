@@ -22,8 +22,6 @@ const reservedPaths = [
 	'valueOf',
 ];
 
-function isReserved (path) {
+export function isReserved (path) {
 	return reservedPaths.indexOf(path) >= 0;
 }
-
-export = isReserved;

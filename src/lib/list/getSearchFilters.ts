@@ -1,8 +1,9 @@
-const _ = require('lodash');
-const moment = require('moment');
-const utils = require('keystone-utils');
+import * as _ from 'lodash';
+import * as moment from 'moment';
+import * as utils from 'keystone-utils';
 
-const debug = require('debug')('keystone:core:list:getSearchFilters');
+import * as _debug from 'debug';
+const debug = _debug('keystone:core:list:getSearchFilters');
 
 /**
  * Gets filters for a Mongoose query that will search for the provided string,
@@ -20,8 +21,8 @@ const debug = require('debug')('keystone:core:list:getSearchFilters');
  * @param {String} query
  * @param {Object} additional filters
  */
-function getSearchFilters (search, add) {
-	let filters = {};
+export function getSearchFilters (search, add) {
+	let filters: any = {};
 	const list = this;
 
 	search = String(search || '').trim();
@@ -242,5 +243,3 @@ function getSearchFilters (search, add) {
 	debug("Applying filters to list '" + list.key + "':", filters);
 	return filters;
 }
-
-export = getSearchFilters;

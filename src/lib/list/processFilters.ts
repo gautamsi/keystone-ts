@@ -1,4 +1,4 @@
-const queryfilterlib = require('queryfilter');
+import * as queryfilterlib from 'queryfilter';
 
 /**
  * Processes a filter string into a filters object
@@ -8,7 +8,7 @@ const queryfilterlib = require('queryfilter');
  *
  * @param {String} filters
  */
-function processFilters (q) {
+export function processFilters (q) {
 	const list = this;
 	const filters = {};
 	queryfilterlib.QueryFilters.create(q).getFilters().forEach(function (filter) {
@@ -18,5 +18,3 @@ function processFilters (q) {
 	});
 	return filters;
 }
-
-export = processFilters;

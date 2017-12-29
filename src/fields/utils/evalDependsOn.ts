@@ -1,4 +1,4 @@
-const ExMatch = require('expression-match'); // Matches objects with expressions
+import * as ExMatch from 'expression-match'; // Matches objects with expressions
 
 /**
  * Checks if something is an object

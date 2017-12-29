@@ -16,7 +16,7 @@
  * @param {Number} the maximum number of attempts (optional, defaults to 10)
  * @param {Function} callback(err, uniqueValue)
  */
-function getUniqueValue (path, generator, limit, callback) {
+export function getUniqueValue (path, generator, limit, callback) {
 	const model = this.model;
 	let count = 0;
 	let value;
@@ -44,5 +44,3 @@ function getUniqueValue (path, generator, limit, callback) {
 	};
 	check();
 }
-
-export = getUniqueValue;

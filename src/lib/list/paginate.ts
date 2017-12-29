@@ -13,7 +13,7 @@
  * @param {Object} options
  * @param {Function} callback (optional)
  */
-function paginate (options, callback) {
+export function paginate (options, callback) {
 	const list = this;
 	const model = this.model;
 
@@ -88,5 +88,3 @@ function paginate (options, callback) {
 		return query;
 	}
 }
-
-export = paginate;
