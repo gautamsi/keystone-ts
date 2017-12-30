@@ -2,10 +2,10 @@
  * Render a header for a popout
  */
 
-import React from 'react';
-import Transition from 'react-addons-css-transition-group';
+import * as React from 'react';
+import * as Transition from 'react-addons-css-transition-group';
 
-const PopoutHeader = React.createClass({
+export const PopoutHeader = React.createClass({
 	displayName: 'PopoutHeader',
 	propTypes: {
 		leftAction: React.PropTypes.func,
@@ -53,5 +53,3 @@ const PopoutHeader = React.createClass({
 		);
 	},
 });
-
-export = PopoutHeader;

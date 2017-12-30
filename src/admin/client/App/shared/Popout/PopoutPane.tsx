@@ -2,11 +2,11 @@
  * Render a popout pane, calls props.onLayout when the component mounts
  */
 
-import React from 'react';
-import blacklist from 'blacklist';
-import classnames from 'classnames';
+import * as React from 'react';
+import * as blacklist from 'blacklist';
+import * as classnames from 'classnames';
 
-let PopoutPane = React.createClass({
+export const PopoutPane = React.createClass({
 	displayName: 'PopoutPane',
 	propTypes: {
 		children: React.PropTypes.node.isRequired,
@@ -30,5 +30,3 @@ let PopoutPane = React.createClass({
 		);
 	},
 });
-
-export = PopoutPane;

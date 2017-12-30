@@ -1,6 +1,6 @@
 require('babel-polyfill');
 
-import demand from 'must';
+import * as demand from 'must';
 import { evalQueryParams, updateParams, parseQueryParams, urlUpdate } from '../queryParamsSagas';
 
 import { put, call } from 'redux-saga/effects';

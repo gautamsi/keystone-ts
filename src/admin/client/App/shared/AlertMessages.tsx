@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Alert } from 'elemental';
 
 import { upcase } from '../../utils/string';
@@ -17,81 +17,79 @@ import { upcase } from '../../utils/string';
  *   based on their type. For example: validation errors should be displayed next
  *   to each invalid field and signin errors should promt the user to sign in.
  */
-let AlertMessages = React.createClass({
-	displayName: 'AlertMessages',
-	propTypes: {
-		alerts: React.PropTypes.shape({
-			error: React.PropTypes.Object,
-			success: React.PropTypes.Object,
-		}),
-	},
-	getDefaultProps () {
-		return {
-			alerts: {},
-		};
-	},
-	renderValidationErrors () {
-		let errors = this.props.alerts.error.detail;
-		if (errors.name === 'ValidationError') {
-			errors = errors.errors;
-		}
-		let errorCount = Object.keys(errors).length;
-		let alertContent;
-		let messages = Object.keys(errors).map((path) => {
-			if (errorCount > 1) {
-				return (
-					<li key={path}>
-						{upcase(errors[path].error || errors[path].message)}
-					</li>
-				);
-			} else {
-				return (
-					<div key={path}>
-						{upcase(errors[path].error || errors[path].message)}
-					</div>
-				);
-			}
-		});
+export const AlertMessages = React.createClass({
+    displayName: 'AlertMessages',
+    propTypes: {
+        alerts: React.PropTypes.shape({
+            error: React.PropTypes.object,
+            success: React.PropTypes.object,
+        }),
+    },
+    getDefaultProps() {
+        return {
+            alerts: {},
+        };
+    },
+    renderValidationErrors() {
+        let errors = this.props.alerts.error.detail;
+        if (errors.name === 'ValidationError') {
+            errors = errors.errors;
+        }
+        let errorCount = Object.keys(errors).length;
+        let alertContent;
+        let messages = Object.keys(errors).map((path) => {
+            if (errorCount > 1) {
+                return (
+                    <li key={path}>
+                        {upcase(errors[path].error || errors[path].message)}
+                    </li>
+                );
+            } else {
+                return (
+                    <div key={path}>
+                        {upcase(errors[path].error || errors[path].message)}
+                    </div>
+                );
+            }
+        });
 
-		if (errorCount > 1) {
-			alertContent = (
-				<div>
-					<h4>There were {errorCount} errors creating the new item:</h4>
-					<ul>{messages}</ul>
-				</div>
-			);
-		} else {
-			alertContent = messages;
-		}
+        if (errorCount > 1) {
+            alertContent = (
+                <div>
+                    <h4>There were {errorCount} errors creating the new item:</h4>
+                    <ul>{messages}</ul>
+                </div>
+            );
+        } else {
+            alertContent = messages;
+        }
 
-		return <Alert color="danger">{alertContent}</Alert>;
-	},
-	render () {
-		let { error, success } = this.props.alerts;
+        return <Alert color="danger">{alertContent}</Alert>;
+    },
+    render() {
+        let { error, success } = this.props.alerts;
 
-		if (error) {
-			// Render error alerts
-			switch (error.error) {
-				case 'validation errors':
-					return this.renderValidationErrors();
-				case 'error':
-					if (error.detail.name === 'ValidationError') {
-						return this.renderValidationErrors();
-					} else {
-						return <Alert color="danger">{upcase(error.error)}</Alert>;
-					}
-				default:
-					return <Alert color="danger">{upcase(error.error)}</Alert>;
-			}
-		}
+        if (error) {
+            // Render error alerts
+            switch (error.error) {
+                case 'validation errors':
+                    return this.renderValidationErrors();
+                case 'error':
+                    if (error.detail.name === 'ValidationError') {
+                        return this.renderValidationErrors();
+                    } else {
+                        return <Alert color="danger">{upcase(error.error)}</Alert>;
+                    }
+                default:
+                    return <Alert color="danger">{upcase(error.error)}</Alert>;
+            }
+        }
 
-		if (success) {
-			// Render success alerts
-			return <Alert color="success">{upcase(success.success)}</Alert>;
-		}
+        if (success) {
+            // Render success alerts
+            return <Alert color="success">{upcase(success.success)}</Alert>;
+        }
 
-		return null; // No alerts, render nothing
-	},
+        return null; // No alerts, render nothing
+    },
 });
-
-export = AlertMessages;

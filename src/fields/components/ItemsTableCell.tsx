@@ -1,10 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import classnames from 'classnames';
 
-function ItemsTableCell ({ className, ...props }) {
+export function ItemsTableCell ({ className, ...props }) {
 	props.className = classnames('ItemList__col', className);
 
 	return <td {...props} />;
 }
-
-export = ItemsTableCell;

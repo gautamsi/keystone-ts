@@ -1,5 +1,5 @@
 import Field from '../Field';
-import React from 'react';
+import * as React from 'react';
 import Select from 'react-select';
 import { FormInput } from 'elemental';
 

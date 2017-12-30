@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import CodeMirror from 'codemirror';
 import Field from '../Field';
-import React from 'react';
+import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import { FormInput } from 'elemental';
 import classnames from 'classnames';

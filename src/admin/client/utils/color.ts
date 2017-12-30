@@ -34,7 +34,7 @@ function validateHex (color) {
 	2. combine and add alpha channel
 */
 
-function fade (color, opacity = 100) {
+export function fade (color, opacity = 100) {
 	const decimalFraction = opacity / 100;
 	const hex = validateHex(color);
 
@@ -89,8 +89,8 @@ function shade (color, percent) {
 }
 
 // shade helpers
-const lighten = shade;
-function darken (color, percent) {
+export const lighten = shade;
+export function darken (color, percent) {
 	return shade(color, percent * -1);
 }
 
@@ -109,7 +109,7 @@ function darken (color, percent) {
 	2. combine back into a hex value
 */
 
-function blend (color1, color2, percent) {
+export function blend (color1, color2, percent) {
 	const decimalFraction = percent / 100;
 	const hex1 = validateHex(color1);
 	const hex2 = validateHex(color2);
@@ -132,10 +132,3 @@ function blend (color1, color2, percent) {
 		+ (Math.round((G2 - G1) * decimalFraction) + G1) * 0x100
 		+ (Math.round((B2 - B1) * decimalFraction) + B1)).toString(16).slice(1);
 }
-
-export default {
-	blend,
-	darken,
-	fade,
-	lighten,
-};

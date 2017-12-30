@@ -14,46 +14,44 @@
  * Instead of error, it can also be hilight, info, success or warning
  */
 
-import React from 'react';
-import _ from 'lodash';
+import * as React from 'react';
+import * as _ from 'lodash';
 
-import FlashMessage from './FlashMessage';
+import { FlashMessage } from './FlashMessage';
 
-let FlashMessages = React.createClass({
-	displayName: 'FlashMessages',
-	propTypes: {
-		messages: React.PropTypes.oneOfType([
-			React.PropTypes.bool,
-			React.PropTypes.shape({
-				error: React.PropTypes.array,
-				hilight: React.PropTypes.array,
-				info: React.PropTypes.array,
-				success: React.PropTypes.array,
-				warning: React.PropTypes.array,
-			}),
-		]),
-	},
-	// Render messages by their type
-	renderMessages (messages, type) {
-		if (!messages || !messages.length) return null;
+export const FlashMessages = React.createClass({
+    displayName: 'FlashMessages',
+    propTypes: {
+        messages: React.PropTypes.oneOfType([
+            React.PropTypes.bool,
+            React.PropTypes.shape({
+                error: React.PropTypes.array,
+                hilight: React.PropTypes.array,
+                info: React.PropTypes.array,
+                success: React.PropTypes.array,
+                warning: React.PropTypes.array,
+            }),
+        ]),
+    },
+    // Render messages by their type
+    renderMessages(messages, type) {
+        if (!messages || !messages.length) return null;
 
-		return messages.map((message, i) => {
-			return <FlashMessage message={message} type={type} key={`i${i}`} />;
-		});
-	},
-	// Render the individual messages based on their type
-	renderTypes (types) {
-		return Object.keys(types).map(type => this.renderMessages(types[type], type));
-	},
-	render () {
-		if (!this.props.messages) return null;
+        return messages.map((message, i) => {
+            return <FlashMessage message={message} type={type} key={`i${i}`} />;
+        });
+    },
+    // Render the individual messages based on their type
+    renderTypes(types) {
+        return Object.keys(types).map(type => this.renderMessages(types[type], type));
+    },
+    render() {
+        if (!this.props.messages) return null;
 
-		return (
-			<div className="flash-messages">
-				{_.isPlainObject(this.props.messages) && this.renderTypes(this.props.messages)}
-			</div>
-		);
-	},
+        return (
+            <div className="flash-messages">
+                {_.isPlainObject(this.props.messages) && this.renderTypes(this.props.messages)}
+            </div>
+        );
+    },
 });
-
-export = FlashMessages;

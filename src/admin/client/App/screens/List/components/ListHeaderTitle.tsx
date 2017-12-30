@@ -1,42 +1,40 @@
 import { css } from 'glamor';
-import React, { PropTypes } from 'react';
-import theme from '../../../../theme';
+import * as React from 'react';
+import { theme } from '../../../../theme';
 
-import ListSort from './ListSort';
+import { ListSort } from './ListSort';
 
-function ListHeaderTitle ({
+export function ListHeaderTitle({
 	activeSort,
-	availableColumns,
-	handleSortSelect,
-	title,
-	...props
+    availableColumns,
+    handleSortSelect,
+    title,
+    ...props
 }) {
-	return (
-		<h2 className={css(classes.heading)} {...props}>
-			{title}
-			<ListSort
-				activeSort={activeSort}
-				availableColumns={availableColumns}
-				handleSortSelect={handleSortSelect}
-			/>
-		</h2>
-	);
+    return (
+        <h2 className={css(classes.heading)} {...props}>
+            {title}
+            <ListSort
+                activeSort={activeSort}
+                availableColumns={availableColumns}
+                handleSortSelect={handleSortSelect}
+            />
+        </h2>
+    );
 }
 
-ListHeaderTitle.propTypes = {
-	activeSort: PropTypes.object,
-	availableColumns: PropTypes.arrayOf(PropTypes.object),
-	handleSortSelect: PropTypes.func.isRequired,
-	title: PropTypes.string,
+ListHeaderTitle['propTypes'] = {
+    activeSort: React.PropTypes.object,
+    availableColumns: React.PropTypes.arrayOf(React.PropTypes.object),
+    handleSortSelect: React.PropTypes.func.isRequired,
+    title: React.PropTypes.string,
 };
 
 const classes = {
-	heading: {
-		[`@media (max-width: ${theme.breakpoint.mobileMax})`]: {
-			fontSize: '1.25em',
-			fontWeight: 500,
-		},
-	},
+    heading: {
+        [`@media (max-width: ${theme.breakpoint.mobileMax})`]: {
+            fontSize: '1.25em',
+            fontWeight: 500,
+        },
+    },
 };
-
-export = ListHeaderTitle;

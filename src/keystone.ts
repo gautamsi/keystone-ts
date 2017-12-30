@@ -3,7 +3,6 @@ import * as express from 'express';
 import * as grappling from 'grappling-hook';
 import * as path from 'path';
 import * as utils from 'keystone-utils';
-const importer = require('./lib/core/importer');
 
 import { List } from './lib/list';
 import * as Session from './lib/session';
@@ -11,9 +10,15 @@ import { View } from './lib/view';
 
 import { expandPath, get, getPath, options, set } from './lib/core/options';
 import { retry } from 'async';
-import { Mongoose } from 'mongoose';
+import * as mongoose from 'mongoose';
 import { Content } from './lib/content';
 import { Storage } from './lib/storage';
+import { libCore } from './lib/core';
+import { Email } from './lib/email';
+import * as csrf from './lib/security/csrf';
+import { applyUpdates } from './lib/updates';
+import { api } from './lib/middleware/api';
+import { cors } from './lib/middleware/cors';
 
 /**
  * Don't use process.cwd() as it breaks module encapsulation
@@ -42,7 +47,7 @@ export class Keystone {
 
     // expose express
     express: Express.Application = express;
-    mongoose: Mongoose;
+    mongoose: mongoose.Mongoose;
     middleware: any;
     callHook: Function;
 
@@ -103,13 +108,13 @@ export class Keystone {
         }
 
         // init mongoose
-        this.set('mongoose', require('mongoose'));
-        this.mongoose.Promise = require('es6-promise').Promise;
+        this.set('mongoose', mongoose);
+        this.mongoose.Promise = Promise; // require('es6-promise').Promise;
 
         // Attach middleware packages, bound to this instance
         this.middleware = {
-            api: require('./lib/middleware/api')(this),
-            cors: require('./lib/middleware/cors')(this),
+            api: api(this),
+            cors: cors(this),
         };
 
         Keystone.Field.Types = require('./lib/fieldTypes');
@@ -128,23 +133,23 @@ export class Keystone {
     }
 
     /* Attach core functionality to Keystone.prototype */
-    createItems = require('./lib/core/createItems');
-    createRouter = require('./lib/core/createRouter');
-    getOrphanedLists = require('./lib/core/getOrphanedLists');
-    importer = importer;
-    init = require('./lib/core/init');
-    initDatabaseConfig = require('./lib/core/initDatabaseConfig');
-    initExpressApp = require('./lib/core/initExpressApp');
-    initExpressSession = require('./lib/core/initExpressSession');
-    initNav = require('./lib/core/initNav');
-    list = require('./lib/core/list');
-    openDatabaseConnection = require('./lib/core/openDatabaseConnection');
-    closeDatabaseConnection = require('./lib/core/closeDatabaseConnection');
-    populateRelated = require('./lib/core/populateRelated');
-    redirect = require('./lib/core/redirect');
-    start = require('./lib/core/start');
-    wrapHTMLError = require('./lib/core/wrapHTMLError');
-    createKeystoneHash = require('./lib/core/createKeystoneHash');
+    createItems = libCore.createItems.bind(this);
+    createRouter = libCore.createRouter.bind(this);
+    getOrphanedLists = libCore.getOrphanedLists.bind(this);
+    importer = libCore.importer.bind(this);
+    init = libCore.init.bind(this);
+    initDatabaseConfig = libCore.initDatabaseConfig.bind(this);
+    initExpressApp = libCore.initExpressApp.bind(this);
+    initExpressSession = libCore.initExpressSession.bind(this);
+    initNav = libCore.initNav.bind(this);
+    list = libCore.list.bind(this);
+    openDatabaseConnection = libCore.openDatabaseConnection.bind(this);
+    closeDatabaseConnection = libCore.closeDatabaseConnection.bind(this);
+    populateRelated = libCore.populateRelated.bind(this);
+    redirect = libCore.redirect.bind(this);
+    start = libCore.start.bind(this);
+    wrapHTMLError = libCore.wrapHTMLError.bind(this);
+    createKeystoneHash = libCore.createKeystoneHash.bind(this);
 
     /* Deprecation / Change warnings for 0.4 */
     routes() {
@@ -152,7 +157,7 @@ export class Keystone {
     }
 
     //#region options as prototype methods
-    // _.extend(Keystone.prototype, require('./lib/core/options'));
+    // _.extend(Keystone.prototype, libCore.options.bind(this));
     // expandPath, get, getPath, options, set
     expandPath(pathValue): string {
         return expandPath.apply(this, arguments);
@@ -186,7 +191,7 @@ export class Keystone {
      */
 
     import(dirname) {
-        return importer(this.get('module root'))(dirname);
+        return libCore.importer(this.get('module root'))(dirname);
     }
 
 
@@ -197,7 +202,7 @@ export class Keystone {
     applyUpdates(callback) {
         this.callHook('pre:updates', (err) => {
             if (err) return callback(err);
-            require('./lib/updates').apply((err) => {
+            applyUpdates.apply((err) => {
                 if (err) return callback(err);
                 this.callHook('post:updates', callback);
             });
@@ -234,7 +239,7 @@ export class Keystone {
     static Admin = {
         Server: require('./admin/server'),
     };
-    static Email = require('./lib/email');
+    static Email = Email;
     static Field = require('./fields/types/Type');
 
     static Keystone = Keystone;
@@ -244,7 +249,7 @@ export class Keystone {
 
     static content = Content.init(Keystone.instance);
     static security = {
-        csrf: require('./lib/security/csrf'),
+        csrf: csrf,
     };
     static utils = utils;
 

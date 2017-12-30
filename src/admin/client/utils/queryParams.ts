@@ -1,6 +1,6 @@
-import assign from 'object-assign';
-import blacklist from 'blacklist';
-import isEqual from 'lodash/isEqual';
+import * as assign from 'object-assign';
+import * as blacklist from 'blacklist';
+import * as _ from 'lodash';
 
 export function checkForQueryChange (nextProps, thisProps) {
 	const { query } = nextProps.location;
@@ -19,7 +19,7 @@ export function checkForQueryChange (nextProps, thisProps) {
 
 	if (nextProps.location.pathname !== thisProps.location.pathname) return true;
 
-	if (!isEqual(attenuatedQuery, attenuatedCache)) return true;
+	if (!_.isEqual(attenuatedQuery, attenuatedCache)) return true;
 
 	return false;
 }

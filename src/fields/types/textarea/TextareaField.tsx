@@ -1,5 +1,5 @@
 import Field from '../Field';
-import React from 'react';
+import * as React from 'react';
 import { FormInput } from 'elemental';
 
 export = Field.create({

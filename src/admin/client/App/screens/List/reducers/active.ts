@@ -1,5 +1,5 @@
-import _ from 'lodash';
-import assign from 'object-assign';
+import * as _ from 'lodash';
+import * as assign from 'object-assign';
 
 import {
 	ADD_FILTER,
@@ -31,7 +31,7 @@ const initialState = {
 /**
  * Manage the active state
  */
-function active (state = initialState, action) {
+export function activeReducer (state = initialState, action) {
 	switch (action.type) {
 		case SET_ACTIVE_LIST:
 			return assign({}, state, {
@@ -102,5 +102,3 @@ function active (state = initialState, action) {
 			return state;
 	}
 }
-
-export default active;

@@ -1,8 +1,8 @@
 import { css } from 'glamor';
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { DropdownButton, Glyph } from 'elemental';
 
-function ListHeaderButton ({ className, label, glyph, ...props }) {
+export function ListHeaderButton ({ className, label, glyph, ...props }) {
 	return (
 		<DropdownButton block {...props}>
 			<Glyph name={glyph} cssStyles={classes.glyph} />
@@ -11,8 +11,8 @@ function ListHeaderButton ({ className, label, glyph, ...props }) {
 	);
 }
 
-ListHeaderButton.propTypes = {
-	glyph: PropTypes.string.isRequired,
+ListHeaderButton['propTypes'] = {
+	glyph: React.PropTypes.string.isRequired,
 };
 
 // show an icon on small screens where real estate is precious
@@ -33,5 +33,3 @@ const classes = {
 		},
 	},
 };
-
-export = ListHeaderButton;

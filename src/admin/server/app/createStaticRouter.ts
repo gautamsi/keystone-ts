@@ -6,7 +6,7 @@
  * logging, etc) for reduced overhead.
  */
 
-import { browserifyMiddleware } from '../middleware/browserify';
+import { browserifyMiddleware as browserify } from '../middleware/browserify';
 import * as express from 'express';
 import * as less from 'less-middleware';
 import * as path from 'path';
@@ -32,7 +32,7 @@ function buildFieldTypesStream(fieldTypes) {
     return str(src);
 }
 
-export default function createStaticRouter(keystone) {
+export function createStaticRouter(keystone) {
     const keystoneHash = keystone.createKeystoneHash();
     const writeToDisk = keystone.get('cache admin bundles');
     const router = express.Router();

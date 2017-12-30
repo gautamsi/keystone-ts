@@ -3,9 +3,9 @@
  * the configuration
  */
 
-import React from 'react';
+import * as React from 'react';
 
-const Brand = function (props) {
+export const Brand = function (props) {
 	// Default to the KeystoneJS logo
 	let logo = { src: `${Keystone.adminPath}/images/logo.png`, width: 205, height: 68 };
 	if (props.logo) {
@@ -33,5 +33,3 @@ const Brand = function (props) {
 		</div>
 	);
 };
-
-export = Brand;

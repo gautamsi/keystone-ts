@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+import * as utils from 'keystone-utils';
 /**
 Deprecated.
 
@@ -13,10 +15,10 @@ See https://github.com/keystonejs/keystone/wiki/File-Fields-Upgrade-Guide
  * @extends Field
  * @api public
  */
-function azurefile (list, path, options) {
+export function azurefile(list, path, options) {
 
-	throw new Error('The AzureFile field type has been removed. Please use File instead.'
-		+ '\n\nSee https://github.com/keystonejs/keystone/wiki/File-Fields-Upgrade-Guide\n');
+    throw new Error('The AzureFile field type has been removed. Please use File instead.'
+        + '\n\nSee https://github.com/keystonejs/keystone/wiki/File-Fields-Upgrade-Guide\n');
 
 	/*
 
@@ -60,16 +62,16 @@ function azurefile (list, path, options) {
 	*/
 
 }
-azurefile.properName = 'AzureFile';
+azurefile['properName'] = 'AzureFile';
 // util.inherits(azurefile, FieldType);
 
 /**
  * Exposes the custom or keystone s3 config settings
  */
 Object.defineProperty(azurefile.prototype, 'azurefileconfig', {
-	get: function () {
-		return this.options.azurefileconfig || keystone.get('azurefile config');
-	},
+    get: function () {
+        return this.options.azurefileconfig || keystone.get('azurefile config');
+    },
 });
 
 /**
@@ -77,108 +79,108 @@ Object.defineProperty(azurefile.prototype, 'azurefileconfig', {
  */
 azurefile.prototype.addToSchema = function (schema) {
 
-	const azure = require('azure-storage');
+    const azure = require('azure-storage');
 
-	const field = this;
+    const field = this;
 
-	const paths = this.paths = {
-		// fields
-		filename: this.path + '.filename',
-		path: this.path + '.path',
-		size: this.path + '.size',
-		filetype: this.path + '.filetype',
-		url: this.path + '.url',
-		etag: this.path + '.etag',
-		container: this.path + '.container',
-		// virtuals
-		exists: this.path + '.exists',
-		upload: this.path + '_upload',
-		action: this.path + '_action',
-	};
+    const paths = this.paths = {
+        // fields
+        filename: this.path + '.filename',
+        path: this.path + '.path',
+        size: this.path + '.size',
+        filetype: this.path + '.filetype',
+        url: this.path + '.url',
+        etag: this.path + '.etag',
+        container: this.path + '.container',
+        // virtuals
+        exists: this.path + '.exists',
+        upload: this.path + '_upload',
+        action: this.path + '_action',
+    };
 
-	const schemaPaths = this._path.addTo({}, {
-		filename: String,
-		path: String,
-		size: Number,
-		filetype: String,
-		url: String,
-		etag: String,
-		container: String,
-	});
+    const schemaPaths = this._path.addTo({}, {
+        filename: String,
+        path: String,
+        size: Number,
+        filetype: String,
+        url: String,
+        etag: String,
+        container: String,
+    });
 
-	schema.add(schemaPaths);
+    schema.add(schemaPaths);
 
-	const exists = function (item) {
-		return (item.get(paths.url) ? true : false);
-	};
+    const exists = function (item) {
+        return (item.get(paths.url) ? true : false);
+    };
 
-	// The .exists virtual indicates whether a file is stored
-	schema.virtual(paths.exists).get(function () {
-		return schemaMethods.exists.apply(this);
-	});
+    // The .exists virtual indicates whether a file is stored
+    schema.virtual(paths.exists).get(function () {
+        return schemaMethods.exists.apply(this);
+    });
 
-	const reset = function (item) {
-		item.set(field.path, {
-			filename: '',
-			path: '',
-			size: 0,
-			filetype: '',
-			url: '',
-		});
-	};
+    const reset = function (item) {
+        item.set(field.path, {
+            filename: '',
+            path: '',
+            size: 0,
+            filetype: '',
+            url: '',
+        });
+    };
 
-	const schemaMethods = {
-		exists: function () {
-			return exists(this);
-		},
+    const schemaMethods = {
+        exists: function () {
+            return exists(this);
+        },
 		/**
 		 * Resets the value of the field
 		 *
 		 * @api public
 		 */
-		reset: function () {
-			try {
-				azure.createBlobService().deleteBlob(this.get(paths.container), this.get(paths.filename), function () {});
-			} catch (e) {} // eslint-disable-line no-empty
-			reset(this);
-		},
+        reset: function () {
+            try {
+                azure.createBlobService().deleteBlob(this.get(paths.container), this.get(paths.filename), function () { });
+            } catch (e) { } // eslint-disable-line no-empty
+            reset(this);
+        },
 		/**
 		 * Deletes the file from AzureFile and resets the field
 		 *
 		 * @api public
 		 */
-		delete: function () {
-			try {
-				azure.createBlobService().blobService.deleteBlob(this.get(paths.container), this.get(paths.filename), function () {});
-			} catch (e) {} // eslint-disable-line no-empty
-			reset(this);
-		},
-	};
+        delete: function () {
+            try {
+                azure.createBlobService().blobService.deleteBlob(this.get(paths.container), this.get(paths.filename), function () { });
+            } catch (e) { } // eslint-disable-line no-empty
+            reset(this);
+        },
+    };
 
-	_.forEach(schemaMethods, function (fn, key) {
-		field.underscoreMethod(key, fn);
-	});
+    _.forEach(schemaMethods, function (fn, key) {
+        field.underscoreMethod(key, fn);
+    });
 
-	// expose a method on the field to call schema methods
-	this.apply = function (item, method) {
-		return schemaMethods[method].apply(item, Array.prototype.slice.call(arguments, 2));
-	};
+    // expose a method on the field to call schema methods
+    this.apply = function (item, method) {
+        return schemaMethods[method].apply(item, Array.prototype.slice.call(arguments, 2));
+    };
 
-	this.bindUnderscoreMethods();
+    this.bindUnderscoreMethods();
 };
 
 /**
  * Formats the field value
  */
 azurefile.prototype.format = function (item) {
-	return item.get(this.paths.url);
+    return item.get(this.paths.url);
 };
 
 /**
  * Detects whether the field has been modified
  */
 azurefile.prototype.isModified = function (item) {
-	return item.isModified(this.paths.url);
+    return item.isModified(this.paths.url);
 };
 
 /**
@@ -187,16 +189,16 @@ azurefile.prototype.isModified = function (item) {
  * Deprecated
  */
 azurefile.prototype.inputIsValid = function (data) { // eslint-disable-line no-unused-vars
-	// TODO - how should file field input be validated?
-	return true;
+    // TODO - how should file field input be validated?
+    return true;
 };
 
 /**
  * Updates the value for this field in the item from a data object
  */
 azurefile.prototype.updateItem = function (item, data, callback) {
-	// TODO - direct updating of data (not via upload)
-	process.nextTick(callback);
+    // TODO - direct updating of data (not via upload)
+    process.nextTick(callback);
 };
 
 /**
@@ -204,55 +206,55 @@ azurefile.prototype.updateItem = function (item, data, callback) {
  */
 azurefile.prototype.uploadFile = function (item, file, update, callback) {
 
-	const azure = require('azure-storage');
+    const azure = require('azure-storage');
 
-	const field = this;
-	const filetype = file.mimetype || file.type;
+    const field = this;
+    const filetype = file.mimetype || file.type;
 
-	if (field.options.allowedTypes && !_.contains(field.options.allowedTypes, filetype)) {
-		return callback(new Error('Unsupported File Type: ' + filetype));
-	}
+    if (field.options.allowedTypes && !_.contains(field.options.allowedTypes, filetype)) {
+        return callback(new Error('Unsupported File Type: ' + filetype));
+    }
 
-	if (typeof update === 'function') {
-		callback = update;
-		update = false;
-	}
+    if (typeof update === 'function') {
+        callback = update;
+        update = false;
+    }
 
-	const doUpload = function () {
-		const blobService = azure.createBlobService();
-		const container = field.options.containerFormatter(item, file.name);
+    const doUpload = function () {
+        const blobService = azure.createBlobService();
+        const container = field.options.containerFormatter(item, file.name);
 
-		blobService.createContainerIfNotExists(container, { publicAccessLevel: 'blob' }, function (err) {
+        blobService.createContainerIfNotExists(container, { publicAccessLevel: 'blob' }, function (err) {
 
-			if (err) return callback(err);
+            if (err) return callback(err);
 
-			blobService.createBlockBlobFromLocalFile(container, field.options.filenameFormatter(item, file.name), file.path, function (err, blob, res) {
+            blobService.createBlockBlobFromLocalFile(container, field.options.filenameFormatter(item, file.name), file.path, function (err, blob, res) {
 
-				if (err) return callback(err);
+                if (err) return callback(err);
 
-				const fileData = {
-					filename: blob.blob,
-					size: file.size,
-					filetype: filetype,
-					etag: blob.etag,
-					container: container,
-					url: 'http://' + field.azurefileconfig.account + '.blob.core.windows.net/' + container + '/' + blob.blob,
-				};
+                const fileData = {
+                    filename: blob.blob,
+                    size: file.size,
+                    filetype: filetype,
+                    etag: blob.etag,
+                    container: container,
+                    url: 'http://' + field.azurefileconfig.account + '.blob.core.windows.net/' + container + '/' + blob.blob,
+                };
 
-				if (update) {
-					item.set(field.path, fileData);
-				}
+                if (update) {
+                    item.set(field.path, fileData);
+                }
 
-				callback(null, fileData);
+                callback(null, fileData);
 
-			});
-		});
-	};
+            });
+        });
+    };
 
-	this.callHook('pre:upload', item, file, function (err) {
-		if (err) return callback(err);
-		doUpload();
-	});
+    this.callHook('pre:upload', item, file, function (err) {
+        if (err) return callback(err);
+        doUpload();
+    });
 };
 
 /**
@@ -264,35 +266,32 @@ azurefile.prototype.uploadFile = function (item, file, update, callback) {
  */
 azurefile.prototype.getRequestHandler = function (item, req, paths, callback) {
 
-	const field = this;
+    const field = this;
 
-	if (utils.isFunction(paths)) {
-		callback = paths;
-		paths = field.paths;
-	} else if (!paths) {
-		paths = field.paths;
-	}
+    if (utils.isFunction(paths)) {
+        callback = paths;
+        paths = field.paths;
+    } else if (!paths) {
+        paths = field.paths;
+    }
 
-	callback = callback || function () {};
+    callback = callback || function () { };
 
-	return function () {
-		if (req.body) {
-			const action = req.body[paths.action];
+    return function () {
+        if (req.body) {
+            const action = req.body[paths.action];
 
-			if (/^(delete|reset)$/.test(action)) {
-				field.apply(item, action);
-			}
-		}
+            if (/^(delete|reset)$/.test(action)) {
+                field.apply(item, action);
+            }
+        }
 
-		if (req.files && req.files[paths.upload] && req.files[paths.upload].size) {
-			return field.uploadFile(item, req.files[paths.upload], true, callback);
-		}
+        if (req.files && req.files[paths.upload] && req.files[paths.upload].size) {
+            return field.uploadFile(item, req.files[paths.upload], true, callback);
+        }
 
-		return callback();
+        return callback();
 
-	};
+    };
 
 };
-
-/* Export Field Type */
-export = azurefile;

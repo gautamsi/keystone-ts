@@ -2,11 +2,11 @@
  * Render the body of a popout
  */
 
-import React from 'react';
-import blacklist from 'blacklist';
-import classnames from 'classnames';
+import * as React from 'react';
+import * as blacklist from 'blacklist';
+import * as classnames from 'classnames';
 
-let PopoutBody = React.createClass({
+export const PopoutBody = React.createClass({
 	displayName: 'PopoutBody',
 	propTypes: {
 		children: React.PropTypes.node.isRequired,
@@ -24,5 +24,3 @@ let PopoutBody = React.createClass({
 		);
 	},
 });
-
-export = PopoutBody;

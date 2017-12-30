@@ -18,19 +18,19 @@
 	}
 */
 
-function linearGradient (direction, top, bottom, base = '') {
+export function linearGradient (direction, top, bottom, base = '') {
 	return {
 		background: `linear-gradient(${direction}, ${top} 0%, ${bottom} 100%) ${base}`,
 	};
 }
 
 // Vertical Gradient
-function gradientVertical (top, bottom, base) {
+export function gradientVertical (top, bottom, base) {
 	return linearGradient('to bottom', top, bottom, base);
 }
 
 // Horizontal Gradient
-function gradientHorizontal (top, bottom, base) {
+export function gradientHorizontal (top, bottom, base) {
 	return linearGradient('to right', top, bottom, base);
 }
 
@@ -42,7 +42,7 @@ function gradientHorizontal (top, bottom, base) {
 */
 
 // top
-function borderTopRadius (radius) {
+export function borderTopRadius (radius) {
 	return {
 		borderTopLeftRadius: radius,
 		borderTopRightRadius: radius,
@@ -50,7 +50,7 @@ function borderTopRadius (radius) {
 }
 
 // right
-function borderRightRadius (radius) {
+export function borderRightRadius (radius) {
 	return {
 		borderBottomRightRadius: radius,
 		borderTopRightRadius: radius,
@@ -58,7 +58,7 @@ function borderRightRadius (radius) {
 }
 
 // bottom
-function borderBottomRadius (radius) {
+export function borderBottomRadius (radius) {
 	return {
 		borderBottomLeftRadius: radius,
 		borderBottomRightRadius: radius,
@@ -66,21 +66,9 @@ function borderBottomRadius (radius) {
 }
 
 // left
-function borderLeftRadius (radius) {
+export function borderLeftRadius (radius) {
 	return {
 		borderBottomLeftRadius: radius,
 		borderTopLeftRadius: radius,
 	};
 }
-
-// Return
-
-export default {
-	borderTopRadius,
-	borderRightRadius,
-	borderBottomRadius,
-	borderLeftRadius,
-
-	gradientHorizontal,
-	gradientVertical,
-};

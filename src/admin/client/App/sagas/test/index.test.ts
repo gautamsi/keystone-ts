@@ -1,6 +1,6 @@
 import { setActiveColumnsSaga, setActiveSortSaga, setActiveFilterSaga } from '../index';
 import { filterParser, sortParser, columnsParser } from '../../parsers/index';
-import demand from 'must';
+import * as demand from 'must';
 import * as actions from '../../screens/List/constants.js';
 import { take, call } from 'redux-saga/effects';
 //

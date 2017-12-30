@@ -40,7 +40,7 @@ export function loadCounts () {
  *
  * @param  {Object} counts The counts object as returned by the API
  */
-export function countsLoaded (counts) {
+export function countsLoaded (counts?) {
 	return {
 		type: COUNTS_LOADING_SUCCESS,
 		counts,

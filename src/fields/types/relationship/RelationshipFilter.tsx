@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import async from 'async';
-import React from 'react';
+import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import xhr from 'xhr';
 

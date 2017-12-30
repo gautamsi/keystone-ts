@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router';
 
 /**
  * Displays information about a list and lets you create a new one.
  */
-let ListTile = React.createClass({
+export const ListTile = React.createClass({
 	propTypes: {
 		count: React.PropTypes.string,
 		hideCreateButton: React.PropTypes.bool,
@@ -39,5 +39,3 @@ let ListTile = React.createClass({
 		);
 	},
 });
-
-export = ListTile;

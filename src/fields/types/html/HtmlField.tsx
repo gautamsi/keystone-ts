@@ -1,5 +1,5 @@
 import Field from '../Field';
-import React from 'react';
+import * as React from 'react';
 import tinymce from 'tinymce';
 import { FormInput } from 'elemental';
 import evalDependsOn from '../../utils/evalDependsOn';

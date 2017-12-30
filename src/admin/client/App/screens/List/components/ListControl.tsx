@@ -1,7 +1,7 @@
-import React from 'react';
-import classnames from 'classnames';
+import * as React from 'react';
+import * as classnames from 'classnames';
 
-let ListControl = React.createClass({
+export const ListControl = React.createClass({
 	propTypes: {
 		dragSource: React.PropTypes.func,
 		onClick: React.PropTypes.func,
@@ -45,5 +45,3 @@ let ListControl = React.createClass({
 		);
 	},
 });
-
-export = ListControl;

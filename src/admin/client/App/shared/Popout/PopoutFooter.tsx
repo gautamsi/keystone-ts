@@ -2,11 +2,11 @@
  * Render a footer for a popout
  */
 
-import React from 'react';
+import * as React from 'react';
 
 const BUTTON_BASE_CLASSNAME = 'Popout__footer__button Popout__footer__button--';
 
-const PopoutFooter = React.createClass({
+export const PopoutFooter = React.createClass({
 	displayName: 'PopoutFooter',
 	propTypes: {
 		children: React.PropTypes.node,
@@ -54,5 +54,3 @@ const PopoutFooter = React.createClass({
 		);
 	},
 });
-
-export = PopoutFooter;

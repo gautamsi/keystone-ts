@@ -6,7 +6,7 @@ Some features here, including size formatting and icons, may be ported across.
 import _ from 'lodash';
 import bytes from 'bytes';
 import Field from '../Field';
-import React from 'react';
+import * as React from 'react';
 import { Button, FormField, FormInput, FormNote } from 'elemental';
 
 const ICON_EXTS = [

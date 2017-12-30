@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Field from '../Field';
 import { FormField, FormInput } from 'elemental';
 import ImageThumbnail from '../../components/ImageThumbnail';

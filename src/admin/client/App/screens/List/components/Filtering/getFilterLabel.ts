@@ -1,9 +1,9 @@
-import moment from 'moment';
+import * as moment from 'moment';
 
 const DATE_FORMAT = 'MMM D YYYY';
 const DATETIME_FORMAT = 'MMM D YYYY h:mm:ss';
 
-function getFilterLabel (field, value) {
+export function getFilterLabel (field, value) {
 	const label = field.label;
 
 	switch (field.type) {
@@ -170,5 +170,3 @@ function resolveDateFormat (value, format, conjunction = 'is') {
 
 	return `${joiner} ${mode} ${formattedValue}`;
 }
-
-export default getFilterLabel;

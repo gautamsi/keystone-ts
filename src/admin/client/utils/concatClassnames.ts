@@ -18,7 +18,7 @@
 	};
 */
 
-export default function concatClassnames (className) {
+export function concatClassnames (className) {
 	return [className].reduce((a, b) => {
 		return a.concat(b);
 	}, []);

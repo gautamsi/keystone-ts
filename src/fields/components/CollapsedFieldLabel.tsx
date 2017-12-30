@@ -1,10 +1,10 @@
-import React from 'react';
+import * as React from 'react';
 import { Button } from 'elemental';
 
 // NOTE marginBottom of 1px stops things jumping around
 // TODO find out why this is necessary
 
-function CollapsedFieldLabel ({ style, ...props }) {
+export function CollapsedFieldLabel ({ style, ...props }) {
 	const __style__ = {
 		marginBottom: 1,
 		paddingLeft: 0,
@@ -16,5 +16,3 @@ function CollapsedFieldLabel ({ style, ...props }) {
 		<Button variant="link" style={__style__} {...props} />
 	);
 }
-
-export = CollapsedFieldLabel;

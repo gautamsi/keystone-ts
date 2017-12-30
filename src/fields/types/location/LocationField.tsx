@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import React from 'react';
+import * as React from 'react';
 import Field from '../Field';
 import CollapsedFieldLabel from '../../components/CollapsedFieldLabel';
 import NestedFormField from '../../components/NestedFormField';

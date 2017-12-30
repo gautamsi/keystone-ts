@@ -1,11 +1,11 @@
 import * as crypto from 'crypto';
-import * as forEach from 'lodash/forEach');
+import * as _ from 'lodash';
 
 export function createKeystoneHash() {
     const hash = crypto.createHash('md5');
     hash.update(this.version);
 
-    forEach(this.lists, function (list, key) {
+    _.forEach(this.lists, function (list, key) {
         hash.update(JSON.stringify(list.getOptions()));
     });
 

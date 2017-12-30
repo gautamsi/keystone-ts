@@ -2,7 +2,7 @@
  * A few helper methods for strings
  */
 
-import inflect from 'i';
+import * as inflect from 'i';
 import { compact, size } from 'lodash';
 
 /**

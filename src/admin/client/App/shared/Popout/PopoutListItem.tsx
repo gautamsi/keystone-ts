@@ -2,11 +2,11 @@
  * Render a popout list item
  */
 
-import React from 'react';
-import blacklist from 'blacklist';
-import classnames from 'classnames';
+import * as React from 'react';
+import * as blacklist from 'blacklist';
+import * as classnames from 'classnames';
 
-let PopoutListItem = React.createClass({
+export const PopoutListItem = React.createClass({
 	displayName: 'PopoutListItem',
 	propTypes: {
 		icon: React.PropTypes.string,
@@ -58,5 +58,3 @@ let PopoutListItem = React.createClass({
 		);
 	},
 });
-
-export = PopoutListItem;

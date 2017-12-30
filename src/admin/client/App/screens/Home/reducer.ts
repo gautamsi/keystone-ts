@@ -1,4 +1,4 @@
-import assign from 'object-assign';
+import * as assign from 'object-assign';
 import {
 	LOAD_COUNTS,
 	COUNTS_LOADING_SUCCESS,
@@ -11,7 +11,7 @@ const initialState = {
 	error: null,
 };
 
-function home (state = initialState, action) {
+export function homeReducer (state = initialState, action) {
 	switch (action.type) {
 		case LOAD_COUNTS:
 			return assign({}, state, {
@@ -32,5 +32,3 @@ function home (state = initialState, action) {
 			return state;
 	}
 }
-
-export default home;

@@ -2,10 +2,10 @@
  * A list item of the mobile navigation
  */
 
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router';
 
-const MobileListItem = React.createClass({
+export const MobileListItem = React.createClass({
 	displayName: 'MobileListItem',
 	propTypes: {
 		children: React.PropTypes.node.isRequired,
@@ -26,5 +26,3 @@ const MobileListItem = React.createClass({
 		);
 	},
 });
-
-export = MobileListItem;

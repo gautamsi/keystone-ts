@@ -61,7 +61,7 @@ function getSortString(sort) {
  * Build a query string from a bunch of options
  */
 function buildQueryString(options) {
-    const query = {};
+    const query: any = {};
     if (options.search) query.search = options.search;
     if (options.filters.length) query.filters = JSON.stringify(getFilters(options.filters));
     if (options.columns) query.fields = options.columns.map(i => i.path).join(',');
@@ -77,275 +77,290 @@ function buildQueryString(options) {
  *
  * @param {Object} options
  */
-const List = function (options) {
-    // TODO these options are possibly unused
-    assign(this, options);
-    this.columns = getColumns(this);
-    this.expandedDefaultColumns = this.expandColumns(this.defaultColumns);
-    this.defaultColumnPaths = this.expandedDefaultColumns.map(i => i.path).join(',');
-};
+export class List {
+    defaultColumns: any;
+    hidden: any;
+    key: any;
+    path: string;
+    fields: any;
+    namePath: any;
+    sortable: any;
+    defaultSort: any;
+    defaultColumnPaths: any;
+    expandedDefaultColumns: any;
+    columns: any;
 
-/**
- * Create an item via the API
- *
- * @param  {FormData} formData The submitted form data
- * @param  {Function} callback Called after the API call
- */
-List.prototype.createItem = function (formData, callback) {
-    xhr({
-        url: `${Keystone.adminPath}/api/${this.path}/create`,
-        responseType: 'json',
-        method: 'POST',
-        headers: assign({}, Keystone.csrf.header),
-        body: formData,
-    }, (err, resp, data) => {
-        if (err) callback(err);
-        if (resp.statusCode === 200) {
-            callback(null, data);
-        } else {
-            // NOTE: xhr callback will be called with an Error if
-            //  there is an error in the browser that prevents
-            //  sending the request. A HTTP 500 response is not
-            //  going to cause an error to be returned.
-            callback(data, null);
-        }
-    });
-};
 
-/**
- * Update a specific item
- *
- * @param  {String}   id       The id of the item we want to update
- * @param  {FormData} formData The submitted form data
- * @param  {Function} callback Called after the API call
- */
-List.prototype.updateItem = function (id, formData, callback) {
-    xhr({
-        url: `${Keystone.adminPath}/api/${this.path}/${id}`,
-        responseType: 'json',
-        method: 'POST',
-        headers: assign({}, Keystone.csrf.header),
-        body: formData,
-    }, (err, resp, data) => {
-        if (err) return callback(err);
-        if (resp.statusCode === 200) {
-            callback(null, data);
-        } else {
-            callback(data);
-        }
-    });
-};
+    constructor(options) {
+        // TODO these options are possibly unused
+        assign(this, options);
+        this.columns = getColumns(this);
+        this.expandedDefaultColumns = this.expandColumns(this.defaultColumns);
+        this.defaultColumnPaths = this.expandedDefaultColumns.map(i => i.path).join(',');
+    }
 
-List.prototype.expandColumns = function (input) {
-    let nameIncluded = false;
-    const cols = listToArray(input).map(i => {
-        const split = i.split('|');
-        let path = split[0];
-        const width = split[1];
-        if (path === '__name__') {
-            path = this.namePath;
-        }
-        const field = this.fields[path];
-        if (!field) {
-            // TODO: Support arbitary document paths
-            if (!this.hidden) {
-                if (path === this.namePath) {
-                    console.warn(`List ${this.key} did not specify any default columns or a name field`);
-                } else {
-                    console.warn(`List ${this.key} specified an invalid default column: ${path}`);
-                }
+
+    /**
+     * Create an item via the API
+     *
+     * @param  {FormData} formData The submitted form data
+     * @param  {Function} callback Called after the API call
+     */
+    createItem(formData, callback) {
+        xhr({
+            url: `${Keystone.adminPath}/api/${this.path}/create`,
+            responseType: 'json',
+            method: 'POST',
+            headers: assign({}, Keystone.csrf.header),
+            body: formData,
+        }, (err, resp, data) => {
+            if (err) callback(err);
+            if (resp.statusCode === 200) {
+                callback(null, data);
+            } else {
+                // NOTE: xhr callback will be called with an Error if
+                //  there is an error in the browser that prevents
+                //  sending the request. A HTTP 500 response is not
+                //  going to cause an error to be returned.
+                callback(data, null);
             }
-            return;
-        }
-        if (path === this.namePath) {
-            nameIncluded = true;
-        }
-        return {
-            field: field,
-            label: field.label,
-            path: field.path,
-            type: field.type,
-            width: width,
-        };
-    }).filter(truthy);
-    if (!nameIncluded) {
-        cols.unshift({
-            type: 'id',
-            label: 'ID',
-            path: 'id',
         });
     }
-    return cols;
-};
 
-List.prototype.expandSort = function (input) {
-    const sort = {
-        rawInput: input || this.defaultSort,
-        isDefaultSort: false,
-    };
-    sort.input = sort.rawInput;
-    if (sort.input === '__default__') {
-        sort.isDefaultSort = true;
-        sort.input = this.sortable ? 'sortOrder' : this.namePath;
+    /**
+     * Update a specific item
+     *
+     * @param  {String}   id       The id of the item we want to update
+     * @param  {FormData} formData The submitted form data
+     * @param  {Function} callback Called after the API call
+     */
+    updateItem(id, formData, callback) {
+        xhr({
+            url: `${Keystone.adminPath}/api/${this.path}/${id}`,
+            responseType: 'json',
+            method: 'POST',
+            headers: assign({}, Keystone.csrf.header),
+            body: formData,
+        }, (err, resp, data) => {
+            if (err) return callback(err);
+            if (resp.statusCode === 200) {
+                callback(null, data);
+            } else {
+                callback(data);
+            }
+        });
     }
-    sort.paths = listToArray(sort.input).map(path => {
-        let invert = false;
-        if (path.charAt(0) === '-') {
-            invert = true;
-            path = path.substr(1);
+
+    expandColumns(input) {
+        let nameIncluded = false;
+        const cols = listToArray(input).map(i => {
+            const split = i.split('|');
+            let path = split[0];
+            const width = split[1];
+            if (path === '__name__') {
+                path = this.namePath;
+            }
+            const field = this.fields[path];
+            if (!field) {
+                // TODO: Support arbitary document paths
+                if (!this.hidden) {
+                    if (path === this.namePath) {
+                        console.warn(`List ${this.key} did not specify any default columns or a name field`);
+                    } else {
+                        console.warn(`List ${this.key} specified an invalid default column: ${path}`);
+                    }
+                }
+                return;
+            }
+            if (path === this.namePath) {
+                nameIncluded = true;
+            }
+            return {
+                field: field,
+                label: field.label,
+                path: field.path,
+                type: field.type,
+                width: width,
+            };
+        }).filter(truthy);
+        if (!nameIncluded) {
+            cols.unshift({
+                type: 'id',
+                label: 'ID',
+                path: 'id',
+            });
         }
-        else if (path.charAt(0) === '+') {
-            path = path.substr(1);
-        }
-        const field = this.fields[path];
-        if (!field) {
-            // TODO: Support arbitary document paths
-            console.warn('Invalid Sort specified:', path);
-            return;
-        }
-        return {
-            field: field,
-            type: field.type,
-            label: field.label,
-            path: field.path,
-            invert: invert,
+        return cols;
+    }
+
+    expandSort(input) {
+        const sort = {
+            rawInput: input || this.defaultSort,
+            isDefaultSort: false,
+            input: undefined,
+            paths: undefined
         };
-    }).filter(truthy);
-    return sort;
-};
-
-/**
- * Load a specific item via the API
- *
- * @param  {String}   itemId   The id of the item we want to load
- * @param  {Object}   options
- * @param  {Function} callback
- */
-List.prototype.loadItem = function (itemId, options, callback) {
-    if (arguments.length === 2 && typeof options === 'function') {
-        callback = options;
-        options = null;
+        sort.input = sort.rawInput;
+        if (sort.input === '__default__') {
+            sort.isDefaultSort = true;
+            sort.input = this.sortable ? 'sortOrder' : this.namePath;
+        }
+        sort.paths = listToArray(sort.input).map(path => {
+            let invert = false;
+            if (path.charAt(0) === '-') {
+                invert = true;
+                path = path.substr(1);
+            }
+            else if (path.charAt(0) === '+') {
+                path = path.substr(1);
+            }
+            const field = this.fields[path];
+            if (!field) {
+                // TODO: Support arbitary document paths
+                console.warn('Invalid Sort specified:', path);
+                return;
+            }
+            return {
+                field: field,
+                type: field.type,
+                label: field.label,
+                path: field.path,
+                invert: invert,
+            };
+        }).filter(truthy);
+        return sort;
     }
-    let url = Keystone.adminPath + '/api/' + this.path + '/' + itemId;
-    const query = qs.stringify(options);
-    if (query.length) url += '?' + query;
-    xhr({
-        url: url,
-        responseType: 'json',
-    }, (err, resp, data) => {
-        if (err) return callback(err);
-        // Pass the data as result or error, depending on the statusCode
-        if (resp.statusCode === 200) {
-            callback(null, data);
-        } else {
-            callback(data);
-        }
-    });
-};
 
-/**
- * Load all items of a list, optionally passing objects to build a query string
- * for sorting or searching
- *
- * @param  {Object}   options
- * @param  {Function} callback
- */
-List.prototype.loadItems = function (options, callback) {
-    const url = Keystone.adminPath + '/api/' + this.path + buildQueryString(options);
-    xhr({
-        url: url,
-        responseType: 'json',
-    }, (err, resp, data) => {
-        if (err) callback(err);
-        // Pass the data as result or error, depending on the statusCode
-        if (resp.statusCode === 200) {
-            callback(null, data);
-        } else {
-            callback(data);
+    /**
+     * Load a specific item via the API
+     *
+     * @param  {String}   itemId   The id of the item we want to load
+     * @param  {Object}   options
+     * @param  {Function} callback
+     */
+    loadItem(itemId, options, callback) {
+        if (arguments.length === 2 && typeof options === 'function') {
+            callback = options;
+            options = null;
         }
-    });
-};
+        let url = Keystone.adminPath + '/api/' + this.path + '/' + itemId;
+        const query = qs.stringify(options);
+        if (query.length) url += '?' + query;
+        xhr({
+            url: url,
+            responseType: 'json',
+        }, (err, resp, data) => {
+            if (err) return callback(err);
+            // Pass the data as result or error, depending on the statusCode
+            if (resp.statusCode === 200) {
+                callback(null, data);
+            } else {
+                callback(data);
+            }
+        });
+    };
 
-/**
- * Constructs a download URL to download a list with the current sorting, filtering,
- * selection and searching options
- *
- * @param  {Object} options
- *
- * @return {String}         The download URL
- */
-List.prototype.getDownloadURL = function (options) {
-    const url = Keystone.adminPath + '/api/' + this.path;
-    const parts = [];
-    if (options.format !== 'json') {
-        options.format = 'csv';
+    /**
+     * Load all items of a list, optionally passing objects to build a query string
+     * for sorting or searching
+     *
+     * @param  {Object}   options
+     * @param  {Function} callback
+     */
+    loadItems(options, callback) {
+        const url = Keystone.adminPath + '/api/' + this.path + buildQueryString(options);
+        xhr({
+            url: url,
+            responseType: 'json',
+        }, (err, resp, data) => {
+            if (err) callback(err);
+            // Pass the data as result or error, depending on the statusCode
+            if (resp.statusCode === 200) {
+                callback(null, data);
+            } else {
+                callback(data);
+            }
+        });
     }
-    parts.push(options.search ? 'search=' + options.search : '');
-    parts.push(options.filters.length ? 'filters=' + JSON.stringify(getFilters(options.filters)) : '');
-    parts.push(options.columns ? 'select=' + options.columns.map(i => i.path).join(',') : '');
-    parts.push(options.sort ? 'sort=' + getSortString(options.sort) : '');
-    parts.push('expandRelationshipFields=true');
-    return url + '/export.' + options.format + '?' + parts.filter(truthy).join('&');
-};
 
-/**
- * Delete a specific item via the API
- *
- * @param  {String}   itemId   The id of the item we want to delete
- * @param  {Function} callback
- */
-List.prototype.deleteItem = function (itemId, callback) {
-    this.deleteItems([itemId], callback);
-};
-
-/**
- * Delete multiple items at once via the API
- *
- * @param  {Array}   itemIds  An array of ids of items we want to delete
- * @param  {Function} callback
- */
-List.prototype.deleteItems = function (itemIds, callback) {
-    const url = Keystone.adminPath + '/api/' + this.path + '/delete';
-    xhr({
-        url: url,
-        method: 'POST',
-        headers: assign({}, Keystone.csrf.header),
-        json: {
-            ids: itemIds,
-        },
-    }, (err, resp, body) => {
-        if (err) return callback(err);
-        // Pass the body as result or error, depending on the statusCode
-        if (resp.statusCode === 200) {
-            callback(null, body);
-        } else {
-            callback(body);
+    /**
+     * Constructs a download URL to download a list with the current sorting, filtering,
+     * selection and searching options
+     *
+     * @param  {Object} options
+     *
+     * @return {String}         The download URL
+     */
+    getDownloadURL(options) {
+        const url = Keystone.adminPath + '/api/' + this.path;
+        const parts = [];
+        if (options.format !== 'json') {
+            options.format = 'csv';
         }
-    });
-};
+        parts.push(options.search ? 'search=' + options.search : '');
+        parts.push(options.filters.length ? 'filters=' + JSON.stringify(getFilters(options.filters)) : '');
+        parts.push(options.columns ? 'select=' + options.columns.map(i => i.path).join(',') : '');
+        parts.push(options.sort ? 'sort=' + getSortString(options.sort) : '');
+        parts.push('expandRelationshipFields=true');
+        return url + '/export.' + options.format + '?' + parts.filter(truthy).join('&');
+    }
 
-List.prototype.reorderItems = function (item, oldSortOrder, newSortOrder, pageOptions, callback) {
-    const url = Keystone.adminPath + '/api/' + this.path + '/' + item.id + '/sortOrder/' + oldSortOrder + '/' + newSortOrder + '/' + buildQueryString(pageOptions);
-    xhr({
-        url: url,
-        method: 'POST',
-        headers: assign({}, Keystone.csrf.header),
-    }, (err, resp, body) => {
-        if (err) return callback(err);
-        try {
-            body = JSON.parse(body);
-        } catch (e) {
-            console.log('Error parsing results json:', e, body);
-            return callback(e);
-        }
-        // Pass the body as result or error, depending on the statusCode
-        if (resp.statusCode === 200) {
-            callback(null, body);
-        } else {
-            callback(body);
-        }
-    });
-};
+    /**
+     * Delete a specific item via the API
+     *
+     * @param  {String}   itemId   The id of the item we want to delete
+     * @param  {Function} callback
+     */
+    deleteItem(itemId, callback) {
+        this.deleteItems([itemId], callback);
+    }
 
+    /**
+     * Delete multiple items at once via the API
+     *
+     * @param  {Array}   itemIds  An array of ids of items we want to delete
+     * @param  {Function} callback
+     */
+    deleteItems(itemIds, callback) {
+        const url = Keystone.adminPath + '/api/' + this.path + '/delete';
+        xhr({
+            url: url,
+            method: 'POST',
+            headers: assign({}, Keystone.csrf.header),
+            json: {
+                ids: itemIds,
+            },
+        }, (err, resp, body) => {
+            if (err) return callback(err);
+            // Pass the body as result or error, depending on the statusCode
+            if (resp.statusCode === 200) {
+                callback(null, body);
+            } else {
+                callback(body);
+            }
+        });
+    }
 
-export default List;
+    reorderItems(item, oldSortOrder, newSortOrder, pageOptions, callback) {
+        const url = Keystone.adminPath + '/api/' + this.path + '/' + item.id + '/sortOrder/' + oldSortOrder + '/' + newSortOrder + '/' + buildQueryString(pageOptions);
+        xhr({
+            url: url,
+            method: 'POST',
+            headers: assign({}, Keystone.csrf.header),
+        }, (err, resp, body) => {
+            if (err) return callback(err);
+            try {
+                body = JSON.parse(body);
+            } catch (e) {
+                console.log('Error parsing results json:', e, body);
+                return callback(e);
+            }
+            // Pass the body as result or error, depending on the statusCode
+            if (resp.statusCode === 200) {
+                callback(null, body);
+            } else {
+                callback(body);
+            }
+        });
+    }
+}

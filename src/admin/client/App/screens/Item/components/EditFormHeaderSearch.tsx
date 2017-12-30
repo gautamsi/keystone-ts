@@ -1,111 +1,109 @@
 /* eslint quote-props: ["error", "as-needed"] */
 
-import React, { Component, PropTypes } from 'react';
+import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import { css } from 'glamor';
 import { FormInput, Glyph, GlyphButton } from 'elemental';
-import theme from '../../../../theme';
+import { theme } from '../../../../theme';
 
-class EditFormHeaderSearch extends Component {
-	constructor () {
-		super();
+export class EditFormHeaderSearch extends React.Component {
+    constructor() {
+        super();
 
-		this.focusField = this.focusField.bind(this);
-		this.state = { focused: false };
-	}
-	focusField () {
-		this.setState({ focused: true }, () => {
-			findDOMNode(this.refs.target).focus();
-		});
-	}
-	render () {
-		const { focused } = this.state;
-		const {
+        this.focusField = this.focusField.bind(this);
+        this.state = { focused: false };
+    }
+    focusField() {
+        this.setState({ focused: true }, () => {
+            findDOMNode(this.refs.target).focus();
+        });
+    }
+    render() {
+        const { focused } = this.state;
+        const {
 			onChange,
-			onKeyUp,
-			value,
-			...props
+            onKeyUp,
+            value,
+            ...props
 		} = this.props;
 
-		return focused ? (
-			<div className={css(classes.wrapper)}>
-				<Glyph
-					cssStyles={classes.glyph}
-					color={theme.color.gray40}
-					name="search"
-					data-e2e-search-icon
-				/>
-				<FormInput
-					cssStyles={classes.input}
-					name="search"
-					onBlur={() => this.setState({ focused: false })}
-					onChange={onChange}
-					onKeyUp={onKeyUp}
-					placeholder="Search"
-					ref="target"
-					type="search"
-					value={value}
-					{...props}
-				/>
-			</div>
-		) : (
-			<GlyphButton
-				color="primary"
-				glyph="search"
-				glyphStyle={{ marginRight: '0.4em' }}
-				onClick={this.focusField}
-				onFocus={this.focusField}
-				position="left"
-				variant="link"
-				style={{ paddingLeft: '0.7em' }}
-				data-e2e-search-icon
-				>
-				Search
+        return focused ? (
+            <div className={css(classes.wrapper)}>
+                <Glyph
+                    cssStyles={classes.glyph}
+                    color={theme.color.gray40}
+                    name="search"
+                    data-e2e-search-icon
+                />
+                <FormInput
+                    cssStyles={classes.input}
+                    name="search"
+                    onBlur={() => this.setState({ focused: false })}
+                    onChange={onChange}
+                    onKeyUp={onKeyUp}
+                    placeholder="Search"
+                    ref="target"
+                    type="search"
+                    value={value}
+                    {...props}
+                />
+            </div>
+        ) : (
+                <GlyphButton
+                    color="primary"
+                    glyph="search"
+                    glyphStyle={{ marginRight: '0.4em' }}
+                    onClick={this.focusField}
+                    onFocus={this.focusField}
+                    position="left"
+                    variant="link"
+                    style={{ paddingLeft: '0.7em' }}
+                    data-e2e-search-icon
+                >
+                    Search
 			</GlyphButton>
-		);
-	}
+            );
+    }
 }
 
 // For props "glyph", "glyphColor", and "glyphSize":
 // prop type validation will occur within the Glyph component, no need to
 // duplicate, just pass it through.
-EditFormHeaderSearch.propTypes = {
-	onChange: PropTypes.func.isRequired,
-	value: PropTypes.string,
+EditFormHeaderSearch['propTypes'] = {
+    onChange: React.PropTypes.func.isRequired,
+    value: React.PropTypes.string,
 };
 
 const classes = {
-	wrapper: {
-		display: 'inline-block',
-		position: 'relative',
-		verticalAlign: 'middle',
-	},
+    wrapper: {
+        display: 'inline-block',
+        position: 'relative',
+        verticalAlign: 'middle',
+    },
 
-	// input
-	input: {
-		paddingLeft: '2.2em',
-		// opacity: 0,
-		transition: 'all 240ms',
-		width: 100,
+    // input
+    input: {
+        paddingLeft: '2.2em',
+        // opacity: 0,
+        transition: 'all 240ms',
+        width: 100,
 
-		':focus': {
-			// opacity: 1,
-			width: 240,
-		},
-	},
+        ':focus': {
+            // opacity: 1,
+            width: 240,
+        },
+    },
 
-	// glyph
-	glyph: {
-		alignItems: 'center',
-		display: 'flex',
-		height: '100%',
-		justifyContent: 'center',
-		position: 'absolute',
-		width: '2.2em',
-	},
+    // glyph
+    glyph: {
+        alignItems: 'center',
+        display: 'flex',
+        height: '100%',
+        justifyContent: 'center',
+        position: 'absolute',
+        width: '2.2em',
+    },
 };
-
-export = EditFormHeaderSearch;
 
 
 // Search

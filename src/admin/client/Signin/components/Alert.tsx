@@ -3,10 +3,10 @@
  * the signedOut prop to true to show the standard signed out message
  */
 
-import React from 'react';
+import * as React from 'react';
 import { Alert } from 'elemental';
 
-const AlertView = function (props) {
+export const AlertView = function (props) {
 	if (props.isInvalid) {
 		return <Alert key="error" color="danger" style={{ textAlign: 'center' }}>{props.invalidMessage}</Alert>;
 	} else if (props.signedOut) {
@@ -17,10 +17,8 @@ const AlertView = function (props) {
 	}
 };
 
-AlertView.propTypes = {
+AlertView['propTypes'] = {
 	invalidMessage: React.PropTypes.string,
 	isInvalid: React.PropTypes.bool,
 	signedOut: React.PropTypes.bool,
 };
-
-export = AlertView;

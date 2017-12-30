@@ -1,6 +1,4 @@
-import isPlainObject from 'lodash/isPlainObject';
-import isArray from 'lodash/isArray';
-import isObject from 'lodash/isObject';
+import * as _ from 'lodash';
 
 /**
  * Returns an array of expanded filter objects,
@@ -46,14 +44,14 @@ export function filtersParser (filters, currentList) {
 
 
 export function filterParser ({ path, value }, activeFilters, currentList) {
-	if (!activeFilters || !isArray(activeFilters)) {
+	if (!activeFilters || !_.isArray(activeFilters)) {
 		throw new Error('activeFilters must be an array');
 	}
 	if (!currentList) {
 		throw new Error('No currentList selected');
 	}
 
-	if (!isObject(currentList) || isArray(currentList)) {
+	if (!_.isObject(currentList) || _.isArray(currentList)) {
 		throw new Error('currentList is expected to be an { Object }', currentList);
 	}
 
@@ -87,7 +85,7 @@ export function filterParser ({ path, value }, activeFilters, currentList) {
  **/
 
 export function createFilterObject (path, value, currentListFields) {
-	if (!currentListFields || !isPlainObject(currentListFields)) {
+	if (!currentListFields || !_.isPlainObject(currentListFields)) {
 		console.warn('currentListFields must be a plain object', currentListFields);
 		return;
 	}

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 const IMAGE_SIZE = 18;
 
@@ -32,7 +32,7 @@ const textStyle = {
 	verticalAlign: 'middle',
 };
 
-let CloudinaryImageSummary = React.createClass({
+export const CloudinaryImageSummary = React.createClass({
 	displayName: 'CloudinaryImageSummary',
 	propTypes: {
 		image: React.PropTypes.object.isRequired,
@@ -73,5 +73,3 @@ let CloudinaryImageSummary = React.createClass({
 		);
 	},
 });
-
-export = CloudinaryImageSummary;

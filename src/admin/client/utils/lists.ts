@@ -3,7 +3,7 @@
  * wrapped with the List helper (./List.js)
  */
 
-import List from './List';
+import { List } from './List';
 
 export let listsByKey = {};
 export let listsByPath = {};

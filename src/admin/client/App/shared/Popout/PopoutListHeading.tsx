@@ -2,11 +2,11 @@
  * Render a popout list heading
  */
 
-import React from 'react';
-import blacklist from 'blacklist';
-import classnames from 'classnames';
+import * as React from 'react';
+import * as blacklist from 'blacklist';
+import * as classnames from 'classnames';
 
-let PopoutListHeading = React.createClass({
+export const PopoutListHeading = React.createClass({
 	displayName: 'PopoutListHeading',
 	propTypes: {
 		children: React.PropTypes.node.isRequired,
@@ -21,5 +21,3 @@ let PopoutListHeading = React.createClass({
 		);
 	},
 });
-
-export = PopoutListHeading;

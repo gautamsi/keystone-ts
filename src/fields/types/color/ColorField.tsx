@@ -1,7 +1,7 @@
 import { SketchPicker } from 'react-color';
 import { css } from 'glamor';
 import Field from '../Field';
-import React from 'react';
+import * as React from 'react';
 import {
 	Button,
 	FormInput,

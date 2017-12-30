@@ -1,6 +1,7 @@
-const keystone = require('../index');
-const utils = require('keystone-utils');
-const safeRequire = require('./safeRequire');
+import { Keystone } from '../keystone';
+import * as utils from 'keystone-utils';
+import { safeRequire } from './safeRequire';
+
 
 /**
  * Email Class
@@ -21,13 +22,14 @@ const safeRequire = require('./safeRequire');
  * @api public
  */
 
-const Email = function (options) {
-	if (typeof options === 'string') {
-		options = { templateName: options };
-	}
-	if (!utils.isObject(options)) {
-		throw new Error('The keystone.Email class requires a templateName or options argument to be provided');
-	}
+export function Email(options) {
+    if (typeof options === 'string') {
+        options = { templateName: options };
+    }
+    if (!utils.isObject(options)) {
+        throw new Error('The keystone.Email class requires a templateName or options argument to be provided');
+    }
+    const keystone = Keystone.instance;
 
 	/**
 	 * Keystone < 0.4 Compatibility
@@ -35,66 +37,64 @@ const Email = function (options) {
 	 * NOTE: Add warnings and enable them in 4.1 or 4.2 release. These patterns
 	 * will be deprecated with the 0.5 release!
 	 */
-	// keystome.set('email transport', 'sometransport') -> options.transport
-	const emailTransport = keystone.get('email transport');
-	if (!options.transport && emailTransport) {
-		options.transport = emailTransport;
-	}
-	// mandrill used to be the default; provide it if the api key is set
-	const mandrillApiKey = keystone.get('mandrill api key');
-	if (!options.transport && mandrillApiKey) {
-		options.transport = 'mandrill';
-		options.apiKey = mandrillApiKey;
-	}
-	// templateExt -> engine
-	if (!options.engine) {
-		options.engine = options.templateExt;
-	}
-	// keystone.set('view engine', 'something') -> engine
-	if (!options.engine) {
-		const customEngine = keystone.get('custom engine');
-		const viewEngine = keystone.get('view engine');
-		if (typeof customEngine === 'function') {
-			// when customEngine is a function, viewEngine is probably the extension
-			options.engine = customEngine;
-			options.ext = options.ext || options.templateExt || viewEngine;
-		} else if (viewEngine) {
-			// otherwise, default the email engine to keystone's view engine
-			options.engine = viewEngine;
-		}
-	}
-	// keystone.set('emails', 'rootpath') -> root
-	const rootPath = keystone.get('emails');
-	if (rootPath && !options.root) {
-		options.root = rootPath;
-	}
+    // keystome.set('email transport', 'sometransport') -> options.transport
+    const emailTransport = keystone.get('email transport');
+    if (!options.transport && emailTransport) {
+        options.transport = emailTransport;
+    }
+    // mandrill used to be the default; provide it if the api key is set
+    const mandrillApiKey = keystone.get('mandrill api key');
+    if (!options.transport && mandrillApiKey) {
+        options.transport = 'mandrill';
+        options.apiKey = mandrillApiKey;
+    }
+    // templateExt -> engine
+    if (!options.engine) {
+        options.engine = options.templateExt;
+    }
+    // keystone.set('view engine', 'something') -> engine
+    if (!options.engine) {
+        const customEngine = keystone.get('custom engine');
+        const viewEngine = keystone.get('view engine');
+        if (typeof customEngine === 'function') {
+            // when customEngine is a function, viewEngine is probably the extension
+            options.engine = customEngine;
+            options.ext = options.ext || options.templateExt || viewEngine;
+        } else if (viewEngine) {
+            // otherwise, default the email engine to keystone's view engine
+            options.engine = viewEngine;
+        }
+    }
+    // keystone.set('emails', 'rootpath') -> root
+    const rootPath = keystone.get('emails');
+    if (rootPath && !options.root) {
+        options.root = rootPath;
+    }
 
-	// Try to use the keystone-email package and throw if it hasn't been installed
-	const KeystoneEmail = safeRequire('keystone-email', 'email');
+    // Try to use the keystone-email package and throw if it hasn't been installed
+    const KeystoneEmail = safeRequire('keystone-email', 'email');
 
-	// Create the new email instance with the template name and options
-	const templateName = options.templateName;
-	delete options.templateName;
-	const email = new KeystoneEmail(templateName, options);
+    // Create the new email instance with the template name and options
+    const templateName = options.templateName;
+    delete options.templateName;
+    const email = new KeystoneEmail(templateName, options);
 
-	// Make email.send backwards compatible with old argument signature
-	const send = email.send;
-	email.send = function () {
-		const args = [arguments[0]];
-		if (typeof arguments[1] === 'function') {
-			// map .send(options, callback) => .send(locals, options, callback)
-			// TOOD: Deprecate this call signature
-			args.push(arguments[0]);
-			args.push(arguments[1]);
-		} else {
-			// map .send(locals options, callback) => .send(locals, options, callback)
-			args.push(arguments[1]);
-			args.push(arguments[2]);
-		}
-		send.apply(email, args);
-	};
+    // Make email.send backwards compatible with old argument signature
+    const send = email.send;
+    email.send = function () {
+        const args = [arguments[0]];
+        if (typeof arguments[1] === 'function') {
+            // map .send(options, callback) => .send(locals, options, callback)
+            // TOOD: Deprecate this call signature
+            args.push(arguments[0]);
+            args.push(arguments[1]);
+        } else {
+            // map .send(locals options, callback) => .send(locals, options, callback)
+            args.push(arguments[1]);
+            args.push(arguments[2]);
+        }
+        send.apply(email, args);
+    };
 
-	return email;
-};
-
-export = Email;
+    return email;
+}

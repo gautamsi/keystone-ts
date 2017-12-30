@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { SegmentedControl } from 'elemental';
 
 const VALUE_OPTIONS = [
@@ -12,7 +12,7 @@ function getDefaultValue () {
 	};
 }
 
-let BooleanFilter = React.createClass({
+export const BooleanFilter = React.createClass({
 	propTypes: {
 		filter: React.PropTypes.shape({
 			value: React.PropTypes.bool,
@@ -33,5 +33,3 @@ let BooleanFilter = React.createClass({
 		return <SegmentedControl equalWidthSegments options={VALUE_OPTIONS} value={this.props.filter.value} onChange={this.updateValue} />;
 	},
 });
-
-export = BooleanFilter;

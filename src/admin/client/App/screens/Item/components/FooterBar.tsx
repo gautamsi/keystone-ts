@@ -1,8 +1,8 @@
-import React from 'react';
-import blacklist from 'blacklist';
-import assign from 'object-assign';
+import * as React from 'react';
+import * as blacklist from 'blacklist';
+import * as assign from 'object-assign';
 
-let FooterBar = React.createClass({
+export const FooterBar = React.createClass({
 	propTypes: {
 		style: React.PropTypes.object,
 	},
@@ -101,5 +101,3 @@ let FooterBar = React.createClass({
 		);
 	},
 });
-
-export = FooterBar;

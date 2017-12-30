@@ -1,37 +1,35 @@
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { Button } from 'elemental';
 
 // TODO Figure out if we should change "Keystone" to "Admin area"
 
-const UserInfo = ({
+export const UserInfo = ({
 	adminPath,
-	signoutPath,
-	userCanAccessKeystone,
-	userName,
+    signoutPath,
+    userCanAccessKeystone,
+    userName,
 }) => {
-	const adminButton = userCanAccessKeystone ? (
-		<Button href={adminPath} color="primary">
-			Open Keystone
+    const adminButton = userCanAccessKeystone ? (
+        <Button href={adminPath} color="primary">
+            Open Keystone
 		</Button>
-	) : null;
+    ) : null;
 
-	return (
-		<div className="auth-box__col">
-			<p>Hi {userName},</p>
-			<p>You're already signed in.</p>
-			{adminButton}
-			<Button href={signoutPath} variant="link" color="cancel">
-				Sign Out
+    return (
+        <div className="auth-box__col">
+            <p>Hi {userName},</p>
+            <p>You're already signed in.</p>
+            {adminButton}
+            <Button href={signoutPath} variant="link" color="cancel">
+                Sign Out
 			</Button>
-		</div>
-	);
+        </div>
+    );
 };
 
-UserInfo.propTypes = {
-	adminPath: PropTypes.string.isRequired,
-	signoutPath: PropTypes.string.isRequired,
-	userCanAccessKeystone: PropTypes.bool,
-	userName: PropTypes.string.isRequired,
+UserInfo['propTypes'] = {
+    adminPath: React.PropTypes.string.isRequired,
+    signoutPath: React.PropTypes.string.isRequired,
+    userCanAccessKeystone: React.PropTypes.bool,
+    userName: React.PropTypes.string.isRequired,
 };
-
-export = UserInfo;

@@ -2,10 +2,10 @@
  * Renders a confirmation dialog modal
  */
 
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { Button, Modal } from 'elemental';
 
-function ConfirmationDialog ({
+export function ConfirmationDialog ({
 	cancelLabel,
 	children,
 	confirmationLabel,
@@ -44,19 +44,17 @@ function ConfirmationDialog ({
 		</Modal.Dialog>
 	);
 }
-ConfirmationDialog.propTypes = {
-	body: PropTypes.string,
-	cancelLabel: PropTypes.string,
-	confirmationLabel: PropTypes.string,
-	confirmationType: PropTypes.oneOf(['danger', 'primary', 'success', 'warning']),
-	onCancel: PropTypes.func,
-	onConfirmation: PropTypes.func,
+ConfirmationDialog['propTypes'] = {
+	body: React.PropTypes.string,
+	cancelLabel: React.PropTypes.string,
+	confirmationLabel: React.PropTypes.string,
+	confirmationType: React.PropTypes.oneOf(['danger', 'primary', 'success', 'warning']),
+	onCancel: React.PropTypes.func,
+	onConfirmation: React.PropTypes.func,
 };
-ConfirmationDialog.defaultProps = {
+ConfirmationDialog['defaultProps'] = {
 	cancelLabel: 'Cancel',
 	confirmationLabel: 'Okay',
 	confirmationType: 'danger',
 	isOpen: false,
 };
-
-export default ConfirmationDialog;

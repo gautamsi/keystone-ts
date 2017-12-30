@@ -1,4 +1,4 @@
-import url from 'cloudinary-microurl';
+import * as url from 'cloudinary-microurl';
 const CLOUD_NAME = window.Keystone.cloudinary.cloud_name;
 
 /*

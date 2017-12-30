@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import moment from 'moment';
 import ItemsTableCell from '../../components/ItemsTableCell';
 import ItemsTableValue from '../../components/ItemsTableValue';

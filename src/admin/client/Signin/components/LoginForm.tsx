@@ -2,10 +2,10 @@
  * The login form of the signin screen
  */
 
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { Button, Form, FormField, FormInput } from 'elemental';
 
-const LoginForm = ({
+export const LoginForm = ({
 	email,
 	handleInputChange,
 	handleSubmit,
@@ -40,13 +40,10 @@ const LoginForm = ({
 	);
 };
 
-LoginForm.propTypes = {
-	email: PropTypes.string,
-	handleInputChange: PropTypes.func.isRequired,
-	handleSubmit: PropTypes.func.isRequired,
-	isAnimating: PropTypes.bool,
-	password: PropTypes.string,
+LoginForm['propTypes'] = {
+	email: React.PropTypes.string,
+	handleInputChange: React.PropTypes.func.isRequired,
+	handleSubmit: React.PropTypes.func.isRequired,
+	isAnimating: React.PropTypes.bool,
+	password: React.PropTypes.string,
 };
-
-
-export = LoginForm;

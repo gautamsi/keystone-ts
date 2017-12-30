@@ -5,7 +5,7 @@
  * @param  [String] string
  * @return [String]        The classname of the icon
  */
-export default function getRelatedIconClass (string) {
+export function getRelatedIconClass (string) {
 	const icons = [
 		{ icon: 'book', sections: ['books', 'posts', 'blog', 'blog-posts', 'stories', 'news-stories', 'content'] },
 		{ icon: 'briefcase', sections: ['businesses', 'companies', 'listings', 'organizations', 'partners'] },

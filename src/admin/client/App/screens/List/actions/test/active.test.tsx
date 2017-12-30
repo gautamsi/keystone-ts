@@ -1,4 +1,4 @@
-import demand from 'must';
+import * as demand from 'must';
 import {
 	setActiveSearch,
 	setActiveList,

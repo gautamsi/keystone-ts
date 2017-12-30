@@ -1,7 +1,7 @@
 import * as  _ from 'lodash';
 import { Keystone } from '../../keystone';
 const keystone = Keystone.instance;
-import * as  Types from '../fieldTypes';
+import { fields as Types } from '../fieldTypes';
 
 /**
  * List track option

@@ -2,16 +2,16 @@
  * A single flash message component. Used by FlashMessages.js
  */
 
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { Alert } from 'elemental';
 
-const FlashMessage = React.createClass({
+export const FlashMessage = React.createClass({
 	propTypes: {
-		message: PropTypes.oneOfType([
-			PropTypes.object,
-			PropTypes.string,
+		message: React.PropTypes.oneOfType([
+			React.PropTypes.object,
+			React.PropTypes.string,
 		]).isRequired,
-		type: PropTypes.string,
+		type: React.PropTypes.string,
 	},
 	// Render the message
 	renderMessage (message) {
@@ -52,5 +52,3 @@ const FlashMessage = React.createClass({
 		);
 	},
 });
-
-export = FlashMessage;

@@ -6,21 +6,21 @@
  * want to have injected here, so this is a completely separate route and template.
  */
 import qs from 'qs';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Signin from './Signin';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { SigninView as Signin } from './Signin';
 
 const params = qs.parse(window.location.search.replace(/^\?/, ''));
 const from = typeof params.from === 'string' && params.from.charAt(0) === '/'
-	? params.from : undefined;
+    ? params.from : undefined;
 
 ReactDOM.render(
-	<Signin
-		brand={Keystone.brand}
-		from={from}
-		logo={Keystone.logo}
-		user={Keystone.user}
-		userCanAccessKeystone={Keystone.userCanAccessKeystone}
-	/>,
-	document.getElementById('signin-view')
+    <Signin
+        brand={Keystone.brand}
+        from={from}
+        logo={Keystone.logo}
+        user={Keystone.user}
+        userCanAccessKeystone={Keystone.userCanAccessKeystone}
+    />,
+    document.getElementById('signin-view')
 );
