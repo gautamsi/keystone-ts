@@ -36,7 +36,7 @@ export function ListHeaderSearch({
     );
 }
 
-ListHeaderSearch.['propTypes'] = {
+ListHeaderSearch['propTypes'] = {
     focusInput: React.PropTypes.bool,
     handleChange: React.PropTypes.func.isRequired,
     handleClear: React.PropTypes.func.isRequired,

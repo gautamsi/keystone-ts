@@ -1,22 +1,15 @@
-import * as  FieldType from '../Type';
-import { text as TextType } from '../text/TextType';
-import * as  util from 'util';
-
+import { TextType } from '../text/TextType';
 
 /**
  * Color FieldType Constructor
  * @extends Field
  * @api public
  */
-export function color(list, path, options) {
-    this._nativeType = String;
-    color.super_.call(this, list, path, options);
+export class ColorType extends TextType {
+
+    constructor(list, path, options) {
+        super(list, path, options);
+        this._nativeType = String;
+    }
+    static properName = 'ColorType';
 }
-color['properName'] = 'Color';
-util.inherits(color, FieldType);
-
-color.prototype.validateInput = TextType.prototype.validateInput;
-color.prototype.validateRequiredInput = TextType.prototype.validateRequiredInput;
-
-/* Inherit from TextType prototype */
-color.prototype.addFilterToQuery = TextType.prototype.addFilterToQuery;

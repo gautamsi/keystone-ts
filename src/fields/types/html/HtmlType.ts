@@ -1,5 +1,5 @@
-import { Field as FieldType } from '../Type';
-import { text as TextType } from '../text/TextType';
+import { FieldTypeBase } from '../FieldTypeBase';
+import { TextType } from '../text/TextType';
 import * as util from 'util';
 
 
@@ -8,20 +8,17 @@ import * as util from 'util';
  * @extends Field
  * @api public
  */
-export function html(list, path, options) {
-    this._nativeType = String;
-    this._defaultSize = 'full';
-    this.wysiwyg = options.wysiwyg || false;
-    this.height = options.height || 180;
-    this._properties = ['wysiwyg', 'height'];
-    html.super_.call(this, list, path, options);
+export class HtmlType extends TextType {
+    height: number;
+    wysiwyg: boolean;
+
+    constructor(list, path, options) {
+        super(list, path, options);
+        this._nativeType = String;
+        this._defaultSize = 'full';
+        this.wysiwyg = options.wysiwyg || false;
+        this.height = options.height || 180;
+        this._properties = ['wysiwyg', 'height'];
+    }
+    static properName = 'HtmlType';
 }
-html['properName'] = 'Html';
-util.inherits(html, FieldType);
-
-
-html.prototype.validateInput = TextType.prototype.validateInput;
-html.prototype.validateRequiredInput = TextType.prototype.validateRequiredInput;
-
-/* Inherit from TextType prototype */
-html.prototype.addFilterToQuery = TextType.prototype.addFilterToQuery;

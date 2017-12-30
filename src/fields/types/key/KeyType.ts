@@ -1,6 +1,5 @@
-import { Field as FieldType } from '../Type';
-import { text as TextType } from '../text/TextType';
-import * as util from 'util';
+import { FieldTypeBase } from '../FieldTypeBase';
+import { TextType } from '../text/TextType';
 import * as utils from 'keystone-utils';
 
 /**
@@ -8,52 +7,49 @@ import * as utils from 'keystone-utils';
  * @extends Field
  * @api public
  */
-export function key(list, path, options) {
-    this._nativeType = String;
-    this._defaultSize = 'medium';
-    this.separator = options.separator || '-';
-    key.super_.call(this, list, path, options);
+export class KeyType extends TextType {
+    separator: string;
+    constructor(list, path, options) {
+        super(list, path, options);
+        this._nativeType = String;
+        this._defaultSize = 'medium';
+        this.separator = options.separator || '-';
+    }
+    static properName = 'KeyType';
+
+    /**
+     * Generates a valid key from a string
+     */
+    generateKey(str) {
+        return utils.slug(String(str), this.separator);
+    }
+
+    /**
+     * Checks that a valid key has been provided in a data object
+     *
+     * Deprecated
+     */
+    inputIsValid(data, required, item) {
+        let value = this.getValueFromData(data);
+        if (value === undefined && item && item.get(this.path)) {
+            return true;
+        }
+        value = this.generateKey(value);
+        return (value || !required) ? true : false;
+    }
+
+    /**
+     * Updates the value for this field in the item from a data object
+     */
+    updateItem(item, data, callback) {
+        let value = this.getValueFromData(data);
+        if (value === undefined) {
+            return process.nextTick(callback);
+        }
+        value = this.generateKey(value);
+        if (item.get(this.path) !== value) {
+            item.set(this.path, value);
+        }
+        process.nextTick(callback);
+    }
 }
-key['properName'] = 'Key';
-util.inherits(key, FieldType);
-
-/* Inherit from TextType prototype */
-key.prototype.addFilterToQuery = TextType.prototype.addFilterToQuery;
-key.prototype.validateInput = TextType.prototype.validateInput;
-key.prototype.validateRequiredInput = TextType.prototype.validateRequiredInput;
-
-/**
- * Generates a valid key from a string
- */
-key.prototype.generateKey = function (str) {
-    return utils.slug(String(str), this.separator);
-};
-
-/**
- * Checks that a valid key has been provided in a data object
- *
- * Deprecated
- */
-key.prototype.inputIsValid = function (data, required, item) {
-    let value = this.getValueFromData(data);
-    if (value === undefined && item && item.get(this.path)) {
-        return true;
-    }
-    value = this.generateKey(value);
-    return (value || !required) ? true : false;
-};
-
-/**
- * Updates the value for this field in the item from a data object
- */
-key.prototype.updateItem = function (item, data, callback) {
-    let value = this.getValueFromData(data);
-    if (value === undefined) {
-        return process.nextTick(callback);
-    }
-    value = this.generateKey(value);
-    if (item.get(this.path) !== value) {
-        item.set(this.path, value);
-    }
-    process.nextTick(callback);
-};

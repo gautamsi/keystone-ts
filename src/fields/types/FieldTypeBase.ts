@@ -10,6 +10,7 @@ import * as  utils from 'keystone-utils';
 import { evalDependsOn } from '../utils/evalDependsOn.js';
 import { definePrototypeGetters } from '../utils/definePrototypeGetters.js';
 import * as _debug from 'debug';
+import { console } from 'node';
 const debug = _debug('keystone:fields:types:Type');
 
 const DEFAULT_OPTION_KEYS = [
@@ -40,11 +41,9 @@ const DEFAULT_OPTION_KEYS = [
  *
  * @api public
  */
-export class Field {
-    getProperties: any;
+export abstract class FieldTypeBase {
     _underscoreMethods: any[];
     _nativeType: any;
-    addFilterToQuery: any;
     _fixedSize: any;
     _defaultSize: string;
     __size: any;
@@ -59,6 +58,49 @@ export class Field {
     _path: any;
     list: any;
 
+    get size() {
+        return this.getSize();
+    }
+
+    get initial() {
+        return this.options.initial || false;
+    }
+
+    get required() {
+        return this.options.required || false;
+    }
+
+    get note() {
+        return this.options.note || '';
+    }
+
+    get col() {
+        return this.options.col || false;
+    }
+
+    get noedit() {
+        return this.options.noedit || false;
+    }
+
+    get nocol() {
+        return this.options.nocol || false;
+    }
+
+    get nosort() {
+        return this.options.nosort || false;
+    }
+
+    get collapse() {
+        return this.options.collapse || false;
+    }
+
+    get hidden() {
+        return this.options.hidden || false;
+    }
+
+    get dependsOn() {
+        return this.options.dependsOn || false;
+    }
 
     constructor(list, path, options) {
 
@@ -115,6 +157,10 @@ export class Field {
         });
 
     }
+
+    addFilterToQuery(filter: any) { }
+
+    getProperties() { }
 
     /**
      * Gets the options for the Field, as used by the React components
@@ -285,7 +331,7 @@ export class Field {
      *
      * @api public
      */
-    format(item) {
+    format(item, ...args) { // ref: args is optional due to DateType and other overrides
         const value = item.get(this.path);
         if (value === undefined) return '';
         return value;
@@ -346,7 +392,7 @@ export class Field {
      *
      * @api public
      */
-    updateItem(item, data, callback) {
+    updateItem(item, data, callback, ...rest) { // ref: ignore rest parament, needed for inheritance to work
         const value = this.getValueFromData(data);
         // This is a deliberate type coercion so that numbers from forms play nice
         if (value !== undefined && value !== item.get(this.path)) { // eslint-disable-line eqeqeq
@@ -365,17 +411,3 @@ export class Field {
     }
 
 }
-/** Getter properties for the Field prototype */
-definePrototypeGetters(Field, {
-    size: function () { return this.getSize(); },
-    initial: function () { return this.options.initial || false; },
-    required: function () { return this.options.required || false; },
-    note: function () { return this.options.note || ''; },
-    col: function () { return this.options.col || false; },
-    noedit: function () { return this.options.noedit || false; },
-    nocol: function () { return this.options.nocol || false; },
-    nosort: function () { return this.options.nosort || false; },
-    collapse: function () { return this.options.collapse || false; },
-    hidden: function () { return this.options.hidden || false; },
-    dependsOn: function () { return this.options.dependsOn || false; },
-});

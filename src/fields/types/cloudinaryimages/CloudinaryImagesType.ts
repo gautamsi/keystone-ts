@@ -1,9 +1,9 @@
-const _ = require('lodash');
-const assign = require('object-assign');
-const async = require('async');
-const FieldType = require('../Type');
-const keystone = require('../../../');
-const util = require('util');
+import * as _ from 'lodash';
+import * as assign from 'object-assign';
+import * as async from 'async';
+import { FieldTypeBase } from '../FieldTypeBase';
+import { keystone } from '../../../keystone';
+import * as util from 'util';
 
 function getEmptyValue() {
     return {
@@ -41,7 +41,7 @@ export function cloudinaryimages(list, path, options) {
     }
 }
 cloudinaryimages['properName'] = 'CloudinaryImages';
-util.inherits(cloudinaryimages, FieldType);
+util.inherits(cloudinaryimages, FieldTypeBase);
 
 /**
  * Gets the folder for images in this field
