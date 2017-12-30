@@ -1,1 +1,1 @@
-export = require('../date/DateFilter');
+export { DateFilter as DateTimeFilter } from '../date/DateFilter';

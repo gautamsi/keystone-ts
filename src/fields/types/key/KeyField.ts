@@ -1,8 +1,8 @@
-import Field from '../Field';
+import * as Field from '../Field';
 
-export = Field.create({
-	displayName: 'KeyField',
-	statics: {
-		type: 'Key',
-	},
+export const KeyField = Field.create({
+    displayName: 'KeyField',
+    statics: {
+        type: 'Key',
+    },
 });

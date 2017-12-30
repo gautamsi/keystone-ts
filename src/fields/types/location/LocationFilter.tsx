@@ -24,7 +24,7 @@ function getDefaultValue () {
 	};
 }
 
-let TextFilter = React.createClass({
+export const TextFilter = React.createClass({
 	propTypes: {
 		filter: React.PropTypes.shape({
 			inverted: React.PropTypes.boolean,
@@ -118,5 +118,3 @@ let TextFilter = React.createClass({
 		);
 	},
 });
-
-export = TextFilter;

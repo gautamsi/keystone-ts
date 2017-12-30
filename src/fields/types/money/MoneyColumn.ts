@@ -1,1 +1,1 @@
-export = require('../number/NumberColumn');
+export { NumberColumn as MoneyColumn } from '../number/NumberColumn';

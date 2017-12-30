@@ -1,10 +1,10 @@
-import _ from 'lodash';
+import * as _ from 'lodash';
 import CodeMirror from 'codemirror';
-import Field from '../Field';
+import * as Field from '../Field';
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import { FormInput } from 'elemental';
-import classnames from 'classnames';
+import * as classnames from 'classnames';
 
 /**
  * TODO:

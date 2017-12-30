@@ -1,21 +1,21 @@
-const crypto = require('crypto');
-const FieldType = require('../Type');
-const TextType = require('../text/TextType');
-const util = require('util');
-const utils = require('keystone-utils');
+import * as crypto from 'crypto';
+import { Field as FieldType } from '../Type';
+import * as TextType from '../text/TextType';
+import * as util from 'util';
+import * as utils from 'keystone-utils';
 
 /**
  * Email FieldType Constructor
  * @extends Field
  * @api public
  */
-function email (list, path, options) {
-	this._nativeType = String;
-	this._underscoreMethods = ['gravatarUrl'];
-	this.typeDescription = 'email address';
-	email.super_.call(this, list, path, options);
+export function email(list, path, options) {
+    this._nativeType = String;
+    this._underscoreMethods = ['gravatarUrl'];
+    this.typeDescription = 'email address';
+    email.super_.call(this, list, path, options);
 }
-email.properName = 'Email';
+email['properName'] = 'Email';
 util.inherits(email, FieldType);
 
 /* Inherit from TextType prototype */
@@ -25,34 +25,34 @@ email.prototype.addFilterToQuery = TextType.prototype.addFilterToQuery;
  * Generate a gravatar image request url
  */
 email.prototype.gravatarUrl = function (item, size, defaultImage, rating) {
-	const value = item.get(this.path);
-	if (typeof value !== 'string') {
-		return '';
-	}
-	return [
-		// base url protocol-less for both http/https
-		'//www.gravatar.com/avatar/',
-		// md5 hash the trimmed lowercase email
-		crypto.createHash('md5').update(value.toLowerCase().trim()).digest('hex'),
-		// size of images ranging from 1 to 2048 pixels, square
-		'?s=' + (/^(?:[1-9][0-9]{0,2}|1[0-9]{3}|20[0-3][0-9]|204[0-8])$/.test(size) ? size : 80),
-		// default image url encoded href or one of the built in options: 404, mm, identicon, monsterid, wavatar, retro, blank
-		'&d=' + (defaultImage ? encodeURIComponent(defaultImage) : 'identicon'),
-		// rating, g, pg, r or x
-		'&r=' + (/^(?:g|pg|r|x)$/i.test(rating) ? rating.toLowerCase() : 'g'),
-	].join('');
+    const value = item.get(this.path);
+    if (typeof value !== 'string') {
+        return '';
+    }
+    return [
+        // base url protocol-less for both http/https
+        '//www.gravatar.com/avatar/',
+        // md5 hash the trimmed lowercase email
+        crypto.createHash('md5').update(value.toLowerCase().trim()).digest('hex'),
+        // size of images ranging from 1 to 2048 pixels, square
+        '?s=' + (/^(?:[1-9][0-9]{0,2}|1[0-9]{3}|20[0-3][0-9]|204[0-8])$/.test(size) ? size : 80),
+        // default image url encoded href or one of the built in options: 404, mm, identicon, monsterid, wavatar, retro, blank
+        '&d=' + (defaultImage ? encodeURIComponent(defaultImage) : 'identicon'),
+        // rating, g, pg, r or x
+        '&r=' + (/^(?:g|pg|r|x)$/i.test(rating) ? rating.toLowerCase() : 'g'),
+    ].join('');
 };
 
 /**
  * Asynchronously confirms that the provided email is valid
  */
 email.prototype.validateInput = function (data, callback) {
-	const input = this.getValueFromData(data);
-	let result = true;
-	if (input) {
-		result = utils.isEmail(input);
-	}
-	utils.defer(callback, result);
+    const input = this.getValueFromData(data);
+    let result = true;
+    if (input) {
+        result = utils.isEmail(input);
+    }
+    utils.defer(callback, result);
 };
 
 /**
@@ -66,12 +66,12 @@ email.prototype.validateRequiredInput = TextType.prototype.validateRequiredInput
  * Deprecated
  */
 email.prototype.inputIsValid = function (data, required, item) {
-	const value = this.getValueFromData(data);
-	if (value) {
-		return utils.isEmail(value);
-	} else {
-		return (!required || (item && item.get(this.path))) ? true : false;
-	}
+    const value = this.getValueFromData(data);
+    if (value) {
+        return utils.isEmail(value);
+    } else {
+        return (!required || (item && item.get(this.path))) ? true : false;
+    }
 };
 
 /**
@@ -79,15 +79,12 @@ email.prototype.inputIsValid = function (data, required, item) {
  * Ensures that the email address is lowercase
  */
 email.prototype.updateItem = function (item, data, callback) {
-	let newValue = this.getValueFromData(data);
-	if (typeof newValue === 'string') {
-		newValue = newValue.toLowerCase();
-	}
-	if (newValue !== undefined && newValue !== item.get(this.path)) {
-		item.set(this.path, newValue);
-	}
-	process.nextTick(callback);
+    let newValue = this.getValueFromData(data);
+    if (typeof newValue === 'string') {
+        newValue = newValue.toLowerCase();
+    }
+    if (newValue !== undefined && newValue !== item.get(this.path)) {
+        item.set(this.path, newValue);
+    }
+    process.nextTick(callback);
 };
-
-/* Export Field Type */
-export = email;

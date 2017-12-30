@@ -1,6 +1,6 @@
-const FieldType = require('../Type');
-const TextType = require('../text/TextType');
-const util = require('util');
+import { Field as FieldType } from '../Type';
+import { text as TextType } from '../text/TextType';
+import * as util from 'util';
 
 
 /**
@@ -8,15 +8,15 @@ const util = require('util');
  * @extends Field
  * @api public
  */
-function html (list, path, options) {
-	this._nativeType = String;
-	this._defaultSize = 'full';
-	this.wysiwyg = options.wysiwyg || false;
-	this.height = options.height || 180;
-	this._properties = ['wysiwyg', 'height'];
-	html.super_.call(this, list, path, options);
+export function html(list, path, options) {
+    this._nativeType = String;
+    this._defaultSize = 'full';
+    this.wysiwyg = options.wysiwyg || false;
+    this.height = options.height || 180;
+    this._properties = ['wysiwyg', 'height'];
+    html.super_.call(this, list, path, options);
 }
-html.properName = 'Html';
+html['properName'] = 'Html';
 util.inherits(html, FieldType);
 
 
@@ -25,6 +25,3 @@ html.prototype.validateRequiredInput = TextType.prototype.validateRequiredInput;
 
 /* Inherit from TextType prototype */
 html.prototype.addFilterToQuery = TextType.prototype.addFilterToQuery;
-
-/* Export Field Type */
-export = html;

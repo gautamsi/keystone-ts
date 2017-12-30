@@ -1,6 +1,6 @@
-const FieldType = require('../Type');
-const TextType = require('../text/TextType');
-const util = require('util');
+import * as  FieldType from '../Type';
+import { text as TextType } from '../text/TextType';
+import * as  util from 'util';
 
 
 /**
@@ -8,11 +8,11 @@ const util = require('util');
  * @extends Field
  * @api public
  */
-function color (list, path, options) {
-	this._nativeType = String;
-	color.super_.call(this, list, path, options);
+export function color(list, path, options) {
+    this._nativeType = String;
+    color.super_.call(this, list, path, options);
 }
-color.properName = 'Color';
+color['properName'] = 'Color';
 util.inherits(color, FieldType);
 
 color.prototype.validateInput = TextType.prototype.validateInput;
@@ -20,6 +20,3 @@ color.prototype.validateRequiredInput = TextType.prototype.validateRequiredInput
 
 /* Inherit from TextType prototype */
 color.prototype.addFilterToQuery = TextType.prototype.addFilterToQuery;
-
-/* Export Field Type */
-export = color;

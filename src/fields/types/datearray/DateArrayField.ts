@@ -1,44 +1,44 @@
-import ArrayFieldMixin from '../../mixins/ArrayField';
-import DateInput from '../../components/DateInput';
-import Field from '../Field';
-import React from 'react';
-import moment from 'moment';
+import * as ArrayFieldMixin from '../../mixins/ArrayField';
+import { DateInput } from '../../components/DateInput';
+import * as Field from '../Field';
+import * as React from 'react';
+import * as moment from 'moment';
 
 const DEFAULT_INPUT_FORMAT = 'YYYY-MM-DD';
 const DEFAULT_FORMAT_STRING = 'Do MMM YYYY';
 
-export = Field.create({
+export const DateArrayField = Field.create({
 
-	displayName: 'DateArrayField',
-	statics: {
-		type: 'DateArray',
-	},
-	mixins: [ArrayFieldMixin],
+    displayName: 'DateArrayField',
+    statics: {
+        type: 'DateArray',
+    },
+    mixins: [ArrayFieldMixin],
 
-	propTypes: {
-		formatString: React.PropTypes.string,
-		inputFormat: React.PropTypes.string,
-	},
+    propTypes: {
+        formatString: React.PropTypes.string,
+        inputFormat: React.PropTypes.string,
+    },
 
-	getDefaultProps () {
-		return {
-			formatString: DEFAULT_FORMAT_STRING,
-			inputFormat: DEFAULT_INPUT_FORMAT,
-		};
-	},
+    getDefaultProps() {
+        return {
+            formatString: DEFAULT_FORMAT_STRING,
+            inputFormat: DEFAULT_INPUT_FORMAT,
+        };
+    },
 
-	processInputValue (value) {
-		if (!value) return;
-		const m = moment(value);
-		return m.isValid() ? m.format(this.props.inputFormat) : value;
-	},
+    processInputValue(value) {
+        if (!value) return;
+        const m = moment(value);
+        return m.isValid() ? m.format(this.props.inputFormat) : value;
+    },
 
-	formatValue (value) {
-		return value ? moment(value).format(this.props.formatString) : '';
-	},
+    formatValue(value) {
+        return value ? moment(value).format(this.props.formatString) : '';
+    },
 
-	getInputComponent () {
-		return DateInput;
-	},
+    getInputComponent() {
+        return DateInput;
+    },
 
 });

@@ -1,1 +1,1 @@
-export = require('../number/NumberFilter');
+export { NumberFilter as MoneyFilter } from '../number/NumberFilter';

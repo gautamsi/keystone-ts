@@ -28,7 +28,7 @@ function getDefaultValue () {
 	};
 }
 
-let TextFilter = React.createClass({
+export const TextFilter = React.createClass({
 	propTypes: {
 		filter: React.PropTypes.shape({
 			mode: React.PropTypes.oneOf(MODE_OPTIONS.map(i => i.value)),
@@ -92,5 +92,3 @@ let TextFilter = React.createClass({
 		);
 	},
 });
-
-export = TextFilter;

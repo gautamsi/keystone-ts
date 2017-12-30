@@ -1,1 +1,1 @@
-export = require('../text/TextFilter');
+export { TextFilter as HtmlFilter } from '../text/TextFilter';

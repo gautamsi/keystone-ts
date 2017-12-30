@@ -13,7 +13,7 @@ function getDefaultValue () {
 	};
 }
 
-let PasswordFilter = React.createClass({
+export const PasswordFilter = React.createClass({
 	propTypes: {
 		filter: React.PropTypes.shape({
 			exists: React.PropTypes.oneOf(EXISTS_OPTIONS.map(i => i.value)),
@@ -43,5 +43,3 @@ let PasswordFilter = React.createClass({
 		);
 	},
 });
-
-export = PasswordFilter;

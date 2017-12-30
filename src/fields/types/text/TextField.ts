@@ -1,6 +1,6 @@
-import Field from '../Field';
+import * as Field from '../Field';
 
-export = Field.create({
+export const TextField = Field.create({
 	displayName: 'TextField',
 	statics: {
 		type: 'Text',

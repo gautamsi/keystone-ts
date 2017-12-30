@@ -1,1 +1,1 @@
-export = require('../cloudinaryimage/CloudinaryImageFilter');
+export { CloudinaryImageFilter as EmbedlyFilter } from '../cloudinaryimage/CloudinaryImageFilter';

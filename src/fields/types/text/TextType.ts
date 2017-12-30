@@ -7,7 +7,7 @@ const utils = require('keystone-utils');
  * @extends Field
  * @api public
  */
-function text (list, path, options) {
+export function text (list, path, options) {
 	this.options = options;
 	this._nativeType = String;
 	this._properties = ['monospace'];
@@ -68,6 +68,3 @@ text.prototype.addFilterToQuery = function (filter) {
 text.prototype.crop = function (item, length, append, preserveWords) {
 	return utils.cropString(item.get(this.path), length, append, preserveWords);
 };
-
-/* Export Field Type */
-export = text;

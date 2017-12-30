@@ -1,1 +1,1 @@
-export = require('../date/DateColumn');
+export { DateColumn as DateTimeColumn } from '../date/DateColumn';

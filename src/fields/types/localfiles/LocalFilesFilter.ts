@@ -1,1 +1,1 @@
-export = require('../cloudinaryimage/CloudinaryImageFilter');
+export { CloudinaryImageFilter as LocalFilesFilter } from '../cloudinaryimage/CloudinaryImageFilter';

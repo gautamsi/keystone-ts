@@ -23,7 +23,7 @@ function getDefaultValue () {
 	};
 }
 
-let TextFilter = React.createClass({
+export const TextFilter = React.createClass({
 	propTypes: {
 		filter: React.PropTypes.shape({
 			lat: React.PropTypes.number,
@@ -121,5 +121,3 @@ let TextFilter = React.createClass({
 		);
 	},
 });
-
-export = TextFilter;

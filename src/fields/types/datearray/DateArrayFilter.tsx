@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
-import moment from 'moment';
+import * as moment from 'moment';
 import DayPicker from 'react-day-picker';
 import {
 	FormInput,
@@ -41,7 +41,7 @@ function getDefaultValue () {
 	};
 }
 
-let DateFilter = React.createClass({
+export const DateFilter = React.createClass({
 	displayName: 'DateFilter',
 	propTypes: {
 		filter: React.PropTypes.shape({
@@ -214,5 +214,3 @@ let DateFilter = React.createClass({
 		);
 	},
 });
-
-export = DateFilter;

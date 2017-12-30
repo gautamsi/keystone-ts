@@ -1,17 +1,17 @@
-import ArrayFieldMixin from '../../mixins/ArrayField';
-import Field from '../Field';
+import * as ArrayFieldMixin from '../../mixins/ArrayField';
+import * as Field from '../Field';
 
-export = Field.create({
+export const NumberArrayField = Field.create({
 
-	displayName: 'NumberArrayField',
-	statics: {
-		type: 'NumberArray',
-	},
+    displayName: 'NumberArrayField',
+    statics: {
+        type: 'NumberArray',
+    },
 
-	mixins: [ArrayFieldMixin],
+    mixins: [ArrayFieldMixin],
 
-	cleanInput (input) {
-		return input.replace(/[^\d]/g, '');
-	},
+    cleanInput(input) {
+        return input.replace(/[^\d]/g, '');
+    },
 
 });

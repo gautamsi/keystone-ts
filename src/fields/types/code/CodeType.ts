@@ -1,7 +1,7 @@
-const assign = require('object-assign');
-const FieldType = require('../Type');
-const TextType = require('../text/TextType');
-const util = require('util');
+import * as  assign from 'object-assign';
+import * as  FieldType from '../Type';
+import { text as TextType } from '../text/TextType';
+import * as  util from 'util';
 
 
 /**
@@ -9,17 +9,17 @@ const util = require('util');
  * @extends Field
  * @api public
  */
-function code (list, path, options) {
-	this._nativeType = String;
-	this._defaultSize = 'full';
-	this.height = options.height || 180;
-	this.lang = options.lang || options.language;
-	this._properties = ['editor', 'height', 'lang'];
-	this.codemirror = options.codemirror || {};
-	this.editor = assign({ mode: this.lang }, this.codemirror);
-	code.super_.call(this, list, path, options);
+export function code(list, path, options) {
+    this._nativeType = String;
+    this._defaultSize = 'full';
+    this.height = options.height || 180;
+    this.lang = options.lang || options.language;
+    this._properties = ['editor', 'height', 'lang'];
+    this.codemirror = options.codemirror || {};
+    this.editor = assign({ mode: this.lang }, this.codemirror);
+    code.super_.call(this, list, path, options);
 }
-code.properName = 'Code';
+code['properName'] = 'Code';
 util.inherits(code, FieldType);
 
 
@@ -28,6 +28,3 @@ code.prototype.validateRequiredInput = TextType.prototype.validateRequiredInput;
 
 /* Inherit from TextType prototype */
 code.prototype.addFilterToQuery = TextType.prototype.addFilterToQuery;
-
-/* Export Field Type */
-export = code;

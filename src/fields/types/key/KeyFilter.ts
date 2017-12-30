@@ -1,1 +1,1 @@
-export = require('../text/TextFilter');
+export { TextFilter as KeyFilter } from '../text/TextFilter';

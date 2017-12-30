@@ -1,32 +1,32 @@
-const FieldType = require('../Type');
-const marked = require('marked');
-const sanitizeHtml = require('sanitize-html');
-const TextType = require('../text/TextType');
-const util = require('util');
-const utils = require('keystone-utils');
+import { Field as FieldType } from '../Type';
+import * as marked from 'marked';
+import * as sanitizeHtml from 'sanitize-html';
+import { text as TextType } from '../text/TextType';
+import * as util from 'util';
+import * as utils from 'keystone-utils';
 
 /**
  * Markdown FieldType Constructor
  * @extends Field
  * @api public
  */
-function markdown (list, path, options) {
-	this._defaultSize = 'full';
+export function markdown(list, path, options) {
+    this._defaultSize = 'full';
 
-	this.toolbarOptions = options.toolbarOptions || {};
-	this.markedOptions = options.markedOptions || {};
+    this.toolbarOptions = options.toolbarOptions || {};
+    this.markedOptions = options.markedOptions || {};
 
-	// See sanitize-html docs for defaults
-	// .. https://www.npmjs.com/package/sanitize-html#what-are-the-default-options
-	this.sanitizeOptions = options.sanitizeOptions || {};
+    // See sanitize-html docs for defaults
+    // .. https://www.npmjs.com/package/sanitize-html#what-are-the-default-options
+    this.sanitizeOptions = options.sanitizeOptions || {};
 
-	this.height = options.height || 90;
-	this.wysiwyg = ('wysiwyg' in options) ? options.wysiwyg : true;
+    this.height = options.height || 90;
+    this.wysiwyg = ('wysiwyg' in options) ? options.wysiwyg : true;
 
-	this._properties = ['wysiwyg', 'height', 'toolbarOptions'];
-	markdown.super_.call(this, list, path, options);
+    this._properties = ['wysiwyg', 'height', 'toolbarOptions'];
+    markdown.super_.call(this, list, path, options);
 }
-markdown.properName = 'Markdown';
+markdown['properName'] = 'Markdown';
 util.inherits(markdown, FieldType);
 
 
@@ -42,44 +42,44 @@ markdown.prototype.validateRequiredInput = TextType.prototype.validateRequiredIn
  */
 markdown.prototype.addToSchema = function (schema) {
 
-	const paths = this.paths = {
-		md: this.path + '.md',
-		html: this.path + '.html',
-	};
+    const paths = this.paths = {
+        md: this.path + '.md',
+        html: this.path + '.html',
+    };
 
-	const markedOptions = this.markedOptions;
-	const sanitizeOptions = this.sanitizeOptions;
+    const markedOptions = this.markedOptions;
+    const sanitizeOptions = this.sanitizeOptions;
 
-	const setMarkdown = function (value) {
-		// Clear if saving invalid value
-		if (typeof value !== 'string') {
-			this.set(paths.md, undefined);
-			this.set(paths.html, undefined);
+    const setMarkdown = function (value) {
+        // Clear if saving invalid value
+        if (typeof value !== 'string') {
+            this.set(paths.md, undefined);
+            this.set(paths.html, undefined);
 
-			return undefined;
-		}
+            return undefined;
+        }
 
-		const newMd = sanitizeHtml(value, sanitizeOptions);
-		const newHtml = marked(newMd, markedOptions);
+        const newMd = sanitizeHtml(value, sanitizeOptions);
+        const newHtml = marked(newMd, markedOptions);
 
-		// Return early if no changes to save
-		if (newMd === this.get(paths.md) && newHtml === this.get(paths.html)) {
-			return newMd;
-		}
+        // Return early if no changes to save
+        if (newMd === this.get(paths.md) && newHtml === this.get(paths.html)) {
+            return newMd;
+        }
 
-		this.set(paths.md, newMd);
-		this.set(paths.html, newHtml);
+        this.set(paths.md, newMd);
+        this.set(paths.html, newHtml);
 
-		return newMd;
-	};
+        return newMd;
+    };
 
-	schema.nested[this.path] = true;
-	schema.add({
-		html: { type: String },
-		md: { type: String, set: setMarkdown },
-	}, this.path + '.');
+    schema.nested[this.path] = true;
+    schema.add({
+        html: { type: String },
+        md: { type: String, set: setMarkdown },
+    }, this.path + '.');
 
-	this.bindUnderscoreMethods();
+    this.bindUnderscoreMethods();
 };
 
 /**
@@ -87,37 +87,37 @@ markdown.prototype.addToSchema = function (schema) {
  * the only difference being that the path isn't this.path but this.paths.md)
  */
 markdown.prototype.addFilterToQuery = function (filter) {
-	const query = {};
-	if (filter.mode === 'exactly' && !filter.value) {
-		query[this.paths.md] = filter.inverted ? { $nin: ['', null] } : { $in: ['', null] };
-		return query;
-	}
-	let value = utils.escapeRegExp(filter.value);
-	if (filter.mode === 'beginsWith') {
-		value = '^' + value;
-	} else if (filter.mode === 'endsWith') {
-		value = value + '$';
-	} else if (filter.mode === 'exactly') {
-		value = '^' + value + '$';
-	}
-	value = new RegExp(value, filter.caseSensitive ? '' : 'i');
-	query[this.paths.md] = filter.inverted ? { $not: value } : value;
-	return query;
+    const query = {};
+    if (filter.mode === 'exactly' && !filter.value) {
+        query[this.paths.md] = filter.inverted ? { $nin: ['', null] } : { $in: ['', null] };
+        return query;
+    }
+    let value = utils.escapeRegExp(filter.value);
+    if (filter.mode === 'beginsWith') {
+        value = '^' + value;
+    } else if (filter.mode === 'endsWith') {
+        value = value + '$';
+    } else if (filter.mode === 'exactly') {
+        value = '^' + value + '$';
+    }
+    value = new RegExp(value, filter.caseSensitive ? '' : 'i');
+    query[this.paths.md] = filter.inverted ? { $not: value } : value;
+    return query;
 };
 
 /**
  * Formats the field value
  */
 markdown.prototype.format = function (item) {
-	return item.get(this.paths.html);
+    return item.get(this.paths.html);
 };
 
 /**
  * Gets the field's data from an Item, as used by the React components
  */
 markdown.prototype.getData = function (item) {
-	const value = item.get(this.path);
-	return typeof value === 'object' ? value : {};
+    const value = item.get(this.path);
+    return typeof value === 'object' ? value : {};
 };
 
 /**
@@ -126,17 +126,17 @@ markdown.prototype.getData = function (item) {
  * Deprecated
  */
 markdown.prototype.inputIsValid = function (data, required, item) {
-	if (!(this.path in data) && item && item.get(this.paths.md)) {
-		return true;
-	}
-	return (!required || data[this.path]) ? true : false;
+    if (!(this.path in data) && item && item.get(this.paths.md)) {
+        return true;
+    }
+    return (!required || data[this.path]) ? true : false;
 };
 
 /**
  * Detects whether the field has been modified
  */
 markdown.prototype.isModified = function (item) {
-	return item.isModified(this.paths.md);
+    return item.isModified(this.paths.md);
 };
 
 /**
@@ -145,13 +145,13 @@ markdown.prototype.isModified = function (item) {
  * Will accept either the field path, or paths.md
  */
 markdown.prototype.updateItem = function (item, data, callback) {
-	const value = this.getValueFromData(data);
-	if (value !== undefined) {
-		item.set(this.paths.md, value);
-	}	else if (this.paths.md in data) {
-		item.set(this.paths.md, data[this.paths.md]);
-	}
-	process.nextTick(callback);
+    const value = this.getValueFromData(data);
+    if (value !== undefined) {
+        item.set(this.paths.md, value);
+    } else if (this.paths.md in data) {
+        item.set(this.paths.md, data[this.paths.md]);
+    }
+    process.nextTick(callback);
 };
 
 /* Export Field Type */

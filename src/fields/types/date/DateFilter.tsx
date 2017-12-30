@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { findDOMNode } from 'react-dom';
-import moment from 'moment';
+import * as moment from 'moment';
 import DayPicker from 'react-day-picker';
 
 import {
@@ -43,12 +43,12 @@ function getDefaultValue () {
 	};
 }
 
-let DateFilter = React.createClass({
+export const DateFilter = React.createClass({
 	displayName: 'DateFilter',
 	propTypes: {
-		filter: PropTypes.shape({
-			mode: PropTypes.oneOf(MODE_OPTIONS.map(i => i.value)),
-			inverted: PropTypes.boolean,
+		filter: React.PropTypes.shape({
+			mode: React.PropTypes.oneOf(MODE_OPTIONS.map(i => i.value)),
+			inverted: React.PropTypes.boolean,
 		}),
 	},
 	statics: {
@@ -263,5 +263,3 @@ let DateFilter = React.createClass({
 		);
 	},
 });
-
-export = DateFilter;

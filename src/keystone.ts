@@ -265,3 +265,5 @@ export class Keystone {
 
     //#endregion
 }
+
+export const keystone = Keystone.instance;

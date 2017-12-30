@@ -1,1 +1,1 @@
-export = require('../text/TextColumn');
+export { TextColumn as HtmlColumn } from '../text/TextColumn';

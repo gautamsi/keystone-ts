@@ -1,1 +1,1 @@
-export = require('../text/TextFilter');
+export { TextFilter as TextAreaFilter } from '../text/TextFilter';

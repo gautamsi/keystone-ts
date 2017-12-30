@@ -1,6 +1,6 @@
-const FieldType = require('../Type');
-const TextType = require('../text/TextType');
-const util = require('util');
+import { Field as FieldType } from '../Type';
+import { text as TextType } from '../text/TextType';
+import * as util from 'util';
 
 
 /**
@@ -8,12 +8,12 @@ const util = require('util');
  * @extends Field
  * @api public
  */
-function url (list, path, options) {
-	this._nativeType = String;
-	this._underscoreMethods = ['format'];
-	url.super_.call(this, list, path, options);
+export function url(list, path, options) {
+    this._nativeType = String;
+    this._underscoreMethods = ['format'];
+    url.super_.call(this, list, path, options);
 }
-url.properName = 'Url';
+url['properName'] = 'Url';
 util.inherits(url, FieldType);
 
 
@@ -31,22 +31,19 @@ url.prototype.addFilterToQuery = TextType.prototype.addFilterToQuery;
  * which strips the leading protocol from the value for simpler display
  */
 url.prototype.format = function (item) {
-	const url = item.get(this.path) || '';
-	if (this.options.format === false) {
-		return url;
-	} else if (typeof this.options.format === 'function') {
-		return this.options.format(url);
-	} else {
-		return removeProtocolPrefix(url);
-	}
+    const url = item.get(this.path) || '';
+    if (this.options.format === false) {
+        return url;
+    } else if (typeof this.options.format === 'function') {
+        return this.options.format(url);
+    } else {
+        return removeProtocolPrefix(url);
+    }
 };
 
 /**
  * Remove the protocol prefix from url
  */
-function removeProtocolPrefix (url) {
-	return url.replace(/^[a-zA-Z]+\:\/\//, '');
+function removeProtocolPrefix(url) {
+    return url.replace(/^[a-zA-Z]+\:\/\//, '');
 }
-
-/* Export Field Type */
-export = url;

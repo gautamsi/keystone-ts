@@ -16,7 +16,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 * ========================================================== */
-
+declare var jQuery;
 let $ = require('jquery');
 let marked = require('marked');
 
@@ -46,7 +46,7 @@ Markdown.prototype = {
 	constructor: Markdown
 
 , __alterButtons: function(name, alter) {
-		let handler = this.$handler, isAll = (name == 'all'), that = this;
+		let handler = this.$handler, isAll = (name === 'all'), that = this;
 
 		$.each(handler, function(k, v) {
 			let halt = true;
@@ -56,7 +56,7 @@ Markdown.prototype = {
 				halt = v.indexOf(name) < 0;
 			}
 
-			if (halt == false) {
+			if (halt === false) {
 				alter(that.$editor.find('button[data-handler="' + v + '"]'));
 			}
 		});
@@ -104,7 +104,7 @@ Markdown.prototype = {
 							'data-handler': buttonHandler,
 							'data-hotkey': hotkey
 					});
-					if (button.toggle == true) {
+					if (button.toggle === true) {
 						buttonContainer.attr('data-toggle', 'button');
 					}
 					buttonIconContainer = $('<span/>');
@@ -128,7 +128,7 @@ Markdown.prototype = {
 	}
 , __setListener: function() {
 		// Set size and resizable Properties
-		let hasRows = typeof this.$textarea.attr('rows') != 'undefined',
+		let hasRows = typeof this.$textarea.attr('rows') !== 'undefined',
 				maxRows = this.$textarea.val().split('\n').length > 5 ? this.$textarea.val().split('\n').length : '5',
 				rowsVal = hasRows ? this.$textarea.attr('rows') : maxRows;
 
@@ -190,7 +190,7 @@ Markdown.prototype = {
 	}
 
 , __getIcon: function(src) {
-	return typeof src == 'object' ? src[this.$options.iconlibrary] : src;
+	return typeof src === 'object' ? src[this.$options.iconlibrary] : src;
 }
 
 , setFullscreen: function(mode) {
@@ -229,7 +229,7 @@ Markdown.prototype = {
 									});
 
 		// Prepare the editor
-		if (this.$editor == null) {
+		if (this.$editor === null) {
 			// Create the panel
 			let editorHeader = $('<div/>', {
 													'class': 'md-editor__header btn-toolbar'
@@ -274,7 +274,7 @@ Markdown.prototype = {
 				textarea.addClass('md-input');
 				editor.append(textarea);
 			} else {
-				let rawContent = (typeof toMarkdown == 'function') ? toMarkdown(container.html()) : container.html(),
+				let rawContent = (typeof toMarkdown === 'function') ? toMarkdown(container.html()) : container.html(),
 						currentContent = $.trim(rawContent);
 
 				// This is some arbitrary content that could be edited
@@ -428,15 +428,15 @@ Markdown.prototype = {
 		let content,
 			callbackContent = this.$options.onPreview(this); // Try to get the content from callback
 
-		if (typeof callbackContent == 'string') {
+		if (typeof callbackContent === 'string') {
 			// Set the content based by callback content
 			content = callbackContent;
 		} else {
 			// Set the content
 			let val = this.$textarea.val();
-			if (typeof markdown == 'object') {
+			if (typeof markdown === 'object') {
 				content = markdown.toHTML(val);
-			} else if (typeof marked == 'function') {
+			} else if (typeof marked === 'function') {
 				content = marked(val);
 			} else {
 				content = val;
@@ -463,7 +463,7 @@ Markdown.prototype = {
 		// Build preview element
 		replacementContainer.html(content);
 
-		if (afterContainer && afterContainer.attr('class') == 'md-footer') {
+		if (afterContainer && afterContainer.attr('class') === 'md-footer') {
 			// If there is footer element, insert the preview container before it
 			replacementContainer.insertBefore(afterContainer);
 		} else {
@@ -518,7 +518,7 @@ Markdown.prototype = {
 	}
 
 , isDirty: function() {
-		return this.$oldContent != this.getContent();
+		return this.$oldContent !== this.getContent();
 	}
 
 , getContent: function() {
@@ -614,14 +614,14 @@ Markdown.prototype = {
 
 , getNextTab: function() {
 		// Shift the nextTab
-		if (this.$nextTab.length == 0) {
+		if (this.$nextTab.length === 0) {
 			return null;
 		} else {
 			let nextTab, tab = this.$nextTab.shift();
 
-			if (typeof tab == 'function') {
+			if (typeof tab === 'function') {
 				nextTab = tab();
-			} else if (typeof tab == 'object' && tab.length > 0) {
+			} else if (typeof tab === 'object' && tab.length > 0) {
 				nextTab = tab;
 			}
 
@@ -631,12 +631,12 @@ Markdown.prototype = {
 
 , setNextTab: function(start, end) {
 		// Push new selection into nextTab collections
-		if (typeof start == 'string') {
+		if (typeof start === 'string') {
 			let that = this;
 			this.$nextTab.push(function() {
 				return that.findSelection(start);
 			});
-		} else if (typeof start == 'number' && typeof end == 'number') {
+		} else if (typeof start === 'number' && typeof end === 'number') {
 			let oldSelection = this.getSelection();
 
 			this.setSelection(start, end);
@@ -651,7 +651,7 @@ Markdown.prototype = {
 , __parseButtonNameParam: function(nameParam) {
 		let buttons = [];
 
-		if (typeof nameParam == 'string') {
+		if (typeof nameParam === 'string') {
 			buttons.push(nameParam);
 		} else {
 			buttons = nameParam;
@@ -735,7 +735,7 @@ Markdown.prototype = {
 
 			case 9: // tab
 				let nextTab;
-				if (nextTab = this.getNextTab(), nextTab != null) {
+				if (nextTab = this.getNextTab(), nextTab !== null) {
 					// Get the nextTab if exists
 					let that = this;
 					setTimeout(function() {
@@ -748,7 +748,7 @@ Markdown.prototype = {
 					// check the cursor position to determine tab action
 					let cursor = this.getSelection();
 
-					if (cursor.start == cursor.end && cursor.end == this.getContent().length) {
+					if (cursor.start === cursor.end && cursor.end === this.getContent().length) {
 						// The cursor already reach the end of the content
 						blocked = false;
 
@@ -796,11 +796,11 @@ Markdown.prototype = {
 
 		// Blur other markdown(s)
 		$(document).find('.md-editor').each(function() {
-			if ($(this).attr('id') != editor.attr('id')) {
+			if ($(this).attr('id') !== editor.attr('id')) {
 				let attachedMarkdown;
 
 				if (attachedMarkdown = $(this).find('textarea').data('markdown'),
-						attachedMarkdown == null) {
+						attachedMarkdown === null) {
 						attachedMarkdown = $(this).find('div[data-provider="markdown-preview"]').data('markdown');
 				}
 
@@ -822,17 +822,17 @@ Markdown.prototype = {
 				editor = this.$editor,
 				editable = this.$editable;
 
-		if (editor.hasClass('active') || this.$element.parent().length == 0) {
+		if (editor.hasClass('active') || this.$element.parent().length === 0) {
 			editor.removeClass('active');
 
 			if (isHideable) {
 
 				// Check for editable elements
-				if (editable.el != null) {
+				if (editable.el !== null) {
 					// Build the original element
 					let oldElement = $('<' + editable.type + '/>'),
 							content = this.getContent(),
-							currentContent = (typeof markdown == 'object') ? markdown.toHTML(content) : content;
+							currentContent = (typeof markdown === 'object') ? markdown.toHTML(content) : content;
 
 					$(editable.attrKeys).each(function(k, v) {
 						oldElement.attr(editable.attrKeys[k], editable.attrValues[k]);
@@ -866,7 +866,7 @@ $.fn.markdown = function (option) {
 	return this.each(function () {
 		let $this = $(this)
 			, data = $this.data('markdown')
-			, options = typeof option == 'object' && option;
+			, options = typeof option === 'object' && option;
 		if (!data) $this.data('markdown', (data = new Markdown(this, options)));
 	});
 };
@@ -898,7 +898,7 @@ $.fn.markdown.defaults = {
 					// Give/remove ** surround the selection
 					let chunk, cursor, selected = e.getSelection(), content = e.getContent();
 
-					if (selected.length == 0) {
+					if (selected.length === 0) {
 						// Give extra word
 						chunk = e.__localize('strong text');
 					} else {
@@ -906,8 +906,8 @@ $.fn.markdown.defaults = {
 					}
 
 					// transform selection and set the cursor into chunked text
-					if (content.substr(selected.start - 2, 2) == '**'
-							&& content.substr(selected.end, 2) == '**' ) {
+					if (content.substr(selected.start - 2, 2) === '**'
+							&& content.substr(selected.end, 2) === '**' ) {
 						e.setSelection(selected.start - 2, selected.end + 2);
 						e.replaceSelection(chunk);
 						cursor = selected.start - 2;
@@ -928,7 +928,7 @@ $.fn.markdown.defaults = {
 					// Give/remove * surround the selection
 					let chunk, cursor, selected = e.getSelection(), content = e.getContent();
 
-					if (selected.length == 0) {
+					if (selected.length === 0) {
 						// Give extra word
 						chunk = e.__localize('emphasized text');
 					} else {
@@ -936,8 +936,8 @@ $.fn.markdown.defaults = {
 					}
 
 					// transform selection and set the cursor into chunked text
-					if (content.substr(selected.start - 1, 1) == '_'
-							&& content.substr(selected.end, 1) == '_' ) {
+					if (content.substr(selected.start - 1, 1) === '_'
+							&& content.substr(selected.end, 1) === '_' ) {
 						e.setSelection(selected.start - 1, selected.end + 1);
 						e.replaceSelection(chunk);
 						cursor = selected.start - 1;
@@ -961,7 +961,7 @@ $.fn.markdown.defaults = {
 					// Give [] surround the selection and prepend the link
 					let chunk, cursor, selected = e.getSelection(), content = e.getContent(), link;
 
-					if (selected.length == 0) {
+					if (selected.length === 0) {
 						// Give extra word
 						chunk = e.__localize('enter link description here');
 					} else {
@@ -970,7 +970,7 @@ $.fn.markdown.defaults = {
 
 					link = prompt(e.__localize('Insert Hyperlink'), 'http://');
 
-					if (link != null && link != '' && link != 'http://' && link.substr(0, 4) == 'http') {
+					if (link !== null && link !== '' && link !== 'http://' && link.substr(0, 4) === 'http') {
 						let sanitizedLink = $('<div>' + link + '</div>').text();
 
 						// transform selection and set the cursor into chunked text
@@ -990,7 +990,7 @@ $.fn.markdown.defaults = {
 					// Give ![] surround the selection and prepend the image link
 					let chunk, cursor, selected = e.getSelection(), content = e.getContent(), link;
 
-					if (selected.length == 0) {
+					if (selected.length === 0) {
 						// Give extra word
 						chunk = e.__localize('enter image description here');
 					} else {
@@ -999,7 +999,7 @@ $.fn.markdown.defaults = {
 
 					link = prompt(e.__localize('Insert Image Hyperlink'), 'http://');
 
-					if (link != null && link != '' && link != 'http://' && link.substr(0, 4) == 'http') {
+					if (link !== null && link !== '' && link != 'http://' && link.substr(0, 4) === 'http') {
 						let sanitizedLink = $('<div>' + link + '</div>').text();
 
 						// transform selection and set the cursor into chunked text
@@ -1026,7 +1026,7 @@ $.fn.markdown.defaults = {
 					let chunk, cursor, selected = e.getSelection(), content = e.getContent();
 
 					// transform selection and set the cursor into chunked text
-					if (selected.length == 0) {
+					if (selected.length === 0) {
 						// Give extra word
 						chunk = e.__localize('list text here');
 
@@ -1074,7 +1074,7 @@ $.fn.markdown.defaults = {
 					let chunk, cursor, selected = e.getSelection(), content = e.getContent();
 
 					// transform selection and set the cursor into chunked text
-					if (selected.length == 0) {
+					if (selected.length === 0) {
 						// Give extra word
 						chunk = e.__localize('list text here');
 						e.replaceSelection('1. ' + chunk);
@@ -1120,7 +1120,7 @@ $.fn.markdown.defaults = {
 					let chunk, cursor, selected = e.getSelection(), content = e.getContent();
 
 					// transform selection and set the cursor into chunked text
-					if (selected.length == 0) {
+					if (selected.length === 0) {
 						// Give extra word
 						chunk = e.__localize('quote here');
 						e.replaceSelection('> ' + chunk);
@@ -1166,7 +1166,7 @@ $.fn.markdown.defaults = {
 					// Give/remove ** surround the selection
 					let chunk, cursor, selected = e.getSelection(), content = e.getContent();
 
-					if (selected.length == 0) {
+					if (selected.length === 0) {
 						// Give extra word
 						chunk = e.__localize('code text here');
 					} else {
@@ -1174,8 +1174,8 @@ $.fn.markdown.defaults = {
 					}
 
 					// transform selection and set the cursor into chunked text
-					if (content.substr(selected.start - 1, 1) == '`'
-							&& content.substr(selected.end, 1) == '`' ) {
+					if (content.substr(selected.start - 1, 1) === '`'
+							&& content.substr(selected.end, 1) === '`' ) {
 						e.setSelection(selected.start - 1, selected.end + 1);
 						e.replaceSelection(chunk);
 						cursor = selected.start - 1;
@@ -1202,7 +1202,7 @@ $.fn.markdown.defaults = {
 					// Check the preview mode and toggle based on this flag
 					let isPreview = e.$isPreview, content;
 
-					if (isPreview == false) {
+					if (isPreview === false) {
 						// Give flag that tell the editor enter preview mode
 						e.showPreview();
 					} else {
@@ -1273,12 +1273,12 @@ let analyzeMarkdown = function(e) {
 			$docEditor = $(e.currentTarget);
 
 	// Check whether it was editor childs or not
-	if ((e.type == 'focusin' || e.type == 'click') && $docEditor.length == 1 && typeof $docEditor[0] == 'object') {
+	if ((e.type === 'focusin' || e.type === 'click') && $docEditor.length === 1 && typeof $docEditor[0] === 'object') {
 		el = $docEditor[0].activeElement;
 		if ( ! $(el).data('markdown')) {
-			if (typeof $(el).parent().parent().parent().attr('class') == 'undefined'
+			if (typeof $(el).parent().parent().parent().attr('class') === 'undefined'
 						|| $(el).parent().parent().parent().attr('class').indexOf('md-editor') < 0) {
-				if ( typeof $(el).parent().parent().attr('class') == 'undefined'
+				if ( typeof $(el).parent().parent().attr('class') === 'undefined'
 						|| $(el).parent().parent().attr('class').indexOf('md-editor') < 0) {
 
 							blurred = true;
@@ -1294,11 +1294,11 @@ let analyzeMarkdown = function(e) {
 			$(document).find('.md-editor').each(function() {
 				let parentMd = $(el).parent();
 
-				if ($(this).attr('id') != parentMd.attr('id')) {
+				if ($(this).attr('id') !== parentMd.attr('id')) {
 					let attachedMarkdown;
 
 					if (attachedMarkdown = $(this).find('textarea').data('markdown'),
-							attachedMarkdown == null) {
+							attachedMarkdown === null) {
 							attachedMarkdown = $(this).find('div[data-provider="markdown-preview"]').data('markdown');
 					}
 

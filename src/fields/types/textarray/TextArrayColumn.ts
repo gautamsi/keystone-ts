@@ -1,1 +1,1 @@
-export = require('../../components/columns/ArrayColumn');
+export { ArrayColumn as TextArrayColumn } from '../../components/columns/ArrayColumn';

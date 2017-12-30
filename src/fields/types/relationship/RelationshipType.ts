@@ -1,8 +1,8 @@
-const _ = require('lodash');
-const FieldType = require('../Type');
-const keystone = require('../../../keystone');
-const util = require('util');
-const utils = require('keystone-utils');
+import * as _ from 'lodash';
+import { Field as FieldType } from '../Type';
+import { keystone } from '../../../keystone';
+import * as util from 'util';
+import * as utils from 'keystone-utils';
 import { definePrototypeGetters } from '../../utils/definePrototypeGetters';
 
 /**
@@ -10,7 +10,7 @@ import { definePrototypeGetters } from '../../utils/definePrototypeGetters';
  * @extends Field
  * @api public
  */
-function relationship(list, path, options) {
+export function relationship(list, path, options) {
     this.many = (options.many) ? true : false;
     this.filters = options.filters;
     this.createInline = (options.createInline) ? true : false;
@@ -20,7 +20,7 @@ function relationship(list, path, options) {
     this._properties = ['isValid', 'many', 'filters', 'createInline'];
     relationship.super_.call(this, list, path, options);
 }
-relationship.properName = 'Relationship';
+relationship['properName'] = 'Relationship';
 util.inherits(relationship, FieldType);
 
 /**
@@ -267,6 +267,3 @@ definePrototypeGetters(relationship, {
         return (this.filters && _.keys(this.filters).length);
     },
 });
-
-/* Export Field Type */
-export = relationship;

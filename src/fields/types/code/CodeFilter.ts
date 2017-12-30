@@ -1,1 +1,1 @@
-export = require('../text/TextFilter');
+export { TextFilter as CodeFilter} from '../text/TextFilter';

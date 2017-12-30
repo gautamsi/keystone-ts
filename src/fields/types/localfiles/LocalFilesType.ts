@@ -13,7 +13,7 @@ See https://github.com/keystonejs/keystone/wiki/File-Fields-Upgrade-Guide
  * @extends Field
  * @api public
  */
-function localfiles (list, path, options) {
+export function localfiles (list, path, options) {
 
 	throw new Error('The LocalFiles field type has been removed. Please use File instead.'
 		+ '\n\nSee https://github.com/keystonejs/keystone/wiki/File-Fields-Upgrade-Guide\n');
@@ -363,7 +363,3 @@ localfiles.prototype.getRequestHandler = function (item, req, paths, callback) {
 	};
 
 };
-
-
-/* Export Field Type */
-export = localfiles;

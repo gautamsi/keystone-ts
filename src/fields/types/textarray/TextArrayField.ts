@@ -1,10 +1,10 @@
-import ArrayFieldMixin from '../../mixins/ArrayField';
-import Field from '../Field';
+import * as ArrayFieldMixin from '../../mixins/ArrayField';
+import * as Field from '../Field';
 
-export = Field.create({
-	displayName: 'TextArrayField',
-	statics: {
-		type: 'TextArray',
-	},
-	mixins: [ArrayFieldMixin],
+export const TextArrayField = Field.create({
+    displayName: 'TextArrayField',
+    statics: {
+        type: 'TextArray',
+    },
+    mixins: [ArrayFieldMixin],
 });
