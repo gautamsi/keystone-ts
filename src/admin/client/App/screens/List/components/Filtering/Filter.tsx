@@ -6,9 +6,9 @@ import { Popout } from '../../../../shared/Popout';
 import { setFilter, clearFilter } from '../../actions';
 import { getFilterLabel } from './getFilterLabel';
 
-export class Filter extends React.Component {
-    constructor() {
-        super();
+export class Filter extends React.Component<Props, any> {
+    constructor(props) {
+        super(props);
 
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
@@ -80,13 +80,11 @@ export class Filter extends React.Component {
             </span>
         );
     }
-
-
-    static propTypes = {
-        dispatch: React.PropTypes.func.isRequired,
-        filter: React.PropTypes.shape({
-            field: React.PropTypes.object.isRequired,
-            value: React.PropTypes.object.isRequired,
-        }).isRequired,
+}
+interface Props {
+    dispatch: any;
+    filter: {
+        field: any,
+        value: any,
     };
 }

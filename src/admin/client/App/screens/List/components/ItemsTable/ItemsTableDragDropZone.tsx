@@ -8,14 +8,19 @@ import * as React from 'react';
 import { DropZoneTarget } from './ItemsTableDragDropZoneTarget';
 import classnames from 'classnames';
 
-let ItemsTableDragDropZone = React.createClass({
-    displayName: 'ItemsTableDragDropZone',
-    propTypes: {
-        columns: React.PropTypes.array,
-        connectDropTarget: React.PropTypes.func,
-        items: React.PropTypes.object,
-        list: React.PropTypes.object,
-    },
+interface Props {
+    columns?: Array<any>;
+    connectDropTarget?: any;
+    items?: any;
+    list?: any;
+    currentPage?: any;
+    pageSize?: number;
+    drag?: any;
+    dispatch?: any;
+}
+class ItemsTableDragDropZone extends React.Component<Props> {
+    static displayName: string = 'ItemsTableDragDropZone';
+
     renderPageDrops() {
         const { items, currentPage, pageSize } = this.props;
 
@@ -57,10 +62,10 @@ let ItemsTableDragDropZone = React.createClass({
                 </td>
             </tr>
         );
-    },
+    }
     render() {
         return this.renderPageDrops();
-    },
-});
+    }
+}
 
 export const DropZone = ItemsTableDragDropZone;

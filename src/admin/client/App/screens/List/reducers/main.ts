@@ -93,7 +93,7 @@ export function listsReducer(state = initialState, action) {
             let ready = state.ready;
             // If we have cached items ready, don't show a loading indicator
             // while we fetch the new items in the background
-            if (state.items.count !== null && loading === false) {
+            if (state.items.count !== null && (loading as any) === false) {
                 loading = false;
                 ready = true;
             }

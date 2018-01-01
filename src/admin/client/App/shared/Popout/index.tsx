@@ -6,7 +6,7 @@
 
 import * as React from 'react';
 import { Portal } from '../Portal';
-import Transition from 'react-addons-css-transition-group';
+import Transition from 'react-transition-group/Transition';
 
 const SIZES = {
     arrowHeight: 12,
@@ -14,23 +14,28 @@ const SIZES = {
     horizontalMargin: 20,
 };
 
-export const Popout = React.createClass({
-    displayName: 'Popout',
-    propTypes: {
-        isOpen: React.PropTypes.bool,
-        onCancel: React.PropTypes.func,
-        onSubmit: React.PropTypes.func,
-        relativeToID: React.PropTypes.string.isRequired,
-        width: React.PropTypes.number,
-    },
-    getDefaultProps() {
+interface Props {
+    isOpen?: boolean;
+    onCancel?: any;
+    onSubmit?: any;
+    relativeToID: string;
+    width?: number;
+}
+
+export class Popout extends React.Component<Props, any> {
+    displayName: string = 'Popout';
+    refs: {
+        [key: string]: (Portal)
+        portal: (Portal) // !important
+    };
+    static defaultProps() {
         return {
             width: 320,
         };
-    },
-    getInitialState() {
+    }
+    static getInitialState() {
         return {};
-    },
+    }
     componentWillReceiveProps(nextProps) {
         if (!this.props.isOpen && nextProps.isOpen) {
             window.addEventListener('resize', this.calculatePosition);
@@ -38,13 +43,13 @@ export const Popout = React.createClass({
         } else if (this.props.isOpen && !nextProps.isOpen) {
             window.removeEventListener('resize', this.calculatePosition);
         }
-    },
+    }
     getPortalDOMNode() {
         return this.refs.portal.getPortalDOMNode();
-    },
+    }
     calculatePosition(isOpen) {
         if (!isOpen) return;
-        let posNode = document.getElementById(this.props.relativeToID);
+        let posNode: HTMLElement = document.getElementById(this.props.relativeToID);
 
         const pos = {
             top: 0,
@@ -55,7 +60,7 @@ export const Popout = React.createClass({
         while (posNode.offsetParent) {
             pos.top += posNode.offsetTop;
             pos.left += posNode.offsetLeft;
-            posNode = posNode.offsetParent;
+            posNode = posNode.offsetParent as HTMLElement;
         }
 
         let leftOffset = Math.max(pos.left + (pos.width / 2) - (this.props.width / 2), SIZES.horizontalMargin);
@@ -81,7 +86,7 @@ export const Popout = React.createClass({
                 arrowLeftOffset: arrowLeftOffset,
             });
         }
-    },
+    }
     renderPopout() {
         if (!this.props.isOpen) return null;
 
@@ -100,29 +105,35 @@ export const Popout = React.createClass({
                 </div>
             </div>
         );
-    },
+    }
     renderBlockout() {
         if (!this.props.isOpen) return;
         return <div className="blockout" onClick={this.props.onCancel} />;
-    },
+    }
     render() {
         return (
             <Portal className="Popout-wrapper" ref="portal">
                 <Transition
-                    transitionEnterTimeout={200}
-                    transitionLeaveTimeout={200}
-                    transitionName="Popout"
+                    timeout={200}
+                    classNames="Popout"
                 >
                     {this.renderPopout()}
                 </Transition>
                 {this.renderBlockout()}
             </Portal>
         );
-    },
-});
+    }
+}
 
 // expose the child to the top level export
-export { PopoutHeader as Header } from './PopoutHeader';
-export { PopoutBody as Body } from './PopoutBody';
-export { PopoutFooter as Footer } from './PopoutFooter';
-export { PopoutPane as Pane } from './PopoutPane';
+import { PopoutHeader } from './PopoutHeader';
+import { PopoutBody } from './PopoutBody';
+import { PopoutFooter } from './PopoutFooter';
+import { PopoutPane } from './PopoutPane';
+
+export namespace Popout {
+    export const Body = PopoutBody;
+    export const Footer = PopoutFooter;
+    export const Header = PopoutHeader;
+    export const Pane = PopoutPane;
+}

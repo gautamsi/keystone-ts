@@ -9,8 +9,8 @@ import { Path } from '../../lib/path';
 import * as  utils from 'keystone-utils';
 import { evalDependsOn } from '../utils/evalDependsOn.js';
 import { definePrototypeGetters } from '../utils/definePrototypeGetters.js';
+import { List } from '../../lib/list';
 import * as _debug from 'debug';
-import { console } from 'node';
 const debug = _debug('keystone:fields:types:Type');
 
 const DEFAULT_OPTION_KEYS = [
@@ -54,9 +54,9 @@ export abstract class FieldTypeBase {
     label: any;
     options: any;
     type: string;
-    path: any;
-    _path: any;
-    list: any;
+    path: string;
+    _path: Path;
+    list: List;
 
     get size() {
         return this.getSize();
@@ -102,7 +102,7 @@ export abstract class FieldTypeBase {
         return this.options.dependsOn || false;
     }
 
-    constructor(list, path, options) {
+    constructor(list: List, path: string, options) {
 
         // Set field properties and options
         this.list = list;

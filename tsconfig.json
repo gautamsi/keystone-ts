@@ -10,7 +10,8 @@
         "skipLibCheck": true,
         "jsx": "react",
         "lib": [
-            "es2015"
+            "es2015",
+            "dom"
         ],
         "paths": {
             "*": [
@@ -20,6 +21,11 @@
         }
     },
     "include": [
-        "src/**/*"
+        "src/**/*.tsx"
+    ],
+    "exclude": [
+        "src/**/*.test.ts",
+        "src/**/*.test.tsx",
+        "src/**/test/*.ts"
     ]
 }

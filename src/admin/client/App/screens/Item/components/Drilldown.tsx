@@ -2,8 +2,17 @@ import { css } from 'glamor';
 import * as React from 'react';
 import { DrilldownItem } from './DrilldownItem';
 
-export function Drilldown({ className, items, ...props }) {
-    props.className = css(classes.drilldown, className);
+interface Props {
+    items: Array<{
+        href: string,
+        label: string,
+        separate: boolean
+    }>;
+    className: any;
+}
+
+export const Drilldown: React.SFC<Props> = ({ items, ...props }) => {
+    props.className = css(classes.drilldown, props.className);
 
     return (
         <ul {...props}>
@@ -17,16 +26,6 @@ export function Drilldown({ className, items, ...props }) {
             ))}
         </ul>
     );
-}
-
-Drilldown['propTypes'] = {
-    items: React.PropTypes.arrayOf(
-        React.PropTypes.shape({
-            href: React.PropTypes.string.isRequired,
-            label: React.PropTypes.string.isRequired,
-            separate: React.PropTypes.bool, // FIXME verb; could be better
-        })
-    ).isRequired,
 };
 
 const classes = {

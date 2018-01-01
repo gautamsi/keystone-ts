@@ -14,7 +14,7 @@ import { listsByKey } from '../../../utils/lists';
 import { CreateForm } from '../../shared/CreateForm';
 import { Alert } from 'elemental';
 import { EditForm } from './components/EditForm';
-import { EditFormHeaderClass } from './components/EditFormHeader';
+import { EditFormHeader } from './components/EditFormHeader';
 import { RelatedItemsList } from './components/RelatedItemsList/RelatedItemsList';
 // import FlashMessages from '../../shared/FlashMessages';
 
@@ -27,16 +27,29 @@ import {
     selectList,
 } from '../List/actions';
 
-const ItemView = React.createClass({
-    displayName: 'ItemView',
-    contextTypes: {
-        router: React.PropTypes.object.isRequired,
-    },
-    getInitialState() {
-        return {
+interface Props {
+    dispatch: any;
+    currentList: any;
+    params: any;
+    relationshipData: any;
+    drag: any;
+    routeParams: any;
+    ready: boolean;
+    error: any;
+    data: any;
+}
+class ItemView extends React.Component<Props, any> {
+    static displayName: string = 'ItemView';
+    // static contextTypes = {
+    //     router: any
+    // };
+
+    constructor(props) {
+        super(props);
+        this.state = {
             createIsOpen: false,
         };
-    },
+    }
     componentDidMount() {
         // When we directly navigate to an item without coming from another client
         // side routed page before, we need to select the list before initializing the item
@@ -45,7 +58,8 @@ const ItemView = React.createClass({
             this.props.dispatch(selectList(this.props.params.listId));
         }
         this.initializeItem(this.props.params.itemId);
-    },
+    }
+
     componentWillReceiveProps(nextProps: any) {
         // We've opened a new item from the client side routing, so initialize
         // again with the new item id
@@ -53,12 +67,14 @@ const ItemView = React.createClass({
             this.props.dispatch(selectList(nextProps.params.listId));
             this.initializeItem(nextProps.params.itemId);
         }
-    },
+    }
+
     // Initialize an item
     initializeItem(itemId) {
         this.props.dispatch(selectItem(itemId));
         this.props.dispatch(loadItemData());
-    },
+    }
+
     // Called when a new item is created
     onCreate(item) {
         // Hide the create form
@@ -66,13 +82,15 @@ const ItemView = React.createClass({
         // Redirect to newly created item path
         const list = this.props.currentList;
         this.context.router.push(`${Keystone.adminPath}/${list.path}/${item.id}`);
-    },
+    }
+
     // Open and close the create new item modal
     toggleCreateModal(visible) {
         this.setState({
             createIsOpen: visible,
         });
-    },
+    }
+
     // Render this items relationships
     renderRelationships() {
         const { relationships } = this.props.currentList;
@@ -102,7 +120,8 @@ const ItemView = React.createClass({
                 </Container>
             </div>
         );
-    },
+    }
+
     // Handle errors
     handleError(error) {
         const detail = error.detail;
@@ -141,7 +160,8 @@ const ItemView = React.createClass({
 				</Alert>
             </Container>
         );
-    },
+    }
+
     render() {
         // If we don't have any data yet, show the loading indicator
         if (!this.props.ready) {
@@ -158,7 +178,7 @@ const ItemView = React.createClass({
                 {(this.props.error) ? this.handleError(this.props.error) : (
                     <div>
                         <Container>
-                            <EditFormHeaderClass
+                            <EditFormHeader
                                 list={this.props.currentList}
                                 data={this.props.data}
                                 toggleCreate={this.toggleCreateModal}
@@ -181,8 +201,8 @@ const ItemView = React.createClass({
                 )}
             </div>
         );
-    },
-});
+    }
+}
 
 export const Item = connect((state: any) => ({
     data: state.item.data,
@@ -192,4 +212,4 @@ export const Item = connect((state: any) => ({
     currentList: state.lists.currentList,
     relationshipData: state.item.relationshipData,
     drag: state.item.drag,
-}))(ItemView as any);
+}))(ItemView);

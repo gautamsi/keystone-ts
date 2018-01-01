@@ -7,7 +7,7 @@ import {
     Spinner,
 } from 'elemental';
 
-export function ListManagement({
+export const ListManagement: React.SFC<Props> = ({
 	checkedItemCount,
     handleDelete,
     handleSelect,
@@ -19,7 +19,7 @@ export function ListManagement({
     noedit,
     selectAllItemsLoading,
     ...props
-}) {
+}) => {
     // do not render if there's no results
     // or if edit/delete unavailable on the list
     if (!itemCount || (nodelete && noedit)) return null;
@@ -51,7 +51,7 @@ export function ListManagement({
                 active={allVisibleButtonIsActive}
                 onClick={() => handleSelect('all')}
                 title="Select all rows (including those not visible)">
-                {selectAllItemsLoading ? <Spinner /> : 'All'} <small style={buttonNoteStyles}>({itemCount})</small>
+                {selectAllItemsLoading ? <Spinner /> : 'All'} <small style={buttonNoteStyles as any}>({itemCount})</small>
             </Button>
         </Section>
     );
@@ -63,7 +63,7 @@ export function ListManagement({
                 <Section>
                     <Button active={pageVisibleButtonIsActive} onClick={() => handleSelect('visible')} title="Select all rows">
                         {itemCount > itemsPerPage ? 'Page ' : 'All '}
-                        <small style={buttonNoteStyles}>({itemCount > itemsPerPage ? itemsPerPage : itemCount})</small>
+                        <small style={buttonNoteStyles as any}>({itemCount > itemsPerPage ? itemsPerPage : itemCount})</small>
                     </Button>
                 </Section>
                 <Section>
@@ -97,17 +97,18 @@ export function ListManagement({
             </Group>
         </div>
     );
-}
-
-ListManagement['propTypes'] = {
-    checkedItems: React.PropTypes.number,
-    handleDelete: React.PropTypes.func.isRequired,
-    handleSelect: React.PropTypes.func.isRequired,
-    handleToggle: React.PropTypes.func.isRequired,
-    isOpen: React.PropTypes.bool,
-    itemCount: React.PropTypes.number,
-    itemsPerPage: React.PropTypes.number,
-    nodelete: React.PropTypes.bool,
-    noedit: React.PropTypes.bool,
-    selectAllItemsLoading: React.PropTypes.bool,
 };
+
+interface Props {
+    checkedItems?: number;
+    handleDelete: any;
+    handleSelect: any;
+    handleToggle: any;
+    isOpen?: boolean;
+    itemCount?: number;
+    itemsPerPage?: number;
+    nodelete?: boolean;
+    noedit?: boolean;
+    selectAllItemsLoading?: boolean;
+    checkedItemCount?: any;
+}

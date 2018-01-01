@@ -6,15 +6,17 @@ import * as React from 'react';
 import { MobileListItem } from './ListItem';
 import { Link } from 'react-router';
 
-export const MobileSectionItem = React.createClass({
-    displayName: 'MobileSectionItem',
-    propTypes: {
-        children: React.PropTypes.node.isRequired,
-        className: React.PropTypes.string,
-        currentListKey: React.PropTypes.string,
-        href: React.PropTypes.string.isRequired,
-        lists: React.PropTypes.array,
-    },
+interface Props {
+    children: React.ReactNode;
+    className?: string;
+    currentListKey?: string;
+    href: string;
+    lists?: Array<any>;
+    onClick: any;
+}
+export class MobileSectionItem extends React.Component<Props, {}> {
+    static displayName: string = 'MobileSectionItem';
+
     // Render the lists
     renderLists() {
         if (!this.props.lists || this.props.lists.length <= 1) return null;
@@ -36,14 +38,14 @@ export const MobileSectionItem = React.createClass({
                 {navLists}
             </div>
         );
-    },
+    }
     render() {
         return (
             <div className={this.props.className}>
                 <Link
                     className="MobileNavigation__section-item"
                     to={this.props.href}
-                    tabIndex="-1"
+                    tabIndex={-1}
                     onClick={this.props.onClick}
                 >
                     {this.props.children}
@@ -51,5 +53,5 @@ export const MobileSectionItem = React.createClass({
                 {this.renderLists()}
             </div>
         );
-    },
-});
+    }
+}

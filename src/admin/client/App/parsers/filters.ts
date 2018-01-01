@@ -52,7 +52,7 @@ export function filterParser ({ path, value }, activeFilters, currentList) {
 	}
 
 	if (!_.isObject(currentList) || _.isArray(currentList)) {
-		throw new Error('currentList is expected to be an { Object }', currentList);
+		throw new Error('currentList is expected to be an { Object }'); // ref: , currentList);
 	}
 
 	let filter = activeFilters.filter(i => i.field.path === path)[0];

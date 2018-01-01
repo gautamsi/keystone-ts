@@ -3,7 +3,6 @@ import { Keystone } from '../../../keystone';
 const keystone = Keystone.instance;
 import * as EmbedlyAPI from 'embedly';
 import { FieldTypeBase } from '../FieldTypeBase';
-import { console } from 'node';
 
 /**
  * Embedly FieldType Constructor

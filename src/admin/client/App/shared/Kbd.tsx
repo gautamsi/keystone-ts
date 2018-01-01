@@ -3,11 +3,14 @@ import { css } from 'glamor';
 import { theme } from '../../theme';
 import { darken, lighten } from '../../utils/color';
 
-export function Kbd({ className, ...props }) {
-    props.className = css(classes.kbd);
+interface Props {
+    className?: string;
+}
+export const Kbd: React.SFC<Props> = ({ ...props }) => {
+    props.className = `${css(classes.kbd)}`;
 
     return <kbd {...props} />;
-}
+};
 
 const classes = {
     kbd: {

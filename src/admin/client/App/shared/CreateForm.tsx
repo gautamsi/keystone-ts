@@ -11,21 +11,22 @@ import { Fields } from 'FieldTypes';
 import { InvalidFieldType } from './InvalidFieldType';
 import { Button, Form, Modal } from 'elemental';
 
-export const CreateForm = React.createClass({
-    displayName: 'CreateForm',
-    propTypes: {
-        err: React.PropTypes.object,
-        isOpen: React.PropTypes.bool,
-        list: React.PropTypes.object,
-        onCancel: React.PropTypes.func,
-        onCreate: React.PropTypes.func,
-    },
+interface Props {
+    err?: any;
+    isOpen?: boolean;
+    list?: any;
+    onCancel?: any;
+    onCreate?: any;
+}
+
+export class CreateForm extends React.Component<Props, any> {
+    static displayName: string = 'CreateForm';
     getDefaultProps() {
         return {
             err: null,
             isOpen: false,
         };
-    },
+    }
     getInitialState() {
         // Set the field values to their default values when first rendering the
         // form. (If they have a default value, that is)
@@ -39,18 +40,18 @@ export const CreateForm = React.createClass({
             values: values,
             alerts: {},
         };
-    },
+    }
     componentDidMount() {
         document.body.addEventListener('keyup', this.handleKeyPress, false);
-    },
+    }
     componentWillUnmount() {
         document.body.removeEventListener('keyup', this.handleKeyPress, false);
-    },
+    }
     handleKeyPress(evt) {
         if (vkey[evt.keyCode] === '<escape>') {
             this.props.onCancel();
         }
-    },
+    }
     // Handle input change events
     handleChange(event) {
         let values = assign({}, this.state.values);
@@ -58,7 +59,7 @@ export const CreateForm = React.createClass({
         this.setState({
             values: values,
         });
-    },
+    }
     // Set the props of a field
     getFieldProps(field) {
         let props = assign({}, field);
@@ -68,7 +69,7 @@ export const CreateForm = React.createClass({
         props.mode = 'create';
         props.key = field.path;
         return props;
-    },
+    }
     // Create a new item when the form is submitted
     submitForm(event) {
         event.preventDefault();
@@ -107,7 +108,7 @@ export const CreateForm = React.createClass({
                 });
             }
         });
-    },
+    }
     // Render the form itself
     renderForm() {
         if (!this.props.isOpen) return;
@@ -175,7 +176,7 @@ export const CreateForm = React.createClass({
                 </Modal.Footer>
             </Form>
         );
-    },
+    }
     render() {
         return (
             <Modal.Dialog
@@ -186,5 +187,5 @@ export const CreateForm = React.createClass({
                 {this.renderForm()}
             </Modal.Dialog>
         );
-    },
-});
+    }
+}

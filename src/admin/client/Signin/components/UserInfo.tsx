@@ -3,7 +3,7 @@ import { Button } from 'elemental';
 
 // TODO Figure out if we should change "Keystone" to "Admin area"
 
-export const UserInfo = ({
+export const UserInfo: React.SFC<Props> = ({
 	adminPath,
     signoutPath,
     userCanAccessKeystone,
@@ -27,9 +27,9 @@ export const UserInfo = ({
     );
 };
 
-UserInfo['propTypes'] = {
-    adminPath: React.PropTypes.string.isRequired,
-    signoutPath: React.PropTypes.string.isRequired,
-    userCanAccessKeystone: React.PropTypes.bool,
-    userName: React.PropTypes.string.isRequired,
-};
+interface Props {
+    adminPath: string;
+    signoutPath: string;
+    userCanAccessKeystone?: boolean;
+    userName: string;
+}

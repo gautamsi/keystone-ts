@@ -21,7 +21,7 @@ export const packages = [
     'moment',
     'numeral',
     'qs',
-    'react-addons-css-transition-group',
+    'react-transition-group',
     'react-alt-text',
     'react-color',
     'react-day-picker',

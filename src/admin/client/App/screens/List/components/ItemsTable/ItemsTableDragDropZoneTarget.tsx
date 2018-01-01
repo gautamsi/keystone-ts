@@ -11,21 +11,27 @@ import { setCurrentPage } from '../../actions';
 
 let timeoutID;
 
+interface Props {
+    className?: string;
+    connectDropTarget?: any;
+    isOver?: boolean;
+    pageItems?: string;
+    page?: any;
+    currentPage?: any;
+    dispatch?: any;
+}
+
 // drop target
-let ItemsTableDragDropZoneTarget = React.createClass({
-    displayName: 'ItemsTableDragDropZoneTarget',
-    propTypes: {
-        className: React.PropTypes.string,
-        connectDropTarget: React.PropTypes.func,
-        isOver: React.PropTypes.bool,
-        pageItems: React.PropTypes.string,
-    },
+class ItemsTableDragDropZoneTarget extends React.Component<Props> {
+    static displayName: string = 'ItemsTableDragDropZoneTarget';
+
     componentDidUpdate() {
         if (timeoutID && !this.props.isOver) {
             clearTimeout(timeoutID);
             timeoutID = false;
         }
-    },
+    }
+
     render() {
         const { pageItems, page, isOver, dispatch } = this.props;
         let { className } = this.props;
@@ -41,8 +47,8 @@ let ItemsTableDragDropZoneTarget = React.createClass({
             >
                 {pageItems}
             </div>);
-    },
-});
+    }
+}
 
 /**
  * Implements drag target.

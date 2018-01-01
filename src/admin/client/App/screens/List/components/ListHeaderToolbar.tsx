@@ -13,17 +13,17 @@ import { ListHeaderSearch } from './ListHeaderSearch';
 
 import { ListFiltersAdd } from './Filtering/ListFiltersAdd';
 
-function ButtonDivider({ style, ...props }) {
+const ButtonDivider: React.SFC<{ style?: any }> = ({ ...props }) => {
     props.style = {
         borderLeft: '1px solid rgba(0, 0, 0, 0.1)',
         paddingLeft: '0.75em',
-        ...style,
+        ...props.style,
     };
 
     return <div {...props} />;
-}
+};
 
-function CreateButton({ listName, onClick, ...props }) {
+const CreateButton: React.SFC<any> = ({ listName, onClick, ...props }) => {
     return (
         <GlyphButton
             block
@@ -42,9 +42,9 @@ function CreateButton({ listName, onClick, ...props }) {
             />
         </GlyphButton>
     );
-}
+};
 
-export function ListHeaderToolbar({
+export const ListHeaderToolbar: React.SFC<Props> = ({
     // common
     dispatch,
     list,
@@ -73,7 +73,7 @@ export function ListHeaderToolbar({
     columnsActive,
 
     ...props
-}) {
+}) => {
     return (
         <Group block cssStyles={classes.wrapper}>
             <Section grow cssStyles={classes.search}>
@@ -129,25 +129,25 @@ export function ListHeaderToolbar({
             </Section>
         </Group>
     );
-}
-
-ListHeaderToolbar['propTypes'] = {
-    columnsActive: React.PropTypes.array,
-    columnsAvailable: React.PropTypes.array,
-    createIsAvailable: React.PropTypes.bool,
-    createListName: React.PropTypes.string,
-    createOnClick: React.PropTypes.func.isRequired,
-    dispatch: React.PropTypes.func.isRequired,
-    expandIsActive: React.PropTypes.bool,
-    expandOnClick: React.PropTypes.func.isRequired,
-    filtersActive: React.PropTypes.array,
-    filtersAvailable: React.PropTypes.array,
-    list: React.PropTypes.object,
-    searchHandleChange: React.PropTypes.func.isRequired,
-    searchHandleClear: React.PropTypes.func.isRequired,
-    searchHandleKeyup: React.PropTypes.func.isRequired,
-    searchValue: React.PropTypes.string,
 };
+
+interface Props {
+    columnsActive?: Array<any>;
+    columnsAvailable?: Array<any>;
+    createIsAvailable?: boolean;
+    createListName?: string;
+    createOnClick: any;
+    dispatch: any;
+    expandIsActive?: boolean;
+    expandOnClick: any;
+    filtersActive?: Array<any>;
+    filtersAvailable?: Array<any>;
+    list?: object;
+    searchHandleChange: any;
+    searchHandleClear: any;
+    searchHandleKeyup: any;
+    searchValue?: string;
+}
 
 const tabletGrowStyles = {
     [`@media (max-width: ${theme.breakpoint.tabletPortraitMax})`]: {

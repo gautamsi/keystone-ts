@@ -24,7 +24,11 @@ const classes = {
     },
 };
 
-export const App = (props) => {
+interface Props {
+    params: any;
+}
+
+export const App: React.SFC<Props> = (props) => {
     const listsByPath = require('../utils/lists').listsByPath;
     let children = props.children;
     // If we're on either a list or an item view
@@ -50,7 +54,7 @@ export const App = (props) => {
     // Default current section key to dashboard
     const currentSectionKey = (currentSection && currentSection.key) || 'dashboard';
     return (
-        <div className={css(classes.wrapper)}>
+        <div className={`${css(classes.wrapper)}`}>
             <header>
                 <MobileNavigation
                     brand={Keystone.brand}
@@ -74,7 +78,7 @@ export const App = (props) => {
                     />
                 ) : null}
             </header>
-            <main className={css(classes.body)}>
+            <main className={`${css(classes.body)}`}>
                 {children}
             </main>
             <Footer

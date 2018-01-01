@@ -62,7 +62,7 @@ export function loadItems (options = {}) {
 				dispatch(itemsLoaded(items));
 			} else {
 				// Catch this error in redux and set the loadCounter back to zero.
-				dispatch(itemLoadingError(err));
+				dispatch(itemLoadingError());
 			}
 		});
 	};

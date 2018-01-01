@@ -12,9 +12,22 @@ import { Brand } from './components/Brand';
 import { UserInfo } from './components/UserInfo';
 import { LoginForm } from './components/LoginForm';
 
-export const SigninView = React.createClass({
-    getInitialState() {
-        return {
+interface Props {
+    from?: any;
+    logo?: any;
+    brand?: any;
+    user?: any;
+    userCanAccessKeystone?: boolean;
+}
+export class SigninView extends React.Component<Props, any> {
+    _isMounted: boolean;
+    refs: {
+        [key: string]: (Element)
+        email: (HTMLInputElement) // !important
+    }
+    constructor(props) {
+        super(props);
+        this.state = {
             email: '',
             password: '',
             isAnimating: false,
@@ -22,19 +35,23 @@ export const SigninView = React.createClass({
             invalidMessage: '',
             signedOut: window.location.search === '?signedout',
         };
-    },
+    }
     componentDidMount() {
+        this._isMounted = true;
         // Focus the email field when we're mounted
         if (this.refs.email) {
             this.refs.email.select();
         }
-    },
+    }
+    componentWillUnmount(){
+        this._isMounted = false;
+    }
     handleInputChange(e) {
         // Set the new state when the input changes
         const newState = {};
         newState[e.target.name] = e.target.value;
         this.setState(newState);
-    },
+    }
     handleSubmit(e) {
         e.preventDefault();
         // If either password or mail are missing, show an error
@@ -64,7 +81,7 @@ export const SigninView = React.createClass({
                 }
             }
         });
-    },
+    }
 	/**
 	 * Display an error message
 	 *
@@ -77,18 +94,18 @@ export const SigninView = React.createClass({
             invalidMessage: message,
         });
         setTimeout(this.finishAnimation, 750);
-    },
+    }
     // Finish the animation and select the email field
     finishAnimation() {
         // TODO isMounted was deprecated, find out if we need this guard
-        if (!this.isMounted()) return;
+        if (!this._isMounted) return;
         if (this.refs.email) {
             this.refs.email.select();
         }
         this.setState({
             isAnimating: false,
         });
-    },
+    }
     render() {
         const boxClassname = classnames('auth-box', {
             'auth-box--has-errors': this.state.isAnimating,
@@ -131,5 +148,5 @@ export const SigninView = React.createClass({
                 </div>
             </div>
         );
-    },
-});
+    }
+}

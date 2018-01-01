@@ -14,19 +14,26 @@ import {
     moveItem,
 } from '../../actions';
 
-export const TableRow = React.createClass({
-    propTypes: {
-        columns: React.PropTypes.array,
-        id: React.PropTypes.any,
-        index: React.PropTypes.number,
-        items: React.PropTypes.object,
-        list: React.PropTypes.object,
-        // Injected by React DnD:
-        isDragging: React.PropTypes.bool,         // eslint-disable-line react/sort-prop-types
-        connectDragSource: React.PropTypes.func,  // eslint-disable-line react/sort-prop-types
-        connectDropTarget: React.PropTypes.func,  // eslint-disable-line react/sort-prop-types
-        connectDragPreview: React.PropTypes.func, // eslint-disable-line react/sort-prop-types
-    },
+interface Props {
+    columns?: Array<any>;
+    id?: any;
+    index?: number;
+    items?: any;
+    list?: any;
+    // Injected by React DnD:
+    isDragging?: boolean;
+    connectDragSource?: any;
+    connectDropTarget?: any;
+    connectDragPreview?: any;
+    checkedItems?: any;
+    manageMode?: any;
+    rowAlert?: any;
+    deleteTableItem?: any;
+    checkTableItem?: any;
+    item?: any;
+}
+
+class ItemsRow extends React.Component<Props> {
     renderRow(item) {
         const itemId = item.id;
         const rowClassname = classnames({
@@ -68,11 +75,11 @@ export const TableRow = React.createClass({
         } else {
             return (addRow);
         }
-    },
+    }
     render() {
         return this.renderRow(this.props.item);
-    },
-});
+    }
+}
 
 // Expose Sortable
 
@@ -155,4 +162,4 @@ function dropProps(connect) {
     };
 }
 
-export const Sortable = DragSource('item', dragItem, dragProps)(DropTarget('item', dropItem, dropProps)(ItemsRow));
+export const TableRow = DragSource('item', dragItem, dragProps)(DropTarget('item', dropItem, dropProps)(ItemsRow));

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as demand from 'must';
-import { EditFormHeaderClass } from '../EditFormHeader';
+import { EditFormHeader } from '../EditFormHeader';
 import { shallow } from 'enzyme';
 
 import { Toolbar } from '../Toolbar';
@@ -17,13 +17,13 @@ describe('<EditFormHeader />', () => {
     });
 
     it('should render a Toolbar', () => {
-        const component = shallow(<EditFormHeaderClass data={{}} list={{}} />);
+        const component = shallow(<EditFormHeader data={{}} list={{}} />);
         demand(component.find(Toolbar).length).gt(0);
     });
 
     describe('Drilldown', () => {
         it('should render a Toolbar Section on the left', () => {
-            const component = shallow(<EditFormHeaderClass data={{}} list={{}} />);
+            const component = shallow(<EditFormHeader data={{}} list={{}} />);
             demand(component.find(ToolbarSection).length).gt(0);
             demand(component.find(ToolbarSection).at(0).prop('left')).true();
         });
@@ -32,7 +32,7 @@ describe('<EditFormHeader />', () => {
         it.skip('should render a link back to the list if no items are specified', () => {
             const path = 'some/path';
             const component = shallow(
-                <EditFormHeaderClass
+                <EditFormHeader
                     data={{}}
                     list={{
                         path,
@@ -50,7 +50,7 @@ describe('<EditFormHeader />', () => {
                 href: 'some/other/item',
             }];
             const component = shallow(
-                <EditFormHeaderClass
+                <EditFormHeader
                     data={{
                         drilldown: {
                             items: [{
@@ -73,7 +73,7 @@ describe('<EditFormHeader />', () => {
                 href: 'some/other/item',
             }];
             const component = shallow(
-                <EditFormHeaderClass
+                <EditFormHeader
                     data={{
                         drilldown: {
                             items: [{
@@ -90,7 +90,7 @@ describe('<EditFormHeader />', () => {
 
         it.skip('should render ... if there\'s more items', () => {
             const component = shallow(
-                <EditFormHeaderClass
+                <EditFormHeader
                     data={{
                         drilldown: {
                             items: [{
@@ -108,7 +108,7 @@ describe('<EditFormHeader />', () => {
 
         it.skip('should render a back button if there\'s items', () => {
             const component = shallow(
-                <EditFormHeaderClass
+                <EditFormHeader
                     data={{
                         drilldown: {
                             items: [{
@@ -125,13 +125,13 @@ describe('<EditFormHeader />', () => {
         });
 
         it('should render a search form', () => {
-            const component = shallow(<EditFormHeaderClass data={{}} list={{}} />);
+            const component = shallow(<EditFormHeader data={{}} list={{}} />);
             demand(component.find('form.EditForm__header__search').length).eql(1);
         });
 
         // TODO needs to be reconfigured
         it.skip('should render a search input', () => {
-            const component = shallow(<EditFormHeaderClass data={{}} list={{}} />);
+            const component = shallow(<EditFormHeader data={{}} list={{}} />);
             demand(component.find(FormInput).length).eql(1);
             demand(component.find(FormInput).at(0).prop('type')).eql('search');
         });
@@ -139,19 +139,19 @@ describe('<EditFormHeader />', () => {
 
     describe('Info', () => {
         it('should render a Toolbar Section on the right', () => {
-            const component = shallow(<EditFormHeaderClass data={{}} list={{}} />);
+            const component = shallow(<EditFormHeader data={{}} list={{}} />);
             demand(component.find(ToolbarSection).length).gt(0);
             demand(component.find(ToolbarSection).at(1).prop('right')).true();
         });
 
         it.skip('should render a create button', () => {
-            const component = shallow(<EditFormHeaderClass data={{}} list={{}} />);
+            const component = shallow(<EditFormHeader data={{}} list={{}} />);
             demand(component.find(Button).find(ResponsiveText).at(0).prop('visibleXS')).eql('Create');
         });
 
         it('should not render a create button if the list is a nocreate', () => {
             const component = shallow(
-                <EditFormHeaderClass
+                <EditFormHeader
                     data={{}}
                     list={{
                         nocreate: true,
@@ -163,7 +163,7 @@ describe('<EditFormHeader />', () => {
 
         it.skip('should change the href if the list is an autocreate', () => {
             const component = shallow(
-                <EditFormHeaderClass
+                <EditFormHeader
                     data={{}}
                     list={{
                         autocreate: true,

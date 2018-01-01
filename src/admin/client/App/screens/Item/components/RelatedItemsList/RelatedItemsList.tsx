@@ -3,35 +3,39 @@ import { Link } from 'react-router';
 import { Alert, BlankState, Center, Spinner } from 'elemental';
 
 import { DragDrop } from './RelatedItemsListDragDrop';
-import { RelatedItemsListRow as ListRow } from './RelatedItemsListRow';
+import { Sortable as ListRow } from './RelatedItemsListRow';
 
 import { loadRelationshipItemData } from '../../actions';
 import { TABLE_CONTROL_COLUMN_WIDTH } from '../../../../../constants';
 
-export const RelatedItemsList = React.createClass({
-    propTypes: {
-        dispatch: React.PropTypes.func.isRequired,
-        dragNewSortOrder: React.PropTypes.number,
-        items: React.PropTypes.array,
-        list: React.PropTypes.object.isRequired,
-        refList: React.PropTypes.object.isRequired,
-        relatedItemId: React.PropTypes.string.isRequired,
-        relationship: React.PropTypes.object.isRequired,
-    },
-    getInitialState() {
-        return {
+interface Props {
+    dispatch: any;
+    dragNewSortOrder?: number;
+    items?: any;
+    list: any;
+    refList: any;
+    relatedItemId: string;
+    relationship: any;
+}
+export class RelatedItemsList extends React.Component<Props, any> {
+    __isMounted: boolean;
+
+    constructor(props) {
+        super(props);
+        this.state = {
             columns: this.getColumns(),
             err: null,
             items: null,
         };
-    },
+    }
+
     componentDidMount() {
         this.__isMounted = true;
         this.loadItems();
-    },
+    }
     componentWillUnmount() {
         this.__isMounted = false;
-    },
+    }
     isSortable() {
         // Check if the related items should be sortable. The referenced list has to
         //   be sortable and it has to set the current list as it's sortContext.
@@ -44,12 +48,12 @@ export const RelatedItemsList = React.createClass({
             }
         }
         return false;
-    },
+    }
     getColumns() {
         const { relationship, refList } = this.props;
         const columns = refList.expandColumns(refList.defaultColumns);
         return columns.filter(i => i.path !== relationship.refPath);
-    },
+    }
     loadItems() {
         const { refList, relatedItemId, relationship } = this.props;
         const { columns } = this.state;
@@ -63,7 +67,7 @@ export const RelatedItemsList = React.createClass({
             return this.setState({ err });
         }
         this.props.dispatch(loadRelationshipItemData({ columns, refList, relatedItemId, relationship }));
-    },
+    }
     renderItems() {
         const tableBody = (this.isSortable()) ? (
             <DragDrop
@@ -97,11 +101,11 @@ export const RelatedItemsList = React.createClass({
                     style={{ marginBottom: '3em' }}
                 />
             );
-    },
+    }
     renderTableCols() {
         const cols = this.state.columns.map((col) => <col width={col.width} key={col.path} />);
         return <colgroup>{cols}</colgroup>;
-    },
+    }
     renderTableHeaders() {
         const cells = this.state.columns.map((col) => {
             return <th key={col.path}>{col.label}</th>;
@@ -115,7 +119,7 @@ export const RelatedItemsList = React.createClass({
         }
 
         return <thead><tr>{cells}</tr></thead>;
-    },
+    }
     render() {
         if (this.state.err) {
             return <div className="Relationship">{this.state.err}</div>;
@@ -134,5 +138,5 @@ export const RelatedItemsList = React.createClass({
                 {this.props.items ? this.renderItems() : loadingElement}
             </div>
         );
-    },
-});
+    }
+}

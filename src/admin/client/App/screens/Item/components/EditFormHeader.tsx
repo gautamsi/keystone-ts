@@ -2,41 +2,44 @@ import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 
-import { Toolbar } from './Toolbar';
-import { ToolbarSection } from './Toolbar/ToolbarSection';
+import { Toolbar, ToolbarSection } from './Toolbar';
 import { EditFormHeaderSearch } from './EditFormHeaderSearch';
 import { Link } from 'react-router';
 
 import { Drilldown } from './Drilldown';
 import { GlyphButton, ResponsiveText } from 'elemental';
 
-export const EditFormHeaderClass = React.createClass({
-    displayName: 'EditFormHeader',
-    propTypes: {
-        data: React.PropTypes.object,
-        list: React.PropTypes.object,
-        toggleCreate: React.PropTypes.func,
-    },
-    getInitialState() {
-        return {
+interface Props {
+    data?: any;
+    list?: any;
+    toggleCreate?: any;
+    listActivePage?: number;
+}
+class EditFormHeaderClass extends React.Component<Props, any> {
+    static displayName: string = 'EditFormHeader';
+
+    constructor(props) {
+        super(props);
+        this.state = {
             searchString: '',
         };
-    },
+    }
+
     toggleCreate(visible) {
         this.props.toggleCreate(visible);
-    },
+    }
     searchStringChanged(event) {
         this.setState({
             searchString: event.target.value,
         });
-    },
+    }
     handleEscapeKey(event) {
         const escapeKeyCode = 27;
 
         if (event.which === escapeKeyCode) {
-            findDOMNode(this.refs.searchField).blur();
+            findDOMNode<HTMLElement>(this.refs.searchField).blur();
         }
-    },
+    }
     renderDrilldown() {
         return (
             <ToolbarSection left>
@@ -44,7 +47,7 @@ export const EditFormHeaderClass = React.createClass({
                 {this.renderSearch()}
             </ToolbarSection>
         );
-    },
+    }
     renderDrilldownItems() {
         const { data, list } = this.props;
         const items = data.drilldown ? data.drilldown.items : [];
@@ -98,7 +101,7 @@ export const EditFormHeaderClass = React.createClass({
         return (
             <Drilldown items={drilldown} />
         );
-    },
+    }
     renderSearch() {
         let list = this.props.list;
         return (
@@ -122,20 +125,20 @@ export const EditFormHeaderClass = React.createClass({
 				</GlyphField> */}
             </form>
         );
-    },
+    }
     renderInfo() {
         return (
             <ToolbarSection right>
                 {this.renderCreateButton()}
             </ToolbarSection>
         );
-    },
+    }
     renderCreateButton() {
         const { nocreate, autocreate, singular } = this.props.list;
 
         if (nocreate) return null;
 
-        let props = {};
+        let props: any = {};
         if (autocreate) {
             props.href = '?new' + Keystone.csrf.query;
         } else {
@@ -146,7 +149,7 @@ export const EditFormHeaderClass = React.createClass({
                 <ResponsiveText hiddenXS={`New ${singular}`} visibleXS="Create" />
             </GlyphButton>
         );
-    },
+    }
     render() {
         return (
             <Toolbar>
@@ -154,9 +157,9 @@ export const EditFormHeaderClass = React.createClass({
                 {this.renderInfo()}
             </Toolbar>
         );
-    },
-});
+    }
+}
 
-export const EditFormHeader = connect((state: any) => ({
+export const EditFormHeader = connect<any, any, any>((state: any) => ({
     listActivePage: state.lists.page.index,
-}))(EditFormHeaderClass as any);
+}))(EditFormHeaderClass);

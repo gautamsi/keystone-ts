@@ -38,11 +38,11 @@
 	transition: opacity 200ms, transform 200ms ease-out;
 	transform: translate3d(0, 0, 0);
 }
-.Popout-leave {
+.Popout-exit {
 	opacity: 1;
 	transform: translate3d(0, 0, 0);
 }
-.Popout-leave.Popout-leave-active {
+.Popout-exit.Popout-exit-active {
 	opacity: 0.01;
 	transition: opacity 200ms, transform 200ms ease-in;
 	transform: translate3d(0, 20px, 0);
@@ -139,11 +139,11 @@
 	transition-timing-function: @popout-pane-timing-function;
 	transform: translate3d(0, 0, 0);
 }
-.Popout__pane-next-leave {
+.Popout__pane-next-exit {
 	opacity: 1;
 	transform: translate3d(0, 0, 0);
 }
-.Popout__pane-next-leave.Popout__pane-next-leave-active {
+.Popout__pane-next-exit.Popout__pane-next-exit-active {
 	opacity: 0.01;
 	transition: opacity @popout-pane-transition-duration, transform @popout-pane-transition-duration;
 	transition-timing-function: @popout-pane-timing-function;
@@ -159,11 +159,11 @@
 	transition-timing-function: @popout-pane-timing-function;
 	transform: translate3d(0, 0, 0);
 }
-.Popout__pane-prev-leave {
+.Popout__pane-prev-exit {
 	opacity: 1;
 	transform: translate3d(0, 0, 0);
 }
-.Popout__pane-prev-leave.Popout__pane-prev-leave-active {
+.Popout__pane-prev-exit.Popout__pane-prev-exit-active {
 	opacity: 0.01;
 	transition: opacity @popout-pane-transition-duration, transform @popout-pane-transition-duration;
 	transition-timing-function: @popout-pane-timing-function;
@@ -222,10 +222,10 @@
 	opacity: 1;
 	transition: opacity 200ms;
 }
-.Popout__header__button-leave {
+.Popout__header__button-exit {
 	opacity: 1;
 }
-.Popout__header__button-leave.Popout__header__button-leave-active {
+.Popout__header__button-exit.Popout__header__button-exit-active {
 	opacity: 0.01;
 	transition: opacity 200ms;
 }
@@ -258,11 +258,11 @@
 	transition-timing-function: @popout-pane-timing-function;
 	transform: translate3d(0, 0, 0);
 }
-.Popout__header__label-next-leave {
+.Popout__header__label-next-exit {
 	opacity: 1;
 	transform: translate3d(0, 0, 0);
 }
-.Popout__header__label-next-leave.Popout__header__label-next-leave-active {
+.Popout__header__label-next-exit.Popout__header__label-next-exit-active {
 	opacity: 0.01;
 	transition: opacity @popout-pane-transition-duration, transform @popout-pane-transition-duration;
 	transition-timing-function: @popout-pane-timing-function;
@@ -278,11 +278,11 @@
 	transition-timing-function: @popout-pane-timing-function;
 	transform: translate3d(0, 0, 0);
 }
-.Popout__header__label-prev-leave {
+.Popout__header__label-prev-exit {
 	opacity: 1;
 	transform: translate3d(0, 0, 0);
 }
-.Popout__header__label-prev-leave.Popout__header__label-prev-leave-active {
+.Popout__header__label-prev-exit.Popout__header__label-prev-exit-active {
 	opacity: 0.01;
 	transition: opacity @popout-pane-transition-duration, transform @popout-pane-transition-duration;
 	transition-timing-function: @popout-pane-timing-function;

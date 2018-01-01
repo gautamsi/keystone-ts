@@ -3,10 +3,10 @@
  * getting information about those lists, etc.
  */
 
-const listToArray = require('list-to-array');
-const qs = require('qs');
-const xhr = require('xhr');
-const assign = require('object-assign');
+import * as listToArray from 'list-to-array';
+import * as qs from 'qs';
+import * as xhr from 'xhr';
+import * as assign from 'object-assign';
 // Filters for truthy elements in an array
 const truthy = (i) => i;
 
@@ -258,7 +258,7 @@ export class List {
                 callback(data);
             }
         });
-    };
+    }
 
     /**
      * Load all items of a list, optionally passing objects to build a query string

@@ -6,9 +6,8 @@ declare var it;
 declare var describe;
 declare var beforeEach;
 
-declare var document;
-declare var window;
-
+declare var Keystone;
+declare var keystone;
 
 interface Error{
     type?:any;

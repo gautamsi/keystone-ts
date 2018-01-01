@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 import { plural } from '../../../../utils/string';
 import { ListTile } from './ListTile';
 
-interface IListsProps {
+interface Props {
     counts: any;
     lists: Array<any> | object;
     spinner: React.ReactNode;
     listsData?: any;
 }
-export class Lists extends React.Component<IListsProps> {
+export class Lists extends React.Component<Props> {
     render() {
         return (
             <div className="dashboard-group__lists">
@@ -37,16 +37,6 @@ export class Lists extends React.Component<IListsProps> {
             </div>
         );
     }
-
-
-    static propTypes = {
-        counts: React.PropTypes.object.isRequired,
-        lists: React.PropTypes.oneOfType([
-            React.PropTypes.array,
-            React.PropTypes.object,
-        ]).isRequired,
-        spinner: React.PropTypes.node,
-    };
 }
 
 export default connect((state: any) => {

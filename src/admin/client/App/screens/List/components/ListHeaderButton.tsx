@@ -2,34 +2,39 @@ import { css } from 'glamor';
 import * as React from 'react';
 import { DropdownButton, Glyph } from 'elemental';
 
-export function ListHeaderButton ({ className, label, glyph, ...props }) {
-	return (
-		<DropdownButton block {...props}>
-			<Glyph name={glyph} cssStyles={classes.glyph} />
-			<span className={css(classes.label)}>{label}</span>
-		</DropdownButton>
-	);
+interface Props {
+    glyph: string;
+    className?: string;
+    label?: string;
+    active?: any;
+    id?: any;
+    onClick?: any;
 }
 
-ListHeaderButton['propTypes'] = {
-	glyph: React.PropTypes.string.isRequired,
+export const ListHeaderButton: React.SFC<Props> = ({ className, label, glyph, ...props }) => {
+    return (
+        <DropdownButton block {...props}>
+            <Glyph name={glyph} cssStyles={classes.glyph} />
+            <span className={`{css(classes.label)}`}>{label}</span>
+        </DropdownButton>
+    );
 };
 
 // show an icon on small screens where real estate is precious
 // otherwise render the label
 const classes = {
-	glyph: {
-		'display': 'none',
+    glyph: {
+        'display': 'none',
 
-		'@media (max-width: 500px)': {
-			display: 'inline-block',
-		},
-	},
-	label: {
-		'display': 'inline-block',
+        '@media (max-width: 500px)': {
+            display: 'inline-block',
+        },
+    },
+    label: {
+        'display': 'inline-block',
 
-		'@media (max-width: 500px)': {
-			display: 'none',
-		},
-	},
+        '@media (max-width: 500px)': {
+            display: 'none',
+        },
+    },
 };

@@ -5,8 +5,17 @@ import { Button, Glyph } from 'elemental';
 
 import { theme } from '../../../../theme';
 
-export function DrilldownItem({ className, href, label, separate, separator, style, ...props }) {
-    props.className = css(classes.item, className);
+interface Props {
+    className?: any;
+    style?: any;
+    href: string;
+    label: string;
+    separate: boolean;
+    separator?: string | JSX.Element;
+}
+
+export const DrilldownItem: React.SFC<Props> = ({ href, label, separate, separator, style, ...props }) => {
+    props.className = css(classes.item, props.className);
 
     // remove horizontal padding
     const styles = {
@@ -26,23 +35,14 @@ export function DrilldownItem({ className, href, label, separate, separator, sty
                 {label}
             </Button>
             {separate && (
-                <span className={css(classes.separator)}>
+                <span className={`${css(classes.separator)}`}>
                     {separator}
                 </span>
             )}
         </li>
     );
-}
-
-DrilldownItem.propTypes = {
-    href: React.PropTypes.string.isRequired,
-    label: React.PropTypes.string.isRequired,
-    separate: React.PropTypes.bool, // FIXME verb; could be better
-    separator: React.PropTypes.oneOfType([
-        React.PropTypes.element,
-        React.PropTypes.string,
-    ]),
 };
+
 DrilldownItem.defaultProps = {
     separator: <Glyph name="chevron-right" />,
 };

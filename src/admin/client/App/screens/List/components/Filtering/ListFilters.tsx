@@ -4,7 +4,7 @@ import { Filter } from './Filter';
 
 import { clearAllFilters } from '../../actions';
 
-export const ListFilters = ({ dispatch, filters }) => {
+export const ListFilters: React.SFC<Props> = ({ dispatch, filters }) => {
 
     if (!filters.length) return <div />;
 
@@ -44,7 +44,7 @@ export const ListFilters = ({ dispatch, filters }) => {
     );
 };
 
-ListFilters['propTypes'] = {
-    dispatch: React.PropTypes.func.isRequired,
-    filters: React.PropTypes.array.isRequired,
-};
+interface Props {
+    dispatch: any;
+    filters: Array<any>;
+}

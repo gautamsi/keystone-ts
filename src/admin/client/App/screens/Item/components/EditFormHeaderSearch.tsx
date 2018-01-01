@@ -6,16 +6,16 @@ import { css } from 'glamor';
 import { FormInput, Glyph, GlyphButton } from 'elemental';
 import { theme } from '../../../../theme';
 
-export class EditFormHeaderSearch extends React.Component {
-    constructor() {
-        super();
+export class EditFormHeaderSearch extends React.Component<Props, any> {
+    constructor(props) {
+        super(props);
 
         this.focusField = this.focusField.bind(this);
         this.state = { focused: false };
     }
     focusField() {
         this.setState({ focused: true }, () => {
-            findDOMNode(this.refs.target).focus();
+            findDOMNode<HTMLElement>(this.refs.target).focus();
         });
     }
     render() {
@@ -28,7 +28,7 @@ export class EditFormHeaderSearch extends React.Component {
 		} = this.props;
 
         return focused ? (
-            <div className={css(classes.wrapper)}>
+            <div className={`${css(classes.wrapper)}`}>
                 <Glyph
                     cssStyles={classes.glyph}
                     color={theme.color.gray40}
@@ -69,10 +69,11 @@ export class EditFormHeaderSearch extends React.Component {
 // For props "glyph", "glyphColor", and "glyphSize":
 // prop type validation will occur within the Glyph component, no need to
 // duplicate, just pass it through.
-EditFormHeaderSearch['propTypes'] = {
-    onChange: React.PropTypes.func.isRequired,
-    value: React.PropTypes.string,
-};
+interface Props {
+    onChange: any;
+    value?: string;
+    onKeyUp?: any;
+}
 
 const classes = {
     wrapper: {

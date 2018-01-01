@@ -17,19 +17,21 @@ import { upcase } from '../../utils/string';
  *   based on their type. For example: validation errors should be displayed next
  *   to each invalid field and signin errors should promt the user to sign in.
  */
-export const AlertMessages = React.createClass({
-    displayName: 'AlertMessages',
-    propTypes: {
-        alerts: React.PropTypes.shape({
-            error: React.PropTypes.object,
-            success: React.PropTypes.object,
-        }),
-    },
-    getDefaultProps() {
-        return {
+interface Props {
+    alerts?: {
+        error?: any;
+        success?: any;
+    };
+}
+
+export class AlertMessages extends React.Component<Props> {
+    static displayName: string = 'AlertMessages';
+    constructor(props) {
+        super(props);
+        this.state = {
             alerts: {},
         };
-    },
+    }
     renderValidationErrors() {
         let errors = this.props.alerts.error.detail;
         if (errors.name === 'ValidationError') {
@@ -65,7 +67,7 @@ export const AlertMessages = React.createClass({
         }
 
         return <Alert color="danger">{alertContent}</Alert>;
-    },
+    }
     render() {
         let { error, success } = this.props.alerts;
 
@@ -91,5 +93,5 @@ export const AlertMessages = React.createClass({
         }
 
         return null; // No alerts, render nothing
-    },
-});
+    }
+}

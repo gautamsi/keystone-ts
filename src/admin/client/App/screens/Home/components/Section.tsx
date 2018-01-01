@@ -21,10 +21,4 @@ export class Section extends React.Component<ISectionProps> {
             </div>
         );
     }
-    static propTypes = {
-        children: React.PropTypes.element.isRequired,
-        icon: React.PropTypes.string,
-        id: React.PropTypes.string,
-        label: React.PropTypes.string.isRequired,
-    };
 }

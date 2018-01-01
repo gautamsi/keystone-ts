@@ -7,30 +7,29 @@ import * as React from 'react';
 import { Container } from 'elemental';
 import { PrimaryNavItem } from './NavItem';
 
-export const PrimaryNavigation = React.createClass({
-    displayName: 'PrimaryNavigation',
-    propTypes: {
-        brand: React.PropTypes.string,
-        currentSectionKey: React.PropTypes.string,
-        sections: React.PropTypes.array.isRequired,
-        signoutUrl: React.PropTypes.string,
-    },
-    getInitialState() {
-        return {};
-    },
+interface Props {
+    brand?: string;
+    currentSectionKey: string;
+    sections?: Array<any>;
+    signoutUrl?: string;
+}
+
+export class PrimaryNavigation extends React.Component<Props, any> {
+    static displayName: 'PrimaryNavigation';
+
     // Handle resizing, hide this navigation on mobile (i.e. < 768px) screens
     componentDidMount() {
         this.handleResize();
         window.addEventListener('resize', this.handleResize);
-    },
+    }
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleResize);
-    },
+    }
     handleResize() {
         this.setState({
             navIsVisible: window.innerWidth >= 768,
         });
-    },
+    }
     // Render the sign out button
     renderSignout() {
         if (!this.props.signoutUrl) return null;
@@ -44,7 +43,7 @@ export const PrimaryNavigation = React.createClass({
                 <span className="octicon octicon-sign-out" />
             </PrimaryNavItem>
         );
-    },
+    }
     // Render the back button
     renderBackButton() {
         if (!Keystone.backUrl) return null;
@@ -58,7 +57,7 @@ export const PrimaryNavigation = React.createClass({
                 <span className="octicon octicon-globe" />
             </PrimaryNavItem>
         );
-    },
+    }
     // Render the link to the webpage
     renderFrontLink() {
         return (
@@ -67,7 +66,7 @@ export const PrimaryNavigation = React.createClass({
                 {this.renderSignout()}
             </ul>
         );
-    },
+    }
     renderBrand() {
         // TODO: support navbarLogo from keystone config
 
@@ -84,7 +83,7 @@ export const PrimaryNavigation = React.createClass({
                 <span className="octicon octicon-home" />
             </PrimaryNavItem>
         );
-    },
+    }
     // Render the navigation
     renderNavigation() {
         if (!this.props.sections || !this.props.sections.length) return null;
@@ -107,7 +106,7 @@ export const PrimaryNavigation = React.createClass({
                 </PrimaryNavItem>
             );
         });
-    },
+    }
     render() {
         if (!this.state.navIsVisible) return null;
 
@@ -122,5 +121,5 @@ export const PrimaryNavigation = React.createClass({
                 </Container>
             </nav>
         );
-    },
-});
+    }
+}

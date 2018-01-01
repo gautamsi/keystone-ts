@@ -1,4 +1,4 @@
-import { Component, PropTypes } from 'react';
+import * as React from 'react';
 import { DropTarget, DragSource } from 'react-dnd';
 
 import { Columns } from 'FieldTypes';
@@ -11,7 +11,22 @@ import {
 
 import { ListControl } from '../../../List/components/ListControl';
 
-export class RelatedItemsListRow extends Component {
+interface Props {
+    columns: Array<any>;
+    dispatch: any;
+    dragNewSortOrder?: number;
+    index?: number;
+    item: any;
+    refList: any;
+    relatedItemId: string;
+    relationship: any;
+    // Injected by React DnD:
+    isDragging?: boolean;
+    connectDragSource?: any;
+    connectDropTarget?: any;
+    connectDragPreview?: any;
+}
+class RelatedItemsListRow extends React.Component<Props> {
     render() {
         const { columns, item, connectDragSource, connectDropTarget, refList } = this.props;
         const cells = columns.map((col, i) => {
@@ -35,19 +50,7 @@ export class RelatedItemsListRow extends Component {
     }
 
     static propTypes = {
-        columns: PropTypes.array.isRequired,
-        dispatch: PropTypes.func.isRequired,
-        dragNewSortOrder: PropTypes.number,
-        index: PropTypes.number,
-        item: PropTypes.object.isRequired,
-        refList: PropTypes.object.isRequired,
-        relatedItemId: PropTypes.string.isRequired,
-        relationship: PropTypes.object.isRequired,
-        // Injected by React DnD:
-        isDragging: PropTypes.bool,         // eslint-disable-line react/sort-prop-types
-        connectDragSource: PropTypes.func,  // eslint-disable-line react/sort-prop-types
-        connectDropTarget: PropTypes.func,  // eslint-disable-line react/sort-prop-types
-        connectDragPreview: PropTypes.func, // eslint-disable-line react/sort-prop-types
+
     };
 
 }

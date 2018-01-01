@@ -47,12 +47,26 @@ import {
 
 const ESC_KEY_CODE = 27;
 
-const ListView = React.createClass({
-    contextTypes: {
-        router: React.PropTypes.object.isRequired,
-    },
-    getInitialState() {
-        return {
+interface Props {
+    dispatch?: any;
+    active?: any;
+    currentList?: any;
+    items?: any;
+    lists?: any;
+    location?: any;
+    params?: any;
+    loading?: any;
+    rowAlert?: any;
+    error?: any;
+    ready?: boolean;
+}
+class ListView extends React.Component<Props, any> {
+    // contextTypes: {
+    //     router: React.PropTypes.object.isRequired,
+    // },
+    constructor(props) {
+        super(props);
+        this.state = {
             confirmationDialog: {
                 isOpen: false,
             },
@@ -62,7 +76,7 @@ const ListView = React.createClass({
             showCreateForm: false,
             showUpdateForm: false,
         };
-    },
+    }
     componentWillMount() {
         // When we directly navigate to a list without coming from another client
         // side routed page before, we need to initialize the list and parse
@@ -77,7 +91,7 @@ const ListView = React.createClass({
             showCreateForm: (shouldOpenCreate && !isNoCreate) || Keystone.createFormErrors,
         });
 
-    },
+    }
     componentWillReceiveProps(nextProps: any) {
         // We've opened a new list from the client side routing, so initialize
         // again with the new list id
@@ -85,10 +99,10 @@ const ListView = React.createClass({
         if (isReady && checkForQueryChange(nextProps, this.props)) {
             this.props.dispatch(selectList(nextProps.params.listId));
         }
-    },
+    }
     componentWillUnmount() {
         this.props.dispatch(clearCachedQuery());
-    },
+    }
 
     // ==============================
     // HEADER
@@ -100,7 +114,7 @@ const ListView = React.createClass({
         // Redirect to newly created item path
         const list = this.props.currentList;
         this.context.router.push(`${Keystone.adminPath}/${list.path}/${item.id}`);
-    },
+    }
     createAutocreate() {
         const list = this.props.currentList;
         list.createItem(null, (err, data) => {
@@ -112,42 +126,42 @@ const ListView = React.createClass({
                 this.context.router.push(`${Keystone.adminPath}/${list.path}/${data.id}`);
             }
         });
-    },
+    }
     updateSearch(e) {
         this.props.dispatch(setActiveSearch(e.target.value));
-    },
+    }
     handleSearchClear() {
         this.props.dispatch(setActiveSearch(''));
 
         // TODO re-implement focus when ready
         // findDOMNode(this.refs.listSearchInput).focus();
-    },
+    }
     handleSearchKey(e) {
         // clear on esc
         if (e.which === ESC_KEY_CODE) {
             this.handleSearchClear();
         }
-    },
+    }
     handlePageSelect(i) {
         // If the current page index is the same as the index we are intending to pass to redux, bail out.
         if (i === this.props.lists.page.index) return;
         return this.props.dispatch(setCurrentPage(i));
-    },
+    }
     toggleManageMode(filter = !this.state.manageMode) {
         this.setState({
             manageMode: filter,
             checkedItems: {},
         });
-    },
+    }
     toggleUpdateModal(filter = !this.state.showUpdateForm) {
         this.setState({
             showUpdateForm: filter,
         });
-    },
+    }
     massUpdate() {
         // TODO: Implement update multi-item
         console.log('Update ALL the things!');
-    },
+    }
     massDelete() {
         const { checkedItems } = this.state;
         const list = this.props.currentList;
@@ -173,13 +187,13 @@ const ListView = React.createClass({
                 },
             },
         });
-    },
+    }
     handleManagementSelect(selection) {
         if (selection === 'all') this.checkAllItems();
         if (selection === 'none') this.uncheckAllTableItems();
         if (selection === 'visible') this.checkAllTableItems();
         return false;
-    },
+    }
     renderConfirmationDialog() {
         const props = this.state.confirmationDialog;
         return (
@@ -192,7 +206,7 @@ const ListView = React.createClass({
                 {props.body}
             </ConfirmationDialog>
         );
-    },
+    }
     renderManagement() {
         const { checkedItems, manageMode, selectAllItemsLoading } = this.state;
         const { currentList } = this.props;
@@ -211,7 +225,7 @@ const ListView = React.createClass({
                 selectAllItemsLoading={selectAllItemsLoading}
             />
         );
-    },
+    }
     renderPagination() {
         const items = this.props.items;
         if (this.state.manageMode || !items.count) return;
@@ -232,7 +246,7 @@ const ListView = React.createClass({
                 limit={10}
             />
         );
-    },
+    }
     renderHeader() {
         const items = this.props.items;
         const { autocreate, nocreate, plural, singular } = this.props.currentList;
@@ -286,7 +300,7 @@ const ListView = React.createClass({
                 />
             </Container>
         );
-    },
+    }
 
     // ==============================
     // TABLE
@@ -304,7 +318,7 @@ const ListView = React.createClass({
         this.setState({
             checkedItems: newCheckedItems,
         });
-    },
+    }
     checkAllTableItems() {
         const checkedItems = {};
         this.props.items.results.forEach(item => {
@@ -313,7 +327,7 @@ const ListView = React.createClass({
         this.setState({
             checkedItems: checkedItems,
         });
-    },
+    }
     checkAllItems() {
         const checkedItems = { ...this.state.checkedItems };
         // Just in case this API call takes a long time, we'll update the select all button with
@@ -329,12 +343,12 @@ const ListView = React.createClass({
                 selectAllItemsLoading: false,
             });
         });
-    },
+    }
     uncheckAllTableItems() {
         this.setState({
             checkedItems: {},
         });
-    },
+    }
     deleteTableItem(item, e) {
         if (e.altKey) {
             this.props.dispatch(deleteItem(item.id));
@@ -361,19 +375,19 @@ const ListView = React.createClass({
                 },
             },
         });
-    },
+    }
     removeConfirmationDialog() {
         this.setState({
             confirmationDialog: {
                 isOpen: false,
             },
         });
-    },
+    }
     toggleTableWidth() {
         this.setState({
             constrainTableWidth: !this.state.constrainTableWidth,
         });
-    },
+    }
 
     // ==============================
     // COMMON
@@ -382,24 +396,24 @@ const ListView = React.createClass({
     handleSortSelect(path, inverted) {
         if (inverted) path = '-' + path;
         this.props.dispatch(setActiveSort(path));
-    },
+    }
     toggleCreateModal(visible) {
         this.setState({
             showCreateForm: visible,
         });
-    },
+    }
     openCreateModal() {
         this.toggleCreateModal(true);
-    },
+    }
     closeCreateModal() {
         this.toggleCreateModal(false);
-    },
+    }
     showBlankState() {
         return !this.props.loading
             && !this.props.items.results.length
             && !this.props.active.search
             && !this.props.active.filters.length;
-    },
+    }
     renderBlankState() {
         const { currentList } = this.props;
 
@@ -433,7 +447,7 @@ const ListView = React.createClass({
                 </BlankState>
             </Container>
         );
-    },
+    }
     renderActiveState() {
         if (this.showBlankState()) return null;
 
@@ -442,6 +456,7 @@ const ListView = React.createClass({
             msTransition: 'max-width 160ms ease-out',
             MozTransition: 'max-width 160ms ease-out',
             WebkitTransition: 'max-width 160ms ease-out',
+            maxWidth: undefined
         };
         if (!this.state.constrainTableWidth) {
             containerStyle.maxWidth = '100%';
@@ -494,7 +509,7 @@ const ListView = React.createClass({
                 </Container>
             </div>
         );
-    },
+    }
     renderNoSearchResults() {
         if (this.props.items.results.length) return null;
         let matching = this.props.active.search;
@@ -514,7 +529,7 @@ const ListView = React.createClass({
                 </h2>
             </BlankState>
         );
-    },
+    }
     render() {
         if (!this.props.ready) {
             return (
@@ -543,8 +558,8 @@ const ListView = React.createClass({
                 {this.renderConfirmationDialog()}
             </div>
         );
-    },
-});
+    }
+}
 
 export const List = connect((state: any) => {
     return {
@@ -558,4 +573,4 @@ export const List = connect((state: any) => {
         rowAlert: state.lists.rowAlert,
         active: state.active,
     };
-})(ListView as any);
+})(ListView);

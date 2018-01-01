@@ -5,16 +5,17 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 
-export const SecondaryNavItem = React.createClass({
-    displayName: 'SecondaryNavItem',
-    propTypes: {
-        children: React.PropTypes.node.isRequired,
-        className: React.PropTypes.string,
-        href: React.PropTypes.string.isRequired,
-        onClick: React.PropTypes.func,
-        path: React.PropTypes.string,
-        title: React.PropTypes.string,
-    },
+interface Props {
+    children: React.ReactNode;
+    className?: string;
+    href: string;
+    onClick?: any;
+    path?: string;
+    title?: string;
+}
+export class SecondaryNavItem extends React.Component<Props> {
+    static displayName: string = 'SecondaryNavItem';
+
     render() {
         return (
             <li className={this.props.className} data-list-path={this.props.path}>
@@ -22,11 +23,11 @@ export const SecondaryNavItem = React.createClass({
                     to={this.props.href}
                     onClick={this.props.onClick}
                     title={this.props.title}
-                    tabIndex="-1"
+                    tabIndex={-1}
                 >
                     {this.props.children}
                 </Link>
             </li>
         );
-    },
-});
+    }
+}

@@ -1,9 +1,18 @@
-import { Component, PropTypes } from 'react';
+import * as React from 'react';
 import vkey from 'vkey';
 
-export class AltText extends Component {
-    constructor() {
-        super();
+interface Props {
+    component?: string | any;
+    modified?: JSX.Element | string;
+    modifier?: '<alt>' | '<control>' | '<meta>' | '<shift>';
+    normal?: JSX.Element | string;
+    children?: any;
+    title?: string;
+    className: string;
+}
+export class AltText extends React.Component<Props, any> {
+    constructor(props) {
+        super(props);
 
         this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleKeyUp = this.handleKeyUp.bind(this);
@@ -35,43 +44,24 @@ export class AltText extends Component {
     render() {
         // NOTE `modifier` is declared to remove it from `props`, though never used
         const {
-			component: Component,
+			component,
             modified,
             modifier, // eslint-disable-line no-unused-vars
             normal,
             ...props
 		} = this.props;
 
-        props.children = this.state.modified
+        (props as any).children = this.state.modified
             ? modified
             : normal;
 
         return <Component {...props} />;
     }
     static propTypes = {
-        component: PropTypes.oneOfType([
-            PropTypes.func,
-            PropTypes.string,
-        ]),
-        modified: PropTypes.oneOfType([
-            PropTypes.element,
-            PropTypes.string,
-        ]),
-        modifier: PropTypes.oneOf(SUPPORTED_KEYS),
-        normal: PropTypes.oneOfType([
-            PropTypes.element,
-            PropTypes.string,
-        ]),
+
     };
     static defaultProps = {
         component: 'span',
         modifier: '<alt>',
     };
 }
-
-const SUPPORTED_KEYS = [
-    '<alt>',
-    '<control>',
-    '<meta>',
-    '<shift>',
-];

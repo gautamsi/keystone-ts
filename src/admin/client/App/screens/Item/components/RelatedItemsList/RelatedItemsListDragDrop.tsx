@@ -3,7 +3,17 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { Sortable } from './RelatedItemsListRow';
 
-class RelatedItemsListDragDrop extends React.Component {
+interface Props {
+    columns: Array<any>;
+    dispatch: any;
+    dragNewSortOrder?: number;
+    items: any;
+    list: any;
+    refList: any;
+    relatedItemId: string;
+    relationship: any;
+}
+class RelatedItemsListDragDrop extends React.Component<Props> {
     render() {
         const { items } = this.props;
         return (
@@ -20,15 +30,6 @@ class RelatedItemsListDragDrop extends React.Component {
         );
     }
 }
-RelatedItemsListDragDrop['propTypes'] = {
-    columns: React.PropTypes.array.isRequired,
-    dispatch: React.PropTypes.func.isRequired,
-    dragNewSortOrder: React.PropTypes.number,
-    items: React.PropTypes.array.isRequired,
-    list: React.PropTypes.object.isRequired,
-    refList: React.PropTypes.object.isRequired,
-    relatedItemId: React.PropTypes.string.isRequired,
-    relationship: React.PropTypes.object.isRequired,
-};
+
 
 export const DragDrop = DragDropContext(HTML5Backend)(RelatedItemsListDragDrop);

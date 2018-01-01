@@ -3,44 +3,46 @@
  */
 
 import * as React from 'react';
-import * as Transition from 'react-addons-css-transition-group';
+import Transition from 'react-transition-group/Transition';
 
 import { MobileSectionItem } from './SectionItem';
 
 const ESCAPE_KEY_CODE = 27;
 
-export const MobileNavigation = React.createClass({
-    displayName: 'MobileNavigation',
-    propTypes: {
-        brand: React.PropTypes.string,
-        currentListKey: React.PropTypes.string,
-        currentSectionKey: React.PropTypes.string,
-        sections: React.PropTypes.array.isRequired,
-        signoutUrl: React.PropTypes.string,
-    },
+interface Props {
+    brand: string;
+    currentListKey: string;
+    currentSectionKey: string;
+    sections: Array<any>;
+    signoutUrl: string;
+}
+
+export class MobileNavigation extends React.Component<Props, any> {
+    static displayName: string = 'MobileNavigation';
+
     getInitialState() {
         return {
             barIsVisible: false,
         };
-    },
+    }
     // Handle showing and hiding the menu based on the window size when
     // resizing
     componentDidMount() {
         this.handleResize();
         window.addEventListener('resize', this.handleResize);
-    },
+    }
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleResize);
-    },
+    }
     handleResize() {
         this.setState({
             barIsVisible: window.innerWidth < 768,
         });
-    },
+    }
     // Toggle the menu
     toggleMenu() {
         this[this.state.menuIsVisible ? 'hideMenu' : 'showMenu']();
-    },
+    }
     // Show the menu
     showMenu() {
         this.setState({
@@ -50,7 +52,7 @@ export const MobileNavigation = React.createClass({
         // Make the body unscrollable, so you can only scroll in the menu
         document.body.style.overflow = 'hidden';
         document.body.addEventListener('keyup', this.handleEscapeKey, false);
-    },
+    }
     // Hide the menu
     hideMenu() {
         this.setState({
@@ -60,13 +62,13 @@ export const MobileNavigation = React.createClass({
         // Make the body scrollable again
         document.body.style.overflow = null;
         document.body.removeEventListener('keyup', this.handleEscapeKey, false);
-    },
+    }
     // If the escape key was pressed, hide the menu
     handleEscapeKey(event) {
         if (event.which === ESCAPE_KEY_CODE) {
             this.hideMenu();
         }
-    },
+    }
     renderNavigation() {
         if (!this.props.sections || !this.props.sections.length) return null;
 
@@ -89,13 +91,13 @@ export const MobileNavigation = React.createClass({
                 </MobileSectionItem>
             );
         });
-    },
+    }
     // Render a blockout
     renderBlockout() {
         if (!this.state.menuIsVisible) return null;
 
         return <div className="MobileNavigation__blockout" onClick={this.toggleMenu} />;
-    },
+    }
     // Render the sidebar menu
     renderMenu() {
         if (!this.state.menuIsVisible) return null;
@@ -107,7 +109,7 @@ export const MobileNavigation = React.createClass({
                 </div>
             </nav>
         );
-    },
+    }
     render() {
         if (!this.state.barIsVisible) return null;
 
@@ -133,20 +135,18 @@ export const MobileNavigation = React.createClass({
                 </div>
                 <div className="MobileNavigation__bar--placeholder" />
                 <Transition
-                    transitionName="MobileNavigation__menu"
-                    transitionEnterTimeout={260}
-                    transitionLeaveTimeout={200}
+                    classNames="MobileNavigation__menu"
+                    timeout={260}
                 >
                     {this.renderMenu()}
                 </Transition>
                 <Transition
-                    transitionName="react-transitiongroup-fade"
-                    transitionEnterTimeout={0}
-                    transitionLeaveTimeout={0}
+                    classNames="react-transitiongroup-fade"
+                    timeout={0}
                 >
                     {this.renderBlockout()}
                 </Transition>
             </div>
         );
-    },
-});
+    }
+}

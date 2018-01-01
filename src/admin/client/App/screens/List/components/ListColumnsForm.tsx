@@ -8,28 +8,29 @@ import { ListHeaderButton } from './ListHeaderButton';
 
 import { setActiveColumns } from '../actions';
 
-export const ListColumnsForm = React.createClass({
-    displayName: 'ListColumnsForm',
-    getInitialState() {
-        return {
+export class ListColumnsForm extends React.Component<{ activeColumns?: any, dispatch?: any, availableColumns?: any }, any> {
+    static displayName: string = 'ListColumnsForm';
+    constructor(props) {
+        super(props);
+        this.state = {
             selectedColumns: {},
             searchString: '',
         };
-    },
+    }
     getSelectedColumnsFromStore() {
         let selectedColumns = {};
         this.props.activeColumns.forEach(col => {
             selectedColumns[col.path] = true;
         });
         return selectedColumns;
-    },
+    }
     togglePopout(visible) {
         this.setState({
             selectedColumns: this.getSelectedColumnsFromStore(),
             isOpen: visible,
             searchString: '',
         });
-    },
+    }
     toggleColumn(path, value) {
         const newColumns = assign({}, this.state.selectedColumns);
 
@@ -42,14 +43,14 @@ export const ListColumnsForm = React.createClass({
         this.setState({
             selectedColumns: newColumns,
         });
-    },
+    }
     applyColumns() {
         this.props.dispatch(setActiveColumns(Object.keys(this.state.selectedColumns)));
         this.togglePopout(false);
-    },
+    }
     updateSearch(e) {
         this.setState({ searchString: e.target.value });
-    },
+    }
     renderColumns() {
         const availableColumns = this.props.availableColumns;
         const { searchString } = this.state;
@@ -79,7 +80,7 @@ export const ListColumnsForm = React.createClass({
                     onClick={() => { this.toggleColumn(path, !selected); }} />
             );
         });
-    },
+    }
     render() {
         const formFieldStyles = {
             borderBottom: '1px dashed rgba(0,0,0,0.1)',
@@ -118,5 +119,5 @@ export const ListColumnsForm = React.createClass({
                 </Popout>
             </div>
         );
-    },
-});
+    }
+}

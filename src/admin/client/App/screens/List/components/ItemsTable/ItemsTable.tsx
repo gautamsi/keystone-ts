@@ -6,17 +6,24 @@ import { DragDrop } from './ItemsTableDragDrop';
 
 import { TABLE_CONTROL_COLUMN_WIDTH } from '../../../../../constants';
 
-export const ItemsTable = React.createClass({
-    propTypes: {
-        checkedItems: React.PropTypes.object.isRequired,
-        columns: React.PropTypes.array.isRequired,
-        deleteTableItem: React.PropTypes.func.isRequired,
-        handleSortSelect: React.PropTypes.func.isRequired,
-        items: React.PropTypes.object.isRequired,
-        list: React.PropTypes.object.isRequired,
-        manageMode: React.PropTypes.bool.isRequired,
-        rowAlert: React.PropTypes.object.isRequired,
-    },
+interface Props {
+    checkedItems: any;
+    columns: Array<any>;
+    deleteTableItem: any;
+    handleSortSelect: any;
+    items: any;
+    list: any;
+    manageMode: boolean;
+    rowAlert: any;
+    activeSort: any;
+    checkTableItem?: any;
+    currentPage?: any;
+    pageSize?: number;
+    drag?: any;
+    dispatch?: any;
+}
+export class ItemsTable extends React.Component<Props> {
+
     renderCols() {
         let cols = this.props.columns.map(col => (
             <col key={col.path} width={col.width} />
@@ -41,7 +48,7 @@ export const ItemsTable = React.createClass({
                 {cols}
             </colgroup>
         );
-    },
+    }
     renderHeaders() {
         let listControlCount = 0;
 
@@ -67,7 +74,7 @@ export const ItemsTable = React.createClass({
             });
 
             return (
-                <th key={col.path} colSpan="1">
+                <th key={col.path} colSpan={1}>
                     <button
                         className={colClassName}
                         onClick={() => {
@@ -92,7 +99,7 @@ export const ItemsTable = React.createClass({
                 </tr>
             </thead>
         );
-    },
+    }
     render() {
         const { items } = this.props;
         if (!items.results.length) return null;
@@ -125,5 +132,5 @@ export const ItemsTable = React.createClass({
                 </table>
             </div>
         );
-    },
-});
+    }
+}

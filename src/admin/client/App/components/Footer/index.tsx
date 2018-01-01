@@ -8,16 +8,18 @@ import { css } from 'glamor';
 import { Container } from 'elemental';
 import { theme } from '../../../theme';
 
-export const Footer = React.createClass({
-    displayName: 'Footer',
-    propTypes: {
-        appversion: React.PropTypes.string,
-        backUrl: React.PropTypes.string,
-        brand: React.PropTypes.string,
-        user: React.PropTypes.object,
-        User: React.PropTypes.object, // eslint-disable-line react/sort-prop-types
-        version: React.PropTypes.string,
-    },
+interface Props {
+    appversion?: string;
+    backUrl?: string;
+    brand?: string;
+    user?: any;
+    User?: any; // eslint-disable-line react/sort-prop-type;
+    version?: string;
+}
+
+export class Footer extends React.Component<Props, {}> {
+    static displayName: string = 'Footer';
+
     // Render the user
     renderUser() {
         const { User, user } = this.props;
@@ -26,23 +28,24 @@ export const Footer = React.createClass({
         return (
             <span>
                 <span> Signed in as </span>
-                <a href={`${Keystone.adminPath}/${User.path}/${user.id}`} tabIndex="-1" className={css(classes.link)}>
+                <a href={`${Keystone.adminPath}/${User.path}/${user.id}`} tabIndex={-1} className={`${css(classes.link)}`}>
                     {user.name}
                 </a>
                 <span>.</span>
             </span>
         );
-    },
+    }
+
     render() {
         const { backUrl, brand, appversion, version } = this.props;
 
         return (
-            <footer className={css(classes.footer)} data-keystone-footer>
+            <footer className={`${css(classes.footer)}`} data-keystone-footer>
                 <Container>
                     <a
                         href={backUrl}
-                        tabIndex="-1"
-                        className={css(classes.link)}
+                        tabIndex={-1}
+                        className={`${css(classes.link)}`}
                     >
                         {brand + (appversion ? (' ' + appversion) : '')}
                     </a>
@@ -50,8 +53,8 @@ export const Footer = React.createClass({
                     <a
                         href="http://keystonejs.com"
                         target="_blank"
-                        className={css(classes.link)}
-                        tabIndex="-1"
+                        className={`${css(classes.link)}`}
+                        tabIndex={-1}
                     >
                         KeystoneJS
 					</a>
@@ -60,8 +63,8 @@ export const Footer = React.createClass({
                 </Container>
             </footer>
         );
-    },
-});
+    }
+}
 
 /* eslint quote-props: ["error", "as-needed"] */
 const linkHoverAndFocus = {

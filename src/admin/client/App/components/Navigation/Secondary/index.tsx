@@ -11,28 +11,30 @@ import {
 } from '../../../screens/List/actions/active';
 import { SecondaryNavItem } from './NavItem';
 
-const SecondaryNavigationNav = React.createClass({
-    displayName: 'SecondaryNavigation',
-    propTypes: {
-        currentListKey: React.PropTypes.string,
-        lists: React.PropTypes.array.isRequired,
-    },
-    getInitialState() {
-        return {};
-    },
+interface Props {
+    itemId?: string;
+    currentListKey?: string;
+    lists: Array<any>;
+    dispatch: any;
+    currentList: any;
+}
+
+class SecondaryNavigationNav extends React.Component<Props, any> {
+    static displayName: string = 'SecondaryNavigation';
+
     // Handle resizing and hide this nav on mobile (i.e. < 768px) screens
     componentDidMount() {
         this.handleResize();
         window.addEventListener('resize', this.handleResize);
-    },
+    }
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleResize);
-    },
+    }
     handleResize() {
         this.setState({
             navIsVisible: this.props.lists && Object.keys(this.props.lists).length > 0 && window.innerWidth >= 768,
         });
-    },
+    }
     // Render the navigation
     renderNavigation(lists) {
         const navigation = Object.keys(lists).map((key) => {
@@ -70,7 +72,7 @@ const SecondaryNavigationNav = React.createClass({
                 {navigation}
             </ul>
         );
-    },
+    }
     render() {
         if (!this.state.navIsVisible) return null;
 
@@ -81,11 +83,11 @@ const SecondaryNavigationNav = React.createClass({
                 </Container>
             </nav>
         );
-    },
-});
+    }
+}
 
 export const SecondaryNavigation = connect((state: any) => {
     return {
         currentList: state.lists.currentList,
     };
-})(SecondaryNavigationNav as any);
+})(SecondaryNavigationNav);

@@ -9,6 +9,7 @@ import * as prototypeMethods from 'keystone-storage-namefunctions/prototypeMetho
 import * as sanitize from 'sanitize-filename';
 import * as util from 'util';
 import * as utils from 'keystone-utils';
+import { List } from '../../../lib/list';
 
 /*
 var CLOUDINARY_FIELDS = ['public_id', 'version', 'signature', 'format', 'resource_type', 'url', 'width', 'height', 'secure_url'];
@@ -120,6 +121,44 @@ export class CloudinaryImageType extends FieldTypeBase {
         return folder;
     }
 
+    private exists(item) {
+        return (item.get(this.paths.public_id) ? true : false);
+    }
+
+    private src(cloudinary, item, options) {
+        if (!this.exists(item)) {
+            return '';
+        }
+        options = (typeof options === 'object') ? options : {};
+        if (!('fetch_format' in options) && keystone.get('cloudinary webp') !== false) {
+            options.fetch_format = 'auto';
+        }
+        if (!('progressive' in options) && keystone.get('cloudinary progressive') !== false) {
+            options.progressive = true;
+        }
+        if (!('secure' in options) && keystone.get('cloudinary secure')) {
+            options.secure = true;
+        }
+        options.version = item.get(this.paths.version);
+        options.format = options.format || item.get(this.paths.format);
+
+        return cloudinary.url(item.get(this.paths.public_id), options);
+    }
+
+    private reset(item) {
+        item.set(this.path, getEmptyValue());
+    }
+
+    private addSize(options, width, height, other) {
+        if (width) options.width = width;
+        if (height) options.height = height;
+        if (typeof other === 'object') {
+            assign(options, other);
+        }
+        return options;
+    }
+
+
     /**
      * Registers the field on the List's Mongoose Schema.
      */
@@ -127,9 +166,10 @@ export class CloudinaryImageType extends FieldTypeBase {
 
         const cloudinary = require('cloudinary');
 
-        const field = this;
+        // const field = this;
 
-        const paths = this.paths = {
+        // const paths = this.paths = {
+        this.paths = {
             // cloudinary fields
             public_id: this.path + '.public_id',
             version: this.path + '.version',
@@ -161,92 +201,56 @@ export class CloudinaryImageType extends FieldTypeBase {
 
         schema.add(schemaPaths);
 
-        const exists = function (item) {
-            return (item.get(paths.public_id) ? true : false);
-        };
-
         // The .exists virtual indicates whether an image is stored
-        schema.virtual(paths.exists).get(function () {
+        schema.virtual(this.paths.exists).get(function () {
             return schemaMethods.exists.apply(this);
         });
 
         // The .folder virtual returns the cloudinary folder used to upload/select images
-        schema.virtual(paths.folder).get(function () {
+        schema.virtual(this.paths.folder).get(function () {
             return schemaMethods.folder.apply(this);
         });
 
-        const src = function (item, options) {
-            if (!exists(item)) {
-                return '';
-            }
-            options = (typeof options === 'object') ? options : {};
-            if (!('fetch_format' in options) && keystone.get('cloudinary webp') !== false) {
-                options.fetch_format = 'auto';
-            }
-            if (!('progressive' in options) && keystone.get('cloudinary progressive') !== false) {
-                options.progressive = true;
-            }
-            if (!('secure' in options) && keystone.get('cloudinary secure')) {
-                options.secure = true;
-            }
-            options.version = item.get(paths.version);
-            options.format = options.format || item.get(paths.format);
-
-            return cloudinary.url(item.get(paths.public_id), options);
-        };
-
-        const reset = function (item) {
-            item.set(field.path, getEmptyValue());
-        };
-
-        const addSize = function (options, width, height, other) {
-            if (width) options.width = width;
-            if (height) options.height = height;
-            if (typeof other === 'object') {
-                assign(options, other);
-            }
-            return options;
-        };
 
         const schemaMethods = {
             exists: function () {
-                return exists(this);
+                return this.exists(this);
             },
             folder: function () {
-                return field.getFolder();
+                return this.getFolder();
             },
             src: function (options) {
-                return src(this, options);
+                return this.src(this, options);
             },
             tag: function (options) {
-                return exists(this) ? cloudinary.image(this.get(field.path).public_id, options) : '';
+                return this.exists(this) ? cloudinary.image(this.get(this.path).public_id, options) : '';
             },
             scale: function (width, height, options) {
-                return src(this, addSize({ crop: 'scale' }, width, height, options));
+                return this.src(this, this.addSize({ crop: 'scale' }, width, height, options));
             },
             fill: function (width, height, options) {
-                return src(this, addSize({ crop: 'fill', gravity: 'faces' }, width, height, options));
+                return this.src(this, this.addSize({ crop: 'fill', gravity: 'faces' }, width, height, options));
             },
             lfill: function (width, height, options) {
-                return src(this, addSize({ crop: 'lfill', gravity: 'faces' }, width, height, options));
+                return this.src(this, this.addSize({ crop: 'lfill', gravity: 'faces' }, width, height, options));
             },
             fit: function (width, height, options) {
-                return src(this, addSize({ crop: 'fit' }, width, height, options));
+                return this.src(this, this.addSize({ crop: 'fit' }, width, height, options));
             },
             limit: function (width, height, options) {
-                return src(this, addSize({ crop: 'limit' }, width, height, options));
+                return this.src(this, this.addSize({ crop: 'limit' }, width, height, options));
             },
             pad: function (width, height, options) {
-                return src(this, addSize({ crop: 'pad' }, width, height, options));
+                return this.src(this, this.addSize({ crop: 'pad' }, width, height, options));
             },
             lpad: function (width, height, options) {
-                return src(this, addSize({ crop: 'lpad' }, width, height, options));
+                return this.src(this, this.addSize({ crop: 'lpad' }, width, height, options));
             },
             crop: function (width, height, options) {
-                return src(this, addSize({ crop: 'crop', gravity: 'faces' }, width, height, options));
+                return this.src(this, this.addSize({ crop: 'crop', gravity: 'faces' }, width, height, options));
             },
             thumbnail: function (width, height, options) {
-                return src(this, addSize({ crop: 'thumb', gravity: 'faces' }, width, height, options));
+                return this.src(this, this.addSize({ crop: 'thumb', gravity: 'faces' }, width, height, options));
             },
             /**
              * Resets the value of the field
@@ -254,7 +258,7 @@ export class CloudinaryImageType extends FieldTypeBase {
              * @api public
              */
             reset: function () {
-                reset(this);
+                this.reset(this);
             },
             /**
              * Deletes the image from Cloudinary and resets the field
@@ -263,11 +267,11 @@ export class CloudinaryImageType extends FieldTypeBase {
              */
             delete: function () {
                 const promise = new Promise((resolve) => {
-                    cloudinary.uploader.destroy(this.get(paths.public_id), function (result) {
+                    cloudinary.uploader.destroy(this.get(this.paths.public_id), function (result) {
                         resolve(result);
                     });
                 });
-                reset(this);
+                this.reset(this);
                 return promise;
             },
             /**
@@ -285,20 +289,20 @@ export class CloudinaryImageType extends FieldTypeBase {
             },
         };
 
-        _.forEach(schemaMethods, function (fn, key) {
-            field.underscoreMethod(key, fn);
+        _.forEach(schemaMethods, (fn, key) => {
+            this.underscoreMethod(key, fn);
         });
 
         // expose a method on the field to call schema methods
-        this.apply = function (item, method) {
+        this.applySchemaMethod = function (item, method) {
             return schemaMethods[method].apply(item, Array.prototype.slice.call(arguments, 2));
         };
 
         this.bindUnderscoreMethods();
     }
 
-    private applySchemaMethod(item, method){
-        
+    private applySchemaMethod(item, method, ...rest) {
+
     }
 
     /**
@@ -534,7 +538,7 @@ export class CloudinaryImageType extends FieldTypeBase {
             if (req.body) {
                 const action = req.body[paths.action];
                 if (/^(delete|reset)$/.test(action)) {
-                    field.apply(item, action);
+                    field.applySchemaMethod(item, action);
                 }
             }
             if (req.body && req.body[paths.select]) {
@@ -577,7 +581,7 @@ export class CloudinaryImageType extends FieldTypeBase {
 
                 if (field.options.autoCleanup && item.get(field.paths.exists)) {
                     // capture image delete promise
-                    imageDelete = field.apply(item, 'delete');
+                    imageDelete = field.applySchemaMethod(item, 'delete');
                 }
 
                 // callback to be called upon completion of the 'upload' method
@@ -592,7 +596,7 @@ export class CloudinaryImageType extends FieldTypeBase {
 
                 // upload immediately if image is not being delete
                 if (typeof imageDelete === 'undefined') {
-                    field.apply(item, 'upload', req.files[paths.upload].path, uploadOptions).then(uploadComplete);
+                    (field.applySchemaMethod(item, 'upload', req.files[paths.upload].path, uploadOptions) as any).then(uploadComplete);
                 } else {
                     // otherwise wait until image is deleted before uploading
                     // this avoids problems when deleting/uploading images with the same public_id (issue #598)
@@ -600,7 +604,7 @@ export class CloudinaryImageType extends FieldTypeBase {
                         if (result.error) {
                             callback(result.error);
                         } else {
-                            field.apply(item, 'upload', req.files[paths.upload].path, uploadOptions).then(uploadComplete);
+                            (field.applySchemaMethod(item, 'upload', req.files[paths.upload].path, uploadOptions) as any).then(uploadComplete);
                         }
                     });
                 }

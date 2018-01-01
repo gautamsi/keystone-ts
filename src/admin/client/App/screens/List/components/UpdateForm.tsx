@@ -7,39 +7,40 @@ import { InvalidFieldType } from '../../../shared/InvalidFieldType';
 import { plural } from '../../../../utils/string';
 import { BlankState, Button, Form, Modal } from 'elemental';
 
-export const UpdateForm = React.createClass({
-    displayName: 'UpdateForm',
-    propTypes: {
-        isOpen: React.PropTypes.bool,
-        itemIds: React.PropTypes.array,
-        list: React.PropTypes.object,
-        onCancel: React.PropTypes.func,
-    },
-    getDefaultProps() {
+interface Props {
+    isOpen?: boolean;
+    itemIds?: Array<any>;
+    list?: any;
+    onCancel?: any;
+}
+export class UpdateForm extends React.Component<Props, any> {
+    static displayName: string = 'UpdateForm';
+    static defaultProps() {
         return {
             isOpen: false,
         };
-    },
-    getInitialState() {
-        return {
+    }
+    constructor(props) {
+        super(props);
+        this.state = {
             fields: [],
         };
-    },
+    }
     componentDidMount() {
         this.doFocus();
-    },
+    }
     componentDidUpdate() {
         this.doFocus();
-    },
+    }
     doFocus() {
         if (this.refs.focusTarget) {
-            findDOMNode(this.refs.focusTarget).focus();
+            findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
         }
-    },
+    }
     getOptions() {
         const { fields } = this.props.list;
         return Object.keys(fields).map(key => ({ value: fields[key].path, label: fields[key].label }));
-    },
+    }
     getFieldProps(field) {
         let props = assign({}, field);
         props.value = this.state.fields[field.path];
@@ -48,21 +49,21 @@ export const UpdateForm = React.createClass({
         props.mode = 'create';
         props.key = field.path;
         return props;
-    },
+    }
     updateOptions(fields) {
         this.setState({
             fields: fields,
         }, this.doFocus);
-    },
+    }
     handleChange(value) {
         console.log('handleChange:', value);
-    },
+    }
     handleClose() {
         this.setState({
             fields: [],
         });
         this.props.onCancel();
-    },
+    }
 
     renderFields() {
         const { list } = this.props;
@@ -96,7 +97,7 @@ export const UpdateForm = React.createClass({
                 {fieldsUI}
             </div>
         );
-    },
+    }
     renderForm() {
         const { itemIds, list } = this.props;
         const itemCount = plural(itemIds, ('* ' + list.singular), ('* ' + list.plural));
@@ -126,12 +127,12 @@ export const UpdateForm = React.createClass({
                 </Modal.Footer>
             </Form>
         );
-    },
+    }
     render() {
         return (
             <Modal.Dialog isOpen={this.props.isOpen} onClose={this.handleClose} backdropClosesModal>
                 {this.renderForm()}
             </Modal.Dialog>
         );
-    },
-});
+    }
+}

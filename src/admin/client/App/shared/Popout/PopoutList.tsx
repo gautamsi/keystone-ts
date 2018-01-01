@@ -6,12 +6,13 @@ import * as React from 'react';
 import * as blacklist from 'blacklist';
 import * as classnames from 'classnames';
 
-export const PopoutList = React.createClass({
-    displayName: 'PopoutList',
-    propTypes: {
-        children: React.PropTypes.node.isRequired,
-        className: React.PropTypes.string,
-    },
+interface Props {
+    children: React.ReactNode;
+    className?: string;
+}
+
+export class PopoutList extends React.Component<Props> {
+    static displayName: string = 'PopoutList';
     render() {
         const className = classnames('PopoutList', this.props.className);
         const props = blacklist(this.props, 'className');
@@ -19,9 +20,14 @@ export const PopoutList = React.createClass({
         return (
             <div className={className} {...props} />
         );
-    },
-});
+    }
+}
 
 // expose the child to the top level export
-export { PopoutListItem as Item } from './PopoutListItem';
-export { PopoutListHeading as Heading } from './PopoutListHeading';
+import { PopoutListItem } from './PopoutListItem';
+import { PopoutListHeading } from './PopoutListHeading';
+
+export namespace PopoutList {
+    export const Item = PopoutListItem;
+    export const Heading = PopoutListHeading;
+}

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
-import * as Transition
-    from 'react-addons-css-transition-group';
+import Transition from 'react-transition-group/Transition';
 import classnames from 'classnames';
 import { ListFiltersAddForm } from './ListFiltersAddForm';
 import { Popout } from '../../../../shared/Popout';
@@ -11,30 +10,29 @@ import { ListHeaderButton } from '../ListHeaderButton';
 
 import { setFilter } from '../../actions';
 
-export const ListFiltersAdd = React.createClass({
-    displayName: 'ListFiltersAdd',
-    propTypes: {
-        maxHeight: React.PropTypes.number,
-    },
-    getDefaultProps() {
+export class ListFiltersAdd extends React.Component<{ maxHeight?: number, dispatch?: any, activeFilters?: any, availableFilters?: any }, any> {
+    static displayName: string = 'ListFiltersAdd';
+
+    static defaultProps() {
         return {
             maxHeight: 360,
         };
-    },
-    getInitialState() {
-        return {
+    }
+    constructor(props) {
+        super(props);
+        this.state = {
             innerHeight: 0,
             isOpen: false,
             searchString: '',
             selectedField: false,
         };
-    },
+    }
     updateSearch(e) {
         this.setState({ searchString: e.target.value });
-    },
+    }
     openPopout() {
         this.setState({ isOpen: true }, this.focusSearch);
-    },
+    }
     closePopout() {
         this.setState({
             innerHeight: 0,
@@ -42,29 +40,29 @@ export const ListFiltersAdd = React.createClass({
             searchString: '',
             selectedField: false,
         });
-    },
+    }
     setPopoutHeight(height) {
         this.setState({ innerHeight: Math.min(this.props.maxHeight, height) });
-    },
+    }
     navigateBack() {
         this.setState({
             selectedField: false,
             searchString: '',
             innerHeight: 0,
         }, this.focusSearch);
-    },
+    }
     focusSearch() {
-        findDOMNode(this.refs.search).focus();
-    },
+        findDOMNode<HTMLElement>(this.refs.search).focus();
+    }
     selectField(field) {
         this.setState({
             selectedField: field,
         });
-    },
+    }
     applyFilter(value) {
         this.props.dispatch(setFilter(this.state.selectedField.path, value));
         this.closePopout();
-    },
+    }
     renderList() {
         const activeFilterFields = this.props.activeFilters.map(obj => obj.field);
         const activeFilterPaths = activeFilterFields.map(obj => obj.path);
@@ -121,7 +119,7 @@ export const ListFiltersAdd = React.createClass({
                 </Popout.Body>
             </Popout.Pane>
         );
-    },
+    }
     renderForm() {
         return (
             <Popout.Pane onLayout={this.setPopoutHeight} key="form">
@@ -137,7 +135,7 @@ export const ListFiltersAdd = React.createClass({
                 />
             </Popout.Pane>
         );
-    },
+    }
     render() {
         const { isOpen, selectedField } = this.state;
         const popoutBodyStyle = this.state.innerHeight
@@ -166,14 +164,13 @@ export const ListFiltersAdd = React.createClass({
                         className={popoutPanesClassname}
                         component="div"
                         style={popoutBodyStyle}
-                        transitionName={selectedField ? 'Popout__pane-next' : 'Popout__pane-prev'}
-                        transitionEnterTimeout={360}
-                        transitionLeaveTimeout={360}
+                        classNames={selectedField ? 'Popout__pane-next' : 'Popout__pane-prev'}
+                        timeout={360}
                     >
                         {selectedField ? this.renderForm() : this.renderList()}
                     </Transition>
                 </Popout>
             </div>
         );
-    },
-});
+    }
+}

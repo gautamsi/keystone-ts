@@ -6,57 +6,59 @@ import { Kbd } from '../../../shared/Kbd';
 import { Popout } from '../../../shared/Popout';
 import { PopoutList } from '../../../shared/Popout/PopoutList';
 
-export const ListSort = React.createClass({
-    displayName: 'ListSort',
-    propTypes: {
-        handleSortSelect: React.PropTypes.func.isRequired,
-    },
+interface Props {
+    handleSortSelect?: any;
+    activeSort?: any;
+    availableColumns?: any;
+}
+export class ListSort extends React.Component<Props, any> {
+    static displayName: string = 'ListSort';
     getInitialState() {
         return {
             altDown: false,
             popoutIsOpen: false,
             searchString: '',
         };
-    },
+    }
     componentDidMount() {
         document.body.addEventListener('keydown', this.handleKeyDown, false);
         document.body.addEventListener('keyup', this.handleKeyUp, false);
-    },
+    }
     componentWillUnmount() {
         document.body.removeEventListener('keydown', this.handleKeyDown);
         document.body.removeEventListener('keyup', this.handleKeyUp);
-    },
+    }
     handleKeyDown(e) {
         if (vkey[e.keyCode] !== '<alt>') return;
         this.setState({
             altDown: true,
         });
-    },
+    }
     handleKeyUp(e) {
         if (vkey[e.keyCode] !== '<alt>') return;
         this.setState({
             altDown: false,
         });
-    },
+    }
     handleSortSelect(path, inverted) {
         if (this.state.altDown) inverted = true;
         this.props.handleSortSelect(path, inverted);
         this.closePopout();
-    },
+    }
     openPopout() {
         this.setState({
             popoutIsOpen: true,
         });
-    },
+    }
     closePopout() {
         this.setState({
             popoutIsOpen: false,
             searchString: '',
         });
-    },
+    }
     updateSearch(e) {
         this.setState({ searchString: e.target.value });
-    },
+    }
     renderSortOptions() {
         // TODO: Handle multiple sort paths
         const activeSortPath = this.props.activeSort.paths[0];
@@ -91,7 +93,7 @@ export const ListSort = React.createClass({
                     }} />
             );
         });
-    },
+    }
     render() {
         // TODO: Handle multiple sort paths
         const activeSortPath = this.props.activeSort.paths[0];
@@ -132,5 +134,5 @@ export const ListSort = React.createClass({
                 </Popout>
             </span>
         );
-    },
-});
+    }
+}

@@ -47,27 +47,39 @@ function smoothScrollTop() {
     }
 }
 
-export const EditForm = React.createClass({
-    displayName: 'EditForm',
-    propTypes: {
-        data: React.PropTypes.object,
-        list: React.PropTypes.object,
-    },
-    getInitialState() {
-        return {
+interface Props {
+    data?: any;
+    list?: any;
+    dispatch?: any;
+    router?: any;
+}
+
+export class EditForm extends React.Component<Props, any> {
+    refs: {
+        [key: string]: React.ReactInstance,
+        keyOrIdInput: (HTMLInputElement),
+        editForm: (HTMLFormElement),
+    };
+    __isMounted: boolean;
+    static displayName: string = 'EditForm';
+
+    constructor(props) {
+        super(props);
+        this.state = {
             values: assign({}, this.props.data.fields),
             confirmationDialog: null,
             loading: false,
             lastValues: null, // used for resetting
             focusFirstField: !this.props.list.nameField && !this.props.list.nameFieldIsFormHeader,
         };
-    },
+    }
+
     componentDidMount() {
         this.__isMounted = true;
-    },
+    }
     componentWillUnmount() {
         this.__isMounted = false;
-    },
+    }
     getFieldProps(field) {
         const props = assign({}, field);
         const alerts = this.state.alerts;
@@ -85,43 +97,43 @@ export const EditForm = React.createClass({
         props.onChange = this.handleChange;
         props.mode = 'edit';
         return props;
-    },
+    }
     handleChange(event) {
         const values = assign({}, this.state.values);
 
         values[event.path] = event.value;
         this.setState({ values });
-    },
+    }
 
     toggleDeleteDialog() {
         this.setState({
             deleteDialogIsOpen: !this.state.deleteDialogIsOpen,
         });
-    },
+    }
     toggleResetDialog() {
         this.setState({
             resetDialogIsOpen: !this.state.resetDialogIsOpen,
         });
-    },
+    }
     handleReset() {
         this.setState({
             values: assign({}, this.state.lastValues || this.props.data.fields),
             resetDialogIsOpen: false,
         });
-    },
+    }
     handleDelete() {
         const { data } = this.props;
         this.props.dispatch(deleteItem(data.id, this.props.router));
-    },
+    }
     handleKeyFocus() {
         const input = this.refs.keyOrIdInput;
         input.select();
-    },
+    }
     removeConfirmationDialog() {
         this.setState({
             confirmationDialog: null,
         });
-    },
+    }
     updateItem() {
         const { data, list } = this.props;
         const editForm = this.refs.editForm;
@@ -156,7 +168,7 @@ export const EditForm = React.createClass({
                 });
             }
         });
-    },
+    }
     renderKeyOrId() {
         let className = 'EditForm__key-or-id';
         let list = this.props.list;
@@ -195,7 +207,7 @@ export const EditForm = React.createClass({
                 </div>
             );
         }
-    },
+    }
     renderNameField() {
         let nameField = this.props.list.nameField;
         let nameFieldIsFormHeader = this.props.list.nameFieldIsFormHeader;
@@ -222,7 +234,7 @@ export const EditForm = React.createClass({
                 <h2>{this.props.data.name || '(no name)'}</h2>
             );
         }
-    },
+    }
     renderFormElements() {
         let headings = 0;
 
@@ -255,7 +267,7 @@ export const EditForm = React.createClass({
                 return React.createElement(Fields[field.type], props);
             }
         }, this);
-    },
+    }
     renderFooterBar() {
         if (this.props.list.noedit && this.props.list.nodelete) {
             return null;
@@ -300,7 +312,7 @@ export const EditForm = React.createClass({
                 </div>
             </FooterBar>
         );
-    },
+    }
     renderTrackingMeta() {
         // TODO: These fields are visible now, so we don't want this. We may revisit
         // it when we have more granular control over hiding fields in certain
@@ -310,7 +322,7 @@ export const EditForm = React.createClass({
         if (!this.props.list.tracking) return null;
 
         let elements = [];
-        let data = {};
+        let data: any = {};
 
         if (this.props.list.tracking.createdAt) {
             data.createdAt = this.props.data.fields[this.props.list.tracking.createdAt];
@@ -368,7 +380,7 @@ export const EditForm = React.createClass({
                 {elements}
             </div>
         ) : null;
-    },
+    }
     render() {
         return (
             <form ref="editForm" className="EditForm-container">
@@ -406,8 +418,8 @@ export const EditForm = React.createClass({
 				</ConfirmationDialog>
             </form>
         );
-    },
-});
+    }
+}
 
 const styles = {
     footerbar: {

@@ -4,15 +4,21 @@ import { Popout } from '../../../../shared/Popout';
 
 import { Filters } from 'FieldTypes';
 
-export const ListFiltersAddForm = React.createClass({
-    propTypes: {
-        field: React.PropTypes.object.isRequired,
-        maxHeight: React.PropTypes.number,
-        onApply: React.PropTypes.func,
-        onCancel: React.PropTypes.func,
-        onHeightChange: React.PropTypes.func,
-    },
-    getInitialState() {
+interface Props {
+    field: any;
+    maxHeight?: number;
+    onApply?: any;
+    onCancel?: any;
+    onHeightChange?: any;
+    activeFilters?: any;
+    onBack?: any;
+    dispatch?: any;
+}
+
+export class ListFiltersAddForm extends React.Component<Props, any> {
+
+    constructor(props) {
+        super(props);
         const filterComponent = Filters[this.props.field.type];
         let filterValue = this.props.activeFilters.filter(i => i.field.path === this.props.field.path)[0];
         if (filterValue) {
@@ -20,14 +26,14 @@ export const ListFiltersAddForm = React.createClass({
         } else {
             filterValue = filterComponent && filterComponent.getDefaultValue ? filterComponent.getDefaultValue() : {};
         }
-        return {
+        this.state = {
             filterComponent: filterComponent,
             filterValue: filterValue,
         };
-    },
+    }
     updateHeight(bodyHeight) {
         bodyHeight += 40; // TODO: remove magic number, currently accounts for padding
-        const footerHeight = findDOMNode(this.refs.footer).offsetHeight;
+        const footerHeight = findDOMNode<HTMLElement>(this.refs.footer).offsetHeight;
         const maxBodyHeight = this.props.maxHeight - footerHeight;
         const newHeight = bodyHeight + footerHeight;
         // console.log(bodyHeight, maxBodyHeight, '|', newHeight, this.props.maxHeight);
@@ -36,21 +42,21 @@ export const ListFiltersAddForm = React.createClass({
         }, () => {
             this.props.onHeightChange(Math.min(newHeight, this.props.maxHeight));
         });
-    },
+    }
     updateValue(filterValue) {
         this.setState({
             filterValue: filterValue,
         });
-    },
+    }
     handleFormSubmit(e) {
         e.preventDefault();
         this.props.onApply(this.state.filterValue);
-    },
+    }
     renderInvalidFilter() {
         return (
             <div>Error: type {this.props.field.type} has no filter UI.</div>
         );
-    },
+    }
     render() {
         let FilterComponent = this.state.filterComponent;
         return (
@@ -66,5 +72,5 @@ export const ListFiltersAddForm = React.createClass({
                     secondaryButtonLabel="Cancel" />
             </form>
         );
-    },
-});
+    }
+}

@@ -22,7 +22,7 @@ const initialState = {
     drag: {
         clonedItems: false,
         newSortOrder: null,
-        relationshipPath: false,
+        relationshipPath: '',
     },
 };
 

@@ -7,25 +7,28 @@ import * as React from 'react';
 import { Container, Spinner } from 'elemental';
 import { connect } from 'react-redux';
 
-import Lists from './components/Lists';
+import { Lists } from './components/Lists';
 import { Section } from './components/Section';
 import { AlertMessages } from '../../shared/AlertMessages';
 import {
     loadCounts,
 } from './actions';
 
-export const HomeView = React.createClass({
-    displayName: 'HomeView',
-    getInitialState() {
-        return {
+export class HomeView extends React.Component<any> {
+    static displayName: string = 'HomeView';
+
+    constructor(props) {
+        super(props);
+        this.state = {
             modalIsOpen: true,
         };
-    },
+    }
+
     // When everything is rendered, start loading the item counts of the lists
     // from the API
     componentDidMount() {
         this.props.dispatch(loadCounts());
-    },
+    }
     getSpinner() {
         if (this.props.counts && Object.keys(this.props.counts).length === 0
             && (this.props.error || this.props.loading)) {
@@ -34,7 +37,8 @@ export const HomeView = React.createClass({
             );
         }
         return null;
-    },
+    }
+
     render() {
         const spinner = this.getSpinner();
         return (
@@ -89,8 +93,8 @@ export const HomeView = React.createClass({
                 </div>
             </Container>
         );
-    },
-});
+    }
+}
 
 export const Home = connect((state: any) => ({
     counts: state.home.counts,

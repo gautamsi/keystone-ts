@@ -3,18 +3,28 @@
  * react-router "Link", if it has a "href" prop it'll render a simple "a" tag
  */
 
-import { PropTypes } from 'react';
+import * as React from 'react';
 import classnames from 'classnames';
 import { Link } from 'react-router';
 
-export const PrimaryNavItem = ({ children, className, href, label, title, to, active }) => {
+interface Props {
+    children: React.ReactNode;
+    className?: string;
+    href?: string;
+    label?: string;
+    title?: string;
+    to?: string;
+    active?: boolean;
+}
+
+export const PrimaryNavItem: React.SFC<Props> = ({ children, className, href, label, title, to, active }) => {
     const itemClassName = classnames('primary-navbar__item', className);
 
     const Button = to ? (
         <Link
             className="primary-navbar__link"
             key={title}
-            tabIndex="-1"
+            tabIndex={-1}
             title={title}
             to={to}
             // Block clicks on active link
@@ -27,7 +37,7 @@ export const PrimaryNavItem = ({ children, className, href, label, title, to, ac
                 className="primary-navbar__link"
                 href={href}
                 key={title}
-                tabIndex="-1"
+                tabIndex={-1}
                 title={title}
             >
                 {children}
@@ -44,13 +54,4 @@ export const PrimaryNavItem = ({ children, className, href, label, title, to, ac
     );
 };
 
-PrimaryNavItem['displayName'] = 'PrimaryNavItem';
-PrimaryNavItem['propTypes'] = {
-    children: PropTypes.node.isRequired,
-    className: PropTypes.string,
-    href: PropTypes.string,
-    label: PropTypes.string,
-    title: PropTypes.string,
-    to: PropTypes.string,
-};
-
+PrimaryNavItem.displayName = 'PrimaryNavItem';

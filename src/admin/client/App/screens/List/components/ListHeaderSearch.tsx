@@ -5,16 +5,16 @@ import { darken } from '../../../../utils/color';
 
 import { FormInput, Glyph } from 'elemental';
 
-export function ListHeaderSearch({
+export const ListHeaderSearch: React.SFC<Props> = ({
 	focusInput,
     handleChange,
     handleClear,
     handleKeyup,
     value,
     ...props
-}) {
+}) => {
     return (
-        <div {...props} className={css(classes.wrapper)}>
+        <div {...props} className={`${css(classes.wrapper)}`}>
             <FormInput
                 data-search-input-field
                 onChange={handleChange}
@@ -23,7 +23,7 @@ export function ListHeaderSearch({
                 value={value}
             />
             <button
-                className={css(classes.icon, !!value.length && classes.iconWhenClear)}
+                className={`${css(classes.icon, !!value.length && classes.iconWhenClear)}`}
                 data-search-input-field-clear-icon
                 disabled={!value.length}
                 onClick={value.length && handleClear}
@@ -34,15 +34,15 @@ export function ListHeaderSearch({
             </button>
         </div>
     );
-}
-
-ListHeaderSearch['propTypes'] = {
-    focusInput: React.PropTypes.bool,
-    handleChange: React.PropTypes.func.isRequired,
-    handleClear: React.PropTypes.func.isRequired,
-    handleKeyup: React.PropTypes.func.isRequired,
-    value: React.PropTypes.string,
 };
+
+interface Props {
+    focusInput?: boolean;
+    handleChange: any;
+    handleClear: any;
+    handleKeyup: any;
+    value?: string;
+}
 
 const clearHoverAndFocusStyles = {
     color: theme.color.danger,

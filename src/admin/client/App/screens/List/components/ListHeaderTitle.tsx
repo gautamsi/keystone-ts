@@ -12,7 +12,7 @@ export function ListHeaderTitle({
     ...props
 }) {
     return (
-        <h2 className={css(classes.heading)} {...props}>
+        <h2 className={`${css(classes.heading)}`} {...props}>
             {title}
             <ListSort
                 activeSort={activeSort}
@@ -23,12 +23,12 @@ export function ListHeaderTitle({
     );
 }
 
-ListHeaderTitle['propTypes'] = {
-    activeSort: React.PropTypes.object,
-    availableColumns: React.PropTypes.arrayOf(React.PropTypes.object),
-    handleSortSelect: React.PropTypes.func.isRequired,
-    title: React.PropTypes.string,
-};
+interface Props {
+    activeSort?: object;
+    availableColumns?: Array<any>;
+    handleSortSelect: any;
+    title?: string;
+}
 
 const classes = {
     heading: {
