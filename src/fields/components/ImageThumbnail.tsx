@@ -12,7 +12,7 @@ const ICON_MAP = {
     upload: 'mega-octicon octicon-cloud-upload',
 };
 
-export function ImageThumbnail({ children, className, component, mask, ...props }) {
+export const ImageThumbnail: React.SFC<Props> = ({ component, mask, ...props }) => {
     const maskUI = mask ? (
         <div className={css(classes.mask) + ` ${ICON_MAP[mask]}`}>
             {mask === 'loading'
@@ -25,23 +25,22 @@ export function ImageThumbnail({ children, className, component, mask, ...props 
     props.className = css(
         classes.base,
         component === 'a' ? classes.anchor : null,
-        className
+        props.className
     );
 
     // append the mask UI to children
-    props.children = [].concat(children, [maskUI]);
+    props.children = [].concat(props.children, [maskUI]);
 
     return React.createElement(component, props);
+};
+
+interface Props {
+    component: string | any;
+    mask?: 'loading' | 'remove' | 'upload';
+    className?: any;
 }
 
-ImageThumbnail['propTypes'] = {
-    component: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.func,
-    ]),
-    mask: React.PropTypes.oneOf(['loading', 'remove', 'upload']),
-};
-ImageThumbnail['defaultProps'] = {
+ImageThumbnail.defaultProps = {
     component: 'span',
 };
 

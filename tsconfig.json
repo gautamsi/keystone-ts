@@ -16,7 +16,7 @@
         "paths": {
             "*": [
                 "node_modules/*",
-                "src/types/*"
+                "src/types/*.d.ts"
             ]
         }
     },
@@ -24,8 +24,8 @@
         "src/**/*.tsx"
     ],
     "exclude": [
-        "src/**/*.test.ts",
+        // "src/**/*.test.ts",
         "src/**/*.test.tsx",
-        "src/**/test/*.ts"
+        // "src/**/test/*.ts"
     ]
 }

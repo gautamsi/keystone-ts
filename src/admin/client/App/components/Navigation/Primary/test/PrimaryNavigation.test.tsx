@@ -29,6 +29,6 @@ describe.skip('<PrimaryNavigation />', () => {
 
         demand(component.find(PrimaryNavItem).length).gt(0);
         demand(component.find(PrimaryNavItem).at(0).prop('title')).include(brand);
-        demand(component.find(PrimaryNavItem).at(0).contain('span.octicon-home')).true();
+        demand(component.find(PrimaryNavItem).at(0).contains('span.octicon-home')).true();
     });
 });

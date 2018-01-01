@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link, Router, Route, browserHistory, IndexRoute } from 'react-router';
 import * as ReactDOM from 'react-dom';
-import {ExplorerFieldType as FieldType } from './components/FieldType';
+import { ExplorerFieldType as FieldType } from './components/FieldType';
 
 const Types = {
     Boolean: require('../types/boolean/test/explorer'),
@@ -43,9 +43,14 @@ function generateNavSections(arr) {
 
 const navSections = generateNavSections(Object.keys(Types).map(i => Types[i]));
 
-export class App extends React.Component {
-    constructor() {
-        super();
+interface Props {
+    params?: any;
+    children?; any;
+}
+
+export class App extends React.Component<Props, any> {
+    constructor(props) {
+        super(props);
         this.toggleSidebar = this.toggleSidebar.bind(this);
         this.state = { sidebarIsOpen: true };
     }
@@ -96,7 +101,7 @@ export class App extends React.Component {
                         );
                     })}
                 </div>
-                <div className="fx-body">{Children.map(children, (child) => {
+                <div className="fx-body">{children.map(children, (child) => {
                     if (!params.type) return child;
 
                     const Type = Types[params.type];
@@ -117,7 +122,7 @@ export class App extends React.Component {
     }
 }
 
-const Home = (props) => {
+const Home: React.SFC = (props) => {
     return (
         <div className="fx-welcome">
             <div className="fx-welcome__inner">

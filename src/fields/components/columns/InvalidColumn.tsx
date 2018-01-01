@@ -2,11 +2,12 @@ import * as React from 'react';
 import { ItemsTableCell } from '../../components/ItemsTableCell';
 import { ItemsTableValue } from '../../components/ItemsTableValue';
 
-export const InvalidColumn = React.createClass({
-    displayName: 'InvalidColumn',
-    propTypes: {
-        col: React.PropTypes.object,
-    },
+interface Props {
+    col?: any;
+}
+
+export class InvalidColumn extends React.Component<Props> {
+    static displayName: string = 'InvalidColumn';
     renderValue() {
         return (
             <ItemsTableValue field={this.props.col.type}>
@@ -14,12 +15,12 @@ export const InvalidColumn = React.createClass({
 			</ItemsTableValue>
         );
 
-    },
+    }
     render() {
         return (
             <ItemsTableCell>
                 {this.renderValue()}
             </ItemsTableCell>
         );
-    },
-});
+    }
+}

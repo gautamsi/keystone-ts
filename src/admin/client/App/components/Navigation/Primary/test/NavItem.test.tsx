@@ -26,7 +26,7 @@ describe('<PrimaryNavItem />', () => {
         const component = shallow(
             <PrimaryNavItem>{children}</PrimaryNavItem>
         );
-        demand(component.find('a').at(0).contains(children)).true(1);
+        demand(component.find('a').at(0).contains(children)).true();
     });
 
     it('should render a react-router link if the to prop is specified', () => {
@@ -39,6 +39,6 @@ describe('<PrimaryNavItem />', () => {
         const component = shallow(
             <PrimaryNavItem to="something">{children}</PrimaryNavItem>
         );
-        demand(component.find(Link).at(0).contains(children)).true(1);
+        demand(component.find(Link).at(0).contains(children)).true();
     });
 });

@@ -3,7 +3,7 @@ import { FormInput } from 'elemental';
 import { fade } from '../../admin/client/utils/color';
 import { theme } from '../../admin/client/theme';
 
-export function FileChangeMessage({ style, color, ...props }) {
+export const FileChangeMessage: React.SFC<Props> = ({ style, color, ...props }) => {
     const styles = {
         marginRight: 10,
         minWidth: 0,
@@ -23,11 +23,12 @@ export function FileChangeMessage({ style, color, ...props }) {
             {...props}
         />
     );
-}
-
-FileChangeMessage['propTypes'] = {
-    color: React.PropTypes.oneOf(['danger', 'default', 'success']),
 };
-FileChangeMessage['defaultProps'] = {
+
+interface Props {
+    color?: 'danger' | 'default' | 'success';
+    style?: any;
+}
+FileChangeMessage.defaultProps = {
     color: 'default',
 };

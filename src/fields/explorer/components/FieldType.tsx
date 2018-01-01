@@ -5,14 +5,25 @@ import { ExplorerCol as Col } from './Col';
 import { ExplorerRow as Row } from './Row';
 import { ExplorerFieldType as FieldSpec } from './FieldSpec';
 
-export const ExplorerFieldType = React.createClass({
-    getInitialState() {
-        return {
+interface Props {
+    readme?: any;
+    FilterComponent?: any;
+    FieldComponent?: any;
+
+    value?: any;
+    params?: any;
+    toggleSidebar?: any;
+    spec?: any;
+}
+export class ExplorerFieldType extends React.Component<Props, any> {
+    constructor(props) {
+        super(props);
+        this.state = {
             readmeIsVisible: !!this.props.readme,
             filter: this.props.FilterComponent.getDefaultValue(),
             value: this.props.value,
         };
-    },
+    }
     componentWillReceiveProps(newProps: any) {
         if (this.props.params.type === newProps.params.type) return;
 
@@ -23,23 +34,23 @@ export const ExplorerFieldType = React.createClass({
                 : false,
             value: newProps.value,
         });
-    },
+    }
     onFieldChange(e) {
         let logValue = typeof e.value === 'string' ? `"${e.value}"` : e.value;
         console.log(`${this.props.params.type} field value changed:`, logValue);
         this.setState({
             value: e.value,
         });
-    },
+    }
     onFilterChange(value) {
         console.log(`${this.props.params.type} filter value changed:`, value);
         this.setState({
             filter: value,
         });
-    },
+    }
     toggleReadme() {
         this.setState({ readmeIsVisible: !this.state.readmeIsVisible });
-    },
+    }
     render() {
         const { FieldComponent, FilterComponent, readme, toggleSidebar } = this.props;
         const { readmeIsVisible } = this.state;
@@ -93,5 +104,5 @@ export const ExplorerFieldType = React.createClass({
                 </div>
             </div>
         );
-    },
-});
+    }
+}

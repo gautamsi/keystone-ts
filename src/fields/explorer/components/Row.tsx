@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export class ExplorerRow extends React.Component {
+export class ExplorerRow extends React.Component<Props> {
     getChildContext() {
         return {
             isCollapsed: this.props.isCollapsed,
@@ -27,15 +27,16 @@ export class ExplorerRow extends React.Component {
             />
         );
     }
+    static defaultProps() {
+        return { gutter: 10 };
+    }
 }
-ExplorerRow['childContextTypes'] = {
-    isCollapsed: React.PropTypes.bool,
-};
-ExplorerRow['propTypes'] = {
-    className: React.PropTypes.string,
-    gutter: React.PropTypes.number,
-    style: React.PropTypes.string,
-};
-ExplorerRow['defaultProps'] = {
-    gutter: 10,
-};
+// ExplorerRow['childContextTypes'] = {
+//     isCollapsed: React.PropTypes.bool,
+// };
+interface Props {
+    className?: string;
+    gutter?: number;
+    style?: string;
+    isCollapsed?: boolean
+}

@@ -7,52 +7,59 @@ import { FormInput } from 'elemental';
 
 let lastId = 0;
 
-export const DateInput = React.createClass({
-    displayName: 'DateInput',
-    propTypes: {
-        format: React.PropTypes.string,
-        name: React.PropTypes.string,
-        onChange: React.PropTypes.func.isRequired,
-        path: React.PropTypes.string,
-        value: React.PropTypes.string,
-    },
-    getDefaultProps() {
+interface Props {
+    format?: string;
+    name?: string;
+    onChange: any;
+    path?: string;
+    value?: string;
+}
+
+export class DateInput extends React.Component<Props, any> {
+    refs: {
+        [key: string]: React.ReactInstance,
+        picker: (DayPicker),
+        popout: (Popout),
+    };
+    static displayName: string = 'DateInput';
+    static defaultProps() {
         return {
             format: 'YYYY-MM-DD',
         };
-    },
-    getInitialState() {
+    }
+    constructor(props) {
+        super(props);
         const id = ++lastId;
         let month = new Date();
         const { format, value } = this.props;
         if (moment(value, format, true).isValid()) {
             month = moment(value, format).toDate();
         }
-        return {
+        this.state = {
             id: `_DateInput_${id}`,
             month: month,
             pickerIsOpen: false,
             inputValue: value,
         };
-    },
+    }
     componentDidMount() {
         this.showCurrentMonth();
-    },
-    componentWillReceiveProps: function (newProps: any) {
+    }
+    componentWillReceiveProps(newProps: any) {
         if (newProps.value === this.props.value) return;
         this.setState({
             month: moment(newProps.value, this.props.format).toDate(),
             inputValue: newProps.value,
         }, this.showCurrentMonth);
-    },
+    }
     focus() {
         if (!this.refs.input) return;
-        findDOMNode(this.refs.input).focus();
-    },
+        findDOMNode<HTMLElement>(this.refs.input).focus();
+    }
     handleInputChange(e) {
         const { value } = e.target;
         this.setState({ inputValue: value }, this.showCurrentMonth);
-    },
+    }
     handleKeyPress(e) {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -66,7 +73,7 @@ export const DateInput = React.createClass({
                 }, this.showCurrentMonth);
             }
         }
-    },
+    }
     handleDaySelect(e, date, modifiers) {
         if (modifiers && modifiers.disabled) return;
 
@@ -78,21 +85,21 @@ export const DateInput = React.createClass({
             month: date,
             inputValue: value,
         });
-    },
+    }
     showPicker() {
         this.setState({ pickerIsOpen: true }, this.showCurrentMonth);
-    },
+    }
     showCurrentMonth() {
         if (!this.refs.picker) return;
         this.refs.picker.showMonth(this.state.month);
-    },
+    }
     handleFocus(e) {
         if (this.state.pickerIsOpen) return;
         this.showPicker();
-    },
+    }
     handleCancel() {
         this.setState({ pickerIsOpen: false });
-    },
+    }
     handleBlur(e) {
         let rt = e.relatedTarget || e.nativeEvent.explicitOriginalTarget;
         const popout = this.refs.popout.getPortalDOMNode();
@@ -103,7 +110,7 @@ export const DateInput = React.createClass({
         this.setState({
             pickerIsOpen: false,
         });
-    },
+    }
     render() {
         const selectedDay = this.props.value;
         // react-day-picker adds a class to the selected day based on this
@@ -141,5 +148,5 @@ export const DateInput = React.createClass({
                 </Popout>
             </div>
         );
-    },
-});
+    }
+}

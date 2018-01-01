@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const ExplorerCol = (props, context) => {
+export const ExplorerCol: React.SFC<Props> = (props, context) => {
     const { className, gutter, style = {}, width, ...incidentalProps } = props;
     const { isCollapsed } = context;
     const __style__ = isCollapsed ? style : {
@@ -23,15 +23,17 @@ export const ExplorerCol = (props, context) => {
         />
     );
 };
-ExplorerCol['contextTypes'] = {
-    isCollapsed: React.PropTypes.bool,
-};
-ExplorerCol['propTypes'] = {
-    className: React.PropTypes.string,
-    gutter: React.PropTypes.number,
-    style: React.PropTypes.string,
-    width: React.PropTypes.number,
-};
-ExplorerCol['defaultProps'] = {
+// ExplorerCol.contextTypes = {
+//     isCollapsed: boolean,
+// };
+interface Props {
+    className?: string;
+    gutter?: number;
+    style?: string;
+    width?: number;
+    isCollapsed?: any;
+}
+
+ExplorerCol.defaultProps = {
     gutter: 10,
 };

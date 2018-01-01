@@ -26,6 +26,6 @@ describe('<SecondaryNavItem />', () => {
         const component = shallow(
             <SecondaryNavItem href="something">{children}</SecondaryNavItem>
         );
-        demand(component.find(Link).at(0).contains(children)).true(1);
+        demand(component.find(Link).at(0).contains(children)).true();
     });
 });

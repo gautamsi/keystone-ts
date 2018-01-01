@@ -14,11 +14,11 @@ import * as React from 'react';
 	});
 */
 
-export class HiddenFileInput extends React.Component {
+export class HiddenFileInput extends React.Component<Props> {
     props: any;
     target: any;
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.clearValue = this.clearValue.bind(this);
         this.clickDomNode = this.clickDomNode.bind(this);
@@ -53,7 +53,7 @@ export class HiddenFileInput extends React.Component {
         );
     }
 
-    static propTypes = {
-        onChange: React.PropTypes.func.isRequired
-    };
+}
+interface Props {
+    onChange: any;
 }

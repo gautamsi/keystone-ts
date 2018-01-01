@@ -40,7 +40,7 @@ export function addItem() {
         values: newValues,
     }, () => {
         if (!this.state.values.length) return;
-        findDOMNode(this.refs['item_' + this.state.values.length]).focus();
+        findDOMNode<HTMLElement>(this.refs['item_' + this.state.values.length]).focus();
     });
     this.valueChanged(reduceValues(newValues));
 }
@@ -50,7 +50,7 @@ export function removeItem(i) {
     this.setState({
         values: newValues,
     }, function () {
-        findDOMNode(this.refs.button).focus();
+        findDOMNode<HTMLElement>(this.refs.button).focus();
     });
     this.valueChanged(reduceValues(newValues));
 }

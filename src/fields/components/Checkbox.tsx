@@ -4,32 +4,35 @@ import classnames from 'classnames';
 import { darken, fade } from '../../admin/client/utils/color';
 import { borderRadius } from '../../admin/client/constants';
 
-export const Checkbox = React.createClass({
-    displayName: 'Checkbox',
-    propTypes: {
-        checked: React.PropTypes.bool,
-        component: React.PropTypes.node,
-        onChange: React.PropTypes.func,
-        readonly: React.PropTypes.bool,
-    },
-    getDefaultProps() {
+interface Props {
+    checked?: boolean;
+    component?: React.ComponentClass<any>;
+    onChange?: any;
+    readonly?: boolean;
+}
+
+export class Checkbox extends React.Component<Props, any> {
+    static displayName: string = 'Checkbox';
+    static defaultProps() {
         return {
             component: 'button',
         };
-    },
-    getInitialState() {
-        return {
+    }
+
+    constructor(props) {
+        super(props);
+        this.state = {
             active: null,
             focus: null,
             hover: null,
         };
-    },
+    }
     componentDidMount() {
         window.addEventListener('mouseup', this.handleMouseUp, false);
-    },
+    }
     componentWillUnmount() {
         window.removeEventListener('mouseup', this.handleMouseUp, false);
-    },
+    }
     getStyles() {
         const { checked, readonly } = this.props;
         const { active, focus, hover } = this.state;
@@ -88,39 +91,39 @@ export const Checkbox = React.createClass({
             WebkitTransition: 'all 120ms ease-out',
             transition: 'all 120ms ease-out',
         };
-    },
+    }
     handleKeyDown(e) {
         if (e.keyCode !== 32) return;
         this.toggleActive(true);
-    },
+    }
     handleKeyUp() {
         this.toggleActive(false);
-    },
+    }
     handleMouseOver() {
         this.toggleHover(true);
-    },
+    }
     handleMouseDown() {
         this.toggleActive(true);
         this.toggleFocus(true);
-    },
+    }
     handleMouseUp() {
         this.toggleActive(false);
-    },
+    }
     handleMouseOut() {
         this.toggleHover(false);
-    },
+    }
     toggleActive(pseudo) {
         this.setState({ active: pseudo });
-    },
+    }
     toggleHover(pseudo) {
         this.setState({ hover: pseudo });
-    },
+    }
     toggleFocus(pseudo) {
         this.setState({ focus: pseudo });
-    },
+    }
     handleChange() {
         this.props.onChange(!this.props.checked);
-    },
+    }
     render() {
         const { checked, readonly } = this.props;
 
@@ -148,5 +151,5 @@ export const Checkbox = React.createClass({
         const node = readonly ? 'span' : this.props.component;
 
         return React.createElement(node, props);
-    },
-});
+    }
+}

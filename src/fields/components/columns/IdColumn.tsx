@@ -2,13 +2,14 @@ import * as React from 'react';
 import { ItemsTableCell } from '../../components/ItemsTableCell';
 import { ItemsTableValue } from '../../components/ItemsTableValue';
 
-export const IdColumn = React.createClass({
-    displayName: 'IdColumn',
-    propTypes: {
-        col: React.PropTypes.object,
-        data: React.PropTypes.object,
-        list: React.PropTypes.object,
-    },
+interface Props {
+    col?: any;
+    data?: any;
+    list?: any;
+}
+
+export class IdColumn extends React.Component<Props> {
+    static displayName: string = 'IdColumn';
     renderValue() {
         const value = this.props.data.id;
         if (!value) return null;
@@ -18,12 +19,12 @@ export const IdColumn = React.createClass({
                 {value}
             </ItemsTableValue>
         );
-    },
+    }
     render() {
         return (
             <ItemsTableCell>
                 {this.renderValue()}
             </ItemsTableCell>
         );
-    },
-});
+    }
+}

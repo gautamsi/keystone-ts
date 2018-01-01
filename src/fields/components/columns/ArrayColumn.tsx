@@ -2,18 +2,19 @@ import * as React from 'react';
 import { ItemsTableCell } from '../ItemsTableCell';
 import { ItemsTableValue } from '../ItemsTableValue';
 
-export const ArrayColumn = React.createClass({
-    displayName: 'ArrayColumn',
-    propTypes: {
-        col: React.PropTypes.object,
-        data: React.PropTypes.object,
-    },
+interface Props {
+    col?: any;
+    data?: any;
+}
+
+export class ArrayColumn extends React.Component<Props> {
+    static displayName: string = 'ArrayColumn';
     renderValue() {
         const value = this.props.data.fields[this.props.col.path];
         if (!value || !value.length) return null;
 
         return value.join(', ');
-    },
+    }
     render() {
         return (
             <ItemsTableCell>
@@ -22,5 +23,5 @@ export const ArrayColumn = React.createClass({
                 </ItemsTableValue>
             </ItemsTableCell>
         );
-    },
-});
+    }
+}
