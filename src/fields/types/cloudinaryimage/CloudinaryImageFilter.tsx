@@ -7,29 +7,27 @@ const OPTIONS = [
     { label: 'Is NOT Set', value: false },
 ];
 
-function getDefaultValue() {
-    return {
-        exists: true,
+interface Props {
+    filter?: {
+        exists?: any; // ref: React.PropTypes.oneOf(OPTIONS.map(i => i.value)),
     };
+    onChange?: any;
 }
 
-export const CloudinaryImageFilter = React.createClass({
-    propTypes: {
-        filter: React.PropTypes.shape({
-            exists: React.PropTypes.oneOf(OPTIONS.map(i => i.value)),
-        }),
-    },
-    statics: {
-        getDefaultValue: getDefaultValue,
-    },
-    getDefaultProps() {
+export class CloudinaryImageFilter extends React.Component<Props> {
+    static getDefaultValue() {
         return {
-            filter: getDefaultValue(),
+            exists: true,
         };
-    },
+    }
+    static defaultProps() {
+        return {
+            filter: this.getDefaultValue(),
+        };
+    }
     toggleExists(value) {
         this.props.onChange({ exists: value });
-    },
+    }
     render() {
         const { filter } = this.props;
 
@@ -41,5 +39,5 @@ export const CloudinaryImageFilter = React.createClass({
                 value={filter.exists}
             />
         );
-    },
-});
+    }
+}

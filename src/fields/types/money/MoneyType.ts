@@ -23,7 +23,7 @@ export class MoneyType extends NumberType {
             throw new Error('FieldType.Money: options.format must be a string.');
         }
     }
-    static properName = 'MoneyType';
+    static properName = 'Money';
 
     /**
      * Formats the field value

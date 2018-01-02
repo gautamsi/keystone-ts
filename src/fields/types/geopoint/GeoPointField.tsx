@@ -1,18 +1,17 @@
-import * as Field from '../Field';
 import * as React from 'react';
 import {
     FormInput,
     Grid,
 } from 'elemental';
+import { FieldBase, FieldPropsBase } from '../Field';
 
-export const GeoPointField = Field.create({
+export class GeoPointField extends FieldBase<FieldPropsBase> {
 
-    displayName: 'GeopointField',
-    statics: {
-        type: 'Geopoint',
-    },
+    static displayName: string = 'GeopointField';
 
-    focusTargetRef: 'lat',
+    static type: string = 'Geopoint';
+
+    focusTargetRef: 'lat';
 
     handleLat(event) {
         const { value = [], path, onChange } = this.props;
@@ -21,7 +20,7 @@ export const GeoPointField = Field.create({
             path,
             value: [value[0], newVal],
         });
-    },
+    }
 
     handleLong(event) {
         const { value = [], path, onChange } = this.props;
@@ -30,7 +29,7 @@ export const GeoPointField = Field.create({
             path,
             value: [newVal, value[1]],
         });
-    },
+    }
 
     renderValue() {
         const { value } = this.props;
@@ -38,7 +37,7 @@ export const GeoPointField = Field.create({
             return <FormInput noedit>{value[1]}, {value[0]}</FormInput>; // eslint-disable-line comma-spacing
         }
         return <FormInput noedit>(not set)</FormInput>;
-    },
+    }
 
     renderField() {
         const { value = [], path } = this.props;
@@ -66,6 +65,5 @@ export const GeoPointField = Field.create({
                 </Grid.Col>
             </Grid.Row>
         );
-    },
-
-});
+    }
+}

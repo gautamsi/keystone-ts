@@ -20,7 +20,7 @@ export class NumberType extends FieldTypeBase {
             throw new Error('FieldType.Number: options.format must be a string.');
         }
     }
-    static properName = 'NumberType';
+    static properName = 'Number';
 
     validateInput(data, callback) {
         let value = this.getValueFromData(data);

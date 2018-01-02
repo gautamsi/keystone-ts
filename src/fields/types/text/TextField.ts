@@ -1,8 +1,6 @@
-import * as Field from '../Field';
+import { FieldBase, FieldPropsBase } from '../Field';
 
-export const TextField = Field.create({
-	displayName: 'TextField',
-	statics: {
-		type: 'Text',
-	},
-});
+export class TextField extends FieldBase<FieldPropsBase> {
+    static displayName: string = 'TextField';
+    static type: string = 'Text';
+}

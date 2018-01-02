@@ -33,7 +33,7 @@ export class MarkdownType extends TextType {
 
         this._properties = ['wysiwyg', 'height', 'toolbarOptions'];
     }
-    static properName = 'MarkdownType';
+    static properName = 'Markdown';
 
     /**
      * Registers the field on the List's Mongoose Schema.

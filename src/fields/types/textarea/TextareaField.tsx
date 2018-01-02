@@ -1,12 +1,15 @@
-import * as Field from '../Field';
 import * as React from 'react';
 import { FormInput } from 'elemental';
+import { FieldBase, FieldPropsBase } from '../Field';
 
-export const TextareaField = Field.create({
-    displayName: 'TextareaField',
-    statics: {
-        type: 'Textarea',
-    },
+interface Props extends FieldPropsBase {
+    height?: any;
+    style?: any;
+}
+
+export class TextareaField extends FieldBase<Props> {
+    static displayName: string = 'TextareaField';
+    static type: string = 'Textarea';
     renderValue() {
         const { height } = this.props;
 
@@ -18,7 +21,7 @@ export const TextareaField = Field.create({
         return (
             <FormInput multiline noedit style={styles}>{this.props.value}</FormInput>
         );
-    },
+    }
     renderField() {
         const { height, path, style, value } = this.props;
 
@@ -37,5 +40,5 @@ export const TextareaField = Field.create({
                 value={value}
             />
         );
-    },
-});
+    }
+}

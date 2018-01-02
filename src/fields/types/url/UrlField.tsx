@@ -1,12 +1,10 @@
 import * as React from 'react';
-import * as Field from '../Field';
 import { GlyphButton, FormInput } from 'elemental';
+import { FieldBase, FieldPropsBase } from '../Field';
 
-export const UrlField = Field.create({
-    displayName: 'URLField',
-    statics: {
-        type: 'Url',
-    },
+export class UrlField extends FieldBase<FieldPropsBase> {
+    static displayName: string = 'URLField';
+    static type: string = 'Url';
     openValue() {
         let href = this.props.value;
         if (!href) return;
@@ -14,7 +12,7 @@ export const UrlField = Field.create({
             href = 'http://' + href;
         }
         window.open(href);
-    },
+    }
     renderLink() {
         if (!this.props.value) return null;
 
@@ -27,7 +25,7 @@ export const UrlField = Field.create({
                 variant="link"
             />
         );
-    },
+    }
     renderField() {
         return (
             <FormInput
@@ -39,7 +37,7 @@ export const UrlField = Field.create({
                 value={this.props.value}
             />
         );
-    },
+    }
     wrapField() {
         return (
             <div style={{ position: 'relative' }}>
@@ -47,7 +45,7 @@ export const UrlField = Field.create({
                 {this.renderLink()}
             </div>
         );
-    },
+    }
     renderValue() {
         const { value } = this.props;
         return (
@@ -55,5 +53,5 @@ export const UrlField = Field.create({
                 {value}
             </FormInput>
         );
-    },
-});
+    }
+}

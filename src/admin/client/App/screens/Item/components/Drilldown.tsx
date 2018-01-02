@@ -6,7 +6,8 @@ interface Props {
     items: Array<{
         href: string,
         label: string,
-        separate: boolean
+        separate: boolean,
+        title?: any
     }>;
     className: any;
 }

@@ -2,12 +2,13 @@ import * as React from 'react';
 import { ItemsTableCell } from '../../components/ItemsTableCell';
 import { ItemsTableValue } from '../../components/ItemsTableValue';
 
-export const ColorColumn = React.createClass({
-    displayName: 'ColorColumn',
-    propTypes: {
-        col: React.PropTypes.object,
-        data: React.PropTypes.object,
-    },
+interface Props {
+    col?: any;
+    data?: any;
+}
+
+export class ColorColumn extends React.Component<Props> {
+    static displayName: string = 'ColorColumn';
     renderValue() {
         const value = this.props.data.fields[this.props.col.path];
         if (!value) return null;
@@ -30,12 +31,12 @@ export const ColorColumn = React.createClass({
                 </div>
             </ItemsTableValue>
         );
-    },
+    }
     render() {
         return (
             <ItemsTableCell>
                 {this.renderValue()}
             </ItemsTableCell>
         );
-    },
-});
+    }
+}

@@ -47,7 +47,7 @@ export class EmbedlyType extends FieldTypeBase {
         }
 
     }
-    static properName = 'EmbedlyType';
+    static properName = 'Embedly';
 
     /**
      * Registers the field on the List's Mongoose Schema.

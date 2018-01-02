@@ -3,29 +3,30 @@ import { CloudinaryImageSummary } from '../../components/columns/CloudinaryImage
 import { ItemsTableCell } from '../../components/ItemsTableCell';
 import { ItemsTableValue } from '../../components/ItemsTableValue';
 
-export const CloudinaryImageColumn = React.createClass({
-    displayName: 'CloudinaryImageColumn',
-    propTypes: {
-        col: React.PropTypes.object,
-        data: React.PropTypes.object,
-    },
-    renderValue: function () {
+interface Props {
+    col?: any;
+    data?: any;
+}
+
+export class CloudinaryImageColumn extends React.Component<Props> {
+    static displayName: string = 'CloudinaryImageColumn';
+    renderValue() {
         let value = this.props.data.fields[this.props.col.path];
         if (!value || !Object.keys(value).length) return;
 
         return (
-            <ItemsTableValue field={this.props.col.type}>
+            <ItemsTableValue field={this.props.col.type} >
                 <CloudinaryImageSummary label="dimensions" image={value} secure={this.props.col.field.secure} />
             </ItemsTableValue>
         );
 
-    },
+    }
     render() {
         return (
             <ItemsTableCell>
                 {this.renderValue()}
             </ItemsTableCell>
         );
-    },
-});
+    }
+}
 

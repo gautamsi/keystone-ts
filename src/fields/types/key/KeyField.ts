@@ -1,8 +1,7 @@
-import * as Field from '../Field';
+import { FieldBase, FieldPropsBase } from '../Field';
 
-export const KeyField = Field.create({
-    displayName: 'KeyField',
-    statics: {
-        type: 'Key',
-    },
-});
+export class KeyField extends FieldBase<FieldPropsBase> {
+    static displayName: string = 'KeyField';
+
+    static type: string = 'Key';
+}

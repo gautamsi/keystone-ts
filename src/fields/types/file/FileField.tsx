@@ -4,7 +4,6 @@ TODO:
 - Display file type icon? (see LocalFileField)
 */
 
-import * as Field from '../Field';
 import * as React from 'react';
 import {
     Button,
@@ -14,6 +13,7 @@ import {
 } from 'elemental';
 import { FileChangeMessage } from '../../components/FileChangeMessage';
 import { HiddenFileInput } from '../../components/HiddenFileInput';
+import { FieldPropsBase, FieldBase } from '../Field';
 
 let uploadInc = 1000;
 
@@ -24,39 +24,47 @@ const buildInitialState = (props) => ({
     userSelectedFile: null,
 });
 
-export const FileField = Field.create({
-    propTypes: {
-        autoCleanup: React.PropTypes.bool,
-        collapse: React.PropTypes.bool,
-        label: React.PropTypes.string,
-        note: React.PropTypes.string,
-        path: React.PropTypes.string.isRequired,
-        value: React.PropTypes.shape({
-            filename: React.PropTypes.string,
-            // TODO: these are present but not used in the UI,
-            //       should we start using them?
-            // filetype: PropTypes.string,
-            // originalname: PropTypes.string,
-            // path: PropTypes.string,
-            // size: PropTypes.number,
-        }),
-    },
-    statics: {
-        type: 'File',
-        getDefaultValue: () => ({}),
-    },
-    getInitialState() {
-        return buildInitialState(this.props);
-    },
+interface Props extends FieldPropsBase {
+    autoCleanup?: boolean;
+    collapse?: boolean;
+    label?: string;
+    note?: string;
+    path?: string;
+    value?: {
+        filename?: string;
+        // TODO: these are present but not used in the UI,
+        //       should we start using them?
+        // filetype: PropTypes.string,
+        // originalname: PropTypes.string,
+        // path: PropTypes.string,
+        // size: PropTypes.number,
+        url?: any;
+    };
+}
+export class FileField extends FieldBase<Props> {
+    refs: {
+        [key: string]: (Element)
+        fileInput: (HTMLInputElement) // !important
+    };
+    static displayName: string = 'FileField';
+
+    static type: string = 'File';
+    static getDefaultValue() {
+        return {};
+    }
+    constructor(props) {
+        super(props);
+        this.state = { ...buildInitialState(this.props), ...this.state };
+    }
     shouldCollapse() {
         return this.props.collapse && !this.hasExisting();
-    },
+    }
     componentWillUpdate(nextProps) {
         // Show the new filename when it's finished uploading
         if (this.props.value.filename !== nextProps.value.filename) {
             this.setState(buildInitialState(nextProps));
         }
-    },
+    }
 
     // ==============================
     // HELPERS
@@ -64,30 +72,30 @@ export const FileField = Field.create({
 
     hasFile() {
         return this.hasExisting() || !!this.state.userSelectedFile;
-    },
+    }
     hasExisting() {
         return this.props.value && !!this.props.value.filename;
-    },
+    }
     getFilename() {
         return this.state.userSelectedFile
             ? this.state.userSelectedFile.name
             : this.props.value.filename;
-    },
+    }
 
     // ==============================
     // METHODS
     // ==============================
 
     triggerFileBrowser() {
-        this.refs.fileInput.clickDomNode();
-    },
+        this.refs.fileInput.click();
+    }
     handleFileChange(event) {
         const userSelectedFile = event.target.files[0];
 
         this.setState({
             userSelectedFile: userSelectedFile,
         });
-    },
+    }
     handleRemove(e) {
         let state: any = {};
 
@@ -112,10 +120,10 @@ export const FileField = Field.create({
         }
 
         this.setState(state);
-    },
+    }
     undoRemove() {
         this.setState(buildInitialState(this.props));
-    },
+    }
 
     // ==============================
     // RENDERERS
@@ -133,7 +141,7 @@ export const FileField = Field.create({
                 {this.renderChangeMessage()}
             </div>
         );
-    },
+    }
     renderChangeMessage() {
         if (this.state.userSelectedFile) {
             return (
@@ -150,7 +158,7 @@ export const FileField = Field.create({
         } else {
             return null;
         }
-    },
+    }
     renderClearButton() {
         if (this.state.removeExisting) {
             return (
@@ -171,7 +179,7 @@ export const FileField = Field.create({
                 </Button>
             );
         }
-    },
+    }
     renderActionInput() {
         // If the user has selected a file for uploading, we need to point at
         // the upload field. If the file is being deleted, we submit that.
@@ -189,7 +197,7 @@ export const FileField = Field.create({
         } else {
             return null;
         }
-    },
+    }
     renderUI() {
         const { label, note, path } = this.props;
         const buttons = (
@@ -227,6 +235,5 @@ export const FileField = Field.create({
                 </FormField>
             </div>
         );
-    },
-
-});
+    }
+}

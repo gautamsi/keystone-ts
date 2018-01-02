@@ -1,17 +1,16 @@
 import { FormInput } from 'elemental';
-import * as Field from '../Field';
 import * as React from 'react';
+import { FieldBase, FieldPropsBase } from '../Field';
 
-export const MoneyField = Field.create({
-    displayName: 'MoneyField',
-    propTypes: {
-        onChange: React.PropTypes.func.isRequired,
-        path: React.PropTypes.string.isRequired,
-        value: React.PropTypes.number,
-    },
-    statics: {
-        type: 'Money',
-    },
+interface Props extends FieldPropsBase {
+    onChange: any;
+    path: string;
+    value?: number;
+}
+
+export class MoneyField extends FieldBase<Props> {
+    static displayName: string = 'MoneyField';
+    static type: string = 'Money';
 
     valueChanged(event) {
         let newValue = event.target.value.replace(/[^\d\s\,\.\$€£¥]/g, '');
@@ -21,7 +20,7 @@ export const MoneyField = Field.create({
             path: this.props.path,
             value: newValue,
         });
-    },
+    }
     renderField() {
         return (
             <FormInput
@@ -32,6 +31,5 @@ export const MoneyField = Field.create({
                 value={this.props.value}
             />
         );
-    },
-
-});
+    }
+}

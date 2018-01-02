@@ -9,6 +9,7 @@ import * as classnames from 'classnames';
 interface Props {
     children: React.ReactNode;
     className?: string;
+    style?: any;
 }
 
 export class PopoutListHeading extends React.Component<Props> {

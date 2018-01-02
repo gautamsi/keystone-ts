@@ -53,7 +53,7 @@ export class PasswordType extends FieldTypeBase {
             throw new Error('FieldType.Password: options - maximum password length cannot be less than the minimum length.');
         }
     }
-    static properName = 'PasswordType';
+    static properName = 'Password';
 
     /**
      * Registers the field on the List's Mongoose Schema.

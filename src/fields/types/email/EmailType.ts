@@ -18,7 +18,7 @@ export class EmailType extends TextType {
         this._underscoreMethods = ['gravatarUrl'];
         this.typeDescription = 'email address';
     }
-    static properName = 'EmailType';
+    static properName = 'Email';
 
     /**
      * Generate a gravatar image request url

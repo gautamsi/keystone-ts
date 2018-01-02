@@ -20,5 +20,5 @@ export class HtmlType extends TextType {
         this.height = options.height || 180;
         this._properties = ['wysiwyg', 'height'];
     }
-    static properName = 'HtmlType';
+    static properName = 'Html';
 }

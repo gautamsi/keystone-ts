@@ -1,6 +1,6 @@
 import { SketchPicker } from 'react-color';
 import { css } from 'glamor';
-import * as Field from '../Field';
+import { FieldBase, FieldPropsBase } from '../Field';
 import * as React from 'react';
 import {
     Button,
@@ -11,28 +11,29 @@ import {
 import { transparentSwatch } from './transparent-swatch';
 import { theme } from '../../../admin/client/theme';
 
-export const ColorField = Field.create({
-    displayName: 'ColorField',
-    statics: {
-        type: 'Color',
-    },
-    propTypes: {
-        onChange: React.PropTypes.func,
-        path: React.PropTypes.string,
-        value: React.PropTypes.string,
-    },
+interface Props extends FieldPropsBase {
+    onChange?: any;
+    path?: string;
+    value?: string;
+}
 
-    getInitialState() {
-        return {
+export class ColorField extends FieldBase<Props> {
+    static displayName: string = 'ColorField';
+    static type: string = 'Color';
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
             displayColorPicker: false,
         };
-    },
+    }
     updateValue(value) {
         this.props.onChange({
             path: this.props.path,
             value: value,
         });
-    },
+    }
     handleInputChange(event) {
         let newValue = event.target.value;
         if (/^([0-9A-F]{3}){1,2}$/.test(newValue)) {
@@ -41,20 +42,20 @@ export const ColorField = Field.create({
         if (newValue === this.props.value) return;
 
         this.updateValue(newValue);
-    },
+    }
     handleClick() {
         this.setState({ displayColorPicker: !this.state.displayColorPicker });
-    },
+    }
     handleClose() {
         this.setState({ displayColorPicker: false });
-    },
+    }
     handlePickerChange(color) {
         let newValue = color.hex;
 
         if (newValue === this.props.value) return;
 
         this.updateValue(newValue);
-    },
+    }
     renderSwatch() {
         const className = `${css(classes.swatch)} e2e-type-color__swatch`;
 
@@ -69,7 +70,7 @@ export const ColorField = Field.create({
                     dangerouslySetInnerHTML={{ __html: transparentSwatch }}
                 />
             );
-    },
+    }
     renderField() {
         const { displayColorPicker } = this.state;
 
@@ -94,11 +95,11 @@ export const ColorField = Field.create({
                 {displayColorPicker && (
                     <div>
                         <div
-                            className={css(classes.blockout)}
+                            className={`${css(classes.blockout)}`}
                             data-e2e-type-color__blockout
                             onClick={this.handleClose}
                         />
-                        <div className={css(classes.popover)} onClick={e => e.stopPropagation()} data-e2e-type-color__popover>
+                        <div className={`${css(classes.popover)}`} onClick={e => e.stopPropagation()} data-e2e-type-color__popover>
                             <SketchPicker
                                 color={this.props.value}
                                 onChangeComplete={this.handlePickerChange}
@@ -109,8 +110,8 @@ export const ColorField = Field.create({
                 )}
             </div>
         );
-    },
-});
+    }
+}
 
 /* eslint quote-props: ["error", "as-needed"] */
 const classes = {

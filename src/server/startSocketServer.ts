@@ -21,7 +21,7 @@ export function startSocketServer(keystone, app, callback) {
         keystone.httpServer = app.listen(unixSocket, function (err) {
             callback(err, message);
         });
-        fs.chmod(unixSocket, 0x777);
+        fs.chmod(unixSocket, 0x777, () => { return; });
     });
 
 }

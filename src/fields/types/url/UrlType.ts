@@ -18,7 +18,7 @@ export class UrlType extends TextType {
         this._nativeType = String;
         this._underscoreMethods = ['format'];
     }
-    static properName = 'UrlType';
+    static properName = 'Url';
 
     /**
      * Formats the field value using either a supplied format function or default

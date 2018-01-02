@@ -15,7 +15,7 @@ export class KeyType extends TextType {
         this._defaultSize = 'medium';
         this.separator = options.separator || '-';
     }
-    static properName = 'KeyType';
+    static properName = 'Key';
 
     /**
      * Generates a valid key from a string

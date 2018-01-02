@@ -16,7 +16,7 @@ export class NameType extends FieldTypeBase {
         this._fixedSize = 'full';
         options.default = { first: '', last: '' };
     }
-    static properName = 'NameType';
+    static properName = 'Name';
 
     /**
      * Registers the field on the List's Mongoose Schema.

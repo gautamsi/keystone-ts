@@ -1,22 +1,21 @@
-import * as Field from '../Field';
 import * as React from 'react';
 import { FormInput } from 'elemental';
+import { FieldPropsBase, FieldBase } from '../Field';
 
+interface Props extends FieldPropsBase {
+    path: string;
+    value?: string;
+}
 /*
 	TODO:
 	- gravatar
 	- validate email address
  */
+export class EmailField extends FieldBase<Props> {
 
-export const EmailField = Field.create({
-    displayName: 'EmailField',
-    propTypes: {
-        path: React.PropTypes.string.isRequired,
-        value: React.PropTypes.string,
-    },
-    statics: {
-        type: 'Email',
-    },
+    static displayName: string = 'EmailField';
+
+    static type: string = 'Email';
     renderField() {
         return (
             <FormInput
@@ -28,7 +27,7 @@ export const EmailField = Field.create({
                 type="email"
             />
         );
-    },
+    }
     renderValue() {
         return this.props.value ? (
             <FormInput noedit component="a" href={'mailto:' + this.props.value}>
@@ -37,5 +36,5 @@ export const EmailField = Field.create({
         ) : (
                 <FormInput noedit />
             );
-    },
-});
+    }
+}

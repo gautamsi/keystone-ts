@@ -3,20 +3,23 @@ import * as moment from 'moment';
 import { ItemsTableCell } from '../../components/ItemsTableCell';
 import { ItemsTableValue } from '../../components/ItemsTableValue';
 
-export const DateColumn = React.createClass({
-    displayName: 'DateColumn',
-    propTypes: {
-        col: React.PropTypes.object,
-        data: React.PropTypes.object,
-        linkTo: React.PropTypes.string,
-    },
+interface Props {
+    col?: any;
+    data?: any;
+    linkTo?: string;
+}
+
+export class DateColumn extends React.Component<Props> {
+    static displayName: string = 'DateColumn';
+
     getValue() {
         const value = this.props.data.fields[this.props.col.path];
         if (!value) return null;
 
         const format = (this.props.col.type === 'datetime') ? 'MMMM Do YYYY, h:mm:ss a' : 'MMMM Do YYYY';
         return moment(value).format(format);
-    },
+    }
+
     render() {
         const value = this.getValue();
         const empty = !value && this.props.linkTo ? true : false;
@@ -27,5 +30,5 @@ export const DateColumn = React.createClass({
                 </ItemsTableValue>
             </ItemsTableCell>
         );
-    },
-});
+    }
+}

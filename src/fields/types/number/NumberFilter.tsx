@@ -15,27 +15,31 @@ const MODE_OPTIONS = [
     { label: 'Between', value: 'between' },
 ];
 
-function getDefaultValue() {
-    return {
-        mode: MODE_OPTIONS[0].value,
-        value: '',
-    };
+interface Props {
+    field?: any;
+    filter?: any;
+    onChange?: any;
 }
 
-export const NumberFilter = React.createClass({
-    statics: {
-        getDefaultValue: getDefaultValue,
-    },
-    getDefaultProps() {
+export class NumberFilter extends React.Component<Props> {
+
+    static getDefaultValue() {
         return {
-            filter: getDefaultValue(),
+            mode: MODE_OPTIONS[0].value,
+            value: '',
         };
-    },
+    }
+
+    static defaultProps() {
+        return {
+            filter: this.getDefaultValue(),
+        };
+    }
 
     componentDidMount() {
         // focus the text input
-        findDOMNode(this.refs.focusTarget).focus();
-    },
+        findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
+    }
 
     handleChangeBuilder(type) {
         const self = this;
@@ -68,20 +72,20 @@ export const NumberFilter = React.createClass({
                     });
             }
         };
-    },
+    }
     // Update the props with this.props.onChange
     updateFilter(changedProp) {
         this.props.onChange({ ...this.props.filter, ...changedProp });
-    },
+    }
     // Update the filter mode
     selectMode(e) {
         this.updateFilter({ mode: e.target.value });
 
         // focus on next tick
         setTimeout(() => {
-            findDOMNode(this.refs.focusTarget).focus();
+            findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
         }, 0);
-    },
+    }
 
     renderControls(mode) {
         let controls;
@@ -120,7 +124,7 @@ export const NumberFilter = React.createClass({
         }
 
         return controls;
-    },
+    }
 
     render() {
         const { filter } = this.props;
@@ -138,6 +142,5 @@ export const NumberFilter = React.createClass({
                 {this.renderControls(mode)}
             </Form>
         );
-    },
-
-});
+    }
+}

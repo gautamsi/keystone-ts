@@ -2,18 +2,20 @@ import * as React from 'react';
 import { ItemsTableCell } from '../../components/ItemsTableCell';
 import { ItemsTableValue } from '../../components/ItemsTableValue';
 
-export const TextColumn = React.createClass({
-    displayName: 'TextColumn',
-    propTypes: {
-        col: React.PropTypes.object,
-        data: React.PropTypes.object,
-        linkTo: React.PropTypes.string,
-    },
+interface Props {
+    col?: any;
+    data?: any;
+    linkTo?: string;
+}
+
+export class TextColumn extends React.Component<Props> {
+    static displayName: string = 'TextColumn';
+
     getValue() {
         // cropping text is important for textarea, which uses this column
         const value = this.props.data.fields[this.props.col.path];
         return value ? value.substr(0, 100) : null;
-    },
+    }
     render() {
         const value = this.getValue();
         const empty = !value && this.props.linkTo ? true : false;
@@ -25,5 +27,5 @@ export const TextColumn = React.createClass({
                 </ItemsTableValue>
             </ItemsTableCell>
         );
-    },
-});
+    }
+}

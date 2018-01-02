@@ -35,9 +35,13 @@ export const ImageThumbnail: React.SFC<Props> = ({ component, mask, ...props }) 
 };
 
 interface Props {
-    component: string | any;
+    component?: string | any;
     mask?: 'loading' | 'remove' | 'upload';
     className?: any;
+    href?: any;
+    onClick?: any;
+    target?: any;
+    style?: any;
 }
 
 ImageThumbnail.defaultProps = {

@@ -51,7 +51,7 @@ export class SelectType extends FieldTypeBase {
         this.labels = utils.optionsMap(this.ops, 'label');
         this.values = _.map(this.ops, 'value');
     }
-    static properName = 'SelectType';
+    static properName = 'Select';
 
     /**
      * Registers the field on the List's Mongoose Schema.

@@ -10,7 +10,7 @@ export class UpdateHandler {
     list: any;
     options: any;
 
-    constructor(list, item, req, options) {
+    constructor(list, item, req, options, otherOptions?) {
         this.list = list;
         this.item = item;
         this.req = req;

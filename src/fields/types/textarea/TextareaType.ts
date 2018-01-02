@@ -18,7 +18,7 @@ export class TextareaType extends TextType {
         this.multiline = true;
         this._properties = ['height', 'multiline'];
     }
-    static properName = 'TextareaType';
+    static properName = 'Textarea';
 
     /**
      * Formats the field value

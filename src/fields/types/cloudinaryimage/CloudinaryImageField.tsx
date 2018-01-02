@@ -5,7 +5,7 @@ work out whether we're going to support deleting through the UI.
 */
 
 import * as React from 'react';
-import * as Field from '../Field';
+import { FieldBase, FieldPropsBase } from '../Field';
 import { cloudinaryResize } from '../../../admin/client/utils/cloudinaryResize';
 import { Button, FormField, FormInput, FormNote } from 'elemental';
 
@@ -25,35 +25,26 @@ const buildInitialState = (props) => ({
     userSelectedFile: null,
 });
 
-export const CloudinaryImageField = Field.create({
-    propTypes: {
-        collapse: React.PropTypes.bool,
-        label: React.PropTypes.string,
-        note: React.PropTypes.string,
-        path: React.PropTypes.string.isRequired,
-        value: React.PropTypes.shape({
-            format: React.PropTypes.string,
-            height: React.PropTypes.number,
-            public_id: React.PropTypes.string,
-            resource_type: React.PropTypes.string,
-            secure_url: React.PropTypes.string,
-            signature: React.PropTypes.string,
-            url: React.PropTypes.string,
-            version: React.PropTypes.number,
-            width: React.PropTypes.number,
-        }),
-    },
-    displayName: 'CloudinaryImageField',
-    statics: {
-        type: 'CloudinaryImage',
-        getDefaultValue: () => ({}),
-    },
+interface Props extends FieldPropsBase {
+    secure?: boolean;
+}
+
+export class CloudinaryImageField extends FieldBase<Props> {
+    refs: {
+        [key: string]: (Element)
+        fileInput: (HTMLInputElement) // !important
+    };
+    static displayName: string = 'CloudinaryImageField';
+
+    static type: string = 'CloudinaryImage';
+    static getDefaultValue() { return {}; }
+
     getInitialState() {
         return buildInitialState(this.props);
-    },
+    }
     componentWillReceiveProps(nextProps) {
         // console.log('CloudinaryImageField nextProps:', nextProps);
-    },
+    }
     componentWillUpdate(nextProps) {
         // Reset the action state when the value changes
         // TODO: We should add a check for a new item ID in the store
@@ -63,7 +54,7 @@ export const CloudinaryImageField = Field.create({
                 userSelectedFile: null,
             });
         }
-    },
+    }
 
     // ==============================
     // HELPERS
@@ -71,20 +62,20 @@ export const CloudinaryImageField = Field.create({
 
     hasLocal() {
         return !!this.state.userSelectedFile;
-    },
+    }
     hasExisting() {
         return !!(this.props.value && this.props.value.url);
-    },
+    }
     hasImage() {
         return this.hasExisting() || this.hasLocal();
-    },
+    }
     getFilename() {
         const { format, height, public_id, width } = this.props.value;
 
         return this.state.userSelectedFile
             ? this.state.userSelectedFile.name
             : `${public_id}.${format} (${width}×${height})`;
-    },
+    }
     getImageSource(height = 90) {
         // TODO: This lets really wide images break the layout
         let src;
@@ -100,20 +91,20 @@ export const CloudinaryImageField = Field.create({
         }
 
         return src;
-    },
+    }
 
     // ==============================
     // METHODS
     // ==============================
 
     triggerFileBrowser() {
-        this.refs.fileInput.clickDomNode();
-    },
+        this.refs.fileInput.click();
+    }
     handleFileChange(event) {
         const userSelectedFile = event.target.files[0];
 
         this.setState({ userSelectedFile });
-    },
+    }
 
     // Toggle the lightbox
     openLightbox(event) {
@@ -121,16 +112,16 @@ export const CloudinaryImageField = Field.create({
         this.setState({
             lightboxIsVisible: true,
         });
-    },
+    }
     closeLightbox() {
         this.setState({
             lightboxIsVisible: false,
         });
-    },
+    }
 
     // Handle image selection in file browser
     handleImageChange(e) {
-        if (!window.FileReader) {
+        if (!(window as any).FileReader) {
             return alert('File reader not supported by browser.');
         }
 
@@ -151,13 +142,13 @@ export const CloudinaryImageField = Field.create({
         };
         reader.onloadend = (upload) => {
             this.setState({
-                dataUri: upload.target.result,
+                dataUri: (upload.target as any).result,
                 loading: false,
                 userSelectedFile: file,
             });
             this.props.onChange({ file: file });
         };
-    },
+    }
 
     // If we have a local file added then remove it and reset the file field.
     handleRemove(e) {
@@ -170,10 +161,10 @@ export const CloudinaryImageField = Field.create({
         }
 
         this.setState(state);
-    },
+    }
     undoRemove() {
         this.setState(buildInitialState(this.props));
-    },
+    }
 
     // ==============================
     // RENDERERS
@@ -193,7 +184,7 @@ export const CloudinaryImageField = Field.create({
                 showImageCount={false}
             />
         );
-    },
+    }
     renderImagePreview() {
         const { value } = this.props;
 
@@ -217,7 +208,7 @@ export const CloudinaryImageField = Field.create({
                 <img src={this.getImageSource()} style={{ height: 90 }} />
             </ImageThumbnail>
         );
-    },
+    }
     renderFileNameAndOptionalMessage(showChangeMessage = false) {
         return (
             <div>
@@ -229,7 +220,7 @@ export const CloudinaryImageField = Field.create({
                 {showChangeMessage && this.renderChangeMessage()}
             </div>
         );
-    },
+    }
     renderChangeMessage() {
         if (this.state.userSelectedFile) {
             return (
@@ -246,7 +237,7 @@ export const CloudinaryImageField = Field.create({
         } else {
             return null;
         }
-    },
+    }
 
     // Output [cancel/remove/undo] button
     renderClearButton() {
@@ -261,7 +252,7 @@ export const CloudinaryImageField = Field.create({
                     {clearText}
                 </Button>
             );
-    },
+    }
 
     renderImageToolbar() {
         return (
@@ -272,7 +263,7 @@ export const CloudinaryImageField = Field.create({
                 {this.hasImage() ? this.renderClearButton() : null}
             </div>
         );
-    },
+    }
 
     renderFileInput() {
         if (!this.shouldRenderField()) return null;
@@ -285,7 +276,7 @@ export const CloudinaryImageField = Field.create({
                 onChange={this.handleImageChange}
             />
         );
-    },
+    }
 
     renderActionInput() {
         if (!this.shouldRenderField()) return null;
@@ -304,7 +295,7 @@ export const CloudinaryImageField = Field.create({
         } else {
             return null;
         }
-    },
+    }
 
     renderUI() {
         const { label, note, path } = this.props;
@@ -330,5 +321,5 @@ export const CloudinaryImageField = Field.create({
                 {this.renderActionInput()}
             </FormField>
         );
-    },
-});
+    }
+}

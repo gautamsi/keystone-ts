@@ -30,7 +30,7 @@ export class NumberArrayType extends FieldTypeBase {
         }
         this.separator = options.separator || ' | ';
     }
-    static properName = 'NumberArrayType';
+    static properName = 'NumberArray';
 
     /**
      * Formats the field value

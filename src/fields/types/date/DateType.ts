@@ -42,7 +42,7 @@ export class DateType extends FieldTypeBase {
             throw new Error('FieldType.Date: options.format must be a string.');
         }
     }
-    static properName = 'DateType';
+    static properName = 'Date';
 
     /**
      * validates required inputs

@@ -2,34 +2,32 @@ import * as React from 'react';
 import { SegmentedControl } from 'elemental';
 
 const VALUE_OPTIONS = [
-	{ label: 'Is Checked', value: true },
-	{ label: 'Is NOT Checked', value: false },
+    { label: 'Is Checked', value: true },
+    { label: 'Is NOT Checked', value: false },
 ];
 
-function getDefaultValue () {
-	return {
-		value: true,
-	};
+interface Props {
+    filter?: {
+        value?: boolean,
+    };
+    onChange?: any;
 }
 
-export const BooleanFilter = React.createClass({
-	propTypes: {
-		filter: React.PropTypes.shape({
-			value: React.PropTypes.bool,
-		}),
-	},
-	statics: {
-		getDefaultValue: getDefaultValue,
-	},
-	getDefaultProps () {
-		return {
-			filter: getDefaultValue(),
-		};
-	},
-	updateValue (value) {
-		this.props.onChange({ value });
-	},
-	render () {
-		return <SegmentedControl equalWidthSegments options={VALUE_OPTIONS} value={this.props.filter.value} onChange={this.updateValue} />;
-	},
-});
+export class BooleanFilter extends React.Component<Props> {
+    static getDefaultValue() {
+        return {
+            value: true,
+        };
+    }
+    static defaultProps() {
+        return {
+            filter: this.getDefaultValue(),
+        };
+    }
+    updateValue(value) {
+        this.props.onChange({ value });
+    }
+    render() {
+        return <SegmentedControl equalWidthSegments options={VALUE_OPTIONS} value={this.props.filter.value} onChange={this.updateValue} />;
+    }
+}

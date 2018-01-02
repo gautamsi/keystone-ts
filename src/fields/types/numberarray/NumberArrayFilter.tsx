@@ -20,83 +20,78 @@ const PRESENCE_OPTIONS = [
     { label: 'No element', value: 'none' },
 ];
 
-function getDefaultValue() {
-    return {
-        mode: MODE_OPTIONS[0].value,
-        presence: PRESENCE_OPTIONS[0].value,
-        value: '',
+interface Props {
+    filter?: {
+        mode?: any; // ref: React.PropTypes.oneOf(MODE_OPTIONS.map(i => i.value)),
+        presence?: any; // ref: React.PropTypes.oneOf(PRESENCE_OPTIONS.map(i => i.value)),
+        value?: number | string | {
+            min?: number;
+            max?: number;
+        };
     };
+    onChange?: any;
 }
 
-export const NumberArrayFilter = React.createClass({
-    propTypes: {
-        filter: React.PropTypes.shape({
-            mode: React.PropTypes.oneOf(MODE_OPTIONS.map(i => i.value)),
-            presence: React.PropTypes.oneOf(PRESENCE_OPTIONS.map(i => i.value)),
-            value: React.PropTypes.oneOfType([
-                React.PropTypes.number,
-                React.PropTypes.string,
-                React.PropTypes.shape({
-                    min: React.PropTypes.number,
-                    max: React.PropTypes.number,
-                }),
-            ]),
-        }),
-    },
-    statics: {
-        getDefaultValue: getDefaultValue,
-    },
-    getDefaultProps() {
+export class NumberArrayFilter extends React.Component<Props> {
+
+    static getDefaultValue() {
         return {
-            filter: getDefaultValue(),
+            mode: MODE_OPTIONS[0].value,
+            presence: PRESENCE_OPTIONS[0].value,
+            value: '',
         };
-    },
+    }
+
+    static defaultProps() {
+        return {
+            filter: this.getDefaultValue(),
+        };
+    }
     // Returns a function that handles a specific type of onChange events for
     // either 'minValue', 'maxValue' or simply 'value'
     handleValueChangeBuilder(type) {
-        let self = this;
-        return function (e) {
+        return (e) => {
             switch (type) {
                 case 'minValue':
-                    self.updateFilter({
+                    this.updateFilter({
                         value: {
                             min: e.target.value,
-                            max: self.props.filter.value.max,
+                            max: (this.props.filter.value as any).max,
                         },
                     });
                     break;
                 case 'maxValue':
-                    self.updateFilter({
+                    this.updateFilter({
                         value: {
-                            min: self.props.filter.value.min,
+                            min: (this.props.filter.value as any).min,
                             max: e.target.value,
                         },
                     });
                     break;
                 case 'value':
-                    self.updateFilter({
+                    this.updateFilter({
                         value: e.target.value,
                     });
                     break;
             }
         };
-    },
+    }
     // Update the props with this.props.onChange
     updateFilter(changedProp) {
         this.props.onChange({ ...this.props.filter, ...changedProp });
-    },
+    }
     // Update the filter mode
     selectMode(e) {
         const mode = e.target.value;
         this.updateFilter({ mode });
-        findDOMNode(this.refs.focusTarget).focus();
-    },
+        findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
+    }
     // Update the presence selection
     selectPresence(e) {
         const presence = e.target.value;
         this.updateFilter({ presence });
-        findDOMNode(this.refs.focusTarget).focus();
-    },
+        findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
+    }
     // Render the controls, showing two inputs when the mode is "between"
     renderControls(presence, mode) {
         let controls;
@@ -112,7 +107,7 @@ export const NumberArrayFilter = React.createClass({
                             placeholder="Min."
                             ref="focusTarget"
                             type="number"
-                            value={this.props.filter.value.min}
+                            value={(this.props.filter.value as any).min}
                         />
                     </Grid.Col>
                     <Grid.Col>
@@ -120,7 +115,7 @@ export const NumberArrayFilter = React.createClass({
                             onChange={this.handleValueChangeBuilder('maxValue')}
                             placeholder="Max."
                             type="number"
-                            value={this.props.filter.value.max}
+                            value={(this.props.filter.value as any).max}
                         />
                     </Grid.Col>
                 </Grid.Row>
@@ -139,7 +134,7 @@ export const NumberArrayFilter = React.createClass({
         }
 
         return controls;
-    },
+    }
     render() {
         const { filter } = this.props;
         // Get mode and presence based on their values with .filter
@@ -165,6 +160,5 @@ export const NumberArrayFilter = React.createClass({
                 {this.renderControls(presence, mode)}
             </div>
         );
-    },
-
-});
+    }
+}

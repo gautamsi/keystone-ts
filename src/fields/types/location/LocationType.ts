@@ -53,7 +53,7 @@ export class LocationType extends FieldTypeBase {
         }
 
     }
-    static properName = 'LocationType';
+    static properName = 'Location';
 
     /**
      * Registers the field on the List's Mongoose Schema.

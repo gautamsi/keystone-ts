@@ -8,12 +8,13 @@ const moreIndicatorStyle = {
     fontSize: '.8rem',
 };
 
-export const CloudinaryImagesColumn = React.createClass({
-    displayName: 'CloudinaryImagesColumn',
-    propTypes: {
-        col: React.PropTypes.object,
-        data: React.PropTypes.object,
-    },
+interface Props {
+    col?: any;
+    data?: any;
+}
+
+export class CloudinaryImagesColumn extends React.Component<Props> {
+    static displayName: string = 'CloudinaryImagesColumn';
     renderMany(value) {
         if (!value || !value.length) return;
         const items = [];
@@ -25,13 +26,13 @@ export const CloudinaryImagesColumn = React.createClass({
             items.push(<span key="more" style={moreIndicatorStyle}>[...{value.length - 3} more]</span>);
         }
         return items;
-    },
+    }
     renderValue(value) {
         if (!value || !Object.keys(value).length) return;
 
         return <CloudinaryImageSummary image={value} secure={this.props.col.field.secure} />;
 
-    },
+    }
     render() {
         const value = this.props.data.fields[this.props.col.path];
         const many = value.length > 1;
@@ -43,5 +44,5 @@ export const CloudinaryImagesColumn = React.createClass({
                 </ItemsTableValue>
             </ItemsTableCell>
         );
-    },
-});
+    }
+}

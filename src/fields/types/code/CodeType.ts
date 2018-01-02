@@ -24,5 +24,5 @@ export class CodeType extends TextType {
         this.codemirror = options.codemirror || {};
         this.editor = assign({ mode: this.lang }, this.codemirror);
     }
-    static properName = 'CodeType';
+    static properName = 'Code';
 }

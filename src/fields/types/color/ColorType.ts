@@ -11,5 +11,5 @@ export class ColorType extends TextType {
         super(list, path, options);
         this._nativeType = String;
     }
-    static properName = 'ColorType';
+    static properName = 'Color';
 }

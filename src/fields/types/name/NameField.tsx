@@ -4,29 +4,32 @@ import {
     FormInput,
     Grid,
 } from 'elemental';
+import { FieldPropsBase, FieldBase } from '../Field';
 
-const NAME_SHAPE = {
-    first: React.PropTypes.string,
-    last: React.PropTypes.string,
-};
+// tslint:disable-next-line:class-name
+interface NameShape {
+    first?: string;
+    last?: string;
+}
 
-export const NameField = Field.create({
-    displayName: 'NameField',
-    statics: {
-        type: 'Name',
-        getDefaultValue: () => ({
+interface Props extends FieldPropsBase {
+    onChange: any;
+    path: string;
+    paths: NameShape;
+    value: NameShape;
+}
+
+export class NameField extends FieldBase<Props> {
+    static displayName: string = 'NameField';
+    static type: string = 'Name';
+    static getDefaultValue() {
+        return {
             first: '',
             last: '',
-        }),
-    },
-    propTypes: {
-        onChange: React.PropTypes.func.isRequired,
-        path: React.PropTypes.string.isRequired,
-        paths: React.PropTypes.shape(NAME_SHAPE).isRequired,
-        value: React.PropTypes.shape(NAME_SHAPE).isRequired,
-    },
+        };
+    }
 
-    valueChanged: function (which, event) {
+    valueChanged(which, event?) { // ref: event may not be optional
         const { value = {}, path, onChange } = this.props;
         onChange({
             path,
@@ -35,13 +38,13 @@ export const NameField = Field.create({
                 [which]: event.target.value,
             },
         });
-    },
-    changeFirst: function (event) {
+    }
+    changeFirst(event) {
         return this.valueChanged('first', event);
-    },
-    changeLast: function (event) {
+    }
+    changeLast(event) {
         return this.valueChanged('last', event);
-    },
+    }
     renderValue() {
         const inputStyle = { width: '100%' };
         const { value = {} } = this.props;
@@ -60,7 +63,7 @@ export const NameField = Field.create({
                 </Grid.Col>
             </Grid.Row>
         );
-    },
+    }
     renderField() {
         const { value = {}, paths, autoFocus } = this.props;
         return (
@@ -86,5 +89,5 @@ export const NameField = Field.create({
                 </Grid.Col>
             </Grid.Row>
         );
-    },
-});
+    }
+}

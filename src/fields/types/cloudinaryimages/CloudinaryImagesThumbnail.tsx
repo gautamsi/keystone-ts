@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button } from 'elemental';
 import { ImageThumbnail } from '../../components/ImageThumbnail';
 
-export function CloudinaryImagesThumbnail({
+export const CloudinaryImagesThumbnail: React.SFC<Props> = ({
 	isDeleted,
     imageSourceLarge,
     imageSourceSmall,
@@ -13,7 +13,7 @@ export function CloudinaryImagesThumbnail({
     toggleDelete,
     value,
     ...props
-}) {
+}) => {
     // render icon feedback for intent
     let mask;
     if (isQueued) mask = 'upload';
@@ -53,14 +53,16 @@ export function CloudinaryImagesThumbnail({
         </div>
     );
 
-}
-
-CloudinaryImagesThumbnail['propTypes'] = {
-    imageSourceLarge: React.PropTypes.string,
-    imageSourceSmall: React.PropTypes.string.isRequired,
-    isDeleted: React.PropTypes.bool,
-    isQueued: React.PropTypes.bool,
-    openLightbox: React.PropTypes.func.isRequired,
-    shouldRenderActionButton: React.PropTypes.bool,
-    toggleDelete: React.PropTypes.func.isRequired,
 };
+
+interface Props {
+    imageSourceLarge?: string;
+    imageSourceSmall: string;
+    isDeleted?: boolean;
+    isQueued?: boolean;
+    openLightbox: any;
+    shouldRenderActionButton?: boolean;
+    toggleDelete: any;
+    inputName?: any;
+    value?: any;
+}

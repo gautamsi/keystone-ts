@@ -1,53 +1,57 @@
 import * as React from 'react';
-import * as Field from '../Field';
 import {
     Button,
     FormInput,
     InlineGroup as Group,
     InlineGroupSection as Section,
 } from 'elemental';
+import { FieldBase, FieldPropsBase } from '../Field';
 
-export const PasswordField = Field.create({
+interface Props extends FieldPropsBase {
+    paths?: any;
+}
 
-    displayName: 'PasswordField',
-    statics: {
-        type: 'Password',
-    },
+export class PasswordField extends FieldBase<Props> {
 
-    getInitialState() {
-        return {
+    static displayName: string = 'PasswordField';
+    static type: string = 'Password';
+
+    constructor(props) {
+        super(props);
+        this.state = {
             passwordIsSet: this.props.value ? true : false,
             showChangeUI: this.props.mode === 'create' ? true : false,
             password: '',
             confirm: '',
+            ...this.state
         };
-    },
+    }
 
-    valueChanged(which, event) {
+    valueChanged(which, event?) { // event is not optional
         let newState = {};
         newState[which] = event.target.value;
         this.setState(newState);
-    },
+    }
 
     showChangeUI() {
         this.setState({
             showChangeUI: true,
         }, () => this.focus());
-    },
+    }
 
     onCancel() {
         this.setState({
             showChangeUI: false,
         }, () => this.focus());
-    },
+    }
 
     renderValue() {
         return <FormInput noedit>{this.props.value ? 'Password Set' : ''}</FormInput>;
-    },
+    }
 
     renderField() {
         return this.state.showChangeUI ? this.renderFields() : this.renderChangeButton();
-    },
+    }
 
     renderFields() {
         return (
@@ -79,7 +83,7 @@ export const PasswordField = Field.create({
                 ) : null}
             </Group>
         );
-    },
+    }
 
     renderChangeButton() {
         let label = this.state.passwordIsSet
@@ -89,6 +93,6 @@ export const PasswordField = Field.create({
         return (
             <Button ref="focusTarget" onClick={this.showChangeUI}>{label}</Button>
         );
-    },
+    }
 
-});
+}

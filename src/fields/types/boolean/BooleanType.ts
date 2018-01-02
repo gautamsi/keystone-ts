@@ -18,7 +18,7 @@ export class BooleanType extends FieldTypeBase {
         this._fixedSize = 'full';
         this.indent = (options.indent) ? true : false;
     }
-    static properName = 'BooleanType';
+    static properName = 'Boolean';
 
     defaults: { default: boolean } = {
         default: false,

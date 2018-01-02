@@ -1,12 +1,10 @@
 import * as React from 'react';
-import * as Field from '../Field';
 import { FormInput } from 'elemental';
+import { FieldBase, FieldPropsBase } from '../Field';
 
-export const NumberField = Field.create({
-    displayName: 'NumberField',
-    statics: {
-        type: 'Number',
-    },
+export class NumberField extends FieldBase<FieldPropsBase> {
+    static displayName: string = 'NumberField';
+    static type: string = 'Number';
     valueChanged(event) {
         let newValue = event.target.value;
         if (/^-?\d*\.?\d*$/.test(newValue)) {
@@ -15,7 +13,7 @@ export const NumberField = Field.create({
                 value: newValue,
             });
         }
-    },
+    }
     renderField() {
         return (
             <FormInput
@@ -26,5 +24,5 @@ export const NumberField = Field.create({
                 value={this.props.value}
             />
         );
-    },
-});
+    }
+}

@@ -16,7 +16,7 @@ export class TextArrayType extends FieldTypeBase {
         this._underscoreMethods = ['format'];
         this.separator = options.separator || ' | ';
     }
-    static properName = 'TextArrayType';
+    static properName = 'TextArray';
 
     /**
      * Formats the field value

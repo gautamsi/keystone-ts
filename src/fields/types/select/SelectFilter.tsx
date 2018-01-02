@@ -15,16 +15,15 @@ const INVERTED_OPTIONS = [
     { label: 'Does NOT Match', value: true },
 ];
 
-function getDefaultValue() {
-    return {
-        inverted: INVERTED_OPTIONS[0].value,
-        value: [],
-    };
+interface FilterProps {
+    option?: any;
+    selected?: any;
+    onClick?: any;
 }
 
-class FilterOption extends React.Component {
-    constructor() {
-        super();
+class FilterOption extends React.Component<FilterProps> {
+    constructor(props) {
+        super(props);
 
         bindFunctions.call(this, [
             'handleClick',
@@ -47,9 +46,18 @@ class FilterOption extends React.Component {
     }
 }
 
-export class SelectFilter extends Component {
-    constructor() {
-        super();
+interface Props {
+
+    field?: any;
+    filter?: {
+        inverted?: boolean;
+        value?: Array<any>;
+    };
+    onChange?: any;
+}
+export class SelectFilter extends React.Component<Props, any> {
+    constructor(props) {
+        super(props);
 
         bindFunctions.call(this, [
             'detectOS',
@@ -179,7 +187,7 @@ export class SelectFilter extends Component {
                         value={filter.inverted}
                     />
                 </FormField>
-                <div style={fieldStyles}>
+                <div style={fieldStyles as any}>
                     <Button size="xsmall" onClick={this.toggleAllOptions} style={{ padding: 0, width: 50 }}>
                         {indeterminate ? 'All' : 'None'}
                     </Button>
@@ -194,15 +202,15 @@ export class SelectFilter extends Component {
 
 
 
-    static propTypes = {
-        field: React.PropTypes.object,
-        filter: React.PropTypes.shape({
-            inverted: React.PropTypes.boolean,
-            value: React.PropTypes.array,
-        }),
-    };
-    static getDefaultValue = getDefaultValue;
-    static defaultProps = {
-        filter: getDefaultValue(),
-    };
+    static getDefaultValue() {
+        return {
+            inverted: INVERTED_OPTIONS[0].value,
+            value: [],
+        };
+    }
+    static defaultProps() {
+        return {
+            filter: this.getDefaultValue()
+        };
+    }
 }

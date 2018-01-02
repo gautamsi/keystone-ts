@@ -42,7 +42,7 @@ export class CloudinaryImagesType extends FieldTypeBase {
                 + 'See http://keystonejs.com/docs/configuration/#services-cloudinary for more information.\n');
         }
     }
-    static properName = 'CloudinaryImagesType';
+    static properName = 'CloudinaryImages';
 
     /**
      * Gets the folder for images in this field

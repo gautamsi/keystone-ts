@@ -17,6 +17,8 @@
 * limitations under the License.
 * ========================================================== */
 declare var jQuery;
+declare var toMarkdown;
+declare var markdown;
 let $ = require('jquery');
 let marked = require('marked');
 
@@ -999,7 +1001,7 @@ $.fn.markdown.defaults = {
 
 					link = prompt(e.__localize('Insert Image Hyperlink'), 'http://');
 
-					if (link !== null && link !== '' && link != 'http://' && link.substr(0, 4) === 'http') {
+					if (link !== null && link !== '' && link !== 'http://' && link.substr(0, 4) === 'http') {
 						let sanitizedLink = $('<div>' + link + '</div>').text();
 
 						// transform selection and set the cursor into chunked text

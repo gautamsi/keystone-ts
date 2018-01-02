@@ -29,7 +29,7 @@ export class DateArrayType extends FieldTypeBase {
         }
         this.separator = options.separator || ' | ';
     }
-    static properName = 'DateArrayType';
+    static properName = 'DateArray';
 
     /**
      * Formats the field value

@@ -4,12 +4,14 @@ import { ItemsTableValue } from '../../components/ItemsTableValue';
 
 const SUB_FIELDS = ['street1', 'suburb', 'state', 'postcode', 'country'];
 
-export const LocationColumn = React.createClass({
-    displayName: 'LocationColumn',
-    propTypes: {
-        col: React.PropTypes.object,
-        data: React.PropTypes.object,
-    },
+interface Props {
+    col?: any;
+    data?: any;
+}
+
+export class LocationColumn extends React.Component<Props> {
+    static displayName: string = 'LocationColumn';
+
     renderValue() {
         const value = this.props.data.fields[this.props.col.path];
         if (!value || !Object.keys(value).length) return null;
@@ -26,12 +28,12 @@ export const LocationColumn = React.createClass({
                 {output.join(', ')}
             </ItemsTableValue>
         );
-    },
+    }
     render() {
         return (
             <ItemsTableCell>
                 {this.renderValue()}
             </ItemsTableCell>
         );
-    },
-});
+    }
+}

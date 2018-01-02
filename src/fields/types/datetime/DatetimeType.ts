@@ -32,7 +32,7 @@ export class DateTimeType extends DateType {
             tzOffset: this.path + '_tzOffset',
         };
     }
-    static properName = 'DatetimeType';
+    static properName = 'Datetime';
 
 
     /**

@@ -24,7 +24,7 @@ export class FileType extends FieldTypeBase {
         }
         this.storage = options.storage;
     }
-    static properName = 'FileType';
+    static properName = 'File';
 
     /**
      * Registers the field on the List's Mongoose Schema.

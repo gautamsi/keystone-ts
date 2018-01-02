@@ -17,7 +17,7 @@ export class TextType extends FieldTypeBase {
         this._properties = ['monospace'];
         this._underscoreMethods = ['crop'];
     }
-    static properName = 'TextType';
+    static properName = 'Text';
 
     validateInput(data, callback) {
         const max = this.options.max;

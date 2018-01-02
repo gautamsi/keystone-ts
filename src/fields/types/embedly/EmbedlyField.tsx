@@ -1,29 +1,30 @@
 import * as React from 'react';
-import * as Field from '../Field';
 import { FormField, FormInput } from 'elemental';
 import { ImageThumbnail } from '../../components/ImageThumbnail';
 import { NestedFormField } from '../../components/NestedFormField';
+import { FieldPropsBase, FieldBase } from '../Field';
 
-export const EmbedlyField = Field.create({
 
-    displayName: 'EmbedlyField',
-    statics: {
-        type: 'Embedly',
-        getDefaultValue: () => ({}),
-    },
+export class EmbedlyField extends FieldBase<FieldPropsBase> {
+
+    static displayName: string = 'EmbedlyField';
+    static type: string = 'Embedly';
+    static getDefaultValue() {
+        return {};
+    }
 
     // always defers to renderValue; there is no form UI for this field
     renderField() {
         return this.renderValue();
-    },
+    }
 
-    renderValue(path, label, multiline) {
+    renderValue(path?, label?, multiline?) { // ref: had to use all optional to comply with typescript inheritance issue
         return (
             <NestedFormField key={path} label={label}>
                 <FormInput noedit multiline={multiline}>{this.props.value[path]}</FormInput>
             </NestedFormField>
         );
-    },
+    }
     renderAuthor() {
         if (!this.props.value.authorName) return;
         return (
@@ -31,7 +32,7 @@ export const EmbedlyField = Field.create({
                 <FormInput noedit href={this.props.value.authorUrl && this.props.value.authorUrl} target="_blank">{this.props.value.authorName}</FormInput>
             </NestedFormField>
         );
-    },
+    }
     renderDimensions() {
         if (!this.props.value.width || !this.props.value.height) return;
         return (
@@ -39,7 +40,7 @@ export const EmbedlyField = Field.create({
                 <FormInput noedit>{this.props.value.width} &times; {this.props.value.height}px</FormInput>
             </NestedFormField>
         );
-    },
+    }
     renderPreview() {
         if (!this.props.value.thumbnailUrl) return;
 
@@ -58,7 +59,7 @@ export const EmbedlyField = Field.create({
                 {preview}
             </NestedFormField>
         );
-    },
+    }
 
     renderUI() {
         if (!this.props.value.exists) {
@@ -80,6 +81,5 @@ export const EmbedlyField = Field.create({
                 {this.renderDimensions()}
             </div>
         );
-    },
-
-});
+    }
+}

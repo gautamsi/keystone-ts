@@ -1,5 +1,4 @@
 import { DateInput } from '../../components/DateInput';
-import * as Field from '../Field';
 import * as moment from 'moment';
 import * as React from 'react';
 import {
@@ -10,55 +9,67 @@ import {
     InlineGroup as Group,
     InlineGroupSection as Section,
 } from 'elemental';
+import { FieldPropsBase, FieldBase } from '../Field';
 
-export const DateTimeField = Field.create({
+interface Props extends FieldPropsBase {
+    formatString?: string;
+    paths?: {
+        date?: any;
+        time?: any;
+        tzOffset?: any;
+    };
+    isUTC?: boolean;
+}
 
-    displayName: 'DatetimeField',
-    statics: {
-        type: 'Datetime',
-    },
+export class DateTimeField extends FieldBase<Props> {
+    static displayName: string = 'DatetimeField';
+    static type: string = 'Datetime';
 
-    focusTargetRef: 'dateInput',
+    focusTargetRef: 'dateInput';
 
     // default input formats
-    dateInputFormat: 'YYYY-MM-DD',
-    timeInputFormat: 'h:mm:ss a',
-    tzOffsetInputFormat: 'Z',
+    dateInputFormat: 'YYYY-MM-DD';
+    timeInputFormat: 'h:mm:ss a';
+    tzOffsetInputFormat: 'Z';
 
     // parse formats (duplicated from lib/fieldTypes/datetime.js)
-    parseFormats: ['YYYY-MM-DD', 'YYYY-MM-DD h:m:s a', 'YYYY-MM-DD h:m a', 'YYYY-MM-DD H:m:s', 'YYYY-MM-DD H:m'],
+    parseFormats: ['YYYY-MM-DD', 'YYYY-MM-DD h:m:s a', 'YYYY-MM-DD h:m a', 'YYYY-MM-DD H:m:s', 'YYYY-MM-DD H:m'];
 
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props);
+        this.state = {
             dateValue: this.props.value && this.moment(this.props.value).format(this.dateInputFormat),
             timeValue: this.props.value && this.moment(this.props.value).format(this.timeInputFormat),
             tzOffsetValue: this.props.value ? this.moment(this.props.value).format(this.tzOffsetInputFormat) : this.moment().format(this.tzOffsetInputFormat),
+            ...this.state
         };
-    },
+    }
 
-    getDefaultProps() {
+    static defaultProps() {
+        let props = FieldBase.defaultProps();
         return {
             formatString: 'Do MMM YYYY, h:mm:ss a',
+            ...props
         };
-    },
+    }
 
-    moment() {
+    moment(...args) {
         if (this.props.isUTC) return moment.utc.apply(moment, arguments);
         else return moment.apply(undefined, arguments);
-    },
+    }
 
     // TODO: Move isValid() so we can share with server-side code
     isValid(value) {
         return this.moment(value, this.parseFormats).isValid();
-    },
+    }
 
     // TODO: Move format() so we can share with server-side code
     format(value, format) {
         format = format || this.dateInputFormat + ' ' + this.timeInputFormat;
         return value ? this.moment(value).format(format) : '';
-    },
+    }
 
-    handleChange(dateValue, timeValue, tzOffsetValue) {
+    handleChange(dateValue, timeValue, tzOffsetValue?) {
         let value = dateValue + ' ' + timeValue;
         let datetimeFormat = this.dateInputFormat + ' ' + this.timeInputFormat;
 
@@ -76,17 +87,17 @@ export const DateTimeField = Field.create({
             path: this.props.path,
             value: this.isValid(value) ? this.moment(value, datetimeFormat).toISOString() : null,
         });
-    },
+    }
 
     dateChanged({ value }) {
         this.setState({ dateValue: value });
         this.handleChange(value, this.state.timeValue);
-    },
+    }
 
     timeChanged(evt) {
         this.setState({ timeValue: evt.target.value });
         this.handleChange(this.state.dateValue, evt.target.value);
-    },
+    }
 
     setNow() {
         let dateValue = this.moment().format(this.dateInputFormat);
@@ -98,12 +109,12 @@ export const DateTimeField = Field.create({
             tzOffsetValue: tzOffsetValue,
         });
         this.handleChange(dateValue, timeValue, tzOffsetValue);
-    },
+    }
 
     renderNote() {
         if (!this.props.note) return null;
         return <FormNote note={this.props.note} />;
-    },
+    }
 
     renderUI() {
         let input;
@@ -153,5 +164,5 @@ export const DateTimeField = Field.create({
                 {this.renderNote()}
             </FormField>
         );
-    },
-});
+    }
+}

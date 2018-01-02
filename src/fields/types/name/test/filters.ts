@@ -7,7 +7,7 @@ export const initList = function (List) {
 	});
 };
 
-function getTestItems () {
+export function getTestItems () {
 	return [
 		{
 			name: {},
@@ -56,8 +56,6 @@ function getTestItems () {
 		},
 	];
 }
-
-export const getTestItems = getTestItems;
 
 export const testFilters = function (List, filter) {
 	it('should find the first name', function (done) {

@@ -9,12 +9,14 @@ const moreIndicatorStyle = {
     marginLeft: 8,
 };
 
-export const RelationshipColumn = React.createClass({
-    displayName: 'RelationshipColumn',
-    propTypes: {
-        col: React.PropTypes.object,
-        data: React.PropTypes.object,
-    },
+interface Props {
+    col?: any;
+    data?: any;
+}
+
+export class RelationshipColumn extends React.Component<Props> {
+    static displayName: string = 'RelationshipColumn';
+
     renderMany(value) {
         if (!value || !value.length) return;
         const refList = this.props.col.field.refList;
@@ -31,14 +33,14 @@ export const RelationshipColumn = React.createClass({
             );
         }
         if (value.length > 3) {
-            items.push(<span key="more" style={moreIndicatorStyle}>[...{value.length - 3} more]</span>);
+            items.push(<span key="more" style={moreIndicatorStyle as any}>[...{value.length - 3} more]</span>);
         }
         return (
             <ItemsTableValue field={this.props.col.type}>
                 {items}
             </ItemsTableValue>
         );
-    },
+    }
     renderValue(value) {
         if (!value) return;
         const refList = this.props.col.field.refList;
@@ -47,7 +49,7 @@ export const RelationshipColumn = React.createClass({
                 {value.name}
             </ItemsTableValue>
         );
-    },
+    }
     render() {
         const value = this.props.data.fields[this.props.col.path];
         const many = this.props.col.field.many;
@@ -56,5 +58,5 @@ export const RelationshipColumn = React.createClass({
                 {many ? this.renderMany(value) : this.renderValue(value)}
             </ItemsTableCell>
         );
-    },
-});
+    }
+}

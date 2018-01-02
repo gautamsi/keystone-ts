@@ -1,19 +1,22 @@
-import * as Field from '../Field';
 import * as React from 'react';
 import Select from 'react-select';
 import { FormInput } from 'elemental';
+import { FieldBase, FieldPropsBase } from '../Field';
+
+interface Props extends FieldPropsBase {
+    numeric?: any;
+    ops?: any;
+}
 
 /**
  * TODO:
  * - Custom path support
  */
 
-export const SelectField = Field.create({
+export class SelectField extends FieldBase<Props> {
 
-    displayName: 'SelectField',
-    statics: {
-        type: 'Select',
-    },
+    static displayName: string = 'SelectField';
+    static type: string = 'Select';
 
     valueChanged(newValue) {
         // TODO: This should be natively handled by the Select component
@@ -24,7 +27,7 @@ export const SelectField = Field.create({
             path: this.props.path,
             value: newValue,
         });
-    },
+    }
 
     renderValue() {
         const { ops, value } = this.props;
@@ -35,7 +38,7 @@ export const SelectField = Field.create({
                 {selected ? selected.label : null}
             </FormInput>
         );
-    },
+    }
 
     renderField() {
         const { numeric, ops, path, value: val } = this.props;
@@ -53,7 +56,7 @@ export const SelectField = Field.create({
         return (
             <div>
                 {/* This input element fools Safari's autocorrect in certain situations that completely break react-select */}
-                <input type="text" style={{ position: 'absolute', width: 1, height: 1, zIndex: -1, opacity: 0 }} tabIndex="-1" />
+                <input type="text" style={{ position: 'absolute', width: 1, height: 1, zIndex: -1, opacity: 0 }} tabIndex={-1} />
                 <Select
                     simpleValue
                     name={this.getInputName(path)}
@@ -63,6 +66,5 @@ export const SelectField = Field.create({
                 />
             </div>
         );
-    },
-
-});
+    }
+}

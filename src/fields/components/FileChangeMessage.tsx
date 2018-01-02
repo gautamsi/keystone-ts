@@ -28,6 +28,9 @@ export const FileChangeMessage: React.SFC<Props> = ({ style, color, ...props }) 
 interface Props {
     color?: 'danger' | 'default' | 'success';
     style?: any;
+    component?: any;
+    href?: any;
+    target?: any;
 }
 FileChangeMessage.defaultProps = {
     color: 'default',

@@ -8,11 +8,11 @@ to props.onChange correctly as the user interacts with it)
 import * as _ from 'lodash';
 import * as async from 'async';
 import * as React from 'react';
-import * as Field from '../Field';
+import { FieldBase, FieldPropsBase } from '../Field';
 import { Button, FormField, FormNote } from 'elemental';
 import Lightbox from 'react-images';
 import { cloudinaryResize } from '../../../admin/client/utils/cloudinaryResize';
-import { Thumbnail } from './CloudinaryImagesThumbnail';
+import { CloudinaryImagesThumbnail as Thumbnail } from './CloudinaryImagesThumbnail';
 import { HiddenFileInput } from '../../components/HiddenFileInput';
 import { FileChangeMessage } from '../../components/FileChangeMessage';
 
@@ -25,15 +25,28 @@ const RESIZE_DEFAULTS = {
 
 let uploadInc = 1000;
 
-export const CloudinaryImagesField = Field.create({
-    displayName: 'CloudinaryImagesField',
-    statics: {
-        type: 'CloudinaryImages',
-        getDefaultValue: () => ([]),
-    },
+interface Props extends FieldPropsBase {
+    secure?: boolean;
+}
+
+export class CloudinaryImagesField extends FieldBase<Props> {
+
+    refs: {
+        [key: string]: (Element)
+        fileInput: (HTMLInputElement) // !important
+    };
+
+    static displayName: string = 'CloudinaryImagesField';
+
+    static type: string = 'CloudinaryImages';
+
+    static getDefaultValue() {
+        return [];
+    }
+
     getInitialState() {
         return this.buildInitialState(this.props);
-    },
+    }
     componentWillUpdate(nextProps) {
         // Reset the thumbnails and upload ID when the item value changes
         // TODO: We should add a check for a new item ID in the store
@@ -42,7 +55,7 @@ export const CloudinaryImagesField = Field.create({
         if (value !== nextValue) {
             this.setState(this.buildInitialState(nextProps));
         }
-    },
+    }
     buildInitialState(props) {
         const uploadFieldPath = `CloudinaryImages-${props.path}-${++uploadInc}`;
         const thumbnails = props.value ? props.value.map((img, index) => {
@@ -62,7 +75,7 @@ export const CloudinaryImagesField = Field.create({
             }, index);
         }) : [];
         return { thumbnails, uploadFieldPath };
-    },
+    }
     getThumbnail(props, index) {
         return (
             <Thumbnail
@@ -74,7 +87,7 @@ export const CloudinaryImagesField = Field.create({
                 {...props}
             />
         );
-    },
+    }
 
     // ==============================
     // HELPERS
@@ -82,33 +95,33 @@ export const CloudinaryImagesField = Field.create({
 
     triggerFileBrowser() {
         this.refs.fileInput.clickDomNode();
-    },
+    }
     hasFiles() {
         return this.refs.fileInput && this.refs.fileInput.hasValue();
-    },
+    }
     openLightbox(event, index) {
         event.preventDefault();
         this.setState({
             lightboxIsVisible: true,
             lightboxImageIndex: index,
         });
-    },
+    }
     closeLightbox() {
         this.setState({
             lightboxIsVisible: false,
             lightboxImageIndex: null,
         });
-    },
+    }
     lightboxPrevious() {
         this.setState({
             lightboxImageIndex: this.state.lightboxImageIndex - 1,
         });
-    },
+    }
     lightboxNext() {
         this.setState({
             lightboxImageIndex: this.state.lightboxImageIndex + 1,
         });
-    },
+    }
 
     // ==============================
     // METHODS
@@ -124,7 +137,7 @@ export const CloudinaryImagesField = Field.create({
         }));
 
         this.setState({ thumbnails: newThumbnails });
-    },
+    }
     getCount(key) {
         let count = 0;
 
@@ -133,7 +146,7 @@ export const CloudinaryImagesField = Field.create({
         });
 
         return count;
-    },
+    }
     clearFiles() {
         this.refs.fileInput.clearValue();
 
@@ -142,9 +155,9 @@ export const CloudinaryImagesField = Field.create({
                 return !thumb.props.isQueued;
             }),
         });
-    },
+    }
     uploadFile(event) {
-        if (!window.FileReader) {
+        if (!(window as any).FileReader) {
             return alert('File reader not supported by browser.');
         }
 
@@ -165,7 +178,7 @@ export const CloudinaryImagesField = Field.create({
             reader.onload = (e) => {
                 callback(null, this.getThumbnail({
                     isQueued: true,
-                    imageSourceSmall: e.target.result,
+                    imageSourceSmall: (e.target as any).result,
                 }, index++));
             };
         }, (err, thumbnails) => {
@@ -173,7 +186,7 @@ export const CloudinaryImagesField = Field.create({
                 thumbnails: [...this.state.thumbnails, ...thumbnails],
             });
         });
-    },
+    }
 
     // ==============================
     // RENDERERS
@@ -192,7 +205,7 @@ export const CloudinaryImagesField = Field.create({
                 ref="fileInput"
             />
         );
-    },
+    }
     renderValueInput() {
         if (!this.shouldRenderField()) return null;
 
@@ -215,7 +228,7 @@ export const CloudinaryImagesField = Field.create({
                 />
             );
         }
-    },
+    }
     renderLightbox() {
         const { value, secure } = this.props;
         if (!value || !value.length) return;
@@ -239,7 +252,7 @@ export const CloudinaryImagesField = Field.create({
                 onClose={this.closeLightbox}
             />
         );
-    },
+    }
     renderToolbar() {
         if (!this.shouldRenderField()) return null;
 
@@ -287,7 +300,7 @@ export const CloudinaryImagesField = Field.create({
                 {saveMessage}
             </div>
         );
-    },
+    }
     renderUI() {
         const { label, note, path } = this.props;
         const { thumbnails } = this.state;
@@ -304,5 +317,5 @@ export const CloudinaryImagesField = Field.create({
                 {this.renderLightbox()}
             </FormField>
         );
-    },
-});
+    }
+}

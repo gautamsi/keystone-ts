@@ -1,17 +1,11 @@
-import * as ArrayFieldMixin from '../../mixins/ArrayField';
-import * as Field from '../Field';
+import { ArrayFieldBase, ArrayFieldPropsBase } from '../ArrayField';
 
-export const NumberArrayField = Field.create({
+export class NumberArrayField extends ArrayFieldBase<ArrayFieldPropsBase> {
 
-    displayName: 'NumberArrayField',
-    statics: {
-        type: 'NumberArray',
-    },
+    static displayName: string = 'NumberArrayField';
+    static type: string = 'NumberArray';
 
-    mixins: [ArrayFieldMixin],
-
-    cleanInput(input) {
+    cleanInput = (input) => {
         return input.replace(/[^\d]/g, '');
-    },
-
-});
+    }
+}

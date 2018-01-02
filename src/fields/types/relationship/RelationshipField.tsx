@@ -1,5 +1,4 @@
 import * as async from 'async';
-import * as Field from '../Field';
 import { listsByKey } from '../../../admin/client/utils/lists';
 import * as React from 'react';
 import Select from 'react-select';
@@ -11,6 +10,7 @@ import {
     InlineGroupSection as Section,
 } from 'elemental';
 import * as _ from 'lodash';
+import { FieldBase, FieldPropsBase } from '../Field';
 
 function compareValues(current, next) {
     const currentLength = current ? current.length : 0;
@@ -22,29 +22,40 @@ function compareValues(current, next) {
     return true;
 }
 
-export const RelationshipField = Field.create({
+interface Props extends FieldPropsBase {
+    many?: any;
+    filters?: any[];
+    createInline?: any;
+    refList?: any;
+}
 
-    displayName: 'RelationshipField',
-    statics: {
-        type: 'Relationship',
-    },
+export class RelationshipField extends FieldBase<Props> {
+    _isMounted: boolean = false;
+    _itemsCache: {};
+
+    static displayName: string = 'RelationshipField';
+    static type: string = 'Relationship';
 
     getInitialState() {
         return {
             value: null,
             createIsOpen: false,
         };
-    },
+    }
 
     componentDidMount() {
+        this._isMounted = true;
         this._itemsCache = {};
         this.loadValue(this.props.value);
-    },
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.value === this.props.value || nextProps.many && compareValues(this.props.value, nextProps.value)) return;
         this.loadValue(nextProps.value);
-    },
+    }
 
     shouldCollapse() {
         if (this.props.many) {
@@ -52,7 +63,7 @@ export const RelationshipField = Field.create({
             return this.props.collapse && !this.props.value.length;
         }
         return this.props.collapse && !this.props.value;
-    },
+    }
 
     buildFilters() {
         let filters = {};
@@ -75,7 +86,7 @@ export const RelationshipField = Field.create({
             } else {
                 filters[key] = value;
             }
-        }, this);
+        });
 
         let parts = [];
 
@@ -84,12 +95,12 @@ export const RelationshipField = Field.create({
         });
 
         return parts.join('&');
-    },
+    }
 
     cacheItem(item) {
         item.href = Keystone.adminPath + '/' + this.props.refList.path + '/' + item.id;
         this._itemsCache[item.id] = item;
-    },
+    }
 
     loadValue(values) {
         if (!values) {
@@ -121,19 +132,19 @@ export const RelationshipField = Field.create({
                 done(err, data);
             });
         }, (err, expanded) => {
-            if (!this.isMounted()) return;
+            if (!this._isMounted) return;
             this.setState({
                 loading: false,
                 value: this.props.many ? expanded : expanded[0],
             });
         });
-    },
+    }
 
     // NOTE: this seems like the wrong way to add options to the Select
-    loadOptionsCallback: {},
+    loadOptionsCallback(...args) { }
     loadOptions(input, callback) {
         // NOTE: this seems like the wrong way to add options to the Select
-        this.loadOptionsCallback = callback;
+        this.loadOptionsCallback = callback.bind(this);
         const filters = this.buildFilters();
         xhr({
             url: Keystone.adminPath + '/api/' + this.props.refList.path + '?basic&search=' + input + '&' + filters,
@@ -149,26 +160,26 @@ export const RelationshipField = Field.create({
                 complete: data.results.length === data.count,
             });
         });
-    },
+    }
 
     valueChanged(value) {
         this.props.onChange({
             path: this.props.path,
             value: value,
         });
-    },
+    }
 
     openCreate() {
         this.setState({
             createIsOpen: true,
         });
-    },
+    }
 
     closeCreate() {
         this.setState({
             createIsOpen: false,
         });
-    },
+    }
 
     onCreate(item) {
         this.cacheItem(item);
@@ -187,13 +198,13 @@ export const RelationshipField = Field.create({
             options: Object.keys(this._itemsCache).map((k) => this._itemsCache[k]),
         });
         this.closeCreate();
-    },
+    }
 
-    renderSelect(noedit) {
+    renderSelect(noedit?) {
         return (
             <div>
                 {/* This input element fools Safari's autocorrect in certain situations that completely break react-select */}
-                <input type="text" style={{ position: 'absolute', width: 1, height: 1, zIndex: -1, opacity: 0 }} tabIndex="-1" />
+                <input type="text" style={{ position: 'absolute', width: 1, height: 1, zIndex: -1, opacity: 0 }} tabIndex={-1} />
                 <Select.Async
                     multi={this.props.many}
                     disabled={noedit}
@@ -207,7 +218,7 @@ export const RelationshipField = Field.create({
                 />
             </div>
         );
-    },
+    }
 
     renderInputGroup() {
         // TODO: find better solution
@@ -231,7 +242,7 @@ export const RelationshipField = Field.create({
                     onCancel={this.closeCreate} />
             </Group>
         );
-    },
+    }
 
     renderValue() {
         const { many } = this.props;
@@ -244,7 +255,7 @@ export const RelationshipField = Field.create({
         };
 
         return many ? this.renderSelect(true) : <FormInput {...props} />;
-    },
+    }
 
     renderField() {
         if (this.props.createInline) {
@@ -252,6 +263,5 @@ export const RelationshipField = Field.create({
         } else {
             return this.renderSelect();
         }
-    },
-
-});
+    }
+}

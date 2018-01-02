@@ -1,6 +1,5 @@
-import _ from 'lodash';
+import * as _ from 'lodash';
 import * as React from 'react';
-import * as Field from '../Field';
 import { CollapsedFieldLabel } from '../../components/CollapsedFieldLabel';
 import { NestedFormField } from '../../components/NestedFormField';
 
@@ -11,27 +10,32 @@ import {
     Grid,
     LabelledControl,
 } from 'elemental';
+import { FieldBase, FieldPropsBase } from '../Field';
+
+interface Props extends FieldPropsBase {
+    paths?: any;
+    enableMapsAPI?: boolean;
+}
 
 /**
  * TODO:
  * - Remove dependency on underscore
  * - Custom path support
  */
+export class LocationField extends FieldBase<Props> {
 
-export const LocationField = Field.create({
+    static displayName: string = 'LocationField';
+    static type: string = 'Location';
 
-    displayName: 'LocationField',
-    statics: {
-        type: 'Location',
-    },
-
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props);
+        this.state = {
             collapsedFields: {},
             improve: false,
             overwrite: false,
+            ...this.state
         };
-    },
+    }
 
     componentWillMount() {
         const { value = [] } = this.props;
@@ -40,19 +44,19 @@ export const LocationField = Field.create({
             if (!value[i]) {
                 collapsedFields[i] = true;
             }
-        }, this);
+        });
         this.setState({ collapsedFields });
-    },
+    }
 
     shouldCollapse() {
         return this.props.collapse && !this.formatValue();
-    },
+    }
 
     uncollapseFields() {
         this.setState({
             collapsedFields: {},
         });
-    },
+    }
 
     fieldChanged(fieldPath, event) {
         const { value = {}, path, onChange } = this.props;
@@ -63,11 +67,11 @@ export const LocationField = Field.create({
                 [fieldPath]: event.target.value,
             },
         });
-    },
+    }
 
     makeChanger(fieldPath) {
         return this.fieldChanged.bind(this, fieldPath);
-    },
+    }
 
     geoChanged(i, event) {
         const { value = {}, path, onChange } = this.props;
@@ -83,11 +87,11 @@ export const LocationField = Field.create({
                 geo,
             },
         });
-    },
+    }
 
     makeGeoChanger(fieldPath) {
         return this.geoChanged.bind(this, fieldPath);
-    },
+    }
 
     formatValue() {
         const { value = {} } = this.props;
@@ -101,13 +105,13 @@ export const LocationField = Field.create({
             value.postcode,
             value.country,
         ]).join(', ');
-    },
+    }
 
     renderValue() {
         return <FormInput noedit>{this.formatValue() || ''}</FormInput>;
-    },
+    }
 
-    renderField(fieldPath, label, collapse, autoFocus) {
+    renderField(fieldPath?, label?, collapse?, autoFocus?) {
         if (this.state.collapsedFields[fieldPath]) {
             return null;
         }
@@ -123,7 +127,7 @@ export const LocationField = Field.create({
                 />
             </NestedFormField>
         );
-    },
+    }
 
     renderSuburbState() {
         const { value = {}, path } = this.props;
@@ -149,7 +153,7 @@ export const LocationField = Field.create({
                 </Grid.Row>
             </NestedFormField>
         );
-    },
+    }
 
     renderPostcodeCountry() {
         const { value = {}, path } = this.props;
@@ -175,7 +179,7 @@ export const LocationField = Field.create({
                 </Grid.Row>
             </NestedFormField>
         );
-    },
+    }
 
     renderGeo() {
         if (this.state.collapsedFields.geo) {
@@ -205,17 +209,17 @@ export const LocationField = Field.create({
                 </Grid.Row>
             </NestedFormField>
         );
-    },
+    }
 
     updateGoogleOption(key, e) {
         let newState = {};
         newState[key] = e.target.checked;
         this.setState(newState);
-    },
+    }
 
     makeGoogler(key) {
         return this.updateGoogleOption.bind(this, key);
-    },
+    }
 
 
     renderGoogleOptions() {
@@ -243,7 +247,7 @@ export const LocationField = Field.create({
                 {replace}
             </FormField>
         );
-    },
+    }
 
     renderNote() {
         const { note } = this.props;
@@ -253,7 +257,7 @@ export const LocationField = Field.create({
                 <FormNote note={note} />
             </FormField>
         );
-    },
+    }
 
     renderUI() {
 
@@ -286,6 +290,5 @@ export const LocationField = Field.create({
                 {this.renderNote()}
             </div>
         );
-    },
-
-});
+    }
+}

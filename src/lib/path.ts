@@ -22,7 +22,7 @@ export class Path {
         o[this.last] = val;
         return obj;
     }
-    get(obj: object, subpath: string) {
+    get(obj: object, subpath?: string) {
         if (typeof obj !== 'object') throw new TypeError('Path.get: obj argument must be an Object');
         let i;
         if (subpath) {

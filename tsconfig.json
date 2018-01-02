@@ -21,10 +21,10 @@
         }
     },
     "include": [
-        "src/**/*.tsx"
+        "src/**/*"
     ],
     "exclude": [
-        // "src/**/*.test.ts",
+        "src/**/*.test.ts",
         "src/**/*.test.tsx",
         // "src/**/test/*.ts"
     ]

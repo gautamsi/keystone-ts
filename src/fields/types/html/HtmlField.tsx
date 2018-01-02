@@ -1,8 +1,8 @@
-import * as Field from '../Field';
-import * as React from 'react';
+import * as React from 'React';
 import * as tinymce from 'tinymce';
 import { FormInput } from 'elemental';
 import { evalDependsOn } from '../../utils/evalDependsOn';
+import { FieldBase, FieldPropsBase } from '../Field';
 
 /**
  * TODO:
@@ -24,32 +24,37 @@ function removeTinyMCEInstance(editor) {
     }
 }
 
-export const HtmlField = Field.create({
+interface Props extends FieldPropsBase {
+    wysiwyg?: any;
+    height?: any;
+}
+export class HtmlField extends FieldBase<Props> {
+    _currentValue: any;
+    editor: any;
 
-    displayName: 'HtmlField',
-    statics: {
-        type: 'Html',
-    },
+    static displayName: string = 'HtmlField';
+    static type: string = 'Html';
 
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props);
+        this.state = {
             id: getId(),
             isFocused: false,
             wysiwygActive: false,
+            ...this.state
         };
-    },
+    }
 
     initWysiwyg() {
         if (!this.props.wysiwyg) return;
 
-        let self = this;
-        let opts = this.getOptions();
+        let opts: any = this.getOptions();
 
-        opts.setup = function (editor) {
-            self.editor = editor;
-            editor.on('change', self.valueChanged);
-            editor.on('focus', self.focusChanged.bind(self, true));
-            editor.on('blur', self.focusChanged.bind(self, false));
+        opts.setup = (editor) => {
+            this.editor = editor;
+            editor.on('change', this.valueChanged);
+            editor.on('focus', this.focusChanged.bind(this, true));
+            editor.on('blur', this.focusChanged.bind(this, false));
         };
 
         this._currentValue = this.props.value;
@@ -57,12 +62,12 @@ export const HtmlField = Field.create({
         if (evalDependsOn(this.props.dependsOn, this.props.values)) {
             this.setState({ wysiwygActive: true });
         }
-    },
+    }
 
     removeWysiwyg(state) {
         removeTinyMCEInstance(tinymce.get(state.id));
         this.setState({ wysiwygActive: false });
-    },
+    }
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.isCollapsed && !this.state.isCollapsed) {
@@ -78,23 +83,23 @@ export const HtmlField = Field.create({
                 this.removeWysiwyg(prevState);
             }
         }
-    },
+    }
 
     componentDidMount() {
         this.initWysiwyg();
-    },
+    }
 
     componentWillReceiveProps(nextProps) {
         if (this.editor && this._currentValue !== nextProps.value) {
             this.editor.setContent(nextProps.value);
         }
-    },
+    }
 
     focusChanged(focused) {
         this.setState({
             isFocused: focused,
         });
-    },
+    }
 
     valueChanged(event) {
         let content;
@@ -109,7 +114,7 @@ export const HtmlField = Field.create({
             path: this.props.path,
             value: content,
         });
-    },
+    }
 
     getOptions() {
         let plugins = ['code', 'link'];
@@ -184,7 +189,7 @@ export const HtmlField = Field.create({
         }
 
         return opts;
-    },
+    }
 
     renderField() {
         let className = this.state.isFocused ? 'is-focused' : '';
@@ -204,7 +209,7 @@ export const HtmlField = Field.create({
                 />
             </div>
         );
-    },
+    }
 
     renderValue() {
         return (
@@ -212,6 +217,5 @@ export const HtmlField = Field.create({
                 {this.props.value}
             </FormInput>
         );
-    },
-
-});
+    }
+}

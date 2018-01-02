@@ -19,46 +19,46 @@ const PRESENCE_OPTIONS = [
     { label: 'No element', value: 'none' },
 ];
 
-function getDefaultValue() {
-    return {
-        mode: MODE_OPTIONS[0].value,
-        presence: PRESENCE_OPTIONS[0].value,
-        value: '',
+interface Props {
+    filter?: {
+        mode?: any; // ref: React.PropTypes.oneOf(MODE_OPTIONS.map(i => i.value)),
+        presence?: any; // ref: React.PropTypes.oneOf(PRESENCE_OPTIONS.map(i => i.value)),
+        value?: string;
     };
+    onChange?: any;
 }
 
-export const TextArrayFilter = React.createClass({
-    propTypes: {
-        filter: React.PropTypes.shape({
-            mode: React.PropTypes.oneOf(MODE_OPTIONS.map(i => i.value)),
-            presence: React.PropTypes.oneOf(PRESENCE_OPTIONS.map(i => i.value)),
-            value: React.PropTypes.string,
-        }),
-    },
-    statics: {
-        getDefaultValue: getDefaultValue,
-    },
-    getDefaultProps() {
+export class TextArrayFilter extends React.Component<Props> {
+
+    static getDefaultValue() {
         return {
-            filter: getDefaultValue(),
+            mode: MODE_OPTIONS[0].value,
+            presence: PRESENCE_OPTIONS[0].value,
+            value: '',
         };
-    },
+    }
+
+    static defaultProps() {
+        return {
+            filter: this.getDefaultValue(),
+        };
+    }
     updateFilter(value) {
         this.props.onChange({ ...this.props.filter, ...value });
-    },
+    }
     selectMode(e) {
         const mode = e.target.value;
         this.updateFilter({ mode });
-        findDOMNode(this.refs.focusTarget).focus();
-    },
+        findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
+    }
     selectPresence(e) {
         const presence = e.target.value;
         this.updateFilter({ presence });
-        findDOMNode(this.refs.focusTarget).focus();
-    },
+        findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
+    }
     updateValue(e) {
         this.updateFilter({ value: e.target.value });
-    },
+    }
     render() {
         const { filter } = this.props;
         const mode = MODE_OPTIONS.filter(i => i.value === filter.mode)[0];
@@ -91,5 +91,5 @@ export const TextArrayFilter = React.createClass({
                 />
             </div>
         );
-    },
-});
+    }
+}

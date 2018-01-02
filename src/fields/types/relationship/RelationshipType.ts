@@ -37,7 +37,7 @@ export class RelationshipType extends FieldTypeBase {
         this._underscoreMethods = ['format', 'getExpandedData'];
         this._properties = ['isValid', 'many', 'filters', 'createInline'];
     }
-    static properName = 'RelationshipType';
+    static properName = 'Relationship';
 
     /**
      * Get client-side properties to pass to react field.

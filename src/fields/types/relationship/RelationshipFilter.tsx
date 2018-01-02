@@ -17,53 +17,58 @@ const INVERTED_OPTIONS = [
     { label: 'NOT Linked To', value: true },
 ];
 
-function getDefaultValue() {
-    return {
-        inverted: INVERTED_OPTIONS[0].value,
-        value: [],
+interface Props {
+    field?: any;
+    filter?: {
+        inverted?: boolean,
+        value?: Array<any>,
     };
+    onHeightChange?: any;
+    onChange?: any;
 }
 
-export const RelationshipFilter = React.createClass({
-    propTypes: {
-        field: React.PropTypes.object,
-        filter: React.PropTypes.shape({
-            inverted: React.PropTypes.bool,
-            value: React.PropTypes.array,
-        }),
-        onHeightChange: React.PropTypes.func,
-    },
-    statics: {
-        getDefaultValue: getDefaultValue,
-    },
-    getDefaultProps() {
+export class RelationshipFilter extends React.Component<Props, any> {
+    refs: {
+        [key: string]: (Element)
+        container: (HTMLElement) // !important
+    };
+    _itemsCache: {};
+    static getDefaultValue() {
         return {
-            filter: getDefaultValue(),
+            inverted: INVERTED_OPTIONS[0].value,
+            value: [],
         };
-    },
-    getInitialState() {
+    }
+
+    static defaultProps() {
         return {
+            filter: this.getDefaultValue(),
+        };
+    }
+    constructor(props) {
+        super(props);
+        this.state = {
             searchIsLoading: false,
             searchResults: [],
             searchString: '',
             selectedItems: [],
             valueIsLoading: true,
         };
-    },
+    }
     componentDidMount() {
         this._itemsCache = {};
         this.loadSearchResults(true);
-    },
+    }
     componentWillReceiveProps(nextProps: any) {
         if (nextProps.filter.value !== this.props.filter.value) {
             this.populateValue(nextProps.filter.value);
         }
-    },
+    }
     isLoading() {
         return this.state.searchIsLoading || this.state.valueIsLoading;
-    },
+    }
     populateValue(value) {
-        async.map(value, (id, next) => {
+        async.map(value, (id: string | number, next) => {
             if (this._itemsCache[id]) return next(null, this._itemsCache[id]);
             xhr({
                 url: Keystone.adminPath + '/api/' + this.props.field.refList.path + '/' + id + '?basic',
@@ -82,19 +87,19 @@ export const RelationshipFilter = React.createClass({
                 valueIsLoading: false,
                 selectedItems: items || [],
             }, () => {
-                findDOMNode(this.refs.focusTarget).focus();
+                findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
             });
         });
-    },
+    }
     cacheItem(item) {
         this._itemsCache[item.id] = item;
-    },
+    }
     buildFilters() {
         let filters = {};
-        _.forEach(this.props.field.filters, function (value, key) {
+        _.forEach(this.props.field.filters, (value, key) => {
             if (value[0] === ':') return;
             filters[key] = value;
-        }, this);
+        });
 
         let parts = [];
         _.forEach(filters, function (val, key) {
@@ -102,7 +107,7 @@ export const RelationshipFilter = React.createClass({
         });
 
         return parts.join('&');
-    },
+    }
     loadSearchResults(thenPopulateValue) {
         const searchString = this.state.searchString;
         const filters = this.buildFilters();
@@ -128,30 +133,30 @@ export const RelationshipFilter = React.createClass({
                 searchResults: data.results,
             }, this.updateHeight);
         });
-    },
+    }
     updateHeight() {
         if (this.props.onHeightChange) {
             this.props.onHeightChange(this.refs.container.offsetHeight);
         }
-    },
+    }
     toggleInverted(inverted) {
         this.updateFilter({ inverted });
-    },
+    }
     updateSearch(e) {
-        this.setState({ searchString: e.target.value }, this.loadSearchResults);
-    },
+        this.setState({ searchString: e.target.value }, this.loadSearchResults as any);
+    }
     selectItem(item) {
         const value = this.props.filter.value.concat(item.id);
         this.updateFilter({ value });
-    },
+    }
     removeItem(item) {
         const value = this.props.filter.value.filter(i => { return i !== item.id; });
         this.updateFilter({ value });
-    },
+    }
     updateFilter(value) {
         this.props.onChange({ ...this.props.filter, ...value });
-    },
-    renderItems(items, selected) {
+    }
+    renderItems(items, selected?) {
         const itemIconHover = selected ? 'x' : 'check';
 
         return items.map((item, i) => {
@@ -168,7 +173,7 @@ export const RelationshipFilter = React.createClass({
                 />
             );
         });
-    },
+    }
     render() {
         const selectedItems = this.state.selectedItems;
         const searchResults = this.state.searchResults.filter(i => {
@@ -197,5 +202,5 @@ export const RelationshipFilter = React.createClass({
                 ) : null}
             </div>
         );
-    },
-});
+    }
+}

@@ -1,6 +1,6 @@
-import * as Field from '../Field';
 import * as React from 'react';
 import { FormInput } from 'elemental';
+import { FieldBase, FieldPropsBase } from '../Field';
 
 /**
  * TODO:
@@ -118,31 +118,37 @@ let escapeHtmlForRender = function (html) {
         .replace(/\n/g, '<br />');
 };
 
-export const MarkdownField = Field.create({
-    displayName: 'MarkdownField',
-    statics: {
-        type: 'Markdown',
-        getDefaultValue: () => ({}),
-    },
+interface Props extends FieldPropsBase {
+    paths?: any;
+    wysiwyg?: any;
+    height?: any;
+}
+
+export class MarkdownField extends FieldBase<Props> {
+    static displayName: string = 'MarkdownField';
+    static type: string = 'Markdown';
+    static getDefaultValue() {
+        return {};
+    }
 
     // override `shouldCollapse` to check the markdown field correctly
     shouldCollapse() {
         return this.props.collapse && !this.props.value.md;
-    },
+    }
 
     // only have access to `refs` once component is mounted
     componentDidMount() {
         if (this.props.wysiwyg) {
             renderMarkdown(this);
         }
-    },
+    }
 
     // only have access to `refs` once component is mounted
     componentDidUpdate() {
         if (this.props.wysiwyg) {
             renderMarkdown(this);
         }
-    },
+    }
 
     renderField() {
         const styles = {
@@ -165,7 +171,7 @@ export const MarkdownField = Field.create({
                 style={styles}
             />
         );
-    },
+    }
 
     renderValue() {
         // We want to render the raw markdown string, without parsing it to html
@@ -181,5 +187,5 @@ export const MarkdownField = Field.create({
                 noedit
             />
         );
-    },
-});
+    }
+}

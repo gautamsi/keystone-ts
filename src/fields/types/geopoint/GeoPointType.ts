@@ -16,7 +16,7 @@ export class GeoPointType extends FieldTypeBase {
         super(list, path, options);
         this._fixedSize = 'medium';
     }
-    static properName = 'GeoPointType';
+    static properName = 'GeoPoint';
 
     /**
      * Registers the field on the List's Mongoose Schema.

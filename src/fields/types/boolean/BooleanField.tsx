@@ -1,29 +1,28 @@
 import * as React from 'react';
-import * as Field from '../Field';
+import { FieldBase, FieldPropsBase } from '../Field';
 import { Checkbox } from '../../components/Checkbox';
 import { FormField } from 'elemental';
 
 const NOOP = () => { };
 
-export const BooleanField = Field.create({
-    displayName: 'BooleanField',
-    statics: {
-        type: 'Boolean',
-    },
-    propTypes: {
-        indent: React.PropTypes.bool,
-        label: React.PropTypes.string,
-        onChange: React.PropTypes.func.isRequired,
-        path: React.PropTypes.string.isRequired,
-        value: React.PropTypes.bool,
-    },
+interface Props extends FieldPropsBase {
+    indent?: boolean;
+    label?: string;
+    onChange: any;
+    path: string;
+    value?: boolean;
+}
+
+export class BooleanField extends FieldBase<Props> {
+    static displayName: string = 'BooleanField';
+    static type: string = 'Boolean';
 
     valueChanged(value) {
         this.props.onChange({
             path: this.props.path,
             value: value,
         });
-    },
+    }
     renderFormInput() {
         if (!this.shouldRenderField()) return;
 
@@ -31,10 +30,10 @@ export const BooleanField = Field.create({
             <input
                 name={this.getInputName(this.props.path)}
                 type="hidden"
-                value={!!this.props.value}
+                value={`${!!this.props.value}`}
             />
         );
-    },
+    }
     renderUI() {
         const { indent, value, label, path } = this.props;
 
@@ -56,5 +55,5 @@ export const BooleanField = Field.create({
                 </FormField>
             </div>
         );
-    },
-});
+    }
+}
