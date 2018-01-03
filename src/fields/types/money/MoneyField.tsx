@@ -1,6 +1,6 @@
 import { FormInput } from 'elemental';
 import * as React from 'react';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 interface Props extends FieldPropsBase {
     onChange: any;

@@ -9,7 +9,7 @@ const parseFormats = ['YYYY-MM-DD', 'YYYY-MM-DD h:m:s a', 'YYYY-MM-DD h:m a', 'Y
  * @extends Field
  * @api public
  */
-export class DateTimeType extends DateType {
+export class DatetimeType extends DateType {
     paths: { date: string; time: string; tzOffset: string; };
 
 

@@ -3,7 +3,7 @@ import {
     FormInput,
     Grid,
 } from 'elemental';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 export class GeoPointField extends FieldBase<FieldPropsBase> {
 

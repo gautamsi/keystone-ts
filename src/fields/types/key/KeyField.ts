@@ -1,4 +1,4 @@
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 export class KeyField extends FieldBase<FieldPropsBase> {
     static displayName: string = 'KeyField';

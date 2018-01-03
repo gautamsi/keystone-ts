@@ -4,7 +4,10 @@ import * as scmp from 'scmp';
 import * as utils from 'keystone-utils';
 import * as _ from 'lodash';
 
-const keystone = Keystone.instance;
+let keystone: Keystone = undefined;
+
+export function setKeystone(_keystone: Keystone) { keystone = _keystone; }
+
 /**
  * Creates a hash of str with Keystone's cookie secret.
  * Only hashes the first half of the string.

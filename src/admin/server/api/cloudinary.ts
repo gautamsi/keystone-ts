@@ -7,7 +7,7 @@ export function upload(req, res) {
     const keystone = req.keystone;
 
     if (req.files && req.files.file) {
-        const options = {};
+        const options: any = {};
 
         if (keystone.get('wysiwyg cloudinary images filenameAsPublicID')) {
             options.public_id = req.files.file.originalname.substring(0, req.files.file.originalname.lastIndexOf('.'));

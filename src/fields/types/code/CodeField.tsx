@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 import * as CodeMirror from 'codemirror';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import { FormInput } from 'elemental';

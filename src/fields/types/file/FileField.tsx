@@ -13,7 +13,7 @@ import {
 } from 'elemental';
 import { FileChangeMessage } from '../../components/FileChangeMessage';
 import { HiddenFileInput } from '../../components/HiddenFileInput';
-import { FieldPropsBase, FieldBase } from '../Field';
+import { FieldPropsBase, FieldBase } from '../FieldBase';
 
 let uploadInc = 1000;
 

@@ -1,4 +1,4 @@
-import { ArrayFieldBase, ArrayFieldPropsBase } from '../ArrayField';
+import { ArrayFieldBase, ArrayFieldPropsBase } from '../ArrayFieldBase';
 
 export class NumberArrayField extends ArrayFieldBase<ArrayFieldPropsBase> {
 

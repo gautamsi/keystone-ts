@@ -2,7 +2,7 @@ import * as React from 'React';
 import * as tinymce from 'tinymce';
 import { FormInput } from 'elemental';
 import { evalDependsOn } from '../../utils/evalDependsOn';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 /**
  * TODO:

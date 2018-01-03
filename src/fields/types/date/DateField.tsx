@@ -1,5 +1,5 @@
 import { DateInput } from '../../components/DateInput';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 import * as moment from 'moment';
 import * as React from 'react';
 import {

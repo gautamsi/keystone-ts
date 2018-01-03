@@ -1,5 +1,3 @@
-declare var require;
-declare var process;
 
 declare var before;
 declare var it;

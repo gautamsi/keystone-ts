@@ -20,6 +20,7 @@ import { applyUpdates } from './lib/updates';
 import { api } from './lib/middleware/api';
 import { cors } from './lib/middleware/cors';
 
+
 /**
  * Don't use process.cwd() as it breaks module encapsulation
  * Instead, let's use module.parent if it's present, or the module itself if there is no parent (probably testing keystone directly if that's the case)
@@ -40,7 +41,7 @@ export class Keystone {
 
 
     lists: any = {};
-    fieldTypes: any = {};
+    // fieldTypes: any = {};
     _options: any = {};
     paths: any = {};
     _redirects: any = {};
@@ -117,9 +118,9 @@ export class Keystone {
             cors: cors(this),
         };
 
-        Keystone.Field.Types = require('./lib/fieldTypes');
     }
 
+    // Keystone.Field.Types = require('./lib/fieldTypes');
 
 
     prefixModel(key) {
@@ -202,7 +203,7 @@ export class Keystone {
     applyUpdates(callback) {
         this.callHook('pre:updates', (err) => {
             if (err) return callback(err);
-            applyUpdates.apply((err) => {
+            applyUpdates.apply(this, (err) => {
                 if (err) return callback(err);
                 this.callHook('post:updates', callback);
             });
@@ -236,14 +237,14 @@ export class Keystone {
 */
 
     // Expose modules and Classes
-    static Admin = {
-        Server: require('./admin/server'),
+    static Admin: { Server: { createDynamicRouter: Function, createStaticRouter?: Function } } = {
+        Server: undefined
     };
-    static Email = Email;
+    static Email: (options) => any;
     static Field = require('./fields/types/Type');
 
     static Keystone = Keystone;
-    static List = List.init(Keystone.instance);
+    static List: typeof List;
     static Storage = Storage;
     static View = View;
 
@@ -261,7 +262,7 @@ export class Keystone {
 
 
     // Expose Modules
-    static session = Session;
+    static session;
 
     //#endregion
 }

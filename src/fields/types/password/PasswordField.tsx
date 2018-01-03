@@ -5,7 +5,7 @@ import {
     InlineGroup as Group,
     InlineGroupSection as Section,
 } from 'elemental';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 interface Props extends FieldPropsBase {
     paths?: any;

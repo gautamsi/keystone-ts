@@ -10,7 +10,7 @@ import {
     InlineGroupSection as Section,
 } from 'elemental';
 import * as _ from 'lodash';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 function compareValues(current, next) {
     const currentLength = current ? current.length : 0;

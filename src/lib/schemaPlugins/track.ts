@@ -1,7 +1,7 @@
 import * as  _ from 'lodash';
 import { Keystone } from '../../keystone';
-const keystone = Keystone.instance;
-import { fields as Types } from '../fieldTypes';
+// const keystone = Keystone.instance;
+import { FieldTypes } from '../../fields/types';
 
 /**
  * List track option
@@ -89,7 +89,7 @@ export function track() {
 
                     case 'createdBy':
                     case 'updatedBy':
-                        fields[fieldName] = { type: Types.Relationship, ref: userModel, noedit: true, collapse: true, index: true };
+                        fields[fieldName] = { type: FieldTypes.Relationship, ref: userModel, noedit: true, collapse: true, index: true };
                         break;
                 }
             }

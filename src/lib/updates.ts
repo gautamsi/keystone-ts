@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
 import * as async from 'async';
 import * as fs from 'fs';
-import { Keystone } from '../keystone';
-const keystone = Keystone.instance;
+import { keystone, Keystone } from '../keystone';
+// const keystone = Keystone.instance;
 const mongoose = keystone.mongoose;
 import * as path from 'path';
 import * as semver from 'semver';
@@ -20,7 +20,7 @@ const UpdateModel = new mongoose.Schema({
 mongoose.model('App_Update', UpdateModel);
 
 // Apply method - loads the available updates and applies any that haven't been, in order
-export function applyUpdates(callback) {
+export function applyUpdates(keystone: Keystone, callback) {
 
     const Update = mongoose.model('App_Update');
     let updateCount = 0;

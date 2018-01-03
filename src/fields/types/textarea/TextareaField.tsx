@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormInput } from 'elemental';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 interface Props extends FieldPropsBase {
     height?: any;

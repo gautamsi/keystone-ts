@@ -1,10 +1,10 @@
-import * as Field from '../Field';
+import * as Field from '../FieldBase';
 import * as React from 'react';
 import {
     FormInput,
     Grid,
 } from 'elemental';
-import { FieldPropsBase, FieldBase } from '../Field';
+import { FieldPropsBase, FieldBase } from '../FieldBase';
 
 // tslint:disable-next-line:class-name
 interface NameShape {

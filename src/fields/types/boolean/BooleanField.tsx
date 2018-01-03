@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 import { Checkbox } from '../../components/Checkbox';
 import { FormField } from 'elemental';
 

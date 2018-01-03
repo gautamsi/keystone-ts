@@ -1,8 +1,8 @@
-const _ = require('lodash');
-const assign = require('object-assign');
-const keystone = require('../../');
-const utils = keystone.utils;
-const Type = require('./type');
+import * as _ from 'lodash';
+import * as assign from 'object-assign';
+import { Keystone } from '../../keystone';
+import * as utils from 'keystone-utils';
+import { Type } from './type';
 
 /**
  * Page Class

@@ -9,7 +9,7 @@ import {
     InlineGroup as Group,
     InlineGroupSection as Section,
 } from 'elemental';
-import { FieldPropsBase, FieldBase } from '../Field';
+import { FieldPropsBase, FieldBase } from '../FieldBase';
 
 interface Props extends FieldPropsBase {
     formatString?: string;

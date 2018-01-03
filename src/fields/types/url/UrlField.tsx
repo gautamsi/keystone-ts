@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { GlyphButton, FormInput } from 'elemental';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 export class UrlField extends FieldBase<FieldPropsBase> {
     static displayName: string = 'URLField';

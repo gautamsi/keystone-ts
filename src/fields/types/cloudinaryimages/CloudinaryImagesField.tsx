@@ -8,7 +8,7 @@ to props.onChange correctly as the user interacts with it)
 import * as _ from 'lodash';
 import * as async from 'async';
 import * as React from 'react';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 import { Button, FormField, FormNote } from 'elemental';
 import Lightbox from 'react-images';
 import { cloudinaryResize } from '../../../admin/client/utils/cloudinaryResize';

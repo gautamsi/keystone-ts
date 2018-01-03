@@ -5,7 +5,7 @@ work out whether we're going to support deleting through the UI.
 */
 
 import * as React from 'react';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 import { cloudinaryResize } from '../../../admin/client/utils/cloudinaryResize';
 import { Button, FormField, FormInput, FormNote } from 'elemental';
 

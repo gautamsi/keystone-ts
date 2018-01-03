@@ -1,5 +1,5 @@
-const keystone = require('../../');
-
+import { Keystone } from '../../keystone';
+const keystone = Keystone.instance;
 const historyModelSuffix = '_revisions';
 
 function getHistoryModelName(list) {

@@ -4,10 +4,10 @@
 import { Request, Response } from 'express';
 
 
-const _ = require('lodash');
-const async = require('async');
-const keystone = require('../');
-const utils = require('keystone-utils');
+import * as _ from 'lodash';
+import * as async from 'async';
+import { Keystone } from '../keystone';
+import * as utils from 'keystone-utils';
 
 /**
  * View Constructor

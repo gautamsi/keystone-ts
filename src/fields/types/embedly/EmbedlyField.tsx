@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormField, FormInput } from 'elemental';
 import { ImageThumbnail } from '../../components/ImageThumbnail';
 import { NestedFormField } from '../../components/NestedFormField';
-import { FieldPropsBase, FieldBase } from '../Field';
+import { FieldPropsBase, FieldBase } from '../FieldBase';
 
 
 export class EmbedlyField extends FieldBase<FieldPropsBase> {

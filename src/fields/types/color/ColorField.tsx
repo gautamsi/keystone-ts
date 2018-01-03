@@ -1,6 +1,6 @@
 import { SketchPicker } from 'react-color';
 import { css } from 'glamor';
-import { FieldBase, FieldPropsBase } from '../Field';
+import { FieldBase, FieldPropsBase } from '../FieldBase';
 import * as React from 'react';
 import {
     Button,

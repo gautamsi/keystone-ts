@@ -7,7 +7,7 @@ import { findDOMNode } from 'react-dom';
 // let FormField = require('elemental').FormField;
 // let FormInput = require('elemental').FormInput;
 import { Button, FormField, FormInput } from 'elemental';
-import { FieldBase, FieldPropsBase } from './Field';
+import { FieldBase, FieldPropsBase } from './FieldBase';
 
 export interface ArrayFieldPropsBase extends FieldPropsBase {
     value?: any[];
