@@ -12,7 +12,6 @@ export class TextareaType extends TextType {
 
     constructor(list, path, options) {
         super(list, path, options);
-        this._nativeType = String;
         this._underscoreMethods = ['format', 'crop'];
         this.height = options.height || 90;
         this.multiline = true;

@@ -1,26 +1,28 @@
 import * as _ from 'lodash';
 import * as async from 'async';
 import * as fs from 'fs';
-import { keystone, Keystone } from '../keystone';
+import { Keystone } from '../keystone';
 // const keystone = Keystone.instance;
-const mongoose = keystone.mongoose;
+// const mongoose = keystone.mongoose;
+import * as mongoose from 'mongoose';
 import * as path from 'path';
 import * as semver from 'semver';
 import * as utils from 'keystone-utils';
 
 const _dashes_ = '------------------------------------------------';
 
-// Update Schema - automatically created and managed by Keystone when updates are used
-const UpdateModel = new mongoose.Schema({
-    key: { type: String, index: true },
-    appliedOn: { type: Date, default: Date.now },
-}, {
-        collection: keystone.prefixModel('App_Update'),
-    });
-mongoose.model('App_Update', UpdateModel);
+
 
 // Apply method - loads the available updates and applies any that haven't been, in order
 export function applyUpdates(keystone: Keystone, callback) {
+    // Update Schema - automatically created and managed by Keystone when updates are used
+    const UpdateModel = new mongoose.Schema({
+        key: { type: String, index: true },
+        appliedOn: { type: Date, default: Date.now },
+    }, {
+            collection: keystone.prefixModel('App_Update'),
+        });
+    mongoose.model('App_Update', UpdateModel);
 
     const Update = mongoose.model('App_Update');
     let updateCount = 0;

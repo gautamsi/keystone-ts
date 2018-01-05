@@ -11,8 +11,8 @@ export class NumberType extends FieldTypeBase {
     formatString: string;
 
     constructor(list, path, options) {
-        super(list, path, options);
-        this._nativeType = Number;
+        super(list, path, options, Number);
+        // this._nativeType = Number;
         this._fixedSize = 'small';
         this._underscoreMethods = ['format'];
         this.formatString = (options.format === false) ? false : (options.format || '0,0[.][000000000000]');

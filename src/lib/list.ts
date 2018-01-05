@@ -35,7 +35,7 @@ export class List {
     underscoreMethods: {};
     uiElements: any[];
     schemaFields: any[];
-    schema: any;
+    schema: Schema;
     path: any;
     key: any;
     options: any;
@@ -124,7 +124,7 @@ export class List {
 
 
     constructor(key, options) {
-        if (!(this instanceof List)) return new List(key, options);
+        // if (!(this instanceof List)) return new List(key, options);
 
         let defaultOptions = {
             schema: {
@@ -725,13 +725,13 @@ export class List {
         if (!(options.type.prototype instanceof FieldTypeBase)) {
             // Convert native field types to their default Keystone counterpart
             if (options.type === String) {
-                options.type = FieldTypes.TextType;
+                options.type = FieldTypes.Text;
             } else if (options.type === Number) {
-                options.type = FieldTypes.NumberType;
+                options.type = FieldTypes.Number;
             } else if (options.type === Boolean) {
-                options.type = FieldTypes.BooleanType;
+                options.type = FieldTypes.Boolean;
             } else if (options.type === Date) {
-                options.type = FieldTypes.DatetimeType;
+                options.type = FieldTypes.Datetime;
             } else {
                 throw new Error('Unrecognised field constructor: ' + options.type);
             }

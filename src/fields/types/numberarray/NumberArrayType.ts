@@ -20,8 +20,8 @@ export class NumberArrayType extends FieldTypeBase {
     _formatString: string;
 
     constructor(list, path, options) {
-        super(list, path, options);
-        this._nativeType = [Number];
+        super(list, path, options, [Number]);
+        // this._nativeType = [Number];
         this._underscoreMethods = ['format'];
         this._formatString = (options.format === false) ? false : (options.format || '0,0[.][000000000000]');
         this._defaultSize = 'small';

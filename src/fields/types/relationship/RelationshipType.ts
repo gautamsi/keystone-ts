@@ -28,12 +28,12 @@ export class RelationshipType extends FieldTypeBase {
     }
 
     constructor(list, path, options) {
-        super(list, path, options);
+        super(list, path, options, keystone.mongoose.Schema.Types.ObjectId);
         this.many = (options.many) ? true : false;
         this.filters = options.filters;
         this.createInline = (options.createInline) ? true : false;
         this._defaultSize = 'full';
-        this._nativeType = keystone.mongoose.Schema.Types.ObjectId;
+        // this._nativeType = keystone.mongoose.Schema.Types.ObjectId;
         this._underscoreMethods = ['format', 'getExpandedData'];
         this._properties = ['isValid', 'many', 'filters', 'createInline'];
     }

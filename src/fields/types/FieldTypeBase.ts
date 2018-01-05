@@ -43,7 +43,7 @@ const DEFAULT_OPTION_KEYS = [
  */
 export abstract class FieldTypeBase {
     _underscoreMethods: any[];
-    _nativeType: any;
+    protected _nativeType: any;
     _fixedSize: any;
     _defaultSize: string;
     __size: any;
@@ -102,12 +102,14 @@ export abstract class FieldTypeBase {
         return this.options.dependsOn || false;
     }
 
-    constructor(list: List, path: string, options) {
-
+    constructor(list: List, path: string, options, nativeType) {
+        console.log(this);
+        console.log(this['prototype']);
         // Set field properties and options
         this.list = list;
         this._path = new Path(path);
         this.path = path;
+        this._nativeType = nativeType;
 
         this.type = this.constructor.name;
         this.options = _.defaults({}, options, this.defaults);
@@ -300,17 +302,16 @@ export abstract class FieldTypeBase {
      * Always includes the `update` method
      */
     bindUnderscoreMethods() {
-        const field = this;
-        (this._underscoreMethods || []).concat({ fn: 'updateItem', as: 'update' }).forEach(function (method) {
+        (this._underscoreMethods || []).concat({ fn: 'updateItem', as: 'update' }).forEach((method) => {
             if (typeof method === 'string') {
                 method = { fn: method, as: method };
             }
-            if (typeof field[method.fn] !== 'function') {
-                throw new Error('Invalid underscore method (' + method.fn + ') applied to ' + field.list.key + '.' + field.path + ' (' + field.type + ')');
+            if (typeof this[method.fn] !== 'function') {
+                throw new Error('Invalid underscore method (' + method.fn + ') applied to ' + this.list.key + '.' + this.path + ' (' + this.type + ')');
             }
-            field.underscoreMethod(method.as, function () {
+            this.underscoreMethod(method.as, () => {
                 const args = [this].concat(Array.prototype.slice.call(arguments));
-                return field[method.fn].apply(field, args);
+                return this[method.fn].apply(this, args);
             });
         });
     }
@@ -320,7 +321,7 @@ export abstract class FieldTypeBase {
      * with a path prefix to match this field's path and bound to the document
      */
     underscoreMethod(path, fn) {
-        this.list.underscoreMethod(this.path + '.' + path, function () {
+        this.list.underscoreMethod(this.path + '.' + path, () => {
             return fn.apply(this, arguments);
         });
     }

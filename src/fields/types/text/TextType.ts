@@ -9,11 +9,8 @@ import * as utils from 'keystone-utils';
  */
 export class TextType extends FieldTypeBase {
 
-
     constructor(list, path, options) {
-        super(list, path, options);
-        this.options = options;
-        this._nativeType = String;
+        super(list, path, options, String);
         this._properties = ['monospace'];
         this._underscoreMethods = ['crop'];
     }
