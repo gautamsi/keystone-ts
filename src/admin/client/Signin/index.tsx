@@ -5,7 +5,7 @@
  * lots of data into the other screens (like the lists that exist) that we don't
  * want to have injected here, so this is a completely separate route and template.
  */
-import qs from 'qs';
+import * as qs from 'qs';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { SigninView as Signin } from './Signin';

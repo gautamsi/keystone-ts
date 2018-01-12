@@ -26,7 +26,7 @@ export const ExplorerCol: React.SFC<Props> = (props, context) => {
 // ExplorerCol.contextTypes = {
 //     isCollapsed: boolean,
 // };
-interface Props {
+export interface Props {
     className?: string;
     gutter?: number;
     style?: string;

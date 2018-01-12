@@ -6,13 +6,12 @@
  */
 
 import * as React from 'react';
-import { Center, Container, Spinner } from 'elemental';
+import { Alert, Container, Center, Spinner } from '../../elemental';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import { listsByKey } from '../../../utils/lists';
 import { CreateForm } from '../../shared/CreateForm';
-import { Alert } from 'elemental';
 import { EditForm } from './components/EditForm';
 import { EditFormHeader } from './components/EditFormHeader';
 import { RelatedItemsList } from './components/RelatedItemsList/RelatedItemsList';
@@ -27,7 +26,7 @@ import {
     selectList,
 } from '../List/actions';
 
-interface Props {
+export interface Props {
     dispatch: any;
     currentList: any;
     params: any;
@@ -76,20 +75,20 @@ class ItemView extends React.Component<Props, any> {
     }
 
     // Called when a new item is created
-    onCreate(item) {
+    onCreate = (item) => {
         // Hide the create form
         this.toggleCreateModal(false);
         // Redirect to newly created item path
         const list = this.props.currentList;
         this.context.router.push(`${Keystone.adminPath}/${list.path}/${item.id}`);
-    }
+    };
 
     // Open and close the create new item modal
-    toggleCreateModal(visible) {
+    toggleCreateModal = (visible) => {
         this.setState({
             createIsOpen: visible,
         });
-    }
+    };
 
     // Render this items relationships
     renderRelationships() {

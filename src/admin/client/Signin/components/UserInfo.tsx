@@ -27,7 +27,7 @@ export const UserInfo: React.SFC<Props> = ({
     );
 };
 
-interface Props {
+export interface Props {
     adminPath: string;
     signoutPath: string;
     userCanAccessKeystone?: boolean;

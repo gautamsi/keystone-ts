@@ -4,7 +4,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { TableRow } from './ItemsTableRow';
 import { DropZone } from './ItemsTableDragDropZone';
 
-interface Props {
+export interface Props {
     columns?: Array<any>;
     id?: any;
     index?: number;

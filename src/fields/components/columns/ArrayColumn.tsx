@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ItemsTableCell } from '../ItemsTableCell';
 import { ItemsTableValue } from '../ItemsTableValue';
 
-interface Props {
+export interface Props {
     col?: any;
     data?: any;
 }

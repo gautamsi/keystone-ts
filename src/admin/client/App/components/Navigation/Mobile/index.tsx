@@ -9,7 +9,7 @@ import { MobileSectionItem } from './SectionItem';
 
 const ESCAPE_KEY_CODE = 27;
 
-interface Props {
+export interface Props {
     brand: string;
     currentListKey: string;
     currentSectionKey: string;
@@ -20,8 +20,9 @@ interface Props {
 export class MobileNavigation extends React.Component<Props, any> {
     static displayName: string = 'MobileNavigation';
 
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props);
+        this.state = {
             barIsVisible: false,
         };
     }
@@ -34,15 +35,17 @@ export class MobileNavigation extends React.Component<Props, any> {
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleResize);
     }
-    handleResize() {
+    handleResize = () => {
         this.setState({
             barIsVisible: window.innerWidth < 768,
         });
-    }
+    };
+
     // Toggle the menu
-    toggleMenu() {
+    toggleMenu = () => {
         this[this.state.menuIsVisible ? 'hideMenu' : 'showMenu']();
-    }
+    };
+
     // Show the menu
     showMenu() {
         this.setState({
@@ -99,7 +102,7 @@ export class MobileNavigation extends React.Component<Props, any> {
         return <div className="MobileNavigation__blockout" onClick={this.toggleMenu} />;
     }
     // Render the sidebar menu
-    renderMenu() {
+    renderMenu = () => {
         if (!this.state.menuIsVisible) return null;
 
         return (

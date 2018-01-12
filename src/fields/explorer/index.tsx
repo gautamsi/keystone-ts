@@ -43,7 +43,7 @@ function generateNavSections(arr) {
 
 const navSections = generateNavSections(Object.keys(Types).map(i => Types[i]));
 
-interface Props {
+export interface Props {
     params?: any;
     children?; any;
 }

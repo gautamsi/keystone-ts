@@ -45,7 +45,7 @@ export const ConfirmationDialog: React.SFC<Props> = ({
     );
 };
 
-interface Props {
+export interface Props {
     body?: string;
     cancelLabel?: string;
     confirmationLabel?: string;

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import assign from 'object-assign';
 
 import { Popout } from '../../../shared/Popout';
 import { PopoutList } from '../../../shared/Popout/PopoutList';
@@ -32,7 +31,7 @@ export class ListColumnsForm extends React.Component<{ activeColumns?: any, disp
         });
     }
     toggleColumn(path, value) {
-        const newColumns = assign({}, this.state.selectedColumns);
+        const newColumns = Object.assign({}, this.state.selectedColumns);
 
         if (value) {
             newColumns[path] = value;
@@ -44,13 +43,13 @@ export class ListColumnsForm extends React.Component<{ activeColumns?: any, disp
             selectedColumns: newColumns,
         });
     }
-    applyColumns() {
+    applyColumns = () => {
         this.props.dispatch(setActiveColumns(Object.keys(this.state.selectedColumns)));
         this.togglePopout(false);
-    }
-    updateSearch(e) {
+    };
+    updateSearch = (e) => {
         this.setState({ searchString: e.target.value });
-    }
+    };
     renderColumns() {
         const availableColumns = this.props.availableColumns;
         const { searchString } = this.state;

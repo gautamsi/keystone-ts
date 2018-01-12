@@ -1,19 +1,19 @@
 import * as React from 'react';
 import * as moment from 'moment';
-import * as assign from 'object-assign';
 import {
     Form,
     FormField,
     FormInput,
     Grid,
     ResponsiveText,
+    Button,
+    LoadingButton
 } from 'elemental';
 
 import { Fields } from 'FieldTypes';
 import { fade } from '../../../../utils/color';
 import { theme } from '../../../../theme';
 
-import { Button, LoadingButton } from 'elemental';
 import { AlertMessages } from '../../../shared/AlertMessages';
 import { ConfirmationDialog } from '../../../shared/ConfirmationDialog';
 
@@ -47,7 +47,7 @@ function smoothScrollTop() {
     }
 }
 
-interface Props {
+export interface Props {
     data?: any;
     list?: any;
     dispatch?: any;
@@ -66,7 +66,7 @@ export class EditForm extends React.Component<Props, any> {
     constructor(props) {
         super(props);
         this.state = {
-            values: assign({}, this.props.data.fields),
+            values: Object.assign({}, this.props.data.fields),
             confirmationDialog: null,
             loading: false,
             lastValues: null, // used for resetting
@@ -81,7 +81,7 @@ export class EditForm extends React.Component<Props, any> {
         this.__isMounted = false;
     }
     getFieldProps(field) {
-        const props = assign({}, field);
+        const props = Object.assign({}, field);
         const alerts = this.state.alerts;
         // Display validation errors inline
         if (alerts && alerts.error && alerts.error.error === 'validation errors') {
@@ -98,43 +98,43 @@ export class EditForm extends React.Component<Props, any> {
         props.mode = 'edit';
         return props;
     }
-    handleChange(event) {
-        const values = assign({}, this.state.values);
+    handleChange = (event) => {
+        const values = Object.assign({}, this.state.values);
 
         values[event.path] = event.value;
         this.setState({ values });
-    }
+    };
 
-    toggleDeleteDialog() {
+    toggleDeleteDialog = () => {
         this.setState({
             deleteDialogIsOpen: !this.state.deleteDialogIsOpen,
         });
-    }
-    toggleResetDialog() {
+    };
+    toggleResetDialog = () => {
         this.setState({
             resetDialogIsOpen: !this.state.resetDialogIsOpen,
         });
-    }
-    handleReset() {
+    };
+    handleReset = () => {
         this.setState({
-            values: assign({}, this.state.lastValues || this.props.data.fields),
+            values: Object.assign({}, this.state.lastValues || this.props.data.fields),
             resetDialogIsOpen: false,
         });
-    }
-    handleDelete() {
+    };
+    handleDelete = () => {
         const { data } = this.props;
         this.props.dispatch(deleteItem(data.id, this.props.router));
-    }
-    handleKeyFocus() {
+    };
+    handleKeyFocus = () => {
         const input = this.refs.keyOrIdInput;
         input.select();
-    }
+    };
     removeConfirmationDialog() {
         this.setState({
             confirmationDialog: null,
         });
     }
-    updateItem() {
+    updateItem = () => {
         const { data, list } = this.props;
         const editForm = this.refs.editForm;
         const formData = new FormData(editForm);
@@ -168,7 +168,7 @@ export class EditForm extends React.Component<Props, any> {
                 });
             }
         });
-    }
+    };
     renderKeyOrId() {
         let className = 'EditForm__key-or-id';
         let list = this.props.list;

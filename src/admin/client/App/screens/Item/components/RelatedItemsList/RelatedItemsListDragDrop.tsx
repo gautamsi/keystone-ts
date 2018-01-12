@@ -3,7 +3,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { Sortable } from './RelatedItemsListRow';
 
-interface Props {
+export interface Props {
     columns: Array<any>;
     dispatch: any;
     dragNewSortOrder?: number;

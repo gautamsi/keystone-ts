@@ -5,8 +5,9 @@
 
 import * as React from 'react';
 // import { findDOMNode } from 'react-dom'; // TODO re-implement focus when ready
-import numeral from 'numeral';
+import * as numeral from 'numeral';
 import { connect } from 'react-redux';
+import * as PropTypes from 'prop-types';
 
 import {
     BlankState,
@@ -16,7 +17,7 @@ import {
     GlyphButton,
     Pagination,
     Spinner,
-} from 'elemental';
+} from '../../elemental';
 
 import { ListFilters } from './components/Filtering/ListFilters';
 import { ListHeaderTitle } from './components/ListHeaderTitle';
@@ -54,17 +55,17 @@ interface Props {
     items?: any;
     lists?: any;
     location?: any;
-    params?: any;
+    match?: { params?: any };
     loading?: any;
     rowAlert?: any;
     error?: any;
     ready?: boolean;
 }
 class ListView extends React.Component<Props, any> {
-    // contextTypes: {
-    //     router: React.PropTypes.object.isRequired,
-    // },
-    constructor(props) {
+    static contextTypes = {
+        router: PropTypes.object.isRequired,
+    };
+    constructor(props, context) {
         super(props);
         this.state = {
             confirmationDialog: {
@@ -82,9 +83,9 @@ class ListView extends React.Component<Props, any> {
         // side routed page before, we need to initialize the list and parse
         // possibly specified query parameters
 
-        this.props.dispatch(selectList(this.props.params.listId));
+        this.props.dispatch(selectList(this.props.match.params.listId));
 
-        const isNoCreate = this.props.lists.data[this.props.params.listId].nocreate;
+        const isNoCreate = this.props.lists.data[this.props.match.params.listId].nocreate;
         const shouldOpenCreate = this.props.location.search === '?create';
 
         this.setState({
@@ -97,7 +98,7 @@ class ListView extends React.Component<Props, any> {
         // again with the new list id
         const isReady = this.props.lists.ready && nextProps.lists.ready;
         if (isReady && checkForQueryChange(nextProps, this.props)) {
-            this.props.dispatch(selectList(nextProps.params.listId));
+            this.props.dispatch(selectList(nextProps.match.params.listId));
         }
     }
     componentWillUnmount() {
@@ -108,13 +109,13 @@ class ListView extends React.Component<Props, any> {
     // HEADER
     // ==============================
     // Called when a new item is created
-    onCreate(item) {
+    onCreate = (item) => {
         // Hide the create form
         this.toggleCreateModal(false);
         // Redirect to newly created item path
         const list = this.props.currentList;
         this.context.router.push(`${Keystone.adminPath}/${list.path}/${item.id}`);
-    }
+    };
     createAutocreate() {
         const list = this.props.currentList;
         list.createItem(null, (err, data) => {
@@ -127,42 +128,42 @@ class ListView extends React.Component<Props, any> {
             }
         });
     }
-    updateSearch(e) {
+    updateSearch = (e) => {
         this.props.dispatch(setActiveSearch(e.target.value));
-    }
-    handleSearchClear() {
+    };
+    handleSearchClear = () => {
         this.props.dispatch(setActiveSearch(''));
 
         // TODO re-implement focus when ready
         // findDOMNode(this.refs.listSearchInput).focus();
-    }
-    handleSearchKey(e) {
+    };
+    handleSearchKey = (e) => {
         // clear on esc
         if (e.which === ESC_KEY_CODE) {
             this.handleSearchClear();
         }
-    }
-    handlePageSelect(i) {
+    };
+    handlePageSelect = (i) => {
         // If the current page index is the same as the index we are intending to pass to redux, bail out.
         if (i === this.props.lists.page.index) return;
         return this.props.dispatch(setCurrentPage(i));
-    }
-    toggleManageMode(filter = !this.state.manageMode) {
+    };
+    toggleManageMode = (filter = !this.state.manageMode) => {
         this.setState({
             manageMode: filter,
             checkedItems: {},
         });
-    }
-    toggleUpdateModal(filter = !this.state.showUpdateForm) {
+    };
+    toggleUpdateModal = (filter = !this.state.showUpdateForm) => {
         this.setState({
             showUpdateForm: filter,
         });
-    }
+    };
     massUpdate() {
         // TODO: Implement update multi-item
         console.log('Update ALL the things!');
     }
-    massDelete() {
+    massDelete = () => {
         const { checkedItems } = this.state;
         const list = this.props.currentList;
         const itemCount = pluralize(checkedItems, ('* ' + list.singular.toLowerCase()), ('* ' + list.plural.toLowerCase()));
@@ -187,13 +188,13 @@ class ListView extends React.Component<Props, any> {
                 },
             },
         });
-    }
-    handleManagementSelect(selection) {
+    };
+    handleManagementSelect = (selection) => {
         if (selection === 'all') this.checkAllItems();
         if (selection === 'none') this.uncheckAllTableItems();
         if (selection === 'visible') this.checkAllTableItems();
         return false;
-    }
+    };
     renderConfirmationDialog() {
         const props = this.state.confirmationDialog;
         return (
@@ -265,7 +266,7 @@ class ListView extends React.Component<Props, any> {
                 <ListHeaderToolbar
                     // common
                     dispatch={this.props.dispatch}
-                    list={listsByPath[this.props.params.listId]}
+                    list={listsByPath[this.props.match.params.listId]}
 
                     // expand
                     expandIsActive={!this.state.constrainTableWidth}
@@ -306,7 +307,7 @@ class ListView extends React.Component<Props, any> {
     // TABLE
     // ==============================
 
-    checkTableItem(item, e) {
+    checkTableItem = (item, e) => {
         e.preventDefault();
         const newCheckedItems = { ...this.state.checkedItems };
         const itemId = item.id;
@@ -318,7 +319,7 @@ class ListView extends React.Component<Props, any> {
         this.setState({
             checkedItems: newCheckedItems,
         });
-    }
+    };
     checkAllTableItems() {
         const checkedItems = {};
         this.props.items.results.forEach(item => {
@@ -349,7 +350,7 @@ class ListView extends React.Component<Props, any> {
             checkedItems: {},
         });
     }
-    deleteTableItem(item, e) {
+    deleteTableItem = (item, e) => {
         if (e.altKey) {
             this.props.dispatch(deleteItem(item.id));
             return;
@@ -375,15 +376,15 @@ class ListView extends React.Component<Props, any> {
                 },
             },
         });
-    }
-    removeConfirmationDialog() {
+    };
+    removeConfirmationDialog = () => {
         this.setState({
             confirmationDialog: {
                 isOpen: false,
             },
         });
-    }
-    toggleTableWidth() {
+    };
+    toggleTableWidth = () => {
         this.setState({
             constrainTableWidth: !this.state.constrainTableWidth,
         });
@@ -393,10 +394,10 @@ class ListView extends React.Component<Props, any> {
     // COMMON
     // ==============================
 
-    handleSortSelect(path, inverted) {
+    handleSortSelect = (path, inverted) => {
         if (inverted) path = '-' + path;
         this.props.dispatch(setActiveSort(path));
-    }
+    };
     toggleCreateModal(visible) {
         this.setState({
             showCreateForm: visible,
@@ -405,7 +406,7 @@ class ListView extends React.Component<Props, any> {
     openCreateModal() {
         this.toggleCreateModal(true);
     }
-    closeCreateModal() {
+    closeCreateModal = () => {
         this.toggleCreateModal(false);
     }
     showBlankState() {
@@ -416,7 +417,7 @@ class ListView extends React.Component<Props, any> {
     }
     renderBlankState() {
         const { currentList } = this.props;
-
+        
         if (!this.showBlankState()) return null;
 
         // create and nav directly to the item view, or open the create modal
@@ -532,7 +533,7 @@ class ListView extends React.Component<Props, any> {
     }
     render() {
         if (!this.props.ready) {
-            return (
+           return (
                 <Center height="50vh" data-screen-id="list">
                     <Spinner />
                 </Center>

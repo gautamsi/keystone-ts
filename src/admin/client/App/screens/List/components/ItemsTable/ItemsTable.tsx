@@ -1,12 +1,12 @@
 import * as React from 'react';
-import classnames from 'classnames';
+import * as classnames from 'classnames';
 
 import { TableRow } from './ItemsTableRow';
 import { DragDrop } from './ItemsTableDragDrop';
 
 import { TABLE_CONTROL_COLUMN_WIDTH } from '../../../../../constants';
 
-interface Props {
+export interface Props {
     checkedItems: any;
     columns: Array<any>;
     deleteTableItem: any;

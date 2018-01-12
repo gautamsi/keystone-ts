@@ -6,7 +6,7 @@ import * as React from 'react';
 
 const BUTTON_BASE_CLASSNAME = 'Popout__footer__button Popout__footer__button--';
 
-interface Props {
+export interface Props {
     children?: React.ReactNode;
     primaryButtonAction?: any;
     primaryButtonIsSubmit?: boolean;

@@ -6,9 +6,9 @@
 
 import * as React from 'react';
 import { DropZoneTarget } from './ItemsTableDragDropZoneTarget';
-import classnames from 'classnames';
+import * as classnames from 'classnames';
 
-interface Props {
+export interface Props {
     columns?: Array<any>;
     connectDropTarget?: any;
     items?: any;
@@ -18,7 +18,10 @@ interface Props {
     drag?: any;
     dispatch?: any;
 }
-class ItemsTableDragDropZone extends React.Component<Props> {
+/**
+ * class ItemsTableDragDropZone
+ */
+class DropZone /*ItemsTableDragDropZone*/ extends React.Component<Props> {
     static displayName: string = 'ItemsTableDragDropZone';
 
     renderPageDrops() {
@@ -67,5 +70,3 @@ class ItemsTableDragDropZone extends React.Component<Props> {
         return this.renderPageDrops();
     }
 }
-
-export const DropZone = ItemsTableDragDropZone;

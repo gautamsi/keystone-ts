@@ -44,7 +44,7 @@ export const ListFilters: React.SFC<Props> = ({ dispatch, filters }) => {
     );
 };
 
-interface Props {
+export interface Props {
     dispatch: any;
     filters: Array<any>;
 }

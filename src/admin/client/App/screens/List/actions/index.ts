@@ -10,7 +10,7 @@ import { setActiveList } from './active';
  * Select a list, and set it as the active list. Called whenever the main
  * List component mounts or the list changes.
  *
- * @param  {String} id The list ID, passed via this.props.params.listId
+ * @param  {String} id The list ID, passed via this.props.match.params.listId
  */
 export function selectList (id) {
 	return (dispatch, getState) => {

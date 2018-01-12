@@ -4,13 +4,13 @@ import { theme } from '../../../../theme';
 
 import { ListSort } from './ListSort';
 
-export function ListHeaderTitle({
+export const ListHeaderTitle: React.SFC<Props> = ({
 	activeSort,
     availableColumns,
     handleSortSelect,
     title,
     ...props
-}) {
+}) => {
     return (
         <h2 className={`${css(classes.heading)}`} {...props}>
             {title}
@@ -23,7 +23,7 @@ export function ListHeaderTitle({
     );
 }
 
-interface Props {
+export interface Props {
     activeSort?: object;
     availableColumns?: Array<any>;
     handleSortSelect: any;

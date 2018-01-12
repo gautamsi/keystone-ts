@@ -5,7 +5,7 @@ import { Form } from 'elemental';
 import { ExplorerCol as Col } from './Col';
 import { ExplorerRow as Row } from './Row';
 
-interface Props {
+export interface Props {
     FilterComponent?: any;
     FieldComponent?: any;
     value?: any;

@@ -4,7 +4,7 @@ import { Popout } from '../../../../shared/Popout';
 
 import { Filters } from 'FieldTypes';
 
-interface Props {
+export interface Props {
     field: any;
     maxHeight?: number;
     onApply?: any;
@@ -31,7 +31,7 @@ export class ListFiltersAddForm extends React.Component<Props, any> {
             filterValue: filterValue,
         };
     }
-    updateHeight(bodyHeight) {
+    updateHeight = (bodyHeight) => {
         bodyHeight += 40; // TODO: remove magic number, currently accounts for padding
         const footerHeight = findDOMNode<HTMLElement>(this.refs.footer).offsetHeight;
         const maxBodyHeight = this.props.maxHeight - footerHeight;
@@ -43,15 +43,15 @@ export class ListFiltersAddForm extends React.Component<Props, any> {
             this.props.onHeightChange(Math.min(newHeight, this.props.maxHeight));
         });
     }
-    updateValue(filterValue) {
+    updateValue = (filterValue) => {
         this.setState({
             filterValue: filterValue,
         });
-    }
-    handleFormSubmit(e) {
+    };
+    handleFormSubmit = (e) => {
         e.preventDefault();
         this.props.onApply(this.state.filterValue);
-    }
+    };
     renderInvalidFilter() {
         return (
             <div>Error: type {this.props.field.type} has no filter UI.</div>

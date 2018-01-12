@@ -4,14 +4,14 @@
 
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Container } from 'elemental';
+import { Container } from '../../../elemental';
 
 import {
     setActiveList,
 } from '../../../screens/List/actions/active';
 import { SecondaryNavItem } from './NavItem';
 
-interface Props {
+export interface Props {
     itemId?: string;
     currentListKey?: string;
     lists: Array<any>;
@@ -21,7 +21,10 @@ interface Props {
 
 class SecondaryNavigationNav extends React.Component<Props, any> {
     static displayName: string = 'SecondaryNavigation';
-
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
     // Handle resizing and hide this nav on mobile (i.e. < 768px) screens
     componentDidMount() {
         this.handleResize();

@@ -54,6 +54,6 @@ export class HiddenFileInput extends React.Component<Props> {
     }
 
 }
-interface Props {
+export interface Props {
     onChange: any;
 }

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import Transition from 'react-transition-group/Transition';
-import classnames from 'classnames';
+import * as classnames from 'classnames';
 import { ListFiltersAddForm } from './ListFiltersAddForm';
 import { Popout } from '../../../../shared/Popout';
 import { PopoutList } from '../../../../shared/Popout/PopoutList';
@@ -27,30 +27,30 @@ export class ListFiltersAdd extends React.Component<{ maxHeight?: number, dispat
             selectedField: false,
         };
     }
-    updateSearch(e) {
+    updateSearch = (e) => {
         this.setState({ searchString: e.target.value });
     }
     openPopout() {
         this.setState({ isOpen: true }, this.focusSearch);
     }
-    closePopout() {
+    closePopout = () => {
         this.setState({
             innerHeight: 0,
             isOpen: false,
             searchString: '',
             selectedField: false,
         });
-    }
-    setPopoutHeight(height) {
+    };
+    setPopoutHeight = (height) => {
         this.setState({ innerHeight: Math.min(this.props.maxHeight, height) });
-    }
-    navigateBack() {
+    };
+    navigateBack = () => {
         this.setState({
             selectedField: false,
             searchString: '',
             innerHeight: 0,
         }, this.focusSearch);
-    }
+    };
     focusSearch() {
         findDOMNode<HTMLElement>(this.refs.search).focus();
     }

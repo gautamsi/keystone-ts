@@ -11,7 +11,7 @@ import { setCurrentPage } from '../../actions';
 
 let timeoutID;
 
-interface Props {
+export interface Props {
     className?: string;
     connectDropTarget?: any;
     isOver?: boolean;

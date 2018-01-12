@@ -4,14 +4,13 @@
  */
 
 import * as React from 'react';
-import assign from 'object-assign';
 import vkey from 'vkey';
 import { AlertMessages } from './AlertMessages';
 import { Fields } from 'FieldTypes';
 import { InvalidFieldType } from './InvalidFieldType';
 import { Button, Form, Modal } from 'elemental';
 
-interface Props {
+export interface Props {
     err?: any;
     isOpen?: boolean;
     list?: any;
@@ -27,7 +26,9 @@ export class CreateForm extends React.Component<Props, any> {
             isOpen: false,
         };
     }
-    getInitialState() {
+    constructor(props) {
+        super(props);
+        debugger;
         // Set the field values to their default values when first rendering the
         // form. (If they have a default value, that is)
         let values = {};
@@ -36,7 +37,7 @@ export class CreateForm extends React.Component<Props, any> {
             let FieldComponent = Fields[field.type];
             values[field.path] = FieldComponent.getDefaultValue(field);
         });
-        return {
+        this.state = {
             values: values,
             alerts: {},
         };
@@ -54,7 +55,7 @@ export class CreateForm extends React.Component<Props, any> {
     }
     // Handle input change events
     handleChange(event) {
-        let values = assign({}, this.state.values);
+        let values = Object.assign({}, this.state.values);
         values[event.path] = event.value;
         this.setState({
             values: values,
@@ -62,7 +63,7 @@ export class CreateForm extends React.Component<Props, any> {
     }
     // Set the props of a field
     getFieldProps(field) {
-        let props = assign({}, field);
+        let props = Object.assign({}, field);
         props.value = this.state.values[field.path];
         props.values = this.state.values;
         props.onChange = this.handleChange;
@@ -71,7 +72,7 @@ export class CreateForm extends React.Component<Props, any> {
         return props;
     }
     // Create a new item when the form is submitted
-    submitForm(event) {
+    submitForm = (event) => {
         event.preventDefault();
         const createForm = event.target;
         const formData = new FormData(createForm);
@@ -108,7 +109,7 @@ export class CreateForm extends React.Component<Props, any> {
                 });
             }
         });
-    }
+    };
     // Render the form itself
     renderForm() {
         if (!this.props.isOpen) return;

@@ -8,7 +8,7 @@ import { css } from 'glamor';
 import { Container } from 'elemental';
 import { theme } from '../../../theme';
 
-interface Props {
+export interface Props {
     appversion?: string;
     backUrl?: string;
     brand?: string;

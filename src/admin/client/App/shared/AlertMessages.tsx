@@ -17,7 +17,7 @@ import { upcase } from '../../utils/string';
  *   based on their type. For example: validation errors should be displayed next
  *   to each invalid field and signin errors should promt the user to sign in.
  */
-interface Props {
+export interface Props {
     alerts?: {
         error?: any;
         success?: any;

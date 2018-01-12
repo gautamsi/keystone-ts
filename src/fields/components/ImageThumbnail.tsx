@@ -34,7 +34,7 @@ export const ImageThumbnail: React.SFC<Props> = ({ component, mask, ...props }) 
     return React.createElement(component, props);
 };
 
-interface Props {
+export interface Props {
     component?: string | any;
     mask?: 'loading' | 'remove' | 'upload';
     className?: any;

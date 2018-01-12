@@ -3,7 +3,7 @@
  */
 
 import * as React from 'react';
-import { Button, Form, FormField, FormInput } from 'elemental';
+import { Button, Form, FormField, FormInput } from '../../App/elemental';
 
 export const LoginForm: React.SFC<Props> = ({
 	email,
@@ -32,7 +32,7 @@ export const LoginForm: React.SFC<Props> = ({
                         value={password}
                     />
                 </FormField>
-                <Button disabled={isAnimating} color="primary" type="submit">
+                <Button disabled={isAnimating} color="primary" type="submit" submit={true}>
                     Sign In
 				</Button>
             </Form>
@@ -40,7 +40,7 @@ export const LoginForm: React.SFC<Props> = ({
     );
 };
 
-interface Props {
+export interface Props {
     email?: string;
     handleInputChange: any;
     handleSubmit: any;

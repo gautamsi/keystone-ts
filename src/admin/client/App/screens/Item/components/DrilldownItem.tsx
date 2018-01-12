@@ -1,11 +1,11 @@
 import { css } from 'glamor';
 import * as React from 'react';
-import { Link } from 'react-router';
-import { Button, Glyph } from 'elemental';
+import { Link } from 'react-router-dom';
+import { Button, Glyph } from '../../../elemental';
 
 import { theme } from '../../../../theme';
 
-interface Props {
+export interface Props {
     className?: any;
     style?: any;
     href: string;

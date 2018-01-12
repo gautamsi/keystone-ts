@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as blacklist from 'blacklist';
-import * as assign from 'object-assign';
 
-interface Props {
+export interface Props {
     style?: any;
 }
 export class FooterBar extends React.Component<Props, any> {
@@ -106,7 +105,7 @@ export class FooterBar extends React.Component<Props, any> {
             position: 'relative',
         };
         let footerProps = blacklist(this.props, 'children', 'style');
-        let footerStyle = assign({}, this.props.style, {
+        let footerStyle = Object.assign({}, this.props.style, {
             position: this.state.position,
             top: this.state.top,
             width: this.state.width,

@@ -5,7 +5,7 @@
 import * as React from 'react';
 import { Alert } from 'elemental';
 
-interface Props {
+export interface Props {
     message: string | any;
     type?: string;
 }

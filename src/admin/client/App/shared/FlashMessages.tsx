@@ -19,7 +19,7 @@ import * as _ from 'lodash';
 
 import { FlashMessage } from './FlashMessage';
 
-interface Props {
+export interface Props {
     messages?: boolean | {
         error?: Array<any>;
         hilight?: Array<any>;

@@ -6,7 +6,7 @@ import * as React from 'react';
 import * as blacklist from 'blacklist';
 import * as classnames from 'classnames';
 
-interface Props {
+export interface Props {
     icon?: string;
     iconHover?: string;
     isSelected?: boolean;
@@ -22,12 +22,12 @@ export class PopoutListItem extends React.Component<Props, any> {
             hover: false,
         };
     }
-    hover() {
+    hover = () => {
         this.setState({ hover: true });
-    }
-    unhover() {
+    };
+    unhover = () => {
         this.setState({ hover: false });
-    }
+    };
     // Render an icon
     renderIcon() {
         if (!this.props.icon) return null;

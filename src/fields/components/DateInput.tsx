@@ -7,7 +7,7 @@ import { FormInput } from 'elemental';
 
 let lastId = 0;
 
-interface Props {
+export interface Props {
     format?: string;
     name?: string;
     onChange: any;

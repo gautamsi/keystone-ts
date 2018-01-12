@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import { css } from 'glamor';
-import { FormInput, Glyph, GlyphButton } from 'elemental';
+import { FormInput, Glyph, GlyphButton } from '../../../elemental';
 import { theme } from '../../../../theme';
 
 export class EditFormHeaderSearch extends React.Component<Props, any> {
@@ -13,11 +13,11 @@ export class EditFormHeaderSearch extends React.Component<Props, any> {
         this.focusField = this.focusField.bind(this);
         this.state = { focused: false };
     }
-    focusField() {
+    focusField = () => {
         this.setState({ focused: true }, () => {
             findDOMNode<HTMLElement>(this.refs.target).focus();
         });
-    }
+    };
     render() {
         const { focused } = this.state;
         const {
@@ -30,13 +30,13 @@ export class EditFormHeaderSearch extends React.Component<Props, any> {
         return focused ? (
             <div className={`${css(classes.wrapper)}`}>
                 <Glyph
-                    cssStyles={classes.glyph}
+                    style={classes.glyph as any}
                     color={theme.color.gray40}
                     name="search"
                     data-e2e-search-icon
                 />
                 <FormInput
-                    cssStyles={classes.input}
+                    style={classes.input}
                     name="search"
                     onBlur={() => this.setState({ focused: false })}
                     onChange={onChange}
@@ -61,7 +61,7 @@ export class EditFormHeaderSearch extends React.Component<Props, any> {
                     data-e2e-search-icon
                 >
                     Search
-			</GlyphButton>
+                </GlyphButton>
             );
     }
 }
@@ -69,7 +69,7 @@ export class EditFormHeaderSearch extends React.Component<Props, any> {
 // For props "glyph", "glyphColor", and "glyphSize":
 // prop type validation will occur within the Glyph component, no need to
 // duplicate, just pass it through.
-interface Props {
+export interface Props {
     onChange: any;
     value?: string;
     onKeyUp?: any;

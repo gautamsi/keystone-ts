@@ -3,7 +3,7 @@ import { css } from 'glamor';
 import { theme } from '../../theme';
 import { darken, lighten } from '../../utils/color';
 
-interface Props {
+export interface Props {
     className?: string;
 }
 export const Kbd: React.SFC<Props> = ({ ...props }) => {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
 
-interface Props {
+export interface Props {
     dragSource?: any;
     onClick?: any;
     type: 'check' | 'delete' | 'sortable';

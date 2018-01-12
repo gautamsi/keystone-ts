@@ -1,4 +1,4 @@
-import xhr from 'xhr';
+import * as xhr from 'xhr';
 import {
 	LOAD_COUNTS,
 	COUNTS_LOADING_SUCCESS,

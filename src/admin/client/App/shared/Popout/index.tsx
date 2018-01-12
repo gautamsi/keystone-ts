@@ -14,7 +14,7 @@ const SIZES = {
     horizontalMargin: 20,
 };
 
-interface Props {
+export interface Props {
     isOpen?: boolean;
     onCancel?: any;
     onSubmit?: any;
@@ -33,8 +33,9 @@ export class Popout extends React.Component<Props, any> {
             width: 320,
         };
     }
-    static getInitialState() {
-        return {};
+    constructor(props) {
+        super(props);
+        this.state = {};
     }
     componentWillReceiveProps(nextProps) {
         if (!this.props.isOpen && nextProps.isOpen) {

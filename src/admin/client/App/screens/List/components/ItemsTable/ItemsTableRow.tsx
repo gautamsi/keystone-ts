@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classnames from 'classnames';
+import * as classnames from 'classnames';
 
 import { ListControl } from '../ListControl';
 
@@ -14,7 +14,7 @@ import {
     moveItem,
 } from '../../actions';
 
-interface Props {
+export interface Props {
     columns?: Array<any>;
     id?: any;
     index?: number;

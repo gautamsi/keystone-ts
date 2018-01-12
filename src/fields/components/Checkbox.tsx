@@ -1,10 +1,10 @@
 import * as React from 'react';
 import blacklist from 'blacklist';
-import classnames from 'classnames';
+import * as classnames from 'classnames';
 import { darken, fade } from '../../admin/client/utils/color';
 import { borderRadius } from '../../admin/client/constants';
 
-interface Props {
+export interface Props {
     checked?: boolean;
     component?: React.ComponentClass<any>;
     onChange?: any;

@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import * as assign from 'object-assign';
 
 import {
 	ADD_FILTER,
@@ -34,7 +33,7 @@ const initialState = {
 export function activeReducer (state = initialState, action) {
 	switch (action.type) {
 		case SET_ACTIVE_LIST:
-			return assign({}, state, {
+			return Object.assign({}, state, {
 				id: action.id,
 				columns: action.list.expandColumns(action.list.defaultColumns),
 				filters: [],
@@ -42,19 +41,19 @@ export function activeReducer (state = initialState, action) {
 				sort: action.list.expandSort(action.list.defaultSort),
 			});
 		case SET_ACTIVE_SEARCH:
-			return assign({}, state, {
+			return Object.assign({}, state, {
 				search: action.searchString,
 			});
 		case SET_ACTIVE_SORT:
-			return assign({}, state, {
+			return Object.assign({}, state, {
 				sort: action.sort,
 			});
 		case SET_ACTIVE_COLUMNS:
-			return assign({}, state, {
+			return Object.assign({}, state, {
 				columns: action.columns,
 			});
 		case ADD_FILTER:
-			return assign({}, state, {
+			return Object.assign({}, state, {
 				// Override existing filter with field path,
 				// otherwise add to filters array
 				filters: _.unionWith([action.filter], state.filters, (stateFilter, actionFilter) => {
@@ -62,18 +61,18 @@ export function activeReducer (state = initialState, action) {
 				}),
 			});
 		case SET_FILTERS:
-			return assign({}, state, {
+			return Object.assign({}, state, {
 				filters: action.filters,
 			});
 		case CLEAR_FILTER:
 			const newFilters = _.filter(state.filters, (filter) => {
 				return filter.field.path !== action.path;
 			});
-			return assign({}, state, {
+			return Object.assign({}, state, {
 				filters: newFilters,
 			});
 		case CLEAR_ALL_FILTERS:
-			return assign({}, state, {
+			return Object.assign({}, state, {
 				filters: [],
 			});
 		case QUERY_HAS_CHANGED:
@@ -84,18 +83,18 @@ export function activeReducer (state = initialState, action) {
 				columns,
 			} = action.parsedQuery;
 
-			return assign({}, state, {
+			return Object.assign({}, state, {
 				search,
 				sort: sort || initialState.sort,
 				filters: filters || initialState.filters,
 				columns: columns || initialState.columns,
 			});
 		case REPLACE_CACHED_QUERY:
-			return assign({}, state, {
+			return Object.assign({}, state, {
 				cachedQuery: action.cachedQuery,
 			});
 		case CLEAR_CACHED_QUERY:
-			return assign({}, state, {
+			return Object.assign({}, state, {
 				cachedQuery: {},
 			});
 		default:

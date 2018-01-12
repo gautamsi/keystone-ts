@@ -2,17 +2,16 @@
  * The actual Sign In view, with the login form
  */
 
-import assign from 'object-assign';
-import classnames from 'classnames';
+import * as classnames from 'classnames';
 import * as React from 'react';
-import xhr from 'xhr';
+import * as xhr from 'xhr';
 
 import { AlertView as Alert } from './components/Alert';
 import { Brand } from './components/Brand';
 import { UserInfo } from './components/UserInfo';
 import { LoginForm } from './components/LoginForm';
 
-interface Props {
+export interface Props {
     from?: any;
     logo?: any;
     brand?: any;
@@ -24,7 +23,7 @@ export class SigninView extends React.Component<Props, any> {
     refs: {
         [key: string]: (Element)
         email: (HTMLInputElement) // !important
-    }
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -35,6 +34,8 @@ export class SigninView extends React.Component<Props, any> {
             invalidMessage: '',
             signedOut: window.location.search === '?signedout',
         };
+        // this.handleInputChange = this.handleInputChange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
         this._isMounted = true;
@@ -43,16 +44,16 @@ export class SigninView extends React.Component<Props, any> {
             this.refs.email.select();
         }
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         this._isMounted = false;
     }
-    handleInputChange(e) {
+    handleInputChange = (e) => {
         // Set the new state when the input changes
         const newState = {};
         newState[e.target.name] = e.target.value;
         this.setState(newState);
     }
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault();
         // If either password or mail are missing, show an error
         if (!this.state.email || !this.state.password) {
@@ -66,7 +67,7 @@ export class SigninView extends React.Component<Props, any> {
                 email: this.state.email,
                 password: this.state.password,
             },
-            headers: assign({}, Keystone.csrf.header),
+            headers: Object.assign({}, Keystone.csrf.header),
         }, (err, resp, body) => {
             if (err || body && body.error) {
                 return body.error === 'invalid csrf'

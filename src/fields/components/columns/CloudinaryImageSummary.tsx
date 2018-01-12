@@ -32,7 +32,7 @@ const textStyle = {
     verticalAlign: 'middle',
 };
 
-interface Props {
+export interface Props {
     image: any;
     label?: 'dimensions' | 'publicId';
     secure?: boolean;

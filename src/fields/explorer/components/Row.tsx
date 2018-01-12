@@ -34,7 +34,7 @@ export class ExplorerRow extends React.Component<Props> {
 // ExplorerRow['childContextTypes'] = {
 //     isCollapsed: React.PropTypes.bool,
 // };
-interface Props {
+export interface Props {
     className?: string;
     gutter?: number;
     style?: string;

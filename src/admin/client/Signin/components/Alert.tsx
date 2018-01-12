@@ -17,7 +17,7 @@ export const AlertView: React.SFC<Props> = function (props) {
     }
 };
 
-interface Props {
+export interface Props {
     invalidMessage?: string;
     isInvalid?: boolean;
     signedOut?: boolean;

@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 
 import { Toolbar, ToolbarSection } from './Toolbar';
 import { EditFormHeaderSearch } from './EditFormHeaderSearch';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import { Drilldown } from './Drilldown';
-import { GlyphButton, ResponsiveText } from 'elemental';
+import { GlyphButton, ResponsiveText } from '../../../elemental';
 
-interface Props {
+export interface Props {
     data?: any;
     list?: any;
     toggleCreate?: any;
@@ -28,18 +28,18 @@ class EditFormHeaderClass extends React.Component<Props, any> {
     toggleCreate(visible) {
         this.props.toggleCreate(visible);
     }
-    searchStringChanged(event) {
+    searchStringChanged = (event) => {
         this.setState({
             searchString: event.target.value,
         });
-    }
-    handleEscapeKey(event) {
+    };
+    handleEscapeKey = (event) => {
         const escapeKeyCode = 27;
 
         if (event.which === escapeKeyCode) {
             findDOMNode<HTMLElement>(this.refs.searchField).blur();
         }
-    }
+    };
     renderDrilldown() {
         return (
             <ToolbarSection left>

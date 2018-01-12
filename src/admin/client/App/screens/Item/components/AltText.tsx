@@ -1,7 +1,7 @@
 import * as React from 'react';
 import vkey from 'vkey';
 
-interface Props {
+export interface Props {
     component?: string | any;
     modified?: JSX.Element | string;
     modifier?: '<alt>' | '<control>' | '<meta>' | '<shift>';
@@ -44,7 +44,7 @@ export class AltText extends React.Component<Props, any> {
     render() {
         // NOTE `modifier` is declared to remove it from `props`, though never used
         const {
-			component,
+			component: Component,
             modified,
             modifier, // eslint-disable-line no-unused-vars
             normal,

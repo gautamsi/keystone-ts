@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {
     GlyphButton,
-    InlineGroup as Group,
-    InlineGroupSection as Section,
+    InputGroup as Group,
+    InputGroupSection as Section,
     ResponsiveText,
-} from 'elemental';
+} from '../../../elemental';
 import { theme } from '../../../../theme';
 
 import { ListColumnsForm } from './ListColumnsForm';
@@ -75,8 +75,8 @@ export const ListHeaderToolbar: React.SFC<Props> = ({
     ...props
 }) => {
     return (
-        <Group block cssStyles={classes.wrapper}>
-            <Section grow cssStyles={classes.search}>
+        <Group block style={classes.wrapper}>
+            <Section grow style={classes.search}>
                 <ListHeaderSearch
                     handleChange={searchHandleChange}
                     handleClear={searchHandleClear}
@@ -84,32 +84,32 @@ export const ListHeaderToolbar: React.SFC<Props> = ({
                     value={searchValue}
                 />
             </Section>
-            <Section grow cssStyles={classes.buttons}>
+            <Section grow style={classes.buttons}>
                 <Group block>
-                    <Section cssStyles={classes.filter}>
+                    <Section style={classes.filter}>
                         <ListFiltersAdd
                             dispatch={dispatch}
                             activeFilters={filtersActive}
                             availableFilters={filtersAvailable}
                         />
                     </Section>
-                    <Section cssStyles={classes.columns}>
+                    <Section style={classes.columns}>
                         <ListColumnsForm
                             availableColumns={columnsAvailable}
                             activeColumns={columnsActive}
                             dispatch={dispatch}
                         />
                     </Section>
-                    <Section cssStyles={classes.download}>
+                    <Section style={classes.download}>
                         <ListDownloadForm
                             activeColumns={columnsActive}
                             dispatch={dispatch}
                             list={list}
                         />
                     </Section>
-                    <Section cssStyles={classes.expand}>
+                    <Section style={classes.expand}>
                         <ButtonDivider>
-                            <GlyphButton
+                        <GlyphButton
                                 active={expandIsActive}
                                 glyph="mirror"
                                 onClick={expandOnClick}
@@ -117,7 +117,7 @@ export const ListHeaderToolbar: React.SFC<Props> = ({
                             />
                         </ButtonDivider>
                     </Section>
-                    {createIsAvailable && <Section cssStyles={classes.create}>
+                    {createIsAvailable && <Section style={classes.create}>
                         <ButtonDivider>
                             <CreateButton
                                 listName={createListName}
@@ -131,7 +131,7 @@ export const ListHeaderToolbar: React.SFC<Props> = ({
     );
 };
 
-interface Props {
+export interface Props {
     columnsActive?: Array<any>;
     columnsAvailable?: Array<any>;
     createIsAvailable?: boolean;

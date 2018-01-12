@@ -1,13 +1,12 @@
 import * as React from 'react';
 import Select from 'react-select';
 import { findDOMNode } from 'react-dom';
-import assign from 'object-assign';
 import { Fields } from 'FieldTypes';
 import { InvalidFieldType } from '../../../shared/InvalidFieldType';
 import { plural } from '../../../../utils/string';
 import { BlankState, Button, Form, Modal } from 'elemental';
 
-interface Props {
+export interface Props {
     isOpen?: boolean;
     itemIds?: Array<any>;
     list?: any;
@@ -22,6 +21,7 @@ export class UpdateForm extends React.Component<Props, any> {
     }
     constructor(props) {
         super(props);
+        debugger;
         this.state = {
             fields: [],
         };
@@ -37,12 +37,12 @@ export class UpdateForm extends React.Component<Props, any> {
             findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
         }
     }
-    getOptions() {
+    getOptions = () => {
         const { fields } = this.props.list;
         return Object.keys(fields).map(key => ({ value: fields[key].path, label: fields[key].label }));
-    }
+    };
     getFieldProps(field) {
-        let props = assign({}, field);
+        let props = Object.assign({}, field);
         props.value = this.state.fields[field.path];
         props.values = this.state.fields;
         props.onChange = this.handleChange;
@@ -50,20 +50,20 @@ export class UpdateForm extends React.Component<Props, any> {
         props.key = field.path;
         return props;
     }
-    updateOptions(fields) {
+    updateOptions = (fields) => {
         this.setState({
             fields: fields,
         }, this.doFocus);
-    }
+    };
     handleChange(value) {
         console.log('handleChange:', value);
     }
-    handleClose() {
+    handleClose = () => {
         this.setState({
             fields: [],
         });
         this.props.onCancel();
-    }
+    };
 
     renderFields() {
         const { list } = this.props;

@@ -2,14 +2,14 @@ import { css } from 'glamor';
 import * as React from 'react';
 import { DrilldownItem } from './DrilldownItem';
 
-interface Props {
+export interface Props {
     items: Array<{
         href: string,
         label: string,
         separate: boolean,
         title?: any
     }>;
-    className: any;
+    className?: any;
 }
 
 export const Drilldown: React.SFC<Props> = ({ items, ...props }) => {

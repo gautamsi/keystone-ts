@@ -1,5 +1,4 @@
 import * as React from 'react';
-import assign from 'object-assign';
 import { Popout } from '../../../shared/Popout';
 import { PopoutList } from '../../../shared/Popout/PopoutList';
 import { ListHeaderButton } from './ListHeaderButton';
@@ -11,7 +10,7 @@ const FORMAT_OPTIONS = [
     { label: 'JSON', value: 'json' },
 ];
 
-interface Props {
+export interface Props {
     activeColumns?: Array<any>;
     dispatch?: any;
     list?: any;
@@ -46,13 +45,13 @@ export class ListDownloadForm extends React.Component<Props, any> {
         const columnAmount = this.getListUIElements().filter((el) => el.type !== 'heading').length;
         return selectedColumns === columnAmount;
     }
-    togglePopout(visible) {
+    togglePopout = (visible) => {
         this.setState({
             isOpen: visible,
         });
-    }
-    toggleColumn(column, value) {
-        const newColumns = assign({}, this.state.selectedColumns);
+    };
+    toggleColumn = (column, value) => {
+        const newColumns = Object.assign({}, this.state.selectedColumns);
         if (value) {
             newColumns[column] = value;
         } else {
@@ -61,26 +60,26 @@ export class ListDownloadForm extends React.Component<Props, any> {
         this.setState({
             selectedColumns: newColumns,
         });
-    }
-    changeFormat(value) {
+    };
+    changeFormat = (value) => {
         this.setState({
             format: value,
         });
-    }
-    toggleCurrentlySelectedColumns(e) {
+    };
+    toggleCurrentlySelectedColumns = (e) => {
         const newState = {
             useCurrentColumns: e.target.checked,
             selectedColumns: this.getDefaultSelectedColumns(),
         };
         this.setState(newState);
-    }
-    clickSelectAll() {
+    };
+    clickSelectAll = () => {
         if (this.allColumnsSelected()) {
             this.selectNoColumns();
         } else {
             this.selectAllColumns();
         }
-    }
+    };
     selectAllColumns() {
         const newColumns = {};
         this.getListUIElements().map((el) => {
@@ -97,10 +96,10 @@ export class ListDownloadForm extends React.Component<Props, any> {
             selectedColumns: {},
         });
     }
-    handleDownloadRequest() {
+    handleDownloadRequest = () => {
         this.props.dispatch(downloadItems(this.state.format, Object.keys(this.state.selectedColumns)));
         this.togglePopout(false);
-    }
+    };
     renderColumnSelect() {
         if (this.state.useCurrentColumns) return null;
 

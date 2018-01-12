@@ -24,7 +24,7 @@ const classes = {
     },
 };
 
-interface Props {
+export interface Props {
     children: string | any;
     className?: any;
     label?: string;

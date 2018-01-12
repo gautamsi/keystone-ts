@@ -7,7 +7,7 @@ import * as React from 'react';
 import { Container } from 'elemental';
 import { PrimaryNavItem } from './NavItem';
 
-interface Props {
+export interface Props {
     brand?: string;
     currentSectionKey: string;
     sections?: Array<any>;
@@ -16,14 +16,17 @@ interface Props {
 
 export class PrimaryNavigation extends React.Component<Props, any> {
     static displayName: 'PrimaryNavigation';
-
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
     // Handle resizing, hide this navigation on mobile (i.e. < 768px) screens
     componentDidMount() {
         this.handleResize();
-        window.addEventListener('resize', this.handleResize);
+        window.addEventListener('resize', this.handleResize.bind(this));
     }
     componentWillUnmount() {
-        window.removeEventListener('resize', this.handleResize);
+        window.removeEventListener('resize', this.handleResize.bind(this));
     }
     handleResize() {
         this.setState({
@@ -112,7 +115,8 @@ export class PrimaryNavigation extends React.Component<Props, any> {
 
         return (
             <nav className="primary-navbar">
-                <Container clearFloatingChildren>
+                <Container >
+                {/* clearFloatingChildren */}
                     <ul className="app-nav app-nav--primary app-nav--left">
                         {this.renderBrand()}
                         {this.renderNavigation()}

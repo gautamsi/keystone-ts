@@ -1,7 +1,6 @@
 /**
  * Item reducer, handles the item data and loading
  */
-import assign from 'object-assign';
 import {
     SELECT_ITEM,
     LOAD_DATA,
@@ -29,25 +28,25 @@ const initialState = {
 export function itemReducer(state = initialState, action) {
     switch (action.type) {
         case SELECT_ITEM:
-            return assign({}, state, {
+            return Object.assign({}, state, {
                 ready: false,
                 id: action.id,
                 data: null,
             });
         case LOAD_DATA:
-            return assign({}, state, {
+            return Object.assign({}, state, {
                 loading: true,
             });
         case DATA_LOADING_SUCCESS:
             Keystone.item = action.data; // Fix keystone filter
-            return assign({}, state, {
+            return Object.assign({}, state, {
                 data: action.data,
                 loading: false,
                 ready: true,
                 error: null,
             });
         case DATA_LOADING_ERROR:
-            return assign({}, state, {
+            return Object.assign({}, state, {
                 data: null,
                 loading: false,
                 ready: true,
@@ -70,10 +69,10 @@ export function itemReducer(state = initialState, action) {
                 );
             // Add item back in at new index
             itemsWithoutItem.splice(action.newIndex, 0, item);
-            const newRelationshipData = assign({}, state.relationshipData[action.relationshipPath], {
+            const newRelationshipData = Object.assign({}, state.relationshipData[action.relationshipPath], {
                 results: itemsWithoutItem,
             });
-            return assign({}, state, {
+            return Object.assign({}, state, {
                 drag: {
                     newSortOrder: action.newSortOrder,
                     clonedItems: clonedItems,
@@ -85,10 +84,10 @@ export function itemReducer(state = initialState, action) {
                 },
             });
         case DRAG_RESET_ITEMS:
-            const originalRelationshipData = assign({}, state.relationshipData[state.drag.relationshipPath], {
+            const originalRelationshipData = Object.assign({}, state.relationshipData[state.drag.relationshipPath], {
                 results: state.drag.clonedItems,
             });
-            return assign({}, state, {
+            return Object.assign({}, state, {
                 drag: {
                     newSortOrder: null,
                     clonedItems: false,
@@ -100,7 +99,7 @@ export function itemReducer(state = initialState, action) {
                 },
             });
         case LOAD_RELATIONSHIP_DATA:
-            return assign({}, state, {
+            return Object.assign({}, state, {
                 // Reset drag and drop when relationship data is loaded
                 drag: {
                     newSortOrder: null,

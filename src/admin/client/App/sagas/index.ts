@@ -17,7 +17,7 @@ function* debouncedSearch() {
     yield call(updateParams);
 }
 
-export function* setActiveColumnsSaga() {
+export function* setActiveColumnsSaga(): any {
     while (true) {
         const { columns } = yield take(actions.SELECT_ACTIVE_COLUMNS);
         const { currentList } = yield select((state: any) => state.lists);
@@ -26,7 +26,7 @@ export function* setActiveColumnsSaga() {
     }
 }
 
-export function* setActiveSortSaga() {
+export function* setActiveSortSaga(): any {
     while (true) {
         const { path } = yield take(actions.SELECT_ACTIVE_SORT);
         const { currentList } = yield select((state: any) => state.lists);
@@ -36,7 +36,7 @@ export function* setActiveSortSaga() {
     }
 }
 
-export function* setActiveFilterSaga() {
+export function* setActiveFilterSaga(): any {
     while (true) {
         const { filter } = yield take(actions.SELECT_FILTER);
         const { currentList } = yield select((state: any) => state.lists);
@@ -47,7 +47,7 @@ export function* setActiveFilterSaga() {
     }
 }
 
-export function* rootSaga() {
+export function* rootSaga(): any {
     yield fork(<any>takeLatest, actions.SET_ACTIVE_SEARCH, debouncedSearch);
     yield fork(<any>takeLatest, actions.SET_ACTIVE_LIST, evalQueryParams);
     // If one of the other active properties changes, update the query params and load the new items

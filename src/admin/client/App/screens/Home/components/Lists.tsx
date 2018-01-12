@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import { connect } from 'react-redux';
+import * as redux from 'react-redux';
 
 import { plural } from '../../../../utils/string';
 import { ListTile } from './ListTile';
@@ -11,7 +11,7 @@ interface Props {
     spinner: React.ReactNode;
     listsData?: any;
 }
-export class Lists extends React.Component<Props> {
+class ListsComponent extends React.Component<Props> {
     render() {
         return (
             <div className="dashboard-group__lists">
@@ -39,8 +39,8 @@ export class Lists extends React.Component<Props> {
     }
 }
 
-export default connect((state: any) => {
+export const Lists = redux.connect((state: any) => {
     return {
         listsData: state.lists.data,
     };
-})(Lists as any);
+})(ListsComponent as any);

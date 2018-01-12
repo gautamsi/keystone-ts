@@ -2,10 +2,10 @@ import * as React from 'react';
 import {
     Button,
     GlyphButton,
-    InlineGroup as Group,
-    InlineGroupSection as Section,
+    InputGroup as Group,
+    InputGroupSection as Section,
     Spinner,
-} from 'elemental';
+} from '../../../elemental';
 
 export const ListManagement: React.SFC<Props> = ({
 	checkedItemCount,
@@ -99,7 +99,7 @@ export const ListManagement: React.SFC<Props> = ({
     );
 };
 
-interface Props {
+export interface Props {
     checkedItems?: number;
     handleDelete: any;
     handleSelect: any;

@@ -11,7 +11,7 @@ import {
 
 import { ListControl } from '../../../List/components/ListControl';
 
-interface Props {
+export interface Props {
     columns: Array<any>;
     dispatch: any;
     dragNewSortOrder?: number;

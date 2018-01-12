@@ -25,7 +25,7 @@ export const FileChangeMessage: React.SFC<Props> = ({ style, color, ...props }) 
     );
 };
 
-interface Props {
+export interface Props {
     color?: 'danger' | 'default' | 'success';
     style?: any;
     component?: any;

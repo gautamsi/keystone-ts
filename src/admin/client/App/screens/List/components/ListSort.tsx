@@ -6,15 +6,16 @@ import { Kbd } from '../../../shared/Kbd';
 import { Popout } from '../../../shared/Popout';
 import { PopoutList } from '../../../shared/Popout/PopoutList';
 
-interface Props {
+export interface Props {
     handleSortSelect?: any;
     activeSort?: any;
     availableColumns?: any;
 }
 export class ListSort extends React.Component<Props, any> {
     static displayName: string = 'ListSort';
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props);
+        this.state =  {
             altDown: false,
             popoutIsOpen: false,
             searchString: '',
@@ -45,20 +46,20 @@ export class ListSort extends React.Component<Props, any> {
         this.props.handleSortSelect(path, inverted);
         this.closePopout();
     }
-    openPopout() {
+    openPopout = () => {
         this.setState({
             popoutIsOpen: true,
         });
-    }
-    closePopout() {
+    };
+    closePopout = () => {
         this.setState({
             popoutIsOpen: false,
             searchString: '',
         });
-    }
-    updateSearch(e) {
+    };
+    updateSearch = (e) => {
         this.setState({ searchString: e.target.value });
-    }
+    };
     renderSortOptions() {
         // TODO: Handle multiple sort paths
         const activeSortPath = this.props.activeSort.paths[0];

@@ -5,7 +5,7 @@ import { ExplorerCol as Col } from './Col';
 import { ExplorerRow as Row } from './Row';
 import { ExplorerFieldType as FieldSpec } from './FieldSpec';
 
-interface Props {
+export interface Props {
     readme?: any;
     FilterComponent?: any;
     FieldComponent?: any;

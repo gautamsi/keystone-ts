@@ -3,7 +3,7 @@ import * as React from 'react';
 import { theme } from '../../../../theme';
 import { darken } from '../../../../utils/color';
 
-import { FormInput, Glyph } from 'elemental';
+import { FormInput, Glyph } from '../../../elemental';
 
 export const ListHeaderSearch: React.SFC<Props> = ({
 	focusInput,
@@ -36,7 +36,7 @@ export const ListHeaderSearch: React.SFC<Props> = ({
     );
 };
 
-interface Props {
+export interface Props {
     focusInput?: boolean;
     handleChange: any;
     handleClear: any;

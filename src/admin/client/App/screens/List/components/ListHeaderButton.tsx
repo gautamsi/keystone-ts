@@ -1,8 +1,8 @@
 import { css } from 'glamor';
 import * as React from 'react';
-import { DropdownButton, Glyph } from 'elemental';
+import { DropdownButton, Glyph } from '../../../elemental';
 
-interface Props {
+export interface Props {
     glyph: string;
     className?: string;
     label?: string;
@@ -14,7 +14,7 @@ interface Props {
 export const ListHeaderButton: React.SFC<Props> = ({ className, label, glyph, ...props }) => {
     return (
         <DropdownButton block {...props}>
-            <Glyph name={glyph} cssStyles={classes.glyph} />
+            <Glyph name={glyph} cssStyles={classes.glyph as any} />
             <span className={`{css(classes.label)}`}>{label}</span>
         </DropdownButton>
     );

@@ -6,7 +6,7 @@ import * as React from 'react';
 import * as blacklist from 'blacklist';
 import * as classnames from 'classnames';
 
-interface Props {
+export interface Props {
     children: React.ReactNode;
     className?: string;
     style?: any;

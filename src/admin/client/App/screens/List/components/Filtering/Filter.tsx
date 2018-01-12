@@ -20,31 +20,31 @@ export class Filter extends React.Component<Props, any> {
             isOpen: false,
         };
     }
-    open() {
+    open = () => {
         this.setState({
             isOpen: true,
             filterValue: this.props.filter.value,
         });
-    }
-    close() {
+    };
+    close = () => {
         this.setState({
             isOpen: false,
         });
-    }
-    updateValue(filterValue) {
+    };
+    updateValue = (filterValue) => {
         this.setState({
             filterValue: filterValue,
         });
-    }
-    updateFilter(e) {
+    };
+    updateFilter = (e) => {
         const { dispatch, filter } = this.props;
         dispatch(setFilter(filter.field.path, this.state.filterValue));
         this.close();
         e.preventDefault();
-    }
-    removeFilter() {
+    };
+    removeFilter = () => {
         this.props.dispatch(clearFilter(this.props.filter.field.path));
-    }
+    };
     render() {
         const { filter } = this.props;
         const filterId = `activeFilter__${filter.field.path}`;
@@ -81,7 +81,7 @@ export class Filter extends React.Component<Props, any> {
         );
     }
 }
-interface Props {
+export interface Props {
     dispatch: any;
     filter: {
         field: any,

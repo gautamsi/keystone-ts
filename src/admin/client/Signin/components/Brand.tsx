@@ -34,7 +34,7 @@ export const Brand: React.SFC<Props> = function (props) {
     );
 };
 
-interface Props {
+export interface Props {
     loop?: any;
     logo?: any;
     brand?: any;

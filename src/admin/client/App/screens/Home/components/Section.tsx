@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { getRelatedIconClass } from '../utils/getRelatedIconClass';
 
-interface ISectionProps {
+export interface ISectionProps {
     children: JSX.Element;
     icon?: string;
     id?: string;
