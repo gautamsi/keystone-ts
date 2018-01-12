@@ -35,7 +35,7 @@ const DayPickerIndicator: React.SFC<{ children?: any, activeInputField?: any }> 
 
 
 
-interface Props {
+export interface Props {
     filter?: {
         mode?: any; // ref: React.PropTypes.oneOf(MODE_OPTIONS.map(i => i.value)),
         inverted?: boolean,

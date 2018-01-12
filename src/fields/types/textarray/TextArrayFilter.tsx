@@ -19,7 +19,7 @@ const PRESENCE_OPTIONS = [
     { label: 'No element', value: 'none' },
 ];
 
-interface Props {
+export interface Props {
     filter?: {
         mode?: any; // ref: React.PropTypes.oneOf(MODE_OPTIONS.map(i => i.value)),
         presence?: any; // ref: React.PropTypes.oneOf(PRESENCE_OPTIONS.map(i => i.value)),

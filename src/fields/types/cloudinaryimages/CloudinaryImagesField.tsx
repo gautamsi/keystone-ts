@@ -25,7 +25,7 @@ const RESIZE_DEFAULTS = {
 
 let uploadInc = 1000;
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     secure?: boolean;
 }
 
@@ -44,8 +44,9 @@ export class CloudinaryImagesField extends FieldBase<Props> {
         return [];
     }
 
-    getInitialState() {
-        return this.buildInitialState(this.props);
+    constructor(props) {
+        super(props);
+        this.state = this.buildInitialState(this.props);
     }
     componentWillUpdate(nextProps) {
         // Reset the thumbnails and upload ID when the item value changes

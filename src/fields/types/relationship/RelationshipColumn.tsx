@@ -9,7 +9,7 @@ const moreIndicatorStyle = {
     marginLeft: 8,
 };
 
-interface Props {
+export interface Props {
     col?: any;
     data?: any;
 }

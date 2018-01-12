@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import * as async from 'async';
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
-import xhr from 'xhr';
+import * as xhr from 'xhr';
 
 import {
     FormField,
@@ -17,7 +17,7 @@ const INVERTED_OPTIONS = [
     { label: 'NOT Linked To', value: true },
 ];
 
-interface Props {
+export interface Props {
     field?: any;
     filter?: {
         inverted?: boolean,

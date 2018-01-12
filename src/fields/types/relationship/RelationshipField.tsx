@@ -2,7 +2,7 @@ import * as async from 'async';
 import { listsByKey } from '../../../admin/client/utils/lists';
 import * as React from 'react';
 import Select from 'react-select';
-import xhr from 'xhr';
+import * as xhr from 'xhr';
 import {
     Button,
     FormInput,
@@ -22,7 +22,7 @@ function compareValues(current, next) {
     return true;
 }
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     many?: any;
     filters?: any[];
     createInline?: any;
@@ -36,8 +36,9 @@ export class RelationshipField extends FieldBase<Props> {
     static displayName: string = 'RelationshipField';
     static type: string = 'Relationship';
 
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props);
+        this.state = {
             value: null,
             createIsOpen: false,
         };

@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import * as assign from 'object-assign';
 import * as ensureCallback from 'keystone-storage-namefunctions/ensureCallback';
 import { FieldTypeBase } from '../FieldTypeBase';
 import { Keystone } from '../../../keystone';
@@ -77,10 +76,12 @@ function trimSupportedFileExtensions(publicId) {
 export class CloudinaryImageType extends FieldTypeBase {
     paths: { public_id: string; version: string; signature: string; format: string; resource_type: string; url: string; width: string; height: string; secure_url: string; exists: string; folder: string; select: string; };
 
-
+    get _underscoreMethods() {
+        return ['format'];
+    }
     constructor(list, path, options) {
-        super(list, path, options);
-        this._underscoreMethods = ['format'];
+        super(list, path, options, null);
+        // this._underscoreMethods = ['format'];
         this._fixedSize = 'full';
         this._properties = ['select', 'selectPrefix', 'autoCleanup'];
 
@@ -89,7 +90,7 @@ export class CloudinaryImageType extends FieldTypeBase {
             options.generateFilename = nameFunctions.originalFilename;
             options.whenExists = 'overwrite';
         }
-        options = assign({}, DEFAULT_OPTIONS, options);
+        options = Object.assign({}, DEFAULT_OPTIONS, options);
         options.generateFilename = ensureCallback(options.generateFilename);
 
         // validate cloudinary config
@@ -153,7 +154,7 @@ export class CloudinaryImageType extends FieldTypeBase {
         if (width) options.width = width;
         if (height) options.height = height;
         if (typeof other === 'object') {
-            assign(options, other);
+            Object.assign(options, other);
         }
         return options;
     }
@@ -211,46 +212,46 @@ export class CloudinaryImageType extends FieldTypeBase {
             return schemaMethods.folder.apply(this);
         });
 
-
+        const __this = this;
         const schemaMethods = {
             exists: function () {
-                return this.exists(this);
+                return __this.exists(this);
             },
             folder: function () {
-                return this.getFolder();
+                return __this.getFolder();
             },
             src: function (options) {
-                return this.src(this, options);
+                return __this.src(cloudinary, this, options);
             },
             tag: function (options) {
-                return this.exists(this) ? cloudinary.image(this.get(this.path).public_id, options) : '';
+                return __this.exists(this) ? cloudinary.image(this.get(this.path).public_id, options) : '';
             },
             scale: function (width, height, options) {
-                return this.src(this, this.addSize({ crop: 'scale' }, width, height, options));
+                return __this.src(cloudinary, this, __this.addSize({ crop: 'scale' }, width, height, options));
             },
             fill: function (width, height, options) {
-                return this.src(this, this.addSize({ crop: 'fill', gravity: 'faces' }, width, height, options));
+                return __this.src(cloudinary, this, __this.addSize({ crop: 'fill', gravity: 'faces' }, width, height, options));
             },
             lfill: function (width, height, options) {
-                return this.src(this, this.addSize({ crop: 'lfill', gravity: 'faces' }, width, height, options));
+                return __this.src(cloudinary, this, __this.addSize({ crop: 'lfill', gravity: 'faces' }, width, height, options));
             },
             fit: function (width, height, options) {
-                return this.src(this, this.addSize({ crop: 'fit' }, width, height, options));
+                return __this.src(cloudinary, this, __this.addSize({ crop: 'fit' }, width, height, options));
             },
             limit: function (width, height, options) {
-                return this.src(this, this.addSize({ crop: 'limit' }, width, height, options));
+                return __this.src(cloudinary, this, __this.addSize({ crop: 'limit' }, width, height, options));
             },
             pad: function (width, height, options) {
-                return this.src(this, this.addSize({ crop: 'pad' }, width, height, options));
+                return __this.src(cloudinary, this, __this.addSize({ crop: 'pad' }, width, height, options));
             },
             lpad: function (width, height, options) {
-                return this.src(this, this.addSize({ crop: 'lpad' }, width, height, options));
+                return __this.src(cloudinary, this, __this.addSize({ crop: 'lpad' }, width, height, options));
             },
             crop: function (width, height, options) {
-                return this.src(this, this.addSize({ crop: 'crop', gravity: 'faces' }, width, height, options));
+                return __this.src(cloudinary, this, __this.addSize({ crop: 'crop', gravity: 'faces' }, width, height, options));
             },
             thumbnail: function (width, height, options) {
-                return this.src(this, this.addSize({ crop: 'thumb', gravity: 'faces' }, width, height, options));
+                return __this.src(cloudinary, this, __this.addSize({ crop: 'thumb', gravity: 'faces' }, width, height, options));
             },
             /**
              * Resets the value of the field
@@ -258,7 +259,7 @@ export class CloudinaryImageType extends FieldTypeBase {
              * @api public
              */
             reset: function () {
-                this.reset(this);
+                __this.reset(this);
             },
             /**
              * Deletes the image from Cloudinary and resets the field
@@ -271,7 +272,7 @@ export class CloudinaryImageType extends FieldTypeBase {
                         resolve(result);
                     });
                 });
-                this.reset(this);
+                __this.reset(this);
                 return promise;
             },
             /**
@@ -320,10 +321,11 @@ export class CloudinaryImageType extends FieldTypeBase {
         return typeof value === 'object' ? value : {};
     }
 
-    _originalGetOptions = this.getOptions;
+    // _originalGetOptions = this.getOptions;
 
     getOptions() {
-        this._originalGetOptions();
+        // this._originalGetOptions();
+        super.getOptions();
         // We are performing the check here, so that if cloudinary secure is added
         // to keystone after the model is registered, it will still be respected.
         // Setting secure overrides default `cloudinary secure`

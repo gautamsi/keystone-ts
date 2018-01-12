@@ -6,7 +6,7 @@ import { findDOMNode } from 'react-dom';
 import { FormInput } from 'elemental';
 import * as classnames from 'classnames';
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     editor?: any;
     height?: number;
 }

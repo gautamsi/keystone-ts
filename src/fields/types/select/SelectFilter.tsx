@@ -46,7 +46,7 @@ class FilterOption extends React.Component<FilterProps> {
     }
 }
 
-interface Props {
+export interface Props {
 
     field?: any;
     filter?: {

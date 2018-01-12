@@ -11,7 +11,7 @@ import {
 } from 'elemental';
 import { FieldPropsBase, FieldBase } from '../FieldBase';
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     formatString?: string;
     paths?: {
         date?: any;

@@ -16,11 +16,14 @@ export class DateType extends FieldTypeBase {
     formatString: string;
     parseFormatString: string;
 
+    get _underscoreMethods() {
+        return ['format', 'moment', 'parse'];
+    }
 
     constructor(list, path, options) {
-        super(list, path, options);
+        super(list, path, options, Date);
         this._nativeType = Date;
-        this._underscoreMethods = ['format', 'moment', 'parse'];
+        // this._underscoreMethods = ['format', 'moment', 'parse'];
         this._fixedSize = 'medium';
         this._properties = ['formatString', 'yearRange', 'isUTC', 'inputFormat'];
         this.parseFormatString = options.inputFormat || 'YYYY-MM-DD';

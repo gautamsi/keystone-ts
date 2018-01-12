@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 
-interface Props {
+export interface Props {
     col?: any;
     data?: any;
 }

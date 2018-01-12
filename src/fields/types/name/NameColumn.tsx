@@ -3,7 +3,7 @@ import { ItemsTableCell } from '../../components/ItemsTableCell';
 import { ItemsTableValue } from '../../components/ItemsTableValue';
 import displayName from 'display-name';
 
-interface Props {
+export interface Props {
     col?: any;
     data?: any;
     linkTo?: string;

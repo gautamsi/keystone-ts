@@ -5,6 +5,7 @@ import * as  _ from 'lodash';
 import * as  assign from 'object-assign';
 import * as  di from 'asyncdi';
 import * as  marked from 'marked';
+import * as  mongoose from 'mongoose';
 import { Path } from '../../lib/path';
 import * as  utils from 'keystone-utils';
 import { evalDependsOn } from '../utils/evalDependsOn.js';
@@ -42,7 +43,9 @@ const DEFAULT_OPTION_KEYS = [
  * @api public
  */
 export abstract class FieldTypeBase {
-    _underscoreMethods: any[];
+    get _underscoreMethods() {
+        return [];
+    }
     protected _nativeType: any;
     _fixedSize: any;
     _defaultSize: string;
@@ -56,7 +59,7 @@ export abstract class FieldTypeBase {
     type: string;
     path: string;
     _path: Path;
-    list: List;
+    list: List<any>;
 
     get size() {
         return this.getSize();
@@ -102,16 +105,14 @@ export abstract class FieldTypeBase {
         return this.options.dependsOn || false;
     }
 
-    constructor(list: List, path: string, options, nativeType) {
-        console.log(this);
-        console.log(this['prototype']);
+    constructor(list: List<any>, path: string, options, nativeType) {
         // Set field properties and options
         this.list = list;
         this._path = new Path(path);
         this.path = path;
         this._nativeType = nativeType;
 
-        this.type = this.constructor.name;
+        this.type = this.constructor.name.replace('Type', '');
         this.options = _.defaults({}, options, this.defaults);
         this.label = options.label || utils.keyToLabel(this.path);
         this.typeDescription = options.typeDescription || this.typeDescription || this.type;
@@ -290,7 +291,7 @@ export abstract class FieldTypeBase {
      * Default method to register the field on the List's Mongoose Schema.
      * Overridden by some fieldType Classes
      */
-    addToSchema(schema) {
+    addToSchema(schema: mongoose.Schema) {
         const ops = (this._nativeType) ? _.defaults({ type: this._nativeType }, this.options) : this.options;
         schema.path(this.path, ops);
         this.bindUnderscoreMethods();
@@ -302,6 +303,7 @@ export abstract class FieldTypeBase {
      * Always includes the `update` method
      */
     bindUnderscoreMethods() {
+        // let __this = this;
         (this._underscoreMethods || []).concat({ fn: 'updateItem', as: 'update' }).forEach((method) => {
             if (typeof method === 'string') {
                 method = { fn: method, as: method };
@@ -309,9 +311,9 @@ export abstract class FieldTypeBase {
             if (typeof this[method.fn] !== 'function') {
                 throw new Error('Invalid underscore method (' + method.fn + ') applied to ' + this.list.key + '.' + this.path + ' (' + this.type + ')');
             }
-            this.underscoreMethod(method.as, () => {
-                const args = [this].concat(Array.prototype.slice.call(arguments));
-                return this[method.fn].apply(this, args);
+            this.underscoreMethod(method.as, (...args) => {
+                // const args = [modal].concat(Array.prototype.slice.call(arguments));
+                return this[method.fn].call(this, ...args);
             });
         });
     }
@@ -320,9 +322,10 @@ export abstract class FieldTypeBase {
      * Adds a method to the underscoreMethods collection on the field's list,
      * with a path prefix to match this field's path and bound to the document
      */
-    underscoreMethod(path, fn) {
-        this.list.underscoreMethod(this.path + '.' + path, () => {
-            return fn.apply(this, arguments);
+    underscoreMethod(path, fn: Function) {
+        this.list.underscoreMethod(this.path + '.' + path, function () { // ref: can not do arrw function, 'this' is set by mongoose to be modal instance. arrow function breaks 'this' from mongoose
+            // return fn.apply(this, [this].concat(Array.prototype.slice.call(arguments)));
+            return fn.call(this, this, ...arguments);
         });
     }
 

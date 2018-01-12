@@ -1,9 +1,9 @@
 import * as React from 'react';
-import numeral from 'numeral';
+import * as numeral from 'numeral';
 import { ItemsTableCell } from '../../components/ItemsTableCell';
 import { ItemsTableValue } from '../../components/ItemsTableValue';
 
-interface Props {
+export interface Props {
     col?: any;
     data?: any;
 }

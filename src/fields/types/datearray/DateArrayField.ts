@@ -6,7 +6,7 @@ import * as moment from 'moment';
 const DEFAULT_INPUT_FORMAT = 'YYYY-MM-DD';
 const DEFAULT_FORMAT_STRING = 'Do MMM YYYY';
 
-interface Props extends ArrayFieldPropsBase {
+export interface Props extends ArrayFieldPropsBase {
     formatString?: string;
     inputFormat?: string;
 }

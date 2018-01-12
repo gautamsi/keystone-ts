@@ -10,10 +10,14 @@ import { addPresenceToQuery } from '../../utils/addPresenceToQuery';
 export class TextArrayType extends FieldTypeBase {
     separator: string;
 
+    get _underscoreMethods() {
+        return ['format'];
+    }
+
     constructor(list, path, options) {
-        super(list, path, options);
+        super(list, path, options, [String]);
         this._nativeType = [String];
-        this._underscoreMethods = ['format'];
+        // this._underscoreMethods = ['format'];
         this.separator = options.separator || ' | ';
     }
     static properName = 'TextArray';

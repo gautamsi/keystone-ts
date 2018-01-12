@@ -12,7 +12,7 @@ import {
 } from 'elemental';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     paths?: any;
     enableMapsAPI?: boolean;
 }

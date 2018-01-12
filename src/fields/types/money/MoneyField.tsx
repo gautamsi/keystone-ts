@@ -2,7 +2,7 @@ import { FormInput } from 'elemental';
 import * as React from 'react';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     onChange: any;
     path: string;
     value?: number;

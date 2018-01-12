@@ -27,6 +27,10 @@ export class RelationshipType extends FieldTypeBase {
         return (this.filters && _.keys(this.filters).length);
     }
 
+    get _underscoreMethods() {
+        return ['format', 'getExpandedData'];
+    }
+
     constructor(list, path, options) {
         super(list, path, options, keystone.mongoose.Schema.Types.ObjectId);
         this.many = (options.many) ? true : false;
@@ -34,7 +38,7 @@ export class RelationshipType extends FieldTypeBase {
         this.createInline = (options.createInline) ? true : false;
         this._defaultSize = 'full';
         // this._nativeType = keystone.mongoose.Schema.Types.ObjectId;
-        this._underscoreMethods = ['format', 'getExpandedData'];
+        // this._underscoreMethods = ['format', 'getExpandedData'];
         this._properties = ['isValid', 'many', 'filters', 'createInline'];
     }
     static properName = 'Relationship';

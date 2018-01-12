@@ -24,7 +24,7 @@ function removeTinyMCEInstance(editor) {
     }
 }
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     wysiwyg?: any;
     height?: any;
 }

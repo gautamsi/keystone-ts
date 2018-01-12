@@ -15,12 +15,15 @@ export class DateArrayType extends FieldTypeBase {
     parseFormatString: string;
     separator: string;
 
+    get _underscoreMethods() {
+        return ['format'];
+    }
 
     constructor(list, path, options) {
-        super(list, path, options);
+        super(list, path, options, [Date]);
         this._nativeType = [Date];
         this._defaultSize = 'medium';
-        this._underscoreMethods = ['format'];
+        // this._underscoreMethods = ['format'];
         this._properties = ['formatString'];
         this.parseFormatString = options.parseFormat || 'YYYY-MM-DD';
         this.formatString = (options.format === false) ? false : (options.format || 'Do MMM YYYY');

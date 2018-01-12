@@ -10,11 +10,15 @@ import * as utils from 'keystone-utils';
 export class NumberType extends FieldTypeBase {
     formatString: string;
 
+    get _underscoreMethods() {
+        return ['format'];
+    }
+
     constructor(list, path, options) {
         super(list, path, options, Number);
         // this._nativeType = Number;
         this._fixedSize = 'small';
-        this._underscoreMethods = ['format'];
+        // this._underscoreMethods = ['format'];
         this.formatString = (options.format === false) ? false : (options.format || '0,0[.][000000000000]');
         if (this.formatString && typeof this.formatString !== 'string') {
             throw new Error('FieldType.Number: options.format must be a string.');

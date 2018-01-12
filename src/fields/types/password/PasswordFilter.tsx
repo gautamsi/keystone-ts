@@ -7,7 +7,7 @@ const EXISTS_OPTIONS = [
     { label: 'Is NOT Set', value: false },
 ];
 
-interface Props {
+export interface Props {
     filter?: {
         exists?: any; // ref: React.PropTypes.oneOf(EXISTS_OPTIONS.map(i => i.value)),
     };

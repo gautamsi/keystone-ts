@@ -55,7 +55,7 @@ export const CloudinaryImagesThumbnail: React.SFC<Props> = ({
 
 };
 
-interface Props {
+export interface Props {
     imageSourceLarge?: string;
     imageSourceSmall: string;
     isDeleted?: boolean;

@@ -16,7 +16,7 @@ export class DatetimeType extends DateType {
     constructor(list, path, options) {
         super(list, path, options);
         this._nativeType = Date;
-        this._underscoreMethods = ['format', 'moment', 'parse'];
+        // this._underscoreMethods = ['format', 'moment', 'parse'];
         this._fixedSize = 'full';
         this._properties = ['formatString', 'isUTC'];
         this.typeDescription = 'date and time';

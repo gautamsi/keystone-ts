@@ -6,7 +6,7 @@ const VALUE_OPTIONS = [
     { label: 'Is NOT Checked', value: false },
 ];
 
-interface Props {
+export interface Props {
     filter?: {
         value?: boolean,
     };

@@ -13,7 +13,7 @@ const REGEXP_LNGLAT = /^\s*(\-?\d+(?:\.\d+)?)\s*\,\s*(\-?\d+(?:\.\d+)?)\s*$/;
 export class GeoPointType extends FieldTypeBase {
 
     constructor(list, path, options) {
-        super(list, path, options);
+        super(list, path, options, [Number]);
         this._fixedSize = 'medium';
     }
     static properName = 'GeoPoint';

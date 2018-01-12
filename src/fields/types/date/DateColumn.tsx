@@ -3,7 +3,7 @@ import * as moment from 'moment';
 import { ItemsTableCell } from '../../components/ItemsTableCell';
 import { ItemsTableValue } from '../../components/ItemsTableValue';
 
-interface Props {
+export interface Props {
     col?: any;
     data?: any;
     linkTo?: string;

@@ -11,7 +11,7 @@ import {
 import { transparentSwatch } from './transparent-swatch';
 import { theme } from '../../../admin/client/theme';
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     onChange?: any;
     path?: string;
     value?: string;

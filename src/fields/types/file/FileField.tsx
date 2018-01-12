@@ -24,7 +24,7 @@ const buildInitialState = (props) => ({
     userSelectedFile: null,
 });
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     autoCleanup?: boolean;
     collapse?: boolean;
     label?: string;

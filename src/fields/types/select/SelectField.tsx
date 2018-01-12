@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { FormInput } from 'elemental';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     numeric?: any;
     ops?: any;
 }

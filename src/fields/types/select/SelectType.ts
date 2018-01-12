@@ -17,12 +17,16 @@ export class SelectType extends FieldTypeBase {
     map: any;
     emptyOption: boolean;
 
+    get _underscoreMethods() {
+        return ['format', 'pluck'];
+    }
+
     constructor(list, path, options) {
         super(list, path, options, (options.numeric) ? Number : String);
         this.ui = options.ui || 'select';
         this.numeric = options.numeric ? true : false;
         // this._nativeType = (options.numeric) ? Number : String;
-        this._underscoreMethods = ['format', 'pluck'];
+        // this._underscoreMethods = ['format', 'pluck'];
         this._properties = ['ops', 'numeric'];
         if (typeof options.options === 'string') {
             options.options = options.options.split(',');

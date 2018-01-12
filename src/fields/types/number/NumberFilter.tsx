@@ -15,7 +15,7 @@ const MODE_OPTIONS = [
     { label: 'Between', value: 'between' },
 ];
 
-interface Props {
+export interface Props {
     field?: any;
     filter?: any;
     onChange?: any;

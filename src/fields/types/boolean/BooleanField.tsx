@@ -5,7 +5,7 @@ import { FormField } from 'elemental';
 
 const NOOP = () => { };
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     indent?: boolean;
     label?: string;
     onChange: any;

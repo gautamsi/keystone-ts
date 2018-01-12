@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import * as assign from 'object-assign';
 import * as async from 'async';
 import { FieldTypeBase } from '../FieldTypeBase';
 import { keystone } from '../../../keystone';
@@ -27,10 +26,12 @@ function truthy(value) {
  */
 export class CloudinaryImagesType extends FieldTypeBase {
     paths: { folder: string; upload: string; uploads: string; action: string; };
-
+    get _underscoreMethods() {
+        return ['format'];
+    }
     constructor(list, path, options) {
-        super(list, path, options);
-        this._underscoreMethods = ['format'];
+        super(list, path, options, null);
+        // this._underscoreMethods = ['format'];
         this._fixedSize = 'full';
         this._properties = ['select', 'selectPrefix', 'autoCleanup', 'publicID', 'folder', 'filenameAsPublicID'];
 
@@ -127,7 +128,7 @@ export class CloudinaryImagesType extends FieldTypeBase {
             if (width) options.width = width;
             if (height) options.height = height;
             if (typeof other === 'object') {
-                assign(options, other);
+                Object.assign(options, other);
             }
             return options;
         };
@@ -223,12 +224,13 @@ export class CloudinaryImagesType extends FieldTypeBase {
     }
 
 
-    _originalGetOptions() {
-        return this.getOptions();
-    }
+    // _originalGetOptions() {
+    //     return this.getOptions();
+    // }
 
     getOptions() {
-        this._originalGetOptions();
+        // this._originalGetOptions();
+        super.getOptions();
         // We are performing the check here, so that if cloudinary secure is added
         // to keystone after the model is registered, it will still be respected.
         // Setting secure overrides default `cloudinary secure`
@@ -332,7 +334,7 @@ export class CloudinaryImagesType extends FieldTypeBase {
                 // Cloudinary Image data provided
                 if (value.public_id) {
                     // Default the object with empty values
-                    const v = assign(getEmptyValue(), value);
+                    const v = Object.assign(getEmptyValue(), value);
                     return next(null, v);
                 } else {
                     // public_id is falsy, remove the value
@@ -343,7 +345,7 @@ export class CloudinaryImagesType extends FieldTypeBase {
                 let uploadOptions = getUploadOptions();
                 // NOTE: field.options.publicID has been deprecated (tbc)
                 if (field.options.filenameAsPublicID && value.originalname && typeof value.originalname === 'string') {
-                    uploadOptions = assign({}, uploadOptions, {
+                    uploadOptions = Object.assign({}, uploadOptions, {
                         public_id: value.originalname.substring(0, value.originalname.lastIndexOf('.')),
                     });
                 }

@@ -18,10 +18,14 @@ export class LocationType extends FieldTypeBase {
     requiredPaths: any;
     enableMapsAPI: boolean;
 
+    get _underscoreMethods() {
+        return ['format', 'googleLookup', 'kmFrom', 'milesFrom'];
+    }
+
     constructor(list, path, options) {
 
-        super(list, path, options);
-        this._underscoreMethods = ['format', 'googleLookup', 'kmFrom', 'milesFrom'];
+        super(list, path, options, null);
+        // this._underscoreMethods = ['format', 'googleLookup', 'kmFrom', 'milesFrom'];
         this._fixedSize = 'full';
         this._properties = ['enableMapsAPI'];
         this.enableMapsAPI = (options.enableImprove === true || (options.enableImprove !== false && keystone.get('google server api key'))) ? true : false;

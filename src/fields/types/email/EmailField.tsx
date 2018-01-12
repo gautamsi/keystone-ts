@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormInput } from 'elemental';
 import { FieldPropsBase, FieldBase } from '../FieldBase';
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     path: string;
     value?: string;
 }

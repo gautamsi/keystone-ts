@@ -118,7 +118,7 @@ let escapeHtmlForRender = function (html) {
         .replace(/\n/g, '<br />');
 };
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     paths?: any;
     wysiwyg?: any;
     height?: any;

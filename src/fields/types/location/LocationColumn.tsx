@@ -4,7 +4,7 @@ import { ItemsTableValue } from '../../components/ItemsTableValue';
 
 const SUB_FIELDS = ['street1', 'suburb', 'state', 'postcode', 'country'];
 
-interface Props {
+export interface Props {
     col?: any;
     data?: any;
 }

@@ -8,7 +8,7 @@ const moreIndicatorStyle = {
     fontSize: '.8rem',
 };
 
-interface Props {
+export interface Props {
     col?: any;
     data?: any;
 }

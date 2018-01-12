@@ -7,12 +7,12 @@ import {
 import { FieldPropsBase, FieldBase } from '../FieldBase';
 
 // tslint:disable-next-line:class-name
-interface NameShape {
+export interface NameShape {
     first?: string;
     last?: string;
 }
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     onChange: any;
     path: string;
     paths: NameShape;

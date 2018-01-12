@@ -12,7 +12,7 @@ export class BooleanType extends FieldTypeBase {
 
 
     constructor(list, path, options) {
-        super(list, path, options);
+        super(list, path, options, Boolean);
         this._nativeType = Boolean;
         this._properties = ['indent'];
         this._fixedSize = 'full';

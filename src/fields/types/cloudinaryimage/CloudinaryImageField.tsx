@@ -25,7 +25,7 @@ const buildInitialState = (props) => ({
     userSelectedFile: null,
 });
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     secure?: boolean;
 }
 
@@ -39,8 +39,9 @@ export class CloudinaryImageField extends FieldBase<Props> {
     static type: string = 'CloudinaryImage';
     static getDefaultValue() { return {}; }
 
-    getInitialState() {
-        return buildInitialState(this.props);
+    constructor(props) {
+        super(props);
+        this.state = buildInitialState(this.props);
     }
     componentWillReceiveProps(nextProps) {
         // console.log('CloudinaryImageField nextProps:', nextProps);

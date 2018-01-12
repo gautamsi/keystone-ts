@@ -9,10 +9,14 @@ import * as utils from 'keystone-utils';
  */
 export class TextType extends FieldTypeBase {
 
+    get _underscoreMethods() {
+        return ['crop'];
+    }
+
     constructor(list, path, options) {
         super(list, path, options, String);
         this._properties = ['monospace'];
-        this._underscoreMethods = ['crop'];
+        // this._underscoreMethods = ['crop'];
     }
     static properName = 'Text';
 

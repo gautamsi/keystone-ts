@@ -15,7 +15,7 @@ export class MoneyType extends NumberType {
         super(list, path, options);
         this.currency = options.currency;
         this._nativeType = Number;
-        this._underscoreMethods = ['format'];
+        // this._underscoreMethods = ['format'];
         this._properties = ['currency'];
         this._fixedSize = 'small';
         this._formatString = (options.format === false) ? false : (options.format || '$0,0.00');

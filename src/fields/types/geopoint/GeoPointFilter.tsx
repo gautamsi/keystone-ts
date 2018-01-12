@@ -12,7 +12,7 @@ const DISTANCE_OPTIONS = [
     { label: 'Min distance (km)', value: 'min' },
 ];
 
-interface Props {
+export interface Props {
     filter?: {
         lat?: number,
         lon?: number,

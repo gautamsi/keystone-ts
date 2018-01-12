@@ -16,7 +16,7 @@ TODO: Implement yearRange Prop, or deprecate for max / min values (better)
 const DEFAULT_INPUT_FORMAT = 'YYYY-MM-DD';
 const DEFAULT_FORMAT_STRING = 'Do MMM YYYY';
 
-interface Props extends FieldPropsBase {
+export interface Props extends FieldPropsBase {
     formatString?: string;
     inputFormat?: string;
     label?: string;

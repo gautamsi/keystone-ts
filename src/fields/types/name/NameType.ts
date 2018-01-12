@@ -12,7 +12,7 @@ export class NameType extends FieldTypeBase {
     paths: any;
 
     constructor(list, path, options) {
-        super(list, path, options);
+        super(list, path, options, String);
         this._fixedSize = 'full';
         options.default = { first: '', last: '' };
     }

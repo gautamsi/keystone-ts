@@ -18,10 +18,14 @@ export class EmbedlyType extends FieldTypeBase {
     fromPath: any;
     embedlyOptions: any;
 
+    get _underscoreMethods() {
+        return ['reset'];
+    }
+
     constructor(list, path, options) {
 
-        super(list, path, options);
-        this._underscoreMethods = ['reset'];
+        super(list, path, options, null);
+        // this._underscoreMethods = ['reset'];
         this._fixedSize = 'full';
         this.fromPath = options.from;
         this.embedlyOptions = options.options || {};

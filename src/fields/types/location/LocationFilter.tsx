@@ -13,7 +13,7 @@ const INVERTED_OPTIONS = [
     { label: 'Does NOT Match', value: true },
 ];
 
-interface Props {
+export interface Props {
     filter?: {
         inverted?: boolean;
         street?: string;

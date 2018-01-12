@@ -13,9 +13,13 @@ export class FileType extends FieldTypeBase {
     paths: {};
     storage: any;
 
+    get _underscoreMethods() {
+        return ['format', 'upload', 'remove', 'reset'];
+    }
+
     constructor(list, path, options) {
-        super(list, path, options);
-        this._underscoreMethods = ['format', 'upload', 'remove', 'reset'];
+        super(list, path, options, null);
+        // this._underscoreMethods = ['format', 'upload', 'remove', 'reset'];
         this._fixedSize = 'full';
 
         if (!options.storage) {
