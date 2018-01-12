@@ -68,7 +68,7 @@ export function fade (color, opacity = 100) {
 	2. combine back into a hex value
 */
 
-function shade (color, percent) {
+export function shade (color, percent) {
 	const decimalFraction = percent / 100;
 	const hex = validateHex(color);
 

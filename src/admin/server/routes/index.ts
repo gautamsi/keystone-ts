@@ -1,3 +1,4 @@
+import { getToken, CSRF_HEADER_KEY } from '../../../lib/security/csrf';
 import * as _ from 'lodash';
 import * as ejs from 'ejs';
 import * as path from 'path';
@@ -56,7 +57,7 @@ export function IndexRoute(req, res) {
             }
         },
     };
-    keystoneData.csrf.header[keystone.security.csrf.CSRF_HEADER_KEY] = keystone.security.csrf.getToken(req, res);
+    keystoneData.csrf.header[CSRF_HEADER_KEY] = getToken(req, res);
 
     const codemirrorPath = keystone.get('codemirror url path')
         ? '/' + keystone.get('codemirror url path')

@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import * as assign from 'object-assign';
 import { Keystone } from '../../keystone';
 import * as utils from 'keystone-utils';
 import { Type } from './type';
@@ -23,7 +22,7 @@ export class Page {
             return new Page(key, options);
         }
 
-        this.options = assign({}, options);
+        this.options = Object.assign({}, options);
         this.key = key;
         this.fields = {};
 

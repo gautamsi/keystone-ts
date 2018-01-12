@@ -1,3 +1,5 @@
+import {Keystone} from '../../../keystone';
+import { persist, keystoneAuth } from '../../../lib/session';
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import * as multer from 'multer';
@@ -19,7 +21,7 @@ import { cloudinaryHandler } from '../api/cloudinary';
 import { s3Handler } from '../api/s3';
 import { countsHandler } from '../api/counts';
 
-export function createDynamicRouter(keystone) {
+export function createDynamicRouter(keystone: Keystone): any {
     // ensure keystone nav has been initialised
     // TODO: move this elsewhere (on demand generation, or client-side?)
     if (!keystone.nav) {
@@ -66,11 +68,11 @@ export function createDynamicRouter(keystone) {
             keystone.set('signin url', '/' + keystone.get('admin path') + '/signin');
         }
         if (!keystone.nativeApp || !keystone.get('session')) {
-            router.all('*', keystone.session.persist);
+            router.all('*', persist);
         }
         router.all('/signin', SigninRoute);
         router.all('/signout', SignoutRoute);
-        router.use(keystone.session.keystoneAuth);
+        router.use(keystoneAuth);
     } else if (typeof keystone.get('auth') === 'function') {
         router.use(keystone.get('auth'));
     }

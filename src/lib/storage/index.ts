@@ -1,4 +1,3 @@
-import * as assign from 'object-assign';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as mime from 'mime-types';
@@ -63,7 +62,7 @@ export class Storage {
 
     constructor(options) {
         // we're going to mutate options so get a clean copy of it
-        options = assign({}, options);
+        options = Object.assign({}, options);
 
         const AdapterType = options.adapter;
         delete options.adapter;
@@ -85,7 +84,7 @@ export class Storage {
         }
 
         // assign ensures the default schema constant isn't exposed as a property
-        const schemaFields = assign({}, SCHEMA_FIELD_DEFAULTS, AdapterType.SCHEMA_FIELD_DEFAULTS, options.schema);
+        const schemaFields = Object.assign({}, SCHEMA_FIELD_DEFAULTS, AdapterType.SCHEMA_FIELD_DEFAULTS, options.schema);
         delete options.schema;
 
         // Copy requested fields into local schema.
@@ -182,4 +181,4 @@ function normalizeFile(file, schema, callback) {
 	public url for the file. The result is what is saved back to the field.
 */
 
-assign(Storage, nameFunctions);
+Object.assign(Storage, nameFunctions);

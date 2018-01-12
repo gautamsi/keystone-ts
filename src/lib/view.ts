@@ -6,7 +6,7 @@ import { Request, Response } from 'express';
 
 import * as _ from 'lodash';
 import * as async from 'async';
-import { Keystone } from '../keystone';
+import { Keystone, keystone } from '../keystone';
 import * as utils from 'keystone-utils';
 
 /**
@@ -47,7 +47,7 @@ export class View {
 
     }
 
-    on(on) {
+    on(on, func?, func2?) {
 
         const req = this.req;
         let callback = arguments[1];
@@ -223,7 +223,7 @@ export class View {
      * @api public
      */
 
-    query(key, query, options) {
+    query(key, query, options?): any {
 
         let locals = this.res.locals;
         const parts = key.split('.');
@@ -298,19 +298,19 @@ export class View {
      *
      * @api public
      */
-    render(renderFn, locals, callback) {
+    render(renderFn, locals?, callback?) {
 
         const req = this.req;
         const res = this.res;
 
         if (typeof renderFn === 'string') {
             const viewPath = renderFn;
-            renderFn = function () {
+            renderFn = () => {
                 if (typeof locals === 'function') {
                     locals = locals();
                 }
                 this.res.render(viewPath, locals, callback);
-            }.bind(this);
+            };
         }
 
         if (typeof renderFn !== 'function') {

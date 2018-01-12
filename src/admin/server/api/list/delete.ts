@@ -1,8 +1,9 @@
+import { validate } from '../../../../lib/security/csrf';
 import * as async from 'async';
 
 export function delete_(req, res) {
     const keystone = req.keystone;
-    if (!keystone.security.csrf.validate(req)) {
+    if (!validate(req)) {
         console.log('Refusing to delete ' + req.list.key + ' items; CSRF failure');
         return res.apiError(403, 'invalid csrf');
     }

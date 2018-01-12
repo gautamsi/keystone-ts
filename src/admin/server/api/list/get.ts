@@ -1,5 +1,4 @@
 import * as async from 'async';
-import * as assign from 'object-assign';
 import * as listToArray from 'list-to-array';
 
 export function get(req, res) {
@@ -24,10 +23,10 @@ export function get(req, res) {
         catch (e) { } // eslint-disable-line no-empty
     }
     if (typeof filters === 'object') {
-        assign(where, req.list.addFiltersToQuery(filters));
+        Object.assign(where, req.list.addFiltersToQuery(filters));
     }
     if (req.query.search) {
-        assign(where, req.list.addSearchToQuery(req.query.search));
+        Object.assign(where, req.list.addSearchToQuery(req.query.search));
     }
     const query = req.list.model.find(where);
     if (req.query.populate) {

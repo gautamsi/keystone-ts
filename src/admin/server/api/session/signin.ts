@@ -1,9 +1,10 @@
+import { validate } from '../../../../lib/security/csrf';
 import * as  utils from 'keystone-utils';
 import { signinWithUser } from '../../../../lib/session';
 
 export function signin(req, res) {
     const keystone = req.keystone;
-    if (!keystone.security.csrf.validate(req)) {
+    if (!validate(req)) {
         return res.apiError(403, 'invalid csrf');
     }
     if (!req.body.email || !req.body.password) {

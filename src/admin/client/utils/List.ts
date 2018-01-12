@@ -6,7 +6,6 @@
 import * as listToArray from 'list-to-array';
 import * as qs from 'qs';
 import * as xhr from 'xhr';
-import * as assign from 'object-assign';
 // Filters for truthy elements in an array
 const truthy = (i) => i;
 
@@ -93,7 +92,7 @@ export class List {
 
     constructor(options) {
         // TODO these options are possibly unused
-        assign(this, options);
+        Object.assign(this, options);
         this.columns = getColumns(this);
         this.expandedDefaultColumns = this.expandColumns(this.defaultColumns);
         this.defaultColumnPaths = this.expandedDefaultColumns.map(i => i.path).join(',');
@@ -111,7 +110,7 @@ export class List {
             url: `${Keystone.adminPath}/api/${this.path}/create`,
             responseType: 'json',
             method: 'POST',
-            headers: assign({}, Keystone.csrf.header),
+            headers: Object.assign({}, Keystone.csrf.header),
             body: formData,
         }, (err, resp, data) => {
             if (err) callback(err);
@@ -139,7 +138,7 @@ export class List {
             url: `${Keystone.adminPath}/api/${this.path}/${id}`,
             responseType: 'json',
             method: 'POST',
-            headers: assign({}, Keystone.csrf.header),
+            headers: Object.assign({}, Keystone.csrf.header),
             body: formData,
         }, (err, resp, data) => {
             if (err) return callback(err);
@@ -326,7 +325,7 @@ export class List {
         xhr({
             url: url,
             method: 'POST',
-            headers: assign({}, Keystone.csrf.header),
+            headers: Object.assign({}, Keystone.csrf.header),
             json: {
                 ids: itemIds,
             },
@@ -346,7 +345,7 @@ export class List {
         xhr({
             url: url,
             method: 'POST',
-            headers: assign({}, Keystone.csrf.header),
+            headers: Object.assign({}, Keystone.csrf.header),
         }, (err, resp, body) => {
             if (err) return callback(err);
             try {

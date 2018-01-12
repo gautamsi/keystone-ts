@@ -19,7 +19,7 @@ function buildFieldTypesStream(fieldTypes) {
         src += 'export const ' + i + 's = {\n';
         types.forEach(function (type) {
             if (typeof fieldTypes[type] !== 'string') return;
-            src += type + ': require("../../fields/types/' + type + '/' + fieldTypes[type] + i + '"),\n';
+            src += type + ': require("../../fields/types/' + type.replace('Type', '') + '/' + fieldTypes[type] + i + '"),\n';
         });
         // Append ID and Unrecognised column types
         if (i === 'Column') {
@@ -32,7 +32,7 @@ function buildFieldTypesStream(fieldTypes) {
     return str(src);
 }
 
-export function createStaticRouter(keystone) {
+export function createStaticRouter(keystone): any {
     const keystoneHash = keystone.createKeystoneHash();
     const writeToDisk = keystone.get('cache admin bundles');
     const router = express.Router();

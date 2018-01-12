@@ -1,6 +1,7 @@
 import * as connectFlash from 'connect-flash';
 import { Keystone } from '../keystone';
 import { Application } from 'express';
+import { persist } from '../lib/session';
 
 export function bindSessionMiddleware(keystone: Keystone, app: Application) {
 
@@ -18,7 +19,7 @@ export function bindSessionMiddleware(keystone: Keystone, app: Application) {
     app.use(connectFlash());
 
     if (keystone.get('session') === true) {
-        app.use(keystone.session.persist);
+        app.use(persist);
     } else if (typeof keystone.get('session') === 'function') {
         app.use(keystone.get('session'));
     }

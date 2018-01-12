@@ -1,6 +1,7 @@
+import { validate } from '../../../../lib/security/csrf';
 export function update(req, res) {
     const keystone = req.keystone;
-    if (!keystone.security.csrf.validate(req)) {
+    if (!validate(req)) {
         return res.apiError(403, 'invalid csrf');
     }
     req.list.model.findById(req.params.id, function (err, item) {

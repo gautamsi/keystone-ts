@@ -1,5 +1,4 @@
 import * as _ from 'lodash';
-import * as assign from 'object-assign';
 
 // NOTE: the old signature was UpdateHandler (list, item, req, res, options)
 // the `res` argument has been deprecated, but we still detect and handle it
@@ -55,7 +54,7 @@ export class UpdateHandler {
         const item = this.item;
         const list = this.list;
         const req = this.req;
-        options = assign({}, this.options, options);
+        options = Object.assign({}, this.options, options);
 
         // pass the user from the request by default
         if (!options.user) {

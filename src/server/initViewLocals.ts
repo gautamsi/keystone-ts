@@ -1,9 +1,8 @@
-import * as assign from 'object-assign';
 
 export function initViewLocals(keystone, app) {
     // Apply locals
     if (typeof keystone.get('locals') === 'object') {
-        assign(app.locals, keystone.get('locals'));
+        Object.assign(app.locals, keystone.get('locals'));
     }
 
     // Default "pretty html" mode except in production

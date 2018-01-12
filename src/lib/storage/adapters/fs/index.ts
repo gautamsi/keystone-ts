@@ -1,4 +1,3 @@
-import * as assign from 'object-assign';
 import * as ensureCallback from 'keystone-storage-namefunctions/ensureCallback';
 import * as fs from 'fs-extra';
 import * as nameFunctions from 'keystone-storage-namefunctions';
@@ -45,7 +44,7 @@ export class FSAdapter {
     constructor(options, schema) {
         if (!schema.filename) throw Error('Cannot use FSAdapter without storing filename');
 
-        this.options = assign({}, DEFAULT_OPTIONS, options.fs);
+        this.options = Object.assign({}, DEFAULT_OPTIONS, options.fs);
         debug('Initialising FS Adapter with options', this.options);
 
         this.options.generateFilename = ensureCallback(this.options.generateFilename);
@@ -80,7 +79,7 @@ export class FSAdapter {
         if (!publicPath) return null; // No URL.
 
         return url.resolve(publicPath, file.filename);
-    };
+    }
 
     /**
         Private function for getting the on-disk filename

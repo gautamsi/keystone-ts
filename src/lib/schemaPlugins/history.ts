@@ -45,7 +45,7 @@ export function history() {
     const collectionName = getHistoryModelName(list);
     if (list.get('inherits')
         && collectionName.indexOf(historyModelSuffix, collectionName.length - historyModelSuffix.length) !== -1
-        && keystone.mongoose.models[collectionName]) {
+        && keystone.mongoose.model[collectionName]) {
         console.log('List/model already exists for ' + collectionName + ".\nWon't re-create, keystone continuing.");
         return;
     }

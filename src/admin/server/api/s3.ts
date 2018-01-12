@@ -1,3 +1,4 @@
+import { validate } from '../../../lib/security/csrf';
 import * as knox from 'knox';
 
 /*
@@ -9,7 +10,7 @@ function upload(req, res) {
     const keystone = req.keystone;
     const Types = keystone.Field.Types;
 
-    if (!keystone.security.csrf.validate(req, req.body.authenticity_token)) {
+    if (!validate(req, req.body.authenticity_token)) {
         return res.status(403).send({ error: { message: 'invalid csrf' } });
     }
 

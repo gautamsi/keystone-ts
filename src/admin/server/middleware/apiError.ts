@@ -1,4 +1,3 @@
-import * as assign from 'object-assign';
 
 /*
 	This middleware simplifies returning errors from the API.
@@ -43,7 +42,7 @@ export function apiErrorMiddleware(req, res, next) {
             ? { error: error, detail: detail }
             : error;
         res.json(data);
-        return assign({
+        return Object.assign({
             statusCode: statusCode,
         }, data);
     };

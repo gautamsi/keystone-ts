@@ -3,7 +3,6 @@ TODO: Needs Review and Spec
 */
 
 import * as moment from 'moment';
-import * as assign from 'object-assign';
 import * as baby from 'babyparse';
 
 export function download(req, res, next) {
@@ -17,10 +16,10 @@ export function download(req, res, next) {
 		catch (e) { /* */ }
 	}
 	if (typeof filters === 'object') {
-		assign(where, req.list.addFiltersToQuery(filters));
+		Object.assign(where, req.list.addFiltersToQuery(filters));
 	}
 	if (req.query.search) {
-		assign(where, req.list.addSearchToQuery(req.query.search));
+		Object.assign(where, req.list.addSearchToQuery(req.query.search));
 	}
 	const query = req.list.model.find(where);
 	if (req.query.populate) {

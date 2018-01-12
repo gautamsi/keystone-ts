@@ -2,7 +2,7 @@ import * as chalk from 'chalk';
 import * as crypto from 'crypto';
 import * as fs from 'fs-extra';
 import * as moment from 'moment';
-import { packages } from '../../client/packages';
+import * as packages from '../../client/packages';
 import * as path from 'path';
 
 const basedir = path.resolve(__dirname + '/../../client/');

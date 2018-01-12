@@ -1,3 +1,4 @@
+import { validate } from '../../../../lib/security/csrf';
 /*
 TODO: Needs Review and Spec
 */
@@ -6,7 +7,7 @@ import * as async from 'async';
 
 export function update(req, res) {
     const keystone = req.keystone;
-    if (!keystone.security.csrf.validate(req)) {
+    if (!validate(req)) {
         return res.apiError(403, 'invalid csrf');
     }
     // var updateCount = 0;

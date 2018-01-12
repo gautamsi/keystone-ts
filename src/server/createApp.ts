@@ -1,3 +1,4 @@
+import { createStaticRouter, createDynamicRouter } from '../admin/server';
 import * as compression from 'compression';
 import * as favicon from 'serve-favicon';
 import * as methodOverride from 'method-override';
@@ -21,7 +22,7 @@ import { bindRedirectsHandler } from './bindRedirectsHandler';
 import { bindErrorHandlers } from './bindErrorHandlers';
 import { frameGuard } from '../lib/security/frameGuard';
 
-export function createApp(keystone, express) {
+export function createApp(keystone, express?) {
 
     if (!keystone.app) {
         if (!express) {
@@ -64,7 +65,7 @@ export function createApp(keystone, express) {
     // unless the headless option is set (which disables the Admin UI),
     // bind the Admin UI's Static Router for public resources
     if (!keystone.get('headless')) {
-        app.use('/' + keystone.get('admin path'), require('../admin/server').createStaticRouter(keystone));
+        app.use('/' + keystone.get('admin path'), createStaticRouter(keystone));
     }
 
     bindLessMiddleware(keystone, app);
@@ -105,7 +106,7 @@ export function createApp(keystone, express) {
         app.use(function (req, res, next) {
             keystone.callHook('pre:admin', req, res, next);
         });
-        app.use('/' + keystone.get('admin path'), require('../admin/server').createDynamicRouter(keystone));
+        app.use('/' + keystone.get('admin path'), createDynamicRouter(keystone));
     }
 
     // Pre bodyparser middleware

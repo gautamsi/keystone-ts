@@ -1,8 +1,7 @@
 import * as requestLanguage from 'express-request-language';
-import * as assign from 'object-assign';
 
 export function language(keystone) {
-	const languageOptions = assign({
+	const languageOptions = Object.assign({
 		'supported languages': ['en-US'],
 		'language cookie': 'language',
 		'language cookie options': {},

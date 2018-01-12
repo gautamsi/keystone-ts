@@ -1,7 +1,6 @@
 import { Keystone } from '../../src/keystone';
 import { Schema } from 'mongoose';
 import * as _debug from 'debug';
-import * as assign from 'object-assign';
 import * as listToArray from 'list-to-array';
 
 import * as _ from 'lodash';
@@ -18,7 +17,7 @@ import * as schemaPlugins from './schemaPlugins';
 import { UpdateHandler } from './updateHandler';
 
 
-export class List {
+export class List<T> {
     tracking: any;
     pagination: { maxPages: number; };
     sortable: any;
@@ -204,7 +203,9 @@ export class List {
      * Adds one or more fields to the List
      * Based on Mongoose's Schema.add
      */
-    add(): List {
+    add(...listargs: any[]): List<T> {
+        // add(key: keyof T, field: FieldTypeBase, prefix: string = ''): List<T> {
+
         const add = (obj, prefix?) => {
             prefix = prefix || '';
             const keys = Object.keys(obj);
@@ -337,7 +338,7 @@ export class List {
         if (searchFilters.length > 1) {
             query.$or = searchFilters;
         } else if (searchFilters.length) {
-            assign(query, searchFilters[0]);
+            Object.assign(query, searchFilters[0]);
         }
 
         debug('Built search query for value: "' + searchString + '"', query);
@@ -1490,7 +1491,7 @@ export class List {
         /* Register the list and its field types on the Keystone instance */
         keystone.lists[this.key] = this;
         keystone.paths[this.path] = this.key;
-        assign(keystone.fieldTypes, this.fieldTypes);
+        Object.assign(keystone.fieldTypes, this.fieldTypes);
         /* Add listeners for model events */
         // see http://mongoosejs.com/docs/api.html#model_Model
         this.model.on('index', function (err) {
@@ -1788,7 +1789,7 @@ function combineQueries(a, b) {
         b.$and.push({ $or: b.$or });
         delete b.$or;
     }
-    return assign(a, b);
+    return Object.assign(a, b);
 }
 
 
