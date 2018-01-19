@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
     FormInput,
     Grid,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 export class GeoPointField extends FieldBase<FieldPropsBase> {
@@ -13,23 +13,23 @@ export class GeoPointField extends FieldBase<FieldPropsBase> {
 
     focusTargetRef: 'lat';
 
-    handleLat(event) {
+    handleLat = (event) => {
         const { value = [], path, onChange } = this.props;
         const newVal = event.target.value;
         onChange({
             path,
             value: [value[0], newVal],
         });
-    }
+    };
 
-    handleLong(event) {
+    handleLong = (event) => {
         const { value = [], path, onChange } = this.props;
         const newVal = event.target.value;
         onChange({
             path,
             value: [newVal, value[1]],
         });
-    }
+    };
 
     renderValue() {
         const { value } = this.props;

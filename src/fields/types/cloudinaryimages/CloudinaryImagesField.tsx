@@ -9,7 +9,7 @@ import * as _ from 'lodash';
 import * as async from 'async';
 import * as React from 'react';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
-import { Button, FormField, FormNote } from 'elemental';
+import { Button, FormField, FormNote } from '../../../admin/client/App/elemental';
 import Lightbox from 'react-images';
 import { cloudinaryResize } from '../../../admin/client/utils/cloudinaryResize';
 import { CloudinaryImagesThumbnail as Thumbnail } from './CloudinaryImagesThumbnail';
@@ -128,7 +128,7 @@ export class CloudinaryImagesField extends FieldBase<Props> {
     // METHODS
     // ==============================
 
-    removeImage(index) {
+    removeImage = (index) => {
         const newThumbnails = [...this.state.thumbnails];
         const target = newThumbnails[index];
 
@@ -138,7 +138,7 @@ export class CloudinaryImagesField extends FieldBase<Props> {
         }));
 
         this.setState({ thumbnails: newThumbnails });
-    }
+    };
     getCount(key) {
         let count = 0;
 
@@ -148,7 +148,7 @@ export class CloudinaryImagesField extends FieldBase<Props> {
 
         return count;
     }
-    clearFiles() {
+    clearFiles = () => {
         this.refs.fileInput.clearValue();
 
         this.setState({
@@ -156,8 +156,8 @@ export class CloudinaryImagesField extends FieldBase<Props> {
                 return !thumb.props.isQueued;
             }),
         });
-    }
-    uploadFile(event) {
+    };
+    uploadFile = (event) => {
         if (!(window as any).FileReader) {
             return alert('File reader not supported by browser.');
         }
@@ -187,7 +187,7 @@ export class CloudinaryImagesField extends FieldBase<Props> {
                 thumbnails: [...this.state.thumbnails, ...thumbnails],
             });
         });
-    }
+    };
 
     // ==============================
     // RENDERERS

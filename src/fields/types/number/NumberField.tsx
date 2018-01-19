@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { FormInput } from 'elemental';
+import { FormInput } from '../../../admin/client/App/elemental';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 export class NumberField extends FieldBase<FieldPropsBase> {
     static displayName: string = 'NumberField';
     static type: string = 'Number';
-    valueChanged(event) {
+    valueChanged = (event) => {
         let newValue = event.target.value;
         if (/^-?\d*\.?\d*$/.test(newValue)) {
             this.props.onChange({
@@ -13,7 +13,7 @@ export class NumberField extends FieldBase<FieldPropsBase> {
                 value: newValue,
             });
         }
-    }
+    };
     renderField() {
         return (
             <FormInput

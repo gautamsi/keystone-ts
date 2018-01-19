@@ -6,7 +6,7 @@ import {
     FormInput,
     FormSelect,
     Grid,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 
 const MODE_OPTIONS = [
     { label: 'Exactly', value: 'equals' },
@@ -30,7 +30,7 @@ export class NumberFilter extends React.Component<Props> {
         };
     }
 
-    static defaultProps() {
+    static get defaultProps() {
         return {
             filter: this.getDefaultValue(),
         };
@@ -41,7 +41,7 @@ export class NumberFilter extends React.Component<Props> {
         findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
     }
 
-    handleChangeBuilder(type) {
+    handleChangeBuilder = (type) => {
         const self = this;
         return function handleChange(e) {
             const { filter, onChange } = self.props;
@@ -72,20 +72,20 @@ export class NumberFilter extends React.Component<Props> {
                     });
             }
         };
-    }
+    };
     // Update the props with this.props.onChange
     updateFilter(changedProp) {
         this.props.onChange({ ...this.props.filter, ...changedProp });
     }
     // Update the filter mode
-    selectMode(e) {
+    selectMode = (e) => {
         this.updateFilter({ mode: e.target.value });
 
         // focus on next tick
         setTimeout(() => {
             findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
         }, 0);
-    }
+    };
 
     renderControls(mode) {
         let controls;

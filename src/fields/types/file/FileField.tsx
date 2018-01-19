@@ -10,7 +10,7 @@ import {
     FormField,
     FormInput,
     FormNote,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 import { FileChangeMessage } from '../../components/FileChangeMessage';
 import { HiddenFileInput } from '../../components/HiddenFileInput';
 import { FieldPropsBase, FieldBase } from '../FieldBase';
@@ -86,17 +86,17 @@ export class FileField extends FieldBase<Props> {
     // METHODS
     // ==============================
 
-    triggerFileBrowser() {
+    triggerFileBrowser = () => {
         this.refs.fileInput.click();
-    }
-    handleFileChange(event) {
+    };
+    handleFileChange = (event) => {
         const userSelectedFile = event.target.files[0];
 
         this.setState({
             userSelectedFile: userSelectedFile,
         });
-    }
-    handleRemove(e) {
+    };
+    handleRemove = (e) => {
         let state: any = {};
 
         if (this.state.userSelectedFile) {
@@ -120,10 +120,10 @@ export class FileField extends FieldBase<Props> {
         }
 
         this.setState(state);
-    }
-    undoRemove() {
+    };
+    undoRemove = () => {
         this.setState(buildInitialState(this.props));
-    }
+    };
 
     // ==============================
     // RENDERERS

@@ -1,11 +1,11 @@
 import * as React from 'react';
-import vkey from 'vkey';
+import * as vkey from 'vkey';
 import {
     Button,
     FormField,
     FormNote,
     SegmentedControl,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 import { PopoutList } from '../../../admin/client/App/shared/Popout/PopoutList';
 import { Kbd } from '../../../admin/client/App/shared/Kbd';
 import { bindFunctions } from '../../utils/bindFunctions';
@@ -208,7 +208,7 @@ export class SelectFilter extends React.Component<Props, any> {
             value: [],
         };
     }
-    static defaultProps() {
+    static get defaultProps() {
         return {
             filter: this.getDefaultValue()
         };

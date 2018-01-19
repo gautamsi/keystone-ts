@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { SegmentedControl } from 'elemental';
+import { SegmentedControl } from '../../../admin/client/App/elemental';
 
 const OPTIONS = [
     { label: 'Is Set', value: true },
@@ -20,14 +20,14 @@ export class CloudinaryImageFilter extends React.Component<Props> {
             exists: true,
         };
     }
-    static defaultProps() {
+    static get defaultProps() {
         return {
             filter: this.getDefaultValue(),
         };
     }
-    toggleExists(value) {
+    toggleExists = (value) => {
         this.props.onChange({ exists: value });
-    }
+    };
     render() {
         const { filter } = this.props;
 

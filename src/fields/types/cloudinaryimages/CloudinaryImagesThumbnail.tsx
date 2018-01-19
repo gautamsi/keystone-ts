@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button } from 'elemental';
+import { Button } from '../../../admin/client/App/elemental';
 import { ImageThumbnail } from '../../components/ImageThumbnail';
 
 export const CloudinaryImagesThumbnail: React.SFC<Props> = ({
@@ -42,7 +42,7 @@ export const CloudinaryImagesThumbnail: React.SFC<Props> = ({
             <ImageThumbnail
                 component={imageSourceLarge ? 'a' : 'span'}
                 href={!!imageSourceLarge && imageSourceLarge}
-                onClick={!!imageSourceLarge && openLightbox}
+                onClick={e => !!imageSourceLarge && openLightbox(e)}
                 mask={mask}
                 target={!!imageSourceLarge && '__blank'}
             >

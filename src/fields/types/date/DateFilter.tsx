@@ -8,7 +8,7 @@ import {
     FormSelect,
     Grid,
     SegmentedControl,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 
 const INVERTED_OPTIONS = [
     { label: 'Matches', value: false },
@@ -67,7 +67,7 @@ export class DateFilter extends React.Component<Props, any> {
             after: moment(0, 'HH').format(),
         };
     }
-    static defaultProps() {
+    static get defaultProps() {
         return {
             format: 'DD-MM-YYYY',
             filter: this.getDefaultValue(),
@@ -96,15 +96,15 @@ export class DateFilter extends React.Component<Props, any> {
     updateFilter(value) {
         this.props.onChange({ ...this.props.filter, ...value });
     }
-    toggleInverted(value) {
+    toggleInverted = (value) => {
         this.updateFilter({ inverted: value });
         this.setFocus(this.props.filter.mode);
-    }
-    selectMode(e) {
+    };
+    selectMode = (e) => {
         const mode = e.target.value;
         this.updateFilter({ mode });
         this.setFocus(mode);
-    }
+    };
     setFocus(mode) {
         // give the UI a moment to render
         if (mode === 'between') {
@@ -117,7 +117,7 @@ export class DateFilter extends React.Component<Props, any> {
             }, 50);
         }
     }
-    handleInputChange(e) {
+    handleInputChange = (e) => {
         // TODO @jedwatson
         // Entering virtually any value will return an "Invalid date", so I'm
         // temporarily disabling user entry. This entire component needs review.
@@ -131,13 +131,13 @@ export class DateFilter extends React.Component<Props, any> {
         // }
         // this.updateFilter({ value: value });
         // this.setState({ month }, this.showCurrentDate);
-    }
-    setActiveField(field) {
+    };
+    setActiveField = (field) => {
         this.setState({
             activeInputField: field,
         });
-    }
-    switchBetweenActiveInputFields(e, day, modifiers) {
+    };
+    switchBetweenActiveInputFields = (e, day, modifiers) => {
         if (modifiers && modifiers.disabled) return;
 
         const { activeInputField } = this.state;
@@ -153,17 +153,17 @@ export class DateFilter extends React.Component<Props, any> {
                 findDOMNode<HTMLElement>(this.refs[newActiveField]).focus();
             }
         );
-    }
-    selectDay(e, day, modifiers) {
+    };
+    selectDay = (e, day, modifiers) => {
         if (modifiers && modifiers.disabled) return;
         this.updateFilter({ value: day });
-    }
-    showCurrentDate() {
+    };
+    showCurrentDate = () => {
         // give the UI a moment to render
         setTimeout(() => {
             this.refs.daypicker.showMonth(this.state.month);
         }, 50);
-    }
+    };
 
     // ==============================
     // RENDERERS

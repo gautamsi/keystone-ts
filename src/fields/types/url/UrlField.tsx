@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { GlyphButton, FormInput } from 'elemental';
+import { GlyphButton, FormInput } from '../../../admin/client/App/elemental';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 export class UrlField extends FieldBase<FieldPropsBase> {
     static displayName: string = 'URLField';
     static type: string = 'Url';
-    openValue() {
+    openValue = () => {
         let href = this.props.value;
         if (!href) return;
         if (!/^(mailto\:)|(\w+\:\/\/)/.test(href)) {
             href = 'http://' + href;
         }
         window.open(href);
-    }
+    };
     renderLink() {
         if (!this.props.value) return null;
 
@@ -49,7 +49,7 @@ export class UrlField extends FieldBase<FieldPropsBase> {
     renderValue() {
         const { value } = this.props;
         return (
-            <FormInput noedit onClick={value && this.openValue}>
+            <FormInput noedit onClick={e => value && this.openValue()}>
                 {value}
             </FormInput>
         );

@@ -5,7 +5,7 @@ import {
     FormField,
     FormInput,
     FormSelect,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 
 const MODE_OPTIONS = [
     { label: 'Contains', value: 'contains' },
@@ -38,7 +38,7 @@ export class TextArrayFilter extends React.Component<Props> {
         };
     }
 
-    static defaultProps() {
+    static get defaultProps() {
         return {
             filter: this.getDefaultValue(),
         };

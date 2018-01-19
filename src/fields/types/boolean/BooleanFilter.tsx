@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SegmentedControl } from 'elemental';
+import { SegmentedControl } from '../../../admin/client/App/elemental';
 
 const VALUE_OPTIONS = [
     { label: 'Is Checked', value: true },
@@ -19,14 +19,14 @@ export class BooleanFilter extends React.Component<Props> {
             value: true,
         };
     }
-    static defaultProps() {
+    static get defaultProps() {
         return {
             filter: this.getDefaultValue(),
         };
     }
-    updateValue(value) {
+    updateValue = (value) => {
         this.props.onChange({ value });
-    }
+    };
     render() {
         return <SegmentedControl equalWidthSegments options={VALUE_OPTIONS} value={this.props.filter.value} onChange={this.updateValue} />;
     }

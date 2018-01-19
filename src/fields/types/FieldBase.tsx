@@ -2,7 +2,7 @@ import * as classnames from 'classnames';
 import { evalDependsOn } from '../utils/evalDependsOn';
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
-import { FormField, FormInput, FormNote } from 'elemental';
+import { FormField, FormInput, FormNote } from '../../admin/client/App/elemental';
 import * as blacklist from 'blacklist';
 import { CollapsedFieldLabel } from '../components/CollapsedFieldLabel';
 
@@ -206,7 +206,7 @@ export abstract class FieldBase<T extends FieldPropsBase> extends React.Componen
         return field.defaultValue || '';
     }
 
-    static defaultProps() {
+    static get defaultProps() {
         return {
             adminPath: Keystone.adminPath,
             inputProps: {},
@@ -215,19 +215,19 @@ export abstract class FieldBase<T extends FieldPropsBase> extends React.Componen
             size: 'full',
         };
     }
-    getInputName(path) {
+    getInputName = (path) => {
         // This correctly creates the path for field inputs, and supports the
         // inputNamePrefix prop that is required for nested fields to work
         return this.props.inputNamePrefix
             ? `${this.props.inputNamePrefix}[${path}]`
             : path;
-    }
-    valueChanged(event) {
+    };
+    valueChanged = (event) => {
         this.props.onChange({
             path: this.props.path,
             value: event.target.value,
         });
-    }
+    };
     shouldCollapse() {
         return this.props.collapse && !this.props.value;
     }
@@ -287,11 +287,11 @@ export abstract class FieldBase<T extends FieldPropsBase> extends React.Componen
             this.focus();
         }
     }
-    uncollapse() {
+    uncollapse = () => {
         this.setState({
             isCollapsed: false,
         });
-    }
+    };
     renderCollapse() {
         if (!this.shouldRenderField()) return null;
         return (

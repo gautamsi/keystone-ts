@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormInput } from 'elemental';
+import { FormInput } from '../../../admin/client/App/elemental';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 /**

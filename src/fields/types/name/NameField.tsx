@@ -3,7 +3,7 @@ import * as React from 'react';
 import {
     FormInput,
     Grid,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 import { FieldPropsBase, FieldBase } from '../FieldBase';
 
 // tslint:disable-next-line:class-name

@@ -5,9 +5,9 @@ import * as React from 'react';
 import {
     Button,
     FormInput,
-    InlineGroup as Group,
-    InlineGroupSection as Section,
-} from 'elemental';
+    InputGroup as Group,
+    InputGroupSection as Section,
+} from '../../../admin/client/App/elemental';
 
 /*
 TODO: Implement yearRange Prop, or deprecate for max / min values (better)
@@ -31,18 +31,18 @@ export class DateField extends FieldBase<Props> {
     static displayName: string = 'DateField';
     static type: string = 'Date';
 
-    getDefaultProps() {
+    static get defaultProps() {
         return {
             formatString: DEFAULT_FORMAT_STRING,
             inputFormat: DEFAULT_INPUT_FORMAT,
         };
     }
-    valueChanged({ value }) {
+    valueChanged = ({ value }) => {
         this.props.onChange({
             path: this.props.path,
             value: value,
         });
-    }
+    };
     toMoment(value) {
         if (this.props.isUTC) {
             return moment.utc(value);
@@ -56,11 +56,11 @@ export class DateField extends FieldBase<Props> {
     format(value) {
         return value ? this.toMoment(value).format(this.props.formatString) : '';
     }
-    setToday() {
+    setToday = () => {
         this.valueChanged({
             value: this.toMoment(new Date()).format(this.props.inputFormat),
         });
-    }
+    };
     renderValue() {
         return (
             <FormInput noedit>

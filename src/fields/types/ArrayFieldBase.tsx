@@ -6,7 +6,7 @@ import { findDOMNode } from 'react-dom';
 // let Button = require('elemental').Button;
 // let FormField = require('elemental').FormField;
 // let FormInput = require('elemental').FormInput;
-import { Button, FormField, FormInput } from 'elemental';
+import { Button, FormField, FormInput } from '../../admin/client/App/elemental';
 import { FieldBase, FieldPropsBase } from './FieldBase';
 
 export interface ArrayFieldPropsBase extends FieldPropsBase {
@@ -32,8 +32,8 @@ export abstract class ArrayFieldBase<T extends ArrayFieldPropsBase> extends Fiel
     getInputComponent: Function;
     cleanInput: Function;
 
-    static defaultProps() {
-        let props = FieldBase.defaultProps();
+    static get defaultProps() {
+        let props = FieldBase.defaultProps;
         return {
             ...props
         };
@@ -55,7 +55,7 @@ export abstract class ArrayFieldBase<T extends ArrayFieldPropsBase> extends Fiel
         }
     }
 
-    addItem() {
+    addItem = () => {
         let newValues = this.state.values.concat(newItem(''));
         this.setState({
             values: newValues,
@@ -64,7 +64,7 @@ export abstract class ArrayFieldBase<T extends ArrayFieldPropsBase> extends Fiel
             findDOMNode<HTMLElement>(this.refs['item_' + this.state.values.length]).focus();
         });
         this.valueChanged(reduceValues(newValues));
-    }
+    };
 
     removeItem(i) {
         let newValues = _.without(this.state.values, i);
@@ -87,12 +87,12 @@ export abstract class ArrayFieldBase<T extends ArrayFieldPropsBase> extends Fiel
         this.valueChanged(reduceValues(updatedValues));
     }
 
-    valueChanged(values) {
+    valueChanged = (values) => {
         this.props.onChange({
             path: this.props.path,
             value: values,
         });
-    }
+    };
 
     renderField() {
         return (
@@ -137,10 +137,10 @@ export abstract class ArrayFieldBase<T extends ArrayFieldPropsBase> extends Fiel
         return this.props.collapse && !this.props.value.length;
     }
 
-    addItemOnEnter(event) {
+    addItemOnEnter = (event) => {
         if (event.keyCode === ENTER_KEYCODE) {
             this.addItem();
             event.preventDefault();
         }
-    }
+    };
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { SegmentedControl } from 'elemental';
+import { SegmentedControl } from '../../../admin/client/App/elemental';
 
 const EXISTS_OPTIONS = [
     { label: 'Is Set', value: true },
@@ -21,12 +21,12 @@ export class PasswordFilter extends React.Component<Props> {
         };
     }
 
-    static defaultProps() {
+    static get defaultProps() {
         return {
             filter: this.getDefaultValue(),
         };
     }
-    toggleExists(value) {
+    toggleExists = (value) => {
         this.props.onChange({ exists: value });
     }
     render() {

@@ -22,7 +22,7 @@ export class DateInput extends React.Component<Props, any> {
         popout: (Popout),
     };
     static displayName: string = 'DateInput';
-    static defaultProps() {
+    static get defaultProps() {
         return {
             format: 'YYYY-MM-DD',
         };

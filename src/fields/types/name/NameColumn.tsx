@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ItemsTableCell } from '../../components/ItemsTableCell';
 import { ItemsTableValue } from '../../components/ItemsTableValue';
-import displayName from 'display-name';
+import * as displayName from 'display-name';
 
 export interface Props {
     col?: any;

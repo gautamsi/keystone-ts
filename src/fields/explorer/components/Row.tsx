@@ -27,7 +27,7 @@ export class ExplorerRow extends React.Component<Props> {
             />
         );
     }
-    static defaultProps() {
+    static get defaultProps() {
         return { gutter: 10 };
     }
 }
@@ -38,5 +38,5 @@ export interface Props {
     className?: string;
     gutter?: number;
     style?: string;
-    isCollapsed?: boolean
+    isCollapsed?: boolean;
 }

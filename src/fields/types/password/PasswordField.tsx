@@ -2,9 +2,9 @@ import * as React from 'react';
 import {
     Button,
     FormInput,
-    InlineGroup as Group,
-    InlineGroupSection as Section,
-} from 'elemental';
+    InputGroup as Group,
+    InputGroupSection as Section,
+} from '../../../admin/client/App/elemental';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 export interface Props extends FieldPropsBase {
@@ -27,23 +27,23 @@ export class PasswordField extends FieldBase<Props> {
         };
     }
 
-    valueChanged(which, event?) { // event is not optional
+    valueChanged = (which, event?) => { // event is not optional
         let newState = {};
         newState[which] = event.target.value;
         this.setState(newState);
-    }
+    };
 
-    showChangeUI() {
+    showChangeUI = () => {
         this.setState({
             showChangeUI: true,
         }, () => this.focus());
-    }
+    };
 
-    onCancel() {
+    onCancel = () => {
         this.setState({
             showChangeUI: false,
         }, () => this.focus());
-    }
+    };
 
     renderValue() {
         return <FormInput noedit>{this.props.value ? 'Password Set' : ''}</FormInput>;

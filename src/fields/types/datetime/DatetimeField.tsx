@@ -6,9 +6,9 @@ import {
     FormField,
     FormInput,
     FormNote,
-    InlineGroup as Group,
-    InlineGroupSection as Section,
-} from 'elemental';
+    InputGroup as Group,
+    InputGroupSection as Section,
+} from '../../../admin/client/App/elemental';
 import { FieldPropsBase, FieldBase } from '../FieldBase';
 
 export interface Props extends FieldPropsBase {
@@ -45,8 +45,8 @@ export class DateTimeField extends FieldBase<Props> {
         };
     }
 
-    static defaultProps() {
-        let props = FieldBase.defaultProps();
+    static get defaultProps() {
+        let props = FieldBase.defaultProps;
         return {
             formatString: 'Do MMM YYYY, h:mm:ss a',
             ...props
@@ -69,7 +69,7 @@ export class DateTimeField extends FieldBase<Props> {
         return value ? this.moment(value).format(format) : '';
     }
 
-    handleChange(dateValue, timeValue, tzOffsetValue?) {
+    handleChange = (dateValue, timeValue, tzOffsetValue?) => {
         let value = dateValue + ' ' + timeValue;
         let datetimeFormat = this.dateInputFormat + ' ' + this.timeInputFormat;
 
@@ -87,19 +87,19 @@ export class DateTimeField extends FieldBase<Props> {
             path: this.props.path,
             value: this.isValid(value) ? this.moment(value, datetimeFormat).toISOString() : null,
         });
-    }
+    };
 
-    dateChanged({ value }) {
+    dateChanged = ({ value }) => {
         this.setState({ dateValue: value });
         this.handleChange(value, this.state.timeValue);
-    }
+    };
 
-    timeChanged(evt) {
+    timeChanged = (evt) => {
         this.setState({ timeValue: evt.target.value });
         this.handleChange(this.state.dateValue, evt.target.value);
-    }
+    };
 
-    setNow() {
+    setNow = () => {
         let dateValue = this.moment().format(this.dateInputFormat);
         let timeValue = this.moment().format(this.timeInputFormat);
         let tzOffsetValue = this.moment().format(this.tzOffsetInputFormat);
@@ -109,7 +109,7 @@ export class DateTimeField extends FieldBase<Props> {
             tzOffsetValue: tzOffsetValue,
         });
         this.handleChange(dateValue, timeValue, tzOffsetValue);
-    }
+    };
 
     renderNote() {
         if (!this.props.note) return null;

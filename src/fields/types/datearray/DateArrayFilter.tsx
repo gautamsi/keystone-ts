@@ -6,7 +6,7 @@ import {
     FormInput,
     FormSelect,
     Grid,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 
 const PRESENCE_OPTIONS = [
     { label: 'At least one element', value: 'some' },
@@ -61,7 +61,7 @@ export class DateFilter extends React.Component<Props, any> {
         };
     }
 
-    static defaultProps() {
+    static get defaultProps() {
         return {
             format: 'DD-MM-YYYY',
             filter: this.getDefaultValue(),
@@ -86,12 +86,12 @@ export class DateFilter extends React.Component<Props, any> {
     updateFilter(value) {
         this.props.onChange({ ...this.props.filter, ...value });
     }
-    selectPresence(e) {
+    selectPresence = (e) => {
         const presence = e.target.value;
         this.updateFilter({ presence });
         findDOMNode<HTMLElement>(this.refs.input).focus();
-    }
-    selectMode(e) {
+    };
+    selectMode = (e) => {
         const mode = e.target.value;
         this.updateFilter({ mode });
         if (mode === 'between') {
@@ -99,8 +99,8 @@ export class DateFilter extends React.Component<Props, any> {
         } else {
             findDOMNode<HTMLElement>(this.refs.input).focus();
         }
-    }
-    handleInputChange(e) {
+    };
+    handleInputChange = (e) => {
         const { value } = e.target;
         let { month } = this.state;
         // Change the current month only if the value entered by the user is a valid
@@ -110,13 +110,13 @@ export class DateFilter extends React.Component<Props, any> {
         }
         this.updateFilter({ value: value });
         this.setState({ month }, this.showCurrentDate);
-    }
-    setActiveField(field) {
+    };
+    setActiveField = (field) => {
         this.setState({
             activeInputField: field,
         });
-    }
-    switchBetweenActiveInputFields(e, day, modifiers) {
+    };
+    switchBetweenActiveInputFields = (e, day, modifiers) => {
         if (modifiers && modifiers.disabled) return;
         const { activeInputField } = this.state;
         const send = {};
@@ -129,14 +129,14 @@ export class DateFilter extends React.Component<Props, any> {
                 findDOMNode<HTMLElement>(this.refs[newActiveField]).focus();
             }
         );
-    }
-    selectDay(e, day, modifiers) {
+    };
+    selectDay = (e, day, modifiers) => {
         if (modifiers && modifiers.disabled) return;
         this.updateFilter({ value: day });
-    }
-    showCurrentDate() {
+    };
+    showCurrentDate = () => {
         this.refs.daypicker.showMonth(this.state.month);
-    }
+    };
     renderControls() {
         let controls;
         const { field, filter } = this.props;

@@ -3,7 +3,7 @@ import * as CodeMirror from 'codemirror';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
-import { FormInput } from 'elemental';
+import { FormInput } from '../../../admin/client/App/elemental';
 import * as classnames from 'classnames';
 
 export interface Props extends FieldPropsBase {

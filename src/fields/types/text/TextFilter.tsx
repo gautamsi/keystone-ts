@@ -6,7 +6,7 @@ import {
     FormInput,
     FormSelect,
     SegmentedControl,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 
 const INVERTED_OPTIONS = [
     { label: 'Matches', value: false },
@@ -40,7 +40,7 @@ export class TextFilter extends React.Component<Props> {
         };
     }
 
-    static defaultProps() {
+    static get defaultProps() {
         return {
             filter: this.getDefaultValue(),
         };
@@ -48,18 +48,18 @@ export class TextFilter extends React.Component<Props> {
     updateFilter(value) {
         this.props.onChange({ ...this.props.filter, ...value });
     }
-    selectMode(e) {
+    selectMode = (e) => {
         const mode = e.target.value;
         this.updateFilter({ mode });
         findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
-    }
-    toggleInverted(inverted) {
+    };
+    toggleInverted = (inverted) => {
         this.updateFilter({ inverted });
         findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
     }
-    updateValue(e) {
+    updateValue = (e) => {
         this.updateFilter({ value: e.target.value });
-    }
+    };
     render() {
         const { field, filter } = this.props;
         const mode = MODE_OPTIONS.filter(i => i.value === filter.mode)[0];

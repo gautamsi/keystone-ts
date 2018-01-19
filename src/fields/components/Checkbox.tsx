@@ -13,7 +13,7 @@ export interface Props {
 
 export class Checkbox extends React.Component<Props, any> {
     static displayName: string = 'Checkbox';
-    static defaultProps() {
+    static get defaultProps() {
         return {
             component: 'button',
         };

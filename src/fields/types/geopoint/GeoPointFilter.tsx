@@ -5,7 +5,7 @@ import {
     FormInput,
     Grid,
     SegmentedControl,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 
 const DISTANCE_OPTIONS = [
     { label: 'Max distance (km)', value: 'max' },
@@ -37,7 +37,7 @@ export class TextFilter extends React.Component<Props> {
         };
     }
 
-    static defaultProps() {
+    static get defaultProps() {
         return {
             filter: this.getDefaultValue(),
         };
@@ -45,28 +45,28 @@ export class TextFilter extends React.Component<Props> {
     updateFilter(value) {
         this.props.onChange({ ...this.props.filter, ...value });
     }
-    changeLat(evt) {
+    changeLat = (evt) => {
         this.updateFilter({ lat: evt.target.value });
-    }
-    changeLon(evt) {
+    };
+    changeLon = (evt) => {
         this.updateFilter({ lon: evt.target.value });
-    }
-    changeDistanceValue(evt) {
+    };
+    changeDistanceValue = (evt) => {
         this.updateFilter({
             distance: {
                 mode: this.props.filter.distance.mode,
                 value: evt.target.value,
             },
         });
-    }
-    changeDistanceMode(mode) {
+    };
+    changeDistanceMode = (mode) => {
         this.updateFilter({
             distance: {
                 mode,
                 value: this.props.filter.distance.value,
             },
         });
-    }
+    };
     render() {
         const { filter } = this.props;
         const distanceModeVerb = filter.distance.mode === 'max' ? 'Maximum' : 'Minimum';

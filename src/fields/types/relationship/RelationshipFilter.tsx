@@ -8,7 +8,7 @@ import {
     FormField,
     FormInput,
     SegmentedControl,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 
 import { PopoutList } from '../../../admin/client/App/shared/Popout/PopoutList';
 
@@ -40,7 +40,7 @@ export class RelationshipFilter extends React.Component<Props, any> {
         };
     }
 
-    static defaultProps() {
+    static get defaultProps() {
         return {
             filter: this.getDefaultValue(),
         };
@@ -139,20 +139,20 @@ export class RelationshipFilter extends React.Component<Props, any> {
             this.props.onHeightChange(this.refs.container.offsetHeight);
         }
     }
-    toggleInverted(inverted) {
+    toggleInverted = (inverted) => {
         this.updateFilter({ inverted });
-    }
-    updateSearch(e) {
+    };
+    updateSearch = (e) => {
         this.setState({ searchString: e.target.value }, this.loadSearchResults as any);
-    }
-    selectItem(item) {
+    };
+    selectItem = (item) => {
         const value = this.props.filter.value.concat(item.id);
         this.updateFilter({ value });
     }
-    removeItem(item) {
+    removeItem = (item) => {
         const value = this.props.filter.value.filter(i => { return i !== item.id; });
         this.updateFilter({ value });
-    }
+    };
     updateFilter(value) {
         this.props.onChange({ ...this.props.filter, ...value });
     }

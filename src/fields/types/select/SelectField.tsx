@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Select from 'react-select';
-import { FormInput } from 'elemental';
+import { FormInput } from '../../../admin/client/App/elemental';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 export interface Props extends FieldPropsBase {
@@ -18,7 +18,7 @@ export class SelectField extends FieldBase<Props> {
     static displayName: string = 'SelectField';
     static type: string = 'Select';
 
-    valueChanged(newValue) {
+    valueChanged = (newValue) => {
         // TODO: This should be natively handled by the Select component
         if (this.props.numeric && typeof newValue === 'string') {
             newValue = newValue ? Number(newValue) : undefined;

@@ -6,7 +6,7 @@ import {
     FormInput,
     FormSelect,
     Grid,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 
 const MODE_OPTIONS = [
     { label: 'Exactly', value: 'equals' },
@@ -42,14 +42,14 @@ export class NumberArrayFilter extends React.Component<Props> {
         };
     }
 
-    static defaultProps() {
+    static get defaultProps() {
         return {
             filter: this.getDefaultValue(),
         };
     }
     // Returns a function that handles a specific type of onChange events for
     // either 'minValue', 'maxValue' or simply 'value'
-    handleValueChangeBuilder(type) {
+    handleValueChangeBuilder = (type) => {
         return (e) => {
             switch (type) {
                 case 'minValue':
@@ -75,23 +75,23 @@ export class NumberArrayFilter extends React.Component<Props> {
                     break;
             }
         };
-    }
+    };
     // Update the props with this.props.onChange
     updateFilter(changedProp) {
         this.props.onChange({ ...this.props.filter, ...changedProp });
     }
     // Update the filter mode
-    selectMode(e) {
+    selectMode = (e) => {
         const mode = e.target.value;
         this.updateFilter({ mode });
         findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
-    }
+    };
     // Update the presence selection
-    selectPresence(e) {
+    selectPresence = (e) => {
         const presence = e.target.value;
         this.updateFilter({ presence });
         findDOMNode<HTMLElement>(this.refs.focusTarget).focus();
-    }
+    };
     // Render the controls, showing two inputs when the mode is "between"
     renderControls(presence, mode) {
         let controls;

@@ -7,7 +7,7 @@ work out whether we're going to support deleting through the UI.
 import * as React from 'react';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 import { cloudinaryResize } from '../../../admin/client/utils/cloudinaryResize';
-import { Button, FormField, FormInput, FormNote } from 'elemental';
+import { Button, FormField, FormInput, FormNote } from '../../../admin/client/App/elemental';
 
 import { ImageThumbnail } from '../../components/ImageThumbnail';
 import { FileChangeMessage } from '../../components/FileChangeMessage';
@@ -98,9 +98,9 @@ export class CloudinaryImageField extends FieldBase<Props> {
     // METHODS
     // ==============================
 
-    triggerFileBrowser() {
+    triggerFileBrowser = () => {
         this.refs.fileInput.click();
-    }
+    };
     handleFileChange(event) {
         const userSelectedFile = event.target.files[0];
 
@@ -108,20 +108,20 @@ export class CloudinaryImageField extends FieldBase<Props> {
     }
 
     // Toggle the lightbox
-    openLightbox(event) {
+    openLightbox = (event) => {
         event.preventDefault();
         this.setState({
             lightboxIsVisible: true,
         });
-    }
-    closeLightbox() {
+    };
+    closeLightbox = () => {
         this.setState({
             lightboxIsVisible: false,
         });
-    }
+    };
 
     // Handle image selection in file browser
-    handleImageChange(e) {
+    handleImageChange = (e) => {
         if (!(window as any).FileReader) {
             return alert('File reader not supported by browser.');
         }
@@ -149,10 +149,10 @@ export class CloudinaryImageField extends FieldBase<Props> {
             });
             this.props.onChange({ file: file });
         };
-    }
+    };
 
     // If we have a local file added then remove it and reset the file field.
-    handleRemove(e) {
+    handleRemove = (e) => {
         let state: any = {};
 
         if (this.state.userSelectedFile) {
@@ -162,10 +162,10 @@ export class CloudinaryImageField extends FieldBase<Props> {
         }
 
         this.setState(state);
-    }
-    undoRemove() {
+    };
+    undoRemove = () => {
         this.setState(buildInitialState(this.props));
-    }
+    };
 
     // ==============================
     // RENDERERS
@@ -201,7 +201,7 @@ export class CloudinaryImageField extends FieldBase<Props> {
             <ImageThumbnail
                 component="a"
                 href={this.getImageSource(600)}
-                onClick={shouldOpenLightbox && this.openLightbox}
+                onClick={e => shouldOpenLightbox && this.openLightbox(e)}
                 mask={mask}
                 target="__blank"
                 style={{ float: 'left', marginRight: '1em' }}

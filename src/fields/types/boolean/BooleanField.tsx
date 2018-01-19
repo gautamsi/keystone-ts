@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 import { Checkbox } from '../../components/Checkbox';
-import { FormField } from 'elemental';
+import { FormField } from '../../../admin/client/App/elemental';
 
 const NOOP = () => { };
 
@@ -17,12 +17,12 @@ export class BooleanField extends FieldBase<Props> {
     static displayName: string = 'BooleanField';
     static type: string = 'Boolean';
 
-    valueChanged(value) {
+    valueChanged = (value) => {
         this.props.onChange({
             path: this.props.path,
             value: value,
         });
-    }
+    };
     renderFormInput() {
         if (!this.shouldRenderField()) return;
 

@@ -6,9 +6,9 @@ import * as xhr from 'xhr';
 import {
     Button,
     FormInput,
-    InlineGroup as Group,
-    InlineGroupSection as Section,
-} from 'elemental';
+    InputGroup as Group,
+    InputGroupSection as Section,
+} from '../../../admin/client/App/elemental';
 import * as _ from 'lodash';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
@@ -143,7 +143,7 @@ export class RelationshipField extends FieldBase<Props> {
 
     // NOTE: this seems like the wrong way to add options to the Select
     loadOptionsCallback(...args) { }
-    loadOptions(input, callback) {
+    loadOptions = (input, callback) => {
         // NOTE: this seems like the wrong way to add options to the Select
         this.loadOptionsCallback = callback.bind(this);
         const filters = this.buildFilters();
@@ -155,34 +155,34 @@ export class RelationshipField extends FieldBase<Props> {
                 console.error('Error loading items:', err);
                 return callback(null, []);
             }
-            data.results.forEach(this.cacheItem);
+            data.results.forEach(this.cacheItem.bind(this));
             callback(null, {
                 options: data.results,
                 complete: data.results.length === data.count,
             });
         });
-    }
+    };
 
-    valueChanged(value) {
+    valueChanged = (value) => {
         this.props.onChange({
             path: this.props.path,
             value: value,
         });
-    }
+    };
 
-    openCreate() {
+    openCreate = () => {
         this.setState({
             createIsOpen: true,
         });
-    }
+    };
 
-    closeCreate() {
+    closeCreate = () => {
         this.setState({
             createIsOpen: false,
         });
-    }
+    };
 
-    onCreate(item) {
+    onCreate = (item) => {
         this.cacheItem(item);
         if (Array.isArray(this.state.value)) {
             // For many relationships, append the new item to the end

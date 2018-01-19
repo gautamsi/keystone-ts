@@ -5,9 +5,9 @@ import * as React from 'react';
 import {
     Button,
     FormInput,
-    InlineGroup as Group,
-    InlineGroupSection as Section,
-} from 'elemental';
+    InputGroup as Group,
+    InputGroupSection as Section,
+} from '../../../admin/client/App/elemental';
 import { transparentSwatch } from './transparent-swatch';
 import { theme } from '../../../admin/client/theme';
 
@@ -34,7 +34,7 @@ export class ColorField extends FieldBase<Props> {
             value: value,
         });
     }
-    handleInputChange(event) {
+    handleInputChange = (event) => {
         let newValue = event.target.value;
         if (/^([0-9A-F]{3}){1,2}$/.test(newValue)) {
             newValue = '#' + newValue;
@@ -42,20 +42,20 @@ export class ColorField extends FieldBase<Props> {
         if (newValue === this.props.value) return;
 
         this.updateValue(newValue);
-    }
-    handleClick() {
+    };
+    handleClick = () => {
         this.setState({ displayColorPicker: !this.state.displayColorPicker });
-    }
-    handleClose() {
+    };
+    handleClose = () => {
         this.setState({ displayColorPicker: false });
-    }
-    handlePickerChange(color) {
+    };
+    handlePickerChange = (color) => {
         let newValue = color.hex;
 
         if (newValue === this.props.value) return;
 
         this.updateValue(newValue);
-    }
+    };
     renderSwatch() {
         const className = `${css(classes.swatch)} e2e-type-color__swatch`;
 

@@ -1,6 +1,6 @@
 import * as React from 'React';
 import * as tinymce from 'tinymce';
-import { FormInput } from 'elemental';
+import { FormInput } from '../../../admin/client/App/elemental';
 import { evalDependsOn } from '../../utils/evalDependsOn';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
@@ -101,7 +101,7 @@ export class HtmlField extends FieldBase<Props> {
         });
     }
 
-    valueChanged(event) {
+    valueChanged = (event) => {
         let content;
         if (this.editor) {
             content = this.editor.getContent();
@@ -114,7 +114,7 @@ export class HtmlField extends FieldBase<Props> {
             path: this.props.path,
             value: content,
         });
-    }
+    };
 
     getOptions() {
         let plugins = ['code', 'link'];

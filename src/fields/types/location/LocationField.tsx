@@ -9,7 +9,7 @@ import {
     FormNote,
     Grid,
     LabelledControl,
-} from 'elemental';
+} from '../../../admin/client/App/elemental';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
 export interface Props extends FieldPropsBase {
@@ -52,11 +52,11 @@ export class LocationField extends FieldBase<Props> {
         return this.props.collapse && !this.formatValue();
     }
 
-    uncollapseFields() {
+    uncollapseFields = () => {
         this.setState({
             collapsedFields: {},
         });
-    }
+    };
 
     fieldChanged(fieldPath, event) {
         const { value = {}, path, onChange } = this.props;
@@ -69,9 +69,9 @@ export class LocationField extends FieldBase<Props> {
         });
     }
 
-    makeChanger(fieldPath) {
+    makeChanger = (fieldPath) => {
         return this.fieldChanged.bind(this, fieldPath);
-    }
+    };
 
     geoChanged(i, event) {
         const { value = {}, path, onChange } = this.props;
@@ -89,7 +89,7 @@ export class LocationField extends FieldBase<Props> {
         });
     }
 
-    makeGeoChanger(fieldPath) {
+    makeGeoChanger = (fieldPath) => {
         return this.geoChanged.bind(this, fieldPath);
     }
 

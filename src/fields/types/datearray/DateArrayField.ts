@@ -16,8 +16,8 @@ export class DateArrayField extends ArrayFieldBase<Props> {
 
     static type: string = 'DateArray';
 
-    static defaultProps() {
-        let props = ArrayFieldBase.defaultProps();
+    static get defaultProps() {
+        let props = ArrayFieldBase.defaultProps;
         return {
             formatString: DEFAULT_FORMAT_STRING,
             inputFormat: DEFAULT_INPUT_FORMAT,

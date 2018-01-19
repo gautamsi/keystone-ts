@@ -1,4 +1,4 @@
-import { FormInput } from 'elemental';
+import { FormInput } from '../../../admin/client/App/elemental';
 import * as React from 'react';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 
@@ -12,7 +12,7 @@ export class MoneyField extends FieldBase<Props> {
     static displayName: string = 'MoneyField';
     static type: string = 'Money';
 
-    valueChanged(event) {
+    valueChanged = (event) => {
         let newValue = event.target.value.replace(/[^\d\s\,\.\$€£¥]/g, '');
         if (newValue === this.props.value) return;
 
@@ -20,7 +20,7 @@ export class MoneyField extends FieldBase<Props> {
             path: this.props.path,
             value: newValue,
         });
-    }
+    };
     renderField() {
         return (
             <FormInput
