@@ -33,7 +33,7 @@ export interface Props {
     item?: any;
 }
 
-class ItemsRow extends React.Component<Props> {
+export class TableRow extends React.Component<Props> {
     renderRow(item) {
         const itemId = item.id;
         const rowClassname = classnames({
@@ -45,7 +45,7 @@ class ItemsRow extends React.Component<Props> {
         });
         // item fields
         let cells = this.props.columns.map((col, i) => {
-            let ColumnType = Columns[col.type] || Columns.__unrecognised__;
+            let ColumnType = Columns[col.type] || Columns.__unrecognised__; // 'Type'
             let linkTo = !i ? `${Keystone.adminPath}/${this.props.list.path}/${itemId}` : undefined;
             return <ColumnType key={col.path} list={this.props.list} col={col} data={item} linkTo={linkTo} />;
         });
@@ -162,4 +162,4 @@ function dropProps(connect) {
     };
 }
 
-export const TableRow = DragSource('item', dragItem, dragProps)(DropTarget('item', dropItem, dropProps)(ItemsRow));
+export const SortableTableRow = DragSource('item', dragItem, dragProps)(DropTarget('item', dropItem, dropProps)(TableRow));

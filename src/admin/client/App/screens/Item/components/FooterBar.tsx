@@ -23,8 +23,9 @@ export class FooterBar extends React.Component<Props, any> {
             height: 'auto',
             top: 0,
         };
+        this.recalcPosition.bind = this.recalcPosition.bind(this);
     }
-    static defaultProps() {
+    static get defaultProps() {
         return {
             style: {},
         };

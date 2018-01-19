@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Popout } from '../../../shared/Popout';
 import { PopoutList } from '../../../shared/Popout/PopoutList';
-import { FormInput } from 'elemental';
+import { FormInput } from '../../../elemental';
 import { ListHeaderButton } from './ListHeaderButton';
 
 import { setActiveColumns } from '../actions';
@@ -23,14 +23,14 @@ export class ListColumnsForm extends React.Component<{ activeColumns?: any, disp
         });
         return selectedColumns;
     }
-    togglePopout(visible) {
+    togglePopout = (visible) => {
         this.setState({
             selectedColumns: this.getSelectedColumnsFromStore(),
             isOpen: visible,
             searchString: '',
         });
-    }
-    toggleColumn(path, value) {
+    };
+    toggleColumn = (path, value) => {
         const newColumns = Object.assign({}, this.state.selectedColumns);
 
         if (value) {
@@ -42,7 +42,7 @@ export class ListColumnsForm extends React.Component<{ activeColumns?: any, disp
         this.setState({
             selectedColumns: newColumns,
         });
-    }
+    };
     applyColumns = () => {
         this.props.dispatch(setActiveColumns(Object.keys(this.state.selectedColumns)));
         this.togglePopout(false);
@@ -89,7 +89,7 @@ export class ListColumnsForm extends React.Component<{ activeColumns?: any, disp
         return (
             <div>
                 <ListHeaderButton
-                    active={this.state.isOpen}
+                    active={`${this.state.isOpen}`}
                     id="listHeaderColumnButton"
                     glyph="list-unordered"
                     label="Columns"

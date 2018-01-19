@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Filters } from 'FieldTypes';
-import { Chip } from 'elemental';
+import { Chip } from '../../../../elemental';
 
 import { Popout } from '../../../../shared/Popout';
 import { setFilter, clearFilter } from '../../actions';

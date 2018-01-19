@@ -116,7 +116,7 @@ class ListView extends React.Component<Props, any> {
         const list = this.props.currentList;
         this.context.router.push(`${Keystone.adminPath}/${list.path}/${item.id}`);
     };
-    createAutocreate() {
+    createAutocreate = () => {
         const list = this.props.currentList;
         list.createItem(null, (err, data) => {
             if (err) {
@@ -127,7 +127,7 @@ class ListView extends React.Component<Props, any> {
                 this.context.router.push(`${Keystone.adminPath}/${list.path}/${data.id}`);
             }
         });
-    }
+    };
     updateSearch = (e) => {
         this.props.dispatch(setActiveSearch(e.target.value));
     };
@@ -403,9 +403,9 @@ class ListView extends React.Component<Props, any> {
             showCreateForm: visible,
         });
     }
-    openCreateModal() {
+    openCreateModal = () => {
         this.toggleCreateModal(true);
-    }
+    };
     closeCreateModal = () => {
         this.toggleCreateModal(false);
     }
@@ -417,7 +417,7 @@ class ListView extends React.Component<Props, any> {
     }
     renderBlankState() {
         const { currentList } = this.props;
-        
+
         if (!this.showBlankState()) return null;
 
         // create and nav directly to the item view, or open the create modal
@@ -574,4 +574,4 @@ export const List = connect((state: any) => {
         rowAlert: state.lists.rowAlert,
         active: state.active,
     };
-})(ListView);
+})(ListView as any);

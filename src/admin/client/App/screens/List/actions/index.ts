@@ -33,7 +33,7 @@ export function loadInitialItems () {
  *
  * @param {Number} index The page number we want to be on
  */
-export function setCurrentPage (index) {
+export function setCurrentPage (index?) {
 	return {
 		type: SET_CURRENT_PAGE,
 		index: parseInt(index),

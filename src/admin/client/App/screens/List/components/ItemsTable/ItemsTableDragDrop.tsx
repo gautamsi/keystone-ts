@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import { TableRow } from './ItemsTableRow';
+import { SortableTableRow } from './ItemsTableRow';
 import { DropZone } from './ItemsTableDragDropZone';
 
 export interface Props {
@@ -22,7 +22,7 @@ class ItemsTableDragDrop extends React.Component<Props> {
             <tbody >
                 {this.props.items.results.map((item, i) => {
                     return (
-                        <TableRow key={item.id}
+                        <SortableTableRow key={item.id}
                             index={i}
                             sortOrder={item.sortOrder || 0}
                             id={item.id}
@@ -31,7 +31,7 @@ class ItemsTableDragDrop extends React.Component<Props> {
                         />
                     );
                 })}
-                <Drop   Zone {...this.props} />
+                <DropZone {...this.props} />
             </tbody>
         );
     }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import vkey from 'vkey';
+import * as vkey from 'vkey';
 
 export interface Props {
     component?: string | any;
@@ -57,11 +57,11 @@ export class AltText extends React.Component<Props, any> {
 
         return <Component {...props} />;
     }
-    static propTypes = {
 
-    };
-    static defaultProps = {
-        component: 'span',
-        modifier: '<alt>',
-    };
+    static get defaultProps() {
+        return {
+            component: 'span',
+            modifier: '<alt>',
+        };
+    }
 }

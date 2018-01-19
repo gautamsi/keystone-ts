@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button } from 'elemental';
+import { Button } from '../../App/elemental';
 
 // TODO Figure out if we should change "Keystone" to "Admin area"
 

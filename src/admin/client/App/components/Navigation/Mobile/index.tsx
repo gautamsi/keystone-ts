@@ -25,6 +25,8 @@ export class MobileNavigation extends React.Component<Props, any> {
         this.state = {
             barIsVisible: false,
         };
+        this.handleResize = this.handleResize.bind(this);
+        this.handleEscapeKey = this.handleEscapeKey.bind(this);
     }
     // Handle showing and hiding the menu based on the window size when
     // resizing
@@ -67,11 +69,11 @@ export class MobileNavigation extends React.Component<Props, any> {
         document.body.removeEventListener('keyup', this.handleEscapeKey, false);
     }
     // If the escape key was pressed, hide the menu
-    handleEscapeKey(event) {
+    handleEscapeKey = (event) => {
         if (event.which === ESCAPE_KEY_CODE) {
             this.hideMenu();
         }
-    }
+    };
     renderNavigation() {
         if (!this.props.sections || !this.props.sections.length) return null;
 
@@ -97,13 +99,13 @@ export class MobileNavigation extends React.Component<Props, any> {
     }
     // Render a blockout
     renderBlockout() {
-        if (!this.state.menuIsVisible) return null;
+        if (!this.state.menuIsVisible) () => null;
 
         return <div className="MobileNavigation__blockout" onClick={this.toggleMenu} />;
     }
     // Render the sidebar menu
     renderMenu = () => {
-        if (!this.state.menuIsVisible) return null;
+        if (!this.state.menuIsVisible) return () => null;
 
         return (
             <nav className="MobileNavigation__menu">

@@ -24,6 +24,7 @@ class SecondaryNavigationNav extends React.Component<Props, any> {
     constructor(props) {
         super(props);
         this.state = {};
+        this.handleResize = this.handleResize.bind(this);
     }
     // Handle resizing and hide this nav on mobile (i.e. < 768px) screens
     componentDidMount() {

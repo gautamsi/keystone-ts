@@ -1,6 +1,6 @@
-import { FormNote, FormField, FormInput } from 'elemental';
+import { FormNote, FormField, FormInput } from '../../../elemental';
 import * as React from 'react';
-import vkey from 'vkey';
+import * as vkey from 'vkey';
 
 import { Kbd } from '../../../shared/Kbd';
 import { Popout } from '../../../shared/Popout';
@@ -15,11 +15,13 @@ export class ListSort extends React.Component<Props, any> {
     static displayName: string = 'ListSort';
     constructor(props) {
         super(props);
-        this.state =  {
+        this.state = {
             altDown: false,
             popoutIsOpen: false,
             searchString: '',
         };
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.handleKeyUp = this.handleKeyUp.bind(this);
     }
     componentDidMount() {
         document.body.addEventListener('keydown', this.handleKeyDown, false);
@@ -41,11 +43,11 @@ export class ListSort extends React.Component<Props, any> {
             altDown: false,
         });
     }
-    handleSortSelect(path, inverted) {
+    handleSortSelect = (path, inverted) => {
         if (this.state.altDown) inverted = true;
         this.props.handleSortSelect(path, inverted);
         this.closePopout();
-    }
+    };
     openPopout = () => {
         this.setState({
             popoutIsOpen: true,

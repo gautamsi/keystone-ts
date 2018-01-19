@@ -9,6 +9,7 @@ import * as React from 'react';
 import { Alert, Container, Center, Spinner } from '../../elemental';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import * as PropTypes from 'prop-types';
 
 import { listsByKey } from '../../../utils/lists';
 import { CreateForm } from '../../shared/CreateForm';
@@ -29,7 +30,7 @@ import {
 export interface Props {
     dispatch: any;
     currentList: any;
-    params: any;
+    match: { params: any; };
     relationshipData: any;
     drag: any;
     routeParams: any;
@@ -39,9 +40,9 @@ export interface Props {
 }
 class ItemView extends React.Component<Props, any> {
     static displayName: string = 'ItemView';
-    // static contextTypes = {
-    //     router: any
-    // };
+    static contextTypes: {
+        router: PropTypes.object.isRequired,
+    };
 
     constructor(props) {
         super(props);
@@ -53,18 +54,18 @@ class ItemView extends React.Component<Props, any> {
         // When we directly navigate to an item without coming from another client
         // side routed page before, we need to select the list before initializing the item
         // We also need to update when the list id has changed
-        if (!this.props.currentList || this.props.currentList.id !== this.props.params.listId) {
-            this.props.dispatch(selectList(this.props.params.listId));
+        if (!this.props.currentList || this.props.currentList.id !== this.props.match.params.listId) {
+            this.props.dispatch(selectList(this.props.match.params.listId));
         }
-        this.initializeItem(this.props.params.itemId);
+        this.initializeItem(this.props.match.params.itemId);
     }
 
-    componentWillReceiveProps(nextProps: any) {
+    componentWillReceiveProps(nextProps: Props) {
         // We've opened a new item from the client side routing, so initialize
         // again with the new item id
-        if (nextProps.params.itemId !== this.props.params.itemId) {
-            this.props.dispatch(selectList(nextProps.params.listId));
-            this.initializeItem(nextProps.params.itemId);
+        if (nextProps.match.params.itemId !== this.props.match.params.itemId) {
+            this.props.dispatch(selectList(nextProps.match.params.listId));
+            this.initializeItem(nextProps.match.params.itemId);
         }
     }
 
@@ -102,13 +103,13 @@ class ItemView extends React.Component<Props, any> {
                     {keys.map(key => {
                         const relationship = relationships[key];
                         const refList = listsByKey[relationship.ref];
-                        const { currentList, params, relationshipData, drag } = this.props;
+                        const { currentList, match, relationshipData, drag } = this.props;
                         return (
                             <RelatedItemsList
                                 key={relationship.path}
                                 list={currentList}
                                 refList={refList}
-                                relatedItemId={params.itemId}
+                                relatedItemId={match.params.itemId}
                                 relationship={relationship}
                                 items={relationshipData[relationship.path]}
                                 dragNewSortOrder={drag.newSortOrder}
@@ -211,4 +212,4 @@ export const Item = connect((state: any) => ({
     currentList: state.lists.currentList,
     relationshipData: state.item.relationshipData,
     drag: state.item.drag,
-}))(ItemView);
+}))(ItemView as any);

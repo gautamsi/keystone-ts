@@ -23,7 +23,7 @@ export class PopoutHeader extends React.Component<Props, {}> {
                 className={'Popout__header__button octicon octicon-' + this.props.leftIcon}
                 onClick={this.props.leftAction}
             />
-        ) : null;
+        ) : () => null;
         // If we have a title, render it
         let headerTitle = this.props.title ? (
             <span
@@ -32,7 +32,7 @@ export class PopoutHeader extends React.Component<Props, {}> {
             >
                 {this.props.title}
             </span>
-        ) : null;
+        ) : () => null;
 
         return (
             <div className="Popout__header">

@@ -5,7 +5,7 @@
 
 import * as React from 'react';
 import { css } from 'glamor';
-import { Container } from 'elemental';
+import { Container } from '../../elemental';
 import { theme } from '../../../theme';
 
 export interface Props {

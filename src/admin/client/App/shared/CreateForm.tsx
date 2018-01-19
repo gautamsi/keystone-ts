@@ -4,11 +4,11 @@
  */
 
 import * as React from 'react';
-import vkey from 'vkey';
+import * as vkey from 'vkey';
 import { AlertMessages } from './AlertMessages';
 import { Fields } from 'FieldTypes';
 import { InvalidFieldType } from './InvalidFieldType';
-import { Button, Form, Modal } from 'elemental';
+import { Button, Form, ModalDialog, ModalBody, ModalFooter, ModalHeader } from '../elemental';
 
 export interface Props {
     err?: any;
@@ -20,7 +20,7 @@ export interface Props {
 
 export class CreateForm extends React.Component<Props, any> {
     static displayName: string = 'CreateForm';
-    getDefaultProps() {
+    static get defaultProps() {
         return {
             err: null,
             isOpen: false,
@@ -41,6 +41,7 @@ export class CreateForm extends React.Component<Props, any> {
             values: values,
             alerts: {},
         };
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
     componentDidMount() {
         document.body.addEventListener('keyup', this.handleKeyPress, false);
@@ -54,13 +55,13 @@ export class CreateForm extends React.Component<Props, any> {
         }
     }
     // Handle input change events
-    handleChange(event) {
+    handleChange = (event) => {
         let values = Object.assign({}, this.state.values);
         values[event.path] = event.value;
         this.setState({
             values: values,
         });
-    }
+    };
     // Set the props of a field
     getFieldProps(field) {
         let props = Object.assign({}, field);
@@ -154,15 +155,15 @@ export class CreateForm extends React.Component<Props, any> {
 
         return (
             <Form layout="horizontal" onSubmit={this.submitForm}>
-                <Modal.Header
+                <ModalHeader
                     text={'Create a new ' + list.singular}
                     showCloseButton
                 />
-                <Modal.Body>
+                <ModalBody>
                     <AlertMessages alerts={this.state.alerts} />
                     {form}
-                </Modal.Body>
-                <Modal.Footer>
+                </ModalBody>
+                <ModalFooter>
                     <Button color="success" type="submit" data-button-type="submit">
                         Create
 					</Button>
@@ -174,19 +175,19 @@ export class CreateForm extends React.Component<Props, any> {
                     >
                         Cancel
 					</Button>
-                </Modal.Footer>
+                </ModalFooter>
             </Form>
         );
     }
     render() {
         return (
-            <Modal.Dialog
+            <ModalDialog
                 isOpen={this.props.isOpen}
                 onClose={this.props.onCancel}
                 backdropClosesModal
             >
                 {this.renderForm()}
-            </Modal.Dialog>
+            </ModalDialog>
         );
     }
 }

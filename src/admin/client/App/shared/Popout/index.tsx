@@ -28,7 +28,7 @@ export class Popout extends React.Component<Props, any> {
         [key: string]: (Portal)
         portal: (Portal) // !important
     };
-    static defaultProps() {
+    static get defaultProps() {
         return {
             width: 320,
         };
@@ -36,6 +36,7 @@ export class Popout extends React.Component<Props, any> {
     constructor(props) {
         super(props);
         this.state = {};
+        this.calculatePosition = this.calculatePosition.bind(this);
     }
     componentWillReceiveProps(nextProps) {
         if (!this.props.isOpen && nextProps.isOpen) {
@@ -89,7 +90,7 @@ export class Popout extends React.Component<Props, any> {
         }
     }
     renderPopout() {
-        if (!this.props.isOpen) return null;
+        if (!this.props.isOpen) return () => null;
 
         const { width } = this.props;
         const { arrowLeftOffset, leftOffset: left, topOffset: top } = this.state;

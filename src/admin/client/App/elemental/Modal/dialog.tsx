@@ -30,6 +30,7 @@ export class ModalDialog extends React.Component<Props> {
 
         this.handleBackdropClick = this.handleBackdropClick.bind(this);
         this.handleKeyboardInput = this.handleKeyboardInput.bind(this);
+        this.handleKeyboardInput = this.handleKeyboardInput.bind(this);
     }
     getChildContext() {
         return {
@@ -41,7 +42,7 @@ export class ModalDialog extends React.Component<Props> {
 
         // add event listeners
         if (nextProps.isOpen && nextProps.enableKeyboardInput) {
-            window.addEventListener('keydown', this.handleKeyboardInput.bind(this));
+            window.addEventListener('keydown', this.handleKeyboardInput);
         }
         if (!nextProps.isOpen && nextProps.enableKeyboardInput) {
             window.removeEventListener('keydown', this.handleKeyboardInput);

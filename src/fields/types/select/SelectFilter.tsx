@@ -72,6 +72,8 @@ export class SelectFilter extends React.Component<Props, any> {
         ]);
 
         this.state = { metaDown: false };
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.handleKeyUp = this.handleKeyUp.bind(this);
     }
     componentDidMount() {
         this.detectOS();

@@ -21,7 +21,7 @@ export interface Props {
 /**
  * class ItemsTableDragDropZone
  */
-class DropZone /*ItemsTableDragDropZone*/ extends React.Component<Props> {
+export class DropZone /*ItemsTableDragDropZone*/ extends React.Component<Props> {
     static displayName: string = 'ItemsTableDragDropZone';
 
     renderPageDrops() {

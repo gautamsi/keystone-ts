@@ -26,6 +26,7 @@ export class Checkbox extends React.Component<Props, any> {
             focus: null,
             hover: null,
         };
+        this.handleMouseUp = this.handleMouseUp.bind(this);
     }
     componentDidMount() {
         window.addEventListener('mouseup', this.handleMouseUp, false);

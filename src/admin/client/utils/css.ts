@@ -18,20 +18,20 @@
 	}
 */
 
-export function linearGradient (direction, top, bottom, base = '') {
-	return {
-		background: `linear-gradient(${direction}, ${top} 0%, ${bottom} 100%) ${base}`,
-	};
+export function linearGradient(direction, top, bottom, base = '') {
+    return {
+        background: `linear-gradient(${direction}, ${top} 0%, ${bottom} 100%) ${base}`,
+    };
 }
 
 // Vertical Gradient
-export function gradientVertical (top, bottom, base) {
-	return linearGradient('to bottom', top, bottom, base);
+export function gradientVertical(top, bottom, base = '') {
+    return linearGradient('to bottom', top, bottom, base);
 }
 
 // Horizontal Gradient
-export function gradientHorizontal (top, bottom, base) {
-	return linearGradient('to right', top, bottom, base);
+export function gradientHorizontal(top, bottom, base = '') {
+    return linearGradient('to right', top, bottom, base);
 }
 
 /**
@@ -42,33 +42,33 @@ export function gradientHorizontal (top, bottom, base) {
 */
 
 // top
-export function borderTopRadius (radius) {
-	return {
-		borderTopLeftRadius: radius,
-		borderTopRightRadius: radius,
-	};
+export function borderTopRadius(radius) {
+    return {
+        borderTopLeftRadius: radius,
+        borderTopRightRadius: radius,
+    };
 }
 
 // right
-export function borderRightRadius (radius) {
-	return {
-		borderBottomRightRadius: radius,
-		borderTopRightRadius: radius,
-	};
+export function borderRightRadius(radius) {
+    return {
+        borderBottomRightRadius: radius,
+        borderTopRightRadius: radius,
+    };
 }
 
 // bottom
-export function borderBottomRadius (radius) {
-	return {
-		borderBottomLeftRadius: radius,
-		borderBottomRightRadius: radius,
-	};
+export function borderBottomRadius(radius) {
+    return {
+        borderBottomLeftRadius: radius,
+        borderBottomRightRadius: radius,
+    };
 }
 
 // left
-export function borderLeftRadius (radius) {
-	return {
-		borderBottomLeftRadius: radius,
-		borderTopLeftRadius: radius,
-	};
+export function borderLeftRadius(radius) {
+    return {
+        borderBottomLeftRadius: radius,
+        borderTopLeftRadius: radius,
+    };
 }

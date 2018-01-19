@@ -3,7 +3,7 @@
  */
 
 import * as React from 'react';
-import { Alert } from 'elemental';
+import { Alert } from '../elemental';
 
 export interface Props {
     message: string | any;

@@ -32,7 +32,7 @@ export const LoginForm: React.SFC<Props> = ({
                         value={password}
                     />
                 </FormField>
-                <Button disabled={isAnimating} color="primary" type="submit" submit={true}>
+                <Button disabled={isAnimating} color="primary" type="submit">
                     Sign In
 				</Button>
             </Form>
@@ -42,7 +42,7 @@ export const LoginForm: React.SFC<Props> = ({
 
 export interface Props {
     email?: string;
-    handleInputChange: any;
+    handleInputChange?: any;
     handleSubmit: any;
     isAnimating?: boolean;
     password?: string;

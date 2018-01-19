@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Popout } from '../../../shared/Popout';
 import { PopoutList } from '../../../shared/Popout/PopoutList';
 import { ListHeaderButton } from './ListHeaderButton';
-import { LabelledControl, Form, FormField, SegmentedControl } from 'elemental';
+import { LabelledControl, Form, FormField, SegmentedControl } from '../../../elemental';
 
 import { downloadItems } from '../actions';
 const FORMAT_OPTIONS = [
@@ -148,7 +148,7 @@ export class ListDownloadForm extends React.Component<Props, any> {
         return (
             <div>
                 <ListHeaderButton
-                    active={this.state.isOpen}
+                    active={`${this.state.isOpen}`}
                     id="listHeaderDownloadButton"
                     glyph="cloud-download"
                     label="Download"

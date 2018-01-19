@@ -5,19 +5,23 @@ import * as classnames from 'classnames';
 import { ListFiltersAddForm } from './ListFiltersAddForm';
 import { Popout } from '../../../../shared/Popout';
 import { PopoutList } from '../../../../shared/Popout/PopoutList';
-import { FormInput } from 'elemental';
+import { FormInput } from '../../../../elemental';
 import { ListHeaderButton } from '../ListHeaderButton';
 
 import { setFilter } from '../../actions';
 
 export class ListFiltersAdd extends React.Component<{ maxHeight?: number, dispatch?: any, activeFilters?: any, availableFilters?: any }, any> {
     static displayName: string = 'ListFiltersAdd';
-
-    static defaultProps() {
+    searchField: FormInput;
+    static get defaultProps() {
         return {
             maxHeight: 360,
         };
     }
+    refs: {
+        searchField: HTMLInputElement;
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -30,9 +34,9 @@ export class ListFiltersAdd extends React.Component<{ maxHeight?: number, dispat
     updateSearch = (e) => {
         this.setState({ searchString: e.target.value });
     }
-    openPopout() {
+    openPopout = () => {
         this.setState({ isOpen: true }, this.focusSearch);
-    }
+    };
     closePopout = () => {
         this.setState({
             innerHeight: 0,
@@ -52,7 +56,10 @@ export class ListFiltersAdd extends React.Component<{ maxHeight?: number, dispat
         }, this.focusSearch);
     };
     focusSearch() {
-        findDOMNode<HTMLElement>(this.refs.search).focus();
+        if (this.searchField) {
+            this.searchField.focus();
+        }
+        // findDOMNode<HTMLElement>(this.refs.searchField).focus();
     }
     selectField(field) {
         this.setState({
@@ -111,7 +118,8 @@ export class ListFiltersAdd extends React.Component<{ maxHeight?: number, dispat
                         <FormInput
                             onChange={this.updateSearch}
                             placeholder="Find a filter..."
-                            ref="search"
+                            // ref="searchField"
+                            ref={(sf) => { this.searchField = sf; }}
                             value={this.state.searchString}
                         />
                     </div>
@@ -148,7 +156,7 @@ export class ListFiltersAdd extends React.Component<{ maxHeight?: number, dispat
         return (
             <div>
                 <ListHeaderButton
-                    active={isOpen}
+                    active={`${isOpen}`}
                     glyph="eye"
                     id="listHeaderFilterButton"
                     label="Filter"

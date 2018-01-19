@@ -10,7 +10,7 @@ import { loadItems } from '../screens/List/actions';
 import * as _ from 'lodash';
 import { columnsParser, sortParser, filtersParser } from '../parsers';
 
-export function* urlUpdate(query, cache, pathname) {
+export function* urlUpdate(query, cache, pathname): any {
     const blacklistedField = 'search';
     const attenuatedQuery = blacklist(query, blacklistedField);
     const attenuatedCache = blacklist(cache, blacklistedField);
@@ -33,7 +33,8 @@ export function* updateParams() {
     // Select all the things
     const activeState = yield select((state: any) => state.active);
     const currentList = yield select((state: any) => state.lists.currentList);
-    const location = yield select((state: any) => state.routing.locationBeforeTransitions);
+    const location = yield select((state: any) => state.routing.location);
+    // const location = yield select((state: any) => state.routing.locationBeforeTransitions);
     const { index } = yield select((state: any) => state.lists.page);
 
     // Get the data into the right format, set the defaults
@@ -62,8 +63,8 @@ export function* updateParams() {
 }
 
 
-export function* evalQueryParams() {
-    const { pathname, query } = yield select((state: any) => state.routing.locationBeforeTransitions);
+export function* evalQueryParams(): any {
+    const { pathname, query } = yield select((state: any) => state.routing.location);
 
     const { cachedQuery } = yield select((state: any) => state.active);
     const { currentList } = yield select((state: any) => state.lists);
@@ -74,7 +75,7 @@ export function* evalQueryParams() {
         yield put({ type: actions.QUERY_HAS_NOT_CHANGED });
         yield put(<any>loadItems());
     } else {
-        const parsedQuery = yield call(parseQueryParams, query, currentList);
+        const parsedQuery = yield call(parseQueryParams, query || {}, currentList);
         yield put({ type: actions.QUERY_HAS_CHANGED, parsedQuery });
     }
 }

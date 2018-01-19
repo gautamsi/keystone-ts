@@ -18,7 +18,7 @@ export class PopoutPane extends React.Component<Props> {
         el: (HTMLInputElement) // !important
     };
     static displayName: string = 'PopoutPane';
-    getDefaultProps() {
+    static get defaultProps() {
         return {
             onLayout: () => { },
         };

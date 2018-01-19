@@ -4,7 +4,7 @@ import { findDOMNode } from 'react-dom';
 import { Fields } from 'FieldTypes';
 import { InvalidFieldType } from '../../../shared/InvalidFieldType';
 import { plural } from '../../../../utils/string';
-import { BlankState, Button, Form, Modal } from 'elemental';
+import { BlankState, Button, Form, ModalDialog, ModalBody, ModalFooter, ModalHeader } from '../../../elemental';
 
 export interface Props {
     isOpen?: boolean;
@@ -14,7 +14,7 @@ export interface Props {
 }
 export class UpdateForm extends React.Component<Props, any> {
     static displayName: string = 'UpdateForm';
-    static defaultProps() {
+    static get defaultProps() {
         return {
             isOpen: false,
         };
@@ -105,12 +105,12 @@ export class UpdateForm extends React.Component<Props, any> {
 
         return (
             <Form layout="horizontal" action={formAction} noValidate="true">
-                <Modal.Header
+                <ModalHeader
                     onClose={this.handleClose}
                     showCloseButton
                     text={'Update ' + itemCount}
                 />
-                <Modal.Body>
+                <ModalBody>
                     <Select
                         key="field-select"
                         multi
@@ -120,19 +120,19 @@ export class UpdateForm extends React.Component<Props, any> {
                         value={this.state.fields}
                     />
                     {this.renderFields()}
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button color="primary" submit>Update</Button>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" type="submit">Update</Button>
                     <Button color="cancel" variant="link" onClick={this.handleClose}>Cancel</Button>
-                </Modal.Footer>
+                </ModalFooter>
             </Form>
         );
     }
     render() {
         return (
-            <Modal.Dialog isOpen={this.props.isOpen} onClose={this.handleClose} backdropClosesModal>
+            <ModalDialog isOpen={this.props.isOpen} onClose={this.handleClose} backdropClosesModal>
                 {this.renderForm()}
-            </Modal.Dialog>
+            </ModalDialog>
         );
     }
 }

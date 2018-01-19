@@ -4,7 +4,7 @@
  */
 
 import * as React from 'react';
-import { Alert } from 'elemental';
+import { Alert } from '../../App/elemental';
 
 export const AlertView: React.SFC<Props> = function (props) {
     if (props.isInvalid) {

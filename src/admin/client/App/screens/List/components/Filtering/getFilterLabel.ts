@@ -6,7 +6,7 @@ const DATETIME_FORMAT = 'MMM D YYYY h:mm:ss';
 export function getFilterLabel (field, value) {
 	const label = field.label;
 
-	switch (field.type) {
+    switch (field.type.tolower()) {
 		// BOOLEAN
 		case 'boolean': {
 			return value.value

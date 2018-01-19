@@ -8,7 +8,7 @@ import {
     ResponsiveText,
     Button,
     LoadingButton
-} from 'elemental';
+} from '../../../elemental';
 
 import { Fields } from 'FieldTypes';
 import { fade } from '../../../../utils/color';

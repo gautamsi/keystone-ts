@@ -3,7 +3,7 @@
  */
 
 import * as React from 'react';
-import { Button, Modal } from 'elemental';
+import { Button, ModalDialog, ModalBody, ModalFooter, ModalHeader } from '../elemental';
 
 export const ConfirmationDialog: React.SFC<Props> = ({
 	cancelLabel,
@@ -22,26 +22,26 @@ export const ConfirmationDialog: React.SFC<Props> = ({
     }
 
     return (
-        <Modal.Dialog
+        <ModalDialog
             backdropClosesModal
             isOpen={isOpen}
             onClose={onCancel}
             width={400}
         >
             {html ? (
-                <Modal.Body {...props} dangerouslySetInnerHTML={{ __html: html }} />
+                <ModalBody {...props} dangerouslySetInnerHTML={{ __html: html }} />
             ) : (
-                    <Modal.Body {...props}>{children}</Modal.Body>
+                    <ModalBody {...props}>{children}</ModalBody>
                 )}
-            <Modal.Footer>
+            <ModalFooter>
                 <Button autoFocus size="small" data-button-type="confirm" color={confirmationType} onClick={onConfirmation}>
                     {confirmationLabel}
                 </Button>
                 <Button size="small" data-button-type="cancel" variant="link" color="cancel" onClick={onCancel}>
                     {cancelLabel}
                 </Button>
-            </Modal.Footer>
-        </Modal.Dialog>
+            </ModalFooter>
+        </ModalDialog>
     );
 };
 

@@ -26,7 +26,7 @@ export const ListHeaderSearch: React.SFC<Props> = ({
                 className={`${css(classes.icon, !!value.length && classes.iconWhenClear)}`}
                 data-search-input-field-clear-icon
                 disabled={!value.length}
-                onClick={value.length && handleClear}
+                onClick={e => value.length && handleClear(e)}
                 title="Clear search query"
                 type="button"
             >
@@ -34,6 +34,7 @@ export const ListHeaderSearch: React.SFC<Props> = ({
             </button>
         </div>
     );
+    // value.length && handleClear
 };
 
 export interface Props {
