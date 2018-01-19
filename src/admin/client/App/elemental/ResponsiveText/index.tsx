@@ -22,7 +22,6 @@ export class ResponsiveText extends React.Component<Props, any> {
     constructor(props) {
         super(props);
         this.handleResize = this.handleResize.bind(this);
-        this.handleResize = this.handleResize.bind(this);
         this.state = {
             windowWidth: canUseDOM ? window.innerWidth : 0,
         };
@@ -38,11 +37,11 @@ export class ResponsiveText extends React.Component<Props, any> {
             window.removeEventListener('resize', this.handleResize);
         }
     }
-    handleResize() {
+    handleResize = () => {
         this.setState({
             windowWidth: canUseDOM ? window.innerWidth : 0,
         });
-    }
+    };
     render() {
         const {
             // @ts-ignore

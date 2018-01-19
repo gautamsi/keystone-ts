@@ -34,11 +34,11 @@ class SecondaryNavigationNav extends React.Component<Props, any> {
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleResize);
     }
-    handleResize() {
+    handleResize = () => {
         this.setState({
             navIsVisible: this.props.lists && Object.keys(this.props.lists).length > 0 && window.innerWidth >= 768,
         });
-    }
+    };
     // Render the navigation
     renderNavigation(lists) {
         const navigation = Object.keys(lists).map((key) => {

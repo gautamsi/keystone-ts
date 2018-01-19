@@ -29,11 +29,11 @@ export class PrimaryNavigation extends React.Component<Props, any> {
     componentWillUnmount() {
         window.removeEventListener('resize', this.handleResize);
     }
-    handleResize() {
+    handleResize = () => {
         this.setState({
             navIsVisible: window.innerWidth >= 768,
         });
-    }
+    };
     // Render the sign out button
     renderSignout() {
         if (!this.props.signoutUrl) return null;

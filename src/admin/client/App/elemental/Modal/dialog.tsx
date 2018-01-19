@@ -30,7 +30,6 @@ export class ModalDialog extends React.Component<Props> {
 
         this.handleBackdropClick = this.handleBackdropClick.bind(this);
         this.handleKeyboardInput = this.handleKeyboardInput.bind(this);
-        this.handleKeyboardInput = this.handleKeyboardInput.bind(this);
     }
     getChildContext() {
         return {
@@ -58,16 +57,16 @@ export class ModalDialog extends React.Component<Props> {
     // Methods
     // ==============================
 
-    handleKeyboardInput(event) {
+    handleKeyboardInput = (event) => {
         if (event.keyCode === 27) this.props.onClose();
 
         return false;
-    }
-    handleBackdropClick(e) {
+    };
+    handleBackdropClick = (e) => {
         if (e.target !== this.refs.container) return;
 
         this.props.onClose();
-    }
+    };
 
     // ==============================
     // Renderers

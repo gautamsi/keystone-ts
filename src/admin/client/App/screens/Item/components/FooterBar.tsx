@@ -17,13 +17,13 @@ export class FooterBar extends React.Component<Props, any> {
 
     constructor(props) {
         super(props);
+        this.recalcPosition.bind = this.recalcPosition.bind(this);
         this.state = {
             position: 'relative',
             width: 'auto',
             height: 'auto',
             top: 0,
         };
-        this.recalcPosition.bind = this.recalcPosition.bind(this);
     }
     static get defaultProps() {
         return {
@@ -59,7 +59,7 @@ export class FooterBar extends React.Component<Props, any> {
         };
     }
 
-    recalcPosition() {
+    recalcPosition = () => {
         let wrapper = this.refs.wrapper;
 
         this.footerSize.x = wrapper.offsetWidth;
@@ -97,7 +97,7 @@ export class FooterBar extends React.Component<Props, any> {
             newState.position = 'fixed';
             this.setState(newState);
         }
-    }
+    };
 
     render() {
         let wrapperStyle: any = {

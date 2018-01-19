@@ -49,7 +49,7 @@ export class Popout extends React.Component<Props, any> {
     getPortalDOMNode() {
         return this.refs.portal.getPortalDOMNode();
     }
-    calculatePosition(isOpen) {
+    calculatePosition = (isOpen) => {
         if (!isOpen) return;
         let posNode: HTMLElement = document.getElementById(this.props.relativeToID);
 
@@ -88,7 +88,7 @@ export class Popout extends React.Component<Props, any> {
                 arrowLeftOffset: arrowLeftOffset,
             });
         }
-    }
+    };
     renderPopout() {
         if (!this.props.isOpen) return () => null;
 

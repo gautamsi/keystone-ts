@@ -21,12 +21,12 @@ export class Checkbox extends React.Component<Props, any> {
 
     constructor(props) {
         super(props);
+        this.handleMouseUp = this.handleMouseUp.bind(this);
         this.state = {
             active: null,
             focus: null,
             hover: null,
         };
-        this.handleMouseUp = this.handleMouseUp.bind(this);
     }
     componentDidMount() {
         window.addEventListener('mouseup', this.handleMouseUp, false);
@@ -93,38 +93,38 @@ export class Checkbox extends React.Component<Props, any> {
             transition: 'all 120ms ease-out',
         };
     }
-    handleKeyDown(e) {
+    handleKeyDown = (e) => {
         if (e.keyCode !== 32) return;
         this.toggleActive(true);
-    }
-    handleKeyUp() {
+    };
+    handleKeyUp = () => {
         this.toggleActive(false);
-    }
-    handleMouseOver() {
+    };
+    handleMouseOver = () => {
         this.toggleHover(true);
-    }
-    handleMouseDown() {
+    };
+    handleMouseDown = () => {
         this.toggleActive(true);
         this.toggleFocus(true);
-    }
-    handleMouseUp() {
+    };
+    handleMouseUp = () => {
         this.toggleActive(false);
-    }
-    handleMouseOut() {
+    };
+    handleMouseOut = () => {
         this.toggleHover(false);
     }
-    toggleActive(pseudo) {
+    toggleActive = (pseudo) => {
         this.setState({ active: pseudo });
-    }
-    toggleHover(pseudo) {
+    };
+    toggleHover = (pseudo) => {
         this.setState({ hover: pseudo });
-    }
-    toggleFocus(pseudo) {
+    };
+    toggleFocus = (pseudo) => {
         this.setState({ focus: pseudo });
-    }
-    handleChange() {
+    };
+    handleChange = () => {
         this.props.onChange(!this.props.checked);
-    }
+    };
     render() {
         const { checked, readonly } = this.props;
 
