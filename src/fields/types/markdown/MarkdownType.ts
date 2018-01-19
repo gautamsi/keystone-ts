@@ -19,17 +19,20 @@ export class MarkdownType extends TextType {
 
     constructor(list, path, options) {
         super(list, path, options);
+    }
+    protected init() {
+        super.init();
         this._defaultSize = 'full';
 
-        this.toolbarOptions = options.toolbarOptions || {};
-        this.markedOptions = options.markedOptions || {};
+        this.toolbarOptions = this.options.toolbarOptions || {};
+        this.markedOptions = this.options.markedOptions || {};
 
         // See sanitize-html docs for defaults
         // .. https://www.npmjs.com/package/sanitize-html#what-are-the-default-options
-        this.sanitizeOptions = options.sanitizeOptions || {};
+        this.sanitizeOptions = this.options.sanitizeOptions || {};
 
-        this.height = options.height || 90;
-        this.wysiwyg = ('wysiwyg' in options) ? options.wysiwyg : true;
+        this.height = this.options.height || 90;
+        this.wysiwyg = ('wysiwyg' in this.options) ? this.options.wysiwyg : true;
 
         this._properties = ['wysiwyg', 'height', 'toolbarOptions'];
     }

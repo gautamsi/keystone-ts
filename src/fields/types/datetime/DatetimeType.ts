@@ -12,17 +12,19 @@ const parseFormats = ['YYYY-MM-DD', 'YYYY-MM-DD h:m:s a', 'YYYY-MM-DD h:m a', 'Y
 export class DatetimeType extends DateType {
     paths: { date: string; time: string; tzOffset: string; };
 
-
     constructor(list, path, options) {
         super(list, path, options);
+    }
+    protected init() {
+        super.init();
         this._nativeType = Date;
-        // this._underscoreMethods = ['format', 'moment', 'parse'];
+        this._underscoreMethods = ['format', 'moment', 'parse'];
         this._fixedSize = 'full';
         this._properties = ['formatString', 'isUTC'];
         this.typeDescription = 'date and time';
-        this.parseFormatString = options.parseFormat || parseFormats;
-        this.formatString = (options.format === false) ? false : (options.format || 'YYYY-MM-DD h:mm:ss a');
-        this.isUTC = options.utc || false;
+        this.parseFormatString = this.options.parseFormat || parseFormats;
+        this.formatString = (this.options.format === false) ? false : (this.options.format || 'YYYY-MM-DD h:mm:ss a');
+        this.isUTC = this.options.utc || false;
         if (this.formatString && typeof this.formatString !== 'string') {
             throw new Error('FieldType.DateTime: options.format must be a string.');
         }

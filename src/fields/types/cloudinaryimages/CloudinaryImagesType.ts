@@ -26,12 +26,12 @@ function truthy(value) {
  */
 export class CloudinaryImagesType extends FieldTypeBase {
     paths: { folder: string; upload: string; uploads: string; action: string; };
-    get _underscoreMethods() {
-        return ['format'];
-    }
     constructor(list, path, options) {
-        super(list, path, options, null);
-        // this._underscoreMethods = ['format'];
+        super(list, path, options);
+    }
+    protected init() {
+        super.init();
+        this._underscoreMethods = ['format'];
         this._fixedSize = 'full';
         this._properties = ['select', 'selectPrefix', 'autoCleanup', 'publicID', 'folder', 'filenameAsPublicID'];
 
@@ -39,7 +39,7 @@ export class CloudinaryImagesType extends FieldTypeBase {
         // validate cloudinary config
         if (!keystone.get('cloudinary config')) {
             throw new Error('Invalid Configuration\n\n'
-                + 'CloudinaryImages fields (' + list.key + '.' + this.path + ') require the "cloudinary config" option to be set.\n\n'
+                + 'CloudinaryImages fields (' + this.list.key + '.' + this.path + ') require the "cloudinary config" option to be set.\n\n'
                 + 'See http://keystonejs.com/docs/configuration/#services-cloudinary for more information.\n');
         }
     }

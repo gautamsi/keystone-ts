@@ -29,17 +29,16 @@ const defaultOptions = { min: 8, max: 72, workFactor: 10, rejectCommon: true };
 export class PasswordType extends FieldTypeBase {
     paths: { confirm: any; hash: any; };
 
-    get _underscoreMethods() {
-        return ['format', 'compare'];
-    }
-
     constructor(list, path, options) {
-        super(list, path, options, String);
+        super(list, path, options);
+    }
+    protected init() {
+        super.init();
         // Apply default and enforced options (you can't sort on password fields)
-        options = Object.assign({}, defaultOptions, options, { nosort: false });
+        this.options = Object.assign({}, defaultOptions, this.options, { nosort: false });
 
         this._nativeType = String;
-        // this._underscoreMethods = ['format', 'compare'];
+        this._underscoreMethods = ['format', 'compare'];
         this._fixedSize = 'full';
 
 

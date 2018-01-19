@@ -10,13 +10,15 @@ import * as util from 'util';
 export class BooleanType extends FieldTypeBase {
     indent: boolean;
 
-
     constructor(list, path, options) {
-        super(list, path, options, Boolean);
+        super(list, path, options);
+    }
+    protected init() {
+        super.init();
         this._nativeType = Boolean;
         this._properties = ['indent'];
         this._fixedSize = 'full';
-        this.indent = (options.indent) ? true : false;
+        this.indent = (this.options.indent) ? true : false;
     }
     static properName = 'Boolean';
 

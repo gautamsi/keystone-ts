@@ -16,12 +16,15 @@ export class CodeType extends TextType {
 
     constructor(list, path, options) {
         super(list, path, options);
+    }
+    protected init() {
+        super.init();
         this._nativeType = String;
         this._defaultSize = 'full';
-        this.height = options.height || 180;
-        this.lang = options.lang || options.language;
+        this.height = this.options.height || 180;
+        this.lang = this.options.lang || this.options.language;
         this._properties = ['editor', 'height', 'lang'];
-        this.codemirror = options.codemirror || {};
+        this.codemirror = this.options.codemirror || {};
         this.editor = assign({ mode: this.lang }, this.codemirror);
     }
     static properName = 'Code';

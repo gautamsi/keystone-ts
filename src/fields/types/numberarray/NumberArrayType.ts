@@ -19,20 +19,19 @@ export class NumberArrayType extends FieldTypeBase {
     separator: string;
     _formatString: string;
 
-    get _underscoreMethods() {
-        return ['format'];
-    }
-
     constructor(list, path, options) {
-        super(list, path, options, [Number]);
-        // this._nativeType = [Number];
-        // this._underscoreMethods = ['format'];
-        this._formatString = (options.format === false) ? false : (options.format || '0,0[.][000000000000]');
+        super(list, path, options);
+    }
+    protected init() {
+        super.init();
+        this._nativeType = [Number];
+        this._underscoreMethods = ['format'];
+        this._formatString = (this.options.format === false) ? false : (this.options.format || '0,0[.][000000000000]');
         this._defaultSize = 'small';
         if (this._formatString && typeof this._formatString !== 'string') {
             throw new Error('FieldType.NumberArray: options.format must be a string.');
         }
-        this.separator = options.separator || ' | ';
+        this.separator = this.options.separator || ' | ';
     }
     static properName = 'NumberArray';
 

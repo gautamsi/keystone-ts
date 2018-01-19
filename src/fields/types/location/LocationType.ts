@@ -18,44 +18,42 @@ export class LocationType extends FieldTypeBase {
     requiredPaths: any;
     enableMapsAPI: boolean;
 
-    get _underscoreMethods() {
-        return ['format', 'googleLookup', 'kmFrom', 'milesFrom'];
-    }
-
     constructor(list, path, options) {
 
-        super(list, path, options, null);
-        // this._underscoreMethods = ['format', 'googleLookup', 'kmFrom', 'milesFrom'];
+        super(list, path, options);
+    }
+    protected init() {
+        super.init();
+        this._underscoreMethods = ['format', 'googleLookup', 'kmFrom', 'milesFrom'];
         this._fixedSize = 'full';
         this._properties = ['enableMapsAPI'];
-        this.enableMapsAPI = (options.enableImprove === true || (options.enableImprove !== false && keystone.get('google server api key'))) ? true : false;
+        this.enableMapsAPI = (this.options.enableImprove === true || (this.options.enableImprove !== false && keystone.get('google server api key'))) ? true : false;
 
         // Throw on invalid options in 4.0 (remove for 5.0)
-        if ('geocodeGoogle' in options) {
+        if ('geocodeGoogle' in this.options) {
             throw new Error('The geocodeGoogle option for Location fields has been renamed to enableImprove');
         }
 
-        if (!options.defaults) {
-            options.defaults = {};
+        if (!this.options.defaults) {
+            this.options.defaults = {};
         }
 
-        if (options.required) {
-            if (Array.isArray(options.required)) {
+        if (this.options.required) {
+            if (Array.isArray(this.options.required)) {
                 // required can be specified as an array of paths
-                this.requiredPaths = options.required;
-            } else if (typeof options.required === 'string') {
+                this.requiredPaths = this.options.required;
+            } else if (typeof this.options.required === 'string') {
                 // or it can be specified as a comma-delimited list
-                this.requiredPaths = options.required.replace(/,/g, ' ').split(/\s+/);
+                this.requiredPaths = this.options.required.replace(/,/g, ' ').split(/\s+/);
             }
-            // options.required should always be simplified to a boolean
-            options.required = true;
+            // this.options.required should always be simplified to a boolean
+            this.options.required = true;
         }
 
         // default this.requiredPaths
         if (!this.requiredPaths) {
             this.requiredPaths = ['street1', 'suburb'];
         }
-
     }
     static properName = 'Location';
 

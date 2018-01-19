@@ -16,21 +16,20 @@ export class DateType extends FieldTypeBase {
     formatString: string;
     parseFormatString: string;
 
-    get _underscoreMethods() {
-        return ['format', 'moment', 'parse'];
-    }
-
     constructor(list, path, options) {
-        super(list, path, options, Date);
+        super(list, path, options);
+    }
+    protected init() {
+        super.init();
         this._nativeType = Date;
-        // this._underscoreMethods = ['format', 'moment', 'parse'];
+        this._underscoreMethods = ['format', 'moment', 'parse'];
         this._fixedSize = 'medium';
         this._properties = ['formatString', 'yearRange', 'isUTC', 'inputFormat'];
-        this.parseFormatString = options.inputFormat || 'YYYY-MM-DD';
-        this.formatString = (options.format === false) ? false : (options.format || 'Do MMM YYYY');
+        this.parseFormatString = this.options.inputFormat || 'YYYY-MM-DD';
+        this.formatString = (this.options.format === false) ? false : (this.options.format || 'Do MMM YYYY');
 
-        this.yearRange = options.yearRange;
-        this.isUTC = options.utc || false;
+        this.yearRange = this.options.yearRange;
+        this.isUTC = this.options.utc || false;
 
         /*
          * This offset is used to determine whether or not a stored date is probably corrupted or not.
@@ -39,7 +38,7 @@ export class DateType extends FieldTypeBase {
          * By default this timezone offset matches the offset of the keystone server. Using the default
          * setting is highly recommended.
          */
-        this.timezoneUtcOffsetMinutes = options.timezoneUtcOffsetMinutes || moment().utcOffset();
+        this.timezoneUtcOffsetMinutes = this.options.timezoneUtcOffsetMinutes || moment().utcOffset();
 
         if (this.formatString && typeof this.formatString !== 'string') {
             throw new Error('FieldType.Date: options.format must be a string.');

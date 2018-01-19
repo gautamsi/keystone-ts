@@ -17,39 +17,38 @@ export class SelectType extends FieldTypeBase {
     map: any;
     emptyOption: boolean;
 
-    get _underscoreMethods() {
-        return ['format', 'pluck'];
-    }
-
     constructor(list, path, options) {
-        super(list, path, options, (options.numeric) ? Number : String);
-        this.ui = options.ui || 'select';
-        this.numeric = options.numeric ? true : false;
-        // this._nativeType = (options.numeric) ? Number : String;
-        // this._underscoreMethods = ['format', 'pluck'];
+        super(list, path, options);
+    }
+    protected init() {
+        super.init();
+        this.ui = this.options.ui || 'select';
+        this.numeric = this.options.numeric ? true : false;
+        this._nativeType = (this.options.numeric) ? Number : String;
+        this._underscoreMethods = ['format', 'pluck'];
         this._properties = ['ops', 'numeric'];
-        if (typeof options.options === 'string') {
-            options.options = options.options.split(',');
+        if (typeof this.options.options === 'string') {
+            this.options.options = this.options.options.split(',');
         }
-        if (!Array.isArray(options.options)) {
+        if (!Array.isArray(this.options.options)) {
             throw new Error('Select fields require an options array.');
         }
-        this.ops = options.options.map(function (i) {
+        this.ops = this.options.options.map((i) => {
             let op = typeof i === 'string' ? { value: i.trim(), label: utils.keyToLabel(i) } : i;
             if (!_.isObject(op)) {
                 op = { label: '' + i, value: '' + i };
             }
-            if (options.numeric && !_.isNumber(op.value)) {
+            if (this.options.numeric && !_.isNumber(op.value)) {
                 op.value = Number(op.value);
             }
             return op;
         });
         // undefined options.emptyOption defaults to true
-        if (options.emptyOption === undefined) {
-            options.emptyOption = true;
+        if (this.options.emptyOption === undefined) {
+            this.options.emptyOption = true;
         }
         // ensure this.emptyOption is a boolean
-        this.emptyOption = !!options.emptyOption;
+        this.emptyOption = !!this.options.emptyOption;
         // cached maps for options, labels and values
         this.map = utils.optionsMap(this.ops);
         this.labels = utils.optionsMap(this.ops, 'label');

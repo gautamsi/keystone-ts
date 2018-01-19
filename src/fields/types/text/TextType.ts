@@ -8,16 +8,17 @@ import * as utils from 'keystone-utils';
  * @api public
  */
 export class TextType extends FieldTypeBase {
-
-    get _underscoreMethods() {
-        return ['crop'];
-    }
-
     constructor(list, path, options) {
-        super(list, path, options, String);
-        this._properties = ['monospace'];
-        // this._underscoreMethods = ['crop'];
+        super(list, path, options);
     }
+
+    protected init() {
+        super.init();
+        this._nativeType = String;
+        this._properties = ['monospace'];
+        this._underscoreMethods = ['crop'];
+    }
+
     static properName = 'Text';
 
     validateInput(data, callback) {

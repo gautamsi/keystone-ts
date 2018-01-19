@@ -18,39 +18,39 @@ export class EmbedlyType extends FieldTypeBase {
     fromPath: any;
     embedlyOptions: any;
 
-    get _underscoreMethods() {
-        return ['reset'];
-    }
-
     constructor(list, path, options) {
 
-        super(list, path, options, null);
-        // this._underscoreMethods = ['reset'];
+        super(list, path, options);
+
+    }
+    protected init() {
+        super.init();
+        this._underscoreMethods = ['reset'];
         this._fixedSize = 'full';
-        this.fromPath = options.from;
-        this.embedlyOptions = options.options || {};
+        this.fromPath = this.options.from;
+        this.embedlyOptions = this.options.options || {};
 
         // check and api key has been set, or bail.
         if (!keystone.get('embedly api key')) {
             throw new Error('Invalid Configuration\n\n'
-                + 'Embedly fields (' + list.key + '.' + path + ') require the "embedly api key" option to be set.\n\n'
+                + 'Embedly fields (' + this.list.key + '.' + this.path + ') require the "embedly api key" option to be set.\n\n'
                 + 'See http://keystonejs.com/docs/configuration/#services-embedly for more information.\n');
         }
 
         // ensure a fromPath has been defined
-        if (!options.from) {
+        if (!this.options.from) {
             throw new Error('Invalid Configuration\n\n'
-                + 'Embedly fields (' + list.key + '.' + path + ') require a fromPath option to be set.\n'
+                + 'Embedly fields (' + this.list.key + '.' + this.path + ') require a fromPath option to be set.\n'
                 + 'See http://keystonejs.com/docs/database/#fieldtypes-embedly for more information.\n');
         }
 
         // embedly fields cannot be set as initial fields
-        if (options.initial) {
+        if (this.options.initial) {
             throw new Error('Invalid Configuration\n\n'
-                + 'Embedly fields (' + list.key + '.' + path + ') cannot be set as initial fields.\n');
+                + 'Embedly fields (' + this.list.key + '.' + this.path + ') cannot be set as initial fields.\n');
         }
-
     }
+
     static properName = 'Embedly';
 
     /**

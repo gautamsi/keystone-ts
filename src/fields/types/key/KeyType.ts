@@ -11,9 +11,12 @@ export class KeyType extends TextType {
     separator: string;
     constructor(list, path, options) {
         super(list, path, options);
+    }
+    protected init() {
+        super.init();
         this._nativeType = String;
         this._defaultSize = 'medium';
-        this.separator = options.separator || '-';
+        this.separator = this.options.separator || '-';
     }
     static properName = 'Key';
 

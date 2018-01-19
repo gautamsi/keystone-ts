@@ -43,9 +43,7 @@ const DEFAULT_OPTION_KEYS = [
  * @api public
  */
 export abstract class FieldTypeBase {
-    get _underscoreMethods() {
-        return [];
-    }
+    protected _underscoreMethods = [];
     protected _nativeType: any;
     _fixedSize: any;
     _defaultSize: string;
@@ -105,12 +103,11 @@ export abstract class FieldTypeBase {
         return this.options.dependsOn || false;
     }
 
-    constructor(list: List<any>, path: string, options, nativeType) {
+    constructor(list: List<any>, path: string, options) {
         // Set field properties and options
         this.list = list;
         this._path = new Path(path);
         this.path = path;
-        this._nativeType = nativeType;
 
         this.type = this.constructor.name.replace('Type', '');
         this.options = _.defaults({}, options, this.defaults);
@@ -142,7 +139,7 @@ export abstract class FieldTypeBase {
                 return evalDependsOn(opts.dependsOn, this.toObject());
             };
         }
-
+        this.init();
         // Add the field to the schema
         this.addToSchema(this.list.schema);
 
@@ -150,7 +147,6 @@ export abstract class FieldTypeBase {
         if (this.options.watch) {
             this.list.schema.pre('save', this.getPreSaveWatcher());
         }
-
         // Convert notes from markdown to html
         let note = null;
         Object.defineProperty(this, 'note', {
@@ -158,8 +154,8 @@ export abstract class FieldTypeBase {
                 return (note === null) ? (note = (this.options.note) ? marked(this.options.note) : '') : note;
             },
         });
-
     }
+    protected init() { }
 
     addFilterToQuery(filter: any) { }
 

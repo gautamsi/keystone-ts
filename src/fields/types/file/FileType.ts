@@ -13,20 +13,19 @@ export class FileType extends FieldTypeBase {
     paths: {};
     storage: any;
 
-    get _underscoreMethods() {
-        return ['format', 'upload', 'remove', 'reset'];
-    }
-
     constructor(list, path, options) {
-        super(list, path, options, null);
-        // this._underscoreMethods = ['format', 'upload', 'remove', 'reset'];
+        super(list, path, options);
+    }
+    protected init() {
+        super.init();
+        this._underscoreMethods = ['format', 'upload', 'remove', 'reset'];
         this._fixedSize = 'full';
 
-        if (!options.storage) {
+        if (!this.options.storage) {
             throw new Error('Invalid Configuration\n\n'
-                + 'File fields (' + list.key + '.' + path + ') require storage to be provided.');
+                + 'File fields (' + this.list.key + '.' + this.path + ') require storage to be provided.');
         }
-        this.storage = options.storage;
+        this.storage = this.options.storage;
     }
     static properName = 'File';
 

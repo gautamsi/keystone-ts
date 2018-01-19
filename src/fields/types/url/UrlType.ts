@@ -12,9 +12,12 @@ import * as util from 'util';
  * @api public
  */
 export class UrlType extends TextType {
-
+    private schemaReady = false;
     constructor(list, path, options) {
         super(list, path, options);
+    }
+    protected init() {
+        super.init();
         this._nativeType = String;
         this._underscoreMethods = ['format'];
     }

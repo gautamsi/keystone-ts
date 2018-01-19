@@ -13,12 +13,15 @@ export class MoneyType extends NumberType {
 
     constructor(list, path, options) {
         super(list, path, options);
-        this.currency = options.currency;
+    }
+    protected init() {
+        super.init();
+        this.currency = this.options.currency;
         this._nativeType = Number;
-        // this._underscoreMethods = ['format'];
+        this._underscoreMethods = ['format'];
         this._properties = ['currency'];
         this._fixedSize = 'small';
-        this._formatString = (options.format === false) ? false : (options.format || '$0,0.00');
+        this._formatString = (this.options.format === false) ? false : (this.options.format || '$0,0.00');
         if (this._formatString && typeof this._formatString !== 'string') {
             throw new Error('FieldType.Money: options.format must be a string.');
         }

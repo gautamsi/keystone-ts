@@ -11,14 +11,13 @@ import * as utils from 'keystone-utils';
  */
 export class EmailType extends TextType {
 
-    get _underscoreMethods() {
-        return ['gravatarUrl'];
-    }
-
     constructor(list, path, options) {
         super(list, path, options);
+    }
+    protected init() {
+        super.init();
         this._nativeType = String;
-        // this._underscoreMethods = ['gravatarUrl'];
+        this._underscoreMethods = ['gravatarUrl'];
         this.typeDescription = 'email address';
     }
     static properName = 'Email';

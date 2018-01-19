@@ -76,28 +76,28 @@ function trimSupportedFileExtensions(publicId) {
 export class CloudinaryImageType extends FieldTypeBase {
     paths: { public_id: string; version: string; signature: string; format: string; resource_type: string; url: string; width: string; height: string; secure_url: string; exists: string; folder: string; select: string; };
 
-    get _underscoreMethods() {
-        return ['format'];
-    }
     constructor(list, path, options) {
-        super(list, path, options, null);
-        // this._underscoreMethods = ['format'];
+        super(list, path, options);
+    }
+    protected init() {
+        super.init();
+        this._underscoreMethods = ['format'];
         this._fixedSize = 'full';
         this._properties = ['select', 'selectPrefix', 'autoCleanup'];
 
-        if (options.filenameAsPublicID) {
+        if (this.options.filenameAsPublicID) {
             // Produces the same result as the legacy filenameAsPublicID option
-            options.generateFilename = nameFunctions.originalFilename;
-            options.whenExists = 'overwrite';
+            this.options.generateFilename = nameFunctions.originalFilename;
+            this.options.whenExists = 'overwrite';
         }
-        options = Object.assign({}, DEFAULT_OPTIONS, options);
-        options.generateFilename = ensureCallback(options.generateFilename);
+        this.options = Object.assign({}, DEFAULT_OPTIONS, this.options);
+        this.options.generateFilename = ensureCallback(this.options.generateFilename);
 
         // validate cloudinary config
         if (!keystone.get('cloudinary config')) {
             throw new Error(
                 'Invalid Configuration\n\n'
-                + 'CloudinaryImage fields (' + list.key + '.' + this.path + ') require the "cloudinary config" option to be set.\n\n'
+                + 'CloudinaryImage fields (' + this.list.key + '.' + this.path + ') require the "cloudinary config" option to be set.\n\n'
                 + 'See http://keystonejs.com/docs/configuration/#services-cloudinary for more information.\n'
             );
         }

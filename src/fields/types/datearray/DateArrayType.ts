@@ -15,22 +15,21 @@ export class DateArrayType extends FieldTypeBase {
     parseFormatString: string;
     separator: string;
 
-    get _underscoreMethods() {
-        return ['format'];
-    }
-
     constructor(list, path, options) {
-        super(list, path, options, [Date]);
+        super(list, path, options);
+    }
+    protected init() {
+        super.init();
         this._nativeType = [Date];
         this._defaultSize = 'medium';
-        // this._underscoreMethods = ['format'];
+        this._underscoreMethods = ['format'];
         this._properties = ['formatString'];
-        this.parseFormatString = options.parseFormat || 'YYYY-MM-DD';
-        this.formatString = (options.format === false) ? false : (options.format || 'Do MMM YYYY');
+        this.parseFormatString = this.options.parseFormat || 'YYYY-MM-DD';
+        this.formatString = (this.options.format === false) ? false : (this.options.format || 'Do MMM YYYY');
         if (this.formatString && typeof this.formatString !== 'string') {
             throw new Error('FieldType.DateArray: options.format must be a string.');
         }
-        this.separator = options.separator || ' | ';
+        this.separator = this.options.separator || ' | ';
     }
     static properName = 'DateArray';
 

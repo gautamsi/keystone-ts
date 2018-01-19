@@ -12,9 +12,12 @@ export class NameType extends FieldTypeBase {
     paths: any;
 
     constructor(list, path, options) {
-        super(list, path, options, String);
+        super(list, path, options);
+    }
+    protected init() {
+        super.init();
         this._fixedSize = 'full';
-        options.default = { first: '', last: '' };
+        this.options.default = { first: '', last: '' };
     }
     static properName = 'Name';
 
