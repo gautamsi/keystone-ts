@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { css } from 'glamor';
 import { Button } from '../Button';
-import { Spinner } from 'elemental';
+import { Spinner } from '../Spinner';
 import { theme } from '../../../theme';
 
 export const LoadingButton: React.SFC<Props> = ({ children, loading, ...props }) => {

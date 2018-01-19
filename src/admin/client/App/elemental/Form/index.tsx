@@ -51,4 +51,5 @@ export interface Props {
     labelWidth?: any;
     className?: any;
     onSubmit?: any;
+    variant?: any;
 }

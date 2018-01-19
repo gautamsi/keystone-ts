@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormField, FormLabel } from 'elemental';
+import { FormField, FormLabel } from '../../admin/client/App/elemental';
 import { theme } from '../../admin/client/theme';
 
 export const NestedFormField: React.SFC<Props> = ({ children, className, label, ...props }) => {

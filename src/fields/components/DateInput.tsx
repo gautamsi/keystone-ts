@@ -3,7 +3,7 @@ import DayPicker from 'react-day-picker';
 import * as React from 'react';
 import { findDOMNode } from 'react-dom';
 import { Popout } from '../../admin/client/App/shared/Popout';
-import { FormInput } from 'elemental';
+import { FormInput } from '../../admin/client/App/elemental';
 
 let lastId = 0;
 
@@ -124,6 +124,7 @@ export class DateInput extends React.Component<Props, any> {
                     autoComplete="off"
                     id={this.state.id}
                     name={this.props.name}
+                    // @ts-ignore
                     onBlur={this.handleBlur}
                     onChange={this.handleInputChange}
                     onFocus={this.handleFocus}
@@ -143,6 +144,7 @@ export class DateInput extends React.Component<Props, any> {
                         modifiers={modifiers}
                         onDayClick={this.handleDaySelect}
                         ref="picker"
+                        // @ts-ignore
                         tabIndex={-1}
                     />
                 </Popout>

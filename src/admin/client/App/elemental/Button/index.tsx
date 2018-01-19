@@ -86,4 +86,5 @@ export interface Props {
     className?: any;
     type?: string;
     onClick?: any;
+    style?: any;
 }
