@@ -24,6 +24,7 @@ export interface Props {
     component?: string | any;
     width?: any; // keyof sizes;
     className?: any;
+    style?: any;
 }
 
 Container.defaultProps = {

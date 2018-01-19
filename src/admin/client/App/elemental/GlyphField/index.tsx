@@ -1,7 +1,8 @@
 /* eslint quote-props: ["error", "as-needed"] */
 
 import * as React from 'react';
-import { Glyph, FormField as Field } from 'elemental';
+import { FormField as Field } from '../../elemental';
+import { Glyph } from '../Glyph';
 
 export const GlyphField: React.SFC<Props> = ({
 	children,

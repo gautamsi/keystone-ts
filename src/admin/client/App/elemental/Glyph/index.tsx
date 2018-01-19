@@ -39,10 +39,7 @@ export const Glyph: React.SFC<Props> = ({
 
 export interface Props {
     color?: string; // keyof colors | string; // support random color strings
-    cssStyles?: {
-        _definition?: any,
-        _name?: string,
-    };
+    cssStyles?: any;
     name: string; // keyof octicons;
     size?: string; // keyof sizes;
     component?: string;

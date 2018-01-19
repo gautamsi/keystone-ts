@@ -1,7 +1,8 @@
 /* eslint quote-props: ["error", "as-needed"] */
 
 import * as React from 'react';
-import { Button, Glyph } from 'elemental';
+import { Button } from '../../elemental';
+import { Glyph } from '../Glyph';
 
 export const GlyphButton: React.SFC<Props> = ({
 	children,
@@ -53,6 +54,15 @@ export interface Props {
     glyphSize?: string;
     glyphStyle?: any;
     position?: 'default' | 'left' | 'right';
+    component?: any;
+    style?: any;
+    to?: any;
+    variant?: any;
+    color?: any;
+    onClick?: any;
+    cssStyles?: any;
+    className?: any;
+    title?: any;
 }
 
 GlyphButton.defaultProps = {

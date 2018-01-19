@@ -4,7 +4,7 @@ import classes from './styles';
 import * as PropTypes from 'prop-types';
 
 export const Center: React.SFC<Props> = ({
-	Component: Component,
+	component: Component,
     height,
     ...props
 }) => {
