@@ -59,6 +59,7 @@ export class Keystone {
     utils = utils;
     session: any;
     content: any;
+    View: typeof View;
 
 
     sessionStorePromise: any;

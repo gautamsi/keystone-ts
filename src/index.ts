@@ -51,6 +51,7 @@ Keystone.utils = utils;
 // old code compatibility
 keystone.Field = { Types: FieldTypes };
 keystone.List = List;
+keystone.View = View;
 keystone.session = session;
 keystone.content = Keystone.content;
 // export { Keystone };
