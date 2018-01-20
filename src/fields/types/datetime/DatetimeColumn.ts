@@ -1,1 +1,1 @@
-export { DateColumn as DateTimeColumn } from '../date/DateColumn';
+export { DateColumn as DatetimeColumn } from '../date/DateColumn';

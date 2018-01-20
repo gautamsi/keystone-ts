@@ -29,7 +29,7 @@ export class NameField extends FieldBase<Props> {
         };
     }
 
-    valueChanged(which, event?) { // ref: event may not be optional
+    valueChanged = (which, event?) => { // ref: event may not be optional
         const { value = {}, path, onChange } = this.props;
         onChange({
             path,
@@ -39,12 +39,12 @@ export class NameField extends FieldBase<Props> {
             },
         });
     }
-    changeFirst(event) {
+    changeFirst = (event) => {
         return this.valueChanged('first', event);
-    }
-    changeLast(event) {
+    };
+    changeLast = (event) => {
         return this.valueChanged('last', event);
-    }
+    };
     renderValue() {
         const inputStyle = { width: '100%' };
         const { value = {} } = this.props;

@@ -70,24 +70,24 @@ export class FileField extends FieldBase<Props> {
     // HELPERS
     // ==============================
 
-    hasFile() {
+    hasFile = () => {
         return this.hasExisting() || !!this.state.userSelectedFile;
-    }
+    };
     hasExisting() {
         return this.props.value && !!this.props.value.filename;
     }
-    getFilename() {
+    getFilename = () => {
         return this.state.userSelectedFile
             ? this.state.userSelectedFile.name
             : this.props.value.filename;
-    }
+    };
 
     // ==============================
     // METHODS
     // ==============================
 
     triggerFileBrowser = () => {
-        this.refs.fileInput.click();
+        this.refs.fileInput.clickDomNode();
     };
     handleFileChange = (event) => {
         const userSelectedFile = event.target.files[0];

@@ -31,7 +31,7 @@ export class DateField extends FieldBase<Props> {
     static displayName: string = 'DateField';
     static type: string = 'Date';
 
-    static get defaultProps() {
+    static get defaultProps(): any {
         return {
             formatString: DEFAULT_FORMAT_STRING,
             inputFormat: DEFAULT_INPUT_FORMAT,

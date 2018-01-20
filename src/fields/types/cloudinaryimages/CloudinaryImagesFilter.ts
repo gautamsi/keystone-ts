@@ -1,1 +1,1 @@
-export { CloudinaryImageFilter } from '../cloudinaryimage/CloudinaryImageFilter';
+export { CloudinaryImageFilter as CloudinaryImagesFilter } from '../cloudinaryimage/CloudinaryImageFilter';

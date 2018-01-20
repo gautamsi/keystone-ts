@@ -10,7 +10,7 @@ import * as async from 'async';
 import * as React from 'react';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 import { Button, FormField, FormNote } from '../../../admin/client/App/elemental';
-import Lightbox from 'react-images';
+import * as Lightbox from 'react-images';
 import { cloudinaryResize } from '../../../admin/client/utils/cloudinaryResize';
 import { CloudinaryImagesThumbnail as Thumbnail } from './CloudinaryImagesThumbnail';
 import { HiddenFileInput } from '../../components/HiddenFileInput';
@@ -94,35 +94,35 @@ export class CloudinaryImagesField extends FieldBase<Props> {
     // HELPERS
     // ==============================
 
-    triggerFileBrowser() {
+    triggerFileBrowser = () => {
         this.refs.fileInput.clickDomNode();
-    }
+    };
     hasFiles() {
         return this.refs.fileInput && this.refs.fileInput.hasValue();
     }
-    openLightbox(event, index) {
+    openLightbox = (event, index) => {
         event.preventDefault();
         this.setState({
             lightboxIsVisible: true,
             lightboxImageIndex: index,
         });
-    }
-    closeLightbox() {
+    };
+    closeLightbox = () => {
         this.setState({
             lightboxIsVisible: false,
             lightboxImageIndex: null,
         });
-    }
-    lightboxPrevious() {
+    };
+    lightboxPrevious = () => {
         this.setState({
             lightboxImageIndex: this.state.lightboxImageIndex - 1,
         });
-    }
-    lightboxNext() {
+    };
+    lightboxNext = () => {
         this.setState({
             lightboxImageIndex: this.state.lightboxImageIndex + 1,
         });
-    }
+    };
 
     // ==============================
     // METHODS
@@ -194,7 +194,7 @@ export class CloudinaryImagesField extends FieldBase<Props> {
     // ==============================
 
     renderFileInput() {
-        if (!this.shouldRenderField()) return null;
+        if (!this.shouldRenderField()) return () => null;
 
         return (
             <HiddenFileInput
@@ -208,7 +208,7 @@ export class CloudinaryImagesField extends FieldBase<Props> {
         );
     }
     renderValueInput() {
-        if (!this.shouldRenderField()) return null;
+        if (!this.shouldRenderField()) return () => null;
 
         // This renders an input with either the upload field reference, or an
         // empty value to reset the field if all images have been removed
@@ -232,7 +232,7 @@ export class CloudinaryImagesField extends FieldBase<Props> {
     }
     renderLightbox() {
         const { value, secure } = this.props;
-        if (!value || !value.length) return;
+        if (!value || !value.length) return () => null;
 
         const images = value.map(image => ({
             src: cloudinaryResize(image.public_id, {

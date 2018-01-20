@@ -42,7 +42,7 @@ export const CloudinaryImagesThumbnail: React.SFC<Props> = ({
             <ImageThumbnail
                 component={imageSourceLarge ? 'a' : 'span'}
                 href={!!imageSourceLarge && imageSourceLarge}
-                onClick={e => !!imageSourceLarge && openLightbox(e)}
+                onClick={!!imageSourceLarge ? openLightbox : undefined}
                 mask={mask}
                 target={!!imageSourceLarge && '__blank'}
             >

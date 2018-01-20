@@ -52,15 +52,15 @@ export class DateInput extends React.Component<Props, any> {
             inputValue: newProps.value,
         }, this.showCurrentMonth);
     }
-    focus() {
+    focus = () => {
         if (!this.refs.input) return;
         findDOMNode<HTMLElement>(this.refs.input).focus();
-    }
-    handleInputChange(e) {
+    };
+    handleInputChange = (e) => {
         const { value } = e.target;
         this.setState({ inputValue: value }, this.showCurrentMonth);
-    }
-    handleKeyPress(e) {
+    };
+    handleKeyPress = (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
             // If the date is strictly equal to the format string, dispatch onChange
@@ -74,7 +74,7 @@ export class DateInput extends React.Component<Props, any> {
             }
         }
     }
-    handleDaySelect(e, date, modifiers) {
+    handleDaySelect = (e, date, modifiers) => {
         if (modifiers && modifiers.disabled) return;
 
         let value = moment(date).format(this.props.format);
@@ -85,7 +85,7 @@ export class DateInput extends React.Component<Props, any> {
             month: date,
             inputValue: value,
         });
-    }
+    };
     showPicker() {
         this.setState({ pickerIsOpen: true }, this.showCurrentMonth);
     }
@@ -93,14 +93,14 @@ export class DateInput extends React.Component<Props, any> {
         if (!this.refs.picker) return;
         this.refs.picker.showMonth(this.state.month);
     }
-    handleFocus(e) {
+    handleFocus = (e) => {
         if (this.state.pickerIsOpen) return;
         this.showPicker();
-    }
-    handleCancel() {
+    };
+    handleCancel = () => {
         this.setState({ pickerIsOpen: false });
-    }
-    handleBlur(e) {
+    };
+    handleBlur = (e) => {
         let rt = e.relatedTarget || e.nativeEvent.explicitOriginalTarget;
         const popout = this.refs.popout.getPortalDOMNode();
         while (rt) {
@@ -110,7 +110,7 @@ export class DateInput extends React.Component<Props, any> {
         this.setState({
             pickerIsOpen: false,
         });
-    }
+    };
     render() {
         const selectedDay = this.props.value;
         // react-day-picker adds a class to the selected day based on this

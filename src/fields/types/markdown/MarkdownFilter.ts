@@ -1,1 +1,1 @@
-export { TextFilter as MrkdownFilter } from '../text/TextFilter';
+export { TextFilter as MarkdownFilter } from '../text/TextFilter';

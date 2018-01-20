@@ -12,7 +12,7 @@ import { Button, FormField, FormInput, FormNote } from '../../../admin/client/Ap
 import { ImageThumbnail } from '../../components/ImageThumbnail';
 import { FileChangeMessage } from '../../components/FileChangeMessage';
 import { HiddenFileInput } from '../../components/HiddenFileInput';
-import Lightbox from 'react-images';
+import * as Lightbox from 'react-images';
 
 const SUPPORTED_TYPES = ['image/*', 'application/pdf', 'application/postscript'];
 const SUPPORTED_REGEX = new RegExp(/^image\/|application\/pdf|application\/postscript/g);
@@ -61,23 +61,23 @@ export class CloudinaryImageField extends FieldBase<Props> {
     // HELPERS
     // ==============================
 
-    hasLocal() {
+    hasLocal = () => {
         return !!this.state.userSelectedFile;
-    }
-    hasExisting() {
+    };
+    hasExisting = () => {
         return !!(this.props.value && this.props.value.url);
-    }
-    hasImage() {
+    };
+    hasImage = () => {
         return this.hasExisting() || this.hasLocal();
-    }
-    getFilename() {
+    };
+    getFilename = () => {
         const { format, height, public_id, width } = this.props.value;
 
         return this.state.userSelectedFile
             ? this.state.userSelectedFile.name
             : `${public_id}.${format} (${width}×${height})`;
-    }
-    getImageSource(height = 90) {
+    };
+    getImageSource = (height = 90) => {
         // TODO: This lets really wide images break the layout
         let src;
         if (this.hasLocal()) {
@@ -92,20 +92,20 @@ export class CloudinaryImageField extends FieldBase<Props> {
         }
 
         return src;
-    }
+    };
 
     // ==============================
     // METHODS
     // ==============================
 
     triggerFileBrowser = () => {
-        this.refs.fileInput.click();
+        this.refs.fileInput.clickDomNode();
     };
-    handleFileChange(event) {
+    handleFileChange = (event) => {
         const userSelectedFile = event.target.files[0];
 
         this.setState({ userSelectedFile });
-    }
+    };
 
     // Toggle the lightbox
     openLightbox = (event) => {
@@ -201,7 +201,7 @@ export class CloudinaryImageField extends FieldBase<Props> {
             <ImageThumbnail
                 component="a"
                 href={this.getImageSource(600)}
-                onClick={e => shouldOpenLightbox && this.openLightbox(e)}
+                onClick={shouldOpenLightbox ? this.openLightbox : undefined}
                 mask={mask}
                 target="__blank"
                 style={{ float: 'left', marginRight: '1em' }}

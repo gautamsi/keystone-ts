@@ -123,7 +123,7 @@ export class RelationshipFilter extends React.Component<Props, any> {
                 });
                 return;
             }
-            data.results.forEach(this.cacheItem);
+            data.results.forEach(this.cacheItem.bind(this));
             if (thenPopulateValue) {
                 this.populateValue(this.props.filter.value);
             }

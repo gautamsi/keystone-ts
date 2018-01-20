@@ -21,16 +21,16 @@ export interface Props extends FieldPropsBase {
     isUTC?: boolean;
 }
 
-export class DateTimeField extends FieldBase<Props> {
+export class DatetimeField extends FieldBase<Props> {
     static displayName: string = 'DatetimeField';
     static type: string = 'Datetime';
 
-    focusTargetRef: 'dateInput';
+    focusTargetRef = 'dateInput';
 
     // default input formats
-    dateInputFormat: 'YYYY-MM-DD';
-    timeInputFormat: 'h:mm:ss a';
-    tzOffsetInputFormat: 'Z';
+    dateInputFormat = 'YYYY-MM-DD';
+    timeInputFormat = 'h:mm:ss a';
+    tzOffsetInputFormat = 'Z';
 
     // parse formats (duplicated from lib/fieldTypes/datetime.js)
     parseFormats: ['YYYY-MM-DD', 'YYYY-MM-DD h:m:s a', 'YYYY-MM-DD h:m a', 'YYYY-MM-DD H:m:s', 'YYYY-MM-DD H:m'];

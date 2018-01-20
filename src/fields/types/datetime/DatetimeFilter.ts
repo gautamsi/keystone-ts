@@ -1,1 +1,1 @@
-export { DateFilter as DateTimeFilter } from '../date/DateFilter';
+export { DateFilter as DatetimeFilter } from '../date/DateFilter';

@@ -49,7 +49,7 @@ export class UrlField extends FieldBase<FieldPropsBase> {
     renderValue() {
         const { value } = this.props;
         return (
-            <FormInput noedit onClick={e => value && this.openValue()}>
+            <FormInput noedit onClick={value ? this.openValue : undefined}>
                 {value}
             </FormInput>
         );

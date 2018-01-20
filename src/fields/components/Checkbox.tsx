@@ -1,5 +1,5 @@
 import * as React from 'react';
-import blacklist from 'blacklist';
+import * as blacklist from 'blacklist';
 import * as classnames from 'classnames';
 import { darken, fade } from '../../admin/client/utils/color';
 import { borderRadius } from '../../admin/client/constants';

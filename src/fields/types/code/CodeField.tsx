@@ -46,7 +46,7 @@ export class CodeField extends FieldBase<Props> {
 
         this.codeMirror = CodeMirror.fromTextArea(findDOMNode(this.refs.codemirror), options);
         this.codeMirror.setSize(null, this.props.height);
-        this.codeMirror.on('change', this.codemirrorValueChanged);
+        this.codeMirror.on('change', this.codemirrorValueChanged.bind(this));
         this.codeMirror.on('focus', this.focusChanged.bind(this, true));
         this.codeMirror.on('blur', this.focusChanged.bind(this, false));
         this._currentCodemirrorValue = this.props.value;
