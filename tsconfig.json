@@ -3,8 +3,9 @@
         "module": "commonjs",
         "target": "es6",
         "noImplicitAny": false,
+        "declaration": true,
         "moduleResolution": "node",
-        "sourceMap": true,
+        "sourceMap": false,
         "outDir": "dist",
         "baseUrl": ".",
         "skipLibCheck": true,
@@ -21,7 +22,8 @@
         }
     },
     "include": [
-        "src/**/*"
+        "src/**/*.tsx",
+        "src/**/*.ts"
     ],
     "exclude": [
         "src/**/*.test.ts",
