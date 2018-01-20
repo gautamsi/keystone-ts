@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Alert, BlankState, Center, Spinner } from '../../../../elemental';
 
 import { DragDrop } from './RelatedItemsListDragDrop';
-import { Sortable as ListRow } from './RelatedItemsListRow';
+import { RelatedItemsListRow as ListRow } from './RelatedItemsListRow';
 
 import { loadRelationshipItemData } from '../../actions';
 import { TABLE_CONTROL_COLUMN_WIDTH } from '../../../../../constants';

@@ -26,7 +26,7 @@ export interface Props {
     connectDropTarget?: any;
     connectDragPreview?: any;
 }
-class RelatedItemsListRow extends React.Component<Props> {
+export class RelatedItemsListRow extends React.Component<Props> {
     render() {
         const { columns, item, connectDragSource, connectDropTarget, refList } = this.props;
         const cells = columns.map((col, i) => {
@@ -141,4 +141,4 @@ function dropProps(connect) {
 }
 
 // export const Sortable = RelatedItemsListRow;
-export const Sortable = DragSource('item', dragItem, dragProps)(DropTarget('item', dropItem, dropProps)(RelatedItemsListRow));
+export const SortableRelatedItemsListRow = DragSource('item', dragItem, dragProps)(DropTarget('item', dropItem, dropProps)(RelatedItemsListRow));

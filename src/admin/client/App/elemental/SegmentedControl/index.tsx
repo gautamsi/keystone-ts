@@ -35,7 +35,7 @@ export const SegmentedControl: React.SFC<Props> = ({
                     <button
                         className={`${buttonClassName}`}
                         key={opt.value as any}
-                        onClick={() => !opt.disabled && onChange(opt.value)}
+                        onClick={() => !opt.disabled ? onChange(opt.value) : undefined}
                         type="button"
                         title={cropText ? opt.label : null}
                         tabIndex={opt.disabled ? -1 : null}

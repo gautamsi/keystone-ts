@@ -26,14 +26,14 @@ const classes = {
     glyph: {
         'display': 'none',
 
-        '@media (max-width: 500px)': {
+        '@media (maxWidth: 500px)': {
             display: 'inline-block',
         },
     },
     label: {
         'display': 'inline-block',
 
-        '@media (max-width: 500px)': {
+        '@media (maxWidth: 500px)': {
             display: 'none',
         },
     },

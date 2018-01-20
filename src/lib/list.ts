@@ -742,14 +742,14 @@ export class List<T> {
         this.fieldTypes[options.type.name] = options.type.properName;
 
         // Wysiwyg HTML fields are handled as a special case so we can include TinyMCE as required
-        if (options.type.name === 'html' && options.wysiwyg) {
+        if (options.type.name === 'HtmlType' && options.wysiwyg) {
             this.fieldTypes.wysiwyg = true;
         }
 
         const field = new options.type(this, path, options);
         this.fields[path] = field;
         this.fieldsArray.push(field);
-        if (field.type === 'relationship') {
+        if (field.type === 'Relationship') {
             this.relationshipFields.push(field);
         }
         return field;
@@ -897,7 +897,7 @@ export class List<T> {
             fields.forEach(function (path) {
                 const field = this.fields[path];
                 if (field) {
-                    if (field.type === 'relationship' && expandRelationshipFields) {
+                    if (field.type === 'Relationship' && expandRelationshipFields) {
                         data.fields[path] = field.getExpandedData(item);
                     } else {
                         data.fields[path] = field.getData(item);

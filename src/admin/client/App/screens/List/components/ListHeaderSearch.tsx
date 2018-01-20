@@ -26,7 +26,7 @@ export const ListHeaderSearch: React.SFC<Props> = ({
                 className={`${css(classes.icon, !!value.length && classes.iconWhenClear)}`}
                 data-search-input-field-clear-icon
                 disabled={!value.length}
-                onClick={e => value.length && handleClear(e)}
+                onClick={value.length ? handleClear : undefined}
                 title="Clear search query"
                 type="button"
             >

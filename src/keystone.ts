@@ -1,3 +1,6 @@
+import { startSocketServer } from './server/startSocketServer';
+import { startSecureServer } from './server/startSecureServer';
+import { startHTTPServer } from './server/startHTTPServer';
 import * as _ from 'lodash';
 import * as express from 'express';
 import * as grappling from 'grappling-hook';
@@ -27,6 +30,10 @@ import * as  cookieParser from 'cookie-parser';
 import { safeRequire } from './lib/safeRequire';
 import * as callerId from 'caller-id';
 import * as url from 'url';
+import { FieldTypeBase } from './fields/types/FieldTypeBase';
+import { FieldTypes } from './fields/types';
+import { FieldBase } from './fields/types/FieldBase';
+import { createApp } from './server/createApp';
 
 
 
@@ -48,13 +55,14 @@ let moduleRoot = (function (_rootPath) {
  */
 export class Keystone {
     sessionStorePromise: any;
+    session: any;
     expressSession: express.RequestHandler;
     app: any;
     nav: any;
 
 
     lists: any = {};
-    // fieldTypes: any = {};
+    fieldTypes: any = {};
     _options: any = {};
     paths: any = {};
     _redirects: any = {};
@@ -496,7 +504,7 @@ export class Keystone {
         This is a shorthand method for keystone instances to create a new express
         router, to make it simpler for projects that don't directly depend on express
     */
-    createRouter() {
+    createRouter(): any {
         return express.Router();
     }
 
@@ -597,9 +605,9 @@ export class Keystone {
         this.initExpressSession(this.mongoose);
         if (customApp) {
             this.app = customApp;
-            require('../../server/createApp')(this);
+            createApp(this);
         } else {
-            this.app = require('../../server/createApp')(this);
+            this.app = createApp(this);
         }
         return this;
     }
@@ -728,7 +736,7 @@ export class Keystone {
         return this;
     }
 
-    initNav(sections) {
+    initNav(sections?) {
         const keystone = this;
 
         const nav: any = {
@@ -994,7 +1002,7 @@ export class Keystone {
                 // HTTP Server
                 function (done) {
                     if (ssl === 'only' || unixSocket) return done();
-                    require('../../server/startHTTPServer')(keystone, app, function (err, msg) {
+                    startHTTPServer(keystone, app, function (err, msg) {
                         fireEvent('onHttpServerCreated');
                         startupMessages.push(msg);
                         done(err);
@@ -1003,7 +1011,7 @@ export class Keystone {
                 // HTTPS Server
                 function (done) {
                     if (!ssl || unixSocket) return done();
-                    require('../../server/startSecureServer')(keystone, app, function () {
+                    startSecureServer(keystone, app, function () {
                         fireEvent('onHttpsServerCreated');
                     }, function (err, msg) {
                         startupMessages.push(msg);
@@ -1013,7 +1021,7 @@ export class Keystone {
                 // Unix Socket
                 function (done) {
                     if (!unixSocket) return done();
-                    require('../../server/startSocketServer')(keystone, app, function (err, msg) {
+                    startSocketServer(keystone, app, function (err, msg) {
                         fireEvent('onSocketServerCreated');
                         startupMessages.push(msg);
                         done(err);
@@ -1216,7 +1224,7 @@ export class Keystone {
     applyUpdates(callback) {
         this.callHook('pre:updates', (err) => {
             if (err) return callback(err);
-            applyUpdates.apply(this, (err) => {
+            applyUpdates(this, (err) => {
                 if (err) return callback(err);
                 this.callHook('post:updates', callback);
             });
@@ -1253,13 +1261,12 @@ export class Keystone {
     static Admin: { Server: { createDynamicRouter: Function, createStaticRouter?: Function } } = {
         Server: undefined
     };
-    static Email: (options) => any;
-    static Field = require('./fields/types/Type');
-
-    static Keystone = Keystone;
+    static Email: typeof Email;
+    static Field = FieldBase;
+    // static Keystone = Keystone;
     static List: typeof List;
     static Storage = Storage;
-    static View = View;
+    static View: typeof View;
 
     static content = Content.init(Keystone.instance);
     static security = {

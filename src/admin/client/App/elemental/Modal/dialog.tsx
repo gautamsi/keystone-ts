@@ -87,8 +87,8 @@ export class ModalDialog extends React.Component<Props> {
                 className={`${css(classes.container)}`}
                 key="open"
                 ref="container"
-                onClick={e => !!backdropClosesModal && this.handleBackdropClick(e)}
-                onTouchEnd={e => !!backdropClosesModal && this.handleBackdropClick(e)}
+                onClick={!!backdropClosesModal ? this.handleBackdropClick : undefined}
+                onTouchEnd={!!backdropClosesModal ? this.handleBackdropClick : undefined}
             >
                 <div className={`${css(classes.dialog)}`} style={{ width }} data-screen-id="modal-dialog">
                     {children}

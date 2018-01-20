@@ -14,6 +14,7 @@ import * as server from './admin/server';
 import { setKeystone } from './lib/session';
 import { FieldTypes } from './fields/types';
 import * as path from 'path';
+import { View } from './lib/view';
 
 /**
  * Don't use process.cwd() as it breaks module encapsulation
@@ -42,6 +43,7 @@ Keystone.Email = Email;
 Keystone.session = session;
 Keystone.List = List.init(Keystone.instance);
 Keystone.Admin.Server = server;
+Keystone.View = View;
 
 export const keystone = Keystone.instance;
 
@@ -50,6 +52,4 @@ export const keystone = Keystone.instance;
 (keystone as any).Field.Types = FieldTypes;
 export { Keystone };
 
-console.log(new FieldTypes.Textarea({}, {}, {}));
-console.log(new FieldTypes.Text({}, {}, {}));
-
+export { FieldTypes };

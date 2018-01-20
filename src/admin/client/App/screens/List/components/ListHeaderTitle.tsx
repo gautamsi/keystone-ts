@@ -32,7 +32,7 @@ export interface Props {
 
 const classes = {
     heading: {
-        [`@media (max-width: ${theme.breakpoint.mobileMax})`]: {
+        [`@media (maxWidth: ${theme.breakpoint.mobileMax})`]: {
             fontSize: '1.25em',
             fontWeight: 500,
         },

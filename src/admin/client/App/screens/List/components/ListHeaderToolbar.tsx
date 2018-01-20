@@ -150,7 +150,7 @@ export interface Props {
 }
 
 const tabletGrowStyles = {
-    [`@media (max-width: ${theme.breakpoint.tabletPortraitMax})`]: {
+    [`@media (maxWidth: ${theme.breakpoint.tabletPortraitMax})`]: {
         flexGrow: 1,
     },
 };
@@ -158,26 +158,26 @@ const tabletGrowStyles = {
 const classes = {
     // main wrapper
     wrapper: {
-        [`@media (max-width: ${theme.breakpoint.tabletPortraitMax})`]: {
+        [`@media (maxWidth: ${theme.breakpoint.tabletPortraitMax})`]: {
             flexWrap: 'wrap',
         },
     },
 
     // button wrapper
     buttons: {
-        [`@media (max-width: ${theme.breakpoint.tabletPortraitMax})`]: {
+        [`@media (maxWidth: ${theme.breakpoint.tabletPortraitMax})`]: {
             paddingLeft: 0,
         },
     },
 
     // cols
     expand: {
-        [`@media (max-width: ${theme.breakpoint.desktopMax})`]: {
+        [`@media (maxWidth: ${theme.breakpoint.desktopMax})`]: {
             display: 'none',
         },
     },
     filter: {
-        [`@media (max-width: ${theme.breakpoint.tabletPortraitMax})`]: {
+        [`@media (maxWidth: ${theme.breakpoint.tabletPortraitMax})`]: {
             paddingLeft: 0,
             flexGrow: 1,
         },
@@ -186,7 +186,7 @@ const classes = {
     create: tabletGrowStyles,
     download: tabletGrowStyles,
     search: {
-        [`@media (max-width: ${theme.breakpoint.tabletPortraitMax})`]: {
+        [`@media (maxWidth: ${theme.breakpoint.tabletPortraitMax})`]: {
             marginBottom: '0.75em',
             minWidth: '100%',
         },

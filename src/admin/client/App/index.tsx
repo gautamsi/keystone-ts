@@ -7,19 +7,21 @@
 import 'babel-polyfill';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { Router, browserHistory, IndexRoute } from 'react-router';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
 
 import { App } from './App';
 import { Home } from './screens/Home';
 import { Item } from './screens/Item';
 import { List } from './screens/List';
 
-import { store } from './store';
+import { store, history } from './store';
 
 // Sync the browser history to the Redux store
-const history = syncHistoryWithStore(browserHistory, store);
+// const history = syncHistoryWithStore(createHistory(), store);
+
 
 // Initialise Keystone.User list
 import { listsByKey } from '../utils/lists';
@@ -27,13 +29,13 @@ Keystone.User = listsByKey[Keystone.userList];
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router history={history}>
-            <Route path={Keystone.adminPath} component={App}>
-                <IndexRoute component={Home} />
-                <Route path=":listId" component={List} />
-                <Route path=":listId/:itemId" component={Item} />
-            </Route>
-        </Router>
+        <ConnectedRouter history={history}>
+            {/* <div> */}
+            <Route path={Keystone.adminPath + '/'} component={App}/>
+            {/* <App history={history} /> */}
+            {/* </Route> */}
+            {/* </div> */}
+        </ConnectedRouter>
     </Provider>,
     document.getElementById('react-root')
 );

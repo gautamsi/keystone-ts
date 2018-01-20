@@ -9,7 +9,7 @@
         "class-name": true,
         "eofline": true,
         "triple-equals": [true, "allow-null-check"],
-        "forin": true,
+        "forin": false,
         "curly": [true, "ignore-same-line"],
         "comment-format": [
             true,

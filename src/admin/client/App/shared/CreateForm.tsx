@@ -28,7 +28,6 @@ export class CreateForm extends React.Component<Props, any> {
     }
     constructor(props) {
         super(props);
-        debugger;
         // Set the field values to their default values when first rendering the
         // form. (If they have a default value, that is)
         let values = {};

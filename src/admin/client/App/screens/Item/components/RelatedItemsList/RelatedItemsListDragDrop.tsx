@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import { Sortable } from './RelatedItemsListRow';
+import { SortableRelatedItemsListRow } from './RelatedItemsListRow';
 
 export interface Props {
     columns: Array<any>;
@@ -19,7 +19,7 @@ class RelatedItemsListDragDrop extends React.Component<Props> {
         return (
             <tbody>
                 {items.results.map((item, i) => {
-                    return (<Sortable
+                    return (<SortableRelatedItemsListRow
                         key={item.id}
                         index={i}
                         item={item}

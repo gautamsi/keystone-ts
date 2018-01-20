@@ -4,14 +4,18 @@
  */
 
 import * as React from 'react';
-import { Container } from 'elemental';
-import { Link } from 'react-router';
+import { Container } from './elemental';
+import { ConnectedRouter } from 'react-router-redux';
 import { css } from 'glamor';
+import { Link, Switch, Route } from 'react-router-dom';
 
 import { MobileNavigation } from './components/Navigation/Mobile';
 import { PrimaryNavigation } from './components/Navigation/Primary';
 import { SecondaryNavigation } from './components/Navigation/Secondary';
 import { Footer } from './components/Footer';
+import { Home } from './screens/Home';
+import { Item } from './screens/Item';
+import { List } from './screens/List';
 
 const classes = {
     wrapper: {
@@ -24,8 +28,9 @@ const classes = {
     },
 };
 
-interface Props {
-    params: any;
+export interface Props {
+    history?: any;
+    match?: { params: any; };
 }
 
 export const App: React.SFC<Props> = (props) => {
@@ -33,8 +38,8 @@ export const App: React.SFC<Props> = (props) => {
     let children = props.children;
     // If we're on either a list or an item view
     let currentList, currentSection;
-    if (props.params.listId) {
-        currentList = listsByPath[props.params.listId];
+    if (props.match.params.listId) {
+        currentList = listsByPath[props.match.params.listId];
         // If we're on a list path that doesn't exist (e.g. /keystone/gibberishasfw34afsd) this will
         // be undefined
         if (!currentList) {
@@ -58,7 +63,7 @@ export const App: React.SFC<Props> = (props) => {
             <header>
                 <MobileNavigation
                     brand={Keystone.brand}
-                    currentListKey={props.params.listId}
+                    currentListKey={props.match.params.listId}
                     currentSectionKey={currentSectionKey}
                     sections={Keystone.nav.sections}
                     signoutUrl={Keystone.signoutUrl}
@@ -72,14 +77,21 @@ export const App: React.SFC<Props> = (props) => {
                 {/* If a section is open currently, show the secondary nav */}
                 {(currentSection) ? (
                     <SecondaryNavigation
-                        currentListKey={props.params.listId}
+                        currentListKey={props.match.params.listId}
                         lists={currentSection.lists}
-                        itemId={props.params.itemId}
+                        itemId={props.match.params.itemId}
                     />
                 ) : null}
             </header>
             <main className={`${css(classes.body)}`}>
-                {children}
+                {/* {children} */}
+                <ConnectedRouter history={props.history}>
+                    <Switch>
+                        <Route exact path={Keystone.adminPath + '/'} component={Home} />
+                        <Route exact path={Keystone.adminPath + '/:listId'} component={List} />
+                        <Route path={Keystone.adminPath + '/:listId/:itemId'} component={Item} />
+                    </Switch>
+                </ConnectedRouter>
             </main>
             <Footer
                 appversion={Keystone.appversion}

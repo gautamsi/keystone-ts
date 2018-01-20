@@ -21,7 +21,6 @@ export class UpdateForm extends React.Component<Props, any> {
     }
     constructor(props) {
         super(props);
-        debugger;
         this.state = {
             fields: [],
         };

@@ -28,7 +28,7 @@ export const FormInputNoedit: React.SFC<Props> = ({
 
 export interface Props {
     component?: any;
-    Component?: string | Function;
+    // Component?: string | Function;
     cropText?: boolean;
     className?: any;
     multiline?: boolean;
@@ -39,7 +39,7 @@ export interface Props {
 }
 
 FormInputNoedit.defaultProps = {
-    Component: 'span',
+    component: 'span',
 };
 
 const anchorHoverAndFocusStyles = {
