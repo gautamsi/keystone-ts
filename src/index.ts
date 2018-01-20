@@ -4,6 +4,7 @@ import * as createClass from 'create-react-class';
 
 // (React as any).PropTypes = PropTypes;
 // (React as any).createClass = createClass;
+import * as utils from 'keystone-utils';
 
 
 import { Keystone } from './keystone';
@@ -44,7 +45,7 @@ Keystone.session = session;
 Keystone.List = List.init(Keystone.instance);
 Keystone.Admin.Server = server;
 Keystone.View = View;
-
+Keystone.utils = utils;
 export const keystone = Keystone.instance;
 
 // old code compatibility

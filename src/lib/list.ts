@@ -805,7 +805,7 @@ export class List<T> {
                     data[path] = item.get(path);
                     return;
                 }
-                if (field.type !== 'relationship' || !options.expandRelationshipFields) {
+                if (field.type !== 'Relationship' || !options.expandRelationshipFields) {
                     // use the transformFieldValue function to get the data
                     data[path] = transformFieldValue(field, item, options);
                     return;

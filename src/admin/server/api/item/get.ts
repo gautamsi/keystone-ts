@@ -43,7 +43,7 @@ export function get(req, res) {
 
                     const field = req.list.fields[path];
 
-                    if (!field || field.type !== 'relationship') {
+                    if (!field || field.type !== 'Relationship') {
                         throw new Error('Drilldown for ' + req.list.key + ' is invalid: field at path ' + path + ' is not a relationship.');
                     }
 

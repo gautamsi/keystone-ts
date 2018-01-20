@@ -1,5 +1,5 @@
 import * as  _ from 'lodash';
-import { Keystone } from '../../keystone';
+import { keystone } from '../../keystone';
 // const keystone = Keystone.instance;
 import { FieldTypes } from '../../fields/types';
 

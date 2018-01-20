@@ -55,7 +55,7 @@ let moduleRoot = (function (_rootPath) {
  */
 export class Keystone {
     sessionStorePromise: any;
-    session: any;
+    // session: any;
     expressSession: express.RequestHandler;
     app: any;
     nav: any;
@@ -264,7 +264,7 @@ export class Keystone {
 
                         async.each(list.fieldsArray, function (field: any, doneField) {
                             // skip relationship fields on the first pass.
-                            if (field.type !== 'relationship') {
+                            if (field.type !== 'Relationship') {
                                 // TODO: Validate items?
                                 field.updateItem(doc, data, doneField);
                             } else {
@@ -960,7 +960,7 @@ export class Keystone {
      *
      * @api public
      */
-    start(events) {
+    start(events?) {
 
         if (typeof events === 'function') {
             events = { onStart: events };
@@ -1275,8 +1275,8 @@ export class Keystone {
     static utils = utils;
 
     /**
- * Keystone version
- */
+     * Keystone version
+     */
 
     static version = require('../package.json').version;
 
@@ -1284,6 +1284,10 @@ export class Keystone {
     // Expose Modules
     static session;
 
+    //#endregion
+
+    //#region greplin hooks methods
+    pre: (...args) => any;
     //#endregion
 }
 

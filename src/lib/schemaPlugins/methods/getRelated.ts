@@ -1,4 +1,4 @@
-import { Keystone } from '../../../keystone';
+import { keystone } from '../../../keystone';
 import * as _ from 'lodash';
 import * as async from 'async';
 
@@ -46,7 +46,7 @@ export function getRelated(paths, callback, nocollapse) {
         if (!refList) throw new Error('List.getRelated: list ' + relationship.ref + ' does not exist.');
 
         const relField = refList.fields[relationship.refPath];
-        if (!relField || relField.type !== 'relationship') throw new Error('List.getRelated: relationship ' + relationship.ref + ' on list ' + list.key + ' refers to a path (' + relationship.refPath + ') which is not a relationship field.');
+        if (!relField || relField.type !== 'Relationship') throw new Error('List.getRelated: relationship ' + relationship.ref + ' on list ' + list.key + ' refers to a path (' + relationship.refPath + ') which is not a relationship field.');
 
         if (populateString.length) {
 

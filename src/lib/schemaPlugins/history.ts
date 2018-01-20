@@ -1,5 +1,4 @@
-import { Keystone } from '../../keystone';
-const keystone = Keystone.instance;
+import { Keystone, keystone } from '../../keystone';
 const historyModelSuffix = '_revisions';
 
 function getHistoryModelName(list) {
