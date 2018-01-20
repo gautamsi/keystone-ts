@@ -54,8 +54,14 @@ let moduleRoot = (function (_rootPath) {
  * Keystone Class
  */
 export class Keystone {
+    Field: { Types: typeof FieldTypes };
+    List: typeof List;
+    utils = utils;
+    session: any;
+    content: any;
+
+
     sessionStorePromise: any;
-    // session: any;
     expressSession: express.RequestHandler;
     app: any;
     nav: any;

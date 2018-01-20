@@ -7,7 +7,7 @@ import * as createClass from 'create-react-class';
 import * as utils from 'keystone-utils';
 
 
-import { Keystone } from './keystone';
+import { Keystone, keystone } from './keystone';
 import { Email } from './lib/email';
 import * as session from './lib/session';
 import { List } from './lib/list';
@@ -46,11 +46,15 @@ Keystone.List = List.init(Keystone.instance);
 Keystone.Admin.Server = server;
 Keystone.View = View;
 Keystone.utils = utils;
-export const keystone = Keystone.instance;
+// export const keystone = Keystone.instance;
 
 // old code compatibility
-(keystone as any).Field = {};
-(keystone as any).Field.Types = FieldTypes;
-export { Keystone };
+keystone.Field = { Types: FieldTypes };
+keystone.List = List;
+keystone.session = session;
+keystone.content = Keystone.content;
+// export { Keystone };
 
-export { FieldTypes };
+// export { FieldTypes };
+
+export = keystone;
