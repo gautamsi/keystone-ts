@@ -19,12 +19,12 @@ function buildFieldTypesStream(fieldTypes) {
         src += 'export const ' + i + 's = {\n';
         types.forEach(function (type) {
             if (typeof fieldTypes[type] !== 'string') return;
-            src += type + ': require("../../fields/types/' + type.replace('Type', '') + '/' + fieldTypes[type] + i + '"),\n';
+            src += type.replace('Type', '') + ': require("../../fields/types/' + type.replace('Type', '') + '/' + fieldTypes[type] + i + '").' + fieldTypes[type] + i + ',\n';
         });
         // Append ID and Unrecognised column types
         if (i === 'Column') {
-            src += 'id: require("../../fields/components/columns/IdColumn"),\n';
-            src += '__unrecognised__: require("../../fields/components/columns/InvalidColumn"),\n';
+            src += 'id: require("../../fields/components/columns/IdColumn").IdColumn,\n';
+            src += '__unrecognised__: require("../../fields/components/columns/InvalidColumn").InvalidColumn,\n';
         }
 
         src += '};\n';

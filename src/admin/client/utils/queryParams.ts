@@ -1,39 +1,39 @@
 import * as blacklist from 'blacklist';
 import * as _ from 'lodash';
 
-export function checkForQueryChange (nextProps, thisProps) {
-	const { query } = nextProps.location;
-	const { cachedQuery } = nextProps.active;
+export function checkForQueryChange(nextProps, thisProps) {
+    const { query } = nextProps.location;
+    const { cachedQuery } = nextProps.active;
 
-	const parsedQuery = Object.assign(
-		{},
-		query,
-		{ page: parseInt(query.page) }
-	);
+    const parsedQuery = Object.assign(
+        {},
+        query,
+        { page: parseInt((query || {}).page) }
+    );
 
-	if (!parsedQuery.page) delete parsedQuery.page;
+    if (!parsedQuery.page) delete parsedQuery.page;
 
-	const attenuatedQuery = blacklist(parsedQuery, 'search');
-	const attenuatedCache = blacklist(cachedQuery, 'search');
+    const attenuatedQuery = blacklist(parsedQuery, 'search');
+    const attenuatedCache = blacklist(cachedQuery, 'search');
 
-	if (nextProps.location.pathname !== thisProps.location.pathname) return true;
+    if (nextProps.location.pathname !== thisProps.location.pathname) return true;
 
-	if (!_.isEqual(attenuatedQuery, attenuatedCache)) return true;
+    if (!_.isEqual(attenuatedQuery, attenuatedCache)) return true;
 
-	return false;
+    return false;
 }
 
-export function normaliseValue (value, benchmark) {
-	if (value === benchmark) return void 0;
-	return value;
+export function normaliseValue(value, benchmark) {
+    if (value === benchmark) return void 0;
+    return value;
 }
 
-export function createSortQueryParams (rawInput, defaultSort) {
-	return normaliseValue(rawInput, defaultSort);
+export function createSortQueryParams(rawInput, defaultSort) {
+    return normaliseValue(rawInput, defaultSort);
 }
 
-export function createPageQueryParams (page, defaultValue) {
-	return normaliseValue(page, defaultValue);
+export function createPageQueryParams(page, defaultValue) {
+    return normaliseValue(page, defaultValue);
 }
 
 /**
@@ -42,22 +42,22 @@ export function createPageQueryParams (page, defaultValue) {
  * @param  {Object} params         The new parameters to be added
  * @param  {Object} location       The current location object
  */
-export function updateQueryParams (params, location) {
-	if (!location) return;
-	const newParams = Object.assign({}, location.query);
-	// Stringify nested objects inside the parameters
-	Object.keys(params).forEach(i => {
-		if (params[i]) {
-			newParams[i] = params[i];
-			if (typeof newParams[i] === 'object') {
-				newParams[i] = JSON.stringify(newParams[i]);
-			}
-		} else {
-			delete newParams[i];
-		}
-	});
+export function updateQueryParams(params, location) {
+    if (!location) return;
+    const newParams = Object.assign({}, location.query);
+    // Stringify nested objects inside the parameters
+    Object.keys(params).forEach(i => {
+        if (params[i]) {
+            newParams[i] = params[i];
+            if (typeof newParams[i] === 'object') {
+                newParams[i] = JSON.stringify(newParams[i]);
+            }
+        } else {
+            delete newParams[i];
+        }
+    });
 
-	return newParams;
+    return newParams;
 }
 
 /**
@@ -68,18 +68,18 @@ export function updateQueryParams (params, location) {
  *
  * @return {String}                    The column array, stringified
  */
-export function stringifyColumns (columns, defaultColumnPaths) {
-	if (!columns) {
-		return;
-	}
-	// Turns [{ path: 'someColumn' }, { path: 'someOtherColumn' }]
-	// into ['someColumn', 'someOtherColumn']
-	let columnString = columns.map((column) => column.path);
-	// Turns that array into 'someColumn,someOtherColumn'
-	if (Array.isArray(columnString)) columnString = columnString.join(',');
-	// If that is the same as the default columns, don't set the query param
-	if (columnString === defaultColumnPaths) columnString = undefined;
-	return columnString;
+export function stringifyColumns(columns, defaultColumnPaths) {
+    if (!columns) {
+        return;
+    }
+    // Turns [{ path: 'someColumn' }, { path: 'someOtherColumn' }]
+    // into ['someColumn', 'someOtherColumn']
+    let columnString = columns.map((column) => column.path);
+    // Turns that array into 'someColumn,someOtherColumn'
+    if (Array.isArray(columnString)) columnString = columnString.join(',');
+    // If that is the same as the default columns, don't set the query param
+    if (columnString === defaultColumnPaths) columnString = undefined;
+    return columnString;
 }
 
 
@@ -89,13 +89,13 @@ export function stringifyColumns (columns, defaultColumnPaths) {
  *
  * @param  {Object} filterArray         The array of filters from state
  */
-export function parametizeFilters (filterArray) {
-	if (!filterArray || filterArray.length === 0) {
-		return;
-	}
-	return filterArray.map((filter) => {
-		return Object.assign({
-			path: filter.field.path,
-		}, filter.value);
-	});
+export function parametizeFilters(filterArray) {
+    if (!filterArray || filterArray.length === 0) {
+        return;
+    }
+    return filterArray.map((filter) => {
+        return Object.assign({
+            path: filter.field.path,
+        }, filter.value);
+    });
 }
