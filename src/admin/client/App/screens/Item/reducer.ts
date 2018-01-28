@@ -25,7 +25,7 @@ const initialState = {
     },
 };
 
-export function itemReducer(state = initialState, action) {
+export function itemReducer(state: any = initialState, action: any = {}) {
     switch (action.type) {
         case SELECT_ITEM:
             return Object.assign({}, state, {

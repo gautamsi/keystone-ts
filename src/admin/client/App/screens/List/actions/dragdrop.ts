@@ -38,28 +38,28 @@ export function resetDragItems () {
 	};
 }
 
-export function setDragItem (item) {
+export function setDragItem (item?) {
 	return {
 		type: SET_DRAG_ITEM,
 		item,
 	};
 }
 
-export function setDragIndex (index) {
+export function setDragIndex (index?) {
 	return {
 		type: SET_DRAG_INDEX,
 		index,
 	};
 }
 
-export function setRowAlert (data) {
+export function setRowAlert (data?) {
 	return {
 		type: SET_ROW_ALERT,
 		data,
 	};
 }
 
-export function moveItem (prevIndex, newIndex, options) {
+export function moveItem (prevIndex?, newIndex?, options?) {
 	return {
 		type: DRAG_MOVE_ITEM,
 		prevIndex,

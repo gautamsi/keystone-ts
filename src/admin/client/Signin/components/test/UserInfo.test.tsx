@@ -11,6 +11,7 @@ const props = {
     user: {
         name: 'Max',
     },
+    userName: undefined,
 };
 
 describe('<UserInfo />', () => {

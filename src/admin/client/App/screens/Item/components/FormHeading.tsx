@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { evalDependsOn } from '../../../../../../fields/utils/evalDependsOn';
 
-export class FormHeading extends React.Component<{ options: any, content: any }> {
+export class FormHeading extends React.Component<{ options: any, content?: any }> {
     static displayName: string = 'FormHeading';
 
     render() {

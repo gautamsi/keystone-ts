@@ -42,7 +42,7 @@ describe('<ListTile />', () => {
                 count={count}
             />
         );
-        demand(component.contains(count)).true();
+        demand(component.contains(count.toString())).true();
     });
 
     it('should render a create button', () => {

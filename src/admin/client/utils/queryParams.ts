@@ -68,7 +68,7 @@ export function updateQueryParams(params, location) {
  *
  * @return {String}                    The column array, stringified
  */
-export function stringifyColumns(columns, defaultColumnPaths) {
+export function stringifyColumns(columns?, defaultColumnPaths?) {
     if (!columns) {
         return;
     }
@@ -89,7 +89,7 @@ export function stringifyColumns(columns, defaultColumnPaths) {
  *
  * @param  {Object} filterArray         The array of filters from state
  */
-export function parametizeFilters(filterArray) {
+export function parametizeFilters(filterArray?) {
     if (!filterArray || filterArray.length === 0) {
         return;
     }

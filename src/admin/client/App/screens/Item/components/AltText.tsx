@@ -8,7 +8,7 @@ export interface Props {
     normal?: JSX.Element | string;
     children?: any;
     title?: string;
-    className: string;
+    className?: string;
 }
 export class AltText extends React.Component<Props, any> {
     constructor(props) {

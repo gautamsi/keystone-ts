@@ -8,7 +8,7 @@ import Transition from 'react-transition-group/Transition';
 export interface Props {
     leftAction?: any;
     leftIcon?: string;
-    title: string;
+    title?: string;
     transitionDirection?: 'next' | 'prev';
 }
 export class PopoutHeader extends React.Component<Props, {}> {

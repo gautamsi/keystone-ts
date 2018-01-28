@@ -10,7 +10,7 @@ export interface Props {
     icon?: string;
     iconHover?: string;
     isSelected?: boolean;
-    label: string;
+    label?: string;
     onClick?: any;
 }
 

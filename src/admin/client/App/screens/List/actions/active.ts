@@ -14,7 +14,7 @@ import {
  * Active actions
  */
 
-export function setActiveSearch (searchString) {
+export function setActiveSearch (searchString?) {
 	return {
 		type: SET_ACTIVE_SEARCH,
 		searchString,
@@ -35,7 +35,7 @@ export function setActiveColumns (columns) {
 	};
 }
 
-export function setActiveList (list, id) {
+export function setActiveList (list?, id?) {
 	return {
 		type: SET_ACTIVE_LIST,
 		list,

@@ -7,7 +7,7 @@ import * as blacklist from 'blacklist';
 import * as classnames from 'classnames';
 
 export interface Props {
-    children: React.ReactNode;
+    children?: React.ReactNode;
     className?: string;
 }
 

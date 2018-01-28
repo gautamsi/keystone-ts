@@ -9,7 +9,7 @@ import { PrimaryNavItem } from './NavItem';
 
 export interface Props {
     brand?: string;
-    currentSectionKey: string;
+    currentSectionKey?: string;
     sections?: Array<any>;
     signoutUrl?: string;
 }

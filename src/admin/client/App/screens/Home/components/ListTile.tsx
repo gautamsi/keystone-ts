@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 export interface Props {
-    count: string;
-    hideCreateButton: boolean;
-    href: string;
-    label: string;
-    path: string;
-    spinner: React.ReactNode;
+    count?: number;
+    hideCreateButton?: boolean;
+    href?: string;
+    label?: string;
+    path?: string;
+    spinner?: React.ReactNode;
 }
 
 /**

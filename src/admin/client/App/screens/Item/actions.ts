@@ -17,7 +17,7 @@ import {
  *
  * @param  {String} itemId The item ID
  */
-export function selectItem(itemId) {
+export function selectItem(itemId?) {
     return {
         type: SELECT_ITEM,
         id: itemId,
@@ -83,7 +83,7 @@ export function loadRelationshipItemData({ columns, refList, relationship, relat
  *
  * @param  {Object} data The item data
  */
-export function dataLoaded(data) {
+export function dataLoaded(data?) {
     return {
         type: DATA_LOADING_SUCCESS,
         loadingRef: null,
@@ -105,7 +105,7 @@ export function relationshipDataLoaded(path, data) {
  *
  * @param  {Object} error The error
  */
-export function dataLoadingError(err) {
+export function dataLoadingError(err?) {
     return {
         type: DATA_LOADING_ERROR,
         loadingRef: null,

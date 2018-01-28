@@ -43,7 +43,7 @@ export const LoginForm: React.SFC<Props> = ({
 export interface Props {
     email?: string;
     handleInputChange?: any;
-    handleSubmit: any;
+    handleSubmit?: any;
     isAnimating?: boolean;
     password?: string;
 }

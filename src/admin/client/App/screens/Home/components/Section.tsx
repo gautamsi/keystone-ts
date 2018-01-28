@@ -2,10 +2,10 @@ import * as React from 'react';
 import { getRelatedIconClass } from '../utils/getRelatedIconClass';
 
 export interface ISectionProps {
-    children: JSX.Element;
+    children?: JSX.Element;
     icon?: string;
     id?: string;
-    label: string;
+    label?: string;
 
 }
 export class Section extends React.Component<ISectionProps> {

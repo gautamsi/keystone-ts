@@ -6,9 +6,9 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 export interface Props {
-    children: React.ReactNode;
+    children?: React.ReactNode;
     className?: string;
-    href: string;
+    href?: string;
     onClick?: any;
 }
 export class MobileListItem extends React.Component<Props, any> {

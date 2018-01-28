@@ -7,12 +7,12 @@ import { MobileListItem } from './ListItem';
 import { Link } from 'react-router-dom';
 
 export interface Props {
-    children: React.ReactNode;
+    children?: React.ReactNode;
     className?: string;
     currentListKey?: string;
-    href: string;
+    href?: string;
     lists?: Array<any>;
-    onClick: any;
+    onClick?: any;
 }
 export class MobileSectionItem extends React.Component<Props, {}> {
     static displayName: string = 'MobileSectionItem';

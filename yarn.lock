@@ -104,6 +104,10 @@
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.2.tgz#09c06877e478a5d5f32ce5017c2eb2b33006f6f5"
 
+"@types/mocha@^2.2.47":
+  version "2.2.47"
+  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.47.tgz#30bbd880834d4af0f609025f282a69b8d4458f06"
+
 "@types/mongodb@*", "@types/mongodb@^2.2.17":
   version "2.2.18"
   resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-2.2.18.tgz#6b62056c081c9bba42530c831cffb5da4e74804c"

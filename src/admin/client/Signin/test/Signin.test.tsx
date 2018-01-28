@@ -8,6 +8,7 @@ import { LoginForm } from '../components/LoginForm';
 
 describe('<Signin />', () => {
     before(() => {
+        // @ts-ignore
         global.window = {
             location: {},
         };

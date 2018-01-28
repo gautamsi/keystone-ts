@@ -38,22 +38,19 @@ describe('<App />', () => {
     });
 
     it('should render the PrimaryNavigation', () => {
-        const component = shallow(<App params={{}} />);
+        const component = shallow(<App {...{}} />);
         demand(component.find(PrimaryNavigation).length).eql(1);
     });
 
     it('should render the MobileNavigation', () => {
-        const component = shallow(<App params={{}} />);
+        const component = shallow(<App {...{}} />);
         demand(component.find(MobileNavigation).length).eql(1);
     });
 
     it('should render the SecondaryNavigation if we\'re on a list', () => {
+        let props = { match: { params: { listId: LIST_PATH } } };
         const component = shallow(
-            <App
-                params={{
-                    listId: LIST_PATH,
-                }}
-            />
+            <App {...props} />
         );
 
         demand(component.find(SecondaryNavigation).length).eql(1);
@@ -62,14 +59,14 @@ describe('<App />', () => {
     it('should render its children', () => {
         const children = (<h1>Hello World!</h1>);
         const component = shallow(
-            <App params={{}}>{children}</App>
+            <App {...{}}>{children}</App>
         );
 
         demand(component.contains(children)).true();
     });
 
     it('should render the footer', () => {
-        const component = shallow(<App params={{}} />);
+        const component = shallow(<App {...{}} />);
         demand(component.find(Footer).length).eql(1);
     });
 });

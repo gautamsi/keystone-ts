@@ -8,7 +8,7 @@ import * as classnames from 'classnames';
 import { Link } from 'react-router-dom';
 
 export interface Props {
-    children: React.ReactNode;
+    children?: React.ReactNode;
     className?: string;
     href?: string;
     label?: string;

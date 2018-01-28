@@ -84,7 +84,7 @@ export function downloadItems (format, columns) {
 	};
 }
 
-export function itemsLoaded (items) {
+export function itemsLoaded (items?) {
 	return {
 		type: ITEMS_LOADED,
 		items,

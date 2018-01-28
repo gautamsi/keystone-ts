@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 
 import { Toolbar } from '../Toolbar';
 import { ToolbarSection } from '../Toolbar/ToolbarSection';
-import { Button, FormInput, ResponsiveText } from 'elemental';
+import { Button, FormInput, ResponsiveText } from '../../../../elemental';
 import { Link } from 'react-router';
 
 describe('<EditFormHeader />', () => {

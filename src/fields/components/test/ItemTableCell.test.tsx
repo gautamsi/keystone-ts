@@ -12,11 +12,11 @@ describe('<ItemsTableCell/> tests', () => {
         demand(cell.prop('className')).eql('ItemList__col ');
     });
 
-    it('should render <td> with properties p1, p2', () => {
-        const cell = shallow(<ItemsTableCell p1="v1" p2="v2" />);
-        demand(cell.prop('p1')).eql('v1');
-        demand(cell.prop('p2')).eql('v2');
-    });
+    // it('should render <td> with properties p1, p2', () => {
+    //     const cell = shallow(<ItemsTableCell p1="v1" p2="v2" />);
+    //     demand(cell.prop('p1')).eql('v1');
+    //     demand(cell.prop('p2')).eql('v2');
+    // });
 
     it('should render <td> with css class mock-style', () => {
         const cell = shallow(<ItemsTableCell className="mock-style" />);

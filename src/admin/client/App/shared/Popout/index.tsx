@@ -18,7 +18,7 @@ export interface Props {
     isOpen?: boolean;
     onCancel?: any;
     onSubmit?: any;
-    relativeToID: string;
+    relativeToID?: string;
     width?: number;
 }
 
