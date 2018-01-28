@@ -39,12 +39,11 @@ export const InputGroupSection: React.SFC<Props> = ({
         );
 };
 
-export interface Props {
+export interface Props extends React.HTMLAttributes<any> {
     active?: boolean; // buttons only
     children?: any;
     contiguous?: boolean;
     grow?: boolean;
     position?: 'first' | 'last' | 'middle' | 'only';
     cssStyles?: any;
-    className?: any;
 }

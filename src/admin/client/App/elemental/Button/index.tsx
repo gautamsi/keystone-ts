@@ -75,10 +75,7 @@ export interface Props {
     block?: boolean;
     color?: BUTTON_COLORS;
     component?: any;
-    cssStyles?: {
-        _definition?: object;
-        _name?: string;
-    }[];
+    cssStyles?: any;
     disabled?: boolean;
     href?: string;
     size?: BUTTON_SIZES;
@@ -87,4 +84,7 @@ export interface Props {
     type?: string;
     onClick?: any;
     style?: any;
+    to?: any;
+    title?: any;
+    autoFocus?: any;
 }

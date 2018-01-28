@@ -64,6 +64,8 @@ export interface Props {
     small?: string;
     xsmall?: string;
     className?: any;
+    width?: any;
+    style?: any;
 }
 
 const classes = {

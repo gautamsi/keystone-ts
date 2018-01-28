@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+// @ts-ignore
 import * as CodeMirror from 'codemirror';
 import { FieldBase, FieldPropsBase } from '../FieldBase';
 import * as React from 'react';

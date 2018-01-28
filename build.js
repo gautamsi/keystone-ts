@@ -1,6 +1,6 @@
 var browserify = require('browserify');
 
-var packages = require('./dist/admin/client/packages');
+var packages = require('./dist/admin/client/packages').packages;
 var b = browserify({
 	debug: process.env.NODE_ENV !== 'production',
 });

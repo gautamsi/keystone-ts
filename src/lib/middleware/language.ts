@@ -1,3 +1,4 @@
+// @ts-ignore
 import * as requestLanguage from 'express-request-language';
 
 export function language(keystone) {

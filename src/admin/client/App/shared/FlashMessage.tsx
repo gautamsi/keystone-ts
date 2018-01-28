@@ -7,7 +7,7 @@ import { Alert } from '../elemental';
 
 export interface Props {
     message: string | any;
-    type?: string;
+    type?: 'danger' | 'error' | 'info' | 'success' | 'warning';
 }
 
 export class FlashMessage extends React.Component<Props> {

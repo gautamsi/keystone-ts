@@ -221,6 +221,7 @@ export class List<T> {
                     if (Object.keys(obj[key]).length) {
                         // nested object, e.g. { last: { name: String }}
                         // matches logic in mongoose/Schema:add
+                        // @ts-ignore
                         this.schema.nested[prefix + key] = true;
                         add(obj[key], prefix + key + '.');
                     } else {
@@ -1462,7 +1463,9 @@ export class List<T> {
         if (Object.keys(this.relationships).length) {
             this.schema.methods.getRelated = schemaPlugins.methods.getRelated;
             this.schema.methods.populateRelated = schemaPlugins.methods.populateRelated;
+            // @ts-ignore
             if (!this.schema.options.toObject) this.schema.options.toObject = {};
+            // @ts-ignore
             this.schema.options.toObject.transform = schemaPlugins.options.transform;
         }
         this.schema.virtual('_').get(function () {

@@ -35,9 +35,10 @@ export const Alert: React.SFC<Props> = ({
 
 export interface Props {
     color: 'danger' | 'error' | 'info' | 'success' | 'warning';
-    component: any;
+    component?: any;
     className?: any;
     children?: any;
+    style?: any;
 }
 
 Alert.defaultProps = {

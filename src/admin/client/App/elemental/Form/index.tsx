@@ -52,4 +52,6 @@ export interface Props {
     className?: any;
     onSubmit?: any;
     variant?: any;
+    noValidate?: any;
+    action?: any;
 }

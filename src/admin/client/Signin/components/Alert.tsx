@@ -21,4 +21,5 @@ export interface Props {
     invalidMessage?: string;
     isInvalid?: boolean;
     signedOut?: boolean;
+    component?: any;
 }

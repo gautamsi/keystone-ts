@@ -45,10 +45,11 @@ export const LoadingButton: React.SFC<Props> = ({ children, loading, ...props })
     );
 };
 
-export interface Props {
+export interface Props extends React.HTMLAttributes<any> {
     loading?: boolean;
     color?: any;
     variant?: any;
+    disabled?: any;
 }
 
 LoadingButton.defaultProps = {

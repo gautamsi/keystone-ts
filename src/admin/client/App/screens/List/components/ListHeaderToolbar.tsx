@@ -131,7 +131,7 @@ export const ListHeaderToolbar: React.SFC<Props> = ({
     );
 };
 
-export interface Props {
+export interface Props extends React.HtmlHTMLAttributes<any> {
     columnsActive?: Array<any>;
     columnsAvailable?: Array<any>;
     createIsAvailable?: boolean;

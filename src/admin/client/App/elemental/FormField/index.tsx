@@ -28,7 +28,7 @@ export class FormField extends React.Component<Props> {
     }
     render() {
         const { formLayout = 'basic', labelWidth } = this.context;
-        const {
+        let {
 			cssStyles,
             children,
             className,
@@ -49,7 +49,8 @@ export class FormField extends React.Component<Props> {
             props['className'] += (' ' + className);
         }
         if (offsetAbsentLabel && labelWidth) {
-            props['style'] = {
+            // @ts-ignore
+            props.style = {
                 paddingLeft: labelWidth,
                 ...props.style,
             };
@@ -63,6 +64,7 @@ export class FormField extends React.Component<Props> {
         ) : null;
 
         return (
+            // @ts-ignore
             <div {...props} htmlFor={htmlFor}>
                 {componentLabel}
                 {children}
@@ -76,7 +78,7 @@ export class FormField extends React.Component<Props> {
 // 	_name: PropTypes.string,
 // };
 
-export interface Props {
+export interface Props extends React.HTMLAttributes<any> {
     children?: any;
     cropLabel?: boolean;
     cssStyles?: any;
@@ -88,7 +90,6 @@ export interface Props {
     label?: string;
     offsetAbsentLabel?: boolean;
     className?: any;
-    style?: any;
 }
 
 function generateId() {

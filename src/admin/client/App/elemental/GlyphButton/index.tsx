@@ -63,6 +63,9 @@ export interface Props {
     cssStyles?: any;
     className?: any;
     title?: any;
+    active?: any;
+    onFocus?: any;
+    disabled?: any;
 }
 
 GlyphButton.defaultProps = {

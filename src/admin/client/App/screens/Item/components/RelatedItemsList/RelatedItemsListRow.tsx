@@ -13,18 +13,19 @@ import { ListControl } from '../../../List/components/ListControl';
 
 export interface Props {
     columns: Array<any>;
-    dispatch: any;
+    dispatch?: any;
     dragNewSortOrder?: number;
     index?: number;
     item: any;
     refList: any;
-    relatedItemId: string;
-    relationship: any;
+    relatedItemId?: string;
+    relationship?: any;
     // Injected by React DnD:
     isDragging?: boolean;
     connectDragSource?: any;
     connectDropTarget?: any;
     connectDragPreview?: any;
+    key?: any;
 }
 export class RelatedItemsListRow extends React.Component<Props> {
     render() {

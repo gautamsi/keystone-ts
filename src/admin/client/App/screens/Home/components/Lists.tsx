@@ -39,7 +39,7 @@ class ListsComponent extends React.Component<Props> {
     }
 }
 
-export const Lists = redux.connect((state: any) => {
+export const Lists = redux.connect<{}, Props, any>((state: any) => {
     return {
         listsData: state.lists.data,
     };

@@ -52,7 +52,7 @@ export const InputGroup: React.SFC<Props> = ({
     return <Component {...props} />;
 };
 
-export interface Props {
+export interface Props extends React.HTMLAttributes<any> {
     block?: boolean;
     component?: any;
     contiguous?: boolean;

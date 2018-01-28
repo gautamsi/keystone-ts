@@ -32,7 +32,7 @@ export interface Props extends FieldPropsBase {
 export class CloudinaryImageField extends FieldBase<Props> {
     refs: {
         [key: string]: (Element)
-        fileInput: (HTMLInputElement) // !important
+        fileInput: (HTMLInputElement & { clickDomNode?: any }) // !important
     };
     static displayName: string = 'CloudinaryImageField';
 

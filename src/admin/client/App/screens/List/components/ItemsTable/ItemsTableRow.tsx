@@ -31,6 +31,7 @@ export interface Props {
     deleteTableItem?: any;
     checkTableItem?: any;
     item?: any;
+    sortOrder?: any;
 }
 
 export class TableRow extends React.Component<Props> {

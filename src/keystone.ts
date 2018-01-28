@@ -72,6 +72,8 @@ export class Keystone {
     mongoose: mongoose.Mongoose;
     middleware: any;
     callHook: Function;
+    getMiddleware: Function;
+    nativeApp: any;
 
     constructor() {
         grappling.mixin(this).allowHooks('pre:static', 'pre:bodyparser', 'pre:session', 'pre:logger', 'pre:admin', 'pre:routes', 'pre:render', 'updates', 'signin', 'signout');

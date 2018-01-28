@@ -52,6 +52,7 @@ export interface Props {
     label: string;
     onClear?: PropTypes.func;
     onClick?: PropTypes.func;
+    id?: any;
 }
 
 Chip.defaultProps = {

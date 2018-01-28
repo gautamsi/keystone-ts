@@ -52,7 +52,7 @@ export class DateFilter extends React.Component<Props, any> {
     refs: {
         [key: string]: (Element);
         input: (HTMLInputElement); // !important
-        daypicker: (DayPicker);
+        daypicker: (DayPicker & Element);
     };
 
     _isMounted: boolean;

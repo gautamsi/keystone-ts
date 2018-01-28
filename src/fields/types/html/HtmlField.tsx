@@ -1,4 +1,5 @@
 import * as React from 'React';
+// @ts-ignore
 import * as tinymce from 'tinymce';
 import { FormInput } from '../../../admin/client/App/elemental';
 import { evalDependsOn } from '../../utils/evalDependsOn';

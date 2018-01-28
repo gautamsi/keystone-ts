@@ -6,7 +6,7 @@ import * as path from 'path';
 
 import { packages } from '../../admin/client/packages';
 
-const app = new express();
+const app = express();
 
 // Serve the explorer stylesheet
 app.get('/index.css', (req, res) => res.sendFile(path.resolve('./fields/explorer/index.css')));

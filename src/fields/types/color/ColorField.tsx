@@ -103,6 +103,7 @@ export class ColorField extends FieldBase<Props> {
                             <SketchPicker
                                 color={this.props.value}
                                 onChangeComplete={this.handlePickerChange}
+                                // @ts-ignore
                                 onClose={this.handleClose}
                             />
                         </div>

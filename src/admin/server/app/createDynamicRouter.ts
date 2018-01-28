@@ -1,4 +1,4 @@
-import {Keystone} from '../../../keystone';
+import { Keystone } from '../../../keystone';
 import { persist, keystoneAuth } from '../../../lib/session';
 import * as bodyParser from 'body-parser';
 import * as express from 'express';

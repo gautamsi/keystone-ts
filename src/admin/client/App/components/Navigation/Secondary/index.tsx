@@ -90,7 +90,7 @@ class SecondaryNavigationNav extends React.Component<Props, any> {
     }
 }
 
-export const SecondaryNavigation = connect((state: any) => {
+export const SecondaryNavigation = connect<{}, Props, any>((state: any) => {
     return {
         currentList: state.lists.currentList,
     };

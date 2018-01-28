@@ -22,9 +22,10 @@ export const BlankState: React.SFC<Props> = ({
 };
 
 export interface Props {
-    component: any;
+    component?: any;
     heading?: string;
     className?: any;
+    style?: any;
 }
 
 BlankState.defaultProps = {

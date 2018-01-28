@@ -114,6 +114,7 @@ export class RelatedItemsList extends React.Component<Props, any> {
         // add sort col when available
         if (this.isSortable()) {
             cells.unshift(
+                // @ts-ignore
                 <th width={TABLE_CONTROL_COLUMN_WIDTH} key="sortable" />
             );
         }

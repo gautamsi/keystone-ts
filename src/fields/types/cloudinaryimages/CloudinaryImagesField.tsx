@@ -33,7 +33,7 @@ export class CloudinaryImagesField extends FieldBase<Props> {
 
     refs: {
         [key: string]: (Element)
-        fileInput: (HTMLInputElement) // !important
+        fileInput: (HTMLInputElement & { clickDomNode?; hasValue?; clearValue?}) // !important
     };
 
     static displayName: string = 'CloudinaryImagesField';

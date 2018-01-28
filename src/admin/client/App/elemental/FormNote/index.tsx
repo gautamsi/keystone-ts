@@ -9,7 +9,7 @@ export const FormNote: React.SFC<Props> = ({
     html,
     ...props
 }) => {
-    props['className'] = css(classes.note, className);
+    props['className'] = css(classes.note, className as any);
 
     // Property Violation
     if (children && html) {
@@ -26,9 +26,8 @@ export const FormNote: React.SFC<Props> = ({
 FormNote.defaultProps = {
     component: 'div',
 };
-export interface Props {
+export interface Props extends React.HTMLAttributes<any> {
     component?: any;
     html?: string;
-    className?: any;
     note?: any;
 }

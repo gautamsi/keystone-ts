@@ -4,7 +4,7 @@ import * as React from 'react';
 import { css } from 'glamor';
 import { Button } from '../../elemental';
 
-export const DropdownButton: React.SFC = ({ children, ...props }) => {
+export const DropdownButton: React.SFC<any> = ({ children, ...props }) => {
     return (
         <Button {...props}>
             {children}

@@ -73,7 +73,7 @@ const stylesShape = {
     _name: PropTypes.string,
 };
 
-export interface Props {
+export interface Props extends React.HTMLAttributes<any> {
     cssStyles?: any;
     // PropTypes.oneOfType([
     //     PropTypes.arrayOf(PropTypes.shape(stylesShape)),
@@ -94,4 +94,9 @@ export interface Props {
     name?: any;
     onClick?: any;
     style?: any;
+    required?: any;
+    step?: any;
+    href?: any;
+    target?: any;
+    component?: any;
 }
