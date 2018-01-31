@@ -1,20 +1,17 @@
-var keystone = require('../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../src/index';
 
-var OtherList = new keystone.List('OtherList', {
-	autokey: {path: 'key', from: 'name', unique: true},
-	track: true
+export let OtherList = new Keystone.List('OtherList', {
+    autokey: { path: 'key', from: 'name', unique: true },
+    track: true
 });
 
 OtherList.add({
-	name: {
-		type: Types.Name, 
-		required: true, 
-		index: true
-	},
+    name: {
+        type: Types.Name,
+        required: true,
+        index: true
+    },
 });
 
 OtherList.defaultColumns = 'name';
 OtherList.register();
-
-export = OtherList;

@@ -1,28 +1,25 @@
-var keystone = require('../../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
 // Model to demonstrate issue #2929
 
-var DependsOn = new keystone.List('DependsOn', {
-	autokey: {
-		path: 'key',
-		from: 'name',
-		unique: true,
-	},
-	track: true,
+export let DependsOn = new Keystone.List('DependsOn', {
+    autokey: {
+        path: 'key',
+        from: 'name',
+        unique: true,
+    },
+    track: true,
 });
 
 DependsOn.add({
-	dependency: { type: Boolean, initial: true, default: false },
-	dependent:
-	{
-		type: Types.Select,
-		options: ['spam', 'ham'],
-		initial: true,
-		dependsOn: { dependency: false }
-	}
+    dependency: { type: Boolean, initial: true, default: false },
+    dependent:
+        {
+            type: Types.Select,
+            options: ['spam', 'ham'],
+            initial: true,
+            dependsOn: { dependency: false }
+        }
 });
 
 DependsOn.register();
-
-export = DependsOn;

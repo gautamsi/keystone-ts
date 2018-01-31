@@ -1,5 +1,5 @@
-var inflect = require('i');
-var _ = require('lodash');
+import * as inflect from 'i';
+import * as _ from 'lodash';
 
 
 /**
@@ -74,8 +74,8 @@ exports.titlecase = function (str) {
 	if (str && str.toString) str = str.toString();
 	if (typeof str !== 'string' || !str.length) return '';
 	str = str.replace(/([a-z])([A-Z])/g, '$1 $2');
-	var parts = str.split(/\s|_|\-/);
-	for (var i = 0; i < parts.length; i++) {
+	let parts = str.split(/\s|_|\-/);
+	for (let i = 0; i < parts.length; i++) {
 		if (parts[i] && !/^[A-Z0-9]+$/.test(parts[i])) {
 			parts[i] = exports.upcase(parts[i]);
 		}

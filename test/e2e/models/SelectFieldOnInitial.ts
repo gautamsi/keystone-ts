@@ -1,7 +1,6 @@
-var keystone = require('../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../src/index';
 
-var SelectFieldOnInitial = new keystone.List('SelectFieldOnInitial', {
+export let SelectFieldOnInitial = new Keystone.List('SelectFieldOnInitial', {
 	autokey: {path: 'key', from: 'name', unique: true},
 	track: true
 });
@@ -18,12 +17,10 @@ SelectFieldOnInitial.add({
 		required: true,
 		initial: true,
 		noedit: true,
-		label: "Food Type",
+		label: 'Food Type',
 		index: true
 	},
 });
 
 SelectFieldOnInitial.defaultColumns = 'name, type';
 SelectFieldOnInitial.register();
-
-export = SelectFieldOnInitial;

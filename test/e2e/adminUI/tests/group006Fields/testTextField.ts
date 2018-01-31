@@ -1,5 +1,5 @@
-var fieldTests = require('./commonFieldTestUtils.js');
-var ModelTestConfig = require('../../../modelTestConfig/TextModelTestConfig');
+let fieldTests = require('./commonFieldTestUtils.js');
+let ModelTestConfig = require('../../../modelTestConfig/TextModelTestConfig');
 
 export = {
 	before: function (browser) {
@@ -60,7 +60,7 @@ export = {
 				{ name: 'name', input: { value: 'Text Field Test 1' }, },
 				{ name: 'fieldA', input: { value: 'Some test text for field A' }, },
 			],
-		})
+		});
 	},
 	'Text field can be filled via the edit form': function (browser) {
 		browser.adminUIItemScreen.fillFieldInputs({
@@ -79,6 +79,6 @@ export = {
 				{ name: 'fieldA', input: { value: 'Some test text for field A' }, },
 				{ name: 'fieldB', input: { value: 'Some test text for field B' }, },
 			],
-		})
+		});
 	},
 };

@@ -1,4 +1,4 @@
-var ModelTestConfig = require('../../../modelTestConfig/UserModelTestConfig');
+let ModelTestConfig = require('../../../modelTestConfig/UserModelTestConfig');
 
 export = {
 	before: function (browser) {
@@ -32,7 +32,7 @@ export = {
 		browser.adminUIListScreen.assertElementIsVisible({ element: '@downloadDropdown' });
 	},
 	// TODO:  For some reason the expand table width input control does not show in saucelabs' Firefox 44...why?
-	//		It shows fine with local selenium server and Firefox 44.0.2
+	//        It shows fine with local selenium server and Firefox 44.0.2
 	// 'List screen must show an expand table width input': function (browser) {
 	// 	browser.adminUIListScreen.assertElementIsVisible({ element: 'expandTableIcon' });
 	// },

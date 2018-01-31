@@ -1,11 +1,9 @@
-var keystone = require('../../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
-var HiddenRelationship = new keystone.List('HiddenRelationship');
+export let HiddenRelationship = new Keystone.List('HiddenRelationship', {});
 
 HiddenRelationship.add({
-	fieldA: { type: Types.Relationship, ref: 'User', initial: true, hidden: true },
+    fieldA: { type: Types.Relationship, ref: 'User', initial: true, hidden: true },
 });
 
 HiddenRelationship.register();
-export = HiddenRelationship;

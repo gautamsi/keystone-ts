@@ -1,5 +1,5 @@
-var fieldTests = require('./commonFieldTestUtils.js');
-var ModelTestConfig = require('../../../modelTestConfig/UrlModelTestConfig');
+let fieldTests = require('./commonFieldTestUtils.js');
+let ModelTestConfig = require('../../../modelTestConfig/UrlModelTestConfig');
 
 export = {
 	before: function (browser) {
@@ -60,7 +60,7 @@ export = {
 				{ name: 'name', input: { value: 'Url Field Test 1' }, },
 				{ name: 'fieldA', input: { value: 'http://www.example1.com' }, },
 			],
-		})
+		});
 	},
 	'Url field can be filled via the edit form': function (browser) {
 		browser.adminUIItemScreen.fillFieldInputs({
@@ -80,6 +80,6 @@ export = {
 				{ name: 'fieldA', input: { value: 'http://www.example1.com' }, },
 				{ name: 'fieldB', input: { value: 'http://www.example2.com' }, },
 			],
-		})
+		});
 	},
 };

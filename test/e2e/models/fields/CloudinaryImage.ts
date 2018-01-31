@@ -1,7 +1,6 @@
-var keystone = require('../../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
-var CloudinaryImage = new keystone.List('CloudinaryImage', {
+export let CloudinaryImage = new Keystone.List('CloudinaryImage', {
 	autokey: {
 		path: 'key',
 		from: 'name',
@@ -27,5 +26,3 @@ CloudinaryImage.add({
 
 CloudinaryImage.defaultColumns = 'name, fieldA, fieldB';
 CloudinaryImage.register();
-
-export = CloudinaryImage;

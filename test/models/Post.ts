@@ -1,8 +1,7 @@
-var keystone = require('../../index.js'),
-    Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types } from '../../src/index';
 
 // Simple model
-var Post = new keystone.List('Post', {
+let Post = new Keystone.List('Post', {
     autokey: { path: 'slug', from: 'title', unique: true },
 });
 
@@ -16,11 +15,11 @@ Post.schema.index({
     title: 'text',
     content: 'text'
 }, {
-    name: 'searchIndex',
-    weights: {
-        content: 2,
-        title: 1
-    }
-});
+        name: 'searchIndex',
+        weights: {
+            content: 2,
+            title: 1
+        }
+    });
 
 Post.register();

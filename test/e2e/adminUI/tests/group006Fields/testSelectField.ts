@@ -1,5 +1,5 @@
-var fieldTests = require('./commonFieldTestUtils.js');
-var ModelTestConfig = require('../../../modelTestConfig/SelectModelTestConfig');
+let fieldTests = require('./commonFieldTestUtils.js');
+let ModelTestConfig = require('../../../modelTestConfig/SelectModelTestConfig');
 
 export = {
 	'@disabled': true,
@@ -61,7 +61,7 @@ export = {
 				{ name: 'name', input: { value: 'Select Field Test 1' }, },
 				{ name: 'fieldA', input: { value: 'One' }, },
 			],
-		})
+		});
 	},
 	'Select field can be filled via the edit form': function (browser) {
 		browser.adminUIItemScreen.fillFieldInputs({
@@ -81,6 +81,6 @@ export = {
 				{ name: 'fieldA', input: { value: 'One' }, },
 				{ name: 'fieldB', input: { value: 'Two' }, },
 			],
-		})
+		});
 	},
 };

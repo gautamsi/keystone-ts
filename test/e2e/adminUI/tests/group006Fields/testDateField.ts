@@ -1,5 +1,5 @@
-var fieldTests = require('./commonFieldTestUtils.js');
-var ModelTestConfig = require('../../../modelTestConfig/DateModelTestConfig');
+let fieldTests = require('./commonFieldTestUtils.js');
+let ModelTestConfig = require('../../../modelTestConfig/DateModelTestConfig');
 
 export = {
 	before: function (browser) {
@@ -58,11 +58,11 @@ export = {
 		});
 
 		/* TODO Pending fix of timezone issues which are causing Travis CI to fail
-		browser.adminUIItemScreen.assertFieldInputs({ 
+		browser.adminUIItemScreen.assertFieldInputs({
 			fields: [
 			{ name: 'name', input: { value: 'Date Field Test 1' },},
 			{ name: 'fieldA', input: { value: '2016-01-01' },},
-		], 
+		],
 		});
 		*/
 	},
@@ -84,12 +84,12 @@ export = {
 		browser.adminUIItemScreen.assertElementTextEquals({ element: '@flashMessage', text: 'Your changes have been saved successfully' });
 
 		/* TODO Pending fix of timezone issues which are causing Travis CI to fail
-		browser.adminUIItemScreen.assertFieldInputs({ 
+		browser.adminUIItemScreen.assertFieldInputs({
 			fields: [
 			{ name: 'name', input: { value: 'Date Field Test 1' },},
 			{ name: 'fieldA', input: { value: '2016-01-01' },},
 			{ name: 'fieldB', input: { value: '2016-01-02' },},
-		], 
+		],
 		});
 		*/
 	},

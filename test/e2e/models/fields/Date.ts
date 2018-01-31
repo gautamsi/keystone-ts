@@ -1,32 +1,29 @@
-var keystone = require('../../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
-var Date = new keystone.List('Date', {
-	autokey: {
-		path: 'key',
-		from: 'name',
-		unique: true,
-	},
-	track: true,
+export let Date = new Keystone.List('Date', {
+    autokey: {
+        path: 'key',
+        from: 'name',
+        unique: true,
+    },
+    track: true,
 });
 
 Date.add({
-	name: {
-		type: String,
-		initial: true,
-		required: true,
-		index: true,
-	},
-	fieldA: {
-		type: Types.Date,
-		initial: true,
-	},
-	fieldB: {
-		type: Types.Date,
-	},
+    name: {
+        type: String,
+        initial: true,
+        required: true,
+        index: true,
+    },
+    fieldA: {
+        type: Types.Date,
+        initial: true,
+    },
+    fieldB: {
+        type: Types.Date,
+    },
 });
 
 Date.defaultColumns = 'name, fieldA, fieldB';
 Date.register();
-
-export = Date;

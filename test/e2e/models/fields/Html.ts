@@ -1,32 +1,29 @@
-var keystone = require('../../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
-var Html = new keystone.List('Html', {
-	autokey: {
-		path: 'key',
-		from: 'name',
-		unique: true,
-	},
-	track: true,
+export let Html = new Keystone.List('Html', {
+    autokey: {
+        path: 'key',
+        from: 'name',
+        unique: true,
+    },
+    track: true,
 });
 
 Html.add({
-	name: {
-		type: String,
-		initial: true,
-		required: true,
-		index: true,
-	},
-	fieldA: {
-		type: Types.Html,
-		initial: true,
-	},
-	fieldB: {
-		type: Types.Html,
-	},
+    name: {
+        type: String,
+        initial: true,
+        required: true,
+        index: true,
+    },
+    fieldA: {
+        type: Types.Html,
+        initial: true,
+    },
+    fieldB: {
+        type: Types.Html,
+    },
 });
 
 Html.defaultColumns = 'name, fieldA, fieldB';
 Html.register();
-
-export = Html;

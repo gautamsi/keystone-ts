@@ -1,15 +1,15 @@
-var keystone = require('../../../../index');
-var Types = keystone.Field.Types;
+let keystone = require('../../../../index');
+let Types = keystone.Field.Types;
 
-var SourceRelationship = new keystone.List('SourceRelationship');
+let SourceRelationship = new keystone.List('SourceRelationship');
 
 SourceRelationship.add({
 	name: {
 		type: String,
 		initial: true,
 	},
-	fieldA: { 
-		type: Types.Relationship, 
+	fieldA: {
+		type: Types.Relationship,
 		ref: 'TargetRelationship'
 	},
 });

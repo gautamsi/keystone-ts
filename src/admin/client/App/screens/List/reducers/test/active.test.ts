@@ -1,5 +1,5 @@
 import * as demand from 'must';
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 import {
     SET_ACTIVE_LIST,
     SET_ACTIVE_SEARCH,

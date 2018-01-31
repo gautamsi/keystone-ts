@@ -1,5 +1,5 @@
-var fieldTests = require('./commonFieldTestUtils.js');
-var ModelTestConfig = require('../../../modelTestConfig/TextArrayModelTestConfig');
+let fieldTests = require('./commonFieldTestUtils.js');
+let ModelTestConfig = require('../../../modelTestConfig/TextArrayModelTestConfig');
 
 export = {
 	before: function (browser) {
@@ -117,6 +117,6 @@ export = {
 				{ name: 'fieldA', input: { text1: 'Test text 1', text2: 'Test text 2' }, },
 				{ name: 'fieldB', input: { text1: 'Test text 3', text2: 'Test text 4' }, },
 			],
-		})
+		});
 	},
 };

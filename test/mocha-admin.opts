@@ -1,5 +1,4 @@
-admin/**/*.test.js
+src/admin/**/*.test.ts
 --growl
---require babel-polyfill
+--require ts-node/register
 --reporter spec
---compilers js:babel-core/register

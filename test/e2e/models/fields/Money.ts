@@ -1,7 +1,6 @@
-var keystone = require('../../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
-var Money = new keystone.List('Money', {
+export let Money = new Keystone.List('Money', {
 	autokey: {
 		path: 'key',
 		from: 'name',
@@ -28,5 +27,3 @@ Money.add({
 
 Money.defaultColumns = 'name, fieldA, fieldB';
 Money.register();
-
-export = Money;

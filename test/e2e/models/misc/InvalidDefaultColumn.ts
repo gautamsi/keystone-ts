@@ -1,7 +1,7 @@
 // THIS MODEL IS USED TO MAKE SURE INVALID DEFAULT COLUMNS ARE PROPERLY WARNED ABOUT
-var keystone = require('../../../../index');
+let keystone = require('../../../../index');
 
-var InvalidDefaultColumn = new keystone.List('InvalidDefaultColumn');
+let InvalidDefaultColumn = new keystone.List('InvalidDefaultColumn');
 
 // THIS SHOULD CAUSE THE FOLLOWING WARNING TO BE GENERATED IN THE ADMIN UI CONSOLE:
 // 'List InvalidDefaultColumn specified an invalid default column: bar'

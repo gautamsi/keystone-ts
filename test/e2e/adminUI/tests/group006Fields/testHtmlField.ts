@@ -1,5 +1,5 @@
-var fieldTests = require('./commonFieldTestUtils.js');
-var ModelTestConfig = require('../../../modelTestConfig/HtmlModelTestConfig');
+let fieldTests = require('./commonFieldTestUtils.js');
+let ModelTestConfig = require('../../../modelTestConfig/HtmlModelTestConfig');
 
 export = {
 	before: function (browser) {
@@ -42,7 +42,7 @@ export = {
 			fields: [
 				{ name: 'name', input: { value: 'Html Field Test 1' }, },
 				// FIXME: webteckie Jan 13, 2017 -- For some reason this doesn't work in SauceLabs
-				//{ name: 'fieldA', input: { value: 'Some test html code for field A' }, },
+				// { name: 'fieldA', input: { value: 'Some test html code for field A' }, },
 			],
 		});
 
@@ -62,7 +62,7 @@ export = {
 			fields: [
 				{ name: 'name', input: { value: 'Html Field Test 1' }, },
 				// FIXME: webteckie Jan 13, 2017 -- For some reason this doesn't work in SauceLabs
-				//{ name: 'fieldA', input: { value: 'Some test html code for field A' }, },
+				// { name: 'fieldA', input: { value: 'Some test html code for field A' }, },
 			],
 		});
 	},
@@ -82,8 +82,8 @@ export = {
 			fields: [
 				{ name: 'name', input: { value: 'Html Field Test 1' }, },
 				// FIXME: webteckie Jan 13, 2017 -- For some reason this doesn't work in SauceLabs
-				//{ name: 'fieldA', input: { value: 'Some test html code for field A' }, },
-				//{ name: 'fieldB', input: { value: 'Some test html code for field B' }, },
+				// { name: 'fieldA', input: { value: 'Some test html code for field A' }, },
+				// { name: 'fieldB', input: { value: 'Some test html code for field B' }, },
 			],
 		});
 	},

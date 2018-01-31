@@ -8,7 +8,7 @@ describe('safeRequire', function () {
 			this.oldExit = process.exit;
 			process.exit = function (status) {
 				return demand(status).eql(1);
-			}
+			} as any;
 		});
 
 		afterEach(function () {
