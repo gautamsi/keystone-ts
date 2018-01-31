@@ -1235,7 +1235,7 @@ bl@^1.2.0:
   dependencies:
     readable-stream "^2.0.5"
 
-blacklist@1.1.4, blacklist@^1.1.2:
+blacklist@1.1.4, blacklist@^1.1.2, blacklist@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/blacklist/-/blacklist-1.1.4.tgz#b2dd09d6177625b2caa69835a37b28995fa9a2f2"
 
@@ -2608,6 +2608,13 @@ ejs@0.8.3:
 ejs@2.5.6:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.6.tgz#479636bfa3fe3b1debd52087f0acb204b4f19c88"
+
+elemental@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/elemental/-/elemental-0.6.1.tgz#291c6fe560c36b6d1e8538fa19d56ec941515247"
+  dependencies:
+    blacklist "^1.1.4"
+    classnames "^2.2.5"
 
 elliptic@^6.0.0:
   version "6.4.0"
@@ -5228,7 +5235,7 @@ muri@1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/muri/-/muri-1.2.1.tgz#ec7ea5ce6ca6a523eb1ab35bacda5fa816c9aa3c"
 
-must@0.13.4:
+must@^0.13.4:
   version "0.13.4"
   resolved "https://registry.yarnpkg.com/must/-/must-0.13.4.tgz#9d1389f458e894b2aa04032bfeb7a40714f78171"
   dependencies:
