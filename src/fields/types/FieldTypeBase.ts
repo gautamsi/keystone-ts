@@ -8,7 +8,7 @@ import * as  marked from 'marked';
 import * as  mongoose from 'mongoose';
 import { Path } from '../../lib/path';
 import * as  utils from 'keystone-utils';
-import { evalDependsOn } from '../utils/evalDependsOn.js';
+import { evalDependsOn } from '../utils/evalDependsOn';
 import { definePrototypeGetters } from '../utils/definePrototypeGetters.js';
 import { List } from '../../lib/list';
 import * as _debug from 'debug';

@@ -68,7 +68,7 @@ export class Keystone {
     _redirects: any = {};
 
     // expose express
-    express: Express.Application = express;
+    express: express.Application = express();
     mongoose: mongoose.Mongoose;
     middleware: any;
     callHook: Function;
@@ -167,7 +167,9 @@ export class Keystone {
         return this;
     }
 
-    createItems(data, ops, callback) {
+    createItems(data, ops);
+    createItems(data, ops, callback);
+    createItems(data, ops, callback?) {
         const debug = _debug('keystone:core:createItems');
 
         const keystone = this;

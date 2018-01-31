@@ -38,7 +38,7 @@ export function itemReducer(state: any = initialState, action: any = {}) {
                 loading: true,
             });
         case DATA_LOADING_SUCCESS:
-            Keystone.item = action.data; // Fix keystone filter
+            keystone.item = action.data; // Fix keystone filter
             return Object.assign({}, state, {
                 data: action.data,
                 loading: false,
