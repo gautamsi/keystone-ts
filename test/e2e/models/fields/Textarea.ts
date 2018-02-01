@@ -1,7 +1,6 @@
-var keystone = require('../../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
-var Textarea = new keystone.List('Textarea', {
+export let Textarea = new Keystone.List('Textarea', {
 	autokey: {
 		path: 'key',
 		from: 'name',
@@ -28,5 +27,3 @@ Textarea.add({
 
 Textarea.defaultColumns = 'name, fieldA, fieldB';
 Textarea.register();
-
-export = Textarea;

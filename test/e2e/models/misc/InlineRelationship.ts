@@ -1,11 +1,9 @@
-var keystone = require('../../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
-var InlineRelationship = new keystone.List('InlineRelationship');
+export let InlineRelationship = new Keystone.List('InlineRelationship', {});
 
 InlineRelationship.add({
-	fieldA: { type: Types.Relationship, ref: 'User', createInline: true },
+    fieldA: { type: Types.Relationship, ref: 'User', createInline: true },
 });
 
 InlineRelationship.register();
-export = InlineRelationship;

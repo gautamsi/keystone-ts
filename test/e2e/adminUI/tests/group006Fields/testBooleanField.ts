@@ -1,5 +1,5 @@
-var fieldTests = require('./commonFieldTestUtils.js');
-var ModelTestConfig = require('../../../modelTestConfig/BooleanModelTestConfig');
+let fieldTests = require('./commonFieldTestUtils');
+let ModelTestConfig = require('../../../modelTestConfig/BooleanModelTestConfig');
 
 export = {
 	before: function (browser) {
@@ -93,6 +93,6 @@ export = {
 				{ name: 'fieldA', input: { value: 'true' }, },
 				{ name: 'fieldB', input: { value: 'false' }, },
 			],
-		})
+		});
 	},
 };

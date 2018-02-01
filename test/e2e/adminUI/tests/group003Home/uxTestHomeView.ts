@@ -1,4 +1,4 @@
-var NameModelTestConfig = require('../../../modelTestConfig/NameModelTestConfig');
+let NameModelTestConfig = require('../../../modelTestConfig/NameModelTestConfig');
 
 export = {
 	before: function (browser) {
@@ -33,7 +33,7 @@ export = {
 				groupName: 'Access',
 				tabListName: 'User',
 				click: 'tabLabel',
-			})
+			});
 	},
 	'Home view should allow an admin to create a new list item such as a user': function (browser) {
 		browser.adminUIApp.gotoHomeScreen();
@@ -100,7 +100,7 @@ export = {
 			icons: [
 				{ row: 1, column: 1 }
 			],
-		})
+		});
 
 		browser.adminUIApp.waitForDeleteConfirmationScreen();
 

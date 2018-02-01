@@ -19,7 +19,7 @@ describe('<Item /> reducer', () => {
             drag: {
                 clonedItems: false,
                 newSortOrder: null,
-                relationshipPath: false,
+                relationshipPath: '',
             },
         });
     });

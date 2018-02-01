@@ -1,8 +1,8 @@
-var fieldTests = require('./commonFieldTestUtils.js');
-var ModelTestConfig = require('../../../modelTestConfig/DatetimeModelTestConfig');
+let fieldTests = require('./commonFieldTestUtils');
+let ModelTestConfig = require('../../../modelTestConfig/DatetimeModelTestConfig');
 
 export = {
-	//'@disabled': true, // TODO:  https://github.com/keystonejs/keystone/issues/3330
+	// '@disabled': true, // TODO:  https://github.com/keystonejs/keystone/issues/3330
 	before: function (browser) {
 		fieldTests.before(browser);
 		browser.adminUIInitialFormScreen.setDefaultModelTestConfig(ModelTestConfig);
@@ -72,10 +72,10 @@ export = {
 	},
 	'Datetime field can be filled via the edit form': function (browser) {
 		/* https://github.com/keystonejs/keystone/issues/3330
-		browser.adminUIItemScreen.fillFieldInputs({ 
+		browser.adminUIItemScreen.fillFieldInputs({
 			fields: [
 			{ name: 'fieldB', input: { date: '2016-01-02', time: '12:00:00 am' },},
-		], 
+		],
 	});
 		*/
 

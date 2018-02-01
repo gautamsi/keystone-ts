@@ -1,12 +1,10 @@
-var keystone = require('../../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
-var ManyRelationship = new keystone.List('ManyRelationship');
+export let ManyRelationship = new Keystone.List('ManyRelationship', {});
 
 ManyRelationship.add({
-	name: { type: String, initial: true, index: true },
-	fieldA: { type: Types.Relationship, ref: 'Text', initial: true, many: true },
+    name: { type: String, initial: true, index: true },
+    fieldA: { type: Types.Relationship, ref: 'Text', initial: true, many: true },
 });
 
 ManyRelationship.register();
-export = ManyRelationship;

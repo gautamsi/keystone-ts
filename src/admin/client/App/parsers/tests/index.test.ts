@@ -1,6 +1,6 @@
 import * as demand from 'must';
 import { columnsParser, sortParser, filtersParser, filterParser, createFilterObject } from '../index';
-import sinon from 'sinon';
+import * as sinon from 'sinon';
 
 describe('<List> query parsers', function () {
     beforeEach(function () {

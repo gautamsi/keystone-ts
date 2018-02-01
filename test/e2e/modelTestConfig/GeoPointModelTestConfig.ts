@@ -1,8 +1,8 @@
-var objectAssign = require('object-assign');
-var fieldTestObjectsPath = require('keystone-nightwatch-e2e').fieldTestObjectsPath;
-var path = require('path');
-var TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
-var GeoPointFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'GeoPointFieldTestObject'));
+let objectAssign = require('object-assign');
+let fieldTestObjectsPath = require('keystone-nightwatch-e2e').fieldTestObjectsPath;
+let path = require('path');
+let TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
+let GeoPointFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'GeoPointFieldTestObject'));
 
 export = function GeoPointModelTestConfig (config) {
 	return {

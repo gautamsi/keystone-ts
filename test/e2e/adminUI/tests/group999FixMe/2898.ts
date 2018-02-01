@@ -42,7 +42,7 @@ export = {
 		});
 
 		// The following assertion fails where is should pass.
-		browser.adminUIInitialFormScreen.assertFlashError("Please enter a valid date and time in the Field A field");
+		browser.adminUIInitialFormScreen.assertFlashError('Please enter a valid date and time in the Field A field');
 
 		browser.adminUIInitialFormScreen.cancel();
 

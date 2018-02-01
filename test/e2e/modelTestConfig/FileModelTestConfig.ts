@@ -1,8 +1,8 @@
-var objectAssign = require('object-assign');
-var fieldTestObjectsPath = require('keystone-nightwatch-e2e').fieldTestObjectsPath;
-var path = require('path');
-var TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
-var FileFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'FileFieldTestObject'));
+let objectAssign = require('object-assign');
+let fieldTestObjectsPath = require('keystone-nightwatch-e2e').fieldTestObjectsPath;
+let path = require('path');
+let TextFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'TextFieldTestObject'));
+let FileFieldTestObject = require(path.resolve(fieldTestObjectsPath, 'FileFieldTestObject'));
 
 export = function FileModelTestConfig (config) {
 	return {

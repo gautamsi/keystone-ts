@@ -30,7 +30,7 @@ export class List<T> {
     relationships: {};
     mappings: { name: any; createdBy: any; createdOn: any; modifiedBy: any; modifiedOn: any; };
     fieldsArray: any[];
-    fields: {};
+    fields: any;
     underscoreMethods: {};
     uiElements: any[];
     schemaFields: any[];

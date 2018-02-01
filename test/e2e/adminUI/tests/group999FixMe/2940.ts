@@ -57,7 +57,7 @@ export = {
 			listName: 'SourceRelationship',
 			fields: {
 				'fieldA': {value: 'Test Target 1'},
-				//'fieldA': {option: 'option1'},
+				// 'fieldA': {option: 'option1'},
 			},
 		});
 		browser.adminUIItemScreen.save();

@@ -1,4 +1,4 @@
-var ModelTestConfig = require('../../../modelTestConfig/NameModelTestConfig');
+let ModelTestConfig = require('../../../modelTestConfig/NameModelTestConfig');
 
 export = {
 	before: function (browser) {

@@ -1,4 +1,4 @@
-var ModelTestConfig = require('../../../modelTestConfig/UserModelTestConfig');
+let ModelTestConfig = require('../../../modelTestConfig/UserModelTestConfig');
 
 export = {
 	before: function (browser) {
@@ -57,8 +57,8 @@ export = {
 		browser.adminUIItemScreen.assertElementIsVisible({ element: '@metaCreatedAtValue' });
 	},
 	// TODO:  The following are only testable with lists updated via a user session;
-	//		  Currently the admin User is not created via a user session.
-	//		  These assertions should be done by the fields!
+	//        Currently the admin User is not created via a user session.
+	//        These assertions should be done by the fields!
 	// 'Item screen should show an item meta Created By label': function (browser) {
 	// 	browser.adminUIItemScreen.assertElementIsVisible({ element: '@metaCreatedByLabel'});
 	// },

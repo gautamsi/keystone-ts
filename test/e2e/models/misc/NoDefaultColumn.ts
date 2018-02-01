@@ -1,20 +1,17 @@
-var keystone = require('../../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
-var NoDefaultColumn = new keystone.List('NoDefaultColumn', {
-	track: true,
+export let NoDefaultColumn = new Keystone.List('NoDefaultColumn', {
+    track: true,
 });
 
 NoDefaultColumn.add({
-	fieldA: {
-		type: Types.Text,
-		initial: true,
-	},
-	fieldB: {
-		type: Types.Text,
-	},
+    fieldA: {
+        type: Types.Text,
+        initial: true,
+    },
+    fieldB: {
+        type: Types.Text,
+    },
 });
 
 NoDefaultColumn.register();
-
-export = NoDefaultColumn;

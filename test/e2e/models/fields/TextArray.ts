@@ -1,7 +1,6 @@
-var keystone = require('../../../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
-var TextArray = new keystone.List('TextArray', {
+export let TextArray = new Keystone.List('TextArray', {
 	autokey: {
 		path: 'key',
 		from: 'name',
@@ -27,5 +26,3 @@ TextArray.add({
 
 TextArray.defaultColumns = 'name, fieldA, fieldB';
 TextArray.register();
-
-export = TextArray;

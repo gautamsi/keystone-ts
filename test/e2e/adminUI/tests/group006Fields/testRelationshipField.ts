@@ -1,6 +1,6 @@
-var fieldTests = require('./commonFieldTestUtils.js');
-var ModelTestConfig = require('../../../modelTestConfig/RelationshipModelTestConfig');
-var UserModelTestConfig = require('../../../modelTestConfig/UserModelTestConfig');
+let fieldTests = require('./commonFieldTestUtils');
+let ModelTestConfig = require('../../../modelTestConfig/RelationshipModelTestConfig');
+let UserModelTestConfig = require('../../../modelTestConfig/UserModelTestConfig');
 
 export = {
 	before: function (browser) {
@@ -60,7 +60,7 @@ export = {
 				{ name: 'name', input: { value: 'Relationship Field Test 1' }, },
 				{ name: 'fieldA', input: { value: 'e2e member' }, },
 			],
-		})
+		});
 	},
 	'Relationship field can be filled via the edit form': function (browser) {
 		browser.adminUIItemScreen.fillFieldInputs({
@@ -80,7 +80,7 @@ export = {
 				{ name: 'fieldA', input: { value: 'e2e member' }, },
 				{ name: 'fieldB', input: { value: 'e2e user' }, },
 			],
-		})
+		});
 	},
 	'Clicking on the relationship navigates to the relavent item': function (browser) {
 		browser.adminUIApp.openList({ section: 'fields', list: 'Relationship' });

@@ -1,8 +1,8 @@
-var keystone = require('../../index.js');
-var Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../src/index';
+
 
 // Simple model
-var DependsOn = new keystone.List('DependsOn', {
+let DependsOn = new Keystone.List('DependsOn', {
     autokey: { path: 'slug', from: 'title', unique: true },
 });
 

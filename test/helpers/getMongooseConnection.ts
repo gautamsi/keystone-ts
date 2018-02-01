@@ -1,3 +1,3 @@
-var mongoose = require('mongoose');
+import * as mongoose from 'mongoose';
 
-export = mongoose.connect('mongodb://localhost/test');
+export default mongoose.connect('mongodb://localhost/test');

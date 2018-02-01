@@ -1,11 +1,9 @@
-var keystone = require('../../../index.js');
-var User = require('./User');
+import { Keystone, List } from '../../../src/index';
+import { User } from './User';
 
-var Member = new keystone.List('Member', {
-	inherits: User,
-	track: true,
+export let Member = new Keystone.List('Member', {
+    inherits: User,
+    track: true,
 });
 
 Member.register();
-
-export = Member;

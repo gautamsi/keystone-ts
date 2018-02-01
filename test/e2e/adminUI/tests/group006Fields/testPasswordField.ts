@@ -1,5 +1,5 @@
-var fieldTests = require('./commonFieldTestUtils.js');
-var ModelTestConfig = require('../../../modelTestConfig/PasswordModelTestConfig');
+let fieldTests = require('./commonFieldTestUtils');
+let ModelTestConfig = require('../../../modelTestConfig/PasswordModelTestConfig');
 
 export = {
 	// '@disabled': true,  // TODO: enable after https://github.com/keystonejs/keystone/issues/3428 is fixed
@@ -65,7 +65,7 @@ export = {
 			fields: [
 				{ name: 'name', input: { value: 'Password Field Test 1' }, },
 			],
-		})
+		});
 	},
 	'Password field can be filled via the edit form': function (browser) {
 		browser.adminUIItemScreen.clickFieldUI({
@@ -104,6 +104,6 @@ export = {
 			fields: [
 				{ name: 'name', input: { value: 'Password Field Test 1' }, },
 			],
-		})
+		});
 	},
 };
