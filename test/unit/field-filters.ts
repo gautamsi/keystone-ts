@@ -17,7 +17,6 @@ function stringifyValue(value) {
 
 types.forEach(function (name) {
     let filtersTestPath = typesLoc + '/' + name + '/test/filters.ts';
-    console.log(filtersTestPath);
     if (!fs.existsSync(filtersTestPath)) return;
 
     let listKey = name + 'FiltersTest';

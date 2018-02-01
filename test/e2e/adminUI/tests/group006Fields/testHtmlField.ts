@@ -1,4 +1,4 @@
-let fieldTests = require('./commonFieldTestUtils.js');
+let fieldTests = require('./commonFieldTestUtils');
 let ModelTestConfig = require('../../../modelTestConfig/HtmlModelTestConfig');
 
 export = {

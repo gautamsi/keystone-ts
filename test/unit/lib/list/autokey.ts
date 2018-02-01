@@ -1,8 +1,9 @@
 import { keystone } from '../../../../src/index';
 import * as demand from 'must';
 import * as utils from 'keystone-utils';
+import mongoose from '../../../helpers/getMongooseConnection';
 
-keystone.mongoose = require('../../../helpers/getMongooseConnection.js');
+keystone.mongoose = mongoose;
 
 keystone.import('../models');
 

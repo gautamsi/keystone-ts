@@ -1,17 +1,16 @@
-let keystone = require('../../../../index');
-let Types = keystone.Field.Types;
+import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
-let SourceRelationship = new keystone.List('SourceRelationship');
+let SourceRelationship = new Keystone.List('SourceRelationship', {});
 
 SourceRelationship.add({
-	name: {
-		type: String,
-		initial: true,
-	},
-	fieldA: {
-		type: Types.Relationship,
-		ref: 'TargetRelationship'
-	},
+    name: {
+        type: String,
+        initial: true,
+    },
+    fieldA: {
+        type: Types.Relationship,
+        ref: 'TargetRelationship'
+    },
 });
 
 SourceRelationship.register();

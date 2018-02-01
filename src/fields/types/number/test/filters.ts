@@ -1,4 +1,4 @@
-const demand = require('must');
+import * as demand from 'must';
 
 export const initList = function (List) {
 	List.add({

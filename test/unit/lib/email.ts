@@ -13,7 +13,7 @@ describe('Email', function () {
         // Make the tests work no matter if keystone-email is installed or not, spying on the mocked
         // keystone-email
         keystoneEmail = sinon.spy();
-        Email = proxyquire('../../../lib/email', { 'keystone-email': keystoneEmail });
+        Email = proxyquire('../../../src/lib/email', { 'keystone-email': keystoneEmail });
     });
 
 	/**

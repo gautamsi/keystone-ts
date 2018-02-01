@@ -4,7 +4,7 @@ import * as path from 'path';
 
 keystone.init({});
 
-let typesLoc = path.resolve('fields/types');
+let typesLoc = path.resolve('src/fields/types');
 let types = fs.readdirSync(typesLoc);
 
 types.forEach(function (name) {
