@@ -53,4 +53,4 @@ export const keystone = Keystone.instance;
 (keystone as any).Field.Types = FieldTypes;
 export { Keystone };
 
-export { FieldTypes, List };
+export { FieldTypes, List, View };
