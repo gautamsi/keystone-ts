@@ -2,7 +2,7 @@ import * as demand from 'must';
 import * as request from 'supertest';
 import * as methodOverride from 'method-override';
 import * as bodyParser from 'body-parser';
-import { Keystone } from '../../../src/index';
+import { keystone, Keystone, View } from '../../../src/index';
 
 let getApp = function () {
     let app = keystone.express;
@@ -21,7 +21,7 @@ describe('Keystone.View', function () {
             let app = getApp();
             app.get('/', function (req, res) {
                 let view = new Keystone.View(req, res);
-                view.must.be.an.instanceof(keystone.View);
+                view.must.be.an.instanceof(Keystone.View);
                 res.send('OK');
             });
             request(app)
@@ -34,7 +34,7 @@ describe('Keystone.View', function () {
         it('must call the callback function', function (done) {
             let app = getApp();
             app.get('/', function (req, res) {
-                let view = new keystone.View(req, res);
+                let view = new Keystone.View(req, res);
                 view.render(function () {
                     res.send('OK');
                 });
@@ -49,7 +49,7 @@ describe('Keystone.View', function () {
         it('must pass (err, req, res) to the callback', function (done) {
             let app = getApp();
             app.get('/', function (req, res) {
-                let view = new keystone.View(req, res);
+                let view = new Keystone.View(req, res);
                 view.render(function (err, req2, res2) {
                     demand(err).not.exist();
                     req2.must.equal(req);
@@ -68,7 +68,7 @@ describe('Keystone.View', function () {
         it('must call init methods first', function (done) {
             let app = getApp();
             app.get('/', function (req, res) {
-                let view = new keystone.View(req, res);
+                let view = new Keystone.View(req, res);
                 let status = 'NOT OK';
                 view.on('init', function (next) {
                     status = 'OK';
@@ -86,7 +86,7 @@ describe('Keystone.View', function () {
         function getApp_getAndPost() {
             let app = getApp();
             app.all('/', function (req, res) {
-                let view = new keystone.View(req, res);
+                let view = new View(req, res);
                 let status = 'OK';
                 view.on('get', function (next) {
                     status = 'OK GET';
@@ -118,7 +118,7 @@ describe('Keystone.View', function () {
         function getApp_conditionalGet() {
             let app = getApp();
             app.get('/', function (req, res) {
-                let view = new keystone.View(req, res);
+                let view = new Keystone.View(req, res);
                 let status = 'OK';
                 view.on('get', { test: 'yes' }, function (next) {
                     status = 'OK GET';
@@ -146,7 +146,7 @@ describe('Keystone.View', function () {
         function getApp_conditionalPostValue() {
             let app = getApp();
             app.post('/', function (req, res) {
-                let view = new keystone.View(req, res);
+                let view = new Keystone.View(req, res);
                 let status = 'OK';
                 view.on('post', { test: 'yes' }, function (next) {
                     status = 'OK POST';
@@ -176,7 +176,7 @@ describe('Keystone.View', function () {
         function getApp_conditionalPostTruthy() {
             let app = getApp();
             app.post('/', function (req, res) {
-                let view = new keystone.View(req, res);
+                let view = new Keystone.View(req, res);
                 let status = 'OK';
                 view.on('post', { test: true }, function (next) {
                     status = 'OK POST';
@@ -206,7 +206,7 @@ describe('Keystone.View', function () {
             let app = getApp();
             app.get('/', function (req, res) {
                 req.ext = { prop: 'value' };
-                let view = new keystone.View(req, res);
+                let view = new Keystone.View(req, res);
                 let status = 'NOT OK';
                 view.on({ 'ext.prop': 'value' }, function (next) {
                     status = 'OK';
