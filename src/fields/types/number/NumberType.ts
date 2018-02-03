@@ -42,7 +42,7 @@ export class NumberType extends FieldTypeBase {
     validateRequiredInput(item, data, callback) {
         const value = this.getValueFromData(data);
         let result = !!(value || typeof value === 'number');
-        if (value === undefined && item.get(this.path)) {
+        if (value === undefined && typeof item.get(this.path) === 'number') {
             result = true;
         }
         utils.defer(callback, result);

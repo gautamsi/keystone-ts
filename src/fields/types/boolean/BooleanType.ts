@@ -41,7 +41,7 @@ export class BooleanType extends FieldTypeBase {
 
     validateRequiredInput(item, data, callback) {
         const value = this.getValueFromData(data);
-        const result = (value && value !== 'false') || item.get(this.path) ? true : false;
+        const result = (value && value !== 'false') || typeof item.get(this.path) === 'boolean' ? true : false;
         utils.defer(callback, result);
     }
 
