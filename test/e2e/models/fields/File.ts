@@ -1,4 +1,4 @@
-import { Keystone, FieldTypes as Types, List } from '../../../../src/index';
+import { keystone, Keystone, FieldTypes as Types, List } from '../../../../src/index';
 
 export let File = new Keystone.List('File', {
     autokey: {
@@ -9,8 +9,8 @@ export let File = new Keystone.List('File', {
     track: true,
 });
 
-let localStorage = new keystone.Storage({
-    adapter: keystone.Storage.Adapters.FS,
+let localStorage = new Keystone.Storage({
+    adapter: Keystone.Storage.Adapters.FS,
     fs: {
         path: 'data/files',
         publicPath: '/files',

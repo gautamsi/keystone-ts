@@ -1,5 +1,5 @@
 import * as async from 'async';
-import { keystone } from '../..';
+import { keystone } from '../../src/index';
 import * as ReactEngine from 'react-engine';
 const engine = ReactEngine.server.create({});
 import * as request from 'superagent';
