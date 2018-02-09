@@ -9,8 +9,8 @@ import * as path from 'path';
 import * as keystoneNightwatchE2e from 'keystone-nightwatch-e2e';
 
 // Set app-specific env for nightwatch session
-process.env.KNE_TEST_PATHS = 'test/e2e/adminUI/tests';
-process.env.KNE_EXCLUDE_TEST_PATHS = 'test/e2e/adminUI/tests/group006Fields/commonFieldTestUtils.js,test/e2e/adminUI/tests/group999FixMe/*';
+process.env.KNE_TEST_PATHS = 'test-dist/test/e2e/adminUI/tests';
+process.env.KNE_EXCLUDE_TEST_PATHS = 'test-dist/test/e2e/adminUI/tests/group006Fields/commonFieldTestUtils.js,test-dist/test/e2e/adminUI/tests/group999FixMe/*';
 
 // determine the mongo uri and database name
 let dbName = '/e2e' + (process.env.KEYSTONEJS_PORT || 3000);
@@ -83,7 +83,7 @@ function runKeystone(cb) {
         'favicon': 'adminuiCustom/favicon.ico',
         'less': 'frontend',
         'views': 'frontend',
-        'view engine': 'jade',
+        'view engine': 'pug',
 
         'auto update': true,
         'session': true,

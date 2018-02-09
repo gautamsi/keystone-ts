@@ -41,12 +41,12 @@ Thumbs.db
 dist/**/*
 bundles
 docs/_dist
-admin/public/styles/auth.css
-admin/public/styles/auth.min.css
-admin/public/styles/keystone.css
-admin/public/styles/keystone.min.css
+src/admin/public/styles/auth.css
+src/admin/public/styles/auth.min.css
+src/admin/public/styles/keystone.css
+src/admin/public/styles/keystone.min.css
 reports
 
 test/e2e/drivers/*
-
+test-dist/
 package-lock.json

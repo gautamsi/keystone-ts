@@ -3,11 +3,10 @@
         "module": "commonjs",
         "target": "es6",
         "noImplicitAny": false,
-        "declaration": true,
         "allowUnreachableCode": true,
         "moduleResolution": "node",
         "sourceMap": false,
-        "outDir": "dist",
+        "outDir": "test-dist",
         "baseUrl": ".",
         "skipLibCheck": true,
         "jsx": "react",
@@ -23,11 +22,7 @@
     },
     "include": [
         "src/**/*.tsx",
-        "src/**/*.ts"
-    ],
-    "exclude": [
-        "src/**/*.test.ts*",
-        "test/**/*"
-        
+        "src/**/*.ts",
+        "test/**/*.ts"
     ]
 }
