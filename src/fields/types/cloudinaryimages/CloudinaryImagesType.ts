@@ -1,7 +1,7 @@
-import * as _ from 'lodash';
 import * as async from 'async';
-import { FieldTypeBase } from '../FieldTypeBase';
+import * as _ from 'lodash';
 import { keystone } from '../../../keystone';
+import { FieldTypeBase } from '../FieldTypeBase';
 
 function getEmptyValue() {
     return {
@@ -20,6 +20,29 @@ function getEmptyValue() {
 function truthy(value) {
     return value;
 }
+
+/*
+* Uses a before and after snapshot of the images array to find out what images are no longer included
+*/
+function cleanUp(oldValues, newValues) {
+    const cloudinary = require('cloudinary');
+    let oldvalIds = oldValues.map(function (val) {
+        return val.public_id;
+    });
+    let newValIds = newValues.map(function (val) {
+        return val.public_id;
+    });
+
+    let removedItemsCloudinaryIds = _.difference(oldvalIds, newValIds);
+
+    // We never wait to return on the images being removed
+    async.map(removedItemsCloudinaryIds, function (id, next) {
+        cloudinary.uploader.destroy(id, function (result) {
+            next();
+        });
+    });
+}
+
 
 /**
  * CloudinaryImages FieldType Constructor
@@ -256,6 +279,7 @@ export class CloudinaryImagesType extends FieldTypeBase {
         const cloudinary = require('cloudinary');
         const field = this;
         let values = this.getValueFromData(data);
+        let oldValues = item.get(this.path);
 
         // TODO: This logic needs to block uploading of files from the data argument,
         // see CloudinaryImage for a reference on how it should be implemented
@@ -263,6 +287,9 @@ export class CloudinaryImagesType extends FieldTypeBase {
         // Early exit path: reset value when falsy, or bail if no value was provided
         if (!values) {
             if (values !== undefined) {
+                if (field.options.autoCleanup) {
+                    cleanUp(oldValues, []);
+                }
                 item.set(field.path, []);
             }
             return process.nextTick(callback);
@@ -349,7 +376,6 @@ export class CloudinaryImagesType extends FieldTypeBase {
                         public_id: value.originalname.substring(0, value.originalname.lastIndexOf('.')),
                     });
                 }
-                // TODO: implement autoCleanup; should delete existing images before uploading
                 cloudinary.uploader.upload(value.path, function (result) {
                     if (result.error) {
                         next(result.error);
@@ -364,6 +390,7 @@ export class CloudinaryImagesType extends FieldTypeBase {
                 return next();
             }
         }, function (err, result) {
+            cleanUp(oldValues, values);
             if (err) return callback(err);
             result = result.filter(truthy);
             item.set(field.path, result);

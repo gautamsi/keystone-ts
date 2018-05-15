@@ -13,6 +13,9 @@ export class MoneyType extends NumberType {
 
     constructor(list, path, options) {
         super(list, path, options);
+        if (options.currency) {
+            throw new Error('The currency option from money has been deprecated. Provide a formatString instead');
+        }
     }
     protected init() {
         super.init();
@@ -32,14 +35,6 @@ export class MoneyType extends NumberType {
      * Formats the field value
      */
     format(item, format) {
-        if (this.currency) {
-            try {
-                numeral.language(this.currency, require('numeral/languages/' + this.currency));
-                numeral.language(this.currency);
-            } catch (err) {
-                throw new Error('FieldType.Money: options.currency failed to load.');
-            }
-        }
         if (format || this._formatString) {
             return (typeof item.get(this.path) === 'number') ? numeral(item.get(this.path)).format(format || this._formatString) : '';
         } else {

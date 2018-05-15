@@ -119,7 +119,8 @@ See the [KeystoneJS database documentation](http://keystonejs.com/docs/database)
 Keystone's field types include:
 
 *	[Boolean](http://keystonejs.com/docs/database/#fieldtypes-boolean)
-*	[Color](http://keystonejs.com/docs/database/#fieldtypes-color)
+*	[Code](http://keystonejs.com/docs/database/#fieldtypes-code)
+*   [Color](http://keystonejs.com/docs/database/#fieldtypes-color)
 *	[Date](http://keystonejs.com/docs/database/#fieldtypes-date)
 *	[Datetime](http://keystonejs.com/docs/database/#fieldtypes-datetime)
 *	[Email](http://keystonejs.com/docs/database/#fieldtypes-email)

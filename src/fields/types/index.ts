@@ -60,3 +60,33 @@ export const FieldTypes = {
     TextArray: TextArrayType,
     Url: UrlType
 };
+
+export {
+    BooleanType,
+    CloudinaryImageType,
+    CloudinaryImagesType,
+    CodeType,
+    ColorType,
+    DateType,
+    DateArrayType,
+    DatetimeType,
+    EmailType,
+    EmbedlyType,
+    FileType,
+    GeoPointType,
+    HtmlType,
+    KeyType,
+    LocationType,
+    MarkdownType,
+    MoneyType,
+    NameType,
+    NumberType,
+    NumberArrayType,
+    PasswordType,
+    RelationshipType,
+    SelectType,
+    TextType,
+    TextareaType,
+    TextArrayType,
+    UrlType
+};

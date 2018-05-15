@@ -401,8 +401,8 @@ export class CloudinaryImageType extends FieldTypeBase {
         let value = this.getValueFromData(data);
         let uploadedFile;
 
-        // Providing the string "remove" removes the file and resets the field
-        if (value === 'remove') {
+        // Providing the string "remove" or "delete" removes the file and resets the field
+        if (value === 'remove' || value === 'delete') {
             cloudinary.uploader.destroy(item.get(field.paths.public_id), function (result) {
                 if (result.error) {
                     callback(result.error);
@@ -458,7 +458,6 @@ export class CloudinaryImageType extends FieldTypeBase {
                     filename = sanitize(filename);
                     uploadOptions.public_id = trimSupportedFileExtensions(filename);
                 }
-                // TODO: implement autoCleanup; should delete existing images before uploading
                 cloudinary.uploader.upload(uploadedFile.path, function (result) {
                     if (result.error) {
                         return callback(result.error);

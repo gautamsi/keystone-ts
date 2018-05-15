@@ -1,5 +1,5 @@
 import { validate } from '../../../lib/security/csrf';
-import * as knox from 'knox';
+import * as knox from 'knox-s3';
 
 /*
 TODO: Needs Review and Spec

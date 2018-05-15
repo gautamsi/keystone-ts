@@ -1370,7 +1370,7 @@ export class List<T> {
 
         query.exec = (callback) => {
             countQuery.count((err, count) => {
-                if (err) callback(err);
+                if (err) return callback(err);
 
                 query.find().limit(resultsPerPage).skip(skip);
 

@@ -13,7 +13,7 @@ export class NumberColumn extends React.Component<Props> {
 
     renderValue() {
         const value = this.props.data.fields[this.props.col.path];
-        if (!value || isNaN(value)) return null;
+		if (value === undefined || isNaN(value)) return null;
 
         const formattedValue = (this.props.col.path === 'money') ? numeral(value).format('$0,0.00') : value;
 
