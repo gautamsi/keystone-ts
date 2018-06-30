@@ -1,6 +1,6 @@
 // TODO:  Currently the tests here only fill in the name field of the user list form.  That's because the other
-//		  fields in the user list do not have corresponding page object support, yet.  When they do revisit filling
-//		  all the fields.
+//        fields in the user list do not have corresponding page object support, yet.  When they do revisit filling
+//        all the fields.
 let ModelTestConfig = require('../../../modelTestConfig/UserModelTestConfig');
 
 export = {
@@ -38,27 +38,6 @@ export = {
 	after: function (browser) {
 		browser.adminUIApp.signout();
 		browser.end();
-	},
-	'Item screen should allow creating an item of the same type': function (browser) {
-		browser.adminUIItemScreen.new();
-
-		browser.adminUIApp.waitForInitialFormScreen();
-
-		browser.adminUIInitialFormScreen.fillFieldInputs({
-			fields: [
-				{ name: 'name', input: { firstName: 'First 1', lastName: 'Last 1' }, },
-			],
-		});
-
-		browser.adminUIInitialFormScreen.assertFieldInputs({
-			fields: [
-				{ name: 'name', input: { firstName: 'First 1', lastName: 'Last 1' }, },
-			],
-		});
-
-		browser.adminUIInitialFormScreen.save();
-		browser.adminUIApp.waitForItemScreen();
-
 	},
 	'Item screen should allow saving an item without changes': function (browser) {
 		browser.adminUIItemScreen.save();

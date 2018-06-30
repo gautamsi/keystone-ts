@@ -17,7 +17,13 @@ describe('safeRequire', function () {
 
         it('throws an error highlighting that the library is not installed', function () {
             try {
-                safeRequire('foobarbaz', 'foobarbaz');
+                // suppressing console log output
+				const backupLog = console.error;
+				console.error = () => null;
+
+				safeRequire('foobarbaz', 'foobarbaz');
+
+				console.error = backupLog;
             } catch (e) {
                 demand(e.message).contain('foobarbaz');
             }

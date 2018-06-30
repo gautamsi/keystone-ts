@@ -35,7 +35,7 @@ export const testFilters = function (List, filter) {
             },
         }, 'bool', function (results) {
             demand(results).eql([
-                undefined,
+                false,
                 false,
             ]);
             done();

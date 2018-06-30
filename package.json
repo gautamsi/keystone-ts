@@ -1,6 +1,7 @@
 {
     "name": "keystone",
-    "version": "5.1.1",
+    "version": "5.1.2",
+    "keystone-version": "4.0.0-rc.0",
     "description": "Web Application Framework and Admin GUI / Content Management System built on Express.js and Mongoose",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -199,7 +200,7 @@
         "test-build": "cross-env NODE_ENV=production ts-node build.ts | uglifyjs -mc warnings=false,screw_ie8=true -b beautify=false,semicolons=true > ./test-dist/src/admin/public/js/packages.js",
         "test-prep": "ts-node test-prep && npm run test-build && tsc -p tsconfig-test.json",
         "test": "mocha && mocha --opts test/mocha-admin.opts",
-        "test-all": "npm test && npm run test-e2e-bg",
+        "test-all": "npm test",
         "test-unit": "ts-node test/pretest && mocha --opts test/mocha.opts",
         "test-admin": "mocha --opts test/mocha-admin.opts",
         "test-e2e": "node test-dist/test/e2e/server --env default",

@@ -182,6 +182,12 @@ describe('<List /> query param sagas', function () {
         });
 
         describe('If the query and the cached query are the same', function () {
+            // before(() => { // ref: not sure how to add global for ts version, still added this for code completion
+			// 	global.Keystone = {
+			// 		adminPath: '/keystone',
+			// 	};
+            // });
+
             it('puts a QUERY HAS NOT CHANGED action to the store', function () {
                 const generator = evalQueryParams();
                 const pathname = '/keystone/Dictators';

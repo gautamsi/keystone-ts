@@ -22,9 +22,11 @@ export class BooleanType extends FieldTypeBase {
     }
     static properName = 'Boolean';
 
-    defaults: { default: boolean } = {
-        default: false,
-    };
+    get defaults(): { default: boolean } { // ref: must be get accessor rather than simple property, accessed during constructor super call
+        return {
+            default: false,
+        };
+    }
 
     validateInput(data, callback) {
         const value = this.getValueFromData(data);
@@ -41,7 +43,9 @@ export class BooleanType extends FieldTypeBase {
 
     validateRequiredInput(item, data, callback) {
         const value = this.getValueFromData(data);
-        const result = (value && value !== 'false') || typeof item.get(this.path) === 'boolean' ? true : false;
+        const result = value && value !== 'false'
+			? true
+			: false;
         utils.defer(callback, result);
     }
 

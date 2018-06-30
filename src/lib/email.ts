@@ -75,6 +75,7 @@ export class Email {
         }
 
         // Try to use the keystone-email package and throw if it hasn't been installed
+        // Can't use our global safeRequire here or none of the tests run
         const KeystoneEmail = safeRequire('keystone-email', 'email');
 
         // Create the new email instance with the template name and options

@@ -9,6 +9,7 @@ import {
     InputGroupSection as Section,
 } from '../../../admin/client/App/elemental';
 import { transparentSwatch } from './transparent-swatch';
+import { coloredSwatch } from './colored-swatch';
 import { theme } from '../../../admin/client/theme';
 
 export interface Props extends FieldPropsBase {
@@ -62,7 +63,8 @@ export class ColorField extends FieldBase<Props> {
         return (this.props.value) ? (
             <span
                 className={className}
-                style={{ backgroundColor: this.props.value }}
+                style={{ color: this.props.value }}
+				dangerouslySetInnerHTML={{ __html: coloredSwatch }}
             />
         ) : (
                 <span
@@ -141,9 +143,10 @@ const classes = {
     },
     swatch: {
         borderRadius: 1,
-        boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.1)',
-        display: 'block',
-        height: '100%',
-        width: '100%',
+        boxShadow: '0 0 0 1px rgba(0,0,0,0.1)',
+		display: 'block',
+		' svg': {
+			display: 'block',
+		},
     },
 };

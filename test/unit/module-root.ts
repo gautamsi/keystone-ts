@@ -27,7 +27,7 @@ describe('Keystone "module root" setting', function () {
         let customPath = '../..';
 
         before(function () {
-            keystone.set('module root', customPath);
+            keystone.set('module root', customPath + '/..'); // ref: needed to add '/..' otherwise it does not use it correctly.
         });
 
         it('should return the custom configured path', function () {

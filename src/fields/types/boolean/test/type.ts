@@ -98,7 +98,7 @@ export const testFieldType = function (List: List<{ bool, indented }>) {
 
         it('should be false when passed undefined', function (done) {
             const testItem = new List.model();
-            List.fields.bool.updateItem(testItem, { bool: undefined }, function () {
+            List.fields.bool.updateItem(testItem, {}, function () {
                 demand(testItem.bool).be.false();
                 done();
             });

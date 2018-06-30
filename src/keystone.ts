@@ -306,7 +306,7 @@ export class Keystone {
                 async.each(lists, function (key, doneList) {
 
                     const list = keystone.list(key);
-                    const relationships = _.filter(list.fields, { type: 'relationship' });
+                    const relationships = _.filter(list.fields, { type: 'Relationship' });
 
                     if (!list || !relationships.length) {
                         return doneList();
