@@ -3,7 +3,7 @@ import * as demand from 'must';
 import * as utils from 'keystone-utils';
 import mongoose from '../../../helpers/getMongooseConnection';
 
-keystone.mongoose = mongoose;
+keystone.mongoose = <any>mongoose;
 
 keystone.import('../models');
 

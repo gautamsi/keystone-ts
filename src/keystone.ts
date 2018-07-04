@@ -54,6 +54,8 @@ let moduleRoot = (function (_rootPath) {
  * Keystone Class
  */
 export class Keystone {
+    httpServer: any;
+    httpsServer: any;
     sessionStorePromise: any;
     // session: any;
     expressSession: express.RequestHandler;
@@ -68,7 +70,7 @@ export class Keystone {
     _redirects: any = {};
 
     // expose express
-    express: express.Application = express();
+    express: typeof express = express;
     mongoose: mongoose.Mongoose;
     middleware: any;
     callHook: Function;

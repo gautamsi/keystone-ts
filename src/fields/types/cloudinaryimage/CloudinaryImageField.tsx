@@ -27,6 +27,7 @@ const buildInitialState = (props) => ({
 
 export interface Props extends FieldPropsBase {
     secure?: boolean;
+    autoCleanup?:boolean;
 }
 
 export class CloudinaryImageField extends FieldBase<Props> {

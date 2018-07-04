@@ -24,7 +24,7 @@ describe('List "track" option', function () {
 
         // define user model
         keystone.set('user model', userModelName);
-        User = keystone.list(userModelName);
+        User = new Keystone.List(userModelName, {});
         User.add({
             name: { type: String, required: true, index: true }
         });
@@ -200,10 +200,10 @@ describe('List "track" option', function () {
                 demand(Test.field('createdBy')).be.an.object();
                 demand(Test.field('updatedAt')).be.an.object();
                 demand(Test.field('updatedBy')).be.an.object();
-                demand(Test.field('createdAt').type).be.equal('datetime');
-                demand(Test.field('createdBy').type).be.equal('relationship');
-                demand(Test.field('updatedAt').type).be.equal('datetime');
-                demand(Test.field('updatedBy').type).be.equal('relationship');
+                demand(Test.field('createdAt').type).be.equal('Datetime');
+                demand(Test.field('createdBy').type).be.equal('Relationship');
+                demand(Test.field('updatedAt').type).be.equal('Datetime');
+                demand(Test.field('updatedBy').type).be.equal('Relationship');
             });
 
             it('should updated all fields when adding a document', function (done) {
@@ -283,10 +283,10 @@ describe('List "track" option', function () {
                 demand(Test.field('updatedAt')).be.an.object();
                 demand(Test.field('updatedBy')).be.an.object();
 
-                demand(Test.field('createdAt').type).be.equal('datetime');
-                demand(Test.field('createdBy').type).be.equal('relationship');
-                demand(Test.field('updatedAt').type).be.equal('datetime');
-                demand(Test.field('updatedBy').type).be.equal('relationship');
+                demand(Test.field('createdAt').type).be.equal('Datetime');
+                demand(Test.field('createdBy').type).be.equal('Relationship');
+                demand(Test.field('updatedAt').type).be.equal('Datetime');
+                demand(Test.field('updatedBy').type).be.equal('Relationship');
             });
 
             it('should updated all fields when adding a document', function (done) {
@@ -376,8 +376,8 @@ describe('List "track" option', function () {
                 demand(Test.field('updatedAt')).be.an.object();
                 demand(Test.field('updatedBy')).be.an.object();
 
-                demand(Test.field('updatedAt').type).be.equal('datetime');
-                demand(Test.field('updatedBy').type).be.equal('relationship');
+                demand(Test.field('updatedAt').type).be.equal('Datetime');
+                demand(Test.field('updatedBy').type).be.equal('Relationship');
             });
 
             it('should updated all enabled fields when adding a document', function (done) {
@@ -453,8 +453,8 @@ describe('List "track" option', function () {
                 demand(Test.field('updatedAt')).be.an.object();
                 demand(Test.field('updatedBy')).be.an.object();
 
-                demand(Test.field('updatedAt').type).be.equal('datetime');
-                demand(Test.field('updatedBy').type).be.equal('relationship');
+                demand(Test.field('updatedAt').type).be.equal('Datetime');
+                demand(Test.field('updatedBy').type).be.equal('Relationship');
             });
 
             it('should updated all enabled fields when adding a document', function (done) {
@@ -547,10 +547,10 @@ describe('List "track" option', function () {
                 demand(Test.field('customUpdatedAt')).be.an.object();
                 demand(Test.field('customUpdatedBy')).be.an.object();
 
-                demand(Test.field('customCreatedAt').type).be.equal('datetime');
-                demand(Test.field('customCreatedBy').type).be.equal('relationship');
-                demand(Test.field('customUpdatedAt').type).be.equal('datetime');
-                demand(Test.field('customUpdatedBy').type).be.equal('relationship');
+                demand(Test.field('customCreatedAt').type).be.equal('Datetime');
+                demand(Test.field('customCreatedBy').type).be.equal('Relationship');
+                demand(Test.field('customUpdatedAt').type).be.equal('Datetime');
+                demand(Test.field('customUpdatedBy').type).be.equal('Relationship');
             });
 
             it('should updated all custom fields when adding a document', function (done) {
@@ -642,10 +642,10 @@ describe('List "track" option', function () {
                 demand(Test.field('customUpdatedAt')).be.an.object();
                 demand(Test.field('customUpdatedBy')).be.an.object();
 
-                demand(Test.field('customCreatedAt').type).be.equal('datetime');
-                demand(Test.field('customCreatedBy').type).be.equal('relationship');
-                demand(Test.field('customUpdatedAt').type).be.equal('datetime');
-                demand(Test.field('customUpdatedBy').type).be.equal('relationship');
+                demand(Test.field('customCreatedAt').type).be.equal('Datetime');
+                demand(Test.field('customCreatedBy').type).be.equal('Relationship');
+                demand(Test.field('customUpdatedAt').type).be.equal('Datetime');
+                demand(Test.field('customUpdatedBy').type).be.equal('Relationship');
             });
 
             it('should updated all custom fields when adding a document', function (done) {

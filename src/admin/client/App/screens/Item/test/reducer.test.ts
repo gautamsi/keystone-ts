@@ -8,6 +8,11 @@ import {
 } from '../constants';
 
 describe('<Item /> reducer', () => {
+    before(() => {
+        (global as any).keystone = {
+            item: undefined,
+        };
+    });
     it('should return the initial state', () => {
         demand(itemReducer(undefined, {})).eql({
             data: null,

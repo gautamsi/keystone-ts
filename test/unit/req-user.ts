@@ -1,4 +1,4 @@
-import { keystone } from '../../src/index';
+import { Keystone } from '../../src/index';
 import * as request from 'supertest';
 import * as demand from 'must';
 import { getExpressApp } from '../helpers/getExpressApp';
@@ -16,7 +16,7 @@ describe('List schema pre/post save hooks', function () {
         removeModel('Test');
 
         // create test model
-        Test = keystone.list('Test'),
+        Test = new Keystone.List('Test', {}),
             Test.add({ name: { type: String } });
         Test.schema.pre('save', function (next, done) {
             pre = this._req_user;

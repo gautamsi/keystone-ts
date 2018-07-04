@@ -72,7 +72,7 @@ function postHookedSigninWithUser(user, req, res, onSuccess, onFail) {
         if (err) {
             return onFail(err);
         }
-        signinWithUser(user, req, res, onSuccess, onFail);
+        exports.signinWithUser(user, req, res, onSuccess, onFail);
     });
 }
 
@@ -189,7 +189,7 @@ export function persist(req, res, next) {
         process.exit(1);
     }
     if (keystone.get('cookie signin') && !req.session.userId && req.signedCookies['keystone.uid'] && req.signedCookies['keystone.uid'].indexOf(':') > 0) {
-        signin(req.signedCookies['keystone.uid'], req, res, function () {
+        exports.signin(req.signedCookies['keystone.uid'], req, res, function () {
             next();
         }, function (err) {
             const cookieOpts = _.defaults({}, keystone.get('cookie signin options'), {

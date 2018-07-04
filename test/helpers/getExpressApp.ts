@@ -9,7 +9,7 @@ export function getExpressApp() {
     keystone.init({
         'mongoose': mongoose
     });
-    app = keystone.express;
+    app = keystone.express();
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({

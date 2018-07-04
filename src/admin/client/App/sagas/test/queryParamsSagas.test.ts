@@ -147,6 +147,11 @@ describe('<List /> query param sagas', function () {
     });
     describe('* evalQueryParams()', function () {
         describe('If the pathame is is not valid', function () {
+            before(() => {
+                (global as any).Keystone = {
+                    adminPath: '/keystone',
+                };
+            });
             it('bails out', function () {
                 const generator = evalQueryParams();
                 const pathname = '/keystone/badUrl';
@@ -182,11 +187,11 @@ describe('<List /> query param sagas', function () {
         });
 
         describe('If the query and the cached query are the same', function () {
-            // before(() => { // ref: not sure how to add global for ts version, still added this for code completion
-			// 	global.Keystone = {
-			// 		adminPath: '/keystone',
-			// 	};
-            // });
+            before(() => {
+                (global as any).Keystone = {
+                    adminPath: '/keystone',
+                };
+            });
 
             it('puts a QUERY HAS NOT CHANGED action to the store', function () {
                 const generator = evalQueryParams();

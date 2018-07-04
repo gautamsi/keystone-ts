@@ -5,7 +5,7 @@ import * as bodyParser from 'body-parser';
 import { keystone, Keystone, View } from '../../../src/index';
 
 let getApp = function () {
-    let app = keystone.express;
+    let app = keystone.express();
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({
         extended: true,
@@ -205,7 +205,7 @@ describe('Keystone.View', function () {
         function getApp_extRequest() {
             let app = getApp();
             app.get('/', function (req, res) {
-                req.ext = { prop: 'value' };
+                (req as any).ext = { prop: 'value' };
                 let view = new Keystone.View(req, res);
                 let status = 'NOT OK';
                 view.on({ 'ext.prop': 'value' }, function (next) {
